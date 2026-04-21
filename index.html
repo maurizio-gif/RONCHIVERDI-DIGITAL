@@ -320,6 +320,7 @@
     thead th, tbody td { padding: 10px 12px; }
     footer { flex-direction: column; gap: 16px; text-align: center; padding: 32px 20px; }
     .calendly-inline-widget { min-width: unset !important; }
+    iframe { height: 480px !important; }
   }
 </style>
 </head>
@@ -556,6 +557,31 @@
 
   </div>
 </div>
+
+<!-- SHEET EMBED -->
+<section style="background:var(--black);padding:80px 48px;border-top:1px solid var(--border);" class="fade-up">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="margin-bottom:32px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+      <div>
+        <p style="font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--orange);margin-bottom:12px;">Checklist raccolta dati</p>
+        <h2 style="font-family:var(--font-display);font-size:clamp(24px,2.5vw,36px);font-weight:700;line-height:1.15;color:var(--white);">Compilate direttamente<br>nel foglio qui sotto.</h2>
+      </div>
+      <a href="https://docs.google.com/spreadsheets/d/11OnTJA4Xy-leO97KyWZ9WgM_xqFP6siQLx9DUqjS2IU/edit?usp=sharing" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:var(--white);font-family:var(--font-body);font-size:14px;font-weight:500;padding:11px 22px;border-radius:100px;text-decoration:none;flex-shrink:0;transition:background 0.2s;" onmouseover="this.style.background='#FF7A45'" onmouseout="this.style.background='var(--orange)'">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Apri in Google Sheets
+      </a>
+    </div>
+    <div style="border-radius:12px;overflow:hidden;border:1px solid var(--border);background:var(--white);">
+      <iframe
+        src="https://docs.google.com/spreadsheets/d/11OnTJA4Xy-leO97KyWZ9WgM_xqFP6siQLx9DUqjS2IU/htmlview?rm=minimal"
+        style="width:100%;height:600px;border:none;display:block;"
+        loading="lazy"
+        title="Checklist Raccolta Dati — Audit Ronchiverdi">
+      </iframe>
+    </div>
+    <p style="margin-top:12px;font-size:12px;color:var(--gray);text-align:center;">Se il foglio non si carica, apritelo direttamente su Google Sheets con il tasto in alto a destra.</p>
+  </div>
+</section>
 
 <!-- CTA -->
 <section class="cta-section fade-up">
