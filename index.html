@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prima Call — Audit Ronchiverdi | Ready2Digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --orange: #FF5A1F;
+    --orange-light: #FF7A45;
+    --black: #0A0A0A;
+    --dark: #111111;
+    --dark2: #1A1A1A;
+    --white: #FFFFFF;
+    --gray: #888888;
+    --gray-light: #CCCCCC;
+    --border: rgba(255,255,255,0.08);
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--black);
+    color: var(--white);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 48px;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    font-family: var(--font-display);
+    font-weight: 800; font-size: 18px;
+    color: var(--white); text-decoration: none;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .logo-dot { width: 8px; height: 8px; background: var(--orange); border-radius: 50%; }
+  .nav-label {
+    font-size: 13px; font-weight: 400; color: var(--gray);
+    letter-spacing: 0.04em;
+  }
+  .nav-cta {
+    background: var(--orange); color: var(--white);
+    font-family: var(--font-body); font-size: 14px; font-weight: 500;
+    padding: 10px 22px; border-radius: 100px;
+    text-decoration: none; transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--orange-light); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 140px 48px 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background: radial-gradient(ellipse 80% 60% at 60% 30%, rgba(255,90,31,0.12) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 40% at 20% 80%, rgba(255,90,31,0.06) 0%, transparent 60%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; z-index: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 80%);
+  }
+  .hero-tag {
+    font-family: var(--font-body); font-size: 12px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--orange); margin-bottom: 24px;
+    display: flex; align-items: center; gap: 10px;
+    position: relative; z-index: 1;
+  }
+  .hero-tag::before { content: ''; width: 32px; height: 1px; background: var(--orange); }
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(44px, 7vw, 88px);
+    font-weight: 800; line-height: 1.12; overflow: visible; padding-bottom: 0.12em;
+    position: relative; z-index: 1;
+    max-width: 800px;
+  }
+  .hero-title em { font-style: normal; color: var(--orange); }
+  .hero-sub {
+    margin-top: 28px; max-width: 520px;
+    font-size: 17px; font-weight: 300; color: var(--gray-light);
+    line-height: 1.7; position: relative; z-index: 1;
+  }
+  .hero-actions {
+    margin-top: 44px; display: flex; gap: 16px; align-items: center;
+    position: relative; z-index: 1;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--orange); color: var(--white);
+    font-family: var(--font-body); font-size: 15px; font-weight: 500;
+    padding: 14px 28px; border-radius: 100px;
+    text-decoration: none; transition: all 0.25s;
+  }
+  .btn-primary:hover { background: var(--orange-light); transform: translateY(-1px); }
+  .btn-primary svg { width: 16px; height: 16px; }
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--gray-light); font-size: 15px; font-weight: 400;
+    text-decoration: none; transition: color 0.2s;
+  }
+  .btn-ghost:hover { color: var(--white); }
+  .hero-scroll {
+    position: absolute; bottom: 40px; right: 48px; z-index: 1;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: var(--gray); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .hero-scroll-line {
+    width: 1px; height: 48px; background: linear-gradient(var(--orange), transparent);
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+  @keyframes scrollLine { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+  /* INTRO BOX */
+  .intro-section {
+    background: var(--white); color: var(--black);
+    padding: 80px 48px;
+  }
+  .intro-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+  }
+  .intro-label {
+    font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--orange); margin-bottom: 20px;
+  }
+  .intro-heading {
+    font-family: var(--font-display); font-size: 36px; font-weight: 700; line-height: 1.15;
+    color: var(--black);
+  }
+  .intro-body { font-size: 16px; line-height: 1.75; color: #444; margin-top: 20px; }
+  .intro-note {
+    margin-top: 32px; padding: 20px 24px;
+    background: #FFF5F1; border-left: 3px solid var(--orange);
+    border-radius: 0 8px 8px 0;
+    font-size: 14px; line-height: 1.65; color: #555;
+    font-style: italic;
+  }
+
+  /* SECTIONS */
+  .sections { background: var(--dark); }
+  .section-wrap { max-width: 1100px; margin: 0 auto; padding: 0 48px; }
+
+  .section-block {
+    border-top: 1px solid var(--border);
+    padding: 60px 0;
+  }
+  .section-header {
+    display: grid; grid-template-columns: 80px 1fr auto;
+    gap: 24px; align-items: start;
+    cursor: pointer;
+  }
+  .section-num {
+    font-family: var(--font-display); font-size: 13px; font-weight: 700;
+    color: var(--orange); letter-spacing: 0.08em; padding-top: 4px;
+  }
+  .section-title {
+    font-family: var(--font-display); font-size: 26px; font-weight: 700;
+    color: var(--white); line-height: 1.2;
+  }
+  .section-icon {
+    width: 40px; height: 40px; border-radius: 50%;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gray); transition: all 0.3s; flex-shrink: 0;
+  }
+  .section-icon svg { width: 16px; height: 16px; transition: transform 0.3s; }
+  .section-block.open .section-icon { border-color: var(--orange); color: var(--orange); }
+  .section-block.open .section-icon svg { transform: rotate(45deg); }
+
+  .section-body {
+    display: none; padding-top: 36px;
+    padding-left: 104px;
+  }
+  .section-block.open .section-body { display: block; }
+
+  .item-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .item-card {
+    background: var(--dark2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px 22px;
+    transition: border-color 0.2s;
+  }
+  .item-card:hover { border-color: rgba(255,90,31,0.3); }
+  .item-card-label { font-size: 12px; font-weight: 500; color: var(--orange); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+  .item-card-text { font-size: 14px; color: var(--gray-light); line-height: 1.55; }
+  .item-card-hint { font-size: 12px; color: var(--gray); margin-top: 6px; font-style: italic; }
+
+  .bullet-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .bullet-list li {
+    display: flex; gap: 14px; align-items: flex-start;
+    font-size: 15px; color: var(--gray-light); line-height: 1.6;
+  }
+  .bullet-list li::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--orange); flex-shrink: 0; margin-top: 8px;
+  }
+
+  .table-wrap { width: 100%; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  thead th {
+    text-align: left; padding: 12px 16px;
+    background: rgba(255,90,31,0.12); color: var(--orange);
+    font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    border-bottom: 1px solid rgba(255,90,31,0.2);
+  }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+  tbody tr:hover { background: var(--dark2); }
+  tbody td { padding: 14px 16px; color: var(--gray-light); vertical-align: top; line-height: 1.5; }
+  tbody td:first-child { color: var(--white); font-weight: 500; }
+
+  /* CTA SECTION */
+  .cta-section {
+    background: var(--orange); padding: 80px 48px;
+    text-align: center;
+  }
+  .cta-tag {
+    font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.7); margin-bottom: 20px;
+  }
+  .cta-title {
+    font-family: var(--font-display); font-size: clamp(32px, 4vw, 52px);
+    font-weight: 800; color: var(--white); line-height: 1.1; max-width: 640px; margin: 0 auto;
+  }
+  .cta-sub {
+    margin-top: 20px; font-size: 16px; color: rgba(255,255,255,0.8);
+    max-width: 440px; margin: 20px auto 0;
+  }
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    margin-top: 36px; background: var(--black); color: var(--white);
+    font-family: var(--font-body); font-size: 16px; font-weight: 500;
+    padding: 16px 32px; border-radius: 100px;
+    text-decoration: none; transition: all 0.25s;
+  }
+  .cta-btn:hover { background: #1a1a1a; transform: translateY(-2px); }
+  .cta-btn svg { width: 18px; height: 18px; }
+
+  /* DELIVERABLES */
+  .deliverables-section {
+    background: var(--dark2); padding: 80px 48px;
+    border-top: 1px solid var(--border);
+  }
+  .del-grid {
+    max-width: 1100px; margin: 48px auto 0;
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px;
+    background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+  }
+  .del-card {
+    background: var(--dark2); padding: 32px 24px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .del-tag {
+    font-family: var(--font-display); font-size: 22px; font-weight: 800;
+    color: var(--orange);
+  }
+  .del-title { font-size: 14px; font-weight: 600; color: var(--white); line-height: 1.3; }
+  .del-desc { font-size: 12px; color: var(--gray); line-height: 1.55; }
+
+  /* FOOTER */
+  footer {
+    background: var(--black); padding: 40px 48px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-logo {
+    font-family: var(--font-display); font-weight: 800; font-size: 16px;
+    color: var(--white); display: flex; align-items: center; gap: 8px;
+  }
+  .footer-info { font-size: 13px; color: var(--gray); }
+  .footer-info a { color: var(--orange); text-decoration: none; }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-label { display: none; }
+    .hero { padding: 120px 24px 60px; }
+    .intro-inner { grid-template-columns: 1fr; gap: 40px; }
+    .intro-section, .deliverables-section, .cta-section { padding: 60px 24px; }
+    .section-wrap { padding: 0 24px; }
+    .section-header { grid-template-columns: 48px 1fr auto; gap: 16px; }
+    .section-body { padding-left: 64px; }
+    .item-grid { grid-template-columns: 1fr; }
+    .del-grid { grid-template-columns: 1fr 1fr; }
+    .booking-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+    footer { flex-direction: column; gap: 16px; text-align: center; padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://www.ready2digital.it" class="logo" target="_blank">
+    <div class="logo-dot"></div>
+    Ready2Digital
+  </a>
+  <span class="nav-label">Audit — Ronchiverdi Sport Club</span>
+  <a href="https://docs.google.com/spreadsheets/d/11OnTJA4Xy-leO97KyWZ9WgM_xqFP6siQLx9DUqjS2IU/edit?usp=sharing" target="_blank" class="nav-cta">Apri checklist →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <span class="hero-tag">Prima call di analisi</span>
+  <h1 class="hero-title">Come prepararsi<br>alla <em>call</em>.</h1>
+  <p class="hero-sub">Abbiamo firmato il contratto. Ora iniziamo. Questa pagina vi guida nella preparazione alla prima call di analisi del <strong style="color:var(--white);font-weight:500">Customer Journey &amp; Process Architecture Audit</strong> di Ronchiverdi Sport Club.</p>
+  <div class="hero-actions">
+    <a href="https://docs.google.com/spreadsheets/d/11OnTJA4Xy-leO97KyWZ9WgM_xqFP6siQLx9DUqjS2IU/edit?usp=sharing" target="_blank" class="btn-primary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+      Apri la checklist da compilare
+    </a>
+    <a href="https://calendly.com/ready2digital/formazione" target="_blank" class="btn-ghost" style="display:inline-flex;align-items:center;gap:8px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      Prenota il primo appuntamento
+    </a>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    scroll
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro-section fade-up">
+  <div class="intro-inner">
+    <div>
+      <p class="intro-label">A cosa serve</p>
+      <h2 class="intro-heading">Non un questionario.<br>Una guida pratica.</h2>
+      <p class="intro-body">La call dura circa 60–90 minuti. L'obiettivo è costruire insieme una fotografia fedele di come funziona oggi Ronchiverdi — dall'ecosistema Sport Club a quello Business Club, dai processi di acquisizione alla gestione operativa quotidiana.</p>
+      <p class="intro-body">Non è necessario preparare nulla di formale. Questa guida e la checklist allegata sono tutto quello che serve per arrivare pronti.</p>
+      <div class="intro-note">Non esiste una risposta giusta o sbagliata. Più siete diretti su criticità e limiti, più la call — e l'audit che ne seguirà — sarà utile.</div>
+    </div>
+    <div>
+      <p class="intro-label">Chi partecipa</p>
+      <h2 class="intro-heading">Pochi referenti,<br>ben preparati.</h2>
+      <p class="intro-body">Meglio due o tre persone che conoscono i processi reali, piuttosto che un gruppo numeroso ma non coinvolto operativamente.</p>
+      <p class="intro-body">Figure ideali: responsabile commerciale, front office, referente operativo o general manager. Coinvolgete chi conosce i flussi reali — non solo quelli formali.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- BOOKING -->
+<section style="background:var(--dark2);padding:64px 48px;border-top:1px solid var(--border);" class="fade-up">
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
+    <div>
+      <p style="font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--orange);margin-bottom:16px;">Prossimo passo</p>
+      <h2 style="font-family:var(--font-display);font-size:clamp(28px,3vw,40px);font-weight:700;line-height:1.15;color:var(--white);">Fissa il primo<br>appuntamento.</h2>
+      <p style="margin-top:16px;font-size:15px;color:var(--gray-light);line-height:1.7;max-width:400px;">Scegliete il momento più comodo per voi. La call si svolge online — il link di accesso vi verrà inviato automaticamente alla conferma.</p>
+      <a href="https://calendly.com/ready2digital/formazione" target="_blank" style="display:inline-flex;align-items:center;gap:10px;margin-top:28px;background:var(--orange);color:var(--white);font-family:var(--font-body);font-size:15px;font-weight:500;padding:14px 28px;border-radius:100px;text-decoration:none;transition:all 0.25s;" onmouseover="this.style.background='#FF7A45'" onmouseout="this.style.background='var(--orange)'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Prenota su Calendly
+      </a>
+    </div>
+    <div style="background:var(--dark);border:1px solid var(--border);border-radius:16px;padding:32px 28px;display:flex;flex-direction:column;gap:20px;">
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:36px;height:36px;background:rgba(255,90,31,0.12);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:var(--white);margin-bottom:4px;">Durata</div>
+          <div style="font-size:13px;color:var(--gray);">60 – 90 minuti</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:36px;height:36px;background:rgba(255,90,31,0.12);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M15 10l-4 4L7 10"/><path d="M3 6a2 2 0 012-2h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+        </div>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:var(--white);margin-bottom:4px;">Modalità</div>
+          <div style="font-size:13px;color:var(--gray);">Online — link Google Meet inviato alla conferma</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:36px;height:36px;background:rgba(255,90,31,0.12);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:var(--white);margin-bottom:4px;">Chi partecipa</div>
+          <div style="font-size:13px;color:var(--gray);">Referente commerciale, operativo o GM — anche una sola persona</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="width:36px;height:36px;background:rgba(255,90,31,0.12);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+        </div>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:var(--white);margin-bottom:4px;">Prima della call</div>
+          <div style="font-size:13px;color:var(--gray);">Compilate (anche parzialmente) la checklist collegata</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCORDION SECTIONS -->
+<div class="sections" id="sezioni">
+  <div class="section-wrap">
+
+    <!-- 1. Organigramma -->
+    <div class="section-block open">
+      <div class="section-header" onclick="toggle(this)">
+        <span class="section-num">01</span>
+        <h3 class="section-title">Organigramma<br>e ruoli</h3>
+        <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
+      </div>
+      <div class="section-body">
+        <p style="color:var(--gray-light);font-size:15px;margin-bottom:28px;max-width:580px;">Non serve un documento formale. Prima della call, prendete nota di chi fa cosa — anche con un semplice schema scritto a mano. Se avete già un organigramma in PDF o immagine, mandatelo prima.</p>
+        <div class="item-grid">
+          <div class="item-card">
+            <div class="item-card-label">Persone e ruoli</div>
+            <div class="item-card-text">Quante persone lavorano nel club? Dipendenti e collaboratori, con il ruolo di ognuno.</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-label">Gestione lead</div>
+            <div class="item-card-text">Chi riceve le richieste di informazioni da nuovi prospect? C'è una persona dedicata?</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-label">Commerciale</div>
+            <div class="item-card-text">Chi segue il prospect dal primo contatto alla firma del contratto?</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-label">Rinnovi e scadenze</div>
+            <div class="item-card-text">Chi gestisce i rinnovi abbonamenti, le scadenze e gli incassi?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Strumenti -->
+    <div class="section-block">
+      <div class="section-header" onclick="toggle(this)">
+        <span class="section-num">02</span>
+        <h3 class="section-title">Strumenti<br>e software</h3>
+        <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
+      </div>
+      <div class="section-body">
+        <p style="color:var(--gray-light);font-size:15px;margin-bottom:28px;max-width:580px;">Per ogni strumento basta il nome e l'uso principale. Se alcune cose vengono gestite in modo informale (Excel, agenda cartacea, WhatsApp) è esattamente quello che vogliamo sapere.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Area</th><th>Cosa capire</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Gestionale soci / abbonamenti</td><td>Qual è il software? Chi lo usa? È aggiornato?</td></tr>
+              <tr><td>Prenotazioni — Wansport</td><td>Come è integrato con il resto dei sistemi?</td></tr>
+              <tr><td>CRM o gestione contatti</td><td>Usate un CRM? O Excel / agenda / WhatsApp?</td></tr>
+              <tr><td>Comunicazione con i soci</td><td>Email, WhatsApp, SMS — per cosa e con quale frequenza?</td></tr>
+              <tr><td>Email marketing / automazione</td><td>Mailchimp, ActiveCampaign, Brevo o simili?</td></tr>
+              <tr><td>Advertising (Meta, Google)</td><td>Chi gestisce le campagne? Budget mensile indicativo?</td></tr>
+              <tr><td>Pagamenti e incassi</td><td>POS, bonifico, app — come viene registrato il dato?</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Flusso lead -->
+    <div class="section-block">
+      <div class="section-header" onclick="toggle(this)">
+        <span class="section-num">03</span>
+        <h3 class="section-title">Il flusso<br>del lead</h3>
+        <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
+      </div>
+      <div class="section-body">
+        <p style="color:var(--gray-light);font-size:15px;margin-bottom:28px;max-width:580px;">Il tema centrale della call. Ripercorrete mentalmente cosa succede da quando arriva una richiesta a quando la persona diventa socia — o non lo diventa.</p>
+        <ul class="bullet-list">
+          <li>Da dove arrivano le richieste? (WhatsApp, form web, telefono, walk-in, social)</li>
+          <li>Chi le riceve? C'è una procedura o è discrezionale?</li>
+          <li>Quanto tempo passa tra la prima richiesta e il primo contatto?</li>
+          <li>Dove viene registrato il contatto? (CRM, Excel, agenda, nessun posto)</li>
+          <li>Come funziona la prova o la visita al club? Chi la gestisce?</li>
+          <li>Quanti follow-up vengono fatti prima di considerare un lead perso?</li>
+          <li>Tasso di conversione percepito: su 10 richieste, quante iscrizioni?</li>
+        </ul>
+        <div style="margin-top:28px;padding:20px 24px;background:rgba(255,90,31,0.07);border:1px solid rgba(255,90,31,0.2);border-radius:12px;">
+          <p style="font-size:13px;font-weight:600;color:var(--orange);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em;">Dopo l'iscrizione</p>
+          <ul class="bullet-list" style="margin-top:0;">
+            <li>Cosa succede nei giorni successivi? C'è un onboarding?</li>
+            <li>Come vengono gestite scadenze abbonamenti e certificati medici?</li>
+            <li>Quando un socio non rinnova, viene ricontattato?</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Dati e KPI -->
+    <div class="section-block">
+      <div class="section-header" onclick="toggle(this)">
+        <span class="section-num">04</span>
+        <h3 class="section-title">Dati e KPI<br>(anche stimati)</h3>
+        <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
+      </div>
+      <div class="section-body">
+        <p style="color:var(--gray-light);font-size:15px;margin-bottom:28px;max-width:580px;">Non è necessario che siano tracciati in modo preciso. Bastano stime. Se qualcosa non si monitora, è già un'informazione importante per l'audit.</p>
+        <div class="item-grid">
+          <div class="item-card">
+            <div class="item-card-label">Lead mensili</div>
+            <div class="item-card-text">Quante richieste di informazioni arrivano mediamente al mese?</div>
+            <div class="item-card-hint">Anche una stima va bene</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-label">Nuove iscrizioni</div>
+            <div class="item-card-text">Iscrizioni effettive mensili, distinte per tipologia di abbonamento.</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-label">Tasso di rinnovo</div>
+            <div class="item-card-text">Percentuale di soci che rinnova alla scadenza.</div>
+            <div class="item-card-hint">Percezione soggettiva accettata</div>
+          </div>
+          <div class="item-card">
+            <div class="item-card-label">Soci attivi totali</div>
+            <div class="item-card-text">Soci con abbonamento attivo in questo momento.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Materiali -->
+    <div class="section-block" style="border-bottom:1px solid var(--border);">
+      <div class="section-header" onclick="toggle(this)">
+        <span class="section-num">05</span>
+        <h3 class="section-title">Materiali<br>da condividere</h3>
+        <div class="section-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
+      </div>
+      <div class="section-body">
+        <p style="color:var(--gray-light);font-size:15px;margin-bottom:28px;max-width:580px;">Tutto opzionale. Se disponibile, mandatelo prima della call via email o WhatsApp — ci risparmia tempo prezioso.</p>
+        <ul class="bullet-list">
+          <li>Organigramma o schema dei ruoli (PDF, foto, slide — qualsiasi formato)</li>
+          <li>Listino abbonamenti attuale</li>
+          <li>Esempio di comunicazione con i soci (email tipo, messaggio WhatsApp)</li>
+          <li>Screenshot o demo del gestionale soci o di Wansport</li>
+          <li>File Excel o report con dati storici — anche parziali</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- DELIVERABLES -->
+<section class="deliverables-section fade-up">
+  <div style="max-width:1100px;margin:0 auto;">
+    <p style="font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--orange);margin-bottom:16px;">Cosa riceverete al termine dell'audit</p>
+    <h2 style="font-family:var(--font-display);font-size:clamp(28px,3vw,40px);font-weight:700;max-width:520px;line-height:1.15;">I deliverable previsti dal contratto</h2>
+  </div>
+  <div class="del-grid">
+    <div class="del-card">
+      <div class="del-tag">D1</div>
+      <div class="del-title">Architettura dei processi as-is</div>
+      <div class="del-desc">Organigramma funzionale, processi principali, strumenti in uso, carichi di lavoro per ruolo.</div>
+    </div>
+    <div class="del-card">
+      <div class="del-tag">D2</div>
+      <div class="del-title">Gap analysis e colli di bottiglia</div>
+      <div class="del-desc">Inefficienze, ridondanze e punti di rottura nel customer journey, con impatto e urgenza.</div>
+    </div>
+    <div class="del-card">
+      <div class="del-tag">D3</div>
+      <div class="del-title">Mappa del customer journey reale</div>
+      <div class="del-desc">Dal primo contatto alla fidelizzazione, con evidenza dei touchpoint e discontinuità.</div>
+    </div>
+    <div class="del-card">
+      <div class="del-tag">D4</div>
+      <div class="del-title">Raccomandazioni operative</div>
+      <div class="del-desc">Due scenari: autonomo e con supporto consulenziale continuativo.</div>
+    </div>
+    <div class="del-card">
+      <div class="del-tag">D5</div>
+      <div class="del-title">Roadmap 12 mesi</div>
+      <div class="del-desc">Piano d'azione 0–3, 3–6, 6–12 mesi con priorità e KPI suggeriti.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section fade-up">
+  <p class="cta-tag">Prossimo passo</p>
+  <h2 class="cta-title">Due azioni.<br>Dieci minuti.</h2>
+  <p class="cta-sub">Compilate la checklist e prenotate il primo appuntamento. Il resto lo facciamo insieme.</p>
+  <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:36px;">
+    <a href="https://docs.google.com/spreadsheets/d/11OnTJA4Xy-leO97KyWZ9WgM_xqFP6siQLx9DUqjS2IU/edit?usp=sharing" target="_blank" class="cta-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+      Apri la checklist
+    </a>
+    <a href="https://calendly.com/ready2digital/formazione" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,0.15);color:var(--white);font-family:var(--font-body);font-size:16px;font-weight:500;padding:16px 32px;border-radius:100px;text-decoration:none;border:1px solid rgba(255,255,255,0.3);transition:all 0.25s;" onmouseover="this.style.background='rgba(255,255,255,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      Prenota la call
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <div class="logo-dot"></div>
+    Ready2Digital
+  </div>
+  <div class="footer-info">
+    Maurizio Taruggi — <a href="mailto:maurizio@ready2digital.it">maurizio@ready2digital.it</a>
+  </div>
+  <div class="footer-info" style="color:var(--gray);font-size:12px;">
+    Documento riservato — Ronchiverdi Sport Club
+  </div>
+</footer>
+
+<script>
+  function toggle(header) {
+    const block = header.closest('.section-block');
+    block.classList.toggle('open');
+  }
+
+  // Fade-up on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
