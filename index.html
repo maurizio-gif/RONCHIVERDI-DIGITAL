@@ -236,9 +236,6 @@ background: #E8D46A;
 }
 .accordion-block.open .accordion-icon svg { transform: rotate(45deg); }
 
-.accordion-body {
-display: none; padding-bottom: 44px; padding-left: 104px;
-}
 .accordion-block.open .accordion-body { display: block; }
 
 .body-intro {
@@ -600,18 +597,6 @@ background 0.2s, box-shadow 0.2s;
 .card.visible { opacity: 1; transform: translateY(0) scale(1); }
 
 /* Accordion spring */
-.accordion-body {
-display: grid;
-grid-template-rows: 0fr;
-transition: grid-template-rows 0.5s cubic-bezier(0.16,1,0.3,1);
-overflow: hidden;
-padding-bottom: 0;
-}
-.accordion-body-inner { overflow: hidden; }
-.accordion-block.open .accordion-body {
-grid-template-rows: 1fr;
-padding-bottom: 0;
-}
 
 /* Scramble eyebrow highlight */
 .hero-eyebrow span {
@@ -791,6 +776,108 @@ background: #E8D46A;
 width: 0%;
 transition: width 0s linear;
 z-index: 5;
+}
+
+/* ════ ACCORDION — clean & robust ════ */
+.accordion-section {
+background: #F5F1EA;
+border-top: 1px solid rgba(15,15,13,0.12);
+}
+.accordion-inner {
+max-width: 1100px;
+margin: 0 auto;
+padding: 0 24px;
+}
+@media (min-width: 768px) {
+.accordion-inner { padding: 0 48px; }
+}
+
+.accordion-block {
+border-bottom: 1px solid rgba(15,15,13,0.12);
+}
+.accordion-block:first-child {
+border-top: 1px solid rgba(15,15,13,0.12);
+}
+
+/* Header — chiaramente cliccabile */
+.accordion-header {
+display: flex;
+align-items: center;
+gap: 16px;
+padding: 28px 0;
+cursor: pointer;
+-webkit-tap-highlight-color: transparent;
+user-select: none;
+}
+.accordion-header:hover .accordion-title {
+opacity: 0.7;
+}
+.accordion-num {
+font-family: ‘Cormorant Garamond’, Georgia, serif;
+font-size: 14px;
+font-weight: 300;
+font-style: italic;
+color: #B8965A;
+min-width: 36px;
+flex-shrink: 0;
+}
+.accordion-title {
+font-family: ‘Cormorant Garamond’, Georgia, serif;
+font-size: 22px;
+font-weight: 500;
+color: #0F0F0D;
+line-height: 1.2;
+flex: 1;
+transition: opacity 0.2s;
+}
+@media (min-width: 768px) {
+.accordion-title { font-size: 26px; }
+}
+
+/* Icona +/× chiaramente visibile */
+.accordion-icon {
+width: 38px;
+height: 38px;
+border-radius: 50%;
+border: 1.5px solid rgba(15,15,13,0.2);
+display: flex;
+align-items: center;
+justify-content: center;
+flex-shrink: 0;
+transition: background 0.25s, border-color 0.25s, transform 0.35s cubic-bezier(0.16,1,0.3,1);
+background: transparent;
+}
+.accordion-icon svg {
+width: 14px;
+height: 14px;
+stroke: #0F0F0D;
+transition: stroke 0.25s;
+}
+.accordion-block.open .accordion-icon {
+background: #E8D46A;
+border-color: #E8D46A;
+transform: rotate(45deg);
+}
+.accordion-block.open .accordion-icon svg {
+stroke: #0F0F0D;
+}
+
+/* Body — max-height animation, sempre affidabile */
+.accordion-body {
+max-height: 0;
+overflow: hidden;
+transition: max-height 0.55s cubic-bezier(0.16,1,0.3,1),
+padding 0.3s ease;
+padding: 0;
+}
+.accordion-body-inner {
+padding: 4px 0 32px 52px;
+}
+@media (min-width: 768px) {
+.accordion-body-inner { padding: 4px 0 40px 68px; }
+}
+.accordion-block.open .accordion-body {
+max-height: 2400px;
 }
 
 </style>
@@ -1141,7 +1228,12 @@ z-index: 5;
 
 <script>
 function toggle(header) {
-  header.closest('.accordion-block').classList.toggle('open');
+  var block = header.closest('.accordion-block');
+  var isOpen = block.classList.contains('open');
+  document.querySelectorAll('.accordion-block.open').forEach(function(b) {
+    b.classList.remove('open');
+  });
+  if (!isOpen) block.classList.add('open');
 }
 const obs = new IntersectionObserver(e => {
   e.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); });
@@ -1244,11 +1336,12 @@ if (frame && frameImg) {
 
 /* ═══════ 7. ACCORDION spring (toggle) ═══════ */
 function toggle(header) {
-  const block = header.closest('.accordion-block');
-  const wasOpen = block.classList.contains('open');
-  // chiudi tutti
-  document.querySelectorAll('.accordion-block.open').forEach(b => b.classList.remove('open'));
-  if (!wasOpen) block.classList.add('open');
+  var block = header.closest('.accordion-block');
+  var isOpen = block.classList.contains('open');
+  document.querySelectorAll('.accordion-block.open').forEach(function(b) {
+    b.classList.remove('open');
+  });
+  if (!isOpen) block.classList.add('open');
 }
 
 /* ═══════ 8. COUNTER animation ═══════ */
