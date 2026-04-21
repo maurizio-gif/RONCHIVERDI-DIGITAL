@@ -368,60 +368,37 @@
 </section>
 
 
-<!-- BOOKING -->
-<section style="background:var(--dark2);padding:80px 48px;border-top:1px solid var(--border);" class="fade-up">
+<!-- BOOKING INFO -->
+<section style="background:var(--dark2);padding:80px 48px 48px;border-top:1px solid var(--border);" class="fade-up">
   <div style="max-width:1100px;margin:0 auto;">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;">
-
-      <!-- Left: text + info -->
-      <div>
-        <p style="font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--orange);margin-bottom:16px;">Prossimo passo</p>
-        <h2 style="font-family:var(--font-display);font-size:clamp(28px,3vw,40px);font-weight:700;line-height:1.15;color:var(--white);">Fissa il primo<br>appuntamento.</h2>
-        <p style="margin-top:16px;font-size:15px;color:var(--gray-light);line-height:1.7;">Scegliete il momento più comodo dal calendario qui a fianco. Il link di accesso vi verrà inviato automaticamente alla conferma.</p>
-
-        <div style="margin-top:36px;display:flex;flex-direction:column;gap:16px;">
-          <div style="display:flex;gap:16px;align-items:flex-start;">
-            <div style="width:40px;height:40px;background:rgba(255,90,31,0.1);border:1px solid rgba(255,90,31,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-            </div>
-            <div>
-              <div style="font-size:14px;font-weight:500;color:var(--white);margin-bottom:2px;">60 – 90 minuti</div>
-              <div style="font-size:13px;color:var(--gray);">Prima call di analisi — Customer Journey Audit</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:16px;align-items:flex-start;">
-            <div style="width:40px;height:40px;background:rgba(255,90,31,0.1);border:1px solid rgba(255,90,31,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M15 10l-4 4L7 10"/><path d="M3 6a2 2 0 012-2h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
-            </div>
-            <div>
-              <div style="font-size:14px;font-weight:500;color:var(--white);margin-bottom:2px;">Online — Google Meet</div>
-              <div style="font-size:13px;color:var(--gray);">Link inviato automaticamente alla conferma</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:16px;align-items:flex-start;">
-            <div style="width:40px;height:40px;background:rgba(255,90,31,0.1);border:1px solid rgba(255,90,31,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
-            </div>
-            <div>
-              <div style="font-size:14px;font-weight:500;color:var(--white);margin-bottom:2px;">Prima della call</div>
-              <div style="font-size:13px;color:var(--gray);">Compilate (anche parzialmente) la checklist allegata</div>
-            </div>
-          </div>
-        </div>
-
-        <div style="margin-top:36px;padding:20px 24px;border:1px solid rgba(255,90,31,0.2);border-radius:12px;background:rgba(255,90,31,0.05);">
-          <p style="font-size:13px;color:var(--gray-light);line-height:1.65;font-style:italic;">Non è necessario compilare tutto prima della call. Portate quello che avete — il resto lo raccogliamo insieme.</p>
-        </div>
+    <p style="font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--orange);margin-bottom:16px;">Prossimo passo</p>
+    <h2 style="font-family:var(--font-display);font-size:clamp(28px,3vw,40px);font-weight:700;line-height:1.15;color:var(--white);margin-bottom:16px;">Fissa il primo<br>appuntamento.</h2>
+    <p style="font-size:15px;color:var(--gray-light);line-height:1.7;max-width:560px;margin-bottom:36px;">Scegliete il momento più comodo dal calendario qui sotto. Il link di accesso vi verrà inviato automaticamente alla conferma.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:16px;">
+      <div style="display:flex;gap:14px;align-items:center;background:rgba(255,90,31,0.07);border:1px solid rgba(255,90,31,0.15);border-radius:10px;padding:14px 18px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <span style="font-size:13px;color:var(--gray-light);">60 – 90 minuti</span>
       </div>
-
-      <!-- Right: embedded Calendly -->
-      <div style="border-radius:16px;overflow:hidden;border:1px solid var(--border);background:var(--white);">
-        <!-- Calendly inline widget begin -->
-        <div class="calendly-inline-widget" data-url="https://calendly.com/ready2digital/formazione?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=ff5701" style="min-width:320px;height:700px;"></div>
-        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-        <!-- Calendly inline widget end -->
+      <div style="display:flex;gap:14px;align-items:center;background:rgba(255,90,31,0.07);border:1px solid rgba(255,90,31,0.15);border-radius:10px;padding:14px 18px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" style="flex-shrink:0"><path d="M15 10l-4 4L7 10"/><path d="M3 6a2 2 0 012-2h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+        <span style="font-size:13px;color:var(--gray-light);">Online — Google Meet</span>
       </div>
+      <div style="display:flex;gap:14px;align-items:center;background:rgba(255,90,31,0.07);border:1px solid rgba(255,90,31,0.15);border-radius:10px;padding:14px 18px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" style="flex-shrink:0"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+        <span style="font-size:13px;color:var(--gray-light);">Compilate la checklist prima</span>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- BOOKING CALENDAR -->
+<section style="background:var(--dark2);padding:0 48px 80px;border-bottom:1px solid var(--border);">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="border-radius:16px;overflow:hidden;border:1px solid var(--border);background:var(--white);">
+      <!-- Calendly inline widget begin -->
+      <div class="calendly-inline-widget" data-url="https://calendly.com/ready2digital/formazione?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=ff5701" style="min-width:320px;height:700px;"></div>
+      <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+      <!-- Calendly inline widget end -->
     </div>
   </div>
 </section>
