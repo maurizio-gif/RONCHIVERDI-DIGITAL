@@ -298,19 +298,28 @@
   .fade-up.visible { opacity: 1; transform: none; }
 
   @media (max-width: 768px) {
-    section[style*='grid-template-columns:1fr 1fr'] > div { grid-template-columns: 1fr !important; }
-    nav { padding: 16px 24px; }
+    nav { padding: 16px 20px; gap: 8px; }
     .nav-label { display: none; }
-    .hero { padding: 120px 24px 60px; }
-    .intro-inner { grid-template-columns: 1fr; gap: 40px; }
-    .intro-section, .deliverables-section, .cta-section { padding: 60px 24px; }
-    .section-wrap { padding: 0 24px; }
-    .section-header { grid-template-columns: 48px 1fr auto; gap: 16px; }
-    .section-body { padding-left: 64px; }
+    .nav-cta { font-size: 12px; padding: 8px 14px; }
+    .logo img { height: 24px; }
+    .hero { padding: 100px 20px 56px; overflow: hidden; }
+    .hero-title { font-size: 28px !important; line-height: 1.15 !important; overflow-wrap: break-word; }
+    .hero-sub { font-size: 15px; }
+    .hero-actions { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .hero-scroll { display: none; }
+    .intro-section { padding: 52px 20px; }
+    .intro-inner { grid-template-columns: 1fr; gap: 36px; }
+    .cta-section { padding: 52px 20px; }
+    .section-wrap { padding: 0 20px; }
+    .section-header { grid-template-columns: 44px 1fr auto; gap: 12px; }
+    .section-title { font-size: 20px; }
+    .section-body { padding-left: 56px; }
     .item-grid { grid-template-columns: 1fr; }
     .del-grid { grid-template-columns: 1fr 1fr; }
-    [data-url*="calendly"] { height: 700px !important; }
-    footer { flex-direction: column; gap: 16px; text-align: center; padding: 32px 24px; }
+    table { font-size: 13px; }
+    thead th, tbody td { padding: 10px 12px; }
+    footer { flex-direction: column; gap: 16px; text-align: center; padding: 32px 20px; }
+    .calendly-inline-widget { min-width: unset !important; }
   }
 </style>
 </head>
