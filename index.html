@@ -526,7 +526,7 @@ footer { flex-direction: column; gap: 16px; text-align: center; padding: 32px 20
 .calendly-inline-widget { min-width: unset !important; }
 }
 
-/* ═══════════ ANIMATIONS ═══════════ */
+/* ANIMATIONS */
 
 /* Hero load sequence */
 .hero-eyebrow { opacity: 0; transform: translateY(12px); }
@@ -668,7 +668,7 @@ color: #8A8578;
 .card-list li.card-hint::before { content: ‘’; }
 .bullet-list li strong { color: #0F0F0D; }
 
-/* ════ SLIDESHOW ════ */
+/* SLIDESHOW */
 .slideshow-section {
 background: #0F0F0D;
 padding: 64px 0 64px;
@@ -778,7 +778,7 @@ transition: width 0s linear;
 z-index: 5;
 }
 
-/* ════ ACCORDION — clean & robust ════ */
+/* - ACCORDION — clean & robust - */
 .accordion-section {
 background: #F5F1EA;
 border-top: 1px solid rgba(15,15,13,0.12);
@@ -814,11 +814,11 @@ opacity: 0.7;
 }
 .accordion-num {
 font-family: ‘Cormorant Garamond’, Georgia, serif;
-font-size: 14px;
+font-size: 28px;
 font-weight: 300;
 font-style: italic;
 color: #B8965A;
-min-width: 36px;
+min-width: 52px;
 flex-shrink: 0;
 }
 .accordion-title {
@@ -1242,7 +1242,7 @@ document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 </script>
 
 <script>
-/* ═══════ 1. HERO ENTRANCE ═══════ */
+/* - 1. HERO ENTRANCE - */
 window.addEventListener('DOMContentLoaded', () => {
   const els = ['.hero-eyebrow','.hero-title','.hero-divider',
                '.hero-sub','.hero-actions','.hero-scroll'];
@@ -1251,7 +1251,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-/* ═══════ 2. TEXT SCRAMBLE on eyebrow ═══════ */
+/* - 2. TEXT SCRAMBLE on eyebrow - */
 const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ&';
 function scramble(el) {
   const original = el.textContent;
@@ -1270,7 +1270,7 @@ setTimeout(() => {
   document.querySelectorAll('.hero-eyebrow').forEach(el => scramble(el));
 }, 600);
 
-/* ═══════ 3. SCROLL REVEAL ═══════ */
+/* - 3. SCROLL REVEAL - */
 const observer = new IntersectionObserver(entries => {
   entries.forEach((e, i) => {
     if (e.isIntersecting) {
@@ -1297,24 +1297,24 @@ document.querySelectorAll('.booking-pill').forEach((el, i) => {
 // fade-up standard
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-/* ═══════ 4. PARALLAX hero scroll ═══════ */
+/* - 4. PARALLAX hero scroll - */
 const heroLeft = document.querySelector('.hero-left');
 window.addEventListener('scroll', () => {
   const y = window.scrollY;
   if (heroLeft && y < window.innerHeight) {
-    heroLeft.style.transform = `translateY(${y * 0.18}px)`;
+    heroLeft.style.transform = 'translateY(' + (y * 0.18) + 'px)';
     heroLeft.style.opacity = 1 - (y / window.innerHeight) * 1.2;
   }
 }, { passive: true });
 
-/* ═══════ 5. MAGNETIC BUTTONS (desktop) ═══════ */
+/* - 5. MAGNETIC BUTTONS (desktop) - */
 if (window.matchMedia('(hover:hover)').matches) {
   document.querySelectorAll('.btn-primary, .btn-cta-primary, .btn-cta-secondary, .nav-cta').forEach(btn => {
     btn.addEventListener('mousemove', e => {
       const r = btn.getBoundingClientRect();
       const x = e.clientX - r.left - r.width / 2;
       const y = e.clientY - r.top - r.height / 2;
-      btn.style.transform = `translate(${x * 0.22}px, ${y * 0.22}px) scale(1.04)`;
+      btn.style.transform = 'translate(' + (x*0.22) + 'px, ' + (y*0.22) + 'px) scale(1.04)';
     });
     btn.addEventListener('mouseleave', () => {
       btn.style.transform = '';
@@ -1322,7 +1322,7 @@ if (window.matchMedia('(hover:hover)').matches) {
   });
 }
 
-/* ═══════ 6. PHOTO PARALLAX on scroll ═══════ */
+/* - 6. PHOTO PARALLAX on scroll - */
 const frame = document.getElementById('photo-frame');
 const frameImg = frame ? frame.querySelector('img') : null;
 if (frame && frameImg) {
@@ -1330,11 +1330,11 @@ if (frame && frameImg) {
     const r = frame.getBoundingClientRect();
     const center = r.top + r.height / 2;
     const progress = (window.innerHeight / 2 - center) / window.innerHeight;
-    frameImg.style.transform = `scale(1.08) translateY(${progress * 30}px)`;
+    frameImg.style.transform = 'scale(1.08) translateY(' + (progress * 30) + 'px)';
   }, { passive: true });
 }
 
-/* ═══════ 7. ACCORDION spring (toggle) ═══════ */
+/* - 7. ACCORDION spring (toggle) - */
 function toggle(header) {
   var block = header.closest('.accordion-block');
   var isOpen = block.classList.contains('open');
@@ -1344,7 +1344,7 @@ function toggle(header) {
   if (!isOpen) block.classList.add('open');
 }
 
-/* ═══════ 8. COUNTER animation ═══════ */
+/* - 8. COUNTER animation - */
 function animateCount(el, end, suffix='') {
   let start = 0;
   const dur = 1200;
@@ -1358,24 +1358,12 @@ function animateCount(el, end, suffix='') {
   requestAnimationFrame(step);
 }
 
-/* ═══════ 9. SMOOTH CURSOR DOT (desktop) ═══════ */
+/* - 9. SMOOTH CURSOR DOT (desktop) - */
 if (window.matchMedia('(hover:hover)').matches) {
   const dot = document.createElement('div');
-  dot.style.cssText = `
-    position:fixed; width:8px; height:8px; border-radius:50%;
-    background:#E8D46A; pointer-events:none; z-index:9999;
-    transition: transform 0.15s ease, opacity 0.3s;
-    transform: translate(-50%,-50%) scale(0);
-    mix-blend-mode: difference;
-  `;
+  dot.style.cssText = 'position:fixed;width:8px;height:8px;border-radius:50%;background:#E8D46A;pointer-events:none;z-index:9999;transition:transform 0.15s ease,opacity 0.3s;transform:translate(-50%,-50%) scale(0);mix-blend-mode:difference';
   const ring = document.createElement('div');
-  ring.style.cssText = `
-    position:fixed; width:32px; height:32px; border-radius:50%;
-    border:1px solid rgba(232,212,106,0.5); pointer-events:none; z-index:9998;
-    transform: translate(-50%,-50%);
-    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), width 0.3s, height 0.3s, opacity 0.3s;
-    opacity:0;
-  `;
+  ring.style.cssText = 'position:fixed;width:32px;height:32px;border-radius:50%;border:1px solid rgba(232,212,106,0.5);pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform 0.4s cubic-bezier(0.16,1,0.3,1),width 0.3s,height 0.3s,opacity 0.3s;opacity:0';
   document.body.append(dot, ring);
   let mx=0, my=0;
   document.addEventListener('mousemove', e => {
@@ -1404,7 +1392,7 @@ if (window.matchMedia('(hover:hover)').matches) {
 </script>
 
 <script>
-/* ════ SLIDESHOW ENGINE ════ */
+/* SLIDESHOW ENGINE */
 (function() {
   const total = 6;
   const INTERVAL = 4500;
@@ -1423,7 +1411,7 @@ if (window.matchMedia('(hover:hover)').matches) {
 
   function goTo(n) {
     cur = (n + total) % total;
-    track.style.transform = `translateX(${-cur * 100}%)`;
+    track.style.transform = 'translateX(' + (-cur * 100) + '%)';
     dots.forEach((d, i) => d.classList.toggle('active', i === cur));
     resetProgress();
   }
@@ -1433,7 +1421,7 @@ if (window.matchMedia('(hover:hover)').matches) {
     progress.style.width = '0%';
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        progress.style.transition = `width ${INTERVAL}ms linear`;
+        progress.style.transition = 'width ' + INTERVAL + 'ms linear';
         progress.style.width = '100%';
       });
     });
@@ -1471,7 +1459,7 @@ if (window.matchMedia('(hover:hover)').matches) {
   el.addEventListener('pointermove', e => {
     if (!isDragging) return;
     const dx = e.clientX - startX;
-    track.style.transform = `translateX(calc(${-cur * 100}% + ${dx}px))`;
+    track.style.transform = 'translateX(calc(' + (-cur * 100) + '% + ' + dx + 'px))';
   });
   el.addEventListener('pointerup', e => {
     if (!isDragging) return;
