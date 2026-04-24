@@ -137,6 +137,212 @@ footer { background: #0F0F0D; padding: 36px 48px; display: flex; justify-content
 /* FADE */
 .fade-up { opacity: 0; transform: translateY(18px); transition: opacity 0.65s ease, transform 0.65s ease; }
 .fade-up.visible { opacity: 1; transform: none; }
+
+/* ════ ORGANIGRAMMA ════ */
+.org-section {
+  background: #0F0F0D;
+  padding: 72px 24px 80px;
+}
+.org-section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.org-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: #E8D46A; margin-bottom: 10px;
+  display: flex; align-items: center; gap: 12px;
+}
+.org-label::before {
+  content: ''; width: 24px; height: 1px; background: #E8D46A;
+}
+.org-section-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 300; color: #FAF8F4;
+  margin-bottom: 48px; line-height: 1.2;
+}
+.org-tabs {
+  display: flex; gap: 12px; margin-bottom: 48px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 0;
+}
+.org-tab {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  padding: 10px 0 12px;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  margin-bottom: -1px;
+  transition: color 0.2s, border-color 0.2s;
+  background: none; border-top: none; border-left: none; border-right: none;
+}
+.org-tab.active {
+  color: #E8D46A;
+  border-bottom-color: #E8D46A;
+}
+.org-chart { display: none; }
+.org-chart.active { display: block; }
+
+/* Nodi */
+.org-tree {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+.org-level {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  position: relative;
+  width: 100%;
+}
+.org-level + .org-level {
+  margin-top: 0;
+}
+
+/* Connettori verticali */
+.org-connector-v {
+  width: 1px;
+  height: 32px;
+  background: rgba(232,212,106,0.3);
+  margin: 0 auto;
+}
+.org-connector-h-wrap {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 32px;
+}
+.org-connector-h {
+  position: absolute;
+  top: 0;
+  height: 1px;
+  background: rgba(232,212,106,0.3);
+}
+.org-branches {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  position: relative;
+}
+.org-branch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+.org-branch-connector {
+  width: 1px;
+  height: 32px;
+  background: rgba(232,212,106,0.3);
+}
+
+/* Card nodo dipendente */
+.org-node {
+  padding: 12px 16px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  text-align: center;
+  background: rgba(255,255,255,0.04);
+  transition: background 0.2s, border-color 0.2s;
+  min-width: 110px;
+  max-width: 160px;
+}
+.org-node:hover {
+  background: rgba(232,212,106,0.08);
+  border-color: rgba(232,212,106,0.4);
+}
+.org-node.top {
+  background: rgba(232,212,106,0.12);
+  border-color: rgba(232,212,106,0.5);
+}
+/* Card nodo collaboratore */
+.org-node.collab {
+  border-radius: 50px;
+  border-style: dashed;
+  border-color: rgba(184,150,90,0.5);
+  background: rgba(184,150,90,0.06);
+}
+.org-node-name {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #FAF8F4;
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+.org-node-role {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 12px; font-weight: 300;
+  font-style: italic;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.3;
+}
+.org-node.collab .org-node-role {
+  color: #B8965A;
+}
+.org-node.top .org-node-name {
+  color: #E8D46A;
+}
+
+/* Legenda */
+.org-legend {
+  display: flex; gap: 24px; margin-top: 40px;
+  flex-wrap: wrap;
+}
+.org-legend-item {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Jost', sans-serif;
+  font-size: 11px; font-weight: 400;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+.org-legend-box {
+  width: 28px; height: 16px;
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.04);
+}
+.org-legend-pill {
+  width: 36px; height: 16px;
+  border-radius: 50px;
+  border: 1px dashed rgba(184,150,90,0.5);
+  background: rgba(184,150,90,0.06);
+}
+
+/* Gruppo nodi sub */
+.org-sub-group {
+  display: flex; flex-direction: column; align-items: center;
+}
+.org-sub-members {
+  display: flex; gap: 6px; flex-wrap: wrap; justify-content: center;
+  margin-top: 0;
+}
+.org-node.sm {
+  padding: 8px 12px;
+  min-width: 80px; max-width: 120px;
+}
+.org-node.sm .org-node-name {
+  font-size: 10px;
+}
+
+@media (max-width: 640px) {
+  .org-node { min-width: 80px; max-width: 120px; padding: 10px 10px; }
+  .org-node-name { font-size: 10px; }
+  .org-node-role { font-size: 11px; }
+  .org-branches { gap: 6px; }
+}
+
 </style>
 </head>
 <body>
@@ -203,7 +409,224 @@ footer { background: #0F0F0D; padding: 36px 48px; display: flex; justify-content
       </div>
     </div>
 
-    <!-- AREA 2 -->
+    
+<!-- ORGANIGRAMMA -->
+<section class="org-section">
+  <div class="org-section-inner">
+    <p class="org-label">Struttura interna</p>
+    <h2 class="org-section-title">Organigramma<br><em style="font-style:italic;color:#B8965A;">Ronchiverdi Sport Club</em></h2>
+
+    <div class="org-tabs">
+      <button class="org-tab active" onclick="showOrg('generale', this)">Struttura Generale</button>
+      <button class="org-tab" onclick="showOrg('sportivo', this)">Settore Sportivo</button>
+    </div>
+
+    <!-- CHART 1: STRUTTURA GENERALE -->
+    <div class="org-chart active" id="org-generale">
+      <div class="org-tree">
+
+        <!-- Livello 1: Admin Unico + CFO -->
+        <div class="org-level" style="gap:20px;align-items:flex-start;">
+          <div class="org-branch" style="flex:0 0 auto;">
+            <div class="org-node top">
+              <div class="org-node-name">Zunino Vittorio</div>
+              <div class="org-node-role">Amministratore Unico</div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;flex:0 0 auto;margin-top:8px;">
+            <div class="org-node collab">
+              <div class="org-node-name">Zavattero Paola</div>
+              <div class="org-node-role">CFO</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="org-connector-v"></div>
+
+        <!-- Livello 2: Club Manager -->
+        <div class="org-level">
+          <div class="org-node top" style="min-width:150px;">
+            <div class="org-node-name">Rolle Marco</div>
+            <div class="org-node-role">Club Manager</div>
+          </div>
+        </div>
+
+        <div class="org-connector-v"></div>
+
+        <!-- Livello 3: 3 rami -->
+        <div class="org-branches">
+
+          <!-- Ramo Admin -->
+          <div class="org-branch">
+            <div class="org-branch-connector"></div>
+            <div class="org-node">
+              <div class="org-node-name">Francaviglia M.G.</div>
+              <div class="org-node-role">Resp. Amministrativa</div>
+            </div>
+          </div>
+
+          <!-- Ramo Sviluppo -->
+          <div class="org-branch">
+            <div class="org-branch-connector"></div>
+            <div class="org-node" style="border-color:rgba(232,212,106,0.35);">
+              <div class="org-node-name">Gravante Lorella</div>
+              <div class="org-node-role">Resp. Sviluppo Club</div>
+            </div>
+            <div class="org-connector-v"></div>
+            <!-- Sub-ramo Sviluppo -->
+            <div class="org-branches" style="gap:8px;">
+              <div class="org-branch">
+                <div class="org-branch-connector"></div>
+                <div class="org-node">
+                  <div class="org-node-name">Oliverio Rita</div>
+                  <div class="org-node-role">Resp. Accoglienza</div>
+                </div>
+                <div class="org-connector-v"></div>
+                <div class="org-sub-members">
+                  <div class="org-node sm"><div class="org-node-name">Agnoletto S.</div></div>
+                  <div class="org-node sm"><div class="org-node-name">Pautasso C.</div></div>
+                  <div class="org-node sm"><div class="org-node-name">Perrone F.</div></div>
+                  <div class="org-node sm"><div class="org-node-name">DiMauro M.</div></div>
+                  <div class="org-node sm"><div class="org-node-name">Cammarano L.</div></div>
+                  <div class="org-node sm"><div class="org-node-name">Catalano J.</div></div>
+                </div>
+              </div>
+              <div class="org-branch">
+                <div class="org-branch-connector"></div>
+                <div class="org-node collab">
+                  <div class="org-node-name">Porcella Carola</div>
+                  <div class="org-node-role">Sviluppo Club</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ramo Manutenzione -->
+          <div class="org-branch">
+            <div class="org-branch-connector"></div>
+            <div class="org-node">
+              <div class="org-node-name">Sbaglia Rezio</div>
+              <div class="org-node-role">Resp. Manutenzione</div>
+            </div>
+            <div class="org-connector-v"></div>
+            <div class="org-sub-members">
+              <div class="org-node sm"><div class="org-node-name">Faenzi G.</div></div>
+              <div class="org-node sm"><div class="org-node-name">Pascale G.</div></div>
+              <div class="org-node sm"><div class="org-node-name">Tridico C.</div></div>
+              <div class="org-node sm"><div class="org-node-name">Fofana M.</div></div>
+            </div>
+          </div>
+
+        </div><!-- /org-branches -->
+      </div><!-- /org-tree -->
+    </div><!-- /org-generale -->
+
+    <!-- CHART 2: SETTORE SPORTIVO -->
+    <div class="org-chart" id="org-sportivo">
+      <div class="org-tree">
+
+        <div class="org-level">
+          <div class="org-node top">
+            <div class="org-node-name">Zunino Vittorio</div>
+            <div class="org-node-role">Amministratore Unico</div>
+          </div>
+        </div>
+        <div class="org-connector-v"></div>
+
+        <div class="org-level">
+          <div class="org-node top" style="min-width:150px;">
+            <div class="org-node-name">Rolle Marco</div>
+            <div class="org-node-role">Club Manager</div>
+          </div>
+        </div>
+        <div class="org-connector-v"></div>
+
+        <!-- Livello 3: Tugnolo + 5 coordinatori collaboratori -->
+        <div class="org-branches" style="gap:8px;">
+
+          <div class="org-branch">
+            <div class="org-branch-connector"></div>
+            <div class="org-node">
+              <div class="org-node-name">Tugnolo Sara</div>
+              <div class="org-node-role">Resp. Piscine e Young School</div>
+            </div>
+            <div class="org-connector-v"></div>
+            <div class="org-node">
+              <div class="org-node-name">La Vasca N.</div>
+              <div class="org-node-role">Coord. Piscine</div>
+            </div>
+          </div>
+
+          <div class="org-branch">
+            <div class="org-branch-connector"></div>
+            <div class="org-node collab">
+              <div class="org-node-name">Bertone Stefano</div>
+              <div class="org-node-role">Coord. Tennis e Young School</div>
+            </div>
+          </div>
+
+          <div class="org-branch">
+            <div class="org-branch-connector"></div>
+            <div class="org-node collab">
+              <div class="org-node-name">Casale Davide</div>
+              <div class="org-node-role">Coord. Padel</div>
+            </div>
+          </div>
+
+          <div class="org-branch">
+            <div class="org-branch-connector"></div>
+            <div class="org-node collab">
+              <div class="org-node-name">Cristina Laura</div>
+              <div class="org-node-role">Coord. Fitness e Musicali</div>
+            </div>
+          </div>
+
+          <div class="org-branch">
+            <div class="org-branch-connector"></div>
+            <div class="org-node collab">
+              <div class="org-node-name">Citterio Loris</div>
+              <div class="org-node-role">Coord. Sala Pesi</div>
+            </div>
+          </div>
+
+          <div class="org-branch">
+            <div class="org-branch-connector"></div>
+            <div class="org-node collab">
+              <div class="org-node-name">Mortara Giorgio</div>
+              <div class="org-node-role">Coord. Triathlon</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /org-sportivo -->
+
+    <!-- Legenda -->
+    <div class="org-legend">
+      <div class="org-legend-item">
+        <div class="org-legend-box"></div>
+        Personale dipendente
+      </div>
+      <div class="org-legend-item">
+        <div class="org-legend-pill"></div>
+        Collaboratore
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+function showOrg(id, btn) {
+  document.querySelectorAll('.org-chart').forEach(function(el) { el.classList.remove('active'); });
+  document.querySelectorAll('.org-tab').forEach(function(el) { el.classList.remove('active'); });
+  document.getElementById('org-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+
+
+<!-- AREA 2 -->
     <div class="area-block">
       <div class="area-header">
         <span class="area-num">02</span>
@@ -311,29 +734,31 @@ footer { background: #0F0F0D; padding: 36px 48px; display: flex; justify-content
     <h2 class="title">Customer Journey —<br><em>Attraction.</em></h2>
 
     <div class="intro-callout" style="margin-bottom:36px">
-      <p>La seconda sessione si concentra sul primo stadio del Customer Journey: come Ronchiverdi attrae il proprio target, come si presenta all'esterno e come raccoglie i dati dei potenziali soci. Prima di qualsiasi implementazione, la strategia va definita internamente.</p>
+      <p>La seconda sessione mappa il primo stadio del Customer Journey — <strong>Attraction e Conversion</strong> — analizzando ogni Business Unit separatamente: adulti, bambini / Young School, padel e agonistica hanno target diversi, canali diversi e CTA diverse. L'obiettivo è capire, canale per canale e BU per BU, come viene comunicato il valore, qual è l'invito all'azione e come vengono acquisiti i dati del contatto per la prima volta.</p>
     </div>
 
     <div class="next-grid" style="margin-bottom:36px">
       <div class="next-card">
-        <div class="next-card-label">Tema A</div>
-        <h3 class="next-card-title">Il target e la comunicazione esterna</h3>
+        <div class="next-card-label">Tema A — Per ogni Business Unit</div>
+        <h3 class="next-card-title">Target, comunicazione e canali</h3>
         <ul class="next-list">
-          <li>Chi è il potenziale socio per ogni Business Unit (adulti, bambini Young School, padel, agonistica)</li>
-          <li>Dove Ronchiverdi comunica oggi: canali attivi, frequenza, contenuti</li>
-          <li>Come vengono gestite le campagne Meta e Google Ads: chi decide cosa, budget per canale</li>
-          <li>Come funziona il passaggio di strategia da Lorella all'agenzia e alle risorse ADV</li>
+          <li><strong>Chi è il target</strong> di riferimento per ciascuna BU: profilo, motivazione, aspettativa</li>
+          <li><strong>Dove e come si comunica</strong> oggi verso quel target: canale, tono, frequenza, contenuto</li>
+          <li><strong>Qual è la CTA principale</strong> per ciascuna BU: cosa viene chiesto di fare al potenziale socio come passo successivo</li>
+          <li>Come vengono gestite <strong>Meta Ads e Google Ads</strong> per BU: budget, obiettivo, chi decide il messaggio</li>
+          <li>Come passa la strategia da <strong>Lorella all'agenzia</strong>: chi definisce la direzione creativa e chi esegue</li>
         </ul>
       </div>
       <div class="next-card">
-        <div class="next-card-label">Tema B</div>
-        <h3 class="next-card-title">Come vengono acquisiti i dati</h3>
+        <div class="next-card-label">Tema B — Canale per canale</div>
+        <h3 class="next-card-title">Come vengono acquisiti i dati la prima volta</h3>
         <ul class="next-list">
-          <li><strong>Guest register</strong> — come è strutturato, quali dati raccoglie e come viene analizzato</li>
-          <li>Mappa di tutte le CTA attualmente presenti sul sito Wix</li>
-          <li>Quali form esistono, cosa chiedono, dove portano il contatto</li>
-          <li>Meta Lead Form: utilizzato o no? Qualità dei contatti generati</li>
-          <li>Come funziona il referral oggi: processo, strumenti, regole operative</li>
+          <li><strong>Walk-in</strong> — guest register: struttura, campi raccolti, chi lo compila, dove va il dato</li>
+          <li><strong>Form web Wix</strong> — mappa di tutte le CTA e form attivi: cosa chiedono, dove portano il contatto, chi riceve il lead</li>
+          <li><strong>Meta Lead Form</strong> — utilizzato o no per singola BU? Qualità dei contatti, sincronizzazione con altri strumenti</li>
+          <li><strong>WhatsApp / Telefono</strong> — come viene registrato il primo contatto, chi lo gestisce, cosa viene salvato</li>
+          <li><strong>Referral</strong> — processo attuale: chi lo attiva, quali dati raccoglie, come viene tracciato e incentivato</li>
+          <li><strong>Social organico</strong> — esiste un percorso dal post alla richiesta di info? Come viene gestita la DM?</li>
         </ul>
       </div>
     </div>
