@@ -343,6 +343,72 @@ footer { background: #0F0F0D; padding: 36px 48px; display: flex; justify-content
   .org-branches { gap: 6px; }
 }
 
+
+/* ════ PRINCIPIO GUIDA ════ */
+.principio-section {
+  background: #FAF8F4;
+  padding: 72px 48px 0;
+  border-bottom: 1px solid rgba(15,15,13,0.08);
+}
+@media (max-width: 768px) {
+  .principio-section { padding: 48px 24px 0; }
+}
+.principio-inner {
+  max-width: 860px;
+  margin: 0 auto;
+}
+.principio-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: #B8965A; margin-bottom: 32px;
+  display: flex; align-items: center; gap: 12px;
+}
+.principio-label::before {
+  content: ''; width: 24px; height: 1px; background: #B8965A;
+}
+.principio-quote {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.55;
+  color: #0F0F0D;
+  letter-spacing: -0.01em;
+  margin-bottom: 28px;
+  padding-left: 28px;
+  border-left: 2px solid #E8D46A;
+}
+.principio-quote em {
+  font-style: normal;
+  font-weight: 500;
+  color: #0F0F0D;
+}
+.principio-attribution {
+  padding-left: 28px;
+  font-family: 'Jost', sans-serif;
+  font-size: 12px; font-weight: 400;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: #8A8578;
+  margin-bottom: 40px;
+}
+.principio-note {
+  padding: 24px 28px;
+  background: #F0EBE2;
+  border-radius: 12px;
+  margin-bottom: 56px;
+}
+.principio-note p {
+  font-family: 'Jost', sans-serif;
+  font-size: 14px; font-weight: 400;
+  line-height: 1.8;
+  color: #3D3A34;
+}
+.principio-note strong {
+  font-weight: 600;
+  color: #0F0F0D;
+}
+
 </style>
 </head>
 <body>
@@ -379,6 +445,37 @@ footer { background: #0F0F0D; padding: 36px 48px; display: flex; justify-content
   <div class="status-dot"></div>
   <span class="status-text">Audit in corso — Fase: Raccolta dati as-is</span>
 </div>
+
+
+<!-- PRINCIPIO GUIDA -->
+<section class="principio-section">
+  <div class="principio-inner">
+    <p class="principio-label">Il principio guida del progetto</p>
+
+    <blockquote class="principio-quote">
+      &ldquo;Noi restiamo un club con una <em>grossa valenza sociale</em> per i nostri soci.
+      C&rsquo;&egrave; una parte pronta alla digitalizzazione, ma c&rsquo;&egrave; un&rsquo;altra parte
+      che viene a Ronchiverdi <em>perch&eacute; si sente a casa</em> &mdash;
+      e a casa si aspetta che qualsiasi cosa la chiedi, la fai.
+      Dobbiamo trovare un equilibrio tra queste due esigenze.
+      La nostra caratteristica di mercato &egrave; distinguerci
+      da <em>un posto troppo rigido</em>.&rdquo;
+    </blockquote>
+    <p class="principio-attribution">Vittorio Zunino &mdash; Amministratore Unico &mdash; Call del 24 aprile 2026</p>
+
+    <div class="principio-note">
+      <p>
+        Questa premessa orienta ogni scelta del progetto:
+        <strong>la rigidità dei processi va applicata al backoffice</strong> &mdash;
+        flussi, tracciamento, automazioni, responsabilità chiare &mdash;
+        <strong>non all&rsquo;esperienza percepita dal socio</strong>.
+        L&rsquo;obiettivo non è trasformare Ronchiverdi in una macchina,
+        ma liberare le persone dalle mansioni ripetitive
+        per restituire loro il tempo e l&rsquo;energia per la <strong>relazione</strong>.
+      </p>
+    </div>
+  </div>
+</section>
 
 <!-- SEZIONE 1 — COSA È EMERSO -->
 <section class="section light fade-up">
