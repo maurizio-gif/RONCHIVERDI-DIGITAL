@@ -85,37 +85,37 @@ h1.hero-title em { font-style: italic; color: #E8D46A; }
 
 /* GALLERIA — slideshow sotto la hero */
 .gallery-section { background: #0F0F0D; padding: 0 48px 72px; position: relative; }
-.gallery-inner { max-width: 1100px; margin: 0 auto; }
-.gallery-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(232,212,106,0.65); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+.gallery-inner { max-width: 640px; margin: 0 auto; }
+.gallery-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(232,212,106,0.65); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; justify-content: center; }
 .gallery-eyebrow::before { content: ''; width: 24px; height: 1px; background: rgba(232,212,106,0.4); }
-.gallery-frame { position: relative; width: 100%; aspect-ratio: 21/9; border-radius: 20px; overflow: hidden; background: #1C1C19; border: 1px solid rgba(255,255,255,0.06); }
+.gallery-frame { position: relative; width: 100%; aspect-ratio: 3/2; border-radius: 16px; overflow: hidden; background: #1C1C19; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 24px 60px -20px rgba(0,0,0,0.6); }
 .gallery-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.4s cubic-bezier(0.4,0,0.2,1); }
 .gallery-slide.active { opacity: 1; }
-.gallery-slide-img { position: absolute; inset: -3%; background-size: cover; background-position: center; transform: scale(1.04); will-change: transform; }
+.gallery-slide-img { position: absolute; inset: 0; background-size: cover; background-position: center; transform: scale(1); will-change: transform; }
 .gallery-slide.active .gallery-slide-img { animation: galleryKB 7s ease-out forwards; }
 @keyframes galleryKB {
-  0% { transform: scale(1.04) translate(0, 0); }
-  100% { transform: scale(1.14) translate(-1.5%, -1%); }
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.05) translate(-1%, -0.7%); }
 }
 .gallery-slide:nth-child(2n).active .gallery-slide-img { animation-name: galleryKBAlt; }
 @keyframes galleryKBAlt {
-  0% { transform: scale(1.04) translate(0, 0); }
-  100% { transform: scale(1.14) translate(1.5%, -1%); }
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.05) translate(1%, -0.7%); }
 }
 .gallery-slide:nth-child(3n).active .gallery-slide-img { animation-name: galleryKBBottom; }
 @keyframes galleryKBBottom {
-  0% { transform: scale(1.04) translate(0, 0); }
-  100% { transform: scale(1.14) translate(-1%, 1.5%); }
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.05) translate(-0.7%, 1%); }
 }
 
 /* GALLERY META — caption + controls below the image */
-.gallery-meta { margin-top: 22px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
-.gallery-caption { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-style: italic; color: rgba(250,248,244,0.55); transition: opacity 0.4s; line-height: 1.4; }
-.gallery-controls { display: flex; align-items: center; gap: 24px; }
-.gallery-counter { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 300; color: rgba(250,248,244,0.4); letter-spacing: 0.08em; }
-.gallery-counter strong { font-weight: 400; color: #E8D46A; font-size: 18px; transition: opacity 0.3s; display: inline-block; min-width: 22px; }
+.gallery-meta { margin-top: 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.gallery-caption { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-style: italic; color: rgba(250,248,244,0.55); transition: opacity 0.4s; line-height: 1.4; }
+.gallery-controls { display: flex; align-items: center; gap: 20px; }
+.gallery-counter { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-weight: 300; color: rgba(250,248,244,0.4); letter-spacing: 0.08em; }
+.gallery-counter strong { font-weight: 400; color: #E8D46A; font-size: 16px; transition: opacity 0.3s; display: inline-block; min-width: 20px; }
 .gallery-bars { display: flex; gap: 6px; }
-.gallery-bar { width: 32px; height: 2px; background: rgba(255,255,255,0.12); border-radius: 1px; overflow: hidden; cursor: pointer; transition: background 0.2s; position: relative; padding: 0; border: none; }
+.gallery-bar { width: 28px; height: 2px; background: rgba(255,255,255,0.12); border-radius: 1px; overflow: hidden; cursor: pointer; transition: background 0.2s; position: relative; padding: 0; border: none; }
 .gallery-bar:hover { background: rgba(255,255,255,0.25); }
 .gallery-bar-fill { position: absolute; top: 0; left: 0; height: 100%; width: 0%; background: linear-gradient(90deg, #E8D46A, #C9B540); border-radius: 1px; }
 .gallery-bar.active .gallery-bar-fill { animation: galleryProgress 6s linear forwards; }
@@ -124,7 +124,9 @@ h1.hero-title em { font-style: italic; color: #E8D46A; }
 
 @media(max-width:768px){
   .gallery-section { padding: 0 24px 56px; }
-  .gallery-frame { aspect-ratio: 16/10; border-radius: 14px; }
+  .gallery-inner { max-width: 100%; }
+  .gallery-eyebrow { justify-content: flex-start; }
+  .gallery-frame { border-radius: 14px; }
   .gallery-bar { width: 24px; }
   .gallery-counter { font-size: 12px; }
   .gallery-counter strong { font-size: 16px; }
@@ -212,7 +214,8 @@ h1.hero-title em { font-style: italic; color: #E8D46A; }
 .team-inner { max-width: 1100px; margin: 0 auto; }
 .team-grid { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
 .team-chip { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 50px; padding: 12px 20px; display: flex; align-items: center; gap: 10px; }
-.team-chip.lead { border-color: rgba(232,212,106,0.3); background: rgba(232,212,106,0.06); }
+.team-chip.lead { border-color: rgba(232,212,106,0.35); background: rgba(232,212,106,0.07); }
+.team-chip.consultant { border: 1px dashed rgba(232,212,106,0.35); background: rgba(232,212,106,0.03); }
 .team-avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
 .ta-mt { background: rgba(232,212,106,0.2); color: #E8D46A; }
 .ta-v { background: rgba(255,255,255,0.1); color: #FAF8F4; }
@@ -477,31 +480,38 @@ footer { background: rgba(0,0,0,0.4); padding: 40px 48px; border-top: 1px solid 
     <h2 class="section-title">Le <em>persone</em> coinvolte</h2>
     <div class="team-grid">
       <div class="team-chip lead">
-        <div class="team-avatar ta-mt">MT</div>
+        <div class="team-avatar ta-mt">MR</div>
         <div>
-          <div class="team-info-name">Maurizio Taruggi</div>
-          <div class="team-info-role">Consulente · Ready 2 Digital</div>
+          <div class="team-info-name">Marco Rolle</div>
+          <div class="team-info-role">Manager · Ronchiverdi</div>
         </div>
       </div>
       <div class="team-chip">
-        <div class="team-avatar ta-v">V</div>
+        <div class="team-avatar ta-v">PZ</div>
         <div>
-          <div class="team-info-name">Vittorio</div>
-          <div class="team-info-role">Direzione / Fitness · Ronchiverdi</div>
+          <div class="team-info-name">Paola Zavattero</div>
+          <div class="team-info-role">CFO · Ronchiverdi</div>
         </div>
       </div>
       <div class="team-chip">
-        <div class="team-avatar ta-l">L</div>
+        <div class="team-avatar ta-v">LG</div>
         <div>
-          <div class="team-info-name">Lorella</div>
-          <div class="team-info-role">Marketing & Direzione Commerciale</div>
+          <div class="team-info-name">Lorella Gravante</div>
+          <div class="team-info-role">Direzione Commerciale</div>
+        </div>
+      </div>
+      <div class="team-chip">
+        <div class="team-avatar ta-v">VZ</div>
+        <div>
+          <div class="team-info-name">Vittorio Zunino</div>
+          <div class="team-info-role">Amministratore Delegato</div>
         </div>
       </div>
       <div class="team-chip">
         <div class="team-avatar ta-l">Lo</div>
         <div>
           <div class="team-info-name">Loris</div>
-          <div class="team-info-role">Fitness & Customer Care</div>
+          <div class="team-info-role">Fitness · Customer Care</div>
         </div>
       </div>
       <div class="team-chip">
@@ -512,17 +522,31 @@ footer { background: rgba(0,0,0,0.4); padding: 40px 48px; border-top: 1px solid 
         </div>
       </div>
       <div class="team-chip">
+        <div class="team-avatar ta-l">C</div>
+        <div>
+          <div class="team-info-name">Carolina</div>
+          <div class="team-info-role">Reception · Operations</div>
+        </div>
+      </div>
+      <div class="team-chip">
         <div class="team-avatar ta-l">Si</div>
         <div>
           <div class="team-info-name">Simone</div>
-          <div class="team-info-role">Digital Marketing (nuovo)</div>
+          <div class="team-info-role">Digital Marketing · in arrivo</div>
         </div>
       </div>
       <div class="team-chip">
         <div class="team-avatar ta-l">AG</div>
         <div>
           <div class="team-info-name">Agenzia</div>
-          <div class="team-info-role">Brand, Sito, Campagne ADV</div>
+          <div class="team-info-role">Brand · Sito · ADV</div>
+        </div>
+      </div>
+      <div class="team-chip consultant">
+        <div class="team-avatar ta-mt">MT</div>
+        <div>
+          <div class="team-info-name">Maurizio Taruggi</div>
+          <div class="team-info-role">Consulente · Ready 2 Digital</div>
         </div>
       </div>
     </div>
