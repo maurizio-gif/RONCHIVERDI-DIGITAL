@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recap Prima Call — Audit Ronchiverdi</title>
+<meta name="description" content="Verbale Prima Call — Customer Journey & Process Architecture Audit, Ronchiverdi Sport Club">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Jost', sans-serif; background: #FAF8F4; color: #0F0F0D; font-size: 16px; line-height: 1.6; overflow-x: hidden; font-weight: 300; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: #fff; border-bottom: 1px solid rgba(15,15,13,0.12); }
+.nav-logo img { height: 44px; width: auto; mix-blend-mode: multiply; }
+.nav-label { font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: #0F0F0D; }
+.nav-cta { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #0F0F0D; text-decoration: none; background: #E8D46A; padding: 8px 18px; border-radius: 980px; transition: background 0.2s; }
+.nav-cta:hover { background: #F2E882; color: #0F0F0D; }
+@media(max-width:768px){ nav { padding: 0 20px; } .nav-label { display: none; } }
+
+/* HERO */
+.hero { background: #0F0F0D; padding: 160px 48px 72px; min-height: 48vh; display: flex; align-items: flex-end; }
+.hero-inner { max-width: 860px; }
+.hero-eyebrow { font-size: 11px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: #E8D46A; margin-bottom: 28px; display: flex; align-items: center; gap: 14px; }
+.hero-eyebrow::before { content: ''; width: 36px; height: 1px; background: #E8D46A; }
+h1.hero-title { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(40px, 5vw, 70px); font-weight: 300; line-height: 1.05; color: #FAF8F4; letter-spacing: -0.01em; }
+h1.hero-title em { font-style: italic; color: #E8D46A; }
+.hero-divider { width: 40px; height: 1px; background: #8A8578; margin: 32px 0; }
+.hero-meta { display: flex; gap: 48px; flex-wrap: wrap; }
+.meta-item { }
+.meta-label { font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #8A8578; margin-bottom: 4px; }
+.meta-value { font-family: 'Cormorant Garamond', serif; font-size: 17px; color: #FAF8F4; }
+@media(max-width:768px){ .hero { padding: 120px 24px 60px; } }
+
+/* STATUS BAR */
+.status-bar { background: #E8D46A; padding: 14px 48px; display: flex; align-items: center; gap: 12px; }
+.status-dot { width: 8px; height: 8px; border-radius: 50%; background: #0F0F0D; animation: blink 2.5s ease-in-out infinite; flex-shrink: 0; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.status-text { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #0F0F0D; }
+@media(max-width:768px){ .status-bar { padding: 14px 24px; } }
+
+/* SHARED LAYOUT */
+.wrap { max-width: 1100px; margin: 0 auto; }
+.section { padding: 72px 48px; }
+.section.light { background: #FAF8F4; }
+.section.cream { background: #F5F1EA; }
+.section.dark { background: #0F0F0D; }
+@media(max-width:768px){ .section { padding: 56px 24px; } }
+
+.label { font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #B8965A; margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
+.label::before { content: ''; width: 20px; height: 1px; background: #B8965A; flex-shrink: 0; }
+.label.inv { color: #E8D46A; }
+.label.inv::before { background: #E8D46A; }
+
+h2.title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 3vw, 42px); font-weight: 300; line-height: 1.15; color: #0F0F0D; margin-bottom: 36px; letter-spacing: -0.01em; }
+h2.title em { font-style: italic; color: #B8965A; }
+h2.title.inv { color: #FAF8F4; }
+h2.title.inv em { color: #E8D46A; }
+
+/* INTRO CALLOUT */
+.intro-callout { border-left: 3px solid #E8D46A; padding: 22px 26px; background: #F5F1EA; border-radius: 0 12px 12px 0; margin-bottom: 44px; }
+.intro-callout p { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-style: italic; line-height: 1.75; color: #0F0F0D; }
+
+/* AREA BLOCKS */
+.area-block { border-top: 1px solid rgba(15,15,13,0.1); padding: 36px 0; }
+.area-block:last-child { border-bottom: 1px solid rgba(15,15,13,0.1); }
+.area-header { display: flex; align-items: baseline; gap: 20px; margin-bottom: 20px; }
+.area-num { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-style: italic; color: #B8965A; min-width: 28px; }
+.area-title-wrap { flex: 1; }
+.area-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 500; color: #0F0F0D; line-height: 1.2; }
+.area-subtitle { font-size: 12px; color: #8A8578; margin-top: 4px; }
+
+.fact-list { display: flex; flex-direction: column; gap: 0; padding-left: 48px; }
+.fact { display: flex; gap: 14px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid rgba(15,15,13,0.06); font-size: 14px; color: #0F0F0D; line-height: 1.65; }
+.fact:last-child { border-bottom: none; }
+.fact-dot { width: 6px; height: 6px; border-radius: 50%; background: #C9B540; flex-shrink: 0; margin-top: 8px; }
+.fact-dot.red { background: #C9553A; }
+.fact-dot.green { background: #5A9E6B; }
+.fact strong { font-weight: 600; }
+.fact em { font-style: normal; color: #8A8578; font-size: 13px; }
+
+/* OSS. APERTA — pill tag */
+.open-tag { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; background: rgba(201,85,58,0.12); color: #C9553A; margin-left: 6px; vertical-align: middle; }
+.note-tag { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; background: rgba(90,158,107,0.12); color: #3A8A55; margin-left: 6px; vertical-align: middle; }
+
+/* AZIONI DI FOLLOW-UP */
+.action-list { display: flex; flex-direction: column; gap: 0; }
+.action-row { display: flex; align-items: flex-start; gap: 20px; padding: 18px 0; border-bottom: 1px solid rgba(250,248,244,0.08); }
+.action-row:last-child { border-bottom: none; }
+.action-num { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; font-style: italic; color: #E8D46A; min-width: 32px; line-height: 1; padding-top: 2px; }
+.action-body { flex: 1; }
+.action-text { font-size: 14px; color: #FAF8F4; line-height: 1.65; }
+.action-text strong { font-weight: 600; color: #fff; }
+.responsible { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
+.r-mt { background: rgba(232,212,106,0.15); color: #C9B540; }
+.r-rc { background: rgba(250,248,244,0.1); color: rgba(250,248,244,0.7); }
+.r-all { background: rgba(255,255,255,0.06); color: rgba(250,248,244,0.5); }
+
+/* NEXT CALL */
+.next-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media(max-width:768px){ .next-grid { grid-template-columns: 1fr; } }
+
+.next-card { background: #fff; border: 1px solid rgba(15,15,13,0.1); border-radius: 16px; padding: 28px 30px; }
+.next-card-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #B8965A; margin-bottom: 12px; }
+h3.next-card-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 500; color: #0F0F0D; margin-bottom: 16px; line-height: 1.2; }
+.next-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.next-list li { font-size: 14px; color: #0F0F0D; line-height: 1.6; padding-left: 18px; position: relative; }
+.next-list li::before { content: ''; position: absolute; left: 0; top: 9px; width: 5px; height: 5px; border-radius: 50%; background: #C9B540; }
+.next-list li strong { font-weight: 600; }
+
+/* PREPARAZIONE */
+.prep-box { background: #F5F1EA; border-radius: 16px; padding: 36px 40px; }
+.prep-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: #0F0F0D; margin-bottom: 24px; }
+.prep-row { display: flex; align-items: flex-start; gap: 16px; padding: 14px 0; border-bottom: 1px solid rgba(15,15,13,0.08); }
+.prep-row:last-child { border-bottom: none; }
+.prep-who { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; min-width: 110px; flex-shrink: 0; padding-top: 2px; }
+.prep-who.mt { color: #0F0F0D; }
+.prep-who.rc { color: #8A8578; }
+.prep-text { font-size: 14px; color: #0F0F0D; line-height: 1.6; }
+.prep-text strong { font-weight: 600; }
+
+/* CALENDAR */
+.cal-section { background: #1C1C19; padding: 0 48px 72px; }
+.cal-inner { max-width: 1100px; margin: 0 auto; }
+.cal-wrap { border: 1px solid rgba(255,255,255,0.08); background: #FAF8F4; border-radius: 20px; overflow: hidden; }
+@media(max-width:768px){ .cal-section { padding: 0 20px 60px; } }
+
+/* FOOTER */
+footer { background: #0F0F0D; padding: 36px 48px; display: flex; justify-content: space-between; align-items: center; }
+.f-info { font-size: 13px; color: #8A8578; }
+.f-info a { color: #E8D46A; text-decoration: none; }
+.f-note { font-size: 11px; color: rgba(138,133,120,0.5); }
+@media(max-width:768px){ footer { flex-direction: column; gap: 12px; text-align: center; padding: 28px 20px; } }
+
+/* FADE */
+.fade-up { opacity: 0; transform: translateY(18px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.fade-up.visible { opacity: 1; transform: none; }
+
+/* ════ ORGANIGRAMMA ════ */
+.org-section {
+  background: #0F0F0D;
+  padding: 72px 24px 80px;
+}
+.org-section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.org-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: #E8D46A; margin-bottom: 10px;
+  display: flex; align-items: center; gap: 12px;
+}
+.org-label::before {
+  content: ''; width: 24px; height: 1px; background: #E8D46A;
+}
+.org-section-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 300; color: #FAF8F4;
+  margin-bottom: 48px; line-height: 1.2;
+}
+.org-tabs {
+  display: flex; gap: 12px; margin-bottom: 48px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 0;
+}
+.org-tab {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  padding: 10px 0 12px;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  margin-bottom: -1px;
+  transition: color 0.2s, border-color 0.2s;
+  background: none; border-top: none; border-left: none; border-right: none;
+}
+.org-tab.active {
+  color: #E8D46A;
+  border-bottom-color: #E8D46A;
+}
+.org-chart { display: none; }
+.org-chart.active { display: block; }
+
+/* Nodi */
+.org-tree {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+.org-level {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  position: relative;
+  width: 100%;
+}
+.org-level + .org-level {
+  margin-top: 0;
+}
+
+/* Connettori verticali */
+.org-connector-v {
+  width: 1px;
+  height: 32px;
+  background: rgba(232,212,106,0.3);
+  margin: 0 auto;
+}
+.org-connector-h-wrap {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 32px;
+}
+.org-connector-h {
+  position: absolute;
+  top: 0;
+  height: 1px;
+  background: rgba(232,212,106,0.3);
+}
+.org-branches {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  position: relative;
+}
+.org-branch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+.org-branch-connector {
+  width: 1px;
+  height: 32px;
+  background: rgba(232,212,106,0.3);
+}
+
+/* Card nodo dipendente */
+.org-node {
+  padding: 12px 16px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  text-align: center;
+  background: rgba(255,255,255,0.04);
+  transition: background 0.2s, border-color 0.2s;
+  min-width: 110px;
+  max-width: 160px;
+}
+.org-node:hover {
+  background: rgba(232,212,106,0.08);
+  border-color: rgba(232,212,106,0.4);
+}
+.org-node.top {
+  background: rgba(232,212,106,0.12);
+  border-color: rgba(232,212,106,0.5);
+}
+/* Card nodo collaboratore */
+.org-node.collab {
+  border-radius: 50px;
+  border-style: dashed;
+  border-color: rgba(184,150,90,0.5);
+  background: rgba(184,150,90,0.06);
+}
+.org-node-name {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #FAF8F4;
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+.org-node-role {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 12px; font-weight: 300;
+  font-style: italic;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.3;
+}
+.org-node.collab .org-node-role {
+  color: #B8965A;
+}
+.org-node.top .org-node-name {
+  color: #E8D46A;
+}
+
+/* Legenda */
+.org-legend {
+  display: flex; gap: 24px; margin-top: 40px;
+  flex-wrap: wrap;
+}
+.org-legend-item {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Jost', sans-serif;
+  font-size: 11px; font-weight: 400;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+.org-legend-box {
+  width: 28px; height: 16px;
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.04);
+}
+.org-legend-pill {
+  width: 36px; height: 16px;
+  border-radius: 50px;
+  border: 1px dashed rgba(184,150,90,0.5);
+  background: rgba(184,150,90,0.06);
+}
+
+/* Gruppo nodi sub */
+.org-sub-group {
+  display: flex; flex-direction: column; align-items: center;
+}
+.org-sub-members {
+  display: flex; gap: 6px; flex-wrap: wrap; justify-content: center;
+  margin-top: 0;
+}
+.org-node.sm {
+  padding: 8px 12px;
+  min-width: 80px; max-width: 120px;
+}
+.org-node.sm .org-node-name {
+  font-size: 10px;
+}
+
+@media (max-width: 640px) {
+  .org-node { min-width: 80px; max-width: 120px; padding: 10px 10px; }
+  .org-node-name { font-size: 10px; }
+  .org-node-role { font-size: 11px; }
+  .org-branches { gap: 6px; }
+}
+
+
+/* ════ PRINCIPIO GUIDA ════ */
+.principio-section {
+  background: #FAF8F4;
+  padding: 72px 48px 0;
+  border-bottom: 1px solid rgba(15,15,13,0.08);
+}
+@media (max-width: 768px) {
+  .principio-section { padding: 48px 24px 0; }
+}
+.principio-inner {
+  max-width: 860px;
+  margin: 0 auto;
+}
+.principio-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: #B8965A; margin-bottom: 32px;
+  display: flex; align-items: center; gap: 12px;
+}
+.principio-label::before {
+  content: ''; width: 24px; height: 1px; background: #B8965A;
+}
+.principio-quote {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.55;
+  color: #0F0F0D;
+  letter-spacing: -0.01em;
+  margin-bottom: 28px;
+  padding-left: 28px;
+  border-left: 2px solid #E8D46A;
+}
+.principio-quote em {
+  font-style: normal;
+  font-weight: 500;
+  color: #0F0F0D;
+}
+.principio-attribution {
+  padding-left: 28px;
+  font-family: 'Jost', sans-serif;
+  font-size: 12px; font-weight: 400;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: #8A8578;
+  margin-bottom: 40px;
+}
+.principio-note {
+  padding: 24px 28px;
+  background: #F0EBE2;
+  border-radius: 12px;
+  margin-bottom: 56px;
+}
+.principio-note p {
+  font-family: 'Jost', sans-serif;
+  font-size: 14px; font-weight: 400;
+  line-height: 1.8;
+  color: #3D3A34;
+}
+.principio-note strong {
+  font-weight: 600;
+  color: #0F0F0D;
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://ronchiverdi.it" class="nav-logo" target="_blank">
+    <img src="data:image/jpeg;base64,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" alt="Ronchiverdi">
+  </a>
+  <span class="nav-label">Audit — Recap Prima Call</span>
+  <a href="https://calendly.com/ready2digital/formazione" target="_blank" class="nav-cta">Prenota call</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Customer Journey &amp; Process Architecture Audit</div>
+    <h1 class="hero-title">Verbale<br><em>Prima Call.</em></h1>
+    <div class="hero-divider"></div>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <div class="meta-label">Data</div>
+        <div class="meta-value">24 Aprile 2026</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Presenti</div>
+        <div class="meta-value">Marco Rolle · Lorella Gravante · Vittorio Zunino · Paola Zavattero</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="status-bar">
+  <div class="status-dot"></div>
+  <span class="status-text">Audit in corso — Fase: Raccolta dati as-is</span>
+</div>
+
+
+<!-- PRINCIPIO GUIDA -->
+<section class="principio-section">
+  <div class="principio-inner">
+    <p class="principio-label">Il principio guida del progetto</p>
+
+    <blockquote class="principio-quote">
+      &ldquo;Noi restiamo un club con una <em>grossa valenza sociale</em> per i nostri soci.
+      C&rsquo;&egrave; una parte pronta alla digitalizzazione, ma c&rsquo;&egrave; un&rsquo;altra parte
+      che viene a Ronchiverdi <em>perch&eacute; si sente a casa</em> &mdash;
+      e a casa si aspetta che qualsiasi cosa la chiedi, la fai.
+      Dobbiamo trovare un equilibrio tra queste due esigenze.
+      La nostra caratteristica di mercato &egrave; distinguerci
+      da <em>un posto troppo rigido</em>.&rdquo;
+    </blockquote>
+    <p class="principio-attribution">Vittorio Zunino &mdash; Amministratore Unico &mdash; Call del 24 aprile 2026</p>
+
+    <div class="principio-note">
+      <p>
+        Questa premessa orienta ogni scelta del progetto:
+        <strong>la rigidità dei processi va applicata al backoffice</strong> &mdash;
+        flussi, tracciamento, automazioni, responsabilità chiare &mdash;
+        <strong>non all&rsquo;esperienza percepita dal socio</strong>.
+        L&rsquo;obiettivo non è trasformare Ronchiverdi in una macchina,
+        ma liberare le persone dalle mansioni ripetitive
+        per restituire loro il tempo e l&rsquo;energia per la <strong>relazione</strong>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SEZIONE 1 — COSA È EMERSO -->
+<section class="section light fade-up">
+  <div class="wrap">
+    <p class="label">Cosa è emerso</p>
+    <h2 class="title">Fotografia <em>as-is.</em></h2>
+
+    <div class="intro-callout">
+      <p>La prima sessione ha mappato la situazione attuale del club attraverso la checklist di raccolta dati e il confronto diretto con Marco Rolle e Lorella Gravante. Di seguito il riepilogo ordinato per area, così come emerso dalla call.</p>
+    </div>
+
+    <!-- AREA 1 -->
+    <div class="area-block">
+      <div class="area-header">
+        <span class="area-num">01</span>
+        <div class="area-title-wrap">
+          <div class="area-name">Organigramma e ruoli operativi</div>
+          <div class="area-subtitle">Struttura delle persone a contatto con il cliente</div>
+        </div>
+      </div>
+      <div class="fact-list">
+        <div class="fact"><div class="fact-dot"></div><div><strong>Lorella Gravante</strong> — Responsabile Sviluppo Club: gestisce strategia di marketing, supervisione commerciale e ultimo livello di escalation con i soci.</div></div>
+        <div class="fact"><div class="fact-dot"></div><div><strong>Rita Oliverio</strong> — Responsabile Accoglienza: coordina lo staff front office composto da 5 persone (Jasmine, Luigi, Chiara, Francesca + una).</div></div>
+        <div class="fact"><div class="fact-dot"></div><div><strong>Carola Porcella</strong> — Unica figura commerciale dedicata ai new lead. <em>In fase di formazione: Jasmine è in supporto a Carola nei momenti di maggiore affluenza.</em></div></div>
+        <div class="fact"><div class="fact-dot"></div><div><strong>Margherita DiMauro</strong> — Retention e rinnovi, in collaborazione con il front office.</div></div>
+        <div class="fact"><div class="fact-dot"></div><div><strong>Settore ADV</strong> — Attualmente gestito da Emanuela (in uscita). Dal 1 maggio 2026: Simone (in ingresso) + agenzia esterna (contratto dal 1 maggio).</div></div>
+        <div class="fact"><div class="fact-dot"></div><div>Totale persone operative a contatto con il cliente: <strong>9, compresa Lorella</strong>. Lorella interviene solo in situazioni critiche, dopo che la reception e la retention non hanno risolto.</div></div>
+      </div>
+    </div>
+
+    
+<!-- ORGANIGRAMMA -->
+<section class="org-section">
+  <div class="org-section-inner">
+    <p class="org-label">Struttura interna</p>
+    <h2 class="org-section-title">Organigramma<br><em style="font-style:italic;color:#B8965A;">Ronchiverdi Sport Club</em></h2>
+
+    <div class="org-tabs">
+      <button class="org-tab active" onclick="showOrg('generale', this)">Struttura Generale</button>
+      <button class="org-tab" onclick="showOrg('sportivo', this)">Settore Sportivo</button>
+    </div>
+
+    <!-- CHART 1: STRUTTURA GENERALE -->
+    <div class="org-chart active" id="org-generale">
+      <div class="org-tree">
+
+        <!-- Livello 1: Admin Unico + CFO -->
+        <div class="org-level" style="gap:20px;align-items:flex-start;">
+          <div class="org-branch" style="flex:0 0 auto;">
+            <div class="org-node top">
+              <div class="org-node-name">Zunino Vittorio</div>
+              <div class="org-node-role">Amministratore Unico</div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;flex:0 0 auto;margin-top:8px;">
+            <div class="org-node collab">
+              <div class="org-node-name">Zavattero Paola</div>
+              <div class="org-node-role">CFO</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="org-connector-v"></div>
+
+        <!-- Livello 2: Club Manager -->
+        <div class="org-level">
+          <div class="org-node top" style="min-width:150px;">
+            <div class="org-node-name">Rolle Marco</div>
+            <div class="org-node-role">Club Manager</div>
+          </div>
+        </div>
+
+        <div class="org-connector-v"></div>
+
+        <!-- Livello 3: 3 rami -->
+        <div class="org-branches">
+
+          <!-- Ramo Admin -->
+          <div class="org-branch">
+            <div class="org-branch-connector"></div>
+            <div class="org-node">
+              <div class="org-node-name">Francaviglia M.G.</div>
+              <div class="org-node-role">Resp. Amministrativa</div>
+            </div>
+          </div>
+
+          <!-- Ramo Sviluppo -->
+          <div class="org-branch">
+            <div class="org-branch-connector"></div>
+            <div class="org-node" style="border-color:rgba(232,212,106,0.35);">
+              <div class="org-node-name">Gravante Lorella</div>
+              <div class="org-node-role">Resp. Sviluppo Club</div>
+            </div>
+            <div class="org-connector-v"></div>
+            <!-- Sub-ramo Sviluppo -->
+            <div class="org-branches" style="gap:8px;">
+              <div class="org-branch">
+                <div class="org-branch-connector"></div>
+                <div class="org-node">
+                  <div class="org-node-name">Oliverio Rita</div>
+                  <div class="org-node-role">Resp. Accoglienza</div>
+                </div>
+                <div class="org-connector-v"></div>
+                <div class="org-sub-members">
+                  <div class="org-node sm"><div class="org-node-name">Agnoletto S.</div></div>
+                  <div class="org-node sm"><div class="org-node-name">Pautasso C.</div></div>
+                  <div class="org-node sm"><div class="org-node-name">Perrone F.</div></div>
+                  <div class="org-node sm"><div class="org-node-name">DiMauro M.</div></div>
+                  <div class="org-node sm"><div class="org-node-name">Cammarano L.</div></div>
+                  <div class="org-node sm"><div class="org-node-name">Catalano J.</div></div>
+                </div>
+              </div>
+              <div class="org-branch">
+                <div class="org-branch-connector"></div>
+                <div class="org-node collab">
+                  <div class="org-node-name">Porcella Carola</div>
+                  <div class="org-node-role">Sviluppo Club</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ramo Manutenzione -->
+          <div class="org-branch">
+            <div class="org-branch-connector"></div>
+            <div class="org-node">
+              <div class="org-node-name">Sbaglia Rezio</div>
+              <div class="org-node-role">Resp. Manutenzione</div>
+            </div>
+            <div class="org-connector-v"></div>
+            <div class="org-sub-members">
+              <div class="org-node sm"><div class="org-node-name">Faenzi G.</div></div>
+              <div class="org-node sm"><div class="org-node-name">Pascale G.</div></div>
+              <div class="org-node sm"><div class="org-node-name">Tridico C.</div></div>
+              <div class="org-node sm"><div class="org-node-name">Fofana M.</div></div>
+            </div>
+          </div>
+
+        </div><!-- /org-branches -->
+      </div><!-- /org-tree -->
+    </div><!-- /org-generale -->
+
+    <!-- CHART 2: SETTORE SPORTIVO -->
+    <div class="org-chart" id="org-sportivo">
+      <div class="org-tree">
+
+        <div class="org-level">
+          <div class="org-node top">
+            <div class="org-node-name">Zunino Vittorio</div>
+            <div class="org-node-role">Amministratore Unico</div>
+          </div>
+        </div>
+        <div class="org-connector-v"></div>
+
+        <div class="org-level">
+          <div class="org-node top" style="min-width:150px;">
+            <div class="org-node-name">Rolle Marco</div>
+            <div class="org-node-role">Club Manager</div>
+          </div>
+        </div>
+        <div class="org-connector-v"></div>
+
+        <!-- Livello 3: Tugnolo + 5 coordinatori collaboratori -->
+        <div class="org-branches" style="gap:8px;">
+
+          <div class="org-branch">
+            <div class="org-branch-connector"></div>
+            <div class="org-node">
+              <div class="org-node-name">Tugnolo Sara</div>
+              <div class="org-node-role">Resp. Piscine e Young School</div>
+            </div>
+            <div class="org-connector-v"></div>
+            <div class="org-node">
+              <div class="org-node-name">La Vasca N.</div>
+              <div class="org-node-role">Coord. Piscine</div>
+            </div>
+          </div>
+
+          <div class="org-branch">
+            <div class="org-branch-connector"></div>
+            <div class="org-node collab">
+              <div class="org-node-name">Bertone Stefano</div>
+              <div class="org-node-role">Coord. Tennis e Young School</div>
+            </div>
+          </div>
+
+          <div class="org-branch">
+            <div class="org-branch-connector"></div>
+            <div class="org-node collab">
+              <div class="org-node-name">Casale Davide</div>
+              <div class="org-node-role">Coord. Padel</div>
+            </div>
+          </div>
+
+          <div class="org-branch">
+            <div class="org-branch-connector"></div>
+            <div class="org-node collab">
+              <div class="org-node-name">Cristina Laura</div>
+              <div class="org-node-role">Coord. Fitness e Musicali</div>
+            </div>
+          </div>
+
+          <div class="org-branch">
+            <div class="org-branch-connector"></div>
+            <div class="org-node collab">
+              <div class="org-node-name">Citterio Loris</div>
+              <div class="org-node-role">Coord. Sala Pesi</div>
+            </div>
+          </div>
+
+          <div class="org-branch">
+            <div class="org-branch-connector"></div>
+            <div class="org-node collab">
+              <div class="org-node-name">Mortara Giorgio</div>
+              <div class="org-node-role">Coord. Triathlon</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /org-sportivo -->
+
+    <!-- Legenda -->
+    <div class="org-legend">
+      <div class="org-legend-item">
+        <div class="org-legend-box"></div>
+        Personale dipendente
+      </div>
+      <div class="org-legend-item">
+        <div class="org-legend-pill"></div>
+        Collaboratore
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+function showOrg(id, btn) {
+  document.querySelectorAll('.org-chart').forEach(function(el) { el.classList.remove('active'); });
+  document.querySelectorAll('.org-tab').forEach(function(el) { el.classList.remove('active'); });
+  document.getElementById('org-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+
+
+<!-- AREA 2 -->
+    <div class="area-block">
+      <div class="area-header">
+        <span class="area-num">02</span>
+        <div class="area-title-wrap">
+          <div class="area-name">Strumenti e software in uso</div>
+          <div class="area-subtitle">Stack tecnologico attuale</div>
+        </div>
+      </div>
+      <div class="fact-list">
+        <div class="fact"><div class="fact-dot"></div><div><strong>InFor You (Team System)</strong> — gestionale principale: soci, tornelli, vendita abbonamenti, scontrini. Contiene il database storico (stima: 30.000–40.000 anagrafiche). <em>È la source of truth del club.</em></div></div>
+        <div class="fact"><div class="fact-dot"></div><div><strong>Area 32 (Team System)</strong> — software contabilità: scarica automaticamente i dati da InFor per la parte fiscale.</div></div>
+        <div class="fact"><div class="fact-dot"></div><div><strong>Wuan Sport (Wansport)</strong> — prenotazioni padel. Accessibile tramite link su MyWellness e sul sito. Non integrato con gli altri sistemi.</div></div>
+        <div class="fact"><div class="fact-dot"></div><div><strong>MyWellness</strong> — usato esclusivamente per training e prenotazioni fitness. Non utilizzato per CRM o marketing.</div></div>
+        <div class="fact"><div class="fact-dot red"></div><div><strong>Active Campaign</strong> — email marketing: disdetto. Non funzionava. <span class="open-tag">Non attivo</span></div></div>
+        <div class="fact"><div class="fact-dot"></div><div><strong>Wix</strong> — sito web: presente form di contatto e modulo di prenotazione appuntamento. La conversione da questi form è bassa.</div></div>
+        <div class="fact"><div class="fact-dot"></div><div>I nuovi lead vengono salvati in parallelo su: <strong>CRM InFor + WhatsApp + Excel</strong>. Non esiste una fonte unica consolidata.</div></div>
+      </div>
+    </div>
+
+    <!-- AREA 3 -->
+    <div class="area-block">
+      <div class="area-header">
+        <span class="area-num">03</span>
+        <div class="area-title-wrap">
+          <div class="area-name">Flusso del lead — acquisizione</div>
+          <div class="area-subtitle">Dal primo contatto all'iscrizione</div>
+        </div>
+      </div>
+      <div class="fact-list">
+        <div class="fact"><div class="fact-dot"></div><div>I canali di ingresso sono: <strong>telefono, WhatsApp, form sito Wix, walk-in, campagne ADV Meta/Google, referral, ex soci, daily pass, eventi Elements</strong>.</div></div>
+        <div class="fact"><div class="fact-dot red"></div><div>I walk-in vengono registrati su un <strong>guest register cartaceo</strong>, poi trascritti manualmente nel CRM. <span class="open-tag">Ridondanza</span></div></div>
+        <div class="fact"><div class="fact-dot red"></div><div>I lead provenienti dal web <strong>non vengono gestiti in modo organizzato</strong>. Lorella: "è un gran caos". <span class="open-tag">Nessun flusso</span></div></div>
+        <div class="fact"><div class="fact-dot"></div><div>I lead da campagne ADV arrivano come lista esportata da Meta → trasformata in Excel → commentata manualmente da Lorella con esito del lead.</div></div>
+        <div class="fact"><div class="fact-dot red"></div><div><strong>Nessuna procedura scritta</strong> per la gestione dei lead. Esistono solo regole verbali condivise tra lo staff. <span class="open-tag">Non standardizzato</span></div></div>
+        <div class="fact"><div class="fact-dot"></div><div>Tempo medio di risposta alla prima richiesta: <strong>max 24 ore</strong> (dipende dalla presenza del commerciale).</div></div>
+        <div class="fact"><div class="fact-dot"></div><div>Follow-up: fino a <strong>5 tentativi di chiamata</strong> prima di considerare il lead perso.</div></div>
+        <div class="fact"><div class="fact-dot"></div><div>Tasso di conversione stimato: <strong>circa 50%</strong>. Varia significativamente: referral molto alto, sponsorizzate più basso.</div></div>
+        <div class="fact"><div class="fact-dot"></div><div>Per adulti: il lead passa al commerciale. Per bambini (Young School): la richiesta viene smistata al responsabile del settore competente (nuoto, tennis, triathlon) per la parte tecnica.</div></div>
+      </div>
+    </div>
+
+    <!-- AREA 4 -->
+    <div class="area-block">
+      <div class="area-header">
+        <span class="area-num">04</span>
+        <div class="area-title-wrap">
+          <div class="area-name">Post-iscrizione e retention</div>
+          <div class="area-subtitle">Dal nuovo socio al rinnovo</div>
+        </div>
+      </div>
+      <div class="fact-list">
+        <div class="fact"><div class="fact-dot red"></div><div><strong>Nessun processo di onboarding strutturato</strong> per i nuovi soci. È in fase di ideazione ma non ancora attivo. <span class="open-tag">Non presente</span></div></div>
+        <div class="fact"><div class="fact-dot red"></div><div><strong>Nessuna service call proattiva</strong>. Il customer care è esclusivamente reattivo: Margherita è disponibile per i soci che si presentano, ma il servizio non è strutturato né processato. <span class="open-tag">Solo reattivo</span></div></div>
+        <div class="fact"><div class="fact-dot"></div><div>Scadenze abbonamenti: estratte da InFor → riportate su un foglio Google con note e ratio → suddivise tra lo staff retention per le chiamate. Questa operazione è svolta da <strong>una sola persona</strong>.</div></div>
+        <div class="fact"><div class="fact-dot red"></div><div>Quando un socio non rinnova: <strong>nessun follow-up</strong>. Il nome finisce in una lista, senza azioni successive definite. <span class="open-tag">Nessun processo</span></div></div>
+        <div class="fact"><div class="fact-dot green"></div><div>Certificato medico: mail automatica al socio <strong>15 giorni prima della scadenza</strong>, avviso al tornello, agenda medico condivisa. <span class="note-tag">Funziona</span></div></div>
+        <div class="fact"><div class="fact-dot green"></div><div>Tasso di rinnovo medio: <strong>75%</strong>. <span class="note-tag">Dato positivo</span></div></div>
+        <div class="fact"><div class="fact-dot green"></div><div>Referral: tasso di conversione più alto tra tutti i canali. Lorella chiede 5 nominativi per socio al momento del rinnovo, ne ottiene mediamente 2. Tracciamento attualmente <strong>manuale</strong>.</div></div>
+      </div>
+    </div>
+
+    <!-- AREA 5 -->
+    <div class="area-block">
+      <div class="area-header">
+        <span class="area-num">05</span>
+        <div class="area-title-wrap">
+          <div class="area-name">Dati e KPI</div>
+          <div class="area-subtitle">Dimensioni e numeri chiave del club</div>
+        </div>
+      </div>
+      <div class="fact-list">
+        <div class="fact"><div class="fact-dot"></div><div>Soci adulti attivi: <strong>2.300</strong></div></div>
+        <div class="fact"><div class="fact-dot"></div><div>Soci bambini (Young School): <strong>800</strong></div></div>
+        <div class="fact"><div class="fact-dot"></div><div>Padelisti stimati: <strong>circa 200</strong> (dato non tracciato con precisione)</div></div>
+        <div class="fact"><div class="fact-dot"></div><div>Nuove iscrizioni adulti — media mensile: <strong>74 unità</strong></div></div>
+        <div class="fact"><div class="fact-dot"></div><div>Tasso di rinnovo medio: <strong>75%</strong></div></div>
+        <div class="fact"><div class="fact-dot"></div><div>Canali di acquisizione principali: <strong>referral/passaparola, campagne Meta, Google Ads</strong></div></div>
+        <div class="fact"><div class="fact-dot"></div><div>Daily Pass: <strong>30€ per chi si presenta spontaneamente</strong> (detratti in caso di iscrizione); 2 pass gratuiti consegnati al rinnovo, validi solo in settimana. <em>Strategia introdotta per limitare le prove senza conversione.</em></div></div>
+        <div class="fact"><div class="fact-dot"></div><div>Sistema incentivi commerciali: <strong>meritocratico</strong>, con bonus differenziato su new (35%) e retention (65%).</div></div>
+      </div>
+    </div>
+
+    <!-- AREA 6 -->
+    <div class="area-block">
+      <div class="area-header">
+        <span class="area-num">06</span>
+        <div class="area-title-wrap">
+          <div class="area-name">Gestione pagamenti e abbonamenti</div>
+        </div>
+      </div>
+      <div class="fact-list">
+        <div class="fact"><div class="fact-dot"></div><div>Metodi di pagamento accettati: <strong>POS, bonifico, contanti, Cofidis, TSPay</strong> (per pagamenti ricorrenti e rateali).</div></div>
+        <div class="fact"><div class="fact-dot"></div><div>InFor permette la rateizzazione degli abbonamenti annuali <strong>fino a 12 rate mensili</strong>.</div></div>
+        <div class="fact"><div class="fact-dot"></div><div>Il listino attuale non è stato ancora condiviso. È stato richiesto a Lorella per la sessione successiva.</div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SEZIONE 3 — SECONDA CALL -->
+<section class="section cream fade-up">
+  <div class="wrap">
+    <p class="label">Sessione successiva</p>
+    <h2 class="title">Customer Journey —<br><em>Attraction.</em></h2>
+
+    <div class="intro-callout" style="margin-bottom:36px">
+      <p>La seconda sessione mappa il primo stadio del Customer Journey — <strong>Attraction e Conversion</strong> — analizzando ogni Business Unit separatamente: adulti, bambini / Young School, padel e agonistica hanno target diversi, canali diversi e CTA diverse. L'obiettivo è capire, canale per canale e BU per BU, come viene comunicato il valore, qual è l'invito all'azione e come vengono acquisiti i dati del contatto per la prima volta.</p>
+    </div>
+
+    <div class="next-grid" style="margin-bottom:36px">
+      <div class="next-card">
+        <div class="next-card-label">Tema A — Per ogni Business Unit</div>
+        <h3 class="next-card-title">Target, comunicazione e canali</h3>
+        <ul class="next-list">
+          <li><strong>Chi è il target</strong> di riferimento per ciascuna BU: profilo, motivazione, aspettativa</li>
+          <li><strong>Dove e come si comunica</strong> oggi verso quel target: canale, tono, frequenza, contenuto</li>
+          <li><strong>Qual è la CTA principale</strong> per ciascuna BU: cosa viene chiesto di fare al potenziale socio come passo successivo</li>
+          <li>Come vengono gestite <strong>Meta Ads e Google Ads</strong> per BU: budget, obiettivo, chi decide il messaggio</li>
+          <li>Come passa la strategia da <strong>Lorella all'agenzia</strong>: chi definisce la direzione creativa e chi esegue</li>
+        </ul>
+      </div>
+      <div class="next-card">
+        <div class="next-card-label">Tema B — Canale per canale</div>
+        <h3 class="next-card-title">Come vengono acquisiti i dati la prima volta</h3>
+        <ul class="next-list">
+          <li><strong>Walk-in</strong> — guest register: struttura, campi raccolti, chi lo compila, dove va il dato</li>
+          <li><strong>Form web Wix</strong> — mappa di tutte le CTA e form attivi: cosa chiedono, dove portano il contatto, chi riceve il lead</li>
+          <li><strong>Meta Lead Form</strong> — utilizzato o no per singola BU? Qualità dei contatti, sincronizzazione con altri strumenti</li>
+          <li><strong>WhatsApp / Telefono</strong> — come viene registrato il primo contatto, chi lo gestisce, cosa viene salvato</li>
+          <li><strong>Referral</strong> — processo attuale: chi lo attiva, quali dati raccoglie, come viene tracciato e incentivato</li>
+          <li><strong>Social organico</strong> — esiste un percorso dal post alla richiesta di info? Come viene gestita la DM?</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALENDARIO -->
+<section class="section dark" style="padding-bottom:0">
+  <div class="wrap" style="padding-bottom:48px">
+    <p class="label inv">Prenota la prossima sessione</p>
+    <h2 class="title inv">Seconda call —<br><em>Attraction &amp; Acquisizione dati.</em></h2>
+    <p style="font-size:14px;color:rgba(250,248,244,0.55);max-width:500px;line-height:1.8;margin-bottom:0">Scegliete la data più comoda. Il link di accesso arriverà automaticamente alla conferma.</p>
+  </div>
+</section>
+
+<section class="cal-section">
+  <div class="cal-inner">
+    <div class="cal-wrap">
+      <div class="calendly-inline-widget" data-url="https://calendly.com/ready2digital/formazione?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=C9B540" style="min-width:320px;height:700px;"></div>
+      <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-info">Maurizio Taruggi — <a href="mailto:maurizio@ready2digital.it">maurizio@ready2digital.it</a></div>
+  <div class="f-note">Documento riservato — Ronchiverdi Sport Club</div>
+</footer>
+
+<script>
+var obs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-up').forEach(function(el) { obs.observe(el); });
+</script>
+
+</body>
+</html>
