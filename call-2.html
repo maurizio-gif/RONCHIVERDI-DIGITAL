@@ -13,12 +13,60 @@
 body { font-family: 'Jost', sans-serif; background: #FAF8F4; color: #0F0F0D; font-size: 16px; line-height: 1.6; overflow-x: hidden; font-weight: 300; }
 
 /* NAV */
-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: #fff; border-bottom: 1px solid rgba(15,15,13,0.12); }
-.nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 500; color: #0F0F0D; text-decoration: none; }
-.nav-label { font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: #0F0F0D; }
-.nav-back { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #0F0F0D; text-decoration: none; background: #E8D46A; padding: 8px 18px; border-radius: 980px; transition: background 0.2s; }
-.nav-back:hover { background: #F2E882; }
-@media(max-width:768px){ nav { padding: 0 20px; } .nav-label { display: none; } }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: #fff; border-bottom: 1px solid rgba(15,15,13,0.1); }
+.nav-logo { display: flex; flex-direction: column; gap: 2px; text-decoration: none; }
+.nav-logo-name { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 500; color: #0F0F0D; line-height: 1; }
+.nav-logo-sub { font-family: 'Jost', sans-serif; font-size: 9.5px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #B8965A; }
+
+/* DESKTOP MENU */
+.nav-menu { display: flex; align-items: center; gap: 32px; }
+.nav-link { font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(15,15,13,0.5); text-decoration: none; padding: 24px 0; border-bottom: 1.5px solid transparent; transition: color 0.2s, border-color 0.2s; cursor: pointer; }
+.nav-link:hover { color: #0F0F0D; }
+.nav-link.active { color: #0F0F0D; border-bottom-color: #E8D46A; }
+.nav-link.disabled { color: rgba(15,15,13,0.25); pointer-events: none; cursor: not-allowed; display: flex; align-items: center; gap: 8px; }
+.nav-link.disabled::after { content: 'In arrivo'; font-size: 8.5px; font-weight: 700; padding: 2px 7px; border-radius: 3px; background: rgba(184,150,90,0.12); color: #B8965A; letter-spacing: 0.1em; }
+
+/* HAMBURGER */
+.nav-hamburger { display: none; width: 40px; height: 40px; flex-direction: column; justify-content: center; align-items: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 0; }
+.nav-hamburger span { width: 22px; height: 1.5px; background: #0F0F0D; transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.25s, background 0.2s; transform-origin: center; }
+.nav-hamburger.open span { background: #FAF8F4; }
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* MOBILE MENU OVERLAY */
+.nav-mobile { position: fixed; inset: 0; z-index: 99; background: rgba(15,15,13,0.97); backdrop-filter: blur(20px); opacity: 0; pointer-events: none; transition: opacity 0.4s ease; display: flex; flex-direction: column; padding: 88px 28px 40px; }
+.nav-mobile.open { opacity: 1; pointer-events: auto; }
+.nav-mobile-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(232,212,106,0.6); margin-bottom: 24px; display: flex; align-items: center; gap: 12px; opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease 0.1s, transform 0.5s ease 0.1s; }
+.nav-mobile-eyebrow::before { content: ''; width: 24px; height: 1px; background: rgba(232,212,106,0.4); }
+.nav-mobile.open .nav-mobile-eyebrow { opacity: 1; transform: translateY(0); }
+.nav-mobile-list { display: flex; flex-direction: column; gap: 0; flex: 1; }
+.nav-mobile-link { display: block; padding: 22px 0; border-bottom: 1px solid rgba(255,255,255,0.08); text-decoration: none; opacity: 0; transform: translateY(20px); transition: opacity 0.45s ease, transform 0.45s ease; }
+.nav-mobile.open .nav-mobile-link:nth-child(1) { transition-delay: 0.15s; opacity: 1; transform: translateY(0); }
+.nav-mobile.open .nav-mobile-link:nth-child(2) { transition-delay: 0.22s; opacity: 1; transform: translateY(0); }
+.nav-mobile.open .nav-mobile-link:nth-child(3) { transition-delay: 0.29s; opacity: 1; transform: translateY(0); }
+.nav-mobile.open .nav-mobile-link:nth-child(4) { transition-delay: 0.36s; opacity: 1; transform: translateY(0); }
+.nav-mobile-link-tag { display: block; font-family: 'Jost', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(250,248,244,0.4); margin-bottom: 8px; }
+.nav-mobile-link.active .nav-mobile-link-tag { color: #E8D46A; }
+.nav-mobile-link-title { display: block; font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400; color: #FAF8F4; line-height: 1.2; }
+.nav-mobile-link-title em { font-style: italic; color: #E8D46A; }
+.nav-mobile-link.disabled { opacity: 0.4 !important; pointer-events: none; }
+.nav-mobile.open .nav-mobile-link.disabled { opacity: 0.4; }
+.nav-mobile-link.disabled .nav-mobile-link-title { color: rgba(250,248,244,0.4); }
+.nav-mobile-link.disabled .nav-mobile-link-tag::after { content: ' · In arrivo'; color: rgba(232,212,106,0.5); }
+.nav-mobile-footer { padding-top: 28px; font-family: 'Cormorant Garamond', serif; font-size: 14px; font-style: italic; color: rgba(250,248,244,0.3); }
+.nav-mobile-footer em { color: #E8D46A; font-style: normal; }
+
+@media(max-width:768px){
+  nav { padding: 0 20px; }
+  .nav-menu { display: none; }
+  .nav-hamburger { display: flex; }
+  .nav-logo-name { font-size: 16px; }
+  .nav-logo-sub { font-size: 9px; }
+}
+@media(min-width:769px){
+  .nav-mobile { display: none !important; }
+}
 
 /* HERO */
 .hero { background: #0F0F0D; padding: 160px 48px 72px; min-height: 48vh; display: flex; align-items: flex-end; }
@@ -185,10 +233,45 @@ footer { background: #0F0F0D; padding: 36px 48px; display: flex; justify-content
 <body>
 
 <nav>
-  <a class="nav-logo" href="index.html">Ronchiverdi Audit</a>
-  <span class="nav-label">Call #2 — 30 apr 2026</span>
-  <a class="nav-back" href="index.html">← Indice</a>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-name">Maurizio Taruggi</span>
+    <span class="nav-logo-sub">per Ronchiverdi Sport Club</span>
+  </a>
+
+  <div class="nav-menu">
+    <a href="index.html" class="nav-link">Indice</a>
+    <a href="call-1.html" class="nav-link">Call #1</a>
+    <a href="call-2.html" class="nav-link active">Call #2</a>
+    <span class="nav-link disabled">Call #3</span>
+  </div>
+
+  <button class="nav-hamburger" aria-label="Apri menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="nav-mobile">
+  <div class="nav-mobile-eyebrow">Audit Digitale · Verbali</div>
+  <div class="nav-mobile-list">
+    <a href="index.html" class="nav-mobile-link">
+      <span class="nav-mobile-link-tag">Home</span>
+      <span class="nav-mobile-link-title"><em>Indice</em> generale</span>
+    </a>
+    <a href="call-1.html" class="nav-mobile-link">
+      <span class="nav-mobile-link-tag">Call #1 · Aprile 2026</span>
+      <span class="nav-mobile-link-title">Inquadramento &amp; <em>Struttura</em></span>
+    </a>
+    <a href="call-2.html" class="nav-mobile-link active">
+      <span class="nav-mobile-link-tag">Call #2 · 30 aprile 2026</span>
+      <span class="nav-mobile-link-title">Attraction, <em>Data &amp; Nuoto</em></span>
+    </a>
+    <div class="nav-mobile-link disabled">
+      <span class="nav-mobile-link-tag">Call #3 · Martedì 15:15</span>
+      <span class="nav-mobile-link-title">Triathlon, Tennis &amp; <em>Lead Journey</em></span>
+    </div>
+  </div>
+  <div class="nav-mobile-footer">Maurizio Taruggi · <em>Ready 2 Digital</em></div>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -671,6 +754,27 @@ footer { background: #0F0F0D; padding: 36px 48px; display: flex; justify-content
   <div class="f-info">Audit Digitale · <strong>Ronchiverdi Sport Club</strong> × <a href="#">Maurizio Taruggi</a> — Ready 2 Digital</div>
   <div class="f-note">Call #2 · 30 apr 2026 · Note generate da Gemini + elaborazione Taruggi</div>
 </footer>
+
+<script>
+// MOBILE MENU TOGGLE
+(function(){
+  const hamburger = document.querySelector('.nav-hamburger');
+  const overlay = document.querySelector('.nav-mobile');
+  if (!hamburger || !overlay) return;
+
+  function toggleMenu(force) {
+    const isOpen = force !== undefined ? force : !hamburger.classList.contains('open');
+    hamburger.classList.toggle('open', isOpen);
+    overlay.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  }
+
+  hamburger.addEventListener('click', () => toggleMenu());
+  overlay.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleMenu(false)));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') toggleMenu(false); });
+})();
+</script>
 
 <script>
 const obs = new IntersectionObserver(entries => {
