@@ -223,6 +223,44 @@ h1.hero-title em { font-style: italic; color: #E8D46A; }
 .team-info-name { font-size: 13px; font-weight: 500; color: #FAF8F4; }
 .team-info-role { font-size: 11px; color: rgba(250,248,244,0.35); }
 
+/* CALENDAR / BOOKING */
+.calendar-section { padding: 80px 48px; background: #161613; border-top: 1px solid rgba(255,255,255,0.06); position: relative; overflow: hidden; }
+.calendar-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 30% 30%, rgba(232,212,106,0.04) 0%, transparent 60%); pointer-events: none; }
+.calendar-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+.calendar-header { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; margin-bottom: 40px; }
+.calendar-intro { }
+.cal-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #E8D46A; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+.cal-eyebrow::before { content: ''; width: 24px; height: 1px; background: rgba(232,212,106,0.5); }
+.cal-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 3.2vw, 42px); font-weight: 300; color: #FAF8F4; line-height: 1.15; letter-spacing: -0.01em; }
+.cal-title em { font-style: italic; color: #E8D46A; }
+.calendar-side { font-size: 13px; color: rgba(250,248,244,0.5); line-height: 1.7; }
+.calendar-side p { margin-bottom: 14px; }
+.calendar-side strong { color: #FAF8F4; font-weight: 500; }
+.calendar-meta-list { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.08); }
+.cal-meta-row { display: flex; gap: 14px; font-size: 12px; color: rgba(250,248,244,0.5); align-items: baseline; }
+.cal-meta-key { font-size: 9.5px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(232,212,106,0.7); min-width: 70px; }
+.cal-meta-val { color: rgba(250,248,244,0.75); font-family: 'Cormorant Garamond', serif; font-size: 14px; }
+
+.calendar-embed-wrap { position: relative; background: #fff; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 32px 80px -24px rgba(0,0,0,0.7); min-height: 700px; }
+.calendar-embed-wrap iframe { width: 100%; height: 700px; border: none; display: block; }
+.calendar-loading { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: #fff; color: #0F0F0D; font-family: 'Cormorant Garamond', serif; font-size: 16px; font-style: italic; opacity: 1; transition: opacity 0.3s; pointer-events: none; }
+.calendar-loading.hidden { opacity: 0; }
+.calendar-loading-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #E8D46A; margin-right: 12px; animation: calLoadPulse 1.4s ease-in-out infinite; }
+@keyframes calLoadPulse { 0%,100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1); } }
+
+.calendar-footnote { margin-top: 24px; text-align: center; font-size: 12px; color: rgba(250,248,244,0.4); }
+.calendar-footnote a { color: #E8D46A; text-decoration: none; border-bottom: 1px solid rgba(232,212,106,0.4); transition: border-color 0.2s; }
+.calendar-footnote a:hover { border-bottom-color: #E8D46A; }
+
+@media(max-width:900px){
+  .calendar-header { grid-template-columns: 1fr; gap: 28px; }
+}
+@media(max-width:768px){
+  .calendar-section { padding: 56px 24px; }
+  .calendar-embed-wrap { border-radius: 14px; min-height: 640px; }
+  .calendar-embed-wrap iframe { height: 640px; }
+}
+
 /* FOOTER */
 footer { background: rgba(0,0,0,0.4); padding: 40px 48px; border-top: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: center; }
 .f-info { font-size: 13px; color: rgba(250,248,244,0.4); }
@@ -550,6 +588,56 @@ footer { background: rgba(0,0,0,0.4); padding: 40px 48px; border-top: 1px solid 
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- CALENDAR / BOOKING -->
+<section class="calendar-section fade-up">
+  <div class="calendar-inner">
+
+    <div class="calendar-header">
+      <div class="calendar-intro">
+        <div class="cal-eyebrow">Fissa la prossima sessione</div>
+        <h2 class="cal-title">Prenota una <em>call di audit</em><br>o una sessione di follow-up</h2>
+      </div>
+      <div class="calendar-side">
+        <p>Scegli direttamente uno slot disponibile nel calendario qui sotto. <strong>Le call di audit durano in media 90 minuti</strong>, le sessioni di follow-up tra 30 e 60.</p>
+        <p>Riceverai automaticamente l'invito calendar con il link Meet/Zoom e l'ordine del giorno della sessione.</p>
+        <div class="calendar-meta-list">
+          <div class="cal-meta-row">
+            <span class="cal-meta-key">Tipo</span>
+            <span class="cal-meta-val">Call audit / Follow-up</span>
+          </div>
+          <div class="cal-meta-row">
+            <span class="cal-meta-key">Durata</span>
+            <span class="cal-meta-val">30 / 60 / 90 min</span>
+          </div>
+          <div class="cal-meta-row">
+            <span class="cal-meta-key">Modalità</span>
+            <span class="cal-meta-val">Google Meet</span>
+          </div>
+          <div class="cal-meta-row">
+            <span class="cal-meta-key">Conferma</span>
+            <span class="cal-meta-val">Automatica via email</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="calendar-embed-wrap">
+      <div class="calendar-loading"><span class="calendar-loading-dot"></span>Caricamento calendario&hellip;</div>
+      <iframe
+        src="https://calendly.com/ready2digital/formazione?hide_gdpr_banner=1&primary_color=e8d46a&background_color=ffffff&text_color=0f0f0d"
+        title="Calendario Maurizio Taruggi · Ready 2 Digital"
+        loading="lazy"
+        onload="this.previousElementSibling.classList.add('hidden')"
+      ></iframe>
+    </div>
+
+    <div class="calendar-footnote">
+      Hai problemi di visualizzazione? Apri il calendario in una nuova scheda &rarr; <a href="https://calendly.com/ready2digital/formazione" target="_blank" rel="noopener">calendly.com/ready2digital/formazione</a>
+    </div>
+
   </div>
 </section>
 
