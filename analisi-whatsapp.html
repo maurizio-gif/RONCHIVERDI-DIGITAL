@@ -11,32 +11,31 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Jost', sans-serif; background: #0F0F0D; color: #FAF8F4; font-size: 15px; line-height: 1.7; overflow-x: hidden; font-weight: 300; -webkit-font-smoothing: antialiased; }
 
-/* NAV */
-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: rgba(15,15,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.07); }
-.nav-logo { display: flex; flex-direction: column; gap: 2px; text-decoration: none; }
-.nav-logo-name { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 500; color: #FAF8F4; line-height: 1; }
-.nav-logo-sub { font-family: 'Jost', sans-serif; font-size: 9.5px; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(232,212,106,0.65); }
-.nav-menu { display: flex; align-items: center; gap: 32px; }
-.nav-link { font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(250,248,244,0.55); text-decoration: none; padding: 24px 0; border-bottom: 1.5px solid transparent; transition: color 0.2s, border-color 0.2s; }
-.nav-link:hover { color: #FAF8F4; }
-.nav-link.active { color: #E8D46A; border-bottom-color: rgba(232,212,106,0.6); }
-.nav-link.disabled { color: rgba(250,248,244,0.25); pointer-events: none; }
-.nav-link.disabled::after { content: 'In arrivo'; font-size: 8.5px; font-weight: 700; padding: 2px 7px; border-radius: 3px; background: rgba(232,212,106,0.12); color: rgba(232,212,106,0.5); letter-spacing: 0.1em; margin-left: 6px; }
-.nav-hamburger { display: none; width: 40px; height: 40px; flex-direction: column; justify-content: center; align-items: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 0; }
-.nav-hamburger span { width: 22px; height: 1.5px; background: #FAF8F4; transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.25s; transform-origin: center; }
-.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-.nav-hamburger.open span:nth-child(2) { opacity: 0; }
-.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-.nav-mobile { position: fixed; inset: 0; z-index: 99; background: rgba(15,15,13,0.97); backdrop-filter: blur(20px); opacity: 0; pointer-events: none; transition: opacity 0.4s ease; display: flex; flex-direction: column; padding: 88px 28px 40px; }
-.nav-mobile.open { opacity: 1; pointer-events: auto; }
-.nav-mobile-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(232,212,106,0.6); margin-bottom: 24px; }
-.nav-mobile-list { display: flex; flex-direction: column; gap: 4px; }
-.nav-mobile-link { display: flex; flex-direction: column; gap: 4px; padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.06); text-decoration: none; }
-.nav-mobile-link.active .nav-mobile-link-title { color: #E8D46A; }
-.nav-mobile-link.disabled { opacity: 0.3; pointer-events: none; }
-.nav-mobile-link-tag { font-size: 9.5px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(250,248,244,0.35); }
-.nav-mobile-link-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; color: #FAF8F4; }
-.nav-mobile-link-title em { font-style: italic; color: rgba(232,212,106,0.8); }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* HERO */
 .hero { padding: 140px 48px 72px; position: relative; overflow: hidden; }
@@ -168,57 +167,38 @@ footer { background: rgba(0,0,0,0.3); padding: 40px 48px; border-top: 1px solid 
 
 @media(max-width: 900px) {
   nav { padding: 0 24px; }
-  .nav-menu { display: none; }
-  .nav-hamburger { display: flex; }
+  
+  
   .hero { padding: 120px 24px 56px; }
   .page { padding: 0 24px 72px; }
   .split, .pricing-row { grid-template-columns: 1fr; }
   footer { flex-direction: column; gap: 14px; text-align: center; padding: 28px 20px; }
 }
+
+/* BACK NAV */
+.back-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: rgba(15,15,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.07); }
+.back-btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(250,248,244,0.55); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; transition: color 0.2s; padding: 8px 0; }
+.back-btn:hover { color: #E8D46A; }
+.back-btn .arrow { font-size: 16px; transition: transform 0.2s; }
+.back-btn:hover .arrow { transform: translateX(-3px); }
+.back-nav-title { font-family: "Cormorant Garamond", serif; font-size: 14px; font-weight: 300; color: rgba(250,248,244,0.25); font-style: italic; }
+@media(max-width:640px){ .back-nav { padding: 0 20px; } .back-nav-title { display: none; } }
+
+
+.tbl th.hg + th.hg { background: rgba(30,61,40,0.35); }
+.tbl td:nth-child(4) { color: rgba(250,248,244,0.65); }
+
 </style>
 </head>
 <body>
 
-<nav>
-  <a href="index.html" class="nav-logo">
-    <span class="nav-logo-name">Maurizio Taruggi</span>
-    <span class="nav-logo-sub">per Ronchiverdi Sport Club</span>
+<nav class="back-nav">
+  <a href="index.html" class="back-btn">
+    <span class="arrow">&#8592;</span>
+    Torna all&rsquo;indice
   </a>
-  <div class="nav-menu">
-    <a href="index.html" class="nav-link">Indice</a>
-    <a href="call-1.html" class="nav-link">Call #1</a>
-    <a href="call-2.html" class="nav-link">Call #2</a>
-    <a href="analisi-whatsapp.html" class="nav-link active">Analisi WA</a>
-    <span class="nav-link disabled">Call #3</span>
-  </div>
-  <button class="nav-hamburger" aria-label="Apri menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
+  <span class="back-nav-title">Analisi WhatsApp &mdash; Brevo vs SuperAgent.fit</span>
 </nav>
-
-<div class="nav-mobile">
-  <div class="nav-mobile-eyebrow">Audit Digitale &middot; Documenti</div>
-  <div class="nav-mobile-list">
-    <a href="index.html" class="nav-mobile-link">
-      <span class="nav-mobile-link-tag">Home</span>
-      <span class="nav-mobile-link-title"><em>Indice</em> generale</span>
-    </a>
-    <a href="call-1.html" class="nav-mobile-link">
-      <span class="nav-mobile-link-tag">Call #1 &middot; Aprile 2026</span>
-      <span class="nav-mobile-link-title">Inquadramento &amp; <em>Struttura</em></span>
-    </a>
-    <a href="call-2.html" class="nav-mobile-link">
-      <span class="nav-mobile-link-tag">Call #2 &middot; 30 aprile 2026</span>
-      <span class="nav-mobile-link-title">Attraction, <em>Data &amp; Nuoto</em></span>
-    </a>
-    <a href="analisi-whatsapp.html" class="nav-mobile-link active">
-      <span class="nav-mobile-link-tag">Strumenti &middot; Maggio 2026</span>
-      <span class="nav-mobile-link-title">Analisi <em>WhatsApp</em></span>
-    </a>
-    <div class="nav-mobile-link disabled">
-      <span class="nav-mobile-link-tag">Call #3 &middot; Prossima</span>
-      <span class="nav-mobile-link-title">Triathlon, Tennis &amp; <em>Lead Journey</em></span>
-    </div>
   </div>
 </div>
 
@@ -338,39 +318,105 @@ footer { background: rgba(0,0,0,0.3); padding: 40px 48px; border-top: 1px solid 
 
   <div class="section fade-up">
     <div class="section-eyebrow">04 &middot; Simulazione economica</div>
-    <h2>Stima dei costi mensili <em>per Ronchiverdi</em></h2>
-    <div class="prose"><p>Base di partenza: <strong>2.500 soci attivi</strong>. Vengono confrontati due scenari operativi realistici &mdash; comunicazione essenziale (1.000 messaggi/mese) e comunicazione attiva (5.000 messaggi/mese) &mdash; per capire dove si posiziona il punto di parit&agrave; tra le due soluzioni.</p></div>
+    <h2>Confronto costi <em>per Ronchiverdi</em></h2>
+    <div class="prose">
+      <p>Due scenari operativi realistici per un club con <strong>2.500 soci attivi</strong>. I costi per messaggio applicati: <strong>&euro;0,0818/msg</strong> per Brevo, <strong>&euro;0,09/msg</strong> per SuperAgent.fit sui messaggi extra oltre il pool incluso nel piano. Brevo Professional: <strong>&euro;499/mese</strong>.</p>
+    </div>
 
     <table class="tbl">
-      <thead><tr><th>Scenario A &mdash; 1.000 msg/mese</th><th class="hb">Brevo</th><th class="hg">SuperAgent.fit Premium</th></tr></thead>
+      <thead>
+        <tr>
+          <th>Scenario A &mdash; 10.000 msg/mese</th>
+          <th class="hb">Brevo Professional</th>
+          <th class="hg">SuperAgent.fit Lite</th>
+          <th class="hg">SuperAgent.fit Premium</th>
+        </tr>
+      </thead>
       <tbody>
-        <tr><td>Canone piattaforma</td><td><span class="cb">&euro;499/mese</span><br><small>Piano Professional</small></td><td><span class="cg">&euro;250/mese</span></td></tr>
-        <tr><td>1.000 messaggi in uscita</td><td><span class="cb">&euro;82</span><br><small>&euro;0,082/msg &middot; crediti prepagati</small></td><td>Incluso nel pool 1.000 conv.</td></tr>
-        <tr><td>Risposte in entrata</td><td><span class="bn">Non gestite</span><br><small>Costo in tempo staff</small></td><td>Incluso nel pool</td></tr>
-        <tr><td>Agente AI, automazioni, CRM</td><td><span class="bn">Non disponibile</span></td><td><span class="by">Incluso nel piano</span></td></tr>
-        <tr class="tot"><td><strong>Totale mensile</strong></td><td><strong>&euro;581 + tempo staff</strong></td><td><span class="cg"><strong>&euro;250/mese</strong></span></td></tr>
+        <tr>
+          <td>Canone piattaforma</td>
+          <td><span class="cb">&euro;499</span></td>
+          <td><span class="cg">&euro;99</span></td>
+          <td><span class="cg">&euro;250</span></td>
+        </tr>
+        <tr>
+          <td>Messaggi inclusi nel piano</td>
+          <td><span class="bn">Nessuno</span></td>
+          <td>500 conv. incluse</td>
+          <td>1.000 conv. incluse</td>
+        </tr>
+        <tr>
+          <td>Messaggi extra</td>
+          <td><span class="cb">10.000 &times; &euro;0,0818<br><small>= &euro;818</small></span></td>
+          <td><span class="cg">9.500 &times; &euro;0,09<br><small>= &euro;855</small></span></td>
+          <td><span class="cg">9.000 &times; &euro;0,09<br><small>= &euro;810</small></span></td>
+        </tr>
+        <tr>
+          <td>Gestione risposte in entrata</td>
+          <td><span class="bn">Non gestite</span><br><small>Costo in tempo staff</small></td>
+          <td><span class="by">AI h24 inclusa</span></td>
+          <td><span class="by">AI h24 inclusa</span></td>
+        </tr>
+        <tr class="tot">
+          <td><strong>Totale mensile</strong></td>
+          <td><strong>&euro;1.317</strong><br><small>+ tempo staff risposte</small></td>
+          <td><span class="cg"><strong>&euro;954</strong></span><br><small>Conv. bidirezionali incluse</small></td>
+          <td><span class="cg"><strong>&euro;1.060</strong></span><br><small>Conv. bidirezionali incluse</small></td>
+        </tr>
       </tbody>
     </table>
 
     <table class="tbl" style="margin-top:32px;">
-      <thead><tr><th>Scenario B &mdash; 5.000 msg/mese</th><th class="hb">Brevo</th><th class="hg">SuperAgent.fit Premium</th></tr></thead>
+      <thead>
+        <tr>
+          <th>Scenario B &mdash; 15.000 msg/mese</th>
+          <th class="hb">Brevo Professional</th>
+          <th class="hg">SuperAgent.fit Lite</th>
+          <th class="hg">SuperAgent.fit Premium</th>
+        </tr>
+      </thead>
       <tbody>
-        <tr><td>Canone piattaforma</td><td><span class="cb">&euro;499/mese</span><br><small>Piano Professional</small></td><td><span class="cg">&euro;250/mese</span></td></tr>
-        <tr><td>5.000 messaggi in uscita</td><td><span class="cb">&euro;410</span><br><small>&euro;0,082/msg &middot; crediti prepagati</small></td><td>Incluso nel pool 1.000 conv.<br><small>Conv. extra ~4.000 &rarr; &#8776;&euro;480 (a &euro;0,12/cad)</small></td></tr>
-        <tr><td>Risposte in entrata</td><td><span class="bn">Non gestite</span><br><small>Costo in tempo staff</small></td><td>Incluso nelle conv. extra</td></tr>
-        <tr><td>Agente AI, automazioni, CRM</td><td><span class="bn">Non disponibile</span></td><td><span class="by">Incluso nel piano</span></td></tr>
-        <tr class="tot"><td><strong>Totale mensile</strong></td><td><strong>&euro;909 + tempo staff</strong></td><td><span class="cg"><strong>&#8776;&euro;730/mese</strong></span><br><small>Con conversazioni bidirezionali gestite dall'AI</small></td></tr>
+        <tr>
+          <td>Canone piattaforma</td>
+          <td><span class="cb">&euro;499</span></td>
+          <td><span class="cg">&euro;99</span></td>
+          <td><span class="cg">&euro;250</span></td>
+        </tr>
+        <tr>
+          <td>Messaggi inclusi nel piano</td>
+          <td><span class="bn">Nessuno</span></td>
+          <td>500 conv. incluse</td>
+          <td>1.000 conv. incluse</td>
+        </tr>
+        <tr>
+          <td>Messaggi extra</td>
+          <td><span class="cb">15.000 &times; &euro;0,0818<br><small>= &euro;1.227</small></span></td>
+          <td><span class="cg">14.500 &times; &euro;0,09<br><small>= &euro;1.305</small></span></td>
+          <td><span class="cg">14.000 &times; &euro;0,09<br><small>= &euro;1.260</small></span></td>
+        </tr>
+        <tr>
+          <td>Gestione risposte in entrata</td>
+          <td><span class="bn">Non gestite</span><br><small>Costo in tempo staff</small></td>
+          <td><span class="by">AI h24 inclusa</span></td>
+          <td><span class="by">AI h24 inclusa</span></td>
+        </tr>
+        <tr class="tot">
+          <td><strong>Totale mensile</strong></td>
+          <td><strong>&euro;1.726</strong><br><small>+ tempo staff risposte</small></td>
+          <td><span class="cg"><strong>&euro;1.404</strong></span><br><small>Conv. bidirezionali incluse</small></td>
+          <td><span class="cg"><strong>&euro;1.510</strong></span><br><small>Conv. bidirezionali incluse</small></td>
+        </tr>
       </tbody>
     </table>
 
     <div class="infobox" style="margin-top:28px;">
       <div class="infobox-lbl">&#128204; Come leggere i due scenari</div>
-      <p>Nello Scenario A (1.000 msg) Brevo costa <strong>pi&ugrave; del doppio</strong> di SuperAgent.fit ma offre solo messaggi in uscita &mdash; le risposte dei soci rimangono non gestite. Nello Scenario B (5.000 msg) i costi si avvicinano, ma SuperAgent.fit include la gestione bidirezionale dell'AI h24 che Brevo non offre a nessun prezzo. <strong>Il confronto &egrave; asimmetrico: Brevo informa, SuperAgent.fit converte.</strong></p>
+      <p>In entrambi gli scenari SuperAgent.fit &egrave; pi&ugrave; economico di Brevo &mdash; e include la gestione bidirezionale AI h24 che Brevo non offre a nessun prezzo. Nel <strong>Scenario A</strong> il risparmio va da <strong>&euro;257 (Lite)</strong> a <strong>&euro;363 (Premium)</strong> al mese rispetto a Brevo. Nel <strong>Scenario B</strong> il risparmio sale a <strong>&euro;216 (Lite)</strong> o <strong>&euro;322 (Premium)</strong>. <strong>Il confronto rimane asimmetrico</strong>: Brevo invia, SuperAgent.fit risponde e converte.</p>
     </div>
 
   </div>
 
-  <div class="section fade-up">
+    <div class="section fade-up">
     <div class="section-eyebrow">05
     <h2>Stima dei costi mensili <em>per Ronchiverdi</em></h2>
     <div class="prose"><p>Ipotesi: <strong>~400 soci attivi</strong>, 3 broadcast/mese (1 marketing + 2 utility), pi&ugrave; conversazioni in entrata.</p></div>
