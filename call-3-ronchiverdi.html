@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Call #3 &mdash; Tennis &amp; Lead Management &middot; Ronchiverdi Audit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FAF8F4; font-size: 15px; line-height: 1.7; overflow-x: hidden; font-weight: 300; -webkit-font-smoothing: antialiased; }
+/* BACK NAV */
+.back-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: rgba(15,15,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.07); }
+.back-btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(250,248,244,0.55); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; transition: color 0.2s; padding: 8px 0; }
+.back-btn:hover { color: #E8D46A; }
+.back-btn .arrow { font-size: 16px; transition: transform 0.2s; }
+.back-btn:hover .arrow { transform: translateX(-3px); }
+.back-nav-title { font-family: "Cormorant Garamond", serif; font-size: 14px; font-weight: 300; color: rgba(250,248,244,0.25); font-style: italic; }
+@media(max-width:640px){ .back-nav { padding: 0 20px; } .back-nav-title { display: none; } }
+
+/* HERO */
+.hero { padding: 96px 48px 72px; position: relative; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 80% 30%, rgba(232,212,106,0.04) 0%, transparent 60%); pointer-events: none; }
+.hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+.hero-eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; }
+.hero-eyebrow .tag { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(250,248,244,0.3); }
+.hero-eyebrow .sep { color: rgba(250,248,244,0.15); }
+.hero h1 { font-family: "Cormorant Garamond", serif; font-size: clamp(38px, 5vw, 62px); font-weight: 300; line-height: 1.05; color: #FAF8F4; margin-bottom: 20px; letter-spacing: -0.02em; }
+.hero h1 em { font-style: italic; color: #E8D46A; }
+.hero-sub { font-size: 14px; font-weight: 300; line-height: 1.75; color: rgba(250,248,244,0.45); max-width: 620px; margin-bottom: 36px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 32px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.07); }
+.hero-meta-item .lbl { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(232,212,106,0.5); margin-bottom: 4px; }
+.hero-meta-item .val { font-size: 13px; font-weight: 400; color: rgba(250,248,244,0.7); }
+.hero-parts { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+.hero-part-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 50px; padding: 8px 18px; font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(250,248,244,0.5); }
+.hero-part-badge.active { border-color: rgba(232,212,106,0.3); color: #E8D46A; background: rgba(232,212,106,0.06); }
+
+/* LAYOUT */
+.page { max-width: 1100px; margin: 0 auto; padding: 0 48px 100px; }
+
+/* PART DIVIDER */
+.part-divider { margin: 0 -48px; padding: 40px 48px; background: rgba(255,255,255,0.02); border-top: 1px solid rgba(232,212,106,0.15); border-bottom: 1px solid rgba(232,212,106,0.15); margin-bottom: 0; }
+.part-number { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(232,212,106,0.5); margin-bottom: 8px; }
+.part-title { font-family: "Cormorant Garamond", serif; font-size: clamp(28px, 4vw, 44px); font-weight: 300; color: #FAF8F4; line-height: 1.1; }
+.part-title em { font-style: italic; color: #E8D46A; }
+.part-desc { font-size: 13px; color: rgba(250,248,244,0.4); margin-top: 8px; max-width: 560px; line-height: 1.7; }
+
+/* SECTION */
+.section { padding: 56px 0; border-top: 1px solid rgba(255,255,255,0.06); }
+.section-eyebrow { font-family: "JetBrains Mono", monospace; font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(232,212,106,0.6); margin-bottom: 12px; }
+.section > h2 { font-family: "Cormorant Garamond", serif; font-size: clamp(24px, 3vw, 36px); font-weight: 300; line-height: 1.15; color: #FAF8F4; margin-bottom: 24px; }
+.section > h2 em { font-style: italic; color: #E8D46A; }
+
+/* PROSE */
+.prose { font-size: 14px; line-height: 1.8; color: rgba(250,248,244,0.5); }
+.prose p { margin-bottom: 12px; }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { color: rgba(250,248,244,0.8); font-weight: 500; }
+
+/* GRIDS */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 20px 0; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 20px 0; }
+
+/* STAT CARD */
+.stat-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 20px 22px; }
+.stat-card.gold { border-color: rgba(232,212,106,0.25); background: rgba(232,212,106,0.05); }
+.stat-card.green { border-color: rgba(90,180,120,0.2); background: rgba(90,180,120,0.04); }
+.stat-card.red { border-color: rgba(200,60,60,0.2); background: rgba(200,60,60,0.04); }
+.stat-num { font-family: "Cormorant Garamond", serif; font-size: 44px; font-weight: 300; line-height: 1; color: #E8D46A; margin-bottom: 4px; }
+.stat-label { font-size: 12px; font-weight: 400; color: rgba(250,248,244,0.45); line-height: 1.4; }
+.stat-label strong { color: rgba(250,248,244,0.75); font-weight: 500; }
+
+/* CARD */
+.card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 22px 24px; }
+.card.gold { border-color: rgba(232,212,106,0.22); background: rgba(232,212,106,0.04); }
+.card.green { border-color: rgba(90,180,120,0.2); background: rgba(90,180,120,0.04); }
+.card.red { border-color: rgba(200,60,60,0.2); background: rgba(200,60,60,0.04); }
+.card-title { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.card.gold .card-title { color: rgba(232,212,106,0.8); }
+.card.green .card-title { color: rgba(90,180,120,0.8); }
+.card.red .card-title { color: rgba(200,100,100,0.8); }
+.card .card-title { color: rgba(250,248,244,0.4); }
+.card-body { font-size: 13.5px; color: rgba(250,248,244,0.5); line-height: 1.7; }
+.card-body strong { color: rgba(250,248,244,0.8); font-weight: 500; }
+
+/* ITEMS */
+.item-list { display: flex; flex-direction: column; gap: 10px; }
+.item { display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; color: rgba(250,248,244,0.5); line-height: 1.65; }
+.dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; margin-top: 8px; }
+.dot.g { background: #5AB478; }
+.dot.r { background: #C84040; }
+.dot.y { background: #C9B540; }
+.dot.w { background: rgba(250,248,244,0.2); }
+.item strong { color: rgba(250,248,244,0.8); font-weight: 500; }
+
+/* FLOW */
+.flow { display: flex; align-items: stretch; gap: 0; margin: 28px 0; overflow-x: auto; }
+.flow-step { flex: 1; min-width: 120px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); padding: 18px 14px; position: relative; }
+.flow-step:first-child { border-radius: 12px 0 0 12px; }
+.flow-step:last-child { border-radius: 0 12px 12px 0; }
+.flow-step + .flow-step { border-left: none; }
+.flow-step.ok { background: rgba(90,180,120,0.06); border-color: rgba(90,180,120,0.2); }
+.flow-step.gap { background: rgba(200,60,60,0.06); border-color: rgba(200,60,60,0.2); }
+.flow-step.partial { background: rgba(232,212,106,0.05); border-color: rgba(232,212,106,0.2); }
+.flow-num { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,248,244,0.2); margin-bottom: 8px; }
+.flow-name { font-family: "Cormorant Garamond", serif; font-size: 14px; font-weight: 400; color: rgba(250,248,244,0.55); line-height: 1.3; }
+.flow-step.ok .flow-name { color: rgba(90,200,140,0.9); }
+.flow-step.gap .flow-name { color: rgba(220,100,100,0.9); }
+.flow-step.partial .flow-name { color: rgba(210,185,80,0.9); }
+.flow-note { font-size: 11px; color: rgba(250,248,244,0.25); margin-top: 6px; line-height: 1.4; }
+.flow-arrow { position: absolute; right: -11px; top: 50%; transform: translateY(-50%); z-index: 2; width: 22px; height: 22px; border-radius: 50%; background: #0F0F0D; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 9px; color: rgba(250,248,244,0.3); }
+
+/* TABLE */
+.data-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px; }
+.data-table th { padding: 10px 14px; text-align: left; font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.1); color: rgba(250,248,244,0.3); }
+.data-table td { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: top; line-height: 1.55; color: rgba(250,248,244,0.55); }
+.data-table td:first-child { font-weight: 500; color: rgba(250,248,244,0.7); width: 28%; }
+.data-table tr:last-child td { border-bottom: none; }
+.badge { display: inline-block; font-family: "JetBrains Mono", monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; }
+.badge.red { background: rgba(200,60,60,0.2); color: rgba(220,120,120,0.9); }
+.badge.yellow { background: rgba(232,212,106,0.15); color: rgba(210,185,80,0.9); }
+.badge.green { background: rgba(90,180,120,0.15); color: rgba(90,180,120,0.9); }
+
+/* EXCEL BOX */
+.excel-box { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 28px 32px; margin: 24px 0; }
+.excel-box-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+.excel-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(90,180,120,0.15); border: 1px solid rgba(90,180,120,0.3); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.excel-title { font-family: "Cormorant Garamond", serif; font-size: 18px; font-weight: 400; color: rgba(250,248,244,0.8); }
+.excel-subtitle { font-size: 11px; color: rgba(250,248,244,0.3); margin-top: 2px; font-family: "JetBrains Mono", monospace; letter-spacing: 0.08em; }
+
+/* CALLOUT */
+.callout { background: rgba(232,212,106,0.06); border: 1px solid rgba(232,212,106,0.18); border-radius: 14px; padding: 22px 26px; margin: 24px 0; }
+.callout-label { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(232,212,106,0.55); margin-bottom: 10px; }
+.callout p { font-size: 14px; line-height: 1.8; color: rgba(250,248,244,0.55); margin-bottom: 8px; }
+.callout p:last-child { margin-bottom: 0; }
+.callout strong { color: rgba(250,248,244,0.85); font-weight: 500; }
+
+/* QUOTE */
+.quote-block { border-left: 2px solid rgba(232,212,106,0.3); padding: 0 0 0 22px; margin: 24px 0; }
+.quote-text { font-family: "Cormorant Garamond", serif; font-size: clamp(17px, 2vw, 22px); font-weight: 300; font-style: italic; line-height: 1.6; color: rgba(250,248,244,0.6); margin-bottom: 8px; }
+.quote-attr { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(232,212,106,0.5); }
+
+/* PIPELINE */
+.pipeline { display: flex; flex-direction: column; gap: 0; margin: 24px 0; }
+.pipeline-step { display: flex; align-items: flex-start; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.pipeline-step:last-child { border-bottom: none; }
+.pipe-num { font-family: "Cormorant Garamond", serif; font-size: 28px; font-weight: 300; color: rgba(232,212,106,0.2); line-height: 1; flex-shrink: 0; width: 36px; }
+.pipe-body { flex: 1; }
+.pipe-state { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,248,244,0.6); margin-bottom: 4px; }
+.pipe-desc { font-size: 13px; color: rgba(250,248,244,0.4); line-height: 1.6; }
+.pipe-desc strong { color: rgba(250,248,244,0.7); font-weight: 500; }
+
+/* ROADMAP */
+.roadmap { display: flex; flex-direction: column; gap: 10px; margin: 24px 0; }
+.rm-item { display: flex; gap: 18px; align-items: flex-start; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 18px 22px; }
+.rm-item.p1 { border-color: rgba(200,60,60,0.2); }
+.rm-item.p2 { border-color: rgba(232,212,106,0.15); }
+.rm-item.p3 { border-color: rgba(90,180,120,0.15); }
+.rm-priority { font-family: "Cormorant Garamond", serif; font-size: 32px; font-weight: 300; line-height: 1; flex-shrink: 0; width: 44px; }
+.rm-item.p1 .rm-priority { color: rgba(200,80,80,0.3); }
+.rm-item.p2 .rm-priority { color: rgba(232,212,106,0.22); }
+.rm-item.p3 .rm-priority { color: rgba(90,180,120,0.22); }
+.rm-tag { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 9px; border-radius: 4px; margin-bottom: 6px; }
+.p1 .rm-tag { background: rgba(200,60,60,0.15); color: rgba(220,100,100,0.9); }
+.p2 .rm-tag { background: rgba(232,212,106,0.12); color: rgba(210,185,80,0.9); }
+.p3 .rm-tag { background: rgba(90,180,120,0.12); color: rgba(90,180,120,0.85); }
+.rm-title { font-family: "Cormorant Garamond", serif; font-size: 17px; font-weight: 400; color: #FAF8F4; margin-bottom: 4px; }
+.rm-desc { font-size: 13px; color: rgba(250,248,244,0.4); line-height: 1.6; }
+
+/* FOOTER */
+footer { background: rgba(0,0,0,0.3); padding: 40px 48px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; }
+.f-info { font-size: 13px; color: rgba(250,248,244,0.35); }
+.f-info strong { color: rgba(250,248,244,0.6); }
+.f-brand { font-family: "Cormorant Garamond", serif; font-size: 15px; color: rgba(250,248,244,0.2); }
+.f-brand em { font-style: italic; color: rgba(232,212,106,0.4); }
+.fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-up.visible { opacity: 1; transform: none; }
+
+/* NEXT CALL BANNER */
+.next-call-banner { background: rgba(232,212,106,0.08); border: 1px solid rgba(232,212,106,0.25); border-radius: 16px; padding: 28px 32px; margin: 56px 0 0; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.nc-icon { font-size: 28px; flex-shrink: 0; }
+.nc-body { flex: 1; min-width: 200px; }
+.nc-label { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(232,212,106,0.6); margin-bottom: 6px; }
+.nc-title { font-family: "Cormorant Garamond", serif; font-size: 22px; font-weight: 300; color: #FAF8F4; line-height: 1.2; }
+.nc-title em { font-style: italic; color: #E8D46A; }
+.nc-meta { font-size: 13px; color: rgba(250,248,244,0.4); margin-top: 6px; }
+.nc-meta strong { color: rgba(250,248,244,0.7); font-weight: 500; }
+
+@media(max-width:900px){
+  .hero { padding: 88px 24px 52px; }
+  .page { padding: 0 24px 72px; }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 14px; text-align: center; padding: 28px 20px; }
+  .part-divider { margin: 0 -24px; padding: 32px 24px; }
+  .excel-box { padding: 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="back-nav">
+  <a href="index.html" class="back-btn">
+    <span class="arrow">&#8592;</span>
+    Torna all&rsquo;indice
+  </a>
+  <span class="back-nav-title">Call #3 &mdash; Tennis &amp; Lead Management</span>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <span class="tag">Call #3</span>
+      <span class="sep">/</span>
+      <span class="tag">5 maggio 2026</span>
+      <span class="sep">/</span>
+      <span class="tag">Audit Digitale</span>
+    </div>
+    <h1>Tennis &amp; <em>Lead Management</em></h1>
+    <p class="hero-sub">Sessione divisa in due parti: deep dive sulla Business Unit Tennis con Stefano Bertone (Coordinatore Scuola Tennis), seguita da un&rsquo;analisi del processo di gestione lead adulti con Lorella Gravante e Simone. Prima sessione con il nuovo referente digital.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><span class="lbl">Presenti</span><span class="val">Rolle M. &middot; Bertone S. &middot; Gravante L. &middot; Zavattero P. &middot; Simone &middot; Taruggi M.</span></div>
+      <div class="hero-meta-item"><span class="lbl">Data</span><span class="val">5 maggio 2026</span></div>
+      <div class="hero-meta-item"><span class="lbl">Condotto da</span><span class="val">Maurizio Taruggi</span></div>
+    </div>
+    <div class="hero-parts">
+      <div class="hero-part-badge active">Parte I &mdash; Tennis BU</div>
+      <div class="hero-part-badge active">Parte II &mdash; Lead Management Adulti</div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- ══════════════════ PARTE I: TENNIS ══════════════════ -->
+  <div class="part-divider fade-up">
+    <div class="part-number">Parte I &mdash; Sessione con Stefano Bertone</div>
+    <div class="part-title">Business Unit <em>Tennis</em></div>
+    <div class="part-desc">Analisi della struttura, dei processi operativi e del customer journey della Scuola Tennis Ronchiverdi, attiva dal 1992.</div>
+  </div>
+
+  <!-- 01 Struttura -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">T.01 &middot; Struttura della BU</div>
+    <h2>Organizzazione e <em>categorie</em></h2>
+    <div class="prose" style="margin-bottom:24px;">
+      <p>La Scuola Tennis opera dal 1992 ed &egrave; organizzata in due macro-aree: <strong>Area Formazione</strong> (seguita da Stefano Bertone) e <strong>Area Competizione</strong> (coordinata con Maestario e Bondaz). 118 atleti attivi, fascia 4&ndash;18 anni (alcuni fino a 21 nell&rsquo;agonistico avanzato).</p>
+    </div>
+    <div class="grid-4">
+      <div class="stat-card gold">
+        <div class="stat-num">118</div>
+        <div class="stat-label"><strong>Atleti attivi</strong><br>stagione 2025&ndash;2026</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">75%</div>
+        <div class="stat-label"><strong>Tasso di retention</strong><br>rinnovi stagionale</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">&euro;202K</div>
+        <div class="stat-label"><strong>Fatturato previsto</strong><br>primo anno sopra &euro;200K</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-num">&euro;102K</div>
+        <div class="stat-label"><strong>Margine contribuzione</strong><br>sul fatturato tennis</div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:0;">
+      <div class="card">
+        <div class="card-title">&#x1F3BE; Categorie per livello (FIT)</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot y"></div><div><strong>Red</strong> &mdash; 4&ndash;6 anni &mdash; 22 atleti &mdash; fascia pi&ugrave; piccola, base motoria</div></div>
+          <div class="item"><div class="dot y"></div><div><strong>Orange</strong> &mdash; 7&ndash;9 anni &mdash; 26 atleti &mdash; inizio tecnica di base</div></div>
+          <div class="item"><div class="dot y"></div><div><strong>Green</strong> &mdash; 10&ndash;12 anni &mdash; 26 atleti &mdash; consolidamento tecnico</div></div>
+          <div class="item"><div class="dot y"></div><div><strong>Senior / Agonistico</strong> &mdash; 13+ anni &mdash; 23 atleti &mdash; tennisti avanzati</div></div>
+          <div class="item"><div class="dot y"></div><div><strong>Competizione</strong> &mdash; 21 atleti &mdash; agonisti con programma personalizzato, quota fino a &euro;5.200</div></div>
+        </div>
+      </div>
+      <div class="card gold">
+        <div class="card-title">&#x1F4B0; Soci vs non soci</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot g"></div><div><strong>56 famiglie soci</strong> Ronchiverdi (47%)</div></div>
+          <div class="item"><div class="dot w"></div><div><strong>62 famiglie non soci</strong> (53%) &mdash; iscritti solo alla scuola tennis</div></div>
+          <div class="item"><div class="dot y"></div><div>Stesso rapporto ~50/50 del Triathlon</div></div>
+          <div class="item"><div class="dot w"></div><div>A differenza del Triathlon <strong>non esiste una formula strutturata</strong> per il passaggio a socio ordinario</div></div>
+          <div class="item"><div class="dot g"></div><div>In molti casi il passaggio avviene <strong>naturalmente</strong> al crescere dell&rsquo;atleta</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 Customer Journey as-is -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">T.02 &middot; Customer Journey &mdash; as-is</div>
+    <h2>Come funziona <em>il percorso oggi</em></h2>
+
+    <div class="flow">
+      <div class="flow-step gap">
+        <div class="flow-num">01</div>
+        <div class="flow-name">Attraction</div>
+        <div class="flow-note">Reception, tel. diretto Stefano, passaparola, gare. Campagna online: ritorno bassissimo</div>
+      </div>
+      <div class="flow-arrow">&#x203A;</div>
+      <div class="flow-step gap">
+        <div class="flow-num">02</div>
+        <div class="flow-name">Contatto</div>
+        <div class="flow-note">Numero diretto di Stefano su locandine. Bypass totale reception e sistema</div>
+      </div>
+      <div class="flow-arrow">&#x203A;</div>
+      <div class="flow-step gap">
+        <div class="flow-num">03</div>
+        <div class="flow-name">Tracciamento</div>
+        <div class="flow-note">Cartaceo. Nessuna condivisione con staff. Nessuna integrazione CRM</div>
+      </div>
+      <div class="flow-arrow">&#x203A;</div>
+      <div class="flow-step ok">
+        <div class="flow-num">04</div>
+        <div class="flow-name">Prova</div>
+        <div class="flow-note">Sempre disponibile. Stefano valuta livello e inserisce nel corso adatto</div>
+      </div>
+      <div class="flow-arrow">&#x203A;</div>
+      <div class="flow-step partial">
+        <div class="flow-num">05</div>
+        <div class="flow-name">Iscrizione</div>
+        <div class="flow-note">Stefano indica categoria (Red/Orange/Green/Comp). Reception o online. Comunicazione orari verbale</div>
+      </div>
+      <div class="flow-arrow">&#x203A;</div>
+      <div class="flow-step gap">
+        <div class="flow-num">06</div>
+        <div class="flow-name">Tracking</div>
+        <div class="flow-note">Excel locale per quote, pagamenti, livelli, tornei. Non integrato con InForYou</div>
+      </div>
+      <div class="flow-arrow">&#x203A;</div>
+      <div class="flow-step ok">
+        <div class="flow-num">07</div>
+        <div class="flow-name">Rinnovo</div>
+        <div class="flow-note">Campagna maggio. Blocco prezzo o omaggio. WhatsApp gruppo famiglie (mono-direzionale)</div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:8px;">
+      <div class="card">
+        <div class="card-title">&#x1F4E1; Canali di attraction</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot g"></div><div><strong>Passaparola</strong> &mdash; canale principale, altissima qualit&agrave; del lead</div></div>
+          <div class="item"><div class="dot g"></div><div><strong>Gare e competizioni</strong> &mdash; visibilit&agrave; tecnica, contatti diretti con famiglie</div></div>
+          <div class="item"><div class="dot g"></div><div><strong>Reception Ronchiverdi</strong> &mdash; smistamento interno</div></div>
+          <div class="item"><div class="dot y"></div><div><strong>Locandine con numero diretto</strong> &mdash; efficaci ma non tracciate</div></div>
+          <div class="item"><div class="dot r"></div><div><strong>Campagne online generiche</strong> &mdash; ritorno bassissimo quest&rsquo;anno</div></div>
+          <div class="item"><div class="dot w"></div><div>Il post della competizione o del trofeo &egrave; pi&ugrave; efficace di qualsiasi campagna brand generica</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">&#x1F4CB; Prove e conversione</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot g"></div><div>Prova <strong>sempre disponibile</strong> su richiesta (evoluzione: settimana fissa &rarr; mese settembre &rarr; sempre)</div></div>
+          <div class="item"><div class="dot g"></div><div>Stefano fa alcune domande, inquadra il livello e inserisce nel corso pi&ugrave; adatto</div></div>
+          <div class="item"><div class="dot y"></div><div>Eccezione: mini tennis 4&ndash;5 anni, prova non sempre necessaria</div></div>
+          <div class="item"><div class="dot y"></div><div>~<strong>50&ndash;60 prove</strong> per iscrivere <strong>30&ndash;35 nuovi atleti</strong> (tasso conversione ~57%)</div></div>
+          <div class="item"><div class="dot r"></div><div>Nessun tracciamento dei <strong>non convertiti</strong> dopo la prova</div></div>
+          <div class="item"><div class="dot r"></div><div>Stefano non sa <strong>se e quando</strong> chi ha provato poi si &egrave; iscritto in reception</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px;">
+      <div class="card-title">&#x1F4B3; Struttura pagamenti e rinnovi</div>
+      <div class="card-body item-list" style="display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;">
+        <div class="item"><div class="dot w"></div><div>Abbonamento <strong>stagionale settembre&ndash;giugno</strong> (non trimestrale come il nuoto)</div></div>
+        <div class="item"><div class="dot w"></div><div>Quote: da <strong>&euro;660</strong> (baby) a <strong>&euro;5.200</strong> (agonismo avanzato 4 volte/settimana)</div></div>
+        <div class="item"><div class="dot y"></div><div>Pagamento a rate tramite <strong>TSPay</strong> (addebito automatico) o <strong>PayPal 3 rate</strong></div></div>
+        <div class="item"><div class="dot y"></div><div>Pre-iscrizione da <strong>20 maggio</strong>: beneficio blocco prezzo o omaggio (quota sostanziosa, ~&euro;500)</div></div>
+        <div class="item"><div class="dot r"></div><div>Competizione: fino a <strong>&euro;7.000</strong> &mdash; impossibile obbligare pagamento online unico</div></div>
+        <div class="item"><div class="dot r"></div><div>Caricamento rate su InForYou <strong>manuale e lento</strong> &mdash; collo di bottiglia a settembre</div></div>
+        <div class="item"><div class="dot g"></div><div>InForYou traccia insoluti &mdash; controllo mensile amministrazione &mdash; tornello blocca accessi con rate scadute</div></div>
+        <div class="item"><div class="dot g"></div><div>Gruppo WhatsApp monodirezionale con tutte le famiglie &mdash; canale principale per comunicazioni</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 ANALISI EXCEL -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">T.03 &middot; Contestualizzazione file Excel</div>
+    <h2>Il dato reale: <em>provv_ste_25_26</em></h2>
+
+    <div class="callout">
+      <div class="callout-label">&#x26A0; Contesto e lettura critica</div>
+      <p>Il file Excel inviato da Stefano &egrave; la testimonianza concreta di quanto emerso nella call: <strong>un sistema di gestione degli iscritti completamente parallelo a InForYou</strong>, costruito artigianalmente nel tempo. Contiene 15 fogli di lavoro che coprono iscrizioni, orari, pagamenti, tornei interni mensili e solleciti &mdash; dati preziosi che oggi esistono solo localmente sul dispositivo di Stefano.</p>
+    </div>
+
+    <div class="excel-box">
+      <div class="excel-box-header">
+        <div class="excel-icon">&#x1F4CA;</div>
+        <div>
+          <div class="excel-title">provv_ste_25_26_copia.xlsx</div>
+          <div class="excel-subtitle">15 fogli &middot; Stagione 2025&ndash;2026 &middot; Scuola Tennis Ronchiverdi</div>
+        </div>
+      </div>
+      <div class="grid-3">
+        <div class="stat-card">
+          <div class="stat-num" style="font-size:32px;">&euro;501K</div>
+          <div class="stat-label"><strong>Valore complessivo</strong><br>quote tracciate nel file</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" style="font-size:32px;">&euro;1.905</div>
+          <div class="stat-label"><strong>Quota media</strong><br>per atleta (263 record)</div>
+        </div>
+        <div class="stat-card gold">
+          <div class="stat-num" style="font-size:32px;">15</div>
+          <div class="stat-label"><strong>Fogli attivi</strong><br>iscrizioni, orari, tornei, solleciti</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">&#x1F4C4; Struttura del file &mdash; fogli principali</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot y"></div><div><strong>primo elenco 3.8.25</strong> &mdash; anagrafica completa: anno nascita, cognome, nome, stato iscrizione, quota dovuta, stato socio. Due liste affiancate (formazione + competizione)</div></div>
+          <div class="item"><div class="dot y"></div><div><strong>orario</strong> &mdash; assegnazione manuale degli slot per ogni atleta (es. "mart 16.45&ndash;18.15 Giov 16.30&ndash;18")</div></div>
+          <div class="item"><div class="dot y"></div><div><strong>elenco definitivo</strong> &mdash; lista consolidata di fine stagione</div></div>
+          <div class="item"><div class="dot y"></div><div><strong>PER TIPO CORSO</strong> &mdash; segmentazione per tipologia: Comp 1v&ndash;4v (volte/settimana), Comp AL, Red/Orange/Green</div></div>
+          <div class="item"><div class="dot y"></div><div><strong>per et&agrave;</strong> &mdash; atleti ordinati per anno di nascita</div></div>
+          <div class="item"><div class="dot w"></div><div><strong>solleciti 15.10</strong>, <strong>chiamate</strong> &mdash; tracciamento manuale degli insoluti e dei contatti effettuati</div></div>
+          <div class="item"><div class="dot w"></div><div><strong>Torneo Natale 25, Torneo 15.11, 18.10, 17.01, 21.02, 21.03</strong> &mdash; 6 tornei mensili interni tracciati separatamente</div></div>
+        </div>
+      </div>
+      <div class="card red">
+        <div class="card-title">&#x26A0; Gap emersi dall&rsquo;analisi del file</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot r"></div><div><strong>Dati non connessi a InForYou</strong>: il file &egrave; parallelo al gestionale, non integrato. Doppio inserimento manuale</div></div>
+          <div class="item"><div class="dot r"></div><div><strong>Un unico punto di accesso</strong>: il file &egrave; locale su Stefano. Staff e amministrazione non vedono questi dati in tempo reale</div></div>
+          <div class="item"><div class="dot r"></div><div><strong>Orari gestiti manualmente</strong>: assegnazione per testo libero (es. "mart 16.45&ndash;18.15") &mdash; non strutturato, non interrogabile</div></div>
+          <div class="item"><div class="dot r"></div><div><strong>Solleciti su foglio separato</strong>: il foglio "solleciti 15.10" mostra che gli insoluti vengono tracciati in Excel, in parallelo all&rsquo;alert di InForYou</div></div>
+          <div class="item"><div class="dot r"></div><div><strong>Tornei su fogli separati</strong>: 6 tornei mensili &mdash; ognuno su un foglio autonomo, nessuna storicizzazione aggregata</div></div>
+          <div class="item"><div class="dot y"></div><div><strong>Punto di forza riconoscibile</strong>: il file dimostra rigore e cura di Stefano nel tracciare &mdash; &egrave; il segnale che il dato esiste gi&agrave;, va solo strutturato</div></div>
+        </div>
+      </div>
+    </div>
+
+    <table class="data-table" style="margin-top:24px;">
+      <thead><tr><th>Tipo corso</th><th>Fascia quota</th><th>Descrizione</th><th>Profilo atleta</th></tr></thead>
+      <tbody>
+        <tr><td>Red / Orange / Green</td><td>&euro;660 &mdash; &euro;1.705</td><td>Formazione base, 1&ndash;2 sessioni/settimana</td><td>4&ndash;12 anni, principianti&ndash;intermedi</td></tr>
+        <tr><td>Senior / Avanzato</td><td>&euro;1.460 &mdash; &euro;2.930</td><td>Tecnica avanzata, 2&ndash;3 sessioni</td><td>12&ndash;18 anni, agonisti</td></tr>
+        <tr><td>Comp 1v&ndash;3v</td><td>&euro;2.255 &mdash; &euro;3.565</td><td>Agonismo federale, 1&ndash;3 sessioni pers.</td><td>15+ anni, atleti di livello</td></tr>
+        <tr><td>Comp AL 3v&ndash;4v</td><td>&euro;3.230 &mdash; &euro;4.794</td><td>Alto livello, programma personalizzato</td><td>Agonisti avanzati, gare ogni weekend</td></tr>
+        <tr><td>Comp massimo</td><td>fino a &euro;5.200</td><td>Percorso agonistico intensivo</td><td>Atleti di punta, allenamento quotidiano</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 04 Gap Analysis Tennis -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">T.04 &middot; Gap Analysis Tennis</div>
+    <h2>Criticit&agrave; e <em>priorit&agrave;</em></h2>
+    <table class="data-table">
+      <thead><tr><th>Area</th><th>Criticit&agrave;</th><th>Priorit&agrave;</th></tr></thead>
+      <tbody>
+        <tr><td>Tracciamento contatti</td><td>Tutto cartaceo + memoria individuale di Stefano. Nessuno strumento condiviso, nessuna storicizzazione dei prospect</td><td><span class="badge red">Critico</span></td></tr>
+        <tr><td>Excel parallelo a InForYou</td><td>Quote, pagamenti, livelli e tornei su file locali non integrati. Doppio lavoro, rischio perdita dati, nessuna visibilit&agrave; per l&rsquo;amministrazione</td><td><span class="badge red">Critico</span></td></tr>
+        <tr><td>Prova &rarr; Iscrizione</td><td>Stefano d&agrave; indicazioni, il cliente va in autonomia in reception. Nessun feedback automatico sull&rsquo;avvenuta iscrizione</td><td><span class="badge red">Critico</span></td></tr>
+        <tr><td>Orari non pubblicabili online</td><td>Stefano gestisce orari con elasticit&agrave; continua. Pubblicarli richiederebbe aggiornamento costante e crea aspettative rigide. Comunicazione verbale attuale</td><td><span class="badge yellow">Medio</span></td></tr>
+        <tr><td>Pagamenti competition</td><td>Quote fino a &euro;7.000 non gestibili con pagamento online unico. TSPay funziona ma il caricamento rateizzazioni &egrave; lento e manuale</td><td><span class="badge yellow">Medio</span></td></tr>
+        <tr><td>Pipeline Scuola Nuoto &rarr; Tennis</td><td>Bambini che escono dal mini-nuoto a 5&ndash;6 anni non vengono sistematicamente indirizzati al mini-tennis. Canale interno non presidiato</td><td><span class="badge yellow">Opportunit&agrave;</span></td></tr>
+        <tr><td>ADV per sport specifico</td><td>Le campagne generiche non funzionano per il tennis. Il post-gara e i risultati competitivi sono l&rsquo;attrattore pi&ugrave; efficace &mdash; ma non strutturato editorialmente</td><td><span class="badge yellow">Opportunit&agrave;</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ══════════════════ PARTE II: LEAD MANAGEMENT ══════════════════ -->
+  <div class="part-divider fade-up" style="margin-top:40px;">
+    <div class="part-number">Parte II &mdash; Con Lorella Gravante e Simone</div>
+    <div class="part-title">Lead Management <em>Adulti</em></div>
+    <div class="part-desc">Analisi del processo di gestione dei nuovi lead (sorgenti, pipeline, qualificazione, prova, conversione) e discussione della strategia digitale con il nuovo referente ADV.</div>
+  </div>
+
+  <!-- 05 Flusso lead attuale -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">L.01 &middot; Processo attuale &mdash; as-is</div>
+    <h2>Come arriva e viene gestito <em>il lead oggi</em></h2>
+
+    <div class="prose" style="margin-bottom:24px;">
+      <p>I lead adulti arrivano principalmente da campagne Meta e dal form Wix. Il settore ADV scarica manualmente i dati, li inserisce in un Google Sheet e lo condivide con Lorella e il team commerciale. Ogni aggiornamento richiede di aprire manualmente il link. Il lead viene inserito nel CRM (InForYou) <strong>solo se qualificato</strong> (contattato e risposto) &mdash; mai se freddo.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">&#x1F4E5; Sorgenti lead attuali</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot y"></div><div><strong>Meta Ads</strong> (Facebook/Instagram) &mdash; principale canale a pagamento, qualit&agrave; variabile</div></div>
+          <div class="item"><div class="dot y"></div><div><strong>Form Wix</strong> (sito web) &mdash; lead da ricerche organiche e dirette</div></div>
+          <div class="item"><div class="dot w"></div><div><strong>Social organico</strong> &mdash; DM Instagram non tracciate sistematicamente</div></div>
+          <div class="item"><div class="dot w"></div><div><strong>Referral soci</strong> &mdash; attivo ma non digitalizzato, gestito a campagne periodiche</div></div>
+          <div class="item"><div class="dot r"></div><div>Processo di scarico dati <strong>manuale</strong>: ADV &rarr; Google Sheet &rarr; condivisione link</div></div>
+          <div class="item"><div class="dot r"></div><div>Ogni visualizzazione richiede <strong>apertura manuale del link</strong>. Nessuna notifica push</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">&#x260E; Processo di contatto</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot g"></div><div>Team commerciale altamente formato su <strong>empatia, NID analysis, assertivit&agrave;</strong></div></div>
+          <div class="item"><div class="dot y"></div><div><strong>2&ndash;3 tentativi di chiamata</strong>, poi messaggio WhatsApp se nessuna risposta</div></div>
+          <div class="item"><div class="dot r"></div><div>Nessuna <strong>standardizzazione</strong> del numero di chiamate o del timing tra un tentativo e l&rsquo;altro</div></div>
+          <div class="item"><div class="dot r"></div><div>I lead non risposti dopo 2&ndash;3 tentativi finiscono nel <strong>"dimenticatoio"</strong> &mdash; nessun nurturing</div></div>
+          <div class="item"><div class="dot r"></div><div>Gestione su <strong>pi&ugrave; numeri WhatsApp</strong>: numero Customer Care + numero New. Il cliente pu&ograve; ricevere messaggi da un numero e richiamare su un altro &rarr; confusione, blocchi</div></div>
+          <div class="item"><div class="dot y"></div><div>I lead non inseriti nel CRM se "freddi" &mdash; ma senza uno strumento di nurturing, i freddi non si scaldano mai</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 Pipeline stati -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">L.02 &middot; Pipeline &mdash; stati attuali</div>
+    <h2>Nomenclatura e <em>stati del lead</em></h2>
+    <div class="prose" style="margin-bottom:20px;">
+      <p>Emersa durante la call una nomenclatura gi&agrave; in uso, che va standardizzata e integrata in uno strumento unico.</p>
+    </div>
+    <div class="pipeline">
+      <div class="pipeline-step">
+        <div class="pipe-num">1</div>
+        <div class="pipe-body">
+          <div class="pipe-state">Nuovo Lead</div>
+          <div class="pipe-desc">Lead appena acquisito da Meta o Wix. Scaricato manualmente dall&rsquo;ADV su Google Sheet. <strong>Non ancora nel CRM</strong> &mdash; entra solo dopo il primo contatto positivo.</div>
+        </div>
+      </div>
+      <div class="pipeline-step">
+        <div class="pipe-num">2</div>
+        <div class="pipe-body">
+          <div class="pipe-state">Qualificato (Contattato)</div>
+          <div class="pipe-desc">Lead raggiunto telefonicamente. <strong>Entra in InForYou</strong>. Il consulente annota l&rsquo;esito della chiamata. 2&ndash;3 tentativi prima di abbandonare.</div>
+        </div>
+      </div>
+      <div class="pipeline-step">
+        <div class="pipe-num">3</div>
+        <div class="pipe-body">
+          <div class="pipe-state">Appuntamento fissato</div>
+          <div class="pipe-desc">Appuntamento in sede o per la prova fissato dal consulente (principalmente Carola). <strong>Obiettivo primario</strong>: portare il lead in sede.</div>
+        </div>
+      </div>
+      <div class="pipeline-step">
+        <div class="pipe-num">4</div>
+        <div class="pipe-body">
+          <div class="pipe-state">Prova effettuata</div>
+          <div class="pipe-desc">Il consulente accoglie, fa firmare una <strong>liberatoria cartacea</strong> (poi gettata &mdash; controversia). Analisi del bisogno empatica (NID analysis). <br>Prova <strong>gratuita se referral da socio</strong>, &euro;30 per esterni (detraibili dall&rsquo;iscrizione).</div>
+        </div>
+      </div>
+      <div class="pipeline-step">
+        <div class="pipe-num">5</div>
+        <div class="pipe-body">
+          <div class="pipe-state">Evaso (Convertito)</div>
+          <div class="pipe-desc">Il consulente inserisce i dati, genera il contratto da InForYou, firma su tavoletta Wacom in ufficio. Il pagamento iniziale viene gestito dal consulente stesso (rate su TSPay o bonifico). &rarr; <strong>Passaggi successivi (Call #4)</strong>: gestione iscrizione e pagamento nel dettaglio.</div>
+        </div>
+      </div>
+      <div class="pipeline-step">
+        <div class="pipe-num">&#x2715;</div>
+        <div class="pipe-body">
+          <div class="pipe-state" style="color:rgba(220,100,100,0.8);">Non evaso &mdash; Dimenticatoio</div>
+          <div class="pipe-desc"><strong>Gap critico</strong>: i lead non convertiti dopo 2&ndash;3 tentativi non entrano in nessun funnel di nurturing. Vengono abbandonati. Non &egrave; possibile misurare quanti si perdono e perch&eacute;.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 Strategia digitale -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">L.03 &middot; Strategia digitale &mdash; visione condivisa</div>
+    <h2>Framework <em>integrato</em> proposto</h2>
+    <div class="prose" style="margin-bottom:24px;">
+      <p>Prima sessione con Simone (nuovo referente ADV). Condivisa la metodologia customer journey end-to-end: la digitalizzazione funziona solo se integrata verticalmente, dal primo touchpoint pubblicitario fino alla firma del contratto. Un marketing eccellente su un lead management inefficiente brucia denaro.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card gold">
+        <div class="card-title">&#x1F3AF; CTA principale &mdash; tutte le BU</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot y"></div><div>Per le scuole sport: <strong>Richiedi una prova</strong> &mdash; call to action primaria su tutti i canali</div></div>
+          <div class="item"><div class="dot y"></div><div>Per gli adulti: <strong>Fissa un appuntamento in sede</strong> &mdash; obiettivo primario di ogni interazione</div></div>
+          <div class="item"><div class="dot y"></div><div>Modulo condizionale: la CTA varia in base all&rsquo;attivit&agrave; di interesse &rarr; routing automatico del lead</div></div>
+          <div class="item"><div class="dot w"></div><div>Massimo 1&ndash;2 CTA chiare per pagina/campagna &mdash; no frizione inutile</div></div>
+          <div class="item"><div class="dot r"></div><div>"Prenota un Tour" sul sito attuale: troppi step &mdash; alta frizione &mdash; da semplificare urgentemente</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">&#x1F4CA; Mix canali consigliato</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot g"></div><div><strong>Sito web</strong> &mdash; casa principale. Stratificato: prima attrazione visiva, poi informazioni tecniche per chi approfondisce</div></div>
+          <div class="item"><div class="dot g"></div><div><strong>Meta Ads</strong> &mdash; con molti AB test. Mix: traffico sul sito + form Meta multi-step per profilazione</div></div>
+          <div class="item"><div class="dot g"></div><div><strong>Google Ads</strong> &mdash; ricerche intenzionali pi&ugrave; efficaci. Stagionalit&agrave; importante: investire a settembre e gennaio</div></div>
+          <div class="item"><div class="dot y"></div><div><strong>Email marketing</strong> &mdash; nurturing lead freddi. UTM per tracciamento, ID nascosto per re-engagement</div></div>
+          <div class="item"><div class="dot y"></div><div><strong>WhatsApp</strong> &mdash; solo per lead <strong>caldi</strong>. Agente AI bidirezionale per inbound. Non per liste fredde: rischio ban</div></div>
+          <div class="item"><div class="dot w"></div><div>Obiettivo: funnel <strong>evergreen verticali</strong> &mdash; struttura stabile, creativit&agrave; aggiornata. Non campagne mensili effimere</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:20px;">
+      <div class="callout-label">&#x1F4A1; Prodotto civetta &mdash; proposta strategica</div>
+      <p>Per scaldare i lead freddi che non sono pronti a impegnarsi subito con un abbonamento annuale, Maurizio ha proposto un <strong>"prodotto civetta"</strong>: un pass a pagamento (indicativamente <strong>&euro;30&ndash;35</strong>) che d&agrave; accesso per una settimana, acquistabile online.</p>
+      <p>Obiettivo: abbassare la barriera d&rsquo;ingresso, scoraggiare gli "scrocconi" con un prezzo simbolico, creare un momento di esperienza del club che facilita la conversione. <strong>Condizioni obbligatorie</strong>: escluso il periodo estivo &mdash; escluso chi era gi&agrave; iscritto l&rsquo;anno scorso &mdash; attivabile solo per chi non &egrave; al club da almeno tot mesi. Il tracciamento del prodotto civetta deve essere integrato: scadenza, tasso di conversione a iscrizione, valore dell&rsquo;onboarding abbinato.</p>
+    </div>
+
+    <div class="callout" style="margin-top:14px;">
+      <div class="callout-label">&#x1F517; Referral vs Daily Pass &mdash; distinzione fondamentale</div>
+      <p><strong>Daily Pass</strong> = benefit al socio fedele. Il socio che vuole portare un ospite (cugino da Roma, amico di passaggio) deve avere questa possibilit&agrave; come servizio di valore percepito. Non &egrave; strumentale all&rsquo;acquisizione &mdash; &egrave; customer care. <strong>Regola</strong>: non cumulabile, non nei weekend di alta stagione.</p>
+      <p><strong>Referral</strong> = strumento commerciale attivo. Il socio lavora per l&rsquo;azienda portando un potenziale nuovo iscritto. Ha un funnel dedicato, una CTA chiara, un benefit condizionato all&rsquo;iscrizione effettiva (es. mese omaggio). <strong>Deve essere evergreen 365 giorni</strong>, attivabile su pi&ugrave; canali digitali.</p>
+    </div>
+  </div>
+
+  <!-- 08 Multicanalità WA -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">L.04 &middot; Criticit&agrave; operativa &mdash; WhatsApp</div>
+    <h2>Il problema dei <em>numeri multipli</em></h2>
+
+    <div class="callout" style="background:rgba(200,60,60,0.06);border-color:rgba(200,60,60,0.2);">
+      <div class="callout-label" style="color:rgba(220,100,100,0.7);">&#x26A0; Criticit&agrave; grave identificata</div>
+      <p>Ronchiverdi utilizza pi&ugrave; numeri WhatsApp in parallelo: un numero <strong>Customer Care</strong> e un numero <strong>New lead</strong>, pi&ugrave; i telefoni personali dei consulenti usati per messaggistica rapida. Il cliente pu&ograve; ricevere un messaggio da un numero e tentare di richiamare su un altro che <strong>non pu&ograve; ricevere chiamate</strong> (SIM solo dati). Risultato: confusione, numeri bloccati, lead persi. Il cliente che blocca un numero non &egrave; mai pi&ugrave; raggiungibile da quel canale.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card red">
+        <div class="card-title">&#x26A0; Stato attuale &mdash; problemi</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot r"></div><div>Numero madre originale (ex ActiveCampaign) + numeri telefoni commerciali + SIM solo WA &rarr; caos multi-numero</div></div>
+          <div class="item"><div class="dot r"></div><div>Il cliente che risponde al messaggio WhatsApp chiama il numero sbagliato &rarr; non risponde nessuno</div></div>
+          <div class="item"><div class="dot r"></div><div>I consulenti richiamate dal fisso su chi aveva il numero del telefono WA &rarr; numero diverso &rarr; riconosciuto come spam</div></div>
+          <div class="item"><div class="dot r"></div><div>Questa situazione va avanti da mesi senza che nessuno l&rsquo;abbia segnalata come problema strutturale</div></div>
+        </div>
+      </div>
+      <div class="card green">
+        <div class="card-title">&#x2713; Soluzione proposta</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot g"></div><div>Dividere nettamente: <strong>canale NEW</strong> per nuovi lead &mdash; <strong>canale Customer Care</strong> per soci attivi e rinnovi</div></div>
+          <div class="item"><div class="dot g"></div><div>AI agent separato per ogni canale: non &egrave; possibile dare lo stesso prompt a un agente che deve fare sia vendita che customer care</div></div>
+          <div class="item"><div class="dot g"></div><div>Un unico numero visibile per i venditori, gestito da sistema (SuperAgent, Spoki, Keplero o simili): routing automatico + escalation a operatore</div></div>
+          <div class="item"><div class="dot g"></div><div>Ogni operatore vede solo le sue chat assegnate &mdash; ordine totale anche con un numero unico</div></div>
+          <div class="item"><div class="dot g"></div><div>Il cliente che ha interagito con il sistema riceve sempre messaggi dallo stesso numero &mdash; fiducia e riconoscibilit&agrave;</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 09 Priorità digitali -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">09 &middot; Roadmap priorit&agrave;</div>
+    <h2>Azioni prioritarie <em>da questa call</em></h2>
+    <div class="roadmap">
+      <div class="rm-item p1">
+        <div class="rm-priority">1</div>
+        <div class="rm-body">
+          <div class="rm-tag">Immediato &mdash; Tennis</div>
+          <div class="rm-title">Ricevere e analizzare i file Excel di Stefano</div>
+          <div class="rm-desc">Stefano invia via email il file Excel delle presenze, quote, orari e tornei. Maurizio effettua gap analysis e proposta di integrazione in CRM condiviso con il team.</div>
+        </div>
+      </div>
+      <div class="rm-item p1">
+        <div class="rm-priority">2</div>
+        <div class="rm-body">
+          <div class="rm-tag">Immediato &mdash; Tutti</div>
+          <div class="rm-title">Creare account Claude Team e condividere progetto</div>
+          <div class="rm-desc">Account team da &euro;125/mese (5 account base). Simone come "capo progetto" per l&rsquo;AI. Formazione base da concordare martedì.</div>
+        </div>
+      </div>
+      <div class="rm-item p1">
+        <div class="rm-priority">3</div>
+        <div class="rm-body">
+          <div class="rm-tag">Immediato &mdash; Lead Management</div>
+          <div class="rm-title">Condividere link Google Sheet lead con Maurizio</div>
+          <div class="rm-desc">Lorella condivide tutti i link ai fogli Google delle campagne. Maurizio analizza la struttura attuale e propone il sistema di single source of truth per i lead.</div>
+        </div>
+      </div>
+      <div class="rm-item p1">
+        <div class="rm-priority">4</div>
+        <div class="rm-body">
+          <div class="rm-tag">Urgente &mdash; Accessi</div>
+          <div class="rm-title">Accesso remoto a InForYou</div>
+          <div class="rm-desc">Ronchiverdi fornisce accesso remoto al gestionale. Necessario per l&rsquo;analisi del flusso iscrizione e pagamento nella Call #4.</div>
+        </div>
+      </div>
+      <div class="rm-item p2">
+        <div class="rm-priority">5</div>
+        <div class="rm-body">
+          <div class="rm-tag">Breve termine &mdash; Lead Management</div>
+          <div class="rm-title">Standardizzare pipeline e nomenclatura lead</div>
+          <div class="rm-desc">Definire il numero standard di tentativi di contatto, timing tra chiamate, stati della pipeline. Implementare in unica interfaccia (non Google Sheet).</div>
+        </div>
+      </div>
+      <div class="rm-item p2">
+        <div class="rm-priority">6</div>
+        <div class="rm-body">
+          <div class="rm-tag">Breve termine &mdash; Prova</div>
+          <div class="rm-title">Digitalizzare raccolta dati e liberatoria alla prova</div>
+          <div class="rm-desc">QR code, tablet o totem all&rsquo;ingresso. Form digitale con firma inclusa. Elimina cartaceo, garantisce compliance privacy, mantiene il dato nel sistema.</div>
+        </div>
+      </div>
+      <div class="rm-item p3">
+        <div class="rm-priority">7</div>
+        <div class="rm-body">
+          <div class="rm-tag">Medio termine &mdash; Marketing</div>
+          <div class="rm-title">Costruire funnel evergreen verticali per BU</div>
+          <div class="rm-desc">Struttura stabile per ogni BU (tennis, nuoto, triathlon, adulti fitness). Creativit&agrave; aggiornabile, struttura fissa. UTM per ogni sorgente. Piano editoriale gare.</div>
+        </div>
+      </div>
+      <div class="rm-item p3">
+        <div class="rm-priority">8</div>
+        <div class="rm-body">
+          <div class="rm-tag">Medio termine &mdash; Strategia</div>
+          <div class="rm-title">Valutare e progettare il prodotto civetta</div>
+          <div class="rm-desc">Definire condizioni, pricing (&euro;30&ndash;35), esclusioni (estate, ex-soci), integrazione nel funnel lead freddi. Valutare impatto sul brand premium prima del lancio.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEXT CALL BANNER -->
+  <div class="next-call-banner fade-up">
+    <div class="nc-icon">&#x1F4C5;</div>
+    <div class="nc-body">
+      <div class="nc-label">Prossima sessione</div>
+      <div class="nc-title">Call #4 &mdash; <em>Iscrizione &amp; Pagamenti</em></div>
+      <div class="nc-meta"><strong>Venerd&igrave; 8 maggio 2026 &middot; ore 16:00</strong><br>Tema: processo di iscrizione e gestione pagamenti &mdash; con intervento della funzione amministrativa (Maria Grazia). Dettaglio: inserimento dati consulente, generazione contratto InForYou, firma Wacom, gestione rateizzazioni TSPay, gestione insoluti.</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span class="f-info">Audit Digitale &middot; <strong>Ronchiverdi Sport Club</strong> &times; Maurizio Taruggi &mdash; Ready 2 Digital</span>
+  <span class="f-brand">Call #3 &middot; <em>Tennis &amp; Lead Management</em> &middot; 5 maggio 2026</span>
+</footer>
+
+<script>
+var obs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if(e.isIntersecting) e.target.classList.add("visible"); });
+}, { threshold: 0.06 });
+document.querySelectorAll(".fade-up").forEach(function(el) { obs.observe(el); });
+</script>
+</body>
+</html>
