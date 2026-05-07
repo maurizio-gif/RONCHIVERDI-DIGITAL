@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FAF8F4; font-size: 15px; line-height: 1.7; overflow-x: hidden; font-weight: 300; -webkit-font-smoothing: antialiased; }
@@ -168,6 +169,27 @@ footer { background: rgba(0,0,0,0.3); padding: 40px 48px; border-top: 1px solid 
 .f-brand em { font-style: italic; color: rgba(232,212,106,0.4); }
 .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .fade-up.visible { opacity: 1; transform: none; }
+
+/* ---- CHART STYLES ---- */
+.chart-section { background: rgba(232,212,106,0.03); border: 1px solid rgba(232,212,106,0.1); border-radius: 20px; padding: 36px; margin: 32px 0; }
+.chart-section-label { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(232,212,106,0.55); margin-bottom: 6px; }
+.chart-section-title { font-family: "Cormorant Garamond", serif; font-size: clamp(18px, 2vw, 24px); font-weight: 300; color: #FAF8F4; margin-bottom: 32px; line-height: 1.2; }
+.chart-section-title em { font-style: italic; color: #E8D46A; }
+.charts-row { display: grid; grid-template-columns: 260px 1fr; gap: 40px; align-items: center; }
+@media(max-width:700px){ .charts-row { grid-template-columns: 1fr; } }
+.donut-wrap { position: relative; width: 220px; height: 220px; margin: 0 auto; }
+.donut-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; }
+.donut-val { font-family: "Cormorant Garamond", serif; font-size: 52px; font-weight: 300; line-height: 1; color: #E8D46A; }
+.donut-sub { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(232,212,106,0.5); margin-top: 6px; }
+.conv-bars { display: flex; flex-direction: column; gap: 20px; }
+.conv-bar-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+.conv-bar-label { font-size: 13px; color: rgba(250,248,244,0.6); }
+.conv-bar-val { font-family: "Cormorant Garamond", serif; font-size: 22px; font-weight: 300; color: #E8D46A; }
+.conv-bar-track { height: 6px; background: rgba(255,255,255,0.07); border-radius: 3px; overflow: hidden; }
+.conv-bar-fill { height: 100%; border-radius: 3px; width: 0%; transition: width 1.2s cubic-bezier(0.4,0,0.2,1); }
+.conv-bar-note { font-size: 11px; color: rgba(250,248,244,0.3); margin-top: 5px; }
+.gap-chart-wrap { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 28px 32px; margin-top: 24px; }
+.gap-chart-label { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(232,212,106,0.5); margin-bottom: 20px; }
 
 @media(max-width: 1000px) {
   .hero-inner { grid-template-columns: 1fr; gap: 40px; }
@@ -412,6 +434,56 @@ footer { background: rgba(0,0,0,0.3); padding: 40px 48px; border-top: 1px solid 
         </div>
       </div>
     </div>
+
+    <!-- CHART: metriche del volano -->
+    <div class="chart-section fade-up">
+      <div class="chart-section-label">Visualizzazione dati &middot; KPI Triathlon</div>
+      <div class="chart-section-title">Le metriche del <em>volano</em></div>
+      <div class="charts-row">
+        <div style="text-align:center;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(232,212,106,0.5);margin-bottom:16px;">Tasso di rinnovo annuo</div>
+          <div class="donut-wrap">
+            <canvas id="chart-rinnovo" width="220" height="220"></canvas>
+            <div class="donut-center">
+              <span class="donut-val">92%</span>
+              <span class="donut-sub">rinnovi</span>
+            </div>
+          </div>
+          <div style="font-size:12px;color:rgba(250,248,244,0.3);margin-top:12px;">Il pi&ugrave; alto del club</div>
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(232,212,106,0.5);margin-bottom:20px;">Conversioni chiave del sistema</div>
+          <div class="conv-bars">
+            <div class="conv-bar-item">
+              <div class="conv-bar-header">
+                <span class="conv-bar-label">Tasso di rinnovo iscritti</span>
+                <span class="conv-bar-val">92%</span>
+              </div>
+              <div class="conv-bar-track"><div class="conv-bar-fill" data-width="92" style="background:linear-gradient(90deg,#E8D46A,#C9B540);"></div></div>
+              <div class="conv-bar-note">Il pi&ugrave; alto tra tutti i verticali del club</div>
+            </div>
+            <div class="conv-bar-item">
+              <div class="conv-bar-header">
+                <span class="conv-bar-label">Genitori che diventano soci</span>
+                <span class="conv-bar-val">&gt;50%</span>
+              </div>
+              <div class="conv-bar-track"><div class="conv-bar-fill" data-width="50" style="background:linear-gradient(90deg,rgba(90,180,120,0.9),rgba(90,180,120,0.6));"></div></div>
+              <div class="conv-bar-note">~50 soci adulti acquisiti senza campagne ADV dedicate</div>
+            </div>
+            <div class="conv-bar-item">
+              <div class="conv-bar-header">
+                <span class="conv-bar-label">Academy &rarr; Soci Ronchiverdi</span>
+                <span class="conv-bar-val">100%</span>
+              </div>
+              <div class="conv-bar-track"><div class="conv-bar-fill" data-width="100" style="background:linear-gradient(90deg,rgba(90,140,210,0.9),rgba(90,140,210,0.6));"></div></div>
+              <div class="conv-bar-note">12 su 12 ragazzi usciti dall&rsquo;Academy si sono iscritti come soci</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- FINE CHART -->
+
   </div>
 
   <!-- 04 GAP ANALYSIS -->
@@ -462,6 +534,14 @@ footer { background: rgba(0,0,0,0.3); padding: 40px 48px; border-top: 1px solid 
         </tr>
       </tbody>
     </table>
+
+    <!-- CHART: distribuzione gap -->
+    <div class="gap-chart-wrap fade-up">
+      <div class="gap-chart-label">Distribuzione criticit&agrave; per categoria &middot; 7 aree totali</div>
+      <canvas id="chart-gap" height="110"></canvas>
+    </div>
+    <!-- FINE CHART -->
+
   </div>
 
   <!-- 05 OPPORTUNITA DIGITALI -->
@@ -598,6 +678,77 @@ var obs = new IntersectionObserver(function(entries) {
   entries.forEach(function(e) { if(e.isIntersecting) e.target.classList.add("visible"); });
 }, { threshold: 0.06 });
 document.querySelectorAll(".fade-up").forEach(function(el) { obs.observe(el); });
+
+/* ---- Conv bars animation ---- */
+var barObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if(e.isIntersecting) {
+      e.target.querySelectorAll('.conv-bar-fill').forEach(function(bar) {
+        bar.style.width = bar.getAttribute('data-width') + '%';
+      });
+      barObs.disconnect();
+    }
+  });
+}, { threshold: 0.3 });
+var chartSection = document.querySelector('.chart-section');
+if(chartSection) barObs.observe(chartSection);
+
+/* ---- Chart.js defaults ---- */
+Chart.defaults.color = 'rgba(250,248,244,0.45)';
+Chart.defaults.font.family = "'Jost', sans-serif";
+Chart.defaults.font.size = 12;
+
+/* ---- Donut: tasso rinnovo ---- */
+var ctxRinnovo = document.getElementById('chart-rinnovo');
+if(ctxRinnovo) {
+  new Chart(ctxRinnovo, {
+    type: 'doughnut',
+    data: {
+      labels: ['Rinnovi', 'Abbandoni'],
+      datasets: [{ data: [92, 8], backgroundColor: ['rgba(232,212,106,0.88)', 'rgba(255,255,255,0.07)'], borderWidth: 0, hoverOffset: 6 }]
+    },
+    options: {
+      cutout: '76%',
+      animation: { animateRotate: true, duration: 1200, easing: 'easeInOutQuart' },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'rgba(15,15,13,0.95)', borderColor: 'rgba(232,212,106,0.2)', borderWidth: 1,
+          titleColor: 'rgba(250,248,244,0.9)', bodyColor: 'rgba(250,248,244,0.6)', padding: 12,
+          callbacks: { label: function(ctx) { return ' ' + ctx.label + ': ' + ctx.parsed + '%'; } }
+        }
+      }
+    }
+  });
+}
+
+/* ---- Bar: distribuzione gap ---- */
+var ctxGap = document.getElementById('chart-gap');
+if(ctxGap) {
+  new Chart(ctxGap, {
+    type: 'bar',
+    data: {
+      labels: ['Critici', 'Medi', 'Opportunità'],
+      datasets: [{ data: [3, 2, 2], backgroundColor: ['rgba(200,64,64,0.75)', 'rgba(232,212,106,0.75)', 'rgba(90,180,120,0.75)'], borderWidth: 0, borderRadius: 6, borderSkipped: false }]
+    },
+    options: {
+      indexAxis: 'y', responsive: true,
+      animation: { duration: 1000, easing: 'easeOutQuart' },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'rgba(15,15,13,0.95)', borderColor: 'rgba(255,255,255,0.1)', borderWidth: 1,
+          titleColor: 'rgba(250,248,244,0.9)', bodyColor: 'rgba(250,248,244,0.6)', padding: 12,
+          callbacks: { label: function(ctx) { return ' ' + ctx.parsed.x + ' aree'; } }
+        }
+      },
+      scales: {
+        x: { grid: { color: 'rgba(255,255,255,0.06)' }, border: { display: false }, ticks: { color: 'rgba(250,248,244,0.35)', stepSize: 1, font: { size: 11 } }, max: 4 },
+        y: { grid: { display: false }, border: { display: false }, ticks: { color: 'rgba(250,248,244,0.65)', font: { size: 13 } } }
+      }
+    }
+  });
+}
 </script>
 </body>
 </html>

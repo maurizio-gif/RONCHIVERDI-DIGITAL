@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Jost', sans-serif; background: #0F0F0D; color: #FAF8F4; font-size: 15px; line-height: 1.7; overflow-x: hidden; font-weight: 300; -webkit-font-smoothing: antialiased; }
@@ -164,6 +165,19 @@ footer { background: rgba(0,0,0,0.3); padding: 40px 48px; border-top: 1px solid 
 
 .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .fade-up.visible { opacity: 1; transform: none; }
+
+/* ---- CHART STYLES ---- */
+.chart-block { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); border-radius: 20px; padding: 32px; margin: 32px 0; }
+.chart-block-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(232,212,106,0.5); margin-bottom: 6px; }
+.chart-block-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 2vw, 24px); font-weight: 300; color: #FAF8F4; margin-bottom: 28px; line-height: 1.2; }
+.chart-block-title em { font-style: italic; color: #E8D46A; }
+.chart-legend { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px; }
+.chart-legend-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: rgba(250,248,244,0.55); }
+.chart-legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+.radar-split { display: grid; grid-template-columns: 1fr 300px; gap: 40px; align-items: center; }
+@media(max-width: 800px) { .radar-split { grid-template-columns: 1fr; } }
+.radar-legend-row { font-size: 12.5px; color: rgba(250,248,244,0.5); line-height: 1.5; margin-bottom: 14px; }
+.radar-legend-row strong { color: rgba(250,248,244,0.8); font-weight: 500; display: block; margin-bottom: 2px; }
 
 @media(max-width: 900px) {
   nav { padding: 0 24px; }
@@ -409,6 +423,20 @@ footer { background: rgba(0,0,0,0.3); padding: 40px 48px; border-top: 1px solid 
       </tbody>
     </table>
 
+    <!-- CHART: confronto costi -->
+    <div class="chart-block fade-up">
+      <div class="chart-block-label">Visualizzazione &middot; Costi mensili a confronto</div>
+      <div class="chart-block-title">Quanto costa <em>ogni scenario</em></div>
+      <div class="chart-legend">
+        <div class="chart-legend-item"><div class="chart-legend-dot" style="background:rgba(90,140,210,0.8)"></div>Brevo Professional</div>
+        <div class="chart-legend-item"><div class="chart-legend-dot" style="background:rgba(90,180,120,0.8)"></div>SuperAgent.fit Lite</div>
+        <div class="chart-legend-item"><div class="chart-legend-dot" style="background:rgba(130,200,160,0.6)"></div>SuperAgent.fit Premium</div>
+      </div>
+      <canvas id="chart-costi" height="200"></canvas>
+      <div style="margin-top:14px;font-size:11px;color:rgba(250,248,244,0.28);font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;">* Brevo non include la gestione delle risposte in entrata (costo staff non conteggiato)</div>
+    </div>
+    <!-- FINE CHART -->
+
     <div class="infobox" style="margin-top:28px;">
       <div class="infobox-lbl">&#128204; Come leggere i due scenari</div>
       <p>In entrambi gli scenari SuperAgent.fit &egrave; pi&ugrave; economico di Brevo &mdash; e include la gestione bidirezionale AI h24 che Brevo non offre a nessun prezzo. Nel <strong>Scenario A</strong> il risparmio va da <strong>&euro;257 (Lite)</strong> a <strong>&euro;363 (Premium)</strong> al mese rispetto a Brevo. Nel <strong>Scenario B</strong> il risparmio sale a <strong>&euro;216 (Lite)</strong> o <strong>&euro;322 (Premium)</strong>. <strong>Il confronto rimane asimmetrico</strong>: Brevo invia, SuperAgent.fit risponde e converte.</p>
@@ -460,6 +488,25 @@ footer { background: rgba(0,0,0,0.3); padding: 40px 48px; border-top: 1px solid 
   <div class="section fade-up">
     <div class="section-eyebrow">06 &middot; Confronto funzionale</div>
     <h2>Analisi comparativa <em>dettagliata</em></h2>
+
+    <!-- CHART: radar funzionalità -->
+    <div class="chart-block fade-up">
+      <div class="chart-block-label">Visualizzazione &middot; Punteggio funzionale (0–5)</div>
+      <div class="chart-block-title">Dove vince <em>ciascuno</em></div>
+      <div class="radar-split">
+        <canvas id="chart-radar" height="320"></canvas>
+        <div>
+          <div class="radar-legend-row"><strong style="color:rgba(90,140,210,0.9)">Brevo</strong>Eccelle nel broadcasting multicanale e nelle analytics. Zero AI conversazionale.</div>
+          <div class="radar-legend-row"><strong style="color:rgba(90,180,120,0.9)">SuperAgent.fit</strong>Domina su AI, automazioni e conversione. Assente su email e SMS.</div>
+          <div style="margin-top:16px;border-top:1px solid rgba(255,255,255,0.07);padding-top:16px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(232,212,106,0.5);margin-bottom:10px;">Dimensioni valutate</div>
+            <div style="font-size:12px;color:rgba(250,248,244,0.4);line-height:1.8;">Broadcasting · Gestione risposte<br>AI conversazionale · Automazioni<br>CRM integrato · Analytics<br>Multicanale · Verticale fitness</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- FINE CHART -->
+
     <table class="ctbl">
       <thead><tr><th>Funzionalit&agrave;</th><th class="hb">Brevo</th><th class="hg">SuperAgent.fit</th></tr></thead>
       <tbody>
@@ -553,6 +600,75 @@ var obs = new IntersectionObserver(function(entries) {
   entries.forEach(function(e) { if(e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.06 });
 document.querySelectorAll('.fade-up').forEach(function(el) { obs.observe(el); });
+
+/* ---- Chart.js defaults ---- */
+Chart.defaults.color = 'rgba(250,248,244,0.45)';
+Chart.defaults.font.family = "'Jost', sans-serif";
+Chart.defaults.font.size = 12;
+
+/* ---- Bar: costi mensili ---- */
+var ctxCosti = document.getElementById('chart-costi');
+if(ctxCosti) {
+  new Chart(ctxCosti, {
+    type: 'bar',
+    data: {
+      labels: ['Scenario A — 10.000 msg/mese', 'Scenario B — 15.000 msg/mese'],
+      datasets: [
+        { label: 'Brevo Professional', data: [1317, 1726], backgroundColor: 'rgba(90,140,210,0.75)', borderWidth: 0, borderRadius: 6, borderSkipped: false },
+        { label: 'SuperAgent.fit Lite', data: [954, 1404], backgroundColor: 'rgba(90,180,120,0.75)', borderWidth: 0, borderRadius: 6, borderSkipped: false },
+        { label: 'SuperAgent.fit Premium', data: [1060, 1510], backgroundColor: 'rgba(130,200,160,0.55)', borderWidth: 0, borderRadius: 6, borderSkipped: false }
+      ]
+    },
+    options: {
+      responsive: true,
+      animation: { duration: 1000, easing: 'easeOutQuart' },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'rgba(15,15,13,0.95)', borderColor: 'rgba(255,255,255,0.1)', borderWidth: 1,
+          titleColor: 'rgba(250,248,244,0.9)', bodyColor: 'rgba(250,248,244,0.6)', padding: 14,
+          callbacks: { label: function(ctx) { return ' ' + ctx.dataset.label + ': €' + ctx.parsed.y.toLocaleString('it-IT'); } }
+        }
+      },
+      scales: {
+        x: { grid: { display: false }, border: { display: false }, ticks: { color: 'rgba(250,248,244,0.5)', font: { size: 12 } } },
+        y: { grid: { color: 'rgba(255,255,255,0.06)' }, border: { display: false }, ticks: { color: 'rgba(250,248,244,0.35)', font: { size: 11 }, callback: function(v) { return '€' + v.toLocaleString('it-IT'); } } }
+      }
+    }
+  });
+}
+
+/* ---- Radar: funzionalità ---- */
+var ctxRadar = document.getElementById('chart-radar');
+if(ctxRadar) {
+  new Chart(ctxRadar, {
+    type: 'radar',
+    data: {
+      labels: ['Broadcasting', 'Gestione risposte', 'AI conversazionale', 'Automazioni', 'CRM integrato', 'Analytics', 'Multicanale', 'Verticale fitness'],
+      datasets: [
+        { label: 'Brevo', data: [5, 0, 0, 2, 2, 5, 5, 1], backgroundColor: 'rgba(90,140,210,0.12)', borderColor: 'rgba(90,140,210,0.7)', borderWidth: 2, pointBackgroundColor: 'rgba(90,140,210,0.9)', pointRadius: 4, pointHoverRadius: 6 },
+        { label: 'SuperAgent.fit', data: [4, 5, 5, 5, 4, 2, 1, 5], backgroundColor: 'rgba(90,180,120,0.1)', borderColor: 'rgba(90,180,120,0.7)', borderWidth: 2, pointBackgroundColor: 'rgba(90,180,120,0.9)', pointRadius: 4, pointHoverRadius: 6 }
+      ]
+    },
+    options: {
+      responsive: true,
+      animation: { duration: 1200, easing: 'easeInOutQuart' },
+      plugins: {
+        legend: { display: false },
+        tooltip: { backgroundColor: 'rgba(15,15,13,0.95)', borderColor: 'rgba(255,255,255,0.1)', borderWidth: 1, titleColor: 'rgba(250,248,244,0.9)', bodyColor: 'rgba(250,248,244,0.6)', padding: 12 }
+      },
+      scales: {
+        r: {
+          min: 0, max: 5,
+          ticks: { stepSize: 1, display: false },
+          grid: { color: 'rgba(255,255,255,0.08)' },
+          angleLines: { color: 'rgba(255,255,255,0.06)' },
+          pointLabels: { color: 'rgba(250,248,244,0.55)', font: { size: 11 } }
+        }
+      }
+    }
+  });
+}
 </script>
 </body>
 </html>
