@@ -8,6 +8,7 @@
 <meta name="description" content="Verbale Prima Call — Customer Journey & Process Architecture Audit, Ronchiverdi Sport Club">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Jost', sans-serif; background: #FAF8F4; color: #0F0F0D; font-size: 16px; line-height: 1.6; overflow-x: hidden; font-weight: 300; }
@@ -456,6 +457,23 @@ footer { background: #0F0F0D; padding: 36px 48px; display: flex; justify-content
   font-weight: 600;
   color: #0F0F0D;
 }
+/* ── Charts ── */
+.chart-section { background: #fff; border-radius: 16px; padding: 28px 32px; margin: 20px 0; }
+.chart-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 500; color: #0F0F0D; margin-bottom: 4px; }
+.chart-sub { font-size: 11px; color: #8A8578; margin-bottom: 22px; }
+.chart-row { display: flex; gap: 28px; flex-wrap: wrap; align-items: center; }
+.donut-wrap { position: relative; width: 180px; height: 180px; flex-shrink: 0; }
+.donut-wrap-sm { position: relative; width: 150px; height: 150px; flex-shrink: 0; }
+.donut-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; pointer-events: none; }
+.donut-val { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; line-height: 1; color: #0F0F0D; }
+.donut-lbl { font-size: 10px; color: #8A8578; margin-top: 2px; }
+.ch-legend { display: flex; flex-direction: column; gap: 10px; flex: 1; min-width: 150px; }
+.ch-legend-row { display: flex; align-items: center; gap: 10px; font-size: 13px; color: #333; }
+.ch-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.ch-pct { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #0F0F0D; }
+.donut-pair { display: flex; gap: 36px; flex-wrap: wrap; align-items: flex-start; }
+.donut-pair-item { text-align: center; }
+.donut-pair-item .dp-lbl { font-size: 11px; color: #8A8578; margin-bottom: 8px; }
 
 </style>
 </head>
@@ -906,6 +924,44 @@ function showOrg(id, btn) {
         <div class="fact"><div class="fact-dot"></div><div>Daily Pass: <strong>30€ per chi si presenta spontaneamente</strong> (detratti in caso di iscrizione); 2 pass gratuiti consegnati al rinnovo, validi solo in settimana. <em>Strategia introdotta per limitare le prove senza conversione.</em></div></div>
         <div class="fact"><div class="fact-dot"></div><div>Sistema incentivi commerciali: <strong>meritocratico</strong>, con bonus differenziato su new (35%) e retention (65%).</div></div>
       </div>
+
+      <!-- Charts: composizione soci + bonus -->
+      <div class="chart-section">
+        <div class="chart-title">Composizione iscritti</div>
+        <div class="chart-sub">Distribuzione per categoria — totale 3.300 soci stimati</div>
+        <div class="chart-row">
+          <div class="donut-wrap">
+            <canvas id="ch-soci1" width="180" height="180"></canvas>
+            <div class="donut-center"><div class="donut-val">3.300</div><div class="donut-lbl">soci</div></div>
+          </div>
+          <div class="ch-legend">
+            <div class="ch-legend-row"><span class="ch-dot" style="background:#E8D46A"></span>Adulti<span class="ch-pct">2.300 — 70%</span></div>
+            <div class="ch-legend-row"><span class="ch-dot" style="background:#4A90D9"></span>Young School<span class="ch-pct">800 — 24%</span></div>
+            <div class="ch-legend-row"><span class="ch-dot" style="background:#8A8578"></span>Padelisti est.<span class="ch-pct">200 — 6%</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-section">
+        <div class="chart-title">Struttura bonus commerciali</div>
+        <div class="chart-sub">Peso incentivi su new acquisition vs retention — peso meritocratico</div>
+        <div class="donut-pair">
+          <div class="donut-pair-item">
+            <div class="dp-lbl">New acquisition</div>
+            <div class="donut-wrap-sm">
+              <canvas id="ch-bonus-new" width="150" height="150"></canvas>
+              <div class="donut-center"><div class="donut-val" style="font-size:22px;">35%</div><div class="donut-lbl">bonus</div></div>
+            </div>
+          </div>
+          <div class="donut-pair-item">
+            <div class="dp-lbl">Retention</div>
+            <div class="donut-wrap-sm">
+              <canvas id="ch-bonus-ret" width="150" height="150"></canvas>
+              <div class="donut-center"><div class="donut-val" style="font-size:22px;">65%</div><div class="donut-lbl">bonus</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- AREA 6 -->
@@ -986,6 +1042,39 @@ function showOrg(id, btn) {
   <div class="f-info">Maurizio Taruggi — <a href="mailto:maurizio@ready2digital.it">maurizio@ready2digital.it</a></div>
   <div class="f-note">Documento riservato — Ronchiverdi Sport Club</div>
 </footer>
+
+<script>
+Chart.defaults.font.family = "'Jost', sans-serif";
+Chart.defaults.color = '#8A8578';
+var _ttOpts = { plugins: { tooltip: { backgroundColor: '#1a1a17', titleColor: '#E8D46A', bodyColor: '#ccc', padding: 10, cornerRadius: 6 }, legend: { display: false } } };
+
+new Chart(document.getElementById('ch-soci1'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Adulti', 'Young School', 'Padelisti'],
+    datasets: [{ data: [2300, 800, 200], backgroundColor: ['#E8D46A', '#4A90D9', '#8A8578'], borderWidth: 0, hoverOffset: 6 }]
+  },
+  options: Object.assign({}, _ttOpts, { cutout: '68%' })
+});
+
+new Chart(document.getElementById('ch-bonus-new'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Bonus new', 'Resto'],
+    datasets: [{ data: [35, 65], backgroundColor: ['#E8D46A', '#eeece8'], borderWidth: 0 }]
+  },
+  options: Object.assign({}, _ttOpts, { cutout: '72%' })
+});
+
+new Chart(document.getElementById('ch-bonus-ret'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Bonus retention', 'Resto'],
+    datasets: [{ data: [65, 35], backgroundColor: ['#4A90D9', '#eeece8'], borderWidth: 0 }]
+  },
+  options: Object.assign({}, _ttOpts, { cutout: '72%' })
+});
+</script>
 
 <script>
 var obs = new IntersectionObserver(function(entries) {
