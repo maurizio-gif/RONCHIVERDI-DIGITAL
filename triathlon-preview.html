@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[PREVIEW] Analisi Triathlon &mdash; Ronchiverdi Sport Club &middot; Audit Digitale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FAF8F4; font-size: 15px; line-height: 1.7; overflow-x: hidden; font-weight: 300; -webkit-font-smoothing: antialiased; }
+
+/* HERO */
+.hero { padding: 96px 48px 72px; position: relative; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 85% 30%, rgba(232,212,106,0.05) 0%, transparent 60%); pointer-events: none; }
+.hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 380px; gap: 64px; align-items: end; }
+.hero-eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; }
+.hero-eyebrow .tag { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(250,248,244,0.3); }
+.hero-eyebrow .sep { color: rgba(250,248,244,0.15); }
+.hero h1 { font-family: "Cormorant Garamond", serif; font-size: clamp(40px, 5vw, 66px); font-weight: 300; line-height: 1.0; color: #FAF8F4; margin-bottom: 20px; letter-spacing: -0.02em; }
+.hero h1 em { font-style: italic; color: #E8D46A; }
+.hero-sub { font-size: 14px; font-weight: 300; line-height: 1.75; color: rgba(250,248,244,0.45); max-width: 520px; margin-bottom: 36px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 32px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.07); }
+.hero-meta-item .lbl { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(232,212,106,0.5); margin-bottom: 4px; }
+.hero-meta-item .val { font-size: 13px; font-weight: 400; color: rgba(250,248,244,0.7); }
+
+/* STAT CARD sidebar */
+.hero-stats { display: flex; flex-direction: column; gap: 12px; }
+.stat-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; padding: 20px 22px; }
+.stat-card.gold { border-color: rgba(232,212,106,0.25); background: rgba(232,212,106,0.05); }
+.stat-num { font-family: "Cormorant Garamond", serif; font-size: 48px; font-weight: 300; line-height: 1; color: #E8D46A; margin-bottom: 4px; }
+.stat-label { font-size: 12px; font-weight: 400; color: rgba(250,248,244,0.45); line-height: 1.4; }
+.stat-label strong { color: rgba(250,248,244,0.75); font-weight: 500; }
+
+/* LAYOUT */
+.page { max-width: 1100px; margin: 0 auto; padding: 0 48px 100px; }
+
+/* SECTION */
+.section { padding: 64px 0; border-top: 1px solid rgba(255,255,255,0.06); }
+.section-eyebrow { font-family: "JetBrains Mono", monospace; font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(232,212,106,0.6); margin-bottom: 12px; }
+.section > h2 { font-family: "Cormorant Garamond", serif; font-size: clamp(26px, 3vw, 38px); font-weight: 300; line-height: 1.15; color: #FAF8F4; margin-bottom: 28px; }
+.section > h2 em { font-style: italic; color: #E8D46A; }
+
+/* PROSE */
+.prose { font-size: 14px; line-height: 1.8; color: rgba(250,248,244,0.5); }
+.prose p { margin-bottom: 14px; }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { color: rgba(250,248,244,0.8); font-weight: 500; }
+
+/* JOURNEY FLOW */
+.flow { display: flex; align-items: stretch; gap: 0; margin: 32px 0; overflow-x: auto; }
+.flow-step { flex: 1; min-width: 140px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); padding: 20px 16px; position: relative; }
+.flow-step:first-child { border-radius: 12px 0 0 12px; }
+.flow-step:last-child { border-radius: 0 12px 12px 0; }
+.flow-step + .flow-step { border-left: none; }
+.flow-step.active { background: rgba(232,212,106,0.07); border-color: rgba(232,212,106,0.25); }
+.flow-step.gap { background: rgba(200,60,60,0.06); border-color: rgba(200,60,60,0.2); }
+.flow-num { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,248,244,0.2); margin-bottom: 10px; }
+.flow-step.active .flow-num { color: rgba(232,212,106,0.6); }
+.flow-step.gap .flow-num { color: rgba(200,100,100,0.6); }
+.flow-name { font-family: "Cormorant Garamond", serif; font-size: 15px; font-weight: 400; color: rgba(250,248,244,0.55); line-height: 1.3; }
+.flow-step.active .flow-name { color: #FAF8F4; }
+.flow-step.gap .flow-name { color: rgba(220,120,120,0.9); }
+.flow-note { font-size: 11px; color: rgba(250,248,244,0.3); margin-top: 8px; line-height: 1.4; }
+.flow-step.gap .flow-note { color: rgba(200,100,100,0.6); }
+.flow-arrow { position: absolute; right: -12px; top: 50%; transform: translateY(-50%); z-index: 2; width: 24px; height: 24px; border-radius: 50%; background: #0F0F0D; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 10px; color: rgba(250,248,244,0.3); }
+
+/* 2-col / 3-col grid */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 24px 0; }
+
+/* CARD */
+.card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; padding: 24px; }
+.card.green { border-color: rgba(90,180,120,0.2); background: rgba(90,180,120,0.04); }
+.card.red { border-color: rgba(200,60,60,0.2); background: rgba(200,60,60,0.04); }
+.card.gold { border-color: rgba(232,212,106,0.22); background: rgba(232,212,106,0.04); }
+.card-title { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,248,244,0.4); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.card.green .card-title { color: rgba(90,180,120,0.8); }
+.card.red .card-title { color: rgba(200,100,100,0.8); }
+.card.gold .card-title { color: rgba(232,212,106,0.8); }
+.card-body { font-size: 13.5px; color: rgba(250,248,244,0.5); line-height: 1.7; }
+.card-body strong { color: rgba(250,248,244,0.8); font-weight: 500; }
+
+/* LIST items */
+.item-list { display: flex; flex-direction: column; gap: 10px; }
+.item { display: flex; align-items: flex-start; gap: 12px; font-size: 13.5px; color: rgba(250,248,244,0.5); line-height: 1.65; }
+.item .dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; margin-top: 8px; }
+.item .dot.g { background: #5AB478; }
+.item .dot.r { background: #C84040; }
+.item .dot.y { background: #C9B540; }
+.item .dot.w { background: rgba(250,248,244,0.2); }
+.item strong { color: rgba(250,248,244,0.8); font-weight: 500; }
+.item em { color: rgba(250,248,244,0.35); font-style: normal; font-size: 12px; }
+
+/* GAP TABLE */
+.gap-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 13px; }
+.gap-table th { padding: 10px 14px; text-align: left; font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.1); color: rgba(250,248,244,0.3); }
+.gap-table td { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: top; line-height: 1.55; }
+.gap-table td:first-child { font-weight: 500; color: rgba(250,248,244,0.6); width: 26%; font-size: 12.5px; }
+.gap-table tr:last-child td { border-bottom: none; }
+.badge { display: inline-block; font-family: "JetBrains Mono", monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; }
+.badge.critico { background: rgba(200,60,60,0.2); color: rgba(220,120,120,0.9); }
+.badge.medio { background: rgba(232,212,106,0.15); color: rgba(210,185,80,0.9); }
+.badge.opportunita { background: rgba(90,180,120,0.15); color: rgba(90,180,120,0.9); }
+
+/* CALLOUT */
+.callout { background: rgba(232,212,106,0.06); border: 1px solid rgba(232,212,106,0.18); border-radius: 14px; padding: 24px 28px; margin: 28px 0; }
+.callout-label { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(232,212,106,0.55); margin-bottom: 10px; }
+.callout p { font-size: 14px; line-height: 1.8; color: rgba(250,248,244,0.55); }
+.callout strong { color: rgba(250,248,244,0.85); font-weight: 500; }
+
+/* ROADMAP */
+.roadmap { display: flex; flex-direction: column; gap: 12px; margin: 28px 0; }
+.rm-item { display: flex; gap: 20px; align-items: flex-start; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 20px 24px; }
+.rm-item.p1 { border-color: rgba(200,60,60,0.2); }
+.rm-item.p2 { border-color: rgba(232,212,106,0.18); }
+.rm-item.p3 { border-color: rgba(90,180,120,0.18); }
+.rm-priority { font-family: "Cormorant Garamond", serif; font-size: 36px; font-weight: 300; line-height: 1; color: rgba(250,248,244,0.1); flex-shrink: 0; width: 48px; text-align: right; }
+.rm-item.p1 .rm-priority { color: rgba(200,80,80,0.3); }
+.rm-item.p2 .rm-priority { color: rgba(232,212,106,0.25); }
+.rm-item.p3 .rm-priority { color: rgba(90,180,120,0.25); }
+.rm-body { flex: 1; }
+.rm-title { font-family: "Cormorant Garamond", serif; font-size: 18px; font-weight: 400; color: #FAF8F4; margin-bottom: 6px; }
+.rm-desc { font-size: 13px; color: rgba(250,248,244,0.45); line-height: 1.65; }
+.rm-tag { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 9px; border-radius: 4px; margin-bottom: 8px; }
+.p1 .rm-tag { background: rgba(200,60,60,0.15); color: rgba(220,100,100,0.9); }
+.p2 .rm-tag { background: rgba(232,212,106,0.12); color: rgba(210,185,80,0.9); }
+.p3 .rm-tag { background: rgba(90,180,120,0.12); color: rgba(90,180,120,0.85); }
+
+/* QUOTE */
+.quote-block { border-left: 2px solid rgba(232,212,106,0.3); padding: 0 0 0 24px; margin: 28px 0; }
+.quote-text { font-family: "Cormorant Garamond", serif; font-size: clamp(18px, 2vw, 23px); font-weight: 300; font-style: italic; line-height: 1.6; color: rgba(250,248,244,0.65); margin-bottom: 10px; }
+.quote-attr { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(232,212,106,0.5); }
+
+/* FOOTER */
+footer { background: rgba(0,0,0,0.3); padding: 40px 48px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; }
+.f-info { font-size: 13px; color: rgba(250,248,244,0.35); }
+.f-info strong { color: rgba(250,248,244,0.6); }
+.f-brand { font-family: "Cormorant Garamond", serif; font-size: 15px; color: rgba(250,248,244,0.2); }
+.f-brand em { font-style: italic; color: rgba(232,212,106,0.4); }
+.fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-up.visible { opacity: 1; transform: none; }
+
+@media(max-width: 1000px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .hero-stats { flex-direction: row; flex-wrap: wrap; }
+  .stat-card { flex: 1; min-width: 140px; }
+}
+@media(max-width: 900px) {
+  .hero { padding: 88px 24px 52px; }
+  .page { padding: 0 24px 72px; }
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 14px; text-align: center; padding: 28px 20px; }
+}
+
+/* BACK NAV */
+.back-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: rgba(15,15,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.07); }
+.back-btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(250,248,244,0.55); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; transition: color 0.2s; padding: 8px 0; }
+.back-btn:hover { color: #E8D46A; }
+.back-btn .arrow { font-size: 16px; transition: transform 0.2s; }
+.back-btn:hover .arrow { transform: translateX(-3px); }
+.back-nav-title { font-family: "Cormorant Garamond", serif; font-size: 14px; font-weight: 300; color: rgba(250,248,244,0.25); font-style: italic; }
+@media(max-width:640px){ .back-nav { padding: 0 20px; } .back-nav-title { display: none; } }
+
+/* ============================================================
+   CHART STYLES — nuovi
+   ============================================================ */
+.chart-section {
+  background: rgba(232,212,106,0.03);
+  border: 1px solid rgba(232,212,106,0.1);
+  border-radius: 20px;
+  padding: 36px;
+  margin: 32px 0;
+}
+.chart-section-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(232,212,106,0.55);
+  margin-bottom: 6px;
+}
+.chart-section-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 300;
+  color: #FAF8F4;
+  margin-bottom: 32px;
+  line-height: 1.2;
+}
+.chart-section-title em { font-style: italic; color: #E8D46A; }
+
+/* Donut + bar griglia 2 colonne */
+.charts-row {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 40px;
+  align-items: center;
+}
+@media(max-width:700px){ .charts-row { grid-template-columns: 1fr; } }
+
+/* Donut wrapper con cifra centrale */
+.donut-wrap {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin: 0 auto;
+}
+.donut-wrap canvas { display: block; }
+.donut-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.donut-val {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 52px;
+  font-weight: 300;
+  line-height: 1;
+  color: #E8D46A;
+}
+.donut-sub {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(232,212,106,0.5);
+  margin-top: 6px;
+}
+
+/* Barre conversioni */
+.conv-bars { display: flex; flex-direction: column; gap: 20px; }
+.conv-bar-item { }
+.conv-bar-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+.conv-bar-label { font-size: 13px; color: rgba(250,248,244,0.6); }
+.conv-bar-val {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 22px;
+  font-weight: 300;
+  color: #E8D46A;
+}
+.conv-bar-track {
+  height: 6px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.conv-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+}
+.conv-bar-note { font-size: 11px; color: rgba(250,248,244,0.3); margin-top: 5px; }
+
+/* Gap chart wrapper */
+.gap-chart-wrap {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 28px 32px;
+  margin-top: 24px;
+}
+.gap-chart-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(232,212,106,0.5);
+  margin-bottom: 20px;
+}
+
+/* Preview banner */
+.preview-banner {
+  background: rgba(232,212,106,0.1);
+  border-bottom: 1px solid rgba(232,212,106,0.25);
+  padding: 10px 48px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(232,212,106,0.8);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: fixed;
+  top: 68px;
+  left: 0; right: 0;
+  z-index: 99;
+}
+.preview-banner::before { content: '●'; color: #E8D46A; animation: blink 1.8s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+</style>
+</head>
+<body>
+
+<nav class="back-nav">
+  <a href="index.html" class="back-btn">
+    <span class="arrow">&#8592;</span>
+    Torna all&rsquo;indice
+  </a>
+  <span class="back-nav-title">Deep dive &mdash; Triathlon &amp; Running</span>
+</nav>
+
+<div class="preview-banner">Anteprima con grafici &mdash; in attesa di approvazione</div>
+
+<!-- HERO -->
+<div class="hero" style="padding-top:130px;">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">
+        <span class="tag">Verticale Sportivo</span>
+        <span class="sep">/</span>
+        <span class="tag">Deep Dive</span>
+        <span class="sep">/</span>
+        <span class="tag">5 maggio 2026</span>
+      </div>
+      <h1>Triathlon<br><em>&amp; Running</em></h1>
+      <p class="hero-sub">Analisi del Customer Journey della Business Unit Triathlon: dall&rsquo;attraction al rinnovo. Sessione con Giorgio Mortara, responsabile del settore e allenatore federale. Mappatura dei processi as-is, identificazione dei gap e opportunit&agrave; di digitalizzazione sartoriale.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><span class="lbl">Referente</span><span class="val">Giorgio Mortara &mdash; Resp. Triathlon</span></div>
+        <div class="hero-meta-item"><span class="lbl">Staff allenatori</span><span class="val">7 persone</span></div>
+        <div class="hero-meta-item"><span class="lbl">Sessione</span><span class="val">5 maggio 2026</span></div>
+        <div class="hero-meta-item"><span class="lbl">Consulente</span><span class="val">Maurizio Taruggi</span></div>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card gold">
+        <div class="stat-num">92%</div>
+        <div class="stat-label"><strong>Tasso di rinnovo</strong><br>anno precedente &mdash; il pi&ugrave; alto del club</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">~100</div>
+        <div class="stat-label"><strong>Iscritti attivi</strong><br>Young School (6&ndash;13) + Academy (14&ndash;20)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">&gt;50%</div>
+        <div class="stat-label"><strong>Genitori soci Ronchiverdi</strong><br>dei genitori degli iscritti al Triathlon si iscrivono anche al club</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- 01 STRUTTURA BU -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">01 &middot; Struttura della Business Unit</div>
+    <h2>Come &egrave; organizzato <em>il Triathlon</em></h2>
+    <div class="prose" style="margin-bottom:28px;">
+      <p>Il settore Triathlon di Ronchiverdi &egrave; strutturato su due percorsi formativi distinti, con un passaggio interno pensato per fidelizzare l&rsquo;atleta all&rsquo;identit&agrave; del club prima ancora che alla disciplina. Questo modello &mdash; unico nel panorama dei club sportivi &mdash; crea un funnel di fidelizzazione di lungo periodo difficilmente replicabile.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">&#x1F3CA; Young School &mdash; 6/13 anni</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot y"></div><div>Iscrizioni a partire dai 5 anni (agonistico da 6)</div></div>
+          <div class="item"><div class="dot y"></div><div><strong>4 sessioni settimanali da 2 ore</strong> &mdash; flessibilit&agrave; da 1 a 4 giorni</div></div>
+          <div class="item"><div class="dot y"></div><div>Classi per livello tecnico, non solo per et&agrave;</div></div>
+          <div class="item"><div class="dot y"></div><div>Open Week ad inizio stagione per la suddivisione</div></div>
+          <div class="item"><div class="dot y"></div><div>Prove libere tutto l&rsquo;anno &mdash; inserimento diretto nel corso</div></div>
+          <div class="item"><div class="dot y"></div><div>Squadra federale con partecipazione gare ogni weekend</div></div>
+        </div>
+      </div>
+      <div class="card gold">
+        <div class="card-title">&#x1F3C6; Academy &mdash; 14/20 anni (+ Post-Academy)</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot y"></div><div><strong>3 ore di allenamento al giorno</strong> disponibili</div></div>
+          <div class="item"><div class="dot y"></div><div>I ragazzi diventano <strong>soci Ronchiverdi</strong> a tutti gli effetti &mdash; quota maggiorata</div></div>
+          <div class="item"><div class="dot y"></div><div>Integrazione con atleti adulti e professionisti del club</div></div>
+          <div class="item"><div class="dot y"></div><div>Anno scorso: <strong>tutti e 12</strong> i ragazzi usciti dall&rsquo;Academy si sono iscritti ai Ronchi</div></div>
+          <div class="item"><div class="dot y"></div><div>Post-Academy: continuit&agrave; come soci ordinari dopo i 20 anni</div></div>
+          <div class="item"><div class="dot y"></div><div>Approccio community: gruppi misti di corsa con adulti e master</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quote-block" style="margin-top:32px;">
+      <div class="quote-text">&ldquo;Io ho detto: non possiamo far pagare un corso a dei ragazzi perch&eacute; io li voglio fidelizzare che diventino soci Ronchi. Quindi non pagano pi&ugrave; l&rsquo;iscrizione al corso &mdash; sono Ronchi.&rdquo;</div>
+      <div class="quote-attr">Giorgio Mortara &mdash; Responsabile Triathlon &mdash; 5 maggio 2026</div>
+    </div>
+
+    <div class="grid-2" style="margin-top:24px;">
+      <div class="card">
+        <div class="card-title">&#x1F3C3; Running (settore collegato)</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot w"></div><div>Gruppi di corsa in parco cittadino, sponda naturale al triathlon</div></div>
+          <div class="item"><div class="dot w"></div><div>Alta domanda spontanea per la localizzazione (parco Torino)</div></div>
+          <div class="item"><div class="dot w"></div><div>Atleti running integrati nei gruppi triathlon durante le sessioni</div></div>
+          <div class="item"><div class="dot w"></div><div>Ancora non codificato digitalmente &mdash; gestione analoga al triathlon</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">&#x1F30A; Relazione con Scuola Nuoto</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot g"></div><div>Il nuoto &egrave; il <strong>bacino naturale</strong> di alimentazione per il triathlon</div></div>
+          <div class="item"><div class="dot g"></div><div>Chi smette il nuoto "propaganda" a 6-7 anni trova il triathlon come sbocco agonistico</div></div>
+          <div class="item"><div class="dot g"></div><div>Nessuna competizione interna &mdash; buona collaborazione con Sara (Scuola Nuoto)</div></div>
+          <div class="item"><div class="dot r"></div><div>Passaggio Nuoto &rarr; Triathlon <strong>non strutturato</strong>: avviene per relazioni informali</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 CUSTOMER JOURNEY AS-IS -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">02 &middot; Customer Journey &mdash; stato attuale</div>
+    <h2>Come funziona <em>oggi</em> il percorso</h2>
+    <div class="prose" style="margin-bottom:28px;">
+      <p>Il Customer Journey del Triathlon &egrave; fortemente centrato sulla figura di Giorgio Mortara: dall&rsquo;attraction alla conversione, ogni touchpoint passa per lui. Questa centralit&agrave; &egrave; il punto di forza del settore (relazione, credibilit&agrave;, qualit&agrave; tecnica) ma &egrave; anche la sua principale vulnerabilit&agrave; operativa.</p>
+    </div>
+
+    <div class="flow">
+      <div class="flow-step active">
+        <div class="flow-num">01</div>
+        <div class="flow-name">Awareness</div>
+        <div class="flow-note">Gare, locandine, passaparola tecnici, post risultati atleti</div>
+      </div>
+      <div class="flow-arrow">&#x203A;</div>
+      <div class="flow-step active">
+        <div class="flow-num">02</div>
+        <div class="flow-name">Contatto</div>
+        <div class="flow-note">Telefono personale Giorgio o email &mdash; nessuna mediazione segreteria</div>
+      </div>
+      <div class="flow-arrow">&#x203A;</div>
+      <div class="flow-step gap">
+        <div class="flow-num">03</div>
+        <div class="flow-name">Tracciamento</div>
+        <div class="flow-note">Appunti personali + Excel locale &mdash; nessuna condivisione team</div>
+      </div>
+      <div class="flow-arrow">&#x203A;</div>
+      <div class="flow-step active">
+        <div class="flow-num">04</div>
+        <div class="flow-name">Prova</div>
+        <div class="flow-note">Inserimento diretto nel corso &mdash; non selezione, ma esperienza reale</div>
+      </div>
+      <div class="flow-arrow">&#x203A;</div>
+      <div class="flow-step active">
+        <div class="flow-num">05</div>
+        <div class="flow-name">Follow-up</div>
+        <div class="flow-note">Chiamata personale di Giorgio alla famiglia post-prova</div>
+      </div>
+      <div class="flow-arrow">&#x203A;</div>
+      <div class="flow-step gap">
+        <div class="flow-num">06</div>
+        <div class="flow-name">Iscrizione</div>
+        <div class="flow-note">Famiglia va in segreteria &mdash; passaggio non tracciato da Giorgio</div>
+      </div>
+      <div class="flow-arrow">&#x203A;</div>
+      <div class="flow-step active">
+        <div class="flow-num">07</div>
+        <div class="flow-name">Fidelizzazione</div>
+        <div class="flow-note">92% rinnovo &mdash; massima ritenzione del club</div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:28px;">
+      <div class="card">
+        <div class="card-title">&#x1F4E1; Canali di Attraction &mdash; come arrivano i contatti</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot g"></div><div><strong>Gare sportive</strong> &mdash; canale principale: contatti diretti con famiglie e tecnici durante le competizioni</div></div>
+          <div class="item"><div class="dot g"></div><div><strong>Passaparola tecnici</strong> &mdash; rete di allenatori e addetti ai lavori che si conoscono a livello federale</div></div>
+          <div class="item"><div class="dot g"></div><div><strong>Risultati atleti sui social</strong> &mdash; pi&ugrave; efficace dei post promozionali generici</div></div>
+          <div class="item"><div class="dot g"></div><div><strong>Scuola Nuoto Ronchiverdi</strong> &mdash; bacino interno naturale per i ragazzi gi&agrave; iscritti al club</div></div>
+          <div class="item"><div class="dot y"></div><div><strong>Locandine con numero diretto</strong> &mdash; by-passa la segreteria, contatto immediato con Giorgio</div></div>
+          <div class="item"><div class="dot r"></div><div><strong>Campagne social generiche</strong> &mdash; storicamente dispersive, scarsa qualit&agrave; dei lead per una disciplina di nicchia</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">&#x270D; Tracciamento contatti &mdash; stato attuale</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot r"></div><div>Tutto gestito da Giorgio personalmente con <strong>appunti e note informali</strong></div></div>
+          <div class="item"><div class="dot r"></div><div><strong>File Excel locale</strong> per presenze e prove &mdash; non condiviso con i 7 allenatori dello staff</div></div>
+          <div class="item"><div class="dot r"></div><div>Fino a <strong>50 telefonate al giorno</strong> di follow-up gestite interamente da Giorgio</div></div>
+          <div class="item"><div class="dot r"></div><div>Nessuna integrazione con <strong>InForYou</strong> per i dati anagrafici (usato solo per certificati medici)</div></div>
+          <div class="item"><div class="dot r"></div><div>Foglio presenze in Excel o <strong>cartaceo in pista</strong> &mdash; compilato manualmente sul campo</div></div>
+          <div class="item"><div class="dot y"></div><div>Giorgio segue anche le iscrizioni di <strong>atleti master e adulti</strong> con la stessa procedura manuale</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 DATO STRATEGICO -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">03 &middot; Dato strategico</div>
+    <h2>Il Triathlon come <em>volano per i soci adulti</em></h2>
+
+    <div class="callout">
+      <div class="callout-label">&#x26A1; Insight chiave emerso dalla sessione</div>
+      <p>Oltre il <strong>50% dei genitori degli iscritti al Triathlon</strong> &egrave; anche socio Ronchiverdi. I genitori che portano i bambini agli allenamenti e alle gare &mdash; spesso in trasferta con tutta la famiglia &mdash; vivono il club in prima persona, ne percepiscono il valore e si iscrivono. Non &egrave; una correlazione casuale: &egrave; un <strong>effetto diretto della qualit&agrave; dell&rsquo;esperienza</strong> che il Triathlon offre alle famiglie.</p>
+    </div>
+
+    <!-- ★ NUOVO: CHART SECTION -->
+    <div class="chart-section fade-up">
+      <div class="chart-section-label">Visualizzazione dati &middot; KPI Triathlon</div>
+      <div class="chart-section-title">Le metriche del <em>volano</em></div>
+      <div class="charts-row">
+
+        <!-- Donut: tasso di rinnovo -->
+        <div style="text-align:center;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(232,212,106,0.5);margin-bottom:16px;">Tasso di rinnovo annuo</div>
+          <div class="donut-wrap">
+            <canvas id="chart-rinnovo" width="220" height="220"></canvas>
+            <div class="donut-center">
+              <span class="donut-val">92%</span>
+              <span class="donut-sub">rinnovi</span>
+            </div>
+          </div>
+          <div style="font-size:12px;color:rgba(250,248,244,0.3);margin-top:12px;">Il pi&ugrave; alto del club</div>
+        </div>
+
+        <!-- Barre: conversioni chiave -->
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(232,212,106,0.5);margin-bottom:20px;">Conversioni chiave del sistema</div>
+          <div class="conv-bars">
+            <div class="conv-bar-item">
+              <div class="conv-bar-header">
+                <span class="conv-bar-label">Tasso di rinnovo iscritti</span>
+                <span class="conv-bar-val">92%</span>
+              </div>
+              <div class="conv-bar-track">
+                <div class="conv-bar-fill" data-width="92" style="background: linear-gradient(90deg, #E8D46A, #C9B540);"></div>
+              </div>
+              <div class="conv-bar-note">Il pi&ugrave; alto tra tutti i verticali del club</div>
+            </div>
+            <div class="conv-bar-item">
+              <div class="conv-bar-header">
+                <span class="conv-bar-label">Genitori che diventano soci</span>
+                <span class="conv-bar-val">&gt;50%</span>
+              </div>
+              <div class="conv-bar-track">
+                <div class="conv-bar-fill" data-width="50" style="background: linear-gradient(90deg, rgba(90,180,120,0.9), rgba(90,180,120,0.6));"></div>
+              </div>
+              <div class="conv-bar-note">~50 soci adulti acquisiti senza campagne ADV dedicate</div>
+            </div>
+            <div class="conv-bar-item">
+              <div class="conv-bar-header">
+                <span class="conv-bar-label">Academy &rarr; Soci Ronchiverdi</span>
+                <span class="conv-bar-val">100%</span>
+              </div>
+              <div class="conv-bar-track">
+                <div class="conv-bar-fill" data-width="100" style="background: linear-gradient(90deg, rgba(90,140,210,0.9), rgba(90,140,210,0.6));"></div>
+              </div>
+              <div class="conv-bar-note">12 su 12 ragazzi usciti dall&rsquo;Academy si sono iscritti come soci</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- ★ FINE CHART SECTION -->
+
+    <div class="grid-3" style="margin-top:0;">
+      <div class="card gold">
+        <div class="card-title">&#x1F4CA; Il funnel nascosto</div>
+        <div class="card-body">
+          Pi&ugrave; di 1 genitore su 2 tra chi ha un figlio al Triathlon &egrave; gi&agrave; socio Ronchiverdi. Con circa 100 iscritti, questo rappresenta decine di soci adulti acquisiti &mdash; senza nessuna campagna ADV dedicata.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">&#x1F9E0; Il modello Academy</div>
+        <div class="card-body">
+          Il passaggio dalla Young School all&rsquo;Academy trasforma i ragazzi in soci Ronchiverdi. Anno scorso: <strong>100% di conversione</strong> (12 su 12 ragazzi usciti dall&rsquo;Academy si sono iscritti come soci ordinari).
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">&#x1F517; Passaggio Nuoto &rarr; Triathlon</div>
+        <div class="card-body">
+          La Scuola Nuoto produce atleti che cercano uno sbocco agonistico dai 6-7 anni. Il Triathlon &egrave; lo sbocco naturale interno &mdash; ma oggi questo passaggio avviene <strong>per relazioni informali</strong>, non per un processo strutturato.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 GAP ANALYSIS -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">04 &middot; Gap Analysis</div>
+    <h2>Criticit&agrave; operative <em>identificate</em></h2>
+    <div class="prose" style="margin-bottom:28px;">
+      <p>Giorgio Mortara gestisce un sistema che funziona grazie alla sua eccezionale dedizione personale. Questo &egrave; il punto di forza e il rischio sistemico contemporaneamente: se tutto dipende da una persona, la scalabilit&agrave; &egrave; bloccata e la vulnerabilit&agrave; &egrave; alta.</p>
+    </div>
+
+    <table class="gap-table">
+      <thead><tr><th>Area</th><th>Criticit&agrave;</th><th>Impatto</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Tracciamento contatti</td>
+          <td>Appunti personali e memoria individuale. Nessuno strumento condiviso con i 7 allenatori. Se Giorgio non &egrave; disponibile, il dato si perde.</td>
+          <td><span class="badge critico">Critico</span></td>
+        </tr>
+        <tr>
+          <td>Dipendenza singola persona</td>
+          <td>Tutto il flusso &mdash; dall&rsquo;attraction all&rsquo;iscrizione &mdash; &egrave; centralizzato su Giorgio. ~50 telefonate al giorno di follow-up. Non scalabile.</td>
+          <td><span class="badge critico">Critico</span></td>
+        </tr>
+        <tr>
+          <td>Foglio presenze</td>
+          <td>Excel locale o cartaceo compilato manualmente in pista. Non integrato, non condiviso, non analizzabile. Richiede trascrizione manuale.</td>
+          <td><span class="badge critico">Critico</span></td>
+        </tr>
+        <tr>
+          <td>Passaggio prova &rarr; iscrizione</td>
+          <td>Dopo il via libera di Giorgio, la famiglia va autonomamente in segreteria. Giorgio non sa se e quando l&rsquo;iscrizione &egrave; avvenuta, salvo controllo manuale su InForYou.</td>
+          <td><span class="badge medio">Medio</span></td>
+        </tr>
+        <tr>
+          <td>Pipeline Nuoto &rarr; Triathlon</td>
+          <td>Il passaggio avviene per relazioni informali tra Giorgio e Sara. Nessun processo strutturato, nessun trigger di fine stagione, nessun dato su chi &egrave; stato contattato.</td>
+          <td><span class="badge medio">Medio</span></td>
+        </tr>
+        <tr>
+          <td>Acquisizione genitori</td>
+          <td>Il 50%+ dei genitori degli iscritti al Triathlon diventa socio Ronchiverdi. Questo dato non &egrave; tracciato n&eacute; capitalizzato in modo sistematico. Nessuna CTA dedicata ai genitori nel momento della conversione.</td>
+          <td><span class="badge opportunita">Opportunit&agrave;</span></td>
+        </tr>
+        <tr>
+          <td>ADV e campagne esterne</td>
+          <td>Le campagne social generiche sono storicamente dispersive. La comunicazione pi&ugrave; efficace &egrave; basata sui risultati atletici &mdash; ma non &egrave; strutturata in un piano editoriale.</td>
+          <td><span class="badge opportunita">Opportunit&agrave;</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ★ NUOVO: GAP CHART -->
+    <div class="gap-chart-wrap fade-up">
+      <div class="gap-chart-label">Distribuzione criticit&agrave; per categoria &middot; 7 aree totali</div>
+      <canvas id="chart-gap" height="110"></canvas>
+    </div>
+    <!-- ★ FINE GAP CHART -->
+
+  </div>
+
+  <!-- 05 OPPORTUNITA DIGITALI -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">05 &middot; Opportunit&agrave; di digitalizzazione</div>
+    <h2>Cosa si pu&ograve; fare <em>concretamente</em></h2>
+
+    <div class="quote-block">
+      <div class="quote-text">&ldquo;L&rsquo;obiettivo non &egrave; far partire razzi per la luna. Dobbiamo fare una roba semplice che permetta a voi di parlare tutti la stessa lingua, avere condivisione dei dati e a Giorgio un tracciamento di quello che gli succede.&rdquo;</div>
+      <div class="quote-attr">Maurizio Taruggi &mdash; durante la sessione</div>
+    </div>
+
+    <div class="roadmap">
+      <div class="rm-item p1">
+        <div class="rm-priority">1</div>
+        <div class="rm-body">
+          <div class="rm-tag">Priorit&agrave; alta &mdash; Immediato</div>
+          <div class="rm-title">CRM condiviso per il team Triathlon</div>
+          <div class="rm-desc">Interfaccia semplice (simile a Excel) accessibile a Giorgio e ai 7 allenatori. Ogni contatto che chiede informazioni viene registrato con nome, provenienza, note, stato (prospect / prova / iscritto). Giorgio assegna le prove e aggiunge note direttamente dal cellulare. Storico completo consultabile in qualsiasi momento. Elimina le 50 telefonate di follow-up quotidiane.</div>
+        </div>
+      </div>
+      <div class="rm-item p1">
+        <div class="rm-priority">2</div>
+        <div class="rm-body">
+          <div class="rm-tag">Priorit&agrave; alta &mdash; Immediato</div>
+          <div class="rm-title">Foglio presenze digitale da mobile</div>
+          <div class="rm-desc">Sostituzione del foglio presenze Excel/cartaceo con una form mobile che Giorgio o gli allenatori compilano in pista in tempo reale. In alternativa: foto del foglio cartaceo analizzata da AI che trascrive automaticamente le presenze nel sistema. Zero doppie trascrizioni, zero dati persi.</div>
+        </div>
+      </div>
+      <div class="rm-item p2">
+        <div class="rm-priority">3</div>
+        <div class="rm-body">
+          <div class="rm-tag">Priorit&agrave; media &mdash; Breve termine</div>
+          <div class="rm-title">Trigger automatico prova &rarr; iscrizione</div>
+          <div class="rm-desc">Quando Giorgio segnala un atleta come "idoneo all&rsquo;iscrizione", un alert automatico notifica la segreteria e aggiorna lo stato nel CRM. Quando la segreteria registra l&rsquo;iscrizione su InForYou, il record si aggiorna automaticamente. Giorgio vede in tempo reale chi si &egrave; iscritto senza dover controllare manualmente.</div>
+        </div>
+      </div>
+      <div class="rm-item p2">
+        <div class="rm-priority">4</div>
+        <div class="rm-body">
+          <div class="rm-tag">Priorit&agrave; media &mdash; Fine stagione</div>
+          <div class="rm-title">Pipeline strutturata Nuoto &rarr; Triathlon</div>
+          <div class="rm-desc">A fine stagione (maggio-giugno), una lista automatica dei bambini della Scuola Nuoto nella fascia 6-7 anni viene condivisa con Giorgio. Giorgio e Sara concordano chi contattare. Il follow-up viene tracciato nel CRM. Potenziale: decine di nuove prove ogni anno da un bacino interno gi&agrave; iscritto al club.</div>
+        </div>
+      </div>
+      <div class="rm-item p3">
+        <div class="rm-priority">5</div>
+        <div class="rm-body">
+          <div class="rm-tag">Opportunit&agrave; &mdash; Medio termine</div>
+          <div class="rm-title">CTA dedicata ai genitori nelle comunicazioni del Triathlon</div>
+          <div class="rm-desc">Pi&ugrave; del 50% dei genitori degli iscritti al Triathlon diventa socio del club. Una semplice CTA nelle comunicazioni post-gara (&ldquo;Sei curioso di allenarti anche tu?&rdquo;) con form dedicato e follow-up automatico potrebbe strutturare un canale di acquisizione adulti gi&agrave; attivo ma non presidiato.</div>
+        </div>
+      </div>
+      <div class="rm-item p3">
+        <div class="rm-priority">6</div>
+        <div class="rm-body">
+          <div class="rm-tag">Opportunit&agrave; &mdash; Medio termine</div>
+          <div class="rm-title">Piano editoriale basato sui risultati atletici</div>
+          <div class="rm-desc">Le campagne generiche non funzionano per il triathlon. I risultati degli atleti s&igrave;. Un template semplice che Giorgio o lo staff possano compilare dopo ogni gara (risultato, foto, atleta, categoria) e che generi automaticamente un post social per canali Ronchiverdi trasformerebbe ogni domenica di gara in contenuto organico ad alto engagement per la nicchia.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 SINTESI -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">06 &middot; Sintesi e posizionamento</div>
+    <h2>Il Triathlon nell&rsquo;<em>architettura digitale</em> di Ronchiverdi</h2>
+
+    <div class="callout">
+      <div class="callout-label">&#x1F3AF; Lettura consulenziale</div>
+      <p>Il Triathlon &egrave; il verticale con il <strong>ROI di digitalizzazione pi&ugrave; alto</strong> del club: ha gi&agrave; la retention, ha gi&agrave; la qualit&agrave; tecnica e ha gi&agrave; il volano di acquisizione adulti. Quello che manca &egrave; esclusivamente l&rsquo;infrastruttura per <strong>rendere scalabile e misurabile</strong> quello che Giorgio fa gi&agrave; con straordinaria dedizione individuale. Il rischio non &egrave; il sotto-rendimento &mdash; il rischio &egrave; la dipendenza da una singola persona eccezionale.</p>
+      <p style="margin-top:12px;">La digitalizzazione qui non serve a cambiare il modello. Serve a <strong>proteggerlo</strong>: rendere il sapere di Giorgio condiviso con il team, trasformare le 50 telefonate quotidiane in automazioni, dare agli altri 7 allenatori visibilit&agrave; sui dati. In modo che Ronchiverdi mantenga la qualit&agrave; relazionale di Giorgio &mdash; ma non dipenda dall&rsquo;eroismo individuale per garantirla.</p>
+    </div>
+
+    <div class="grid-2" style="margin-top:28px;">
+      <div class="card green">
+        <div class="card-title">&#x2713; Punti di forza da preservare</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot g"></div><div><strong>92% di rinnovo</strong> &mdash; non toccare il modello di retention</div></div>
+          <div class="item"><div class="dot g"></div><div>Credibilit&agrave; tecnica come leva di attraction pi&ugrave; efficace delle campagne</div></div>
+          <div class="item"><div class="dot g"></div><div>Modello Academy &rarr; soci Ronchiverdi: eccellente caso di fidelizzazione preventiva</div></div>
+          <div class="item"><div class="dot g"></div><div>Relazione diretta con le famiglie: punto di forza da amplificare, non sostituire</div></div>
+          <div class="item"><div class="dot g"></div><div>Canale genitori: gi&agrave; attivo, gi&agrave; produttivo &mdash; va solo strutturato</div></div>
+        </div>
+      </div>
+      <div class="card red">
+        <div class="card-title">&#x26A0; Gap prioritari da risolvere</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot r"></div><div><strong>Unico punto di fallimento</strong>: tutto passa da Giorgio, nessuna ridondanza</div></div>
+          <div class="item"><div class="dot r"></div><div>Excel locali scollegati: dati non condivisi, non analizzabili, non integrabili</div></div>
+          <div class="item"><div class="dot r"></div><div>Foglio presenze cartaceo: operazione manuale in pista, nessuna integrazione</div></div>
+          <div class="item"><div class="dot r"></div><div>Pipeline Nuoto &rarr; Triathlon: opportunit&agrave; non sfruttata sistematicamente</div></div>
+          <div class="item"><div class="dot r"></div><div>Iscrizione non tracciata: Giorgio non sa quando e se la prova si converte</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;padding:28px;">
+      <div class="card-title">&#x1F4CB; Prossimi passi concordati</div>
+      <div class="card-body item-list">
+        <div class="item"><div class="dot y"></div><div><strong>Giorgio invia il file Excel</strong> delle presenze e dei contatti a Maurizio via WhatsApp per l&rsquo;analisi e l&rsquo;integrazione nel processo</div></div>
+        <div class="item"><div class="dot y"></div><div><strong>Visita a Torino</strong> di Maurizio (2-3 giorni, mercoled&igrave;&ndash;venerd&igrave;): sessione di lavoro sul campo, analisi diretta dei processi con Giorgio e il team</div></div>
+        <div class="item"><div class="dot y"></div><div>Progettazione dell&rsquo;<strong>interfaccia CRM sartoriale</strong> per il Triathlon sulla base dei file ricevuti</div></div>
+        <div class="item"><div class="dot w"></div><div>Analisi del settore Running con la stessa metodologia (settore contiguo, stesse criticit&agrave;)</div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span class="f-info">Audit Digitale &middot; <strong>Ronchiverdi Sport Club</strong> &times; Maurizio Taruggi &mdash; Ready 2 Digital</span>
+  <span class="f-brand">Verticale <em>Triathlon</em> &middot; 5 maggio 2026</span>
+</footer>
+
+<script>
+/* ---- fade-up observer ---- */
+var obs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if(e.isIntersecting) e.target.classList.add("visible"); });
+}, { threshold: 0.06 });
+document.querySelectorAll(".fade-up").forEach(function(el) { obs.observe(el); });
+
+/* ---- Conv bars animation ---- */
+function animateBars() {
+  document.querySelectorAll('.conv-bar-fill').forEach(function(bar) {
+    var w = bar.getAttribute('data-width');
+    bar.style.width = '0%';
+    setTimeout(function() { bar.style.width = w + '%'; }, 300);
+  });
+}
+var barObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if(e.isIntersecting) { animateBars(); barObs.disconnect(); } });
+}, { threshold: 0.3 });
+var chartSection = document.querySelector('.chart-section');
+if(chartSection) barObs.observe(chartSection);
+
+/* ============================================================
+   CHART.JS — configurazione tema comune
+   ============================================================ */
+Chart.defaults.color = 'rgba(250,248,244,0.45)';
+Chart.defaults.font.family = "'Jost', sans-serif";
+Chart.defaults.font.size = 12;
+
+/* ---- CHART 1: Donut rinnovo ---- */
+var ctxRinnovo = document.getElementById('chart-rinnovo');
+if(ctxRinnovo) {
+  new Chart(ctxRinnovo, {
+    type: 'doughnut',
+    data: {
+      labels: ['Rinnovi', 'Abbandoni'],
+      datasets: [{
+        data: [92, 8],
+        backgroundColor: [
+          'rgba(232,212,106,0.88)',
+          'rgba(255,255,255,0.07)'
+        ],
+        borderWidth: 0,
+        hoverOffset: 6
+      }]
+    },
+    options: {
+      cutout: '76%',
+      animation: { animateRotate: true, duration: 1200, easing: 'easeInOutQuart' },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'rgba(15,15,13,0.95)',
+          borderColor: 'rgba(232,212,106,0.2)',
+          borderWidth: 1,
+          titleColor: 'rgba(250,248,244,0.9)',
+          bodyColor: 'rgba(250,248,244,0.6)',
+          padding: 12,
+          callbacks: {
+            label: function(ctx) { return ' ' + ctx.label + ': ' + ctx.parsed + '%'; }
+          }
+        }
+      }
+    }
+  });
+}
+
+/* ---- CHART 2: Gap distribution (orizzontale) ---- */
+var ctxGap = document.getElementById('chart-gap');
+if(ctxGap) {
+  new Chart(ctxGap, {
+    type: 'bar',
+    data: {
+      labels: ['Critici', 'Medi', 'Opportunità'],
+      datasets: [{
+        label: 'Aree identificate',
+        data: [3, 2, 2],
+        backgroundColor: [
+          'rgba(200,64,64,0.75)',
+          'rgba(232,212,106,0.75)',
+          'rgba(90,180,120,0.75)'
+        ],
+        borderWidth: 0,
+        borderRadius: 6,
+        borderSkipped: false
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      animation: { duration: 1000, easing: 'easeOutQuart' },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'rgba(15,15,13,0.95)',
+          borderColor: 'rgba(255,255,255,0.1)',
+          borderWidth: 1,
+          titleColor: 'rgba(250,248,244,0.9)',
+          bodyColor: 'rgba(250,248,244,0.6)',
+          padding: 12,
+          callbacks: {
+            label: function(ctx) { return ' ' + ctx.parsed.x + ' aree'; }
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { color: 'rgba(255,255,255,0.06)', drawBorder: false },
+          ticks: {
+            color: 'rgba(250,248,244,0.35)',
+            stepSize: 1,
+            font: { family: "'Jost', sans-serif", size: 11 }
+          },
+          border: { display: false },
+          max: 4
+        },
+        y: {
+          grid: { display: false },
+          ticks: {
+            color: 'rgba(250,248,244,0.65)',
+            font: { family: "'Jost', sans-serif", size: 13 }
+          },
+          border: { display: false }
+        }
+      }
+    }
+  });
+}
+</script>
+</body>
+</html>

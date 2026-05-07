@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[PREVIEW] Analisi WhatsApp &mdash; Brevo vs SuperAgent.fit &middot; Ronchiverdi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Jost', sans-serif; background: #0F0F0D; color: #FAF8F4; font-size: 15px; line-height: 1.7; overflow-x: hidden; font-weight: 300; -webkit-font-smoothing: antialiased; }
+
+/* HERO */
+.hero { padding: 140px 48px 72px; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 80% 40%, rgba(232,212,106,0.04) 0%, transparent 60%); pointer-events: none; }
+.hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+.hero-eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; }
+.hero-eyebrow .tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(250,248,244,0.3); }
+.hero-eyebrow .sep { color: rgba(250,248,244,0.15); }
+.hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(38px, 5vw, 62px); font-weight: 300; line-height: 1.05; color: #FAF8F4; margin-bottom: 20px; letter-spacing: -0.02em; }
+.hero h1 em { font-style: italic; color: #E8D46A; }
+.hero-sub { font-size: 15px; font-weight: 300; line-height: 1.7; color: rgba(250,248,244,0.5); max-width: 540px; margin-bottom: 40px; }
+.hero-meta { display: flex; gap: 40px; flex-wrap: wrap; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.07); }
+.hero-meta-item { display: flex; flex-direction: column; gap: 4px; }
+.hero-meta-item .lbl { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(232,212,106,0.5); }
+.hero-meta-item .val { font-size: 13px; font-weight: 400; color: rgba(250,248,244,0.7); }
+
+/* LAYOUT */
+.page { max-width: 1100px; margin: 0 auto; padding: 0 48px 100px; }
+
+/* SECTIONS */
+.section { padding: 72px 0; border-top: 1px solid rgba(255,255,255,0.06); }
+.section-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(232,212,106,0.6); margin-bottom: 12px; }
+.section > h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(26px, 3vw, 38px); font-weight: 300; line-height: 1.15; color: #FAF8F4; margin-bottom: 28px; }
+.section > h2 em { font-style: italic; color: #E8D46A; }
+
+/* PROSE */
+.prose { font-size: 14px; line-height: 1.8; color: rgba(250,248,244,0.55); }
+.prose p { margin-bottom: 14px; }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { color: rgba(250,248,244,0.85); font-weight: 500; }
+.prose em { color: rgba(250,248,244,0.7); }
+
+/* ALERT */
+.alert { border-left: 2px solid rgba(220,80,80,0.6); background: rgba(220,80,80,0.06); padding: 22px 24px; border-radius: 0 12px 12px 0; margin: 28px 0; }
+.alert-lbl { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(220,80,80,0.8); margin-bottom: 10px; }
+.alert p { font-size: 13.5px; line-height: 1.75; color: rgba(250,248,244,0.65); }
+.alert strong { color: rgba(220,80,80,0.9); font-weight: 500; }
+.alert.blue { border-color: rgba(90,140,210,0.5); background: rgba(90,140,210,0.06); }
+.alert.blue .alert-lbl { color: rgba(140,180,240,0.8); }
+.alert.blue strong { color: rgba(140,180,240,0.9); }
+.alert.blue p { color: rgba(250,248,244,0.6); }
+
+/* INFOBOX */
+.infobox { background: rgba(232,212,106,0.06); border: 1px solid rgba(232,212,106,0.18); border-radius: 12px; padding: 20px 24px; margin: 24px 0; }
+.infobox-lbl { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(232,212,106,0.65); margin-bottom: 10px; }
+.infobox p { font-size: 13.5px; line-height: 1.8; color: rgba(250,248,244,0.55); }
+.infobox strong { color: rgba(250,248,244,0.8); font-weight: 500; }
+.infobox a { color: #E8D46A; text-decoration: none; border-bottom: 1px solid rgba(232,212,106,0.4); }
+
+/* SPLIT CARDS */
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0; }
+.card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; overflow: hidden; }
+.card-head { padding: 14px 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,248,244,0.9); display: flex; align-items: center; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.card-head.blue { background: rgba(30,60,107,0.5); }
+.card-head.green { background: rgba(30,61,40,0.5); }
+.card-body { padding: 20px; }
+.card-body ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.card-body li { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; line-height: 1.6; color: rgba(250,248,244,0.5); }
+.card-body li .i { flex-shrink: 0; font-size: 13px; margin-top: 1px; }
+.card-body li strong { color: rgba(250,248,244,0.85); font-weight: 500; }
+
+/* PRICING CARDS */
+.pricing-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0; }
+.pc { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; overflow: hidden; }
+.pc-head { padding: 16px 22px; display: flex; flex-direction: column; gap: 4px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.pc-head.green { background: rgba(30,61,40,0.6); }
+.pc-head.blue { background: rgba(26,58,107,0.5); }
+.pc-head .brand { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(232,212,106,0.5); }
+.pc-head .plan { font-size: 13px; font-weight: 500; color: rgba(250,248,244,0.85); }
+.pr-item { display: flex; justify-content: space-between; align-items: flex-start; padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); gap: 16px; }
+.pr-item:last-child { border-bottom: none; }
+.pk { font-size: 12px; color: rgba(250,248,244,0.4); flex: 0 0 44%; line-height: 1.4; }
+.pv { font-size: 13px; font-weight: 400; color: rgba(250,248,244,0.75); text-align: right; line-height: 1.4; }
+.pv small { display: block; font-size: 11px; font-weight: 300; color: rgba(250,248,244,0.35); margin-top: 2px; }
+.pv a { color: #E8D46A; font-size: 11px; text-decoration: none; border-bottom: 1px solid rgba(232,212,106,0.3); }
+.pv.yes { color: #6DBF8A; }
+.pv.no { color: rgba(220,80,80,0.8); }
+.pv.warn { color: #C9A84C; }
+.mono { font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+
+/* TABLES */
+.tbl { width: 100%; border-collapse: collapse; margin: 28px 0; font-size: 13px; }
+.tbl th { padding: 12px 16px; text-align: left; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.1); color: rgba(250,248,244,0.35); }
+.tbl th.hb { color: rgba(120,160,220,0.7); }
+.tbl th.hg { color: rgba(120,190,140,0.7); }
+.tbl td { padding: 13px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: top; line-height: 1.55; }
+.tbl td:first-child { font-size: 12px; font-weight: 500; color: rgba(250,248,244,0.4); width: 30%; }
+.tbl tr.tot td { background: rgba(232,212,106,0.05); font-weight: 500; border-top: 1px solid rgba(232,212,106,0.15); border-bottom: 1px solid rgba(232,212,106,0.15); }
+.tbl tr:last-child td { border-bottom: none; }
+.cb { color: rgba(120,160,220,0.9); font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; }
+.cg { color: rgba(120,190,140,0.9); font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; }
+.by { color: #6DBF8A; font-weight: 500; }
+.bn { color: rgba(220,80,80,0.8); font-weight: 500; }
+.bp { color: #C9A84C; font-weight: 500; }
+
+/* COMP TABLE */
+.ctbl { width: 100%; border-collapse: collapse; margin: 28px 0; font-size: 13px; }
+.ctbl th { padding: 12px 16px; text-align: left; font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+.ctbl th:first-child { background: rgba(255,255,255,0.02); color: rgba(250,248,244,0.3); width: 32%; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.ctbl th.hb { background: rgba(26,58,107,0.5); color: rgba(150,190,240,0.9); border-bottom: 1px solid rgba(26,58,107,0.8); }
+.ctbl th.hg { background: rgba(30,61,40,0.5); color: rgba(120,190,140,0.9); border-bottom: 1px solid rgba(30,61,40,0.8); }
+.ctbl td { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: top; line-height: 1.6; color: rgba(250,248,244,0.6); }
+.ctbl td:first-child { color: rgba(250,248,244,0.4); font-weight: 400; font-size: 12px; background: rgba(255,255,255,0.015); }
+.ctbl tr:last-child td { border-bottom: none; }
+
+/* VERDICT */
+.verdict { background: rgba(232,212,106,0.06); border: 1px solid rgba(232,212,106,0.18); border-radius: 20px; padding: 48px; margin-top: 56px; position: relative; overflow: hidden; }
+.verdict::before { content: ''; position: absolute; top: 0; right: 0; width: 300px; height: 300px; background: radial-gradient(circle, rgba(232,212,106,0.06) 0%, transparent 70%); pointer-events: none; }
+.verdict-lbl { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(232,212,106,0.5); margin-bottom: 16px; }
+.verdict h3 { font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 2.8vw, 34px); font-weight: 300; color: #FAF8F4; margin-bottom: 24px; line-height: 1.2; }
+.verdict h3 em { font-style: italic; color: #E8D46A; }
+.verdict p { font-size: 14px; line-height: 1.8; color: rgba(250,248,244,0.6); margin-bottom: 14px; }
+.verdict p:last-child { margin-bottom: 0; }
+.verdict strong { color: rgba(250,248,244,0.85); font-weight: 500; }
+
+/* DISCLAIMER */
+.disclaimer { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 18px 22px; margin-top: 24px; font-size: 12px; line-height: 1.7; color: rgba(250,248,244,0.35); }
+.disclaimer strong { color: rgba(250,248,244,0.5); font-weight: 500; }
+
+/* FOOTER */
+footer { background: rgba(0,0,0,0.3); padding: 40px 48px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; }
+.f-info { font-size: 13px; color: rgba(250,248,244,0.35); }
+.f-info strong { color: rgba(250,248,244,0.6); }
+.f-brand { font-family: 'Cormorant Garamond', serif; font-size: 15px; color: rgba(250,248,244,0.2); }
+.f-brand em { font-style: italic; color: rgba(232,212,106,0.4); }
+.fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-up.visible { opacity: 1; transform: none; }
+
+@media(max-width: 900px) {
+  .hero { padding: 120px 24px 56px; }
+  .page { padding: 0 24px 72px; }
+  .split, .pricing-row { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 14px; text-align: center; padding: 28px 20px; }
+}
+
+/* BACK NAV */
+.back-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: rgba(15,15,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.07); }
+.back-btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(250,248,244,0.55); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; transition: color 0.2s; padding: 8px 0; }
+.back-btn:hover { color: #E8D46A; }
+.back-btn .arrow { font-size: 16px; transition: transform 0.2s; }
+.back-btn:hover .arrow { transform: translateX(-3px); }
+.back-nav-title { font-family: "Cormorant Garamond", serif; font-size: 14px; font-weight: 300; color: rgba(250,248,244,0.25); font-style: italic; }
+@media(max-width:640px){ .back-nav { padding: 0 20px; } .back-nav-title { display: none; } }
+
+/* ============================================================
+   CHART STYLES — nuovi
+   ============================================================ */
+.chart-block {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 20px;
+  padding: 32px;
+  margin: 32px 0;
+}
+.chart-block-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(232,212,106,0.5);
+  margin-bottom: 6px;
+}
+.chart-block-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 300;
+  color: #FAF8F4;
+  margin-bottom: 28px;
+  line-height: 1.2;
+}
+.chart-block-title em { font-style: italic; color: #E8D46A; }
+
+.chart-legend {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.chart-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: rgba(250,248,244,0.55);
+}
+.chart-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+/* Radar split */
+.radar-split {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 40px;
+  align-items: center;
+}
+@media(max-width: 800px) { .radar-split { grid-template-columns: 1fr; } }
+
+.radar-legend-list { display: flex; flex-direction: column; gap: 14px; }
+.radar-legend-row { font-size: 12.5px; color: rgba(250,248,244,0.5); line-height: 1.5; }
+.radar-legend-row strong { color: rgba(250,248,244,0.8); font-weight: 500; display: block; margin-bottom: 2px; }
+
+/* Preview banner */
+.preview-banner {
+  background: rgba(232,212,106,0.1);
+  border-bottom: 1px solid rgba(232,212,106,0.25);
+  padding: 10px 48px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(232,212,106,0.8);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: fixed;
+  top: 68px;
+  left: 0; right: 0;
+  z-index: 99;
+}
+.preview-banner::before { content: '●'; color: #E8D46A; animation: blink 1.8s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+</style>
+</head>
+<body>
+
+<nav class="back-nav">
+  <a href="index.html" class="back-btn">
+    <span class="arrow">&#8592;</span>
+    Torna all&rsquo;indice
+  </a>
+  <span class="back-nav-title">Analisi WhatsApp &mdash; Brevo vs SuperAgent.fit</span>
+</nav>
+
+<div class="preview-banner">Anteprima con grafici &mdash; in attesa di approvazione</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <span class="tag">Strumenti</span>
+      <span class="sep">/</span>
+      <span class="tag">WhatsApp</span>
+      <span class="sep">/</span>
+      <span class="tag">Analisi Comparativa</span>
+    </div>
+    <h1>Brevo vs SuperAgent.fit<br><em>per la comunicazione su WhatsApp</em></h1>
+    <p class="hero-sub">Valutazione tecnica e commerciale delle due soluzioni, calibrata sul profilo e sul volume di Ronchiverdi Sport Club.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><span class="lbl">Redatto da</span><span class="val">Maurizio Taruggi</span></div>
+      <div class="hero-meta-item"><span class="lbl">Data</span><span class="val">Maggio 2026</span></div>
+      <div class="hero-meta-item"><span class="lbl">Scope</span><span class="val">WhatsApp &middot; Costi &middot; Funzionalit&agrave;</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <div class="section fade-up">
+    <div class="section-eyebrow">01 &middot; Premessa</div>
+    <h2>Perch&eacute; questo <em>confronto</em></h2>
+    <div class="prose">
+      <p>Ronchiverdi dispone di una base contatti attiva e di un rapporto consolidato con i propri soci. WhatsApp, con un tasso di apertura dei messaggi vicino al 98%, &egrave; oggi il canale di comunicazione diretta pi&ugrave; efficace disponibile. La domanda non &egrave; <em>se</em> usarlo, ma <em>come</em> &mdash; e con quale strumento.</p>
+      <p>Le due soluzioni rispondono a esigenze <strong>fondamentalmente diverse</strong>: Brevo serve a <strong>inviare messaggi</strong>; SuperAgent.fit serve a <strong>gestire conversazioni e convertire contatti</strong>. La distinzione non &egrave; marginale &mdash; cambia l&rsquo;obiettivo operativo e il ritorno atteso.</p>
+    </div>
+    <div class="alert">
+      <div class="alert-lbl">&#9888; Differenza fondamentale</div>
+      <p>Con Brevo, Ronchiverdi invia messaggi ai propri contatti, <strong>ma non pu&ograve; ricevere n&eacute; gestire le risposte in modo automatico</strong>. Se un socio risponde, quella risposta va letta e gestita manualmente dallo staff &mdash; esattamente come oggi.<br><br>
+      SuperAgent.fit &egrave; una piattaforma <strong>bidirezionale</strong>: l&rsquo;AI risponde autonomamente, gestisce conversazioni in modo continuo e accompagna il contatto verso un&rsquo;azione &mdash; senza intervento umano.</p>
+    </div>
+  </div>
+
+  <div class="section fade-up">
+    <div class="section-eyebrow">02 &middot; Profilo delle soluzioni</div>
+    <h2>In sintesi: <em>cosa fa ognuno</em></h2>
+    <div class="split">
+      <div class="card">
+        <div class="card-head blue">&#128228; Brevo &mdash; WhatsApp</div>
+        <div class="card-body">
+          <ul>
+            <li><span class="i">&#9989;</span> Invio broadcast massivo a liste di contatti</li>
+            <li><span class="i">&#9989;</span> Messaggi personalizzati con nome (template Meta)</li>
+            <li><span class="i">&#9989;</span> Segmentazione per liste e tag</li>
+            <li><span class="i">&#9989;</span> Automazioni di invio semplici</li>
+            <li><span class="i">&#9989;</span> Crediti prepagati che non scadono</li>
+            <li><span class="i">&#9989;</span> Piattaforma multicanale (email + SMS + WA)</li>
+            <li><span class="i">&#10060;</span> <strong>Non gestisce le risposte in entrata</strong></li>
+            <li><span class="i">&#10060;</span> Nessun agente AI conversazionale</li>
+            <li><span class="i">&#10060;</span> Nessun CRM dedicato al fitness</li>
+            <li><span class="i">&#9888;</span> WhatsApp solo su piano Professional</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head green">&#129302; SuperAgent.fit</div>
+        <div class="card-body">
+          <ul>
+            <li><span class="i">&#9989;</span> Agente AI che risponde h24 su WhatsApp e web chat</li>
+            <li><span class="i">&#9989;</span> Invio massivo (broadcast) a liste con segmentazione</li>
+            <li><span class="i">&#9989;</span> Automazioni: scadenze, rinnovi, follow-up</li>
+            <li><span class="i">&#9989;</span> Mini-CRM integrato con campi personalizzabili</li>
+            <li><span class="i">&#9989;</span> Prenotazione appuntamenti via chat (Google Cal)</li>
+            <li><span class="i">&#9989;</span> Vendita abbonamenti direttamente in chat (Stripe)</li>
+            <li><span class="i">&#9989;</span> API REST per integrazione con gestionali</li>
+            <li><span class="i">&#9989;</span> Verticale fitness: automazioni preconfigurate</li>
+            <li><span class="i">&#10060;</span> Solo WhatsApp e web chat (non email o SMS)</li>
+            <li><span class="i">&#9888;</span> Prodotto di Ready2Digital (conflitto di interesse dichiarato)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-up">
+    <div class="section-eyebrow">03 &middot; Struttura dei costi</div>
+    <h2>Come sono strutturati <em>i prezzi</em></h2>
+    <div class="prose">
+      <p>Brevo &egrave; pay-per-message senza canone WhatsApp dedicato ma richiede un piano Professional; SuperAgent.fit ha un canone mensile fisso con un pool di conversazioni incluso.</p>
+    </div>
+    <div class="pricing-row">
+      <div class="pc">
+        <div class="pc-head blue">
+          <span class="brand">Brevo</span>
+          <span class="plan">Piano Professional &mdash; richiesto per WhatsApp</span>
+        </div>
+        <div class="pr-item"><span class="pk">Canone piattaforma</span><span class="pv warn"><span class="mono">&euro;499/mese</span><small>Piano Professional &middot; richiesto per WhatsApp</small></span></div>
+        <div class="pr-item"><span class="pk">Messaggi WA inclusi</span><span class="pv no">Nessuno<small>Ogni messaggio WA consuma crediti prepagati</small></span></div>
+        <div class="pr-item"><span class="pk">Costo per messaggio WA</span><span class="pv warn"><span class="mono">&euro;0,082/msg</span><small>1.000 messaggi = <strong>&euro;82</strong> &middot; Pacchetti crediti prepagati</small></span></div>
+        <div class="pr-item"><span class="pk">Crediti WA</span><span class="pv yes">Non scadono<small>Acquistabili in qualsiasi momento</small></span></div>
+        <div class="pr-item"><span class="pk">Setup WhatsApp</span><span class="pv yes">&euro;0<small>Nessun costo di attivazione</small></span></div>
+        <div class="pr-item"><span class="pk">Risposte in entrata</span><span class="pv no">Non gestite<small>Gestione manuale dello staff</small></span></div>
+      </div>
+      <div class="pc">
+        <div class="pc-head green">
+          <span class="brand">SuperAgent.fit</span>
+          <span class="plan">Piani Lite e Premium</span>
+        </div>
+        <div class="pr-item"><span class="pk">Piano Lite</span><span class="pv"><span class="mono">&euro;99/mese</span><small>500 conversazioni incluse &middot; Setup &euro;190</small></span></div>
+        <div class="pr-item"><span class="pk">Piano Premium</span><span class="pv"><span class="mono">&euro;250/mese</span><small>1.000 conv. incluse &middot; Offerta lancio (da &euro;350) &middot; Setup &euro;590</small></span></div>
+        <div class="pr-item"><span class="pk">Cos&rsquo;&egrave; una &ldquo;conversazione&rdquo;</span><span class="pv">Scambio bidirezionale in 24h<small>Broadcast + risposta AI + follow-up = <strong>1 conversazione</strong></small></span></div>
+        <div class="pr-item"><span class="pk">Conv. extra</span><span class="pv"><span class="mono">1.000 &rarr; &euro;130 (&euro;0,13/cad)</span><br><span class="mono">5.000 &rarr; &euro;600 (&euro;0,12/cad)</span><small>Pacchetti senza scadenza</small></span></div>
+        <div class="pr-item"><span class="pk">Setup</span><span class="pv"><span class="mono">&euro;590 una tantum</span><small>Config, knowledge base, training staff</small></span></div>
+        <div class="pr-item"><span class="pk">Risposte in entrata</span><span class="pv yes">Gestite dall&rsquo;AI h24<small>Risponde, qualifica e converte autonomamente</small></span></div>
+      </div>
+    </div>
+    <div class="alert blue">
+      <div class="alert-lbl">&#128204; Differenza pratica nel conteggio</div>
+      <p>Con Brevo ogni messaggio WA consuma crediti singolarmente. Con SuperAgent.fit il contatore &egrave; per <em>conversazione bidirezionale di 24 ore</em>: broadcast + risposta del socio + replica AI = <strong>1 conversazione</strong>. Per chi ha molte interazioni bidirezionali il modello SuperAgent.fit &egrave; pi&ugrave; efficiente; per chi fa solo broadcasting one-way, il confronto va fatto sul costo per messaggio.</p>
+    </div>
+  </div>
+
+  <div class="section fade-up">
+    <div class="section-eyebrow">04 &middot; Simulazione economica</div>
+    <h2>Confronto costi <em>per Ronchiverdi</em></h2>
+    <div class="prose">
+      <p>Due scenari operativi realistici per un club con <strong>2.500 soci attivi</strong>. I costi per messaggio applicati: <strong>&euro;0,0818/msg</strong> per Brevo, <strong>&euro;0,09/msg</strong> per SuperAgent.fit sui messaggi extra oltre il pool incluso nel piano. Brevo Professional: <strong>&euro;499/mese</strong>.</p>
+    </div>
+
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>Scenario A &mdash; 10.000 msg/mese</th>
+          <th class="hb">Brevo Professional</th>
+          <th class="hg">SuperAgent.fit Lite</th>
+          <th class="hg">SuperAgent.fit Premium</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Canone piattaforma</td><td><span class="cb">&euro;499</span></td><td><span class="cg">&euro;99</span></td><td><span class="cg">&euro;250</span></td></tr>
+        <tr><td>Messaggi inclusi nel piano</td><td><span class="bn">Nessuno</span></td><td>500 conv. incluse</td><td>1.000 conv. incluse</td></tr>
+        <tr><td>Messaggi extra</td><td><span class="cb">10.000 &times; &euro;0,0818<br><small>= &euro;818</small></span></td><td><span class="cg">9.500 &times; &euro;0,09<br><small>= &euro;855</small></span></td><td><span class="cg">9.000 &times; &euro;0,09<br><small>= &euro;810</small></span></td></tr>
+        <tr><td>Gestione risposte in entrata</td><td><span class="bn">Non gestite</span><br><small>Costo in tempo staff</small></td><td><span class="by">AI h24 inclusa</span></td><td><span class="by">AI h24 inclusa</span></td></tr>
+        <tr class="tot"><td><strong>Totale mensile</strong></td><td><strong>&euro;1.317</strong><br><small>+ tempo staff risposte</small></td><td><span class="cg"><strong>&euro;954</strong></span><br><small>Conv. bidirezionali incluse</small></td><td><span class="cg"><strong>&euro;1.060</strong></span><br><small>Conv. bidirezionali incluse</small></td></tr>
+      </tbody>
+    </table>
+
+    <table class="tbl" style="margin-top:32px;">
+      <thead>
+        <tr>
+          <th>Scenario B &mdash; 15.000 msg/mese</th>
+          <th class="hb">Brevo Professional</th>
+          <th class="hg">SuperAgent.fit Lite</th>
+          <th class="hg">SuperAgent.fit Premium</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Canone piattaforma</td><td><span class="cb">&euro;499</span></td><td><span class="cg">&euro;99</span></td><td><span class="cg">&euro;250</span></td></tr>
+        <tr><td>Messaggi inclusi nel piano</td><td><span class="bn">Nessuno</span></td><td>500 conv. incluse</td><td>1.000 conv. incluse</td></tr>
+        <tr><td>Messaggi extra</td><td><span class="cb">15.000 &times; &euro;0,0818<br><small>= &euro;1.227</small></span></td><td><span class="cg">14.500 &times; &euro;0,09<br><small>= &euro;1.305</small></span></td><td><span class="cg">14.000 &times; &euro;0,09<br><small>= &euro;1.260</small></span></td></tr>
+        <tr><td>Gestione risposte in entrata</td><td><span class="bn">Non gestite</span><br><small>Costo in tempo staff</small></td><td><span class="by">AI h24 inclusa</span></td><td><span class="by">AI h24 inclusa</span></td></tr>
+        <tr class="tot"><td><strong>Totale mensile</strong></td><td><strong>&euro;1.726</strong><br><small>+ tempo staff risposte</small></td><td><span class="cg"><strong>&euro;1.404</strong></span><br><small>Conv. bidirezionali incluse</small></td><td><span class="cg"><strong>&euro;1.510</strong></span><br><small>Conv. bidirezionali incluse</small></td></tr>
+      </tbody>
+    </table>
+
+    <!-- ★ NUOVO: COSTI CHART -->
+    <div class="chart-block fade-up">
+      <div class="chart-block-label">Visualizzazione &middot; Costi mensili a confronto</div>
+      <div class="chart-block-title">Quanto costa <em>ogni scenario</em></div>
+      <div class="chart-legend">
+        <div class="chart-legend-item"><div class="chart-legend-dot" style="background:rgba(90,140,210,0.8)"></div>Brevo Professional</div>
+        <div class="chart-legend-item"><div class="chart-legend-dot" style="background:rgba(90,180,120,0.8)"></div>SuperAgent.fit Lite</div>
+        <div class="chart-legend-item"><div class="chart-legend-dot" style="background:rgba(130,200,160,0.6)"></div>SuperAgent.fit Premium</div>
+      </div>
+      <canvas id="chart-costi" height="200"></canvas>
+      <div style="margin-top:16px;font-size:12px;color:rgba(250,248,244,0.3);font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;">
+        * Brevo non include la gestione delle risposte in entrata (costo staff non conteggiato)
+      </div>
+    </div>
+    <!-- ★ FINE COSTI CHART -->
+
+    <div class="infobox" style="margin-top:28px;">
+      <div class="infobox-lbl">&#128204; Come leggere i due scenari</div>
+      <p>In entrambi gli scenari SuperAgent.fit &egrave; pi&ugrave; economico di Brevo &mdash; e include la gestione bidirezionale AI h24 che Brevo non offre a nessun prezzo. Nel <strong>Scenario A</strong> il risparmio va da <strong>&euro;257 (Lite)</strong> a <strong>&euro;363 (Premium)</strong> al mese rispetto a Brevo. Nel <strong>Scenario B</strong> il risparmio sale a <strong>&euro;216 (Lite)</strong> o <strong>&euro;322 (Premium)</strong>. <strong>Il confronto rimane asimmetrico</strong>: Brevo invia, SuperAgent.fit risponde e converte.</p>
+    </div>
+  </div>
+
+  <div class="section fade-up">
+    <div class="section-eyebrow">05 &middot; Casi d&rsquo;uso</div>
+    <h2>Quale soluzione serve <em>per cosa</em></h2>
+    <table class="ctbl">
+      <thead><tr><th>Scenario operativo</th><th class="hb">Con Brevo</th><th class="hg">Con SuperAgent.fit</th></tr></thead>
+      <tbody>
+        <tr><td>Messaggio a tutti i soci per un evento</td><td><span class="by">&#10003; Funziona</span></td><td><span class="by">&#10003; Funziona</span></td></tr>
+        <tr><td>Reminder abbonamento in scadenza (&minus;30 giorni)</td><td><span class="bp">&#9680; Solo invio, risposta non gestita</span></td><td><span class="by">&#10003; Invia + gestisce risposta + accompagna al rinnovo</span></td></tr>
+        <tr><td>Lead scrive su WA fuori orario: vuole info abbonamento</td><td><span class="bn">&#10007; Nessuna risposta automatica</span></td><td><span class="by">&#10003; Risposta AI istantanea h24</span></td></tr>
+        <tr><td>Messaggio WA automatico entro 5 min dal form sul sito</td><td><span class="bp">&#9680; Richiede integrazione custom</span></td><td><span class="by">&#10003; Automatico via API endpoint</span></td></tr>
+        <tr><td>Follow-up a chi ha fatto prova e non si &egrave; iscritto (3 giorni)</td><td><span class="bn">&#10007; Non disponibile</span></td><td><span class="by">&#10003; Automazione preconfigurata</span></td></tr>
+        <tr><td>Reminder certificato medico in scadenza</td><td><span class="bp">&#9680; Solo invio, senza dialogo</span></td><td><span class="by">&#10003; Automazione + risposta AI</span></td></tr>
+        <tr><td>Promozione agli ex soci scaduti negli ultimi 6 mesi</td><td><span class="by">&#10003; Funziona</span></td><td><span class="by">&#10003; Funziona + gestisce risposta</span></td></tr>
+        <tr><td>Newsletter multicanale (email + WA + SMS)</td><td><span class="by">&#10003; Punto di forza di Brevo</span></td><td><span class="bn">&#10007; Solo WhatsApp e web chat</span></td></tr>
+        <tr><td>Prenotazione visita/tour via chat</td><td><span class="bn">&#10007; Non disponibile</span></td><td><span class="by">&#10003; Integrazione Google Calendar</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section fade-up">
+    <div class="section-eyebrow">06 &middot; Confronto funzionale</div>
+    <h2>Analisi comparativa <em>dettagliata</em></h2>
+
+    <!-- ★ NUOVO: RADAR CHART -->
+    <div class="chart-block fade-up" style="margin-bottom:32px;">
+      <div class="chart-block-label">Visualizzazione &middot; Punteggio funzionale (0–5)</div>
+      <div class="chart-block-title">Dove vince <em>ciascuno</em></div>
+      <div class="radar-split">
+        <canvas id="chart-radar" height="320"></canvas>
+        <div class="radar-legend-list">
+          <div class="radar-legend-row">
+            <strong style="color:rgba(90,140,210,0.9)">Brevo</strong>
+            Eccelle nel broadcasting multicanale e nelle analytics. Zero AI conversazionale.
+          </div>
+          <div class="radar-legend-row">
+            <strong style="color:rgba(90,180,120,0.9)">SuperAgent.fit</strong>
+            Domina su AI, automazioni e conversione. Assente su email e SMS.
+          </div>
+          <div style="margin-top:16px;border-top:1px solid rgba(255,255,255,0.07);padding-top:16px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(232,212,106,0.5);margin-bottom:10px;">Dimensioni valutate</div>
+            <div style="font-size:12px;color:rgba(250,248,244,0.4);line-height:1.8;">
+              Broadcasting · Gestione risposte<br>
+              AI conversazionale · Automazioni<br>
+              CRM integrato · Analytics<br>
+              Multicanale · Verticale fitness
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ★ FINE RADAR CHART -->
+
+    <table class="ctbl">
+      <thead><tr><th>Funzionalit&agrave;</th><th class="hb">Brevo</th><th class="hg">SuperAgent.fit</th></tr></thead>
+      <tbody>
+        <tr><td>Broadcast massivo con template Meta</td><td><span class="by">&#10003; S&igrave;</span></td><td><span class="by">&#10003; S&igrave;</span></td></tr>
+        <tr><td>Personalizzazione messaggi</td><td><span class="by">&#10003; Variabili standard</span></td><td><span class="by">&#10003; Variabili dal CRM</span></td></tr>
+        <tr><td>Segmentazione contatti</td><td><span class="bp">&#9680; Per liste e tag</span></td><td><span class="by">&#10003; Per stato, campi custom, tag</span></td></tr>
+        <tr><td>Gestione risposte in entrata</td><td><span class="bn">&#10007; Manuale staff</span></td><td><span class="by">&#10003; AI risponde h24</span></td></tr>
+        <tr><td>Conversazione bidirezionale</td><td><span class="bn">&#10007; No</span></td><td><span class="by">&#10003; Dialogo naturale con AI</span></td></tr>
+        <tr><td>Automazioni su date (scadenze, rinnovi)</td><td><span class="bp">&#9680; Invii semplici</span></td><td><span class="by">&#10003; Trigger su date, eventi, stato CRM</span></td></tr>
+        <tr><td>Follow-up su prove non convertite</td><td><span class="bn">&#10007; No</span></td><td><span class="by">&#10003; Preconfigurato</span></td></tr>
+        <tr><td>Prenotazione appuntamenti via chat</td><td><span class="bn">&#10007; No</span></td><td><span class="by">&#10003; Google Cal, Outlook</span></td></tr>
+        <tr><td>CRM interno</td><td><span class="bp">&#9680; CRM generico</span></td><td><span class="by">&#10003; Mini-CRM con campi custom</span></td></tr>
+        <tr><td>Integrazione software gestionale</td><td><span class="bp">&#9680; Via API, richiede sviluppo</span></td><td><span class="by">&#10003; API REST con trigger WA</span></td></tr>
+        <tr><td>Web chat sul sito</td><td><span class="bn">&#10007; No</span></td><td><span class="by">&#10003; Widget JS, agenti illimitati</span></td></tr>
+        <tr><td>Analytics e report campagne</td><td><span class="by">&#10003; Dashboard avanzata</span></td><td><span class="bp">&#9680; Report base</span></td></tr>
+        <tr><td>Multicalit&agrave; (email + SMS + WA)</td><td><span class="by">&#10003; Punto di forza</span></td><td><span class="bn">&#10007; Solo WA e web chat</span></td></tr>
+        <tr><td>Verticale fitness / sport</td><td><span class="bn">&#10007; Tool generalista</span></td><td><span class="by">&#10003; KB e automazioni preconfigurate</span></td></tr>
+        <tr><td>Conformit&agrave; API ufficiale Meta</td><td><span class="by">&#10003; S&igrave;</span></td><td><span class="by">&#10003; S&igrave;</span></td></tr>
+        <tr><td>Supporto in italiano</td><td><span class="bp">&#9680; Parziale</span></td><td><span class="by">&#10003; Team italiano</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section fade-up">
+    <div class="section-eyebrow">07 &middot; Analisi critica</div>
+    <h2>Cosa non fa bene <em>ciascuno</em></h2>
+    <div class="split">
+      <div class="card">
+        <div class="card-head blue">Limiti di Brevo</div>
+        <div class="card-body">
+          <ul>
+            <li><span class="i">&#128308;</span><div><strong>WhatsApp solo su piano Professional:</strong> se Ronchiverdi non usa gi&agrave; Brevo per le email, il piano &egrave; difficilmente giustificabile solo per WhatsApp.</div></li>
+            <li><span class="i">&#128308;</span><div><strong>Zero gestione delle risposte:</strong> ogni risposta ai messaggi inviati richiede intervento manuale. Non &egrave; un limite tecnico &mdash; &egrave; il modello della piattaforma.</div></li>
+            <li><span class="i">&#128308;</span><div><strong>Nessuna conversione automatica:</strong> Brevo informa, ma non converte. Il passaggio dall&rsquo;interesse all&rsquo;azione richiede sempre una persona.</div></li>
+            <li><span class="i">&#128993;</span><div>Tool generalista: le automazioni fitness vanno costruite da zero.</div></li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head green">Limiti di SuperAgent.fit</div>
+        <div class="card-body">
+          <ul>
+            <li><span class="i">&#128308;</span><div><strong>Conflitto di interesse dichiarato:</strong> SuperAgent.fit &egrave; un prodotto di Ready2Digital Srl, l&rsquo;azienda di Maurizio Taruggi. Ronchiverdi deve pesare questo fatto nella sua valutazione.</div></li>
+            <li><span class="i">&#128993;</span><div><strong>Setup richiede impegno:</strong> la knowledge base va configurata accuratamente per il posizionamento premium di Ronchiverdi.</div></li>
+            <li><span class="i">&#128993;</span><div><strong>Analytics meno avanzate</strong> rispetto a Brevo per i broadcast.</div></li>
+            <li><span class="i">&#128993;</span><div>Non gestisce email o SMS: serve soluzione complementare per strategia multicanale.</div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="verdict fade-up">
+    <div class="verdict-lbl">Raccomandazione</div>
+    <h3>La valutazione per <em>Ronchiverdi</em></h3>
+    <p>Le due soluzioni non sono alternative dirette. <strong>Brevo &egrave; uno strumento di broadcasting multicanale; SuperAgent.fit &egrave; una piattaforma di acquisizione e gestione conversazionale su WhatsApp.</strong></p>
+    <p>Se l&rsquo;obiettivo &egrave; <strong>comunicare</strong> con i soci attraverso pi&ugrave; canali e Ronchiverdi usa gi&agrave; Brevo per le email, aggiungere WhatsApp costa solo i crediti per messaggio. Il limite resta: le risposte non vengono gestite automaticamente.</p>
+    <p>Se l&rsquo;obiettivo &egrave; <strong>convertire lead, automatizzare i rinnovi e rispondere h24</strong> senza ampliare lo staff, SuperAgent.fit &egrave; lo strumento pi&ugrave; coerente con il profilo e le priorit&agrave; emerse nell&rsquo;audit &mdash; a un costo mensile inferiore rispetto a Brevo Professional con WA attivo.</p>
+    <div class="disclaimer">
+      <strong>Nota di trasparenza:</strong> SuperAgent.fit &egrave; un prodotto di Ready2Digital Srl, societ&agrave; di Maurizio Taruggi. Questa analisi &egrave; stata redatta cercando la massima obiettivit&agrave;, ma il conflitto di interesse &egrave; reale e va considerato nella valutazione finale da parte di Ronchiverdi.
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span class="f-info">Audit Digitale &middot; <strong>Ronchiverdi Sport Club</strong> &times; Maurizio Taruggi &mdash; Ready 2 Digital</span>
+  <span class="f-brand">Analisi <em>WhatsApp</em> &middot; Maggio 2026</span>
+</footer>
+
+<script>
+/* ---- fade-up observer ---- */
+var obs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if(e.isIntersecting) e.target.classList.add("visible"); });
+}, { threshold: 0.06 });
+document.querySelectorAll(".fade-up").forEach(function(el) { obs.observe(el); });
+
+/* ============================================================
+   CHART.JS — configurazione tema comune
+   ============================================================ */
+Chart.defaults.color = 'rgba(250,248,244,0.45)';
+Chart.defaults.font.family = "'Jost', sans-serif";
+Chart.defaults.font.size = 12;
+
+/* ---- CHART 1: Costi mensili grouped bar ---- */
+var ctxCosti = document.getElementById('chart-costi');
+if(ctxCosti) {
+  new Chart(ctxCosti, {
+    type: 'bar',
+    data: {
+      labels: ['Scenario A — 10.000 msg/mese', 'Scenario B — 15.000 msg/mese'],
+      datasets: [
+        {
+          label: 'Brevo Professional',
+          data: [1317, 1726],
+          backgroundColor: 'rgba(90,140,210,0.75)',
+          borderWidth: 0,
+          borderRadius: 6,
+          borderSkipped: false
+        },
+        {
+          label: 'SuperAgent.fit Lite',
+          data: [954, 1404],
+          backgroundColor: 'rgba(90,180,120,0.75)',
+          borderWidth: 0,
+          borderRadius: 6,
+          borderSkipped: false
+        },
+        {
+          label: 'SuperAgent.fit Premium',
+          data: [1060, 1510],
+          backgroundColor: 'rgba(130,200,160,0.55)',
+          borderWidth: 0,
+          borderRadius: 6,
+          borderSkipped: false
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      animation: { duration: 1000, easing: 'easeOutQuart' },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'rgba(15,15,13,0.95)',
+          borderColor: 'rgba(255,255,255,0.1)',
+          borderWidth: 1,
+          titleColor: 'rgba(250,248,244,0.9)',
+          bodyColor: 'rgba(250,248,244,0.6)',
+          padding: 14,
+          callbacks: {
+            label: function(ctx) {
+              return ' ' + ctx.dataset.label + ': €' + ctx.parsed.y.toLocaleString('it-IT');
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          border: { display: false },
+          ticks: {
+            color: 'rgba(250,248,244,0.5)',
+            font: { family: "'Jost', sans-serif", size: 12 }
+          }
+        },
+        y: {
+          grid: { color: 'rgba(255,255,255,0.06)', drawBorder: false },
+          border: { display: false },
+          ticks: {
+            color: 'rgba(250,248,244,0.35)',
+            font: { family: "'Jost', sans-serif", size: 11 },
+            callback: function(v) { return '€' + v.toLocaleString('it-IT'); }
+          }
+        }
+      }
+    }
+  });
+}
+
+/* ---- CHART 2: Radar funzionalità ---- */
+var ctxRadar = document.getElementById('chart-radar');
+if(ctxRadar) {
+  new Chart(ctxRadar, {
+    type: 'radar',
+    data: {
+      labels: [
+        'Broadcasting',
+        'Gestione risposte',
+        'AI conversazionale',
+        'Automazioni',
+        'CRM integrato',
+        'Analytics',
+        'Multicanale',
+        'Verticale fitness'
+      ],
+      datasets: [
+        {
+          label: 'Brevo',
+          data: [5, 0, 0, 2, 2, 5, 5, 1],
+          backgroundColor: 'rgba(90,140,210,0.12)',
+          borderColor: 'rgba(90,140,210,0.7)',
+          borderWidth: 2,
+          pointBackgroundColor: 'rgba(90,140,210,0.9)',
+          pointRadius: 4,
+          pointHoverRadius: 6
+        },
+        {
+          label: 'SuperAgent.fit',
+          data: [4, 5, 5, 5, 4, 2, 1, 5],
+          backgroundColor: 'rgba(90,180,120,0.1)',
+          borderColor: 'rgba(90,180,120,0.7)',
+          borderWidth: 2,
+          pointBackgroundColor: 'rgba(90,180,120,0.9)',
+          pointRadius: 4,
+          pointHoverRadius: 6
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      animation: { duration: 1200, easing: 'easeInOutQuart' },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'rgba(15,15,13,0.95)',
+          borderColor: 'rgba(255,255,255,0.1)',
+          borderWidth: 1,
+          titleColor: 'rgba(250,248,244,0.9)',
+          bodyColor: 'rgba(250,248,244,0.6)',
+          padding: 12
+        }
+      },
+      scales: {
+        r: {
+          min: 0,
+          max: 5,
+          ticks: {
+            stepSize: 1,
+            display: false
+          },
+          grid: { color: 'rgba(255,255,255,0.08)' },
+          angleLines: { color: 'rgba(255,255,255,0.06)' },
+          pointLabels: {
+            color: 'rgba(250,248,244,0.55)',
+            font: { family: "'Jost', sans-serif", size: 11 }
+          }
+        }
+      }
+    }
+  });
+}
+</script>
+</body>
+</html>
