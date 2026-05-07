@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lead Intelligence &mdash; 16 Campagne &middot; Ronchiverdi Audit</title>
+<meta name="description" content="Analisi consolidata di 16 campagne lead generation Ronchiverdi (2024-2026) con AS-IS, gap analysis e roadmap di conversione.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FAF8F4; font-size: 15px; line-height: 1.7; overflow-x: hidden; font-weight: 300; -webkit-font-smoothing: antialiased; }
+
+/* BACK NAV */
+.back-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: rgba(15,15,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.07); }
+.back-btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(250,248,244,0.55); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; transition: color 0.2s; padding: 8px 0; }
+.back-btn:hover { color: #E8D46A; }
+.back-btn .arrow { font-size: 16px; transition: transform 0.2s; }
+.back-btn:hover .arrow { transform: translateX(-3px); }
+.back-nav-title { font-family: "Cormorant Garamond", serif; font-size: 14px; font-weight: 300; color: rgba(250,248,244,0.25); font-style: italic; }
+@media(max-width:640px){ .back-nav { padding: 0 20px; } .back-nav-title { display: none; } }
+
+/* HERO */
+.hero { padding: 120px 48px 72px; position: relative; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 50% at 80% 30%, rgba(232,212,106,0.06) 0%, transparent 60%), radial-gradient(ellipse 50% 60% at 10% 80%, rgba(184,150,90,0.04) 0%, transparent 60%); pointer-events: none; }
+.hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+.hero-eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+.hero-eyebrow .tag { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(250,248,244,0.3); }
+.hero-eyebrow .tag.gold { color: #E8D46A; }
+.hero-eyebrow .sep { color: rgba(250,248,244,0.15); }
+.hero h1 { font-family: "Cormorant Garamond", serif; font-size: clamp(40px, 5.5vw, 68px); font-weight: 300; line-height: 1.05; color: #FAF8F4; margin-bottom: 22px; letter-spacing: -0.02em; }
+.hero h1 em { font-style: italic; color: #E8D46A; }
+.hero-sub { font-size: 14.5px; font-weight: 300; line-height: 1.75; color: rgba(250,248,244,0.5); max-width: 680px; margin-bottom: 36px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 36px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.07); }
+.hero-meta-item .lbl { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(232,212,106,0.55); margin-bottom: 4px; }
+.hero-meta-item .val { font-size: 13px; font-weight: 400; color: rgba(250,248,244,0.75); }
+
+/* LAYOUT */
+.page { max-width: 1100px; margin: 0 auto; padding: 0 48px 100px; }
+
+/* SECTION */
+.section { padding: 64px 0; border-top: 1px solid rgba(255,255,255,0.06); }
+.section-eyebrow { font-family: "JetBrains Mono", monospace; font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(232,212,106,0.6); margin-bottom: 12px; }
+.section > h2 { font-family: "Cormorant Garamond", serif; font-size: clamp(26px, 3vw, 38px); font-weight: 300; line-height: 1.15; color: #FAF8F4; margin-bottom: 14px; }
+.section > h2 em { font-style: italic; color: #E8D46A; }
+.section-lead { font-size: 14px; color: rgba(250,248,244,0.5); max-width: 760px; line-height: 1.75; margin-bottom: 32px; }
+
+/* GRIDS */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 20px 0; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 20px 0; }
+
+/* STAT CARD */
+.stat-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 22px 24px; }
+.stat-card.gold { border-color: rgba(232,212,106,0.3); background: rgba(232,212,106,0.06); }
+.stat-card.green { border-color: rgba(90,180,120,0.22); background: rgba(90,180,120,0.05); }
+.stat-card.red { border-color: rgba(220,80,80,0.22); background: rgba(220,80,80,0.05); }
+.stat-num { font-family: "Cormorant Garamond", serif; font-size: 46px; font-weight: 300; line-height: 1; color: #E8D46A; margin-bottom: 6px; }
+.stat-card.green .stat-num { color: #5CB85C; }
+.stat-card.red .stat-num { color: #E87A6A; }
+.stat-label { font-size: 12px; font-weight: 400; color: rgba(250,248,244,0.5); line-height: 1.45; }
+.stat-label strong { color: rgba(250,248,244,0.8); font-weight: 500; }
+
+/* CARD */
+.card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 22px 26px; }
+.card.gold { border-color: rgba(232,212,106,0.22); background: rgba(232,212,106,0.04); }
+.card.green { border-color: rgba(90,180,120,0.2); background: rgba(90,180,120,0.04); }
+.card.red { border-color: rgba(220,80,80,0.2); background: rgba(220,80,80,0.04); }
+.card h3 { font-family: "Cormorant Garamond", serif; font-size: 21px; font-weight: 400; color: #FAF8F4; margin-bottom: 10px; line-height: 1.3; }
+.card h3 em { font-style: italic; color: #E8D46A; }
+.card p { font-size: 13.5px; color: rgba(250,248,244,0.55); line-height: 1.7; }
+.card p + p { margin-top: 8px; }
+.card ul { margin-top: 8px; padding-left: 0; list-style: none; }
+.card li { font-size: 13px; color: rgba(250,248,244,0.55); line-height: 1.65; padding-left: 18px; position: relative; margin-bottom: 5px; }
+.card li::before { content: "—"; position: absolute; left: 0; color: rgba(232,212,106,0.5); }
+
+/* CHART CARD (light bg, like call-3) */
+.chart-section { background: #FAFAF8; border-radius: 14px; padding: 26px 28px; margin: 14px 0; }
+.chart-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 500; color: #0F0F0D; margin-bottom: 4px; }
+.chart-sub { font-size: 11.5px; color: #8A8578; margin-bottom: 18px; line-height: 1.5; }
+.chart-row { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
+.donut-wrap { position: relative; width: 175px; height: 175px; flex-shrink: 0; }
+.donut-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; pointer-events: none; }
+.donut-val { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; line-height: 1; color: #0F0F0D; }
+.donut-lbl { font-size: 10px; color: #8A8578; margin-top: 3px; letter-spacing: 0.05em; }
+.ch-legend { display: flex; flex-direction: column; gap: 9px; flex: 1; min-width: 130px; }
+.ch-legend-row { display: flex; align-items: center; gap: 10px; font-size: 13px; color: #333; }
+.ch-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.ch-pct { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #0F0F0D; }
+.charts-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+.chart-canvas-wrap { position: relative; width: 100%; min-height: 280px; }
+.chart-canvas-wrap.tall { min-height: 360px; }
+
+/* FUNNEL */
+.funnel { display: flex; flex-direction: column; gap: 6px; margin: 20px 0; }
+.funnel-row { background: linear-gradient(90deg, rgba(232,212,106,0.18), rgba(232,212,106,0.04)); border: 1px solid rgba(232,212,106,0.25); border-radius: 10px; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px; position: relative; }
+.funnel-row:nth-child(2) { width: 80%; }
+.funnel-row:nth-child(3) { width: 60%; background: linear-gradient(90deg, rgba(232,212,106,0.14), rgba(232,212,106,0.03)); }
+.funnel-row:nth-child(4) { width: 32%; background: linear-gradient(90deg, rgba(90,180,120,0.18), rgba(90,180,120,0.04)); border-color: rgba(90,180,120,0.3); }
+.funnel-row:nth-child(5) { width: 12%; background: linear-gradient(90deg, rgba(90,180,120,0.28), rgba(90,180,120,0.08)); border-color: rgba(90,180,120,0.45); }
+.funnel-label { font-family: "Cormorant Garamond", serif; font-size: 18px; font-weight: 400; color: #FAF8F4; }
+.funnel-val { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #E8D46A; white-space: nowrap; }
+.funnel-pct { font-size: 11px; color: rgba(250,248,244,0.45); margin-left: 10px; }
+@media(max-width:768px){
+  .funnel-row, .funnel-row:nth-child(2), .funnel-row:nth-child(3), .funnel-row:nth-child(4), .funnel-row:nth-child(5) { width: 100%; }
+}
+
+/* HEAT GRID — campaign x outcome */
+.heat-grid { display: grid; grid-template-columns: 200px repeat(5, 1fr); gap: 4px; margin: 20px 0; font-size: 11.5px; }
+.heat-head { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(232,212,106,0.55); padding: 8px 6px; text-align: center; }
+.heat-head.first { text-align: left; }
+.heat-cell { padding: 9px 8px; text-align: center; border-radius: 6px; color: rgba(250,248,244,0.7); font-family: 'JetBrains Mono', monospace; }
+.heat-row-label { padding: 9px 8px; color: rgba(250,248,244,0.7); font-size: 12.5px; }
+@media(max-width:768px){
+  .heat-grid { font-size: 10px; grid-template-columns: 130px repeat(5, 1fr); }
+  .heat-row-label { font-size: 11px; }
+}
+
+/* GAP MATRIX */
+.gap-matrix { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px; position: relative; }
+.gap-q { padding: 28px 26px; border-radius: 14px; min-height: 240px; display: flex; flex-direction: column; gap: 10px; }
+.gap-q-label { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.7; }
+.gap-q h4 { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 500; line-height: 1.2; }
+.gap-q ul { padding-left: 0; list-style: none; margin-top: 6px; }
+.gap-q li { font-size: 13px; padding-left: 18px; position: relative; margin-bottom: 5px; line-height: 1.55; }
+.gap-q li::before { content: "▸"; position: absolute; left: 0; opacity: 0.6; }
+.gap-q.urgent { background: rgba(220,80,80,0.07); border: 1px solid rgba(220,80,80,0.28); color: #FAE0DC; }
+.gap-q.urgent .gap-q-label, .gap-q.urgent h4 { color: #E87A6A; }
+.gap-q.strategic { background: rgba(232,212,106,0.07); border: 1px solid rgba(232,212,106,0.28); color: #FAF1C8; }
+.gap-q.strategic .gap-q-label, .gap-q.strategic h4 { color: #E8D46A; }
+.gap-q.quick { background: rgba(90,180,120,0.07); border: 1px solid rgba(90,180,120,0.28); color: #DAF5DC; }
+.gap-q.quick .gap-q-label, .gap-q.quick h4 { color: #5CB85C; }
+.gap-q.deferred { background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.08); color: rgba(250,248,244,0.55); }
+.gap-q.deferred .gap-q-label, .gap-q.deferred h4 { color: rgba(250,248,244,0.7); }
+
+/* PROCESS / ROADMAP */
+.roadmap { display: flex; flex-direction: column; gap: 12px; margin-top: 22px; }
+.rm-step { display: flex; gap: 22px; align-items: flex-start; padding: 20px 24px; background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; }
+.rm-step.priority { border-color: rgba(232,212,106,0.3); background: rgba(232,212,106,0.05); }
+.rm-num { font-family: "Cormorant Garamond", serif; font-size: 38px; font-weight: 300; color: rgba(232,212,106,0.4); line-height: 1; flex-shrink: 0; width: 50px; }
+.rm-step.priority .rm-num { color: #E8D46A; }
+.rm-body { flex: 1; }
+.rm-tag { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(232,212,106,0.7); background: rgba(232,212,106,0.1); padding: 3px 8px; border-radius: 4px; margin-bottom: 8px; }
+.rm-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; color: #FAF8F4; margin-bottom: 6px; }
+.rm-title em { font-style: italic; color: #E8D46A; }
+.rm-desc { font-size: 13px; color: rgba(250,248,244,0.55); line-height: 1.65; }
+
+/* FOOTER */
+footer { border-top: 1px solid rgba(255,255,255,0.07); padding: 32px 48px; margin-top: 64px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; font-size: 12px; color: rgba(250,248,244,0.35); }
+footer em { color: #E8D46A; font-style: normal; }
+
+/* FADE-UP */
+.fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-up.visible { opacity: 1; transform: none; }
+
+@media(max-width:900px){
+  .hero { padding: 100px 24px 56px; }
+  .page { padding: 0 24px 72px; }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .charts-2col { grid-template-columns: 1fr; }
+  .gap-matrix { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 14px; text-align: center; padding: 28px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="back-nav">
+  <a href="index.html" class="back-btn">
+    <span class="arrow">&#8592;</span>
+    Torna all&rsquo;indice
+  </a>
+  <span class="back-nav-title">Lead Intelligence &mdash; 16 Campagne</span>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <span class="tag gold">Data Intelligence</span>
+      <span class="sep">/</span>
+      <span class="tag">Maggio 2026</span>
+      <span class="sep">/</span>
+      <span class="tag">Audit Digitale</span>
+    </div>
+    <h1>Lead Intelligence<br><em>16 Campagne</em>, una sola foto</h1>
+    <p class="hero-sub">Consolidamento di tutti i fogli di lead generation Ronchiverdi (set 2024 &rarr; mag 2026). Volume reale, distribuzione per sport e canale, qualit&agrave; del dato, funnel di conversione effettivo e gap analysis del processo di gestione contatti &mdash; con priorit&agrave; di intervento.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><div class="lbl">Periodo</div><div class="val">Set 2024 &mdash; Mag 2026</div></div>
+      <div class="hero-meta-item"><div class="lbl">Campagne</div><div class="val">16 fogli analizzati</div></div>
+      <div class="hero-meta-item"><div class="lbl">Lead totali</div><div class="val">~480 contatti</div></div>
+      <div class="hero-meta-item"><div class="lbl">Canali</div><div class="val">Meta Ads, Google Form, Referral</div></div>
+      <div class="hero-meta-item"><div class="lbl">Sport coperti</div><div class="val">Padel, Nuoto, Tennis, Fitness</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- ── SEZIONE 1: KPI STRIP ─────────────────────────── -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">L.01 &middot; Snapshot</div>
+    <h2>I numeri <em>fondamentali</em></h2>
+    <p class="section-lead">Una lettura immediata del volume aggregato e della qualit&agrave; del dato, prima di entrare nel dettaglio per campagna. Le percentuali derivano dalla codifica manuale dei feedback presenti nei fogli operativi.</p>
+    <div class="grid-4">
+      <div class="stat-card gold"><div class="stat-num">~480</div><div class="stat-label"><strong>Lead totali</strong> generati nelle 16 campagne attive</div></div>
+      <div class="stat-card"><div class="stat-num">~85%</div><div class="stat-label"><strong>Lead contattati</strong> almeno una volta dalla reception</div></div>
+      <div class="stat-card green"><div class="stat-num">~13%</div><div class="stat-label"><strong>Trial / appuntamenti</strong> effettivamente fissati</div></div>
+      <div class="stat-card red"><div class="stat-num">~6%</div><div class="stat-label"><strong>Iscrizioni</strong> dirette tracciate sui fogli</div></div>
+    </div>
+  </div>
+
+  <!-- ── SEZIONE 2: VOLUME PER CAMPAGNA ─────────────── -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">L.02 &middot; AS-IS &middot; Volume</div>
+    <h2>Volume per <em>campagna</em></h2>
+    <p class="section-lead">La distribuzione &egrave; fortemente sbilanciata: 4 campagne (Young School, Padel Adulti, Padel Anziani, San Valentino) generano oltre il 60% del volume. Le campagne Natale Nuoto e Gruppo FB Mamme non hanno raggiunto massa critica.</p>
+    <div class="chart-section">
+      <div class="chart-title">Lead per campagna</div>
+      <div class="chart-sub">Conteggio assoluto &middot; ordinati per volume decrescente</div>
+      <div class="chart-canvas-wrap tall"><canvas id="ch-volume"></canvas></div>
+    </div>
+  </div>
+
+  <!-- ── SEZIONE 3: SPORT & CANALE ──────────────────── -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">L.03 &middot; AS-IS &middot; Mix</div>
+    <h2>Sport richiesti, <em>canali usati</em></h2>
+    <p class="section-lead">Padel domina il mix di domanda; il nuoto resta il volano per i bambini (Young School). Facebook e Instagram si dividono il traffico quasi a met&agrave;, con FB leggermente pi&ugrave; performante sulle fasce adulte.</p>
+    <div class="charts-2col">
+      <div class="chart-section">
+        <div class="chart-title">Distribuzione per sport</div>
+        <div class="chart-sub">Lead totali ricondotti al verticale principale di campagna</div>
+        <div class="chart-row">
+          <div class="donut-wrap"><canvas id="ch-sport"></canvas><div class="donut-center"><div class="donut-val">~480</div><div class="donut-lbl">lead</div></div></div>
+          <div class="ch-legend">
+            <div class="ch-legend-row"><span class="ch-dot" style="background:#E8D46A"></span>Padel<span class="ch-pct">52%</span></div>
+            <div class="ch-legend-row"><span class="ch-dot" style="background:#4A90D9"></span>Nuoto<span class="ch-pct">22%</span></div>
+            <div class="ch-legend-row"><span class="ch-dot" style="background:#E87A3A"></span>Fitness/Lacertosus<span class="ch-pct">11%</span></div>
+            <div class="ch-legend-row"><span class="ch-dot" style="background:#5CB85C"></span>Tennis<span class="ch-pct">8%</span></div>
+            <div class="ch-legend-row"><span class="ch-dot" style="background:#8A8578"></span>Multisport / coppia<span class="ch-pct">7%</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="chart-section">
+        <div class="chart-title">Canale di acquisizione</div>
+        <div class="chart-sub">Platform field dei form Meta + sorgenti organiche</div>
+        <div class="chart-row">
+          <div class="donut-wrap"><canvas id="ch-canale"></canvas><div class="donut-center"><div class="donut-val">~85%</div><div class="donut-lbl">paid Meta</div></div></div>
+          <div class="ch-legend">
+            <div class="ch-legend-row"><span class="ch-dot" style="background:#1877F2"></span>Facebook Ads<span class="ch-pct">48%</span></div>
+            <div class="ch-legend-row"><span class="ch-dot" style="background:#E1306C"></span>Instagram Ads<span class="ch-pct">37%</span></div>
+            <div class="ch-legend-row"><span class="ch-dot" style="background:#5CB85C"></span>Google Form / Referral<span class="ch-pct">14%</span></div>
+            <div class="ch-legend-row"><span class="ch-dot" style="background:#8A8578"></span>Altro / non tracciato<span class="ch-pct">1%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SEZIONE 4: TIMELINE ────────────────────────── -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">L.04 &middot; AS-IS &middot; Timeline</div>
+    <h2>Andamento <em>nel tempo</em></h2>
+    <p class="section-lead">Tre picchi netti: <strong>settembre 2024</strong> (Young School, riapertura corsi), <strong>ottobre 2024</strong> (Padel Anziani + Open Day), <strong>febbraio 2025</strong> (San Valentino + Padel Mamme). I mesi morti corrispondono a periodi senza ad spend pianificato.</p>
+    <div class="chart-section">
+      <div class="chart-title">Lead generati per mese</div>
+      <div class="chart-sub">Aggregazione campagne &middot; set 2024 &rarr; mag 2026</div>
+      <div class="chart-canvas-wrap"><canvas id="ch-timeline"></canvas></div>
+    </div>
+  </div>
+
+  <!-- ── SEZIONE 5: FUNNEL ──────────────────────────── -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">L.05 &middot; AS-IS &middot; Conversion</div>
+    <h2>Funnel di <em>conversione reale</em></h2>
+    <p class="section-lead">La perdita maggiore non &egrave; tra lead e contatto (la reception lavora bene), ma tra <strong>contatto e prova fissata</strong>: 7 lead su 10 si fermano a &laquo;ci penso, non rispondo, non interessato&raquo;. Ottimizzare lo script di chiamata e l&rsquo;offerta civetta &egrave; la leva pi&ugrave; alta.</p>
+    <div class="funnel">
+      <div class="funnel-row"><span class="funnel-label">Lead acquisiti</span><span class="funnel-val">480 <span class="funnel-pct">100%</span></span></div>
+      <div class="funnel-row"><span class="funnel-label">Contattati dalla reception</span><span class="funnel-val">~410 <span class="funnel-pct">85%</span></span></div>
+      <div class="funnel-row"><span class="funnel-label">Conversazione utile (no num errato, no &laquo;non risponde&raquo;)</span><span class="funnel-val">~290 <span class="funnel-pct">60%</span></span></div>
+      <div class="funnel-row"><span class="funnel-label">Trial / appuntamento fissato</span><span class="funnel-val">~62 <span class="funnel-pct">13%</span></span></div>
+      <div class="funnel-row"><span class="funnel-label">Iscrizione confermata</span><span class="funnel-val">~28 <span class="funnel-pct">6%</span></span></div>
+    </div>
+  </div>
+
+  <!-- ── SEZIONE 6: OUTCOME DISTRIBUTION ──────────── -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">L.06 &middot; AS-IS &middot; Esiti</div>
+    <h2>Cosa succede <em>dopo la chiamata</em></h2>
+    <p class="section-lead">Codifica manuale dei testi liberi nel campo &laquo;Feedback&raquo;. La voce <em>Non risponde</em> &egrave; il primo destinatario di valore: con un secondo touchpoint (WhatsApp automatizzato) si recupererebbero contatti gi&agrave; pagati.</p>
+    <div class="chart-section">
+      <div class="chart-title">Distribuzione esiti (codifica feedback)</div>
+      <div class="chart-sub">Categorizzazione delle stringhe libere presenti nelle colonne &laquo;Feedback&raquo; / &laquo;Esito&raquo;</div>
+      <div class="chart-canvas-wrap"><canvas id="ch-esiti"></canvas></div>
+    </div>
+  </div>
+
+  <!-- ── SEZIONE 7: SPRING PADEL DEEP DIVE ──────────── -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">L.07 &middot; Deep dive &middot; Foglio del 4 maggio</div>
+    <h2>Spring Padel <em>Ambassador</em></h2>
+    <p class="section-lead">Lo spreadsheet aggiornato il 4&nbsp;maggio 2026 racconta una campagna Meta dedicata al programma Ambassador: 16 lead in pochi giorni, ma con segnali strutturali da leggere.</p>
+    <div class="grid-4">
+      <div class="stat-card gold"><div class="stat-num">16</div><div class="stat-label"><strong>Lead totali</strong> raccolti dal form</div></div>
+      <div class="stat-card green"><div class="stat-num">2</div><div class="stat-label"><strong>Soci gi&agrave; attivi</strong> &middot; 12,5% del bacino</div></div>
+      <div class="stat-card red"><div class="stat-num">8</div><div class="stat-label"><strong>Lead fuori target geografico</strong> &middot; 50% (Roma, Verona, Venezia&hellip;)</div></div>
+      <div class="stat-card"><div class="stat-num">0</div><div class="stat-label"><strong>Trial fissati</strong> al momento del download</div></div>
+    </div>
+
+    <div class="charts-2col" style="margin-top:18px;">
+      <div class="chart-section">
+        <div class="chart-title">Fascia oraria preferita</div>
+        <div class="chart-sub">Risposta del form &middot; segnale per la programmazione del recall</div>
+        <div class="chart-row">
+          <div class="donut-wrap"><canvas id="ch-spring-orario"></canvas><div class="donut-center"><div class="donut-val">50%</div><div class="donut-lbl">sera</div></div></div>
+          <div class="ch-legend">
+            <div class="ch-legend-row"><span class="ch-dot" style="background:#4A90D9"></span>Sera<span class="ch-pct">50%</span></div>
+            <div class="ch-legend-row"><span class="ch-dot" style="background:#E8D46A"></span>Pomeriggio<span class="ch-pct">25%</span></div>
+            <div class="ch-legend-row"><span class="ch-dot" style="background:#E87A3A"></span>Mattina<span class="ch-pct">12,5%</span></div>
+            <div class="ch-legend-row"><span class="ch-dot" style="background:#8A8578"></span>Pausa pranzo<span class="ch-pct">12,5%</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="chart-section">
+        <div class="chart-title">Esito chiamata reception</div>
+        <div class="chart-sub">Lettura dei feedback al 4&nbsp;maggio 2026</div>
+        <div class="chart-row">
+          <div class="donut-wrap"><canvas id="ch-spring-esiti"></canvas><div class="donut-center"><div class="donut-val">25%</div><div class="donut-lbl">in attesa</div></div></div>
+          <div class="ch-legend">
+            <div class="ch-legend-row"><span class="ch-dot" style="background:#5CB85C"></span>Soci<span class="ch-pct">12,5%</span></div>
+            <div class="ch-legend-row"><span class="ch-dot" style="background:#E8D46A"></span>Attendo risposta<span class="ch-pct">25%</span></div>
+            <div class="ch-legend-row"><span class="ch-dot" style="background:#8A8578"></span>Non risponde<span class="ch-pct">25%</span></div>
+            <div class="ch-legend-row"><span class="ch-dot" style="background:#E87A6A"></span>Numero errato/staccato<span class="ch-pct">19%</span></div>
+            <div class="ch-legend-row"><span class="ch-dot" style="background:#B85C5C"></span>Non interessato<span class="ch-pct">12,5%</span></div>
+            <div class="ch-legend-row"><span class="ch-dot" style="background:#6A6A66"></span>Senza tempo<span class="ch-pct">6%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:18px;">
+      <div class="card gold">
+        <h3>Cosa <em>funziona</em></h3>
+        <ul>
+          <li>La campagna porta lead caldi: 12,5% sono gi&agrave; soci attivi (segnale di awareness)</li>
+          <li>Il 50% chiede contatto serale &mdash; coerente con target lavoratori</li>
+          <li>Il form &egrave; semplice (4 campi) e ha buona compilazione</li>
+        </ul>
+      </div>
+      <div class="card red">
+        <h3>Cosa <em>non funziona</em></h3>
+        <ul>
+          <li>Il targeting geografico non &egrave; stretto: 50% dei lead sono fuori Torino e provincia</li>
+          <li>La copy non chiarisce abbastanza il prodotto: una lead segnala &laquo;non aveva capito si trattasse di padel&raquo;</li>
+          <li>Nessun trial fissato: l&rsquo;offerta non ha leva sufficiente per chiudere a freddo</li>
+          <li>Il follow-up &egrave; mono-canale (chiamata): chi non risponde resta in stand-by</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SEZIONE 8: HEAT MAP CAMPAGNE ───────────────── -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">L.08 &middot; AS-IS &middot; Heat map</div>
+    <h2>Performance per <em>campagna</em></h2>
+    <p class="section-lead">Sintesi tabellare dell&rsquo;esito tipico per le 8 campagne pi&ugrave; significative. Il colore riflette la concentrazione percentuale di ogni esito (verde = positivo, rosso = perso, grigio = sospeso).</p>
+    <div class="heat-grid">
+      <div class="heat-head first">Campagna</div>
+      <div class="heat-head">Lead</div>
+      <div class="heat-head">Contattati</div>
+      <div class="heat-head">Trial</div>
+      <div class="heat-head">Iscritti</div>
+      <div class="heat-head">Persi</div>
+
+      <div class="heat-row-label">Young School (Set 24)</div>
+      <div class="heat-cell" style="background:rgba(232,212,106,0.18)">~70</div>
+      <div class="heat-cell" style="background:rgba(90,180,120,0.22)">95%</div>
+      <div class="heat-cell" style="background:rgba(232,212,106,0.18)">14%</div>
+      <div class="heat-cell" style="background:rgba(90,180,120,0.10)">7%</div>
+      <div class="heat-cell" style="background:rgba(220,80,80,0.14)">68%</div>
+
+      <div class="heat-row-label">Padel Adulti + Promo</div>
+      <div class="heat-cell" style="background:rgba(232,212,106,0.20)">~70</div>
+      <div class="heat-cell" style="background:rgba(90,180,120,0.18)">88%</div>
+      <div class="heat-cell" style="background:rgba(232,212,106,0.12)">10%</div>
+      <div class="heat-cell" style="background:rgba(90,180,120,0.06)">4%</div>
+      <div class="heat-cell" style="background:rgba(220,80,80,0.18)">72%</div>
+
+      <div class="heat-row-label">Padel Anziani</div>
+      <div class="heat-cell" style="background:rgba(232,212,106,0.18)">~60</div>
+      <div class="heat-cell" style="background:rgba(90,180,120,0.20)">92%</div>
+      <div class="heat-cell" style="background:rgba(232,212,106,0.06)">5%</div>
+      <div class="heat-cell" style="background:rgba(90,180,120,0.04)">2%</div>
+      <div class="heat-cell" style="background:rgba(220,80,80,0.20)">80%</div>
+
+      <div class="heat-row-label">Padel Mamme (Gen-Mar 25)</div>
+      <div class="heat-cell" style="background:rgba(232,212,106,0.14)">~45</div>
+      <div class="heat-cell" style="background:rgba(232,212,106,0.10)">40%</div>
+      <div class="heat-cell" style="background:rgba(220,80,80,0.10)">2%</div>
+      <div class="heat-cell" style="background:rgba(220,80,80,0.10)">0%</div>
+      <div class="heat-cell" style="background:rgba(220,80,80,0.18)">N/A</div>
+
+      <div class="heat-row-label">Mensile 169&euro;</div>
+      <div class="heat-cell" style="background:rgba(232,212,106,0.12)">~40</div>
+      <div class="heat-cell" style="background:rgba(90,180,120,0.18)">85%</div>
+      <div class="heat-cell" style="background:rgba(232,212,106,0.14)">12%</div>
+      <div class="heat-cell" style="background:rgba(90,180,120,0.10)">8%</div>
+      <div class="heat-cell" style="background:rgba(220,80,80,0.14)">70%</div>
+
+      <div class="heat-row-label">San Valentino (Form)</div>
+      <div class="heat-cell" style="background:rgba(232,212,106,0.18)">~65</div>
+      <div class="heat-cell" style="background:rgba(232,212,106,0.10)">35%</div>
+      <div class="heat-cell" style="background:rgba(90,180,120,0.16)">22%</div>
+      <div class="heat-cell" style="background:rgba(90,180,120,0.16)">15%</div>
+      <div class="heat-cell" style="background:rgba(220,80,80,0.10)">45%</div>
+
+      <div class="heat-row-label">Core / Lacertosus</div>
+      <div class="heat-cell" style="background:rgba(232,212,106,0.10)">~27</div>
+      <div class="heat-cell" style="background:rgba(232,212,106,0.10)">60%</div>
+      <div class="heat-cell" style="background:rgba(232,212,106,0.10)">11%</div>
+      <div class="heat-cell" style="background:rgba(90,180,120,0.08)">7%</div>
+      <div class="heat-cell" style="background:rgba(220,80,80,0.18)">75%</div>
+
+      <div class="heat-row-label">Spring Padel Ambassador</div>
+      <div class="heat-cell" style="background:rgba(232,212,106,0.06)">16</div>
+      <div class="heat-cell" style="background:rgba(232,212,106,0.10)">75%</div>
+      <div class="heat-cell" style="background:rgba(220,80,80,0.20)">0%</div>
+      <div class="heat-cell" style="background:rgba(220,80,80,0.18)">0%</div>
+      <div class="heat-cell" style="background:rgba(220,80,80,0.22)">75%</div>
+    </div>
+  </div>
+
+  <!-- ── SEZIONE 9: GAP ANALYSIS ─────────────────────── -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">L.09 &middot; Gap analysis</div>
+    <h2>Cosa <em>manca</em> tra dato e risultato</h2>
+    <p class="section-lead">Le criticit&agrave; emerse dai 16 fogli sono raggruppate in quattro macro-aree, posizionate secondo logica <strong>impatto &times; sforzo</strong>. Le aree in alto rappresentano le priorit&agrave; immediate.</p>
+
+    <div class="gap-matrix">
+      <div class="gap-q urgent">
+        <div class="gap-q-label">Alto impatto &middot; Basso sforzo</div>
+        <h4>Quick wins critici</h4>
+        <ul>
+          <li><strong>Validazione numero in form:</strong> ~8% dei contatti &egrave; inutilizzabile per numero errato/inesistente.</li>
+          <li><strong>Targeting geo:</strong> esclusione di citt&agrave; fuori bacino (Roma, Milano, Verona) recupera budget Meta.</li>
+          <li><strong>Tag mancanti:</strong> molte righe hanno colonne vuote (no operatore, no data, no esito).</li>
+          <li><strong>Doppio canale follow-up:</strong> chi non risponde alla chiamata non riceve nulla (n&eacute; SMS n&eacute; WA).</li>
+        </ul>
+      </div>
+      <div class="gap-q strategic">
+        <div class="gap-q-label">Alto impatto &middot; Alto sforzo</div>
+        <h4>Investimenti strategici</h4>
+        <ul>
+          <li><strong>Un CRM unico al posto di 16 fogli:</strong> oggi i dati vivono in spreadsheet separati, non aggregabili.</li>
+          <li><strong>Tracking funnel end-to-end:</strong> manca il collegamento lead &rarr; trial &rarr; iscrizione &rarr; rinnovo.</li>
+          <li><strong>Offerta civetta strutturata:</strong> nessuna campagna ha una promo testabile in modo sistemico.</li>
+          <li><strong>Script di chiamata standardizzato:</strong> ogni operatore (YC, SA) ha approccio diverso.</li>
+        </ul>
+      </div>
+      <div class="gap-q quick">
+        <div class="gap-q-label">Basso impatto &middot; Basso sforzo</div>
+        <h4>Pulizie immediate</h4>
+        <ul>
+          <li>Deduplica righe (Mensile 169&euro; ha leads duplicate).</li>
+          <li>Standardizzazione siglone operatore (YC vs Y.C. vs &laquo;Carola&raquo;).</li>
+          <li>Conversione date in formato univoco ISO.</li>
+          <li>Elenco ad-hoc di feedback consentiti (5-7 etichette chiuse).</li>
+        </ul>
+      </div>
+      <div class="gap-q deferred">
+        <div class="gap-q-label">Basso impatto &middot; Alto sforzo</div>
+        <h4>Da rimandare</h4>
+        <ul>
+          <li>Migrazione storica completa di tutti i lead pre-2024.</li>
+          <li>Integrazione lookalike audience automatica con InForYou.</li>
+          <li>Predictive scoring del lead (ML) &mdash; servono prima dati puliti.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SEZIONE 10: ROADMAP ─────────────────────────── -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">L.10 &middot; Roadmap to convert</div>
+    <h2>Da <em>16 fogli</em> a un funnel governato</h2>
+    <p class="section-lead">Sequenza di interventi proposta, con impatto stimato sul tasso di conversione finale (oggi ~6%). L&rsquo;ipotesi conservativa &egrave; di portare il tasso a <strong>10-12%</strong> entro 6 mesi solo agendo sulle leve a basso sforzo.</p>
+    <div class="roadmap">
+      <div class="rm-step priority">
+        <div class="rm-num">1</div>
+        <div class="rm-body">
+          <span class="rm-tag">0-30 giorni &middot; Foundation</span>
+          <div class="rm-title">Consolidamento <em>sorgente unica</em></div>
+          <div class="rm-desc">Migrazione dei 16 fogli su un CRM minimale (Airtable / HubSpot starter). Definizione di 7 campi obbligatori (data, sport, canale, esito, operatore, prossima azione, scadenza) e 6 etichette chiuse di outcome.</div>
+        </div>
+      </div>
+      <div class="rm-step priority">
+        <div class="rm-num">2</div>
+        <div class="rm-body">
+          <span class="rm-tag">15-45 giorni &middot; Recovery</span>
+          <div class="rm-title">Sequenza <em>WhatsApp automatica</em> sui &laquo;non risponde&raquo;</div>
+          <div class="rm-desc">Per ogni lead non raggiunto telefonicamente entro 24h: invio template WA (T+1, T+3, T+7) con messaggio del Maestro e link prenotazione prova. Stima recupero: +18% sul bacino oggi perso.</div>
+        </div>
+      </div>
+      <div class="rm-step">
+        <div class="rm-num">3</div>
+        <div class="rm-body">
+          <span class="rm-tag">30-60 giorni &middot; Acquisition</span>
+          <div class="rm-title">Restringere il <em>targeting Meta</em></div>
+          <div class="rm-desc">Esclusione geografica fuori 30km da Torino, custom audience soci/ex-soci come seed per lookalike, A/B test creativit&agrave; sull&rsquo;offerta civetta (€89 mensile vs prova gratuita 2 ingressi).</div>
+        </div>
+      </div>
+      <div class="rm-step">
+        <div class="rm-num">4</div>
+        <div class="rm-body">
+          <span class="rm-tag">45-90 giorni &middot; Conversion</span>
+          <div class="rm-title">Script reception + <em>booking online</em></div>
+          <div class="rm-desc">Script standardizzato per tipo di campagna, prenotazione del trial direttamente nel calendario reception (no rimbalzi), reminder automatico T-24h e T-2h.</div>
+        </div>
+      </div>
+      <div class="rm-step">
+        <div class="rm-num">5</div>
+        <div class="rm-body">
+          <span class="rm-tag">90+ giorni &middot; Intelligence</span>
+          <div class="rm-title">Dashboard <em>per la direzione</em></div>
+          <div class="rm-desc">Vista live: lead/giorno per campagna, costo per trial, costo per iscritto, LTV stimata, alert quando una campagna scende sotto soglia. Replicabile sui 4 sport.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div>Maurizio Taruggi &middot; Audit Digitale &middot; <em>Lead Intelligence</em></div>
+  <div>16 campagne &middot; ~480 lead &middot; aggiornato maggio 2026</div>
+</footer>
+
+<script>
+Chart.defaults.font.family = "'Jost', sans-serif";
+Chart.defaults.color = '#8A8578';
+var _tt = { plugins: { tooltip: { backgroundColor: '#1a1a17', titleColor: '#E8D46A', bodyColor: '#ddd', padding: 10, cornerRadius: 6 }, legend: { display: false } }, maintainAspectRatio: false };
+
+// Volume per campagna
+new Chart(document.getElementById('ch-volume'), {
+  type: 'bar',
+  data: {
+    labels: ['Young School','Padel Adulti','San Valentino (form)','Padel Anziani','Padel Mamme','Mensile 169€','San Valentino ADV','Core/Lacertosus','Dicembre Omaggio','Spring Padel Ambass.','Pacchetti Padel Natale','Workout Lacertosus','Pacchetti Nuoto Natale','Gruppo FB Mamme'],
+    datasets: [{
+      data: [70, 70, 65, 60, 45, 40, 35, 27, 20, 16, 14, 12, 3, 3],
+      backgroundColor: ['#E8D46A','#E8D46A','#E8D46A','#E8D46A','#D4BE5E','#D4BE5E','#C0AA52','#A89146','#A89146','#90793A','#7A6630','#645427','#4A3F1E','#4A3F1E'],
+      borderRadius: 5
+    }]
+  },
+  options: Object.assign({}, _tt, { indexAxis: 'y', scales: { x: { grid: { color: '#EFEDE6' }, ticks:{font:{size:11}} }, y: { grid:{display:false}, ticks:{font:{size:11}} } } })
+});
+
+// Sport donut
+new Chart(document.getElementById('ch-sport'), {
+  type: 'doughnut',
+  data: { labels: ['Padel','Nuoto','Fitness','Tennis','Multisport'], datasets: [{ data:[52,22,11,8,7], backgroundColor:['#E8D46A','#4A90D9','#E87A3A','#5CB85C','#8A8578'], borderWidth:0, hoverOffset:6 }] },
+  options: Object.assign({}, _tt, { cutout:'68%' })
+});
+
+// Canale donut
+new Chart(document.getElementById('ch-canale'), {
+  type: 'doughnut',
+  data: { labels: ['FB','IG','Form/Referral','Altro'], datasets: [{ data:[48,37,14,1], backgroundColor:['#1877F2','#E1306C','#5CB85C','#8A8578'], borderWidth:0, hoverOffset:6 }] },
+  options: Object.assign({}, _tt, { cutout:'68%' })
+});
+
+// Timeline
+new Chart(document.getElementById('ch-timeline'), {
+  type: 'line',
+  data: {
+    labels: ['Set 24','Ott 24','Nov 24','Dic 24','Gen 25','Feb 25','Mar 25','Apr 25','Mag 25','Giu 25','...','Apr 26','Mag 26'],
+    datasets: [{
+      label: 'Lead/mese',
+      data: [70, 90, 25, 45, 50, 95, 25, 8, 12, 6, 3, 4, 16],
+      borderColor: '#E8D46A',
+      backgroundColor: 'rgba(232,212,106,0.16)',
+      tension: 0.32,
+      fill: true,
+      pointBackgroundColor: '#E8D46A',
+      pointBorderColor: '#fff',
+      pointRadius: 4,
+      pointHoverRadius: 6
+    }]
+  },
+  options: Object.assign({}, _tt, { scales: { x:{grid:{display:false},ticks:{font:{size:10}}}, y:{grid:{color:'#EFEDE6'},ticks:{font:{size:10}}} } })
+});
+
+// Esiti
+new Chart(document.getElementById('ch-esiti'), {
+  type: 'bar',
+  data: {
+    labels: ['Non risponde','Ci pensa','Iscritto/Trial','Numero errato','Non interessato','Fuori target','Già socio'],
+    datasets: [{ data:[34,18,15,9,11,8,5], backgroundColor:['#8A8578','#D4BE5E','#5CB85C','#E87A6A','#B85C5C','#6A6A66','#4A90D9'], borderRadius:5 }]
+  },
+  options: Object.assign({}, _tt, { scales: { x:{grid:{display:false},ticks:{font:{size:10.5}}}, y:{grid:{color:'#EFEDE6'},ticks:{font:{size:10}, callback:function(v){return v+'%'}}} } })
+});
+
+// Spring orario
+new Chart(document.getElementById('ch-spring-orario'), {
+  type: 'doughnut',
+  data: { labels:['Sera','Pomeriggio','Mattina','Pausa pranzo'], datasets:[{ data:[50,25,12.5,12.5], backgroundColor:['#4A90D9','#E8D46A','#E87A3A','#8A8578'], borderWidth:0, hoverOffset:6 }] },
+  options: Object.assign({}, _tt, { cutout:'68%' })
+});
+
+// Spring esiti
+new Chart(document.getElementById('ch-spring-esiti'), {
+  type: 'doughnut',
+  data: { labels:['Soci','Attendo risposta','Non risponde','Numero errato/staccato','Non interessato','Senza tempo'], datasets:[{ data:[12.5,25,25,18.75,12.5,6.25], backgroundColor:['#5CB85C','#E8D46A','#8A8578','#E87A6A','#B85C5C','#6A6A66'], borderWidth:0, hoverOffset:6 }] },
+  options: Object.assign({}, _tt, { cutout:'68%' })
+});
+</script>
+
+<script>
+var obs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.06 });
+document.querySelectorAll('.fade-up').forEach(function(el) { obs.observe(el); });
+</script>
+
+</body>
+</html>
