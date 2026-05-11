@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Call #4 &mdash; Iscrizione &amp; Pagamenti &middot; Ronchiverdi Audit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FAF8F4; font-size: 15px; line-height: 1.7; overflow-x: hidden; font-weight: 300; -webkit-font-smoothing: antialiased; }
+
+/* BACK NAV */
+.back-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: rgba(15,15,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.07); }
+.back-btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(250,248,244,0.55); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; transition: color 0.2s; padding: 8px 0; }
+.back-btn:hover { color: #E8D46A; }
+.back-btn .arrow { font-size: 16px; transition: transform 0.2s; }
+.back-btn:hover .arrow { transform: translateX(-3px); }
+.back-nav-title { font-family: "Cormorant Garamond", serif; font-size: 14px; font-weight: 300; color: rgba(250,248,244,0.25); font-style: italic; }
+@media(max-width:640px){ .back-nav { padding: 0 20px; } .back-nav-title { display: none; } }
+
+/* HERO */
+.hero { padding: 120px 48px 72px; position: relative; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 80% 30%, rgba(232,212,106,0.05) 0%, transparent 60%); pointer-events: none; }
+.hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+.hero-eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+.hero-eyebrow .tag { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(250,248,244,0.3); }
+.hero-eyebrow .sep { color: rgba(250,248,244,0.15); }
+.hero h1 { font-family: "Cormorant Garamond", serif; font-size: clamp(38px, 5vw, 62px); font-weight: 300; line-height: 1.05; color: #FAF8F4; margin-bottom: 20px; letter-spacing: -0.02em; }
+.hero h1 em { font-style: italic; color: #E8D46A; }
+.hero-sub { font-size: 14px; font-weight: 300; line-height: 1.75; color: rgba(250,248,244,0.45); max-width: 720px; margin-bottom: 36px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 32px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.07); }
+.hero-meta-item .lbl { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(232,212,106,0.5); margin-bottom: 4px; }
+.hero-meta-item .val { font-size: 13px; font-weight: 400; color: rgba(250,248,244,0.7); }
+.hero-parts { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+.hero-part-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 50px; padding: 8px 18px; font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(250,248,244,0.5); }
+.hero-part-badge.active { border-color: rgba(232,212,106,0.3); color: #E8D46A; background: rgba(232,212,106,0.06); }
+
+/* LAYOUT */
+.page { max-width: 1100px; margin: 0 auto; padding: 0 48px 100px; }
+
+/* PART DIVIDER */
+.part-divider { margin: 0 -48px; padding: 40px 48px; background: rgba(255,255,255,0.02); border-top: 1px solid rgba(232,212,106,0.15); border-bottom: 1px solid rgba(232,212,106,0.15); }
+.part-number { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(232,212,106,0.5); margin-bottom: 8px; }
+.part-title { font-family: "Cormorant Garamond", serif; font-size: clamp(28px, 4vw, 44px); font-weight: 300; color: #FAF8F4; line-height: 1.1; }
+.part-title em { font-style: italic; color: #E8D46A; }
+.part-desc { font-size: 13px; color: rgba(250,248,244,0.4); margin-top: 8px; max-width: 620px; line-height: 1.7; }
+
+/* SECTION */
+.section { padding: 56px 0; border-top: 1px solid rgba(255,255,255,0.06); }
+.section:first-of-type { border-top: none; }
+.section-eyebrow { font-family: "JetBrains Mono", monospace; font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(232,212,106,0.6); margin-bottom: 12px; }
+.section > h2 { font-family: "Cormorant Garamond", serif; font-size: clamp(24px, 3vw, 36px); font-weight: 300; line-height: 1.15; color: #FAF8F4; margin-bottom: 24px; }
+.section > h2 em { font-style: italic; color: #E8D46A; }
+
+/* PROSE */
+.prose { font-size: 14px; line-height: 1.8; color: rgba(250,248,244,0.5); }
+.prose p { margin-bottom: 12px; }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { color: rgba(250,248,244,0.85); font-weight: 500; }
+
+/* GRIDS */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 20px 0; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 20px 0; }
+
+/* CARD */
+.card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 22px 24px; }
+.card.gold { border-color: rgba(232,212,106,0.22); background: rgba(232,212,106,0.04); }
+.card.green { border-color: rgba(90,180,120,0.2); background: rgba(90,180,120,0.04); }
+.card.red { border-color: rgba(200,60,60,0.2); background: rgba(200,60,60,0.04); }
+.card-title { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; color: rgba(250,248,244,0.4); }
+.card.gold .card-title { color: rgba(232,212,106,0.8); }
+.card.green .card-title { color: rgba(90,180,120,0.85); }
+.card.red .card-title { color: rgba(220,120,120,0.9); }
+.card-body { font-size: 13.5px; color: rgba(250,248,244,0.55); line-height: 1.7; }
+.card-body strong { color: rgba(250,248,244,0.85); font-weight: 500; }
+
+/* ITEMS */
+.item-list { display: flex; flex-direction: column; gap: 10px; }
+.item { display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; color: rgba(250,248,244,0.55); line-height: 1.65; }
+.dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; margin-top: 8px; }
+.dot.g { background: #5AB478; }
+.dot.r { background: #C84040; }
+.dot.y { background: #C9B540; }
+.dot.w { background: rgba(250,248,244,0.2); }
+.item strong { color: rgba(250,248,244,0.85); font-weight: 500; }
+
+/* STAT CARD */
+.stat-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 20px 22px; }
+.stat-card.gold { border-color: rgba(232,212,106,0.25); background: rgba(232,212,106,0.05); }
+.stat-card.green { border-color: rgba(90,180,120,0.2); background: rgba(90,180,120,0.04); }
+.stat-card.red { border-color: rgba(200,60,60,0.2); background: rgba(200,60,60,0.04); }
+.stat-num { font-family: "Cormorant Garamond", serif; font-size: 40px; font-weight: 300; line-height: 1; color: #E8D46A; margin-bottom: 6px; }
+.stat-label { font-size: 12px; font-weight: 400; color: rgba(250,248,244,0.45); line-height: 1.4; }
+.stat-label strong { color: rgba(250,248,244,0.75); font-weight: 500; }
+
+/* FLOW */
+.flow { display: flex; align-items: stretch; gap: 0; margin: 28px 0; overflow-x: auto; }
+.flow-step { flex: 1; min-width: 130px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); padding: 18px 14px; position: relative; }
+.flow-step:first-child { border-radius: 12px 0 0 12px; }
+.flow-step:last-child { border-radius: 0 12px 12px 0; }
+.flow-step + .flow-step { border-left: none; }
+.flow-num { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,248,244,0.2); margin-bottom: 8px; }
+.flow-name { font-family: "Cormorant Garamond", serif; font-size: 14px; font-weight: 400; color: rgba(250,248,244,0.7); line-height: 1.3; }
+.flow-note { font-size: 11px; color: rgba(250,248,244,0.3); margin-top: 6px; line-height: 1.4; }
+.flow-arrow { position: absolute; right: -11px; top: 50%; transform: translateY(-50%); z-index: 2; width: 22px; height: 22px; border-radius: 50%; background: #0F0F0D; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 9px; color: rgba(250,248,244,0.3); }
+
+/* CALLOUT */
+.callout { background: rgba(232,212,106,0.06); border: 1px solid rgba(232,212,106,0.18); border-radius: 14px; padding: 22px 26px; margin: 24px 0; }
+.callout-label { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(232,212,106,0.6); margin-bottom: 10px; }
+.callout p { font-size: 14px; line-height: 1.8; color: rgba(250,248,244,0.6); margin-bottom: 8px; }
+.callout p:last-child { margin-bottom: 0; }
+.callout strong { color: rgba(250,248,244,0.9); font-weight: 500; }
+
+/* QUOTE */
+.quote-block { border-left: 2px solid rgba(232,212,106,0.3); padding: 0 0 0 22px; margin: 24px 0; }
+.quote-text { font-family: "Cormorant Garamond", serif; font-size: clamp(17px, 2vw, 22px); font-weight: 300; font-style: italic; line-height: 1.6; color: rgba(250,248,244,0.65); margin-bottom: 8px; }
+.quote-attr { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(232,212,106,0.5); }
+
+/* TABLE */
+.data-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px; }
+.data-table th { padding: 10px 14px; text-align: left; font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.1); color: rgba(250,248,244,0.3); }
+.data-table td { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: top; line-height: 1.55; color: rgba(250,248,244,0.55); }
+.data-table td:first-child { font-weight: 500; color: rgba(250,248,244,0.7); width: 28%; }
+.data-table tr:last-child td { border-bottom: none; }
+.badge { display: inline-block; font-family: "JetBrains Mono", monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; }
+.badge.red { background: rgba(200,60,60,0.2); color: rgba(220,120,120,0.95); }
+.badge.yellow { background: rgba(232,212,106,0.15); color: rgba(210,185,80,0.95); }
+.badge.green { background: rgba(90,180,120,0.15); color: rgba(90,180,120,0.95); }
+
+/* PIPELINE / ESCALATION */
+.escalation { display: flex; flex-direction: column; gap: 0; margin: 24px 0; border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; overflow: hidden; }
+.esc-step { display: flex; gap: 18px; padding: 18px 22px; background: rgba(255,255,255,0.02); border-bottom: 1px solid rgba(255,255,255,0.05); }
+.esc-step:last-child { border-bottom: none; }
+.esc-step.s1 { background: rgba(232,212,106,0.04); }
+.esc-step.s2 { background: rgba(232,140,60,0.04); }
+.esc-step.s3 { background: rgba(200,60,60,0.05); }
+.esc-day { font-family: "Cormorant Garamond", serif; font-size: 28px; font-weight: 300; line-height: 1.1; flex-shrink: 0; width: 92px; color: rgba(232,212,106,0.55); }
+.esc-step.s2 .esc-day { color: rgba(232,140,60,0.7); }
+.esc-step.s3 .esc-day { color: rgba(220,90,90,0.85); }
+.esc-body { flex: 1; }
+.esc-title { font-family: "Cormorant Garamond", serif; font-size: 17px; font-weight: 400; color: #FAF8F4; margin-bottom: 3px; }
+.esc-desc { font-size: 13px; color: rgba(250,248,244,0.5); line-height: 1.6; }
+
+/* ROADMAP */
+.roadmap { display: flex; flex-direction: column; gap: 10px; margin: 24px 0; }
+.rm-item { display: flex; gap: 18px; align-items: flex-start; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 18px 22px; }
+.rm-item.p1 { border-color: rgba(200,60,60,0.2); }
+.rm-item.p2 { border-color: rgba(232,212,106,0.15); }
+.rm-item.p3 { border-color: rgba(90,180,120,0.15); }
+.rm-priority { font-family: "Cormorant Garamond", serif; font-size: 32px; font-weight: 300; line-height: 1; flex-shrink: 0; width: 44px; }
+.rm-item.p1 .rm-priority { color: rgba(200,80,80,0.35); }
+.rm-item.p2 .rm-priority { color: rgba(232,212,106,0.25); }
+.rm-item.p3 .rm-priority { color: rgba(90,180,120,0.25); }
+.rm-tag { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 9px; border-radius: 4px; margin-bottom: 6px; }
+.p1 .rm-tag { background: rgba(200,60,60,0.15); color: rgba(220,100,100,0.95); }
+.p2 .rm-tag { background: rgba(232,212,106,0.12); color: rgba(210,185,80,0.95); }
+.p3 .rm-tag { background: rgba(90,180,120,0.12); color: rgba(90,180,120,0.9); }
+.rm-title { font-family: "Cormorant Garamond", serif; font-size: 17px; font-weight: 400; color: #FAF8F4; margin-bottom: 4px; }
+.rm-desc { font-size: 13px; color: rgba(250,248,244,0.45); line-height: 1.6; }
+
+/* NEXT CALL BANNER */
+.next-call-banner { background: rgba(232,212,106,0.08); border: 1px solid rgba(232,212,106,0.25); border-radius: 16px; padding: 28px 32px; margin: 56px 0 0; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.nc-icon { font-size: 28px; flex-shrink: 0; }
+.nc-body { flex: 1; min-width: 200px; }
+.nc-label { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(232,212,106,0.7); margin-bottom: 6px; }
+.nc-title { font-family: "Cormorant Garamond", serif; font-size: 22px; font-weight: 300; color: #FAF8F4; line-height: 1.2; }
+.nc-title em { font-style: italic; color: #E8D46A; }
+.nc-meta { font-size: 13px; color: rgba(250,248,244,0.5); margin-top: 6px; line-height: 1.65; }
+.nc-meta strong { color: rgba(250,248,244,0.8); font-weight: 500; }
+
+/* FOOTER */
+footer { background: rgba(0,0,0,0.3); padding: 40px 48px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; }
+.f-info { font-size: 13px; color: rgba(250,248,244,0.35); }
+.f-info strong { color: rgba(250,248,244,0.6); }
+.f-brand { font-family: "Cormorant Garamond", serif; font-size: 15px; color: rgba(250,248,244,0.2); }
+.f-brand em { font-style: italic; color: rgba(232,212,106,0.4); }
+
+.fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-up.visible { opacity: 1; transform: none; }
+
+@media(max-width:900px){
+  .hero { padding: 100px 24px 52px; }
+  .page { padding: 0 24px 72px; }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 14px; text-align: center; padding: 28px 20px; }
+  .part-divider { margin: 0 -24px; padding: 32px 24px; }
+  .esc-step { flex-direction: column; gap: 6px; }
+  .esc-day { width: auto; font-size: 22px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="back-nav">
+  <a href="index.html" class="back-btn">
+    <span class="arrow">&#8592;</span>
+    Torna all&rsquo;indice
+  </a>
+  <span class="back-nav-title">Call #4 &mdash; Iscrizione &amp; Pagamenti</span>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <span class="tag">Call #4</span>
+      <span class="sep">/</span>
+      <span class="tag">8 maggio 2026</span>
+      <span class="sep">/</span>
+      <span class="tag">Audit Digitale</span>
+    </div>
+    <h1>Iscrizione &amp; <em>Pagamenti</em></h1>
+    <p class="hero-sub">Quarta sessione dell&rsquo;audit dedicata alla procedura amministrativa: dall&rsquo;inserimento dell&rsquo;anagrafica alla firma digitale del contratto, dal ciclo TSPay alla gestione degli insoluti. Prima sessione con Maria Grazia (Responsabile Amministrativa). Trattati anche reception, totem, certificati medici e tesseramento CSI.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><span class="lbl">Presenti</span><span class="val">Rolle M. &middot; Gravante L. &middot; Maria Grazia &middot; Taruggi M.</span></div>
+      <div class="hero-meta-item"><span class="lbl">Data</span><span class="val">8 maggio 2026</span></div>
+      <div class="hero-meta-item"><span class="lbl">Condotto da</span><span class="val">Maurizio Taruggi</span></div>
+    </div>
+    <div class="hero-parts">
+      <div class="hero-part-badge active">Parte I &mdash; Iscrizione &amp; Contratto</div>
+      <div class="hero-part-badge active">Parte II &mdash; Pagamenti &amp; Insoluti</div>
+      <div class="hero-part-badge active">Parte III &mdash; Reception &amp; Certificati</div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- ══════════════════ PARTE I: ISCRIZIONE & CONTRATTO ══════════════════ -->
+  <div class="part-divider fade-up">
+    <div class="part-number">Parte I &mdash; Sessione con Maria Grazia</div>
+    <div class="part-title">Procedura di <em>iscrizione</em> e contratto</div>
+    <div class="part-desc">Step by step di come la segreteria gestisce ogni nuovo iscritto su InForYou: anagrafica, abbonamento, rate, contratto, firma Wacom, archiviazione.</div>
+  </div>
+
+  <!-- I.01 FLUSSO -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">I.01 &middot; Flusso operativo as-is</div>
+    <h2>Lo step by step <em>della segreteria</em></h2>
+    <div class="prose" style="margin-bottom:18px;">
+      <p>La consulente accoglie il cliente alla reception e gestisce l&rsquo;intero ciclo all&rsquo;interno di <strong>InForYou</strong>. La procedura segue oggi cinque passaggi distinti, con controlli intermedi sull&rsquo;anagrafica e firma digitale finale.</p>
+    </div>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-num">01</div>
+        <div class="flow-name">Anagrafica</div>
+        <div class="flow-note">Inserimento dati e controllo codice fiscale</div>
+        <div class="flow-arrow">&#10095;</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">02</div>
+        <div class="flow-name">Abbonamento</div>
+        <div class="flow-note">Selezione tipologia e prezzo</div>
+        <div class="flow-arrow">&#10095;</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">03</div>
+        <div class="flow-name">Rate</div>
+        <div class="flow-note">Caricamento del piano rateale</div>
+        <div class="flow-arrow">&#10095;</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">04</div>
+        <div class="flow-name">Contratto</div>
+        <div class="flow-note">Generazione automatica + firma su tavoletta Wacom</div>
+        <div class="flow-arrow">&#10095;</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">05</div>
+        <div class="flow-name">Archivio &amp; email</div>
+        <div class="flow-note">PDF firmato salvato in InForYou + inviato al cliente</div>
+      </div>
+    </div>
+    <div class="grid-2" style="margin-top:18px;">
+      <div class="card">
+        <div class="card-title">&#x1F4DD; Cosa entra nel contratto</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot y"></div><div>Anagrafica completa del socio</div></div>
+          <div class="item"><div class="dot y"></div><div>Tipologia di abbonamento e durata</div></div>
+          <div class="item"><div class="dot y"></div><div>Piano rate: numero, importo, scadenze</div></div>
+          <div class="item"><div class="dot y"></div><div>Firma digitale apposta su <strong>tavoletta Wacom</strong></div></div>
+        </div>
+      </div>
+      <div class="card gold">
+        <div class="card-title">&#x1F4E5; Archiviazione</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot g"></div><div>PDF firmato salvato direttamente <strong>su InForYou</strong></div></div>
+          <div class="item"><div class="dot g"></div><div>Copia inviata via email al cliente in allegato</div></div>
+          <div class="item"><div class="dot w"></div><div>Mai utilizzato per azioni legali o recupero crediti</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- I.02 RUOLO CONTRATTO -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">I.02 &middot; Il ruolo del contratto</div>
+    <h2>Da documento di archivio a <em>strumento di trasparenza</em></h2>
+    <div class="prose" style="margin-bottom:14px;">
+      <p>Ronchiverdi conferma che la <strong>policy interna</strong> &egrave; non accanirsi sul cliente: niente azioni legali, recupero crediti gestito esclusivamente per via telefonica. Il contratto, quindi, oggi non viene mai &ldquo;tirato fuori&rdquo; nelle interazioni con il socio.</p>
+    </div>
+    <div class="quote-block">
+      <div class="quote-text">&ldquo;Non &egrave; questione di accanimento. Il contratto serve come elemento di forza per giustificare una soluzione bonaria: il cliente deve capire chiaramente che ha sottoscritto un abbonamento annuale in quattro rate. Cos&igrave; eviti il classico &lsquo;Lorella non me l&rsquo;ha detto&rsquo;.&rdquo;</div>
+      <div class="quote-attr">Maurizio Taruggi</div>
+    </div>
+    <div class="callout">
+      <div class="callout-label">Spunto strategico</div>
+      <p>Il contratto da solo non basta. Lo affianchiamo a una <strong>knowledge base</strong> condivisa che renda tutte le procedure trasparenti e leggibili. Il socio non pu&ograve; pi&ugrave; dire &ldquo;non lo sapevo&rdquo; e il personale di front desk non ha pi&ugrave; bisogno di interpretare regole verbali. <strong>Trasparenza prima dell&rsquo;escalation</strong>.</p>
+    </div>
+    <div class="callout">
+      <div class="callout-label">Azione di audit</div>
+      <p>Maria Grazia invier&agrave; a Maurizio <strong>il contratto attuale</strong> per una revisione legale dedicata a privacy e trattamento dati. Verifica della clausola di conformit&agrave; prima dell&rsquo;introduzione di nuove automazioni (es. invio Kiron).</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════ PARTE II: PAGAMENTI & INSOLUTI ══════════════════ -->
+  <div class="part-divider fade-up">
+    <div class="part-number">Parte II &mdash; Ciclo finanziario</div>
+    <div class="part-title">Pagamenti, scontrini &amp; <em>insoluti</em></div>
+    <div class="part-desc">Metodi di pagamento accettati, ciclo TSPay/Cofidis, fatturazione, e procedura di gestione del debito con escalation graduale.</div>
+  </div>
+
+  <!-- II.01 METODI DI PAGAMENTO -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">II.01 &middot; Metodi di pagamento</div>
+    <h2>Acconto in sede e <em>rate ricorrenti</em></h2>
+    <div class="prose" style="margin-bottom:14px;">
+      <p>Il primo acconto/prima rata viene pagato <strong>in loco</strong>. Le rate successive sono addebitate automaticamente via TSPay o gestite tramite finanziamento Cofidis. Lo scontrino fiscale viene emesso dalla consulente stessa con stampante fiscale collegata a InForYou.</p>
+    </div>
+    <table class="data-table">
+      <thead>
+        <tr><th>Metodo</th><th>Quando</th><th>Note</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Contanti / POS bancomat</td><td>Acconto in sede</td><td>Scontrino emesso immediatamente</td></tr>
+        <tr><td>Bonifico</td><td>Primo pagamento</td><td>Verifica accredito prima di sbloccare</td></tr>
+        <tr><td>Assegno post-datato</td><td>Eccezione</td><td>Blocco automatico in caso di mancato pagamento</td></tr>
+        <tr><td>TSPay &mdash; carta di credito</td><td>Rate ricorrenti</td><td>Addebito automatico ore 8:00 del mattino</td></tr>
+        <tr><td>TSPay &mdash; SEPA</td><td>Rate ricorrenti</td><td>Ciclo 3&ndash;4 gg; scontrino dopo 6&ndash;7 gg per sicurezza</td></tr>
+        <tr><td>Cofidis</td><td>Finanziamento</td><td><strong>Pro soluto</strong>: nessun rischio sui crediti</td></tr>
+      </tbody>
+    </table>
+    <div class="grid-3" style="margin-top:18px;">
+      <div class="card">
+        <div class="card-title">&#x1F9FE; Scontrini fiscali</div>
+        <div class="card-body">Emessi dalla consulente con <strong>stampante fiscale collegata a InForYou</strong>. IVA 22% standard o 0% per i ricavi istituzionali (art. 4).</div>
+      </div>
+      <div class="card">
+        <div class="card-title">&#x1F9FE; Fatture</div>
+        <div class="card-body">Emesse lo stesso giorno se richieste. Gestione tramite <strong>Team System Area 32</strong>, trattate come ricavo commerciale con IVA.</div>
+      </div>
+      <div class="card gold">
+        <div class="card-title">&#x26A0;&#xFE0F; Falsi positivi SEPA</div>
+        <div class="card-body">Alcune banche generano esiti SEPA ritardati o <strong>late failure payment</strong> che complicano la gestione degli scontrini gi&agrave; emessi.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- II.02 TSPAY VS COFIDIS -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">II.02 &middot; Strategia ricorrenza</div>
+    <h2>TSPay o Cofidis? <em>Due logiche diverse</em></h2>
+    <div class="prose" style="margin-bottom:14px;">
+      <p>Ronchiverdi sta gradualmente spostando volume su Cofidis per il vantaggio del <strong>pro soluto</strong>. Maurizio rilancia il valore strategico di TSPay come abilitatore dell&rsquo;iscrizione <strong>online &amp; in autonomia</strong>: con i dati di pagamento memorizzati il rinnovo &egrave; immediato e la segreteria viene alleggerita.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card green">
+        <div class="card-title">&#x1F4B0; Cofidis (finanziamento)</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot g"></div><div><strong>Pro soluto</strong>: nessun rischio crediti per il club</div></div>
+          <div class="item"><div class="dot g"></div><div>Strategia spinta da Ronchiverdi per ridurre insoluti</div></div>
+          <div class="item"><div class="dot w"></div><div>Richiede iscrizione assistita in sede</div></div>
+        </div>
+      </div>
+      <div class="card gold">
+        <div class="card-title">&#x1F4B3; TSPay (ricorrenza)</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot g"></div><div>Permette <strong>iscrizione online in autonomia</strong></div></div>
+          <div class="item"><div class="dot g"></div><div>Rinnovo automatico: dati di pagamento gi&agrave; memorizzati</div></div>
+          <div class="item"><div class="dot g"></div><div>Alleggerisce il carico della segreteria nei picchi</div></div>
+          <div class="item"><div class="dot r"></div><div><strong>Gap</strong>: nessun reminder sulla scadenza delle carte di credito</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:18px;">
+      <div class="callout-label">Azione &mdash; Scadenza carte di credito</div>
+      <p>Le carte scadono spesso a 6 mesi: oggi il sistema le scopre solo come insoluto. <strong>Verificare con TSPay</strong> la disponibilit&agrave; di alert anticipati e la possibilit&agrave; di inviare al cliente una email con <strong>link diretto per salvare la nuova carta</strong> &mdash; problema e soluzione nello stesso messaggio.</p>
+    </div>
+  </div>
+
+  <!-- II.03 INSOLUTI - STATO ATTUALE -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">II.03 &middot; Insoluti as-is</div>
+    <h2>Come si gestisce <em>oggi</em> il recupero crediti</h2>
+    <div class="prose" style="margin-bottom:14px;">
+      <p>Il giorno in cui la rata scade (es. il 9 del mese) il sistema <strong>blocca immediatamente l&rsquo;accesso</strong> al cliente e parte una email automatica. Il team di segreteria genera <strong>manualmente</strong> ogni settimana un elenco Excel degli insoluti che usa per la chiamata di sollecito.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-title">&#x1F4E7; Trigger email</div>
+        <div class="card-body">Email automatica al cliente alla scadenza non rispettata. <em>(Da inviare a Maurizio per allegarla al verbale.)</em></div>
+      </div>
+      <div class="card">
+        <div class="card-title">&#x1F6AB; Blocco accesso</div>
+        <div class="card-body">Blocco <strong>immediato</strong> al tornello al primo mancato pagamento. Sblocco solo a saldo.</div>
+      </div>
+      <div class="card red">
+        <div class="card-title">&#x1F4CB; Excel insoluti</div>
+        <div class="card-body">Estratto <strong>manualmente</strong> ogni settimana da InForYou. Usato per le chiamate di sollecito. Nessuna tracciatura nel CRM delle comunicazioni effettuate.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- II.04 INSOLUTI - PROPOSTA -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">II.04 &middot; Modello proposto</div>
+    <h2>Da Excel statico a <em>pipeline condivisa</em></h2>
+    <div class="prose" style="margin-bottom:14px;">
+      <p>L&rsquo;ipotesi condivisa &egrave; costruire un <strong>strumento comune in cloud</strong> (Airtable + InForYou) in cui caricare gli insoluti estratti. Diventa una pipeline trattata come quella dei lead: ogni debito ha uno stato, un timestamp, le note delle comunicazioni, una sua anzianit&agrave;. Il monitoraggio diventa <strong>quantitativo e qualitativo</strong> sull&rsquo;intero processo.</p>
+    </div>
+    <div class="escalation">
+      <div class="esc-step s1">
+        <div class="esc-day">Giorno 0</div>
+        <div class="esc-body">
+          <div class="esc-title">Scadenza rata &mdash; blocco automatico</div>
+          <div class="esc-desc">Email automatica al cliente. Blocco accesso al tornello. Il record entra in pipeline con timestamp di partenza.</div>
+        </div>
+      </div>
+      <div class="esc-step s1">
+        <div class="esc-day">+7 gg</div>
+        <div class="esc-body">
+          <div class="esc-title">Sollecito soft</div>
+          <div class="esc-desc">Email + chiamata in tono &ldquo;ti sei dimenticato?&rdquo;. Script standard per evitare interpretazioni del personale. Note registrate sul record.</div>
+        </div>
+      </div>
+      <div class="esc-step s2">
+        <div class="esc-day">+15 gg</div>
+        <div class="esc-body">
+          <div class="esc-title">Penale &amp; chiamata diretta</div>
+          <div class="esc-desc">Sull&rsquo;esempio Ready 2 Digital: addebito automatico di <strong>&euro;10 di penale</strong>, chiamata mirata, eventuale proposta di soluzione bonaria.</div>
+        </div>
+      </div>
+      <div class="esc-step s2">
+        <div class="esc-day">+30/60 gg</div>
+        <div class="esc-body">
+          <div class="esc-title">Escalation strutturata</div>
+          <div class="esc-desc">Comunicazione formale con riferimento al contratto sottoscritto. Trasparenza sulle conseguenze del mancato pagamento.</div>
+        </div>
+      </div>
+      <div class="esc-step s3">
+        <div class="esc-day">+90 gg</div>
+        <div class="esc-body">
+          <div class="esc-title">Terza rata insoluta &mdash; chiusura</div>
+          <div class="esc-desc">Tutte le rate residue messe in scadenza, abbonamento chiuso, debito mantenuto attivo sul gestionale.</div>
+        </div>
+      </div>
+    </div>
+    <div class="callout">
+      <div class="callout-label">Benchmark interno &mdash; Ready 2 Digital</div>
+      <p>Pipeline tipo &ldquo;lead&rdquo; applicata al credito: il sistema produce un&rsquo;incidenza dello <strong>0,54% sul fatturato</strong>. Penale &euro;10 al 15&deg; giorno di ritardo (caricata il 16 del mese), tempo considerato congruo per consentire al cliente di risolvere eventuali problemi tecnici bancari.</p>
+    </div>
+  </div>
+
+  <!-- II.05 PADEL & PAGAMENTI VOLANTI -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">II.05 &middot; Pagamenti volanti</div>
+    <h2>Il caso <em>padel</em> e le piccole somme</h2>
+    <div class="prose">
+      <p>Affitto campi padel: i clienti giocano e si dimenticano di pagare importi piccoli (&euro;12&ndash;&euro;20). Il pagamento online esiste ma <strong>adozione bassa</strong>: i competitor permettono di non pagare, e i clienti non vogliono anticipare la quota campo divisa tra quattro giocatori. Stesso pattern si presenta su Aspresso (bar).</p>
+    </div>
+  </div>
+
+  <!-- II.06 REPORTISTICA -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">II.06 &middot; Reportistica mensile</div>
+    <h2>Dai report Excel a una <em>dashboard unica</em></h2>
+    <div class="prose" style="margin-bottom:14px;">
+      <p>Maria Grazia produce un report mensile che differenzia gli incassi per fonte: <strong>TSPay, Cofidis, incassi interni</strong>. Maurizio propone di organizzare una call dedicata, dove analizzare in profondit&agrave; la logica dati di InForYou e progettare una <strong>dashboard unica di controllo di gestione</strong> in Airtable + cloud.</p>
+    </div>
+    <div class="grid-3">
+      <div class="stat-card gold">
+        <div class="stat-num">TSPay</div>
+        <div class="stat-label"><strong>Carte e SEPA</strong><br>rate ricorrenti</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-num">Cofidis</div>
+        <div class="stat-label"><strong>Finanziamento</strong><br>pro soluto</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">Interno</div>
+        <div class="stat-label"><strong>Contanti / POS / bonifico</strong><br>incassi in sede</div>
+      </div>
+    </div>
+    <div class="callout">
+      <div class="callout-label">Azione &mdash; Call follow-up</div>
+      <p>Maria Grazia invia a Maurizio <strong>il file Excel</strong> del report mensile. Da pianificare una call dedicata all&rsquo;analisi della reportistica e alla definizione delle viste necessarie per la dashboard di gestione.</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════ PARTE III: RECEPTION, CERTIFICATI & PERSONALE ══════════════════ -->
+  <div class="part-divider fade-up">
+    <div class="part-number">Parte III &mdash; Operativit&agrave; quotidiana</div>
+    <div class="part-title">Reception, totem &amp; <em>certificati medici</em></div>
+    <div class="part-desc">Riorganizzazione fisica della reception, ruolo dei totem touchscreen, esternalizzazione Kiron dei certificati medici e tesseramento CSI.</div>
+  </div>
+
+  <!-- III.01 RECEPTION & TOTEM -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">III.01 &middot; Reception &amp; totem</div>
+    <h2>Dal bancone <em>al customer care</em></h2>
+    <div class="prose" style="margin-bottom:14px;">
+      <p>Il club ha acquistato grandi <strong>televisori touchscreen (totem)</strong>. Ronchiverdi vuole usarli in modo &ldquo;didattico&rdquo; e informativo, come grande <strong>brochure digitale</strong> che aiuti il cliente a trovare informazioni e completare in autonomia le iscrizioni. Maurizio conferma il principio: i totem self-service <strong>non funzionano se affiancati alla segreteria</strong>, ma sono efficaci se usati per istruire il cliente.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">&#x1F3D7;&#xFE0F; Riorganizzazione spazio</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot y"></div><div>Riduzione del <strong>50% del grande bancone</strong> reception</div></div>
+          <div class="item"><div class="dot y"></div><div>Affiancamento di postazioni pi&ugrave; <strong>open</strong> per le consulenti</div></div>
+          <div class="item"><div class="dot g"></div><div>Trasformazione in <strong>customer care</strong>, non in barriera</div></div>
+          <div class="item"><div class="dot g"></div><div>Personale dalla stessa parte dell&rsquo;utente</div></div>
+        </div>
+      </div>
+      <div class="card gold">
+        <div class="card-title">&#x1F4FA; Uso strategico dei totem</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot y"></div><div>Brochure digitale: informazioni sempre aggiornate</div></div>
+          <div class="item"><div class="dot y"></div><div>Supporto all&rsquo;iscrizione digitale autonoma</div></div>
+          <div class="item"><div class="dot y"></div><div>L&rsquo;operatore <strong>supporta</strong>, non gestisce la transazione</div></div>
+          <div class="item"><div class="dot w"></div><div>Esempi di riferimento: <strong>Autogrill, Leroy Merlin</strong></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="quote-block">
+      <div class="quote-text">&ldquo;La filosofia &egrave; razionalizzare i processi per trasferire il valore dove serve davvero: il personale si concentra sulla consulenza e sulla retention, il totem fa la transazione.&rdquo;</div>
+      <div class="quote-attr">Maurizio Taruggi</div>
+    </div>
+  </div>
+
+  <!-- III.02 CERTIFICATI MEDICI -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">III.02 &middot; Certificati medici</div>
+    <h2>Esternalizzare a Kiron e <em>automatizzare</em></h2>
+    <div class="prose" style="margin-bottom:14px;">
+      <p>Oggi il cliente porta il certificato in sede, le ragazze lo scansionano e lo archiviano. L&rsquo;obiettivo &egrave; spostare la gestione <strong>a Kiron</strong> (societ&agrave; partner per le visite mediche), che inviare&agrave; direttamente i PDF. Prerequisiti: accordo privacy formale, flag specifico nel modulo per il consenso del cliente, integrazione del flusso dati con InForYou.</p>
+    </div>
+    <div class="grid-2" style="margin-bottom:8px;">
+      <div class="card red">
+        <div class="card-title">&#x1F4C1; Stato attuale (criticit&agrave;)</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot r"></div><div>Archiviazione cartacea per data di arrivo &mdash; ricerca <strong>difficile</strong></div></div>
+          <div class="item"><div class="dot r"></div><div>Tempo segreteria assorbito da scansione manuale</div></div>
+          <div class="item"><div class="dot r"></div><div>Conservazione originali obbligatoria <strong>10 anni</strong> per fini fiscali</div></div>
+          <div class="item"><div class="dot r"></div><div>Dubbi su privacy e genuinit&agrave; del certificato</div></div>
+        </div>
+      </div>
+      <div class="card green">
+        <div class="card-title">&#x1F4E8; Stato target (con Kiron)</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot g"></div><div>PDF inviati direttamente via email da Kiron</div></div>
+          <div class="item"><div class="dot g"></div><div>Eliminazione completa del cartaceo lato segreteria</div></div>
+          <div class="item"><div class="dot g"></div><div>Liste clienti da rinviare a Kiron generate da InForYou</div></div>
+          <div class="item"><div class="dot y"></div><div>Richiesto <strong>parere legale</strong> sulla validit&agrave; delle copie</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="callout">
+      <div class="callout-label">Nota tariffaria</div>
+      <p>Per i clienti <strong>corporate in partnership con Kiron</strong>, il costo del certificato medico (circa &euro;50) viene gi&agrave; <strong>anticipato nel costo dell&rsquo;abbonamento</strong>.</p>
+    </div>
+  </div>
+
+  <!-- III.03 ESCALATION CERTIFICATI -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">III.03 &middot; Tolleranza certificati &mdash; escalation</div>
+    <h2>Una procedura <em>chiara e graduata</em></h2>
+    <div class="prose" style="margin-bottom:14px;">
+      <p>Tema delicato: Ronchiverdi &egrave; club premium e non vuole &ldquo;cacciare le persone&rdquo;, ma serve <strong>uniformit&agrave;</strong> tra il personale. La proposta operativa &egrave; un campo &ldquo;<strong>certificato provvisorio</strong>&rdquo; nel gestionale che, valorizzato, sblocca tutti gli accessi (incluso parcheggio) per la finestra di tolleranza.</p>
+    </div>
+    <div class="grid-2" style="margin-bottom:18px;">
+      <div class="card gold">
+        <div class="card-title">&#x1F551; Tempistiche concordate</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot y"></div><div>Termine <strong>15 giorni</strong> per nuovi iscritti <em>e</em> rinnovi</div></div>
+          <div class="item"><div class="dot y"></div><div>Tolleranza tecnica di <strong>14 giorni</strong> sul gestionale</div></div>
+          <div class="item"><div class="dot w"></div><div>Difficolt&agrave; nota: appuntamenti medici a sett./ott. quasi impossibili in tempi rapidi</div></div>
+          <div class="item"><div class="dot r"></div><div>Responsabilit&agrave; legale ricade sul <strong>rappresentante legale</strong></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">&#x1F4E9; Comunicazioni durante la tolleranza</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot y"></div><div>Template <strong>email standard</strong> inviato ad ogni deroga concessa</div></div>
+          <div class="item"><div class="dot y"></div><div>Effetto interno (audit) ed esterno (cliente)</div></div>
+          <div class="item"><div class="dot g"></div><div>Canale <strong>WhatsApp</strong> preferito per target anziano</div></div>
+          <div class="item"><div class="dot w"></div><div>Da valutare: alert automatici via gestionale InForYou</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="escalation">
+      <div class="esc-step s1">
+        <div class="esc-day">15 gg</div>
+        <div class="esc-body">
+          <div class="esc-title">Tolleranza con comunicazione</div>
+          <div class="esc-desc">Sblocco accessi con flag &ldquo;certificato provvisorio&rdquo;. Email/WhatsApp di promemoria al cliente.</div>
+        </div>
+      </div>
+      <div class="esc-step s2">
+        <div class="esc-day">+1 sett.</div>
+        <div class="esc-body">
+          <div class="esc-title">Deroga aggiuntiva</div>
+          <div class="esc-desc">Possibilit&agrave; di estendere la tolleranza di una settimana. Tracciamento sul record cliente.</div>
+        </div>
+      </div>
+      <div class="esc-step s3">
+        <div class="esc-day">Fine</div>
+        <div class="esc-body">
+          <div class="esc-title">Blocco accessi</div>
+          <div class="esc-desc">Blocco automatico al tornello fino a presentazione del certificato definitivo. Niente discrezionalit&agrave; del front desk.</div>
+        </div>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:18px;">
+      <div class="callout-label">Tensione strategica</div>
+      <p>L&rsquo;obiettivo &egrave; <strong>fornire certezze al personale</strong> che interagisce con il pubblico e ridurre la discrezionalit&agrave;. Front desk oggi sotto pressione: gestisce contemporaneamente certificati scaduti, braccialetti non indossati per il tornello, richieste varie. Le procedure devono mettere ordine senza diventare vessatorie.</p>
+    </div>
+  </div>
+
+  <!-- III.04 CSI & YOUNG SCHOOL -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">III.04 &middot; CSI &amp; Young School</div>
+    <h2>Tesseramento automatico e <em>piattaforma condivisa</em></h2>
+    <div class="grid-2">
+      <div class="card gold">
+        <div class="card-title">&#x1F3C5; Automazione tesseramento CSI</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot y"></div><div>Servono <strong>i nuovi abbonamenti in formato giornaliero</strong></div></div>
+          <div class="item"><div class="dot y"></div><div>Tesseramento automatico nel sistema CSI</div></div>
+          <div class="item"><div class="dot g"></div><div>Polizza assicurativa attiva dalla <strong>mezzanotte successiva</strong> al tesseramento</div></div>
+          <div class="item"><div class="dot w"></div><div>Maurizio: organizzare call dedicata con <strong>In For You</strong> per le comunicazioni automatiche</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">&#x1F3CA; Young School &mdash; passaggio dati</div>
+        <div class="card-body item-list">
+          <div class="item"><div class="dot r"></div><div>Oggi: comunicazione <strong>verbale</strong> tra responsabili e segreteria sui pagamenti post-prova</div></div>
+          <div class="item"><div class="dot y"></div><div>Proposta: piattaforma condivisa con esito prova + abbonamento consigliato</div></div>
+          <div class="item"><div class="dot g"></div><div>La segreteria vede subito tutto, niente ricostruzione manuale</div></div>
+          <div class="item"><div class="dot g"></div><div>Niente pi&ugrave; &ldquo;l&rsquo;ho detto a Chiara, ma Francesca non lo sapeva&rdquo;</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- III.05 RUOLI -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">III.05 &middot; Divisione dei ruoli</div>
+    <h2>Consulenti &amp; receptionist: <em>perimetri da chiarire</em></h2>
+    <div class="prose" style="margin-bottom:14px;">
+      <p>Struttura operativa attuale: i <strong>consulenti</strong> gestiscono le nuove iscrizioni (&ldquo;new&rdquo;), le <strong>receptionist</strong> si occupano dei rinnovi e talvolta anche del new. Modello pi&ugrave; efficiente del precedente, ma con due gap residui: la <strong>formazione sulla retention</strong> e l&rsquo;<strong>alleggerimento dalle attivit&agrave; non remunerative</strong> per mantenere freschezza nell&rsquo;acquisizione.</p>
+    </div>
+    <div class="callout">
+      <div class="callout-label">Tre leve identificate da Ronchiverdi</div>
+      <p><strong>1. Formazione del personale</strong> sui nuovi flussi e percorsi. <strong>2. Educazione del cliente</strong> tramite comunicazioni chiare (messaging strutturato). <strong>3. Pagamento digitale</strong>, in particolare per la Young School.</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════ ROADMAP ══════════════════ -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">04 &middot; Azioni di follow-up</div>
+    <h2>Roadmap <em>operativa</em></h2>
+    <div class="roadmap">
+      <div class="rm-item p1">
+        <div class="rm-priority">1</div>
+        <div class="rm-body">
+          <div class="rm-tag">Immediato &mdash; Ronchiverdi</div>
+          <div class="rm-title">Invio email di sollecito insoluto a Maurizio</div>
+          <div class="rm-desc">Inviare a Maurizio l&rsquo;email automatica attualmente generata in caso di insoluto. Verr&agrave; allegata al verbale come riferimento per la riprogettazione del flusso.</div>
+        </div>
+      </div>
+      <div class="rm-item p1">
+        <div class="rm-priority">2</div>
+        <div class="rm-body">
+          <div class="rm-tag">Immediato &mdash; Ronchiverdi</div>
+          <div class="rm-title">Mostrare la procedura di registrazione SEPA digitale</div>
+          <div class="rm-desc">Sessione tecnica dedicata in cui Maria Grazia mostra a Maurizio l&rsquo;iter di registrazione SEPA via TSPay (in vista dell&rsquo;abilitazione del flusso online).</div>
+        </div>
+      </div>
+      <div class="rm-item p1">
+        <div class="rm-priority">3</div>
+        <div class="rm-body">
+          <div class="rm-tag">Immediato &mdash; Ronchiverdi</div>
+          <div class="rm-title">Inviare il contratto attuale per revisione legale</div>
+          <div class="rm-desc">Maurizio analizza l&rsquo;impianto contrattuale dal punto di vista privacy e trattamento dati, soprattutto in vista dell&rsquo;esternalizzazione Kiron per i certificati medici.</div>
+        </div>
+      </div>
+      <div class="rm-item p1">
+        <div class="rm-priority">4</div>
+        <div class="rm-body">
+          <div class="rm-tag">Immediato &mdash; Ronchiverdi</div>
+          <div class="rm-title">Inviare il file Excel del report mensile</div>
+          <div class="rm-desc">Maria Grazia condivide il report contabile mensile in formato Excel. Base di partenza per la dashboard unica di controllo di gestione.</div>
+        </div>
+      </div>
+      <div class="rm-item p1">
+        <div class="rm-priority">5</div>
+        <div class="rm-body">
+          <div class="rm-tag">Immediato &mdash; Visita 19 maggio</div>
+          <div class="rm-title">Organizzare la partecipazione di Maurizio alla call con Kiron</div>
+          <div class="rm-desc">Kiron incontra Ronchiverdi il <strong>19 maggio</strong>: Maurizio partecipa per allineare il flusso PDF, il flag privacy e l&rsquo;integrazione con InForYou.</div>
+        </div>
+      </div>
+      <div class="rm-item p2">
+        <div class="rm-priority">6</div>
+        <div class="rm-body">
+          <div class="rm-tag">Breve termine &mdash; Maurizio</div>
+          <div class="rm-title">Call dedicata con In For You sulle comunicazioni automatiche</div>
+          <div class="rm-desc">Verifica diretta col vendor delle automazioni gestionali disponibili: trigger email, scadenze, WhatsApp, alert TSPay sulla scadenza carte.</div>
+        </div>
+      </div>
+      <div class="rm-item p2">
+        <div class="rm-priority">7</div>
+        <div class="rm-body">
+          <div class="rm-tag">Breve termine &mdash; Maurizio</div>
+          <div class="rm-title">Implementare automazione tesseramento CSI</div>
+          <div class="rm-desc">Processare i nuovi abbonamenti giornalieri per il tesseramento CSI: polizza assicurativa attiva dalla mezzanotte successiva.</div>
+        </div>
+      </div>
+      <div class="rm-item p2">
+        <div class="rm-priority">8</div>
+        <div class="rm-body">
+          <div class="rm-tag">Breve termine &mdash; Ronchiverdi</div>
+          <div class="rm-title">Elenco completo delle email automatiche &mdash; INFIO</div>
+          <div class="rm-desc">Documento riepilogativo: tutte le comunicazioni automatiche attive, le scadenze che le triggerano, il testo standard. Base per il redesign del messaging.</div>
+        </div>
+      </div>
+      <div class="rm-item p3">
+        <div class="rm-priority">9</div>
+        <div class="rm-body">
+          <div class="rm-tag">Preparazione prossima call</div>
+          <div class="rm-title">Materiale cliente post-iscrizione</div>
+          <div class="rm-desc">Ronchiverdi prepara il materiale preparatorio sulla gestione post-iscrizione: reclami, richieste, gestione tornello, canale email.</div>
+        </div>
+      </div>
+      <div class="rm-item p3">
+        <div class="rm-priority">10</div>
+        <div class="rm-body">
+          <div class="rm-tag">Preparazione prossima call</div>
+          <div class="rm-title">Lista operativit&agrave; quotidiana ricorrente</div>
+          <div class="rm-desc">Sintesi delle azioni e dei problemi ricorrenti che il front desk affronta ogni giorno: input strutturato per la mappatura del customer care.</div>
+        </div>
+      </div>
+      <div class="rm-item p3">
+        <div class="rm-priority">11</div>
+        <div class="rm-body">
+          <div class="rm-tag">Medio termine &mdash; Maurizio</div>
+          <div class="rm-title">Call follow-up reportistica &amp; dashboard</div>
+          <div class="rm-desc">Sessione dedicata all&rsquo;analisi dei dati InForYou, progettazione della dashboard Airtable + cloud per controllo di gestione unico (TSPay, Cofidis, interni).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VISITA -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">05 &middot; Visita in loco</div>
+    <h2>Torino, <em>15&ndash;20 maggio</em></h2>
+    <div class="callout">
+      <div class="callout-label">Pianificazione</div>
+      <p>Maurizio sar&agrave; a Torino dal <strong>15 maggio</strong>, con focus operativo <strong>18, 19 e 20 maggio</strong>. La visita si concentra sulla <strong>segreteria</strong>: ascolto, raccolta note sui task fisici ricorrenti, gestione certificati medici. Il <strong>19 maggio</strong> Maurizio partecipa anche alla call con Kiron.</p>
+    </div>
+  </div>
+
+  <!-- NEXT CALL BANNER -->
+  <div class="next-call-banner fade-up">
+    <div class="nc-icon">&#x1F4C5;</div>
+    <div class="nc-body">
+      <div class="nc-label">Prossima sessione</div>
+      <div class="nc-title">Call #5 &mdash; <em>Gestione post-iscrizione</em></div>
+      <div class="nc-meta">Tema: gestione del cliente <strong>dopo</strong> l&rsquo;iscrizione. Lamentele, richieste particolari, canale email, gestione tornello. Materiale preparatorio in arrivo da Ronchiverdi: elenco email automatiche INFIO e lista operativit&agrave; ricorrente del front desk.</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span class="f-info">Audit Digitale &middot; <strong>Ronchiverdi Sport Club</strong> &times; Maurizio Taruggi &mdash; Ready 2 Digital</span>
+  <span class="f-brand">Call #4 &middot; <em>Iscrizione &amp; Pagamenti</em> &middot; 8 maggio 2026</span>
+</footer>
+
+<script>
+var obs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if(e.isIntersecting) e.target.classList.add("visible"); });
+}, { threshold: 0.06 });
+document.querySelectorAll(".fade-up").forEach(function(el) { obs.observe(el); });
+</script>
+</body>
+</html>
