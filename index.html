@@ -36,23 +36,18 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; a
 .nav-mobile-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(232,212,106,0.6); margin-bottom: 24px; display: flex; align-items: center; gap: 12px; opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease 0.1s, transform 0.5s ease 0.1s; }
 .nav-mobile-eyebrow::before { content: ''; width: 24px; height: 1px; background: rgba(232,212,106,0.4); }
 .nav-mobile.open .nav-mobile-eyebrow { opacity: 1; transform: translateY(0); }
-.nav-mobile-list { display: flex; flex-direction: column; gap: 0; flex: 1; }
-.nav-mobile-link { display: block; padding: 22px 0; border-bottom: 1px solid rgba(255,255,255,0.08); text-decoration: none; opacity: 0; transform: translateY(20px); transition: opacity 0.45s ease, transform 0.45s ease; }
-.nav-mobile.open .nav-mobile-link:nth-child(1) { transition-delay: 0.15s; opacity: 1; transform: translateY(0); }
-.nav-mobile.open .nav-mobile-link:nth-child(2) { transition-delay: 0.22s; opacity: 1; transform: translateY(0); }
-.nav-mobile.open .nav-mobile-link:nth-child(3) { transition-delay: 0.29s; opacity: 1; transform: translateY(0); }
-.nav-mobile.open .nav-mobile-link:nth-child(4) { transition-delay: 0.36s; opacity: 1; transform: translateY(0); }
-.nav-mobile.open .nav-mobile-link:nth-child(5) { transition-delay: 0.43s; opacity: 1; transform: translateY(0); }
-.nav-mobile.open .nav-mobile-link:nth-child(6) { transition-delay: 0.50s; opacity: 1; transform: translateY(0); }
-.nav-mobile.open .nav-mobile-link:nth-child(7) { transition-delay: 0.57s; opacity: 1; transform: translateY(0); }
-.nav-mobile.open .nav-mobile-link:nth-child(8) { transition-delay: 0.64s; opacity: 1; transform: translateY(0); }
-.nav-mobile-link-tag { display: block; font-family: 'Jost', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(250,248,244,0.4); margin-bottom: 8px; }
+.nav-mobile-list { display: grid; grid-template-columns: 1fr 1fr; align-content: start; flex: 1; overflow-y: auto; }
+.nav-mobile-link { display: block; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.07); text-decoration: none; opacity: 0; transform: translateY(10px); transition: opacity 0.35s ease 0.12s, transform 0.35s ease 0.12s; }
+.nav-mobile-link:nth-child(odd) { padding-right: 20px; border-right: 1px solid rgba(255,255,255,0.05); }
+.nav-mobile-link:nth-child(even) { padding-left: 20px; }
+.nav-mobile-link:first-child { grid-column: 1 / -1; border-right: none; padding-right: 0; border-bottom-color: rgba(232,212,106,0.15); }
+.nav-mobile.open .nav-mobile-link { opacity: 1; transform: translateY(0); }
+.nav-mobile-link-tag { display: block; font-family: 'Jost', sans-serif; font-size: 9px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(250,248,244,0.35); margin-bottom: 5px; }
 .nav-mobile-link.active .nav-mobile-link-tag { color: #E8D46A; }
-.nav-mobile-link-title { display: block; font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400; color: #FAF8F4; line-height: 1.2; }
+.nav-mobile-link-title { display: block; font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 400; color: #FAF8F4; line-height: 1.25; }
+.nav-mobile-link:first-child .nav-mobile-link-title { font-size: 22px; }
 .nav-mobile-link-title em { font-style: italic; color: #E8D46A; }
-.nav-mobile-link.disabled { opacity: 0.4 !important; pointer-events: none; }
-.nav-mobile.open .nav-mobile-link.disabled { opacity: 0.4; }
-.nav-mobile-link.disabled .nav-mobile-link-title { color: rgba(250,248,244,0.4); }
+.nav-mobile-link.disabled { opacity: 0.3 !important; pointer-events: none; }
 .nav-mobile-link.disabled .nav-mobile-link-tag::after { content: ' · In arrivo'; color: rgba(232,212,106,0.5); }
 .nav-mobile-footer { padding-top: 28px; font-family: 'Cormorant Garamond', serif; font-size: 14px; font-style: italic; color: rgba(250,248,244,0.3); }
 .nav-mobile-footer em { color: #E8D46A; font-style: normal; }
