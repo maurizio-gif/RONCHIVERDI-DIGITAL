@@ -212,8 +212,9 @@ footer { background: rgba(0,0,0,0.3); padding: 40px 48px; border-top: 1px solid 
 .back-btn:hover { color: #E8D46A; }
 .back-btn .arrow { font-size: 16px; transition: transform 0.2s; }
 .back-btn:hover .arrow { transform: translateX(-3px); }
-.back-nav-title { font-family: "Cormorant Garamond", serif; font-size: 14px; font-weight: 300; color: rgba(250,248,244,0.25); font-style: italic; }
-@media(max-width:640px){ .back-nav { padding: 0 20px; } .back-nav-title { display: none; } }
+.back-nav-logo-link { display: flex; align-items: center; }
+.back-nav-logo { height: 36px; width: auto; filter: invert(1); mix-blend-mode: screen; opacity: 0.9; }
+@media(max-width:640px){ .back-nav { padding: 0 20px; } .back-nav-logo { height: 28px; } }
 
 </style>
 </head>
@@ -221,10 +222,12 @@ footer { background: rgba(0,0,0,0.3); padding: 40px 48px; border-top: 1px solid 
 
 <nav class="back-nav">
   <a href="index.html" class="back-btn">
-    <span class="arrow">&#8592;</span>
-    Torna all&rsquo;indice
+    <span class="arrow">←</span>
+    <span>Torna all'indice</span>
   </a>
-  <span class="back-nav-title">Deep dive &mdash; Triathlon &amp; Running</span>
+  <a href="index.html" class="back-nav-logo-link">
+    <img src="ronchiverdi-logo.jpg" class="back-nav-logo" alt="Ronchiverdi">
+  </a>
 </nav>
 </div>
 

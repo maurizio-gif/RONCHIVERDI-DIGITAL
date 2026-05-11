@@ -18,16 +18,12 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; a
 .nav-logo-name { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 500; color: #FAF8F4; line-height: 1; }
 .nav-logo-sub { font-family: 'Jost', sans-serif; font-size: 9.5px; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(232,212,106,0.65); }
 
-/* DESKTOP MENU */
-.nav-menu { display: flex; align-items: center; gap: 32px; }
-.nav-link { font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(250,248,244,0.55); text-decoration: none; padding: 24px 0; border-bottom: 1.5px solid transparent; transition: color 0.2s, border-color 0.2s; cursor: pointer; }
-.nav-link:hover { color: #FAF8F4; }
-.nav-link.active { color: #E8D46A; border-bottom-color: rgba(232,212,106,0.6); }
-.nav-link.disabled { color: rgba(250,248,244,0.25); pointer-events: none; cursor: not-allowed; display: flex; align-items: center; gap: 8px; }
-.nav-link.disabled::after { content: 'In arrivo'; font-size: 8.5px; font-weight: 700; padding: 2px 7px; border-radius: 3px; background: rgba(232,212,106,0.12); color: rgba(232,212,106,0.5); letter-spacing: 0.1em; }
+/* LOGO IMG */
+.nav-left { display: flex; align-items: center; gap: 14px; }
+.nav-logo-img { height: 34px; width: auto; filter: invert(1); mix-blend-mode: screen; opacity: 0.9; }
 
 /* HAMBURGER */
-.nav-hamburger { display: none; width: 40px; height: 40px; flex-direction: column; justify-content: center; align-items: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 0; }
+.nav-hamburger { display: flex; width: 40px; height: 40px; flex-direction: column; justify-content: center; align-items: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 0; }
 .nav-hamburger span { width: 22px; height: 1.5px; background: #FAF8F4; transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.25s; transform-origin: center; }
 .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
 .nav-hamburger.open span:nth-child(2) { opacity: 0; }
@@ -62,13 +58,9 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; a
 
 @media(max-width:768px){
   nav { padding: 0 20px; }
-  .nav-menu { display: none; }
-  .nav-hamburger { display: flex; }
   .nav-logo-name { font-size: 16px; }
   .nav-logo-sub { font-size: 9px; }
-}
-@media(min-width:769px){
-  .nav-mobile { display: none !important; }
+  .nav-logo-img { height: 28px; }
 }
 
 /* HERO */
@@ -280,20 +272,12 @@ footer { background: rgba(0,0,0,0.4); padding: 40px 48px; border-top: 1px solid 
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo">
-    <span class="nav-logo-name">Maurizio Taruggi</span>
-    <span class="nav-logo-sub">per Ronchiverdi Sport Club</span>
-  </a>
-
-  <div class="nav-menu">
-    <a href="index.html" class="nav-link active">Indice</a>
-    <a href="call-1.html" class="nav-link">Call #1</a>
-    <a href="call-2.html" class="nav-link">Call #2</a>
-    <a href="analisi-whatsapp.html" class="nav-link">Analisi WA</a>
-    <a href="triathlon.html" class="nav-link">Triathlon</a>
-    <a href="call-3.html" class="nav-link">Call #3</a>
-    <a href="lead-intelligence.html" class="nav-link">Lead Intel</a>
-    <a href="call-4.html" class="nav-link">Call #4</a>
+  <div class="nav-left">
+    <img src="ronchiverdi-logo.jpg" class="nav-logo-img" alt="Ronchiverdi">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-name">Maurizio Taruggi</span>
+      <span class="nav-logo-sub">per Ronchiverdi Sport Club</span>
+    </a>
   </div>
 
   <button class="nav-hamburger" aria-label="Apri menu" aria-expanded="false">
