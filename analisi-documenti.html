@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analisi Contratti — Moduli operativi · Ronchiverdi Audit</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<meta property="og:title" content="Analisi Contratti — Ronchiverdi Sport Club">
+<meta property="og:description" content="Analisi dei moduli di iscrizione e gap analysis contrattuale: 7 aree di intervento prioritarie.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FAF8F4; font-size: 15px; line-height: 1.7; overflow-x: hidden; font-weight: 300; -webkit-font-smoothing: antialiased; }
+
+/* NAV */
+.back-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: rgba(15,15,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.07); }
+.back-btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(250,248,244,0.55); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; transition: color 0.2s; }
+.back-btn:hover { color: #E8D46A; }
+.back-btn:hover .arrow { transform: translateX(-3px); }
+.arrow { font-size: 16px; transition: transform 0.2s; display: inline-block; }
+.back-nav-logo { height: 36px; width: auto; filter: invert(1); mix-blend-mode: screen; opacity: 0.9; }
+@media(max-width:640px){ .back-nav { padding: 0 20px; } .back-nav-logo { height: 28px; } }
+
+/* HERO */
+.hero { padding: 120px 48px 72px; position: relative; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 80% 30%, rgba(232,212,106,0.05) 0%, transparent 60%); pointer-events: none; }
+.hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+.hero-eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+.tag { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(250,248,244,0.3); }
+.sep { color: rgba(250,248,244,0.15); }
+.hero h1 { font-family: "Cormorant Garamond", serif; font-size: clamp(38px, 5vw, 64px); font-weight: 300; line-height: 1.05; color: #FAF8F4; margin-bottom: 20px; letter-spacing: -0.02em; }
+.hero h1 em { font-style: italic; color: #E8D46A; }
+.hero-sub { font-size: 14px; font-weight: 300; line-height: 1.75; color: rgba(250,248,244,0.45); max-width: 680px; margin-bottom: 36px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 32px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.07); }
+.hero-meta-item .lbl { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(232,212,106,0.5); margin-bottom: 4px; }
+.hero-meta-item .val { font-size: 13px; font-weight: 400; color: rgba(250,248,244,0.7); }
+
+/* LAYOUT */
+.page { max-width: 1100px; margin: 0 auto; padding: 0 48px 100px; }
+@media(max-width:640px){ .page { padding: 0 20px 80px; } .hero { padding: 100px 20px 56px; } }
+
+/* DOC HEADER */
+.doc-header { margin: 0 -48px; padding: 36px 48px; background: rgba(255,255,255,0.02); border-top: 1px solid rgba(232,212,106,0.15); border-bottom: 1px solid rgba(232,212,106,0.15); display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+@media(max-width:640px){ .doc-header { margin: 0 -20px; padding: 28px 20px; } }
+.doc-num { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(232,212,106,0.5); margin-bottom: 8px; }
+.doc-title { font-family: "Cormorant Garamond", serif; font-size: clamp(24px, 3vw, 38px); font-weight: 300; color: #FAF8F4; line-height: 1.1; }
+.doc-title em { font-style: italic; color: #E8D46A; }
+.doc-desc { font-size: 13px; color: rgba(250,248,244,0.4); margin-top: 8px; max-width: 560px; line-height: 1.65; }
+.pill { display: inline-flex; align-items: center; border-radius: 50px; padding: 7px 16px; font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+.pill-gold { border: 1px solid rgba(232,212,106,0.3); color: rgba(232,212,106,0.85); background: rgba(232,212,106,0.06); }
+.pill-green { border: 1px solid rgba(90,180,120,0.3); color: rgba(110,190,140,0.85); background: rgba(90,180,120,0.05); }
+.pill-red { border: 1px solid rgba(200,60,60,0.25); color: rgba(220,120,120,0.85); background: rgba(200,60,60,0.05); }
+.pill-blue { border: 1px solid rgba(90,140,210,0.3); color: rgba(140,185,240,0.85); background: rgba(90,140,210,0.05); }
+.pill-neutral { border: 1px solid rgba(255,255,255,0.1); color: rgba(250,248,244,0.45); background: rgba(255,255,255,0.04); }
+
+/* GAP HEADER — sezione rossa */
+.gap-header { margin: 0 -48px; padding: 40px 48px; background: rgba(200,60,60,0.04); border-top: 1px solid rgba(200,60,60,0.2); border-bottom: 1px solid rgba(200,60,60,0.2); }
+@media(max-width:640px){ .gap-header { margin: 0 -20px; padding: 28px 20px; } }
+.gap-header-label { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(200,80,80,0.7); margin-bottom: 10px; }
+.gap-header-title { font-family: "Cormorant Garamond", serif; font-size: clamp(26px, 3.5vw, 42px); font-weight: 300; color: #FAF8F4; line-height: 1.1; }
+.gap-header-title em { font-style: italic; color: #E8D46A; }
+.gap-header-desc { font-size: 13px; color: rgba(250,248,244,0.4); margin-top: 10px; max-width: 640px; line-height: 1.7; }
+
+/* SECTION */
+.section { padding: 52px 0; border-top: 1px solid rgba(255,255,255,0.06); }
+.section:first-of-type { border-top: none; }
+.eyebrow { font-family: "JetBrains Mono", monospace; font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(232,212,106,0.6); margin-bottom: 12px; }
+.section > h2 { font-family: "Cormorant Garamond", serif; font-size: clamp(22px, 3vw, 34px); font-weight: 300; line-height: 1.15; color: #FAF8F4; margin-bottom: 22px; }
+.section > h2 em { font-style: italic; color: #E8D46A; }
+
+/* PROSE */
+.prose { font-size: 14px; line-height: 1.8; color: rgba(250,248,244,0.5); }
+.prose p { margin-bottom: 12px; }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { color: rgba(250,248,244,0.85); font-weight: 500; }
+
+/* GRIDS */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 20px 0; }
+@media(max-width:900px){ .grid-3 { grid-template-columns: 1fr 1fr; } }
+@media(max-width:640px){ .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+/* CARD */
+.card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 22px 24px; }
+.card.gold { border-color: rgba(232,212,106,0.22); background: rgba(232,212,106,0.04); }
+.card.green { border-color: rgba(90,180,120,0.2); background: rgba(90,180,120,0.04); }
+.card.red { border-color: rgba(200,60,60,0.2); background: rgba(200,60,60,0.04); }
+.card.blue { border-color: rgba(90,140,210,0.2); background: rgba(90,140,210,0.04); }
+.card-label { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 12px; color: rgba(250,248,244,0.35); }
+.card.gold .card-label { color: rgba(232,212,106,0.75); }
+.card.green .card-label { color: rgba(90,180,120,0.8); }
+.card.red .card-label { color: rgba(220,120,120,0.85); }
+.card.blue .card-label { color: rgba(140,180,240,0.8); }
+.card-body { font-size: 13.5px; color: rgba(250,248,244,0.55); line-height: 1.7; }
+.card-body strong { color: rgba(250,248,244,0.85); font-weight: 500; }
+
+/* ITEMS */
+.items { display: flex; flex-direction: column; gap: 9px; }
+.item { display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; color: rgba(250,248,244,0.55); line-height: 1.65; }
+.dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; margin-top: 8px; }
+.dot.y { background: #C9B540; }
+.dot.g { background: #5AB478; }
+.dot.r { background: #C84040; }
+.dot.b { background: #5A8CD2; }
+.dot.w { background: rgba(250,248,244,0.2); }
+.item strong { color: rgba(250,248,244,0.85); font-weight: 500; }
+
+/* ALERT */
+.alert { border-left: 2px solid; padding: 18px 22px; border-radius: 0 12px 12px 0; margin: 20px 0; }
+.alert.gold { border-color: rgba(232,212,106,0.5); background: rgba(232,212,106,0.04); }
+.alert.red { border-color: rgba(200,60,60,0.5); background: rgba(200,60,60,0.04); }
+.alert.green { border-color: rgba(90,180,120,0.4); background: rgba(90,180,120,0.04); }
+.alert.blue { border-color: rgba(90,140,210,0.4); background: rgba(90,140,210,0.04); }
+.alert-lbl { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 8px; }
+.alert.gold .alert-lbl { color: rgba(232,212,106,0.8); }
+.alert.red .alert-lbl { color: rgba(220,100,100,0.85); }
+.alert.green .alert-lbl { color: rgba(110,190,140,0.85); }
+.alert.blue .alert-lbl { color: rgba(140,180,240,0.85); }
+.alert p { font-size: 13.5px; line-height: 1.75; color: rgba(250,248,244,0.6); }
+.alert strong { color: rgba(250,248,244,0.85); font-weight: 500; }
+
+/* QUOTE */
+.quote { border-left: 2px solid rgba(232,212,106,0.25); padding: 12px 20px; margin: 20px 0; }
+.quote p { font-family: "Cormorant Garamond", serif; font-size: 16px; font-style: italic; color: rgba(250,248,244,0.5); line-height: 1.6; }
+.quote cite { display: block; margin-top: 6px; font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(232,212,106,0.35); font-style: normal; }
+
+/* GAP ITEM — numerato, grande */
+.gap-item { padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.06); display: grid; grid-template-columns: 80px 1fr; gap: 32px; align-items: start; }
+.gap-item:first-of-type { border-top: none; }
+@media(max-width:640px){ .gap-item { grid-template-columns: 1fr; gap: 16px; } }
+.gap-num-wrap { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding-top: 4px; }
+.gap-num { font-family: "Cormorant Garamond", serif; font-size: 56px; font-weight: 300; line-height: 1; color: rgba(250,248,244,0.08); }
+.gap-priority { display: inline-block; font-family: "JetBrains Mono", monospace; font-size: 8.5px; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 9px; border-radius: 4px; }
+.priority-high { background: rgba(200,60,60,0.12); border: 1px solid rgba(200,60,60,0.25); color: rgba(220,120,120,0.9); }
+.priority-mid { background: rgba(232,212,106,0.08); border: 1px solid rgba(232,212,106,0.2); color: rgba(232,212,106,0.8); }
+.priority-low { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: rgba(250,248,244,0.4); }
+.gap-content {}
+.gap-eyebrow { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(250,248,244,0.25); margin-bottom: 8px; }
+.gap-title { font-family: "Cormorant Garamond", serif; font-size: clamp(20px, 2.5vw, 28px); font-weight: 300; color: #FAF8F4; line-height: 1.2; margin-bottom: 16px; }
+.gap-title em { font-style: italic; color: #E8D46A; }
+.gap-body { font-size: 14px; line-height: 1.8; color: rgba(250,248,244,0.5); }
+.gap-body p { margin-bottom: 12px; }
+.gap-body p:last-child { margin-bottom: 0; }
+.gap-body strong { color: rgba(250,248,244,0.85); font-weight: 500; }
+
+/* IMPORTANT flag */
+.important-flag { display: inline-flex; align-items: center; gap: 6px; background: rgba(200,60,60,0.1); border: 1px solid rgba(200,60,60,0.3); border-radius: 6px; padding: 5px 12px; font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(220,100,100,0.9); margin-bottom: 14px; }
+
+/* SUMMARY STATS */
+.stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin: 28px 0; }
+@media(max-width:900px){ .stats { grid-template-columns: 1fr 1fr; } }
+@media(max-width:500px){ .stats { grid-template-columns: 1fr; } }
+.stat { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 18px 20px; }
+.stat.gold { border-color: rgba(232,212,106,0.18); background: rgba(232,212,106,0.03); }
+.stat.red { border-color: rgba(200,60,60,0.18); background: rgba(200,60,60,0.03); }
+.stat.green { border-color: rgba(90,180,120,0.18); background: rgba(90,180,120,0.03); }
+.stat-n { font-family: "Cormorant Garamond", serif; font-size: 46px; font-weight: 300; line-height: 1; margin-bottom: 6px; }
+.stat.gold .stat-n { color: #E8D46A; }
+.stat.red .stat-n { color: #C84040; }
+.stat.green .stat-n { color: #5AB478; }
+.stat-n.neutral { color: rgba(250,248,244,0.25); }
+.stat-lbl { font-size: 12px; color: rgba(250,248,244,0.4); line-height: 1.4; }
+.stat-lbl strong { color: rgba(250,248,244,0.7); font-weight: 500; }
+</style>
+</head>
+<body>
+
+<nav class="back-nav">
+  <a href="index.html" class="back-btn">
+    <span class="arrow">←</span>
+    <span>Torna all'indice</span>
+  </a>
+  <a href="index.html"><img src="logo.png" alt="Ronchiverdi" class="back-nav-logo"></a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <span class="tag">Audit Digitale</span>
+      <span class="sep">·</span>
+      <span class="tag">Analisi Contratti</span>
+      <span class="sep">·</span>
+      <span class="tag">Maggio 2026</span>
+    </div>
+    <h1>Moduli operativi &amp;<br><em>gap analysis</em> contrattuale</h1>
+    <p class="hero-sub">Lettura dei due moduli principali di iscrizione — abbonamento adulti e Young School — seguita da un'analisi delle clausole assenti o insufficienti rispetto agli standard contrattuali di settore. Sette aree di intervento prioritarie, con indicazione di urgenza e raccomandazione operativa.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <div class="lbl">Documenti analizzati</div>
+        <div class="val">MOD019 · MOD001</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="lbl">Gap contrattuali identificati</div>
+        <div class="val">7 aree di intervento</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="lbl">Sistema di gestione</div>
+        <div class="val">INFORYOU — aggiornamento maggio 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="page">
+
+  <!-- STATS -->
+  <div class="section" style="border-top:none; padding-top:52px;">
+    <div class="eyebrow">Panoramica</div>
+    <h2>Contratti <em>solidi nella forma</em>, con lacune puntuali da colmare</h2>
+    <div class="prose">
+      <p>I moduli di Ronchiverdi sono redatti con cura e coprono le condizioni operative in modo dettagliato. Le lacune non riguardano la struttura di base, ma <strong>clausole specifiche di tutela</strong> — per il club e per l'utente — che nei contratti di settore più evoluti sono ormai standard. Alcune hanno rilievo legale immediato, altre impattano sulla gestione operativa quotidiana.</p>
+    </div>
+    <div class="stats">
+      <div class="stat gold">
+        <div class="stat-n">2</div>
+        <div class="stat-lbl"><strong>Moduli analizzati</strong> — adulti e Young School</div>
+      </div>
+      <div class="stat red">
+        <div class="stat-n">7</div>
+        <div class="stat-lbl"><strong>Gap contrattuali</strong> identificati per priorità</div>
+      </div>
+      <div class="stat red">
+        <div class="stat-n">2</div>
+        <div class="stat-lbl"><strong>Urgenze legali</strong> — compliance Codice del Consumo e GDPR minori</div>
+      </div>
+      <div class="stat green">
+        <div class="stat-n">0</div>
+        <div class="stat-lbl"><strong>Problemi strutturali</strong> — l'impianto contrattuale è valido, si integra</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== DOC 01 ===== -->
+  <div class="doc-header">
+    <div>
+      <div class="doc-num">Documento 01 · INFORYOU MOD019 · 7 pagine</div>
+      <div class="doc-title">Modulo di iscrizione <em>abbonamento</em></div>
+      <div class="doc-desc">Anagrafica, riepilogo abbonamento, regolamento completo del club, condizioni specifiche per tipo di abbonamento (SWIM, GYM, MORNING, FLEX), GDPR e safeguarding.</div>
+    </div>
+    <span class="pill pill-gold">Abbonamento adulti</span>
+  </div>
+
+  <div class="section">
+    <div class="eyebrow">Struttura e contenuto</div>
+    <h2>Un contratto completo <em>in sette sezioni</em></h2>
+    <div class="prose">
+      <p>Il MOD019 è un documento contrattuale articolato che comprime in sette pagine tutto ciò che regola il rapporto tra il club e il socio adulto: dall'anagrafica al regolamento degli spazi, dalle condizioni di pagamento FLEX al trattamento dei dati. La firma del socio viene raccolta due volte — a pagina 1 (accettazione abbonamento) e a pagina 7 (consensi GDPR) — mentre le pagine 2–6 contengono il regolamento completo che nella pratica viene raramente letto prima della firma.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="card gold">
+        <div class="card-label">Tipologie di abbonamento</div>
+        <div class="card-body">
+          <div class="items">
+            <div class="item"><div class="dot y"></div><div><strong>SWIM</strong> — piscina indoor + Relax Zone, 11 mesi</div></div>
+            <div class="item"><div class="dot y"></div><div><strong>GYM</strong> — palestra indoor + Relax Zone</div></div>
+            <div class="item"><div class="dot y"></div><div><strong>MORNING</strong> — lun–ven 8–13, sab 9–13</div></div>
+            <div class="item"><div class="dot y"></div><div><strong>FLEX</strong> — ricorrente mensile, addebito il 15</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Requisiti all'iscrizione</div>
+        <div class="card-body">
+          <div class="items">
+            <div class="item"><div class="dot w"></div><div>Documento d'identità + codice fiscale</div></div>
+            <div class="item"><div class="dot w"></div><div>Certificato medico — condizione sospensiva del contratto</div></div>
+            <div class="item"><div class="dot w"></div><div>Tesseramento FITP separato per tennis (non incluso)</div></div>
+            <div class="item"><div class="dot w"></div><div>Firma regolamento + 5 consensi GDPR distinti</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Tecnologie citate</div>
+        <div class="card-body">
+          <div class="items">
+            <div class="item"><div class="dot b"></div><div><strong>INFORYOU / TeamSystem</strong> — accessi con tessera magnetica</div></div>
+            <div class="item"><div class="dot b"></div><div><strong>Wansport</strong> — prenotazione campi tennis e padel</div></div>
+            <div class="item"><div class="dot b"></div><div><strong>Email dedicata</strong> — abbonamentiflex@ronchiverdi.it per disdette FLEX</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert gold">
+      <div class="alert-lbl">Nota operativa</div>
+      <p>La condizione sospensiva del certificato medico — il club può sospendere l'accesso ma il contratto decorre comunque — genera frizioni ricorrenti: il socio paga ma non può accedere pienamente. Non è un problema contrattuale ma operativo: andrebbe gestito con un <strong>reminder automatico pre-iscrizione</strong> che chiede di portare o inviare il certificato prima della firma.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="eyebrow">Condizioni FLEX</div>
+    <h2>Il prodotto ricorrente: <em>solido ma rigido</em></h2>
+    <div class="prose">
+      <p>Le condizioni dell'abbonamento FLEX sono tra le più articolate del documento. Il meccanismo è chiaro: addebito automatico il 15 del mese, quota di attivazione €100, preavviso disdetta 30 giorni, nessun congelamento previsto. La struttura è corretta, ma la <strong>rigidità assoluta sulla sospensione</strong> — non prevista — è con ogni probabilità il principale driver del churn su questo prodotto.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card green">
+        <div class="card-label">Cosa funziona</div>
+        <div class="card-body">
+          <div class="items">
+            <div class="item"><div class="dot g"></div><div>Condizioni di modifica contrattuale con preavviso 30 giorni via email</div></div>
+            <div class="item"><div class="dot g"></div><div>Conseguenze della morosità esplicite (sospensione accesso, risoluzione a 30 giorni)</div></div>
+            <div class="item"><div class="dot g"></div><div>Email dedicata per disdette — segnale di organizzazione interna</div></div>
+            <div class="item"><div class="dot g"></div><div>Quota riattivazione €100 chiaramente indicata in caso di recesso e rientro</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="card red">
+        <div class="card-label">Cosa manca</div>
+        <div class="card-body">
+          <div class="items">
+            <div class="item"><div class="dot r"></div><div>Nessuna sospensione prevista — il socio non può "mettere in pausa" il FLEX</div></div>
+            <div class="item"><div class="dot r"></div><div>Penali non quantificate — solo risoluzione generica in caso di inadempimento</div></div>
+            <div class="item"><div class="dot r"></div><div>Procedura di recupero crediti non dettagliata — nessun iter a step prima della risoluzione</div></div>
+            <div class="item"><div class="dot r"></div><div>Diritto di recesso del consumatore non citato (vedi Gap Analysis)</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== DOC 02 ===== -->
+  <div class="doc-header">
+    <div>
+      <div class="doc-num">Documento 02 · INFORYOU MOD001 · 4 pagine</div>
+      <div class="doc-title">Modulo iscrizione <em>Young School</em></div>
+      <div class="doc-desc">Corsi bambini e ragazzi: Nuoto, Tennis, Padel, Triathlon. Stagione 2025–2026. Condizioni specifiche per minori, doppia firma genitore.</div>
+    </div>
+    <span class="pill pill-green">Verticale kids</span>
+  </div>
+
+  <div class="section">
+    <div class="eyebrow">Il modulo più strutturato</div>
+    <h2>Diciotto articoli, <em>un processo ancora manuale</em></h2>
+    <div class="prose">
+      <p>Il MOD001 è il documento più evoluto del set: 18 articoli espliciti, iscrizione online obbligatoria per importi sotto €2.000, rate PayPal senza costi aggiuntivi, calendario dettagliato con tutte le chiusure festive. La gestione dei minori introduce una complessità aggiuntiva corretta: doppia firma, responsabilità differenziate per orari di custodia, riferimento al MOG safeguarding.</p>
+      <p>Il punto debole non è la struttura, ma il fatto che <strong>recuperi, sospensioni e variazioni richiedono ancora un interlocutore umano</strong> — il responsabile di settore — senza un processo standardizzato scritto nel contratto.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="card gold">
+        <div class="card-label">Corsi stagione 2025–26</div>
+        <div class="card-body">
+          <div class="items">
+            <div class="item"><div class="dot y"></div><div><strong>Nuoto</strong> — 22/09/2025 → 06/06/2026</div></div>
+            <div class="item"><div class="dot y"></div><div><strong>Tennis</strong> — 22/09/2025 → 05/06/2026</div></div>
+            <div class="item"><div class="dot y"></div><div><strong>Tennis Competizione</strong> — 08/09/2025 → 26/06/2026</div></div>
+            <div class="item"><div class="dot y"></div><div><strong>Triathlon</strong> — 08/09/2025 → 05/06/2026</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Pagamenti</div>
+        <div class="card-body">
+          <div class="items">
+            <div class="item"><div class="dot b"></div><div>Iscrizione online obbligatoria sotto €2.000</div></div>
+            <div class="item"><div class="dot b"></div><div>3 rate mensili via PayPal senza costi aggiuntivi</div></div>
+            <div class="item"><div class="dot b"></div><div>Sopra €2.000: anche 8 rate set–apr, ma solo al desk fisico</div></div>
+            <div class="item"><div class="dot b"></div><div>Saldo entro il 31/10/2025 — scadenza vincolante</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Recuperi e sospensioni</div>
+        <div class="card-body">
+          <div class="items">
+            <div class="item"><div class="dot r"></div><div>Max <strong>4 recuperi</strong> per corso annuale, 2 per quadrimestrale</div></div>
+            <div class="item"><div class="dot r"></div><div>Recuperi concordati con il responsabile di settore — nessun processo automatico</div></div>
+            <div class="item"><div class="dot r"></div><div>Sospensioni: rimandano ai "singoli responsabili" senza procedura definita</div></div>
+            <div class="item"><div class="dot w"></div><div>Per assenza prolungata: documentazione medica richiesta</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="eyebrow">Young School come canale di acquisition</div>
+    <h2>Il genitore che iscrive il figlio:<br><em>touchpoint commerciale mancato</em></h2>
+    <div class="prose">
+      <p>Come emerso nelle call, la Young School è il principale canale di acquisizione familiare: il genitore che iscrive il figlio è il candidato naturale all'abbonamento adulti. Il MOD001 non contiene alcun riferimento ai servizi per adulti — nessuna menzione della Club House, degli abbonamenti, della piscina outdoor. <strong>Un genitore che firma questo documento non riceve nessun touchpoint verso l'offerta adulti</strong>, né nel modulo né, presumibilmente, nella conversazione che accompagna la firma.</p>
+    </div>
+    <div class="alert gold">
+      <div class="alert-lbl">Opportunità cross-sell</div>
+      <p>L'azione minima è un'<strong>email di benvenuto al genitore</strong> che si iscrive al corso figlio, con presentazione dell'offerta adulti. Non richiede modifiche al contratto — solo un trigger automatico collegato alla registrazione Young School.</p>
+    </div>
+
+    <div class="quote">
+      <p>«Tutte le comunicazioni ufficiali riguardanti i corsi saranno inviate WhatsApp o via email all'indirizzo fornito al momento dell'iscrizione.»</p>
+      <cite>MOD001 — art. 18, Comunicazioni</cite>
+    </div>
+
+    <div class="prose" style="margin-top: 16px;">
+      <p>Il contratto prevede esplicitamente WhatsApp come canale ufficiale per le comunicazioni di servizio. Questo è coerente con quanto emerso nell'analisi degli strumenti — ma non è ancora integrato con un sistema di broadcast strutturato che distingua comunicazioni operative (variazioni orari, chiusure) da comunicazioni commerciali.</p>
+    </div>
+  </div>
+
+  <!-- ===== GAP ANALYSIS ===== -->
+  <div class="gap-header">
+    <div class="gap-header-label">Gap Analysis Contrattuale</div>
+    <div class="gap-header-title">Sette clausole da <em>integrare</em><br>nei moduli esistenti</div>
+    <div class="gap-header-desc">Ogni punto è indipendente e può essere inserito nel prossimo aggiornamento del documento INFORYOU senza stravolgere la struttura attuale. Le priorità sono indicate per ciascun punto.</div>
+  </div>
+
+  <div class="section" style="border-top:none; padding-top: 52px;">
+
+    <!-- GAP 1 -->
+    <div class="gap-item">
+      <div class="gap-num-wrap">
+        <div class="gap-num">01</div>
+        <span class="gap-priority priority-mid">Medio</span>
+      </div>
+      <div class="gap-content">
+        <div class="gap-eyebrow">Diritti del consumatore</div>
+        <div class="gap-title">Chiarire il <em>diritto di recesso</em> — condizioni e modalità</div>
+        <div class="gap-body">
+          <p>Il diritto di recesso entro 14 giorni (art. 52 ss. Codice del Consumo) si applica ai contratti conclusi a distanza o fuori dai locali commerciali. Per le iscrizioni perfezionate in reception, la normativa si applica diversamente — ma il MOD001 Young School prevede già <strong>iscrizioni online obbligatorie</strong>, il che attiva in pieno il diritto di recesso del consumatore.</p>
+          <p>Oggi nessuno dei due moduli menziona questo diritto. Non citarlo non lo elimina: significa che il cliente lo può esercitare senza che il contratto abbia disciplinato le conseguenze (rimborso parziale, trattenuta spese amministrative, pro-rata del periodo fruito). Il rischio è che una contestazione si risolva sempre a favore del cliente in assenza di disciplina contrattuale.</p>
+          <p><strong>Cosa inserire:</strong> una clausola che espliciti se e quando si applica il diritto di recesso, entro quale termine (14 giorni), con quali modalità (email, PEC, sportello), e cosa viene trattenuto (quota del periodo fruito + eventuale rimborso spese segreteria). Specificare anche se è ammessa la disdetta online o richiede presenza fisica.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- GAP 2 -->
+    <div class="gap-item">
+      <div class="gap-num-wrap">
+        <div class="gap-num">02</div>
+        <span class="gap-priority priority-mid">Medio</span>
+      </div>
+      <div class="gap-content">
+        <div class="gap-eyebrow">Gestione del credito e morosità</div>
+        <div class="gap-title">Allineare il contratto alla <em>procedura reale</em> di recupero</div>
+        <div class="gap-body">
+          <p>Il modulo FLEX dichiara che un pagamento insoluto oltre 30 giorni comporta la risoluzione di diritto del contratto. Nella pratica, il processo reale di gestione della morosità si estende fino a 90 giorni prima che si arrivi alla risoluzione effettiva. <strong>Questa discrepanza tra contratto e prassi è un problema</strong>: se il club non applica la clausola entro i 30 giorni dichiarati, indebolisce la propria posizione in caso di contenzioso, poiché il comportamento reiterato può essere interpretato come rinuncia tacita al diritto di risoluzione.</p>
+          <p><strong>Cosa inserire:</strong> una procedura a gradini che rispecchi la pratica reale — ad esempio: sospensione accesso al primo addebito fallito, comunicazione formale entro 7 giorni, sollecito a 30 giorni, risoluzione di diritto a 90 giorni con avviso finale. In questo modo il contratto copre legalmente ogni step del processo già in uso, e ogni comunicazione intermedia ha valore legale documentabile.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- GAP 3 -->
+    <div class="gap-item">
+      <div class="gap-num-wrap">
+        <div class="gap-num">03</div>
+        <span class="gap-priority priority-low">Basso</span>
+      </div>
+      <div class="gap-content">
+        <div class="gap-eyebrow">Tutela della rete commerciale interna</div>
+        <div class="gap-title">Clausola di divieto <em>erogazione PT non autorizzato</em></div>
+        <div class="gap-body">
+          <p>I contratti maturi di centri sportivi includono il divieto esplicito per i soci di offrire, anche gratuitamente, servizi di personal training, coaching o lezioni individuali ad altri soci all'interno della struttura. L'assenza di questa clausola nei moduli Ronchiverdi lascia un vuoto: se un socio "allena" un altro socio in palestra o in piscina, il club non ha uno strumento contrattuale diretto per intervenire — solo le generiche norme comportamentali del regolamento.</p>
+          <p><strong>Cosa inserire:</strong> una clausola che vieti espressamente l'offerta, a titolo oneroso o gratuito, di servizi di personal training o istruzione individuale non autorizzati da parte di un socio verso altri soci. Prevedere come conseguenza la sospensione e/o risoluzione del contratto, con una penale quantificata (tipicamente €100–150) per rendere la clausola azionabile senza dover dimostrare il danno effettivo.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- GAP 4 -->
+    <div class="gap-item">
+      <div class="gap-num-wrap">
+        <div class="gap-num">04</div>
+        <span class="gap-priority priority-high">Urgente</span>
+      </div>
+      <div class="gap-content">
+        <div class="important-flag">Priorità alta</div>
+        <div class="gap-eyebrow">Infrastruttura comunicativa e legale</div>
+        <div class="gap-title">Comunicazioni legalmente rilevanti <em>via email</em></div>
+        <div class="gap-body">
+          <p>Questo è il punto più impattante sulla gestione operativa quotidiana. Oggi i contratti Ronchiverdi non contengono una clausola che faccia dichiarare al socio di <strong>accettare esplicitamente le comunicazioni con valore legale via email</strong>. Senza questa dichiarazione, ogni comunicazione formale — solleciti di pagamento, modifiche contrattuali, comunicazioni di risoluzione — ha pieno valore legale solo se inviata tramite raccomandata A/R.</p>
+          <p>Questo significa che ogni volta che il club vuole notificare formalmente qualcosa a un socio — un aumento tariffe, una sospensione, una risoluzione per morosità — si trova di fronte a due opzioni: o ignora il problema (indebolendo la propria posizione) o invia raccomandate cartacee (costo e tempo). Nel contesto di un progetto di digitalizzazione, questa lacuna blocca alla base qualsiasi automazione delle comunicazioni formali.</p>
+          <p><strong>Cosa inserire:</strong> una clausola in cui il socio dichiara di fornire un indirizzo email valido e attivo, di impegnarsi a tenerlo aggiornato, e di accettare esplicitamente che le comunicazioni inviate a quell'indirizzo — inclusi solleciti, modifiche alle condizioni, comunicazioni di risoluzione — abbiano pieno valore legale. Questa clausola è il prerequisito che abilita tutto il resto: automation, CRM, notifiche di morosità, aggiornamenti contrattuali.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- GAP 5 -->
+    <div class="gap-item">
+      <div class="gap-num-wrap">
+        <div class="gap-num">05</div>
+        <span class="gap-priority priority-mid">Medio</span>
+      </div>
+      <div class="gap-content">
+        <div class="gap-eyebrow">Aggiornamento contrattuale nel tempo</div>
+        <div class="gap-title">Modifica condizioni: distinguere <em>sostanziale da editoriale</em></div>
+        <div class="gap-body">
+          <p>Il MOD019 prevede che il club possa modificare le tariffe e i servizi con preavviso di 30 giorni via email. È una clausola corretta, ma incompleta: non distingue tra modifiche che impattano realmente il socio e aggiornamenti formali del documento (rinumerazione articoli, correzioni grammaticali, chiarimenti redazionali, aggiornamento riferimenti normativi).</p>
+          <p>Senza questa distinzione, <strong>qualsiasi modifica al testo contrattuale — anche meramente formale — obbliga al preavviso di 30 giorni e dà al socio il diritto di recedere senza penali</strong>. Questo rende di fatto molto difficile aggiornare e migliorare il documento nel tempo, con il rischio che resti invariato anche quando andrebbero corrette imprecisioni.</p>
+          <p><strong>Cosa inserire:</strong> specificare che le modifiche "sostanziali" (variazioni tariffarie, riduzione dei servizi inclusi, cambiamento delle condizioni di disdetta) richiedono preavviso 30 giorni e danno diritto al recesso gratuito; mentre le modifiche "non sostanziali" (editoriali, formali, normative) non richiedono preavviso e non generano diritto di recesso, ma vengono comunicate per trasparenza.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- GAP 6 -->
+    <div class="gap-item">
+      <div class="gap-num-wrap">
+        <div class="gap-num">06</div>
+        <span class="gap-priority priority-mid">Medio</span>
+      </div>
+      <div class="gap-content">
+        <div class="gap-eyebrow">Sicurezza e gestione eventi critici</div>
+        <div class="gap-title">Inserire una procedura <em>infortuni</em> con tutele esplicite</div>
+        <div class="gap-body">
+          <p>Il regolamento del MOD019 contiene riferimenti sparsi alla sicurezza — istruttore obbligatorio in palestra, regole per la piscina, safeguarding per i minori — ma non ha una procedura infortuni dedicata. Non è indicato cosa deve fare il socio in caso di infortunio, chi contattare, entro quanto, e quali sono le responsabilità del club e quelle dell'utente.</p>
+          <p>L'assenza di una procedura esplicita espone il club a due rischi opposti: da un lato, il socio non sa come comportarsi (mancanza di guida); dall'altro, in caso di contenzioso successivo a un infortunio, il club non ha una clausola contrattuale su cui far leva per delimitare la propria responsabilità a ciò che è "connaturato all'attività sportiva" vs. utilizzo improprio degli impianti.</p>
+          <p><strong>Cosa inserire:</strong> una clausola che indichi il canale di notifica dell'infortunio (email o modulo dedicato), i tempi entro cui comunicarlo, il richiamo alla polizza assicurativa inclusa nel tesseramento, e la dichiarazione del socio di essere in buona salute al momento dell'iscrizione. Aggiungere che il club è esonerato da responsabilità per infortuni derivanti da utilizzo improprio delle attrezzature o da condizioni fisiche del socio non dichiarate.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- GAP 7 -->
+    <div class="gap-item">
+      <div class="gap-num-wrap">
+        <div class="gap-num">07</div>
+        <span class="gap-priority priority-high">Urgente</span>
+      </div>
+      <div class="gap-content">
+        <div class="important-flag">Priorità alta · GDPR minori</div>
+        <div class="gap-eyebrow">Trattamento dati e diritti di immagine</div>
+        <div class="gap-title">Rafforzare il consenso foto <em>e fotografi esterni</em></div>
+        <div class="gap-body">
+          <p>Il MOD001 Young School raccoglie il consenso fotografico con un semplice checkbox sì/no: «Autorizzateci, se lo desiderate, a realizzare foto e video durante le attività per finalità informative e promozionali». Per un documento che riguarda minori, questa formulazione è insufficiente sotto il profilo GDPR.</p>
+          <p>Mancano tre elementi fondamentali: primo, <strong>chi è il titolare del trattamento delle immagini</strong> quando a scattare è un fotografo esterno — se il fotografo è un soggetto terzo, deve essere identificato come titolare autonomo del trattamento e il consenso deve riflettere questo; secondo, <strong>per quanto tempo le immagini vengono conservate</strong> e da chi; terzo, <strong>come il genitore può esercitare il diritto di opposizione, accesso o cancellazione</strong> delle immagini del figlio dopo che sono state scattate.</p>
+          <p>Il MOD019 adulti non ha una clausola fotografica — probabilmente perché le riprese sono occasionali — ma se il club usa immagini dei soci per social media o materiale promozionale, anche qui il consenso andrebbe formalizzato separatamente e in modo granulare (social media, stampa, sito web).</p>
+          <p><strong>Cosa inserire nel MOD001:</strong> identificare se le riprese vengono effettuate da personale interno (Ronchiverdi come titolare) o da studi fotografici terzi (titolari autonomi con proprio trattamento); indicare i tempi di conservazione; specificare il canale per esercitare i diritti (email privacy@ronchiverdi.it già esistente). Per gli eventi con fotografo esterno: comunicazione con almeno 10 giorni di anticipo e indicazione delle modalità di accesso alle immagini.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /gap items -->
+
+  <!-- ===== DIGITALIZZAZIONE ===== -->
+  <div class="doc-header">
+    <div>
+      <div class="doc-num">Documenti 03 &amp; 04 · Moduli operativi ancillari</div>
+      <div class="doc-title">Scarico responsabilità armadietti<br>&amp; disdetta <em>FLEX</em></div>
+      <div class="doc-desc">Due moduli cartacei attivi nella gestione quotidiana che non richiedono modifiche contrattuali ma andrebbero integralmente digitalizzati.</div>
+    </div>
+    <span class="pill pill-neutral">Da digitalizzare</span>
+  </div>
+
+  <div class="section">
+    <div class="eyebrow">Il problema comune</div>
+    <h2>Moduli che generano <em>carta senza valore aggiunto</em></h2>
+    <div class="prose">
+      <p>Lo scarico di responsabilità per gli armadietti tennis e il modulo di disdetta FLEX hanno una caratteristica in comune: sono documenti semplici, a firma unica, che oggi esistono solo in forma cartacea e richiedono la presenza fisica del socio in reception. Il contenuto di entrambi è già definito contrattualmente — il modulo non aggiunge nulla di nuovo, serve solo a raccogliere la firma e a tracciare l'evento. <strong>È esattamente il caso d'uso per cui la firma digitale è nata.</strong></p>
+    </div>
+
+    <div class="grid-2">
+
+      <div class="card">
+        <div class="card-label">Scarico responsabilità armadietti tennis</div>
+        <div class="card-body">
+          <div class="items" style="margin-bottom: 16px;">
+            <div class="item"><div class="dot w"></div><div>1 pagina, 4 punti, 1 firma</div></div>
+            <div class="item"><div class="dot w"></div><div>Dichiara presa visione delle condizioni di utilizzo dell'armadietto fisso nell'area tennis</div></div>
+            <div class="item"><div class="dot w"></div><div>Il numero armadietto viene compilato in un secondo momento — campo spesso vuoto al momento della firma</div></div>
+            <div class="item"><div class="dot r"></div><div>Oggi: presenza fisica obbligatoria, archiviazione cartacea, nessun collegamento al profilo INFORYOU del socio</div></div>
+          </div>
+          <strong>Come digitalizzarlo:</strong> form online nel portale soci (o in reception su tablet), con precompilazione dei dati anagrafici dal profilo esistente. Il numero armadietto viene assegnato e inserito dal personale al momento dell'attivazione. La firma digitale viene archiviata nel CRM collegata al profilo del socio — nessuna carta, nessun archivio fisico separato da gestire.
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Modulo disdetta contratto FLEX</div>
+        <div class="card-body">
+          <div class="items" style="margin-bottom: 16px;">
+            <div class="item"><div class="dot w"></div><div>1 pagina, dati anagrafici + motivo disdetta + data decorrenza</div></div>
+            <div class="item"><div class="dot w"></div><div>Il contratto già prevede la disdetta via email a abbonamentiflex@ronchiverdi.it — il modulo cartaceo è ridondante</div></div>
+            <div class="item"><div class="dot r"></div><div>La data di decorrenza è lasciata vuota "da compilare a cura della segreteria": il socio firma senza sapere quando parte la disdetta</div></div>
+            <div class="item"><div class="dot r"></div><div>Il motivo della disdetta — dato prezioso — viene raccolto su carta e non aggregato da nessuna parte</div></div>
+          </div>
+          <strong>Come digitalizzarlo:</strong> form online accessibile dall'area soci o inviato automaticamente in risposta all'email di disdetta ricevuta su abbonamentiflex@. Il socio compila nome, motivo e conferma. Il sistema calcola automaticamente la data di decorrenza rispettando i 30 giorni di preavviso e la comunica in tempo reale. Il motivo viene salvato nel CRM come dato aggregabile per reportistica churn.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="alert blue">
+      <div class="alert-lbl">Impatto operativo</div>
+      <p>La digitalizzazione di questi due moduli non è un progetto: è un'attività. Con un form builder (Typeform, Tally, o direttamente nel portale INFORYOU se supportato) si risolve in mezza giornata di lavoro. <strong>Il vero valore non è il risparmio di carta — è che la disdetta FLEX smette di essere un dato perso e diventa il primo input di un flusso di retention automatizzato.</strong> Sapere perché i soci FLEX se ne vanno, in forma strutturata e aggregata, vale molto di più del modulo cartaceo che oggi raccoglie quella risposta senza farne nulla.</p>
+    </div>
+  </div>
+
+  <!-- CHIUSURA -->
+  <div class="section">
+    <div class="eyebrow">In sintesi</div>
+    <h2>Nessuna revisione radicale: <em>sette integrazioni mirate</em></h2>
+    <div class="prose">
+      <p>I contratti Ronchiverdi non vanno riscritti — vanno integrati. L'impianto è solido, il linguaggio è chiaro, le condizioni operative sono ben descritte. Le sette aree identificate sono tutte <strong>addizioni puntuali</strong> che possono essere incorporate nel prossimo aggiornamento del documento INFORYOU senza alterare la struttura esistente.</p>
+      <p>Due punti hanno carattere di urgenza reale: la clausola sulle <strong>comunicazioni email con valore legale</strong> — che sblocca qualsiasi automazione futura — e il <strong>consenso fotografico per i minori della Young School</strong>, che nella formulazione attuale è esposto a contestazioni GDPR. Gli altri cinque punti possono essere pianificati nel ciclo di revisione ordinaria del documento.</p>
+    </div>
+    <div class="alert green">
+      <div class="alert-lbl">Nota metodologica</div>
+      <p>Questa analisi è prodotta ai fini del progetto di audit digitale e non sostituisce una revisione legale professionale. Si raccomanda di sottoporre le integrazioni proposte a un legale specializzato in diritto sportivo e contrattualistica del consumatore prima dell'adozione nei moduli ufficiali.</p>
+    </div>
+  </div>
+
+</div><!-- /page -->
+</body>
+</html>
