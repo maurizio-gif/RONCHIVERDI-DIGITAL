@@ -172,7 +172,7 @@ body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FAF8F4; fon
     <span class="arrow">←</span>
     <span>Torna all'indice</span>
   </a>
-  <a href="index.html"><img src="logo.png" alt="Ronchiverdi" class="back-nav-logo"></a>
+  <a href="index.html"><img src="ronchiverdi-logo.jpg" alt="Ronchiverdi" class="back-nav-logo"></a>
 </nav>
 
 <!-- HERO -->
@@ -262,12 +262,13 @@ body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FAF8F4; fon
           </div>
         </div>
       </div>
-      <div class="card">
-        <div class="card-label">Requisiti all'iscrizione</div>
+      <div class="card red">
+        <div class="card-label">Requisiti all'iscrizione — gap da colmare</div>
         <div class="card-body">
           <div class="items">
             <div class="item"><div class="dot w"></div><div>Documento d'identità + codice fiscale</div></div>
-            <div class="item"><div class="dot w"></div><div>Certificato medico — condizione sospensiva del contratto</div></div>
+            <div class="item"><div class="dot r"></div><div><strong>Certificato medico — tipologia non specificata nel contratto.</strong> Il modulo parla genericamente di "certificato medico" senza distinguere tra idoneità sportiva <em>non agonistica</em> (fitness, nuoto libero, padel, la maggior parte dei corsi) e idoneità sportiva <em>agonistica</em> (tennis agonistico, triathlon agonistico, pallanuoto). Il requisito dell'ECG "nella norma" citato nelle email automatiche non compare nel modulo firmato.</div></div>
+            <div class="item"><div class="dot r"></div><div><strong>Modalità di consegna non definita.</strong> Il contratto prevede la consegna fisica in reception, ma le email di reminder invitano a "prenotare la visita al Chinesis" senza indicare se l'upload digitale sia accettato. Mancano: canale di consegna accettato (email, upload portale, fisico), termine rispetto alla data di inizio attività, e conseguenze in caso di mancata consegna.</div></div>
             <div class="item"><div class="dot w"></div><div>Tesseramento FITP separato per tennis (non incluso)</div></div>
             <div class="item"><div class="dot w"></div><div>Firma regolamento + 5 consensi GDPR distinti</div></div>
           </div>
@@ -286,8 +287,11 @@ body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FAF8F4; fon
     </div>
 
     <div class="alert gold">
-      <div class="alert-lbl">Nota operativa</div>
-      <p>La condizione sospensiva del certificato medico — il club può sospendere l'accesso ma il contratto decorre comunque — genera frizioni ricorrenti: il socio paga ma non può accedere pienamente. Non è un problema contrattuale ma operativo: andrebbe gestito con un <strong>reminder automatico pre-iscrizione</strong> che chiede di portare o inviare il certificato prima della firma.</p>
+      <div class="alert-lbl">Gap da colmare — certificato medico</div>
+      <p>Il contratto cita il certificato medico come condizione sospensiva ma non ne definisce la tipologia, il contenuto obbligatorio né le modalità di consegna. <strong>Tre livelli di intervento necessari:</strong></p>
+      <p style="margin-top:10px;"><strong>1 · Tipologia per disciplina.</strong> Specificare nel modulo: idoneità sportiva <em>non agonistica</em> per fitness, nuoto, padel, morning; idoneità sportiva <em>agonistica</em> per tennis agonistico, triathlon agonistico, pallanuoto. Il requisito ECG — oggi citato solo nelle email automatiche — va inserito nel contratto se è un obbligo effettivo.</p>
+      <p><strong>2 · Modalità di consegna.</strong> Dichiarare esplicitamente se è accettata la consegna digitale (upload su portale o email a un indirizzo dedicato) oltre a quella fisica. Se viene accettato l'upload, va indicato il formato e il termine rispetto alla data di inizio attività. Questo elimina l'ambiguità operativa e allinea contratto ed email automatiche.</p>
+      <p><strong>3 · Gestione della condizione sospensiva.</strong> La condizione sospensiva — il contratto decorre ma l'accesso è bloccato — genera frizioni ricorrenti. Va presidiata con un reminder automatico pre-iscrizione che anticipa il problema prima che si crei.</p>
     </div>
   </div>
 
@@ -364,14 +368,14 @@ body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FAF8F4; fon
           </div>
         </div>
       </div>
-      <div class="card">
-        <div class="card-label">Recuperi e sospensioni</div>
+      <div class="card red">
+        <div class="card-label">Certificato medico — gap nel MOD001</div>
         <div class="card-body">
           <div class="items">
-            <div class="item"><div class="dot r"></div><div>Max <strong>4 recuperi</strong> per corso annuale, 2 per quadrimestrale</div></div>
-            <div class="item"><div class="dot r"></div><div>Recuperi concordati con il responsabile di settore — nessun processo automatico</div></div>
-            <div class="item"><div class="dot r"></div><div>Sospensioni: rimandano ai "singoli responsabili" senza procedura definita</div></div>
-            <div class="item"><div class="dot w"></div><div>Per assenza prolungata: documentazione medica richiesta</div></div>
+            <div class="item"><div class="dot r"></div><div><strong>Tipologia non distinta per disciplina.</strong> Nuoto, tennis, triathlon e padel richiedono tipologie diverse: <em>non agonistica</em> per i corsi base, <em>agonistica</em> per i percorsi competizione. Il modulo non lo specifica.</div></div>
+            <div class="item"><div class="dot r"></div><div><strong>Modalità di consegna ambigua.</strong> Il MOD001 prevede la consegna fisica; l'email credenziali Young School dice "carica nella sezione Documenti" del portale online. I due canali non sono allineati — il genitore non sa quale vale.</div></div>
+            <div class="item"><div class="dot r"></div><div><strong>Termine di consegna non definito</strong> rispetto alla data di inizio corso — solo "all'atto dell'iscrizione".</div></div>
+            <div class="item"><div class="dot w"></div><div>Esonero per bambini sotto i 6 anni correttamente indicato nell'email, ma assente nel modulo.</div></div>
           </div>
         </div>
       </div>
