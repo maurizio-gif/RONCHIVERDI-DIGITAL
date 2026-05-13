@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analisi Report Rinnovi — Ronchiverdi Audit</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FAF8F4; font-size: 15px; line-height: 1.7; overflow-x: hidden; font-weight: 300; -webkit-font-smoothing: antialiased; }
+
+.back-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: rgba(15,15,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.07); }
+.back-btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(250,248,244,0.55); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; transition: color 0.2s; }
+.back-btn:hover { color: #E8D46A; }
+.back-btn:hover .arrow { transform: translateX(-3px); }
+.arrow { font-size: 16px; transition: transform 0.2s; display: inline-block; }
+.back-nav-logo { height: 36px; width: auto; filter: invert(1); mix-blend-mode: screen; opacity: 0.9; }
+@media(max-width:640px){ .back-nav { padding: 0 20px; } .back-nav-logo { height: 28px; } }
+
+.hero { padding: 120px 48px 72px; position: relative; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 80% 30%, rgba(232,212,106,0.05) 0%, transparent 60%); pointer-events: none; }
+.hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+.eyebrow-row { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+.tag { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(250,248,244,0.3); }
+.sep { color: rgba(250,248,244,0.15); }
+.hero h1 { font-family: "Cormorant Garamond", serif; font-size: clamp(36px, 5vw, 62px); font-weight: 300; line-height: 1.05; color: #FAF8F4; margin-bottom: 20px; letter-spacing: -0.02em; }
+.hero h1 em { font-style: italic; color: #E8D46A; }
+.hero-sub { font-size: 14px; font-weight: 300; line-height: 1.75; color: rgba(250,248,244,0.45); max-width: 660px; margin-bottom: 36px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 32px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.07); }
+.hero-meta-item .lbl { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(232,212,106,0.5); margin-bottom: 4px; }
+.hero-meta-item .val { font-size: 13px; font-weight: 400; color: rgba(250,248,244,0.7); }
+
+.page { max-width: 1100px; margin: 0 auto; padding: 0 48px 100px; }
+@media(max-width:640px){ .page { padding: 0 20px 80px; } .hero { padding: 100px 20px 56px; } }
+
+.section { padding: 64px 0; border-top: 1px solid rgba(255,255,255,0.06); }
+.section:first-of-type { border-top: none; }
+.section-eyebrow { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(232,212,106,0.5); margin-bottom: 10px; }
+.section-title { font-family: "Cormorant Garamond", serif; font-size: clamp(24px, 3vw, 38px); font-weight: 300; color: #FAF8F4; line-height: 1.1; margin-bottom: 8px; letter-spacing: -0.01em; }
+.section-title em { font-style: italic; color: #E8D46A; }
+.section-sub { font-size: 13px; font-weight: 300; color: rgba(250,248,244,0.4); max-width: 620px; margin-bottom: 36px; line-height: 1.7; }
+
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+@media(max-width:900px){ .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+.stat-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 22px 20px; }
+.stat-card .stat-num { font-family: "Cormorant Garamond", serif; font-size: 42px; font-weight: 300; color: #E8D46A; line-height: 1; margin-bottom: 6px; letter-spacing: -0.02em; }
+.stat-card .stat-lbl { font-size: 11px; font-weight: 400; color: rgba(250,248,244,0.35); line-height: 1.4; }
+.stat-card .stat-note { font-family: "JetBrains Mono", monospace; font-size: 9px; color: rgba(250,248,244,0.2); margin-top: 4px; letter-spacing: 0.08em; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+@media(max-width:760px){ .two-col { grid-template-columns: 1fr; } }
+
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+@media(max-width:900px){ .three-col { grid-template-columns: 1fr 1fr; } }
+@media(max-width:580px){ .three-col { grid-template-columns: 1fr; } }
+
+/* FIELDS */
+.fields-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.field-tag { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.06em; padding: 5px 10px; border-radius: 6px; }
+.field-tag.v1 { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); color: rgba(250,248,244,0.35); }
+.field-tag.v2 { background: rgba(90,180,120,0.04); border: 1px solid rgba(90,180,120,0.18); color: rgba(130,200,155,0.75); }
+.field-tag.v3 { background: rgba(90,140,210,0.04); border: 1px solid rgba(90,140,210,0.2); color: rgba(140,185,240,0.7); }
+
+/* BARS */
+.distrib-label { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(250,248,244,0.25); margin-bottom: 12px; }
+.bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 7px; }
+.bar-key { font-size: 12px; color: rgba(250,248,244,0.4); width: 210px; flex-shrink: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bar-key.wide { width: 180px; }
+.bar-track { flex: 1; height: 6px; background: rgba(255,255,255,0.05); border-radius: 3px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 3px; }
+.bar-fill.gold-hi { background: rgba(232,212,106,0.55); }
+.bar-fill.gold-mid { background: rgba(232,212,106,0.3); }
+.bar-fill.gold-lo { background: rgba(232,212,106,0.15); }
+.bar-fill.green { background: rgba(90,180,120,0.45); }
+.bar-fill.red { background: rgba(200,80,80,0.35); }
+.bar-val { font-family: "JetBrains Mono", monospace; font-size: 10px; color: rgba(250,248,244,0.3); width: 34px; text-align: right; flex-shrink: 0; }
+
+/* RETENTION TIMELINE */
+.timeline-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; margin-bottom: 24px; }
+.month-cell { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 14px 12px; text-align: center; }
+.month-cell .m-name { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,248,244,0.3); margin-bottom: 6px; }
+.month-cell .m-pct { font-family: "Cormorant Garamond", serif; font-size: 26px; font-weight: 300; line-height: 1; }
+.month-cell .m-n { font-size: 10px; color: rgba(250,248,244,0.2); margin-top: 3px; }
+.month-cell.hi .m-pct { color: rgba(130,200,155,0.9); }
+.month-cell.mid .m-pct { color: rgba(232,212,106,0.8); }
+.month-cell.lo .m-pct { color: rgba(220,120,100,0.8); }
+
+/* CALLOUT */
+.callout { border-left: 2px solid rgba(232,212,106,0.4); padding: 16px 20px; margin: 20px 0; background: rgba(232,212,106,0.03); border-radius: 0 8px 8px 0; }
+.callout p { font-size: 13px; font-weight: 300; color: rgba(250,248,244,0.5); line-height: 1.7; }
+.callout strong { font-weight: 500; color: rgba(250,248,244,0.7); }
+
+/* DATA NOTE */
+.data-note { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 14px 18px; margin-top: 14px; }
+.data-note .dn-label { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(250,248,244,0.2); margin-bottom: 5px; }
+.data-note p { font-size: 12px; font-weight: 300; color: rgba(250,248,244,0.35); line-height: 1.65; }
+
+/* MINI STAT */
+.mini-stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 28px; }
+@media(max-width:640px){ .mini-stat-grid { grid-template-columns: 1fr 1fr; } }
+.mini-stat { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 16px 16px; }
+.mini-stat .num { font-family: "Cormorant Garamond", serif; font-size: 30px; font-weight: 300; color: #FAF8F4; line-height: 1; margin-bottom: 4px; }
+.mini-stat .lbl { font-size: 10px; color: rgba(250,248,244,0.3); font-weight: 400; line-height: 1.35; }
+
+/* ESITO PILL ROW */
+.esito-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+.esito-pill { display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 8px; font-size: 12px; border: 1px solid; }
+.esito-pill.rinnov { border-color: rgba(90,180,120,0.25); color: rgba(130,200,155,0.8); background: rgba(90,180,120,0.04); }
+.esito-pill.non-rinnov { border-color: rgba(200,80,80,0.25); color: rgba(220,130,130,0.8); background: rgba(200,80,80,0.04); }
+.esito-pill.other { border-color: rgba(255,255,255,0.1); color: rgba(250,248,244,0.35); background: rgba(255,255,255,0.02); }
+.esito-pill .ep-label { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.1em; }
+
+/* OBS */
+.obs-grid { display: flex; flex-direction: column; gap: 12px; }
+.obs-item { display: flex; gap: 16px; align-items: flex-start; padding: 18px 20px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; }
+.obs-n { font-family: "JetBrains Mono", monospace; font-size: 11px; color: rgba(232,212,106,0.35); flex-shrink: 0; width: 22px; padding-top: 1px; }
+.obs-body { flex: 1; }
+.obs-title { font-size: 13px; font-weight: 500; color: rgba(250,248,244,0.75); margin-bottom: 4px; }
+.obs-desc { font-size: 13px; font-weight: 300; color: rgba(250,248,244,0.4); line-height: 1.65; }
+.obs-item.flag { border-color: rgba(200,160,60,0.18); background: rgba(200,160,60,0.03); }
+.obs-item.flag .obs-n { color: rgba(232,212,106,0.6); }
+
+/* EVOLUTION TABLE */
+.evo-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 24px; }
+.evo-table th { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,248,244,0.25); padding: 8px 12px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.evo-table td { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: rgba(250,248,244,0.5); vertical-align: top; }
+.evo-table td:first-child { font-weight: 400; color: rgba(250,248,244,0.7); white-space: nowrap; }
+.evo-table tr:last-child td { border-bottom: none; }
+.evo-table .badge { display: inline-block; font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.08em; padding: 3px 7px; border-radius: 4px; margin-right: 4px; }
+.badge-new { background: rgba(90,180,120,0.1); border: 1px solid rgba(90,180,120,0.2); color: rgba(130,200,155,0.8); }
+.badge-chg { background: rgba(90,140,210,0.1); border: 1px solid rgba(90,140,210,0.2); color: rgba(140,185,240,0.75); }
+
+/* STAFF CHART */
+.staff-grid { display: flex; flex-direction: column; gap: 8px; }
+.staff-row { display: flex; align-items: center; gap: 12px; }
+.staff-name { font-size: 12px; color: rgba(250,248,244,0.5); width: 160px; flex-shrink: 0; }
+.staff-bar-track { flex: 1; height: 20px; background: rgba(255,255,255,0.03); border-radius: 4px; overflow: hidden; position: relative; }
+.staff-bar-fill { height: 100%; border-radius: 4px; background: rgba(232,212,106,0.2); }
+.staff-bar-val { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-family: "JetBrains Mono", monospace; font-size: 10px; color: rgba(250,248,244,0.4); }
+</style>
+</head>
+<body>
+
+<nav class="back-nav">
+  <a href="index.html" class="back-btn"><span class="arrow">←</span> Indice</a>
+  <img src="ronchiverdi-logo.jpg" alt="Ronchiverdi" class="back-nav-logo">
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow-row">
+      <span class="tag">Ronchiverdi Sport Club</span>
+      <span class="sep">·</span>
+      <span class="tag">Audit digitale</span>
+      <span class="sep">·</span>
+      <span class="tag">Maggio 2026</span>
+    </div>
+    <h1>Report <em>rinnovi</em><br>abbonamenti</h1>
+    <p class="hero-sub">Analisi del modello di tracciamento retention. Il file Excel contiene 23 fogli mensili che coprono il periodo novembre 2024 – giugno 2026. Creato in dicembre 2024 come primo strumento di tracciabilità delle performance di rinnovo.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><div class="lbl">Fogli totali</div><div class="val">23</div></div>
+      <div class="hero-meta-item"><div class="lbl">Record totali</div><div class="val">~3.700</div></div>
+      <div class="hero-meta-item"><div class="lbl">Arco temporale</div><div class="val">Nov 2024 – Giu 2026</div></div>
+      <div class="hero-meta-item"><div class="lbl">Avviato</div><div class="val">Dicembre 2024</div></div>
+      <div class="hero-meta-item"><div class="lbl">Responsabile</div><div class="val">Lorella</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="page">
+
+  <!-- CONTESTO EVOLUTIVO -->
+  <section class="section" style="border-top:none; padding-top:48px;">
+    <div class="section-eyebrow">Contesto operativo</div>
+    <h2 class="section-title">Evoluzione del <em>settore retention</em></h2>
+    <p class="section-sub">Ricostruzione dell'evoluzione organizzativa del team e degli strumenti di tracciamento. Fonte: Lorella.</p>
+
+    <div class="obs-grid">
+      <div class="obs-item">
+        <span class="obs-n">I</span>
+        <div class="obs-body">
+          <div class="obs-title">Attività concentrata su una sola risorsa — nessuna tracciabilità</div>
+          <div class="obs-desc">Tre anni fa il comparto retention era gestito al 100% da una sola persona. Non esisteva possibilità di tracciamento del lavoro svolto, dell'andamento del settore, né delle percentuali di rinnovo.</div>
+        </div>
+      </div>
+
+      <div class="obs-item">
+        <span class="obs-n">II</span>
+        <div class="obs-body">
+          <div class="obs-title">Ingresso e formalizzazione di una seconda risorsa</div>
+          <div class="obs-desc">Una seconda risorsa viene affiancata e ufficializzata nel comparto. Nel corso del tempo emergono competenze e skill rilevanti che ne consolidano il ruolo nel settore.</div>
+        </div>
+      </div>
+
+      <div class="obs-item">
+        <span class="obs-n">III</span>
+        <div class="obs-body">
+          <div class="obs-title">Estensione a tutto il team reception — relazione diffusa coi soci</div>
+          <div class="obs-desc">Circa un anno fa il coinvolgimento viene esteso a tutto il personale di reception (ad eccezione di Jasmine, da circa un mese dedicata al new business). Questo permette maggiore lavoro in back office e una relazione coi soci distribuita su più figure. Nessun socio è lasciato senza gestione.</div>
+        </div>
+      </div>
+
+      <div class="obs-item">
+        <span class="obs-n">IV</span>
+        <div class="obs-body">
+          <div class="obs-title">Introduzione di ratio e logiche di performance sulla retention</div>
+          <div class="obs-desc">Le metriche di performance erano state introdotte per il comparto new circa tre anni fa. Per la retention vengono inserite solo nell'ultimo anno. Il metodo è stato acquisito gradualmente, non in modo strutturato dall'inizio.</div>
+        </div>
+      </div>
+
+      <div class="obs-item flag">
+        <span class="obs-n">→</span>
+        <div class="obs-body">
+          <div class="obs-title">Stato attuale: nessuna fotografia automatizzata del dato quotidiano</div>
+          <div class="obs-desc">Non esiste una vista aggregata e automatizzata del dato di retention. Il monitoraggio richiede accesso diretto al file da parte di Lorella. La retention media dichiarata è del 75%. Il file Excel è lo strumento primario di controllo e l'unica fonte strutturata disponibile sul comparto.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANORAMICA -->
+  <section class="section">
+    <div class="section-eyebrow">Panoramica</div>
+    <h2 class="section-title">Struttura del <em>file</em></h2>
+    <p class="section-sub">Il file è organizzato in fogli mensili (uno per mese di scadenza) più due fogli per gli Azionisti e un foglio di riferimento per i valori controllati (Foglio26).</p>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-num">20</div>
+        <div class="stat-lbl">Fogli mensili soci regolari</div>
+        <div class="stat-note">Nov 24 – Giu 26</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2</div>
+        <div class="stat-lbl">Fogli Azionisti separati</div>
+        <div class="stat-note">Dic 24 e Dic 25</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">1</div>
+        <div class="stat-lbl">Foglio vocabolario controllato</div>
+        <div class="stat-note">Foglio26 — motivi, tipi, esiti</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">~3.7k</div>
+        <div class="stat-lbl">Rinnovi tracciati complessivi</div>
+        <div class="stat-note">Soci + Azionisti</div>
+      </div>
+    </div>
+
+    <div style="margin-top:32px;">
+      <div class="distrib-label">Tipologie di foglio</div>
+      <div class="callout">
+        <p>I fogli mensili contengono: <strong>riepilogo numerico in cima</strong> (N. scadenze, Rinnovati, % rinnovo), <strong>grafici a torta integrati</strong> per fotografia visiva immediata (Esito e Motivo non rinnovo), e <strong>tabella dati dettagliata</strong> con un record per ogni socio in scadenza. Il foglio Azionisti segue la stessa struttura ma con un insieme di tipologie abbonamento distinto. Il Foglio26 è un foglio di servizio con le liste dei valori ammessi per i menu a tendina (Motivo, Tipo Abbonamento, Esito).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRUTTURA CAMPI ED EVOLUZIONE -->
+  <section class="section">
+    <div class="section-eyebrow">Struttura campi</div>
+    <h2 class="section-title">Evoluzione del <em>modello</em></h2>
+    <p class="section-sub">Il numero di colonne per foglio è cresciuto nel tempo. Il foglio di Novembre 2024 ha 12 campi. Dal Dicembre 2024 il modello si espande a 23 campi. Da Ottobre 2025 viene aggiunto il campo di assegnazione vendita al personale.</p>
+
+    <table class="evo-table">
+      <thead>
+        <tr>
+          <th>Versione</th>
+          <th>Periodo</th>
+          <th>Campi</th>
+          <th>Novità principali</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>V1</td>
+          <td>Novembre 2024</td>
+          <td>12</td>
+          <td>Data scad. prec., Data scad. nuova, Esito, Motivo non rinnovo, Cognome, Nome, Tipo abb. prec., Tipo abb. nuovo, Importo prec., Importo nuovo, Differenza, Quota iscrizione</td>
+        </tr>
+        <tr>
+          <td>V2</td>
+          <td>Dicembre 2024</td>
+          <td>23</td>
+          <td><span class="badge badge-new">new</span> Età, Appuntamenti, Durata, Periodo, DataInizio/Fine, Venditore prec., Venditore nuovo, Motivazione diff. pagata, Email, SMS, DataUltimoAccesso, NrGiorniAssenza</td>
+        </tr>
+        <tr>
+          <td>V3</td>
+          <td>Feb–Set 2025</td>
+          <td>23–27</td>
+          <td><span class="badge badge-new">new</span> Grafici a torta integrati nel foglio (sopra la tabella, righe 0–20) <span class="badge badge-chg">chg</span> Campo "Appuntamenti" rinominato "Appuntamenti / Note" in alcuni mesi</td>
+        </tr>
+        <tr>
+          <td>V4</td>
+          <td>Ottobre 2025 →</td>
+          <td>29–36</td>
+          <td><span class="badge badge-new">new</span> VENDITE ASSEGNATE (colonna 0): assegnazione nominale del rinnovo al membro dello staff responsabile <span class="badge badge-new">new</span> Note non rinnovo come campo separato</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:8px;">
+      <div class="distrib-label">Campi presenti — V1 (base, Novembre 2024)</div>
+      <div class="fields-grid">
+        <span class="field-tag v1">Data Scadenza Precedente</span>
+        <span class="field-tag v1">Data Scadenza Nuova</span>
+        <span class="field-tag v1">Esito</span>
+        <span class="field-tag v1">Motivo non rinnovo</span>
+        <span class="field-tag v1">Cognome</span>
+        <span class="field-tag v1">Nome</span>
+        <span class="field-tag v1">Tipo Abbonamento Prec.</span>
+        <span class="field-tag v1">Tipo Abbonamento Nuovo</span>
+        <span class="field-tag v1">Importo Precedente</span>
+        <span class="field-tag v1">Importo Nuovo</span>
+        <span class="field-tag v1">Differenza</span>
+        <span class="field-tag v1">Quota Iscrizione</span>
+      </div>
+
+      <div class="distrib-label" style="margin-top:16px;">Campi aggiunti in V2 (Dicembre 2024)</div>
+      <div class="fields-grid">
+        <span class="field-tag v2">Età</span>
+        <span class="field-tag v2">Appuntamenti</span>
+        <span class="field-tag v2">Durata</span>
+        <span class="field-tag v2">Periodo</span>
+        <span class="field-tag v2">DataInizioAbbonamento</span>
+        <span class="field-tag v2">DataFineAbbonamento</span>
+        <span class="field-tag v2">Venditore Precedente</span>
+        <span class="field-tag v2">Venditore Nuovo</span>
+        <span class="field-tag v2">Motivazione diff. pagata</span>
+        <span class="field-tag v2">Email</span>
+        <span class="field-tag v2">SMS</span>
+        <span class="field-tag v2">DataUltimoAccesso</span>
+        <span class="field-tag v2">NrGiorniAssenza</span>
+      </div>
+
+      <div class="distrib-label" style="margin-top:16px;">Campo aggiunto in V4 (Ottobre 2025)</div>
+      <div class="fields-grid">
+        <span class="field-tag v3">VENDITE ASSEGNATE</span>
+        <span class="field-tag v3">Note non rinnovo</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESITO — VALORI AMMESSI -->
+  <section class="section">
+    <div class="section-eyebrow">Valori del campo Esito</div>
+    <h2 class="section-title">Tipologie di <em>esito</em></h2>
+    <p class="section-sub">Il campo Esito ammette valori controllati (definiti nel Foglio26). Oltre al binomio RINNOVATO / NON RINNOVA, il modello traccia stati intermedi e tipologie di recupero.</p>
+
+    <div class="esito-row">
+      <div class="esito-pill rinnov"><span class="ep-label">RINNOVATO</span></div>
+      <div class="esito-pill non-rinnov"><span class="ep-label">NON RINNOVA</span></div>
+      <div class="esito-pill other"><span class="ep-label">RECUPERO</span></div>
+      <div class="esito-pill other"><span class="ep-label">FLEX</span></div>
+      <div class="esito-pill other"><span class="ep-label">MENSILE</span></div>
+      <div class="esito-pill other"><span class="ep-label">TRATTATIVA</span></div>
+    </div>
+
+    <div class="callout">
+      <p><strong>RECUPERO</strong>: socio che aveva sospeso l'abbonamento e viene riattivato. <strong>FLEX</strong>: rinnovo con abbonamento Flex (mensile flessibile). <strong>MENSILE</strong>: abbonamento rinnovato su base mensile. <strong>TRATTATIVA</strong>: rinnovo in corso di negoziazione alla data di registrazione.</p>
+    </div>
+  </section>
+
+  <!-- RETENTION MENSILE -->
+  <section class="section">
+    <div class="section-eyebrow">Dati di retention</div>
+    <h2 class="section-title">Tasso di rinnovo <em>mensile</em></h2>
+    <p class="section-sub">Percentuale di rinnovo per mese di scadenza, calcolata sul rapporto RINNOVATO / (RINNOVATO + NON RINNOVA). I dati degli Azionisti sono tracciati separatamente.</p>
+
+    <div class="timeline-grid">
+      <div class="month-cell lo"><div class="m-name">Nov 24</div><div class="m-pct">63%</div><div class="m-n">162 soci</div></div>
+      <div class="month-cell mid"><div class="m-name">Dic 24</div><div class="m-pct">73%</div><div class="m-n">197 soci</div></div>
+      <div class="month-cell mid"><div class="m-name">Gen 25</div><div class="m-pct">68%</div><div class="m-n">208 soci</div></div>
+      <div class="month-cell mid"><div class="m-name">Feb 25</div><div class="m-pct">65%</div><div class="m-n">187 soci</div></div>
+      <div class="month-cell hi"><div class="m-name">Mar 25</div><div class="m-pct">76%</div><div class="m-n">206 soci</div></div>
+      <div class="month-cell mid"><div class="m-name">Apr 25</div><div class="m-pct">72%</div><div class="m-n">186 soci</div></div>
+      <div class="month-cell mid"><div class="m-name">Mag 25</div><div class="m-pct">72%</div><div class="m-n">212 soci</div></div>
+      <div class="month-cell mid"><div class="m-name">Giu 25</div><div class="m-pct">65%</div><div class="m-n">209 soci</div></div>
+      <div class="month-cell hi"><div class="m-name">Lug 25</div><div class="m-pct">80%</div><div class="m-n">163 soci</div></div>
+      <div class="month-cell mid"><div class="m-name">Ago 25</div><div class="m-pct">69%</div><div class="m-n">129 soci</div></div>
+      <div class="month-cell lo"><div class="m-name">Set 25</div><div class="m-pct">65%</div><div class="m-n">293 soci</div></div>
+      <div class="month-cell mid"><div class="m-name">Ott 25</div><div class="m-pct">73%</div><div class="m-n">273 soci</div></div>
+      <div class="month-cell hi"><div class="m-name">Nov 25</div><div class="m-pct">77%</div><div class="m-n">139 soci</div></div>
+      <div class="month-cell hi"><div class="m-name">Dic 25</div><div class="m-pct">77%</div><div class="m-n">186 soci</div></div>
+      <div class="month-cell hi"><div class="m-name">Gen 26</div><div class="m-pct">80%</div><div class="m-n">213 soci</div></div>
+      <div class="month-cell hi"><div class="m-name">Feb 26</div><div class="m-pct">76%</div><div class="m-n">174 soci</div></div>
+      <div class="month-cell hi"><div class="m-name">Mar 26</div><div class="m-pct">77%</div><div class="m-n">192 soci</div></div>
+      <div class="month-cell hi"><div class="m-name">Apr 26</div><div class="m-pct">79%</div><div class="m-n">165 soci</div></div>
+      <div class="month-cell hi"><div class="m-name">Mag 26</div><div class="m-pct">86%</div><div class="m-n">83 soci</div></div>
+    </div>
+
+    <div class="data-note">
+      <div class="dn-label">Azionisti — tracking separato</div>
+      <p>Azionisti Dicembre 2024: 63 rinnovati su 65 → <strong>96.9%</strong>. Azionisti 2025: 61 rinnovati su 64 → <strong>95.3%</strong>. La popolazione azionisti presenta una struttura diversa (abbonamento Member Club 2.1) e un comportamento di retention sostanzialmente diverso dalla base soci generale. Dati non aggregabili con le serie mensili standard.</p>
+    </div>
+
+    <div class="data-note" style="margin-top:10px;">
+      <div class="dn-label">Nota metodologica</div>
+      <p>Le percentuali sono calcolate sul rapporto RINNOVATO / (RINNOVATO + NON RINNOVA), escludendo gli esiti intermedi (RECUPERO, FLEX, MENSILE, TRATTATIVA). Settembre 2025 è il mese con il volume più alto (293 soci) — corrisponde alla finestra di rinnovo stagionale post-estate. Giugno 2026 contiene solo 7 record (foglio attivo, tracciamento parziale) ed è escluso dalla lettura di trend.</p>
+    </div>
+  </section>
+
+  <!-- MOTIVI NON RINNOVO -->
+  <section class="section">
+    <div class="section-eyebrow">Motivi non rinnovo</div>
+    <h2 class="section-title">Perché i soci <em>non rinnovano</em></h2>
+    <p class="section-sub">Aggregazione dei motivi non rinnovo su tutti i fogli mensili da Febbraio 2025 a Maggio 2026. Il campo è compilato per i record con Esito NON RINNOVA. Il vocabolario controllato è definito nel Foglio26.</p>
+
+    <div class="two-col">
+      <div>
+        <div class="distrib-label">Top motivi — tutte le annate (Feb 25–Mag 26)</div>
+        <div class="bar-row"><span class="bar-key">Lavoro</span><div class="bar-track"><div class="bar-fill gold-hi" style="width:100%"></div></div><span class="bar-val">154</span></div>
+        <div class="bar-row"><span class="bar-key">Studio</span><div class="bar-track"><div class="bar-fill gold-mid" style="width:56%"></div></div><span class="bar-val">86</span></div>
+        <div class="bar-row"><span class="bar-key">Poca frequenza</span><div class="bar-track"><div class="bar-fill gold-mid" style="width:45%"></div></div><span class="bar-val">69</span></div>
+        <div class="bar-row"><span class="bar-key">Salute</span><div class="bar-track"><div class="bar-fill gold-mid" style="width:43%"></div></div><span class="bar-val">67</span></div>
+        <div class="bar-row"><span class="bar-key">Prezzo</span><div class="bar-track"><div class="bar-fill gold-lo" style="width:23%"></div></div><span class="bar-val">36</span></div>
+        <div class="bar-row"><span class="bar-key">Rate insolute</span><div class="bar-track"><div class="bar-fill gold-lo" style="width:23%"></div></div><span class="bar-val">35</span></div>
+        <div class="bar-row"><span class="bar-key">Trasferimento lavoro</span><div class="bar-track"><div class="bar-fill gold-lo" style="width:20%"></div></div><span class="bar-val">31</span></div>
+        <div class="bar-row"><span class="bar-key">Trasferimento abitazione</span><div class="bar-track"><div class="bar-fill gold-lo" style="width:20%"></div></div><span class="bar-val">31</span></div>
+        <div class="bar-row"><span class="bar-key">Solo periodo estivo</span><div class="bar-track"><div class="bar-fill gold-lo" style="width:20%"></div></div><span class="bar-val">31</span></div>
+        <div class="bar-row"><span class="bar-key">Altra struttura</span><div class="bar-track"><div class="bar-fill gold-lo" style="width:14%"></div></div><span class="bar-val">22</span></div>
+        <div class="bar-row"><span class="bar-key">Mai venuto/a</span><div class="bar-track"><div class="bar-fill gold-lo" style="width:10%"></div></div><span class="bar-val">27</span></div>
+        <div class="bar-row"><span class="bar-key">Bimbo / family</span><div class="bar-track"><div class="bar-fill gold-lo" style="width:15%"></div></div><span class="bar-val">23</span></div>
+      </div>
+      <div>
+        <div class="distrib-label">Vocabolario Foglio26 — valori ammessi</div>
+        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Lavoro</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Studio</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Salute</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Poca frequenza</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Prezzo</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Prezzo x frequenza</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Rate insolute</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Altro sport</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Bimbo con family</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Family</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Interruzione disciplinare</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Disdetta FLEX</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Mai venuto</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Mensili in scadenza</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Motivi personali</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Nessuna risposta</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Pigrizia / impegni</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Solo padel</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Solo periodi brevi</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Solo periodo estivo</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Solo tennis</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Sospensioni</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Sovraffolamento e prezzo</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Trasf. abitazione</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Trasf. altra struttura</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Trasf. lavoro</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Trasf. studio</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Utilizzo corporate</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Vacanza / torna a set.</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Inutilizzo</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Recupero</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Altra struttura</span>
+        </div>
+
+        <div class="data-note">
+          <div class="dn-label">Varianti libere nel campo</div>
+          <p>Nonostante il vocabolario controllato nel Foglio26, in alcuni mesi il campo Motivo contiene testo libero che duplica categorie già presenti (es. "Mai venuta" e "Mai venuto" come varianti di "Mai venuto"; "Prezzo x frequenza" come variante di "Prezzo"; "Bimbo in family" e "Bimbo con family" come varianti di "Bimbo con family"). Queste varianti sono distinte nella struttura attuale e non vengono aggregate automaticamente.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VENDITE ASSEGNATE -->
+  <section class="section">
+    <div class="section-eyebrow">Staff tracking — da Ottobre 2025</div>
+    <h2 class="section-title">Assegnazione <em>vendite</em></h2>
+    <p class="section-sub">Dal foglio Ottobre 2025, ogni riga ha un'etichetta di assegnazione nominale nella prima colonna. Il dato permette di leggere il volume di rinnovi gestito per persona. Agosto e Settembre 2025 non hanno questo campo (fogli precedenti all'introduzione).</p>
+
+    <div class="two-col">
+      <div>
+        <div class="distrib-label">Rinnovi per staff — Ott 25 – Mag 26</div>
+        <div class="staff-grid">
+          <div class="staff-row">
+            <span class="staff-name">Marghe</span>
+            <div class="staff-bar-track"><div class="staff-bar-fill" style="width:100%"></div><span class="staff-bar-val">302</span></div>
+          </div>
+          <div class="staff-row">
+            <span class="staff-name">Chiara</span>
+            <div class="staff-bar-track"><div class="staff-bar-fill" style="width:52%"></div><span class="staff-bar-val">157</span></div>
+          </div>
+          <div class="staff-row">
+            <span class="staff-name">Sara</span>
+            <div class="staff-bar-track"><div class="staff-bar-fill" style="width:47%"></div><span class="staff-bar-val">143</span></div>
+          </div>
+          <div class="staff-row">
+            <span class="staff-name">Marghe Customer</span>
+            <div class="staff-bar-track"><div class="staff-bar-fill" style="width:41%"></div><span class="staff-bar-val">123</span></div>
+          </div>
+          <div class="staff-row">
+            <span class="staff-name">Francesca</span>
+            <div class="staff-bar-track"><div class="staff-bar-fill" style="width:28%"></div><span class="staff-bar-val">84</span></div>
+          </div>
+          <div class="staff-row">
+            <span class="staff-name">Francy</span>
+            <div class="staff-bar-track"><div class="staff-bar-fill" style="width:26%"></div><span class="staff-bar-val">80</span></div>
+          </div>
+          <div class="staff-row">
+            <span class="staff-name">Flex</span>
+            <div class="staff-bar-track"><div class="staff-bar-fill" style="width:19%"></div><span class="staff-bar-val">58</span></div>
+          </div>
+          <div class="staff-row">
+            <span class="staff-name">Luigi</span>
+            <div class="staff-bar-track"><div class="staff-bar-fill" style="width:15%"></div><span class="staff-bar-val">45</span></div>
+          </div>
+          <div class="staff-row">
+            <span class="staff-name">Marghe Azione Customer</span>
+            <div class="staff-bar-track"><div class="staff-bar-fill" style="width:11%"></div><span class="staff-bar-val">33</span></div>
+          </div>
+        </div>
+        <div class="data-note" style="margin-top:14px;">
+          <div class="dn-label">Nota</div>
+          <p>"Flex" nella colonna VENDITE ASSEGNATE compare sia come etichetta di tipo di abbonamento sia come nome di canale/staff. "Marghe", "Marghe Customer" e "Marghe Azione Customer" sono tre etichette distinte che fanno riferimento alla stessa persona in modalità operative diverse (vendita diretta, gestione customer, azione proattiva su customer).</p>
+        </div>
+      </div>
+      <div>
+        <div class="distrib-label">Campo non presente nei fogli precedenti</div>
+        <div class="callout" style="margin:0 0 16px 0;">
+          <p>I fogli da Novembre 2024 a Settembre 2025 non hanno il campo VENDITE ASSEGNATE. In quei fogli il venditore è identificato nel campo "Venditore Nuovo" (presente dal Dicembre 2024), ma come campo informativo — non come campo di assegnazione operativa prima della chiamata.</p>
+        </div>
+        <div class="distrib-label">Etichette usate nel campo</div>
+        <div class="fields-grid">
+          <span class="field-tag v1">MARGHE</span>
+          <span class="field-tag v1">MARGHE CUSTOMER</span>
+          <span class="field-tag v1">MARGHE AZIONE CUSTOMER</span>
+          <span class="field-tag v1">MARGHE F</span>
+          <span class="field-tag v1">SARA</span>
+          <span class="field-tag v1">SARA T.</span>
+          <span class="field-tag v1">FRANCESCA</span>
+          <span class="field-tag v1">FRANCY</span>
+          <span class="field-tag v1">CHIARA</span>
+          <span class="field-tag v1">LUIGI</span>
+          <span class="field-tag v1">LUIGI (PROVV)</span>
+          <span class="field-tag v1">FLEX</span>
+          <span class="field-tag v1">MENSILI IN SCADENZA</span>
+          <span class="field-tag v1">NESSUNA RISPOSTA</span>
+        </div>
+        <div class="data-note" style="margin-top:12px;">
+          <div class="dn-label">Nota</div>
+          <p>Il campo mescola etichette di persona (MARGHE, SARA, CHIARA…), tipologia di rinnovo (FLEX, MENSILI IN SCADENZA) ed esito provvisorio (NESSUNA RISPOSTA). Le tre categorie convivono nella stessa colonna senza distinzione strutturale.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OSSERVAZIONI STRUTTURALI -->
+  <section class="section">
+    <div class="section-eyebrow">Osservazioni strutturali</div>
+    <h2 class="section-title">Caratteristiche del <em>modello attuale</em></h2>
+    <p class="section-sub">Descrizione oggettiva delle caratteristiche strutturali del sistema di tracciamento rinnovi, come emergono dall'analisi del file.</p>
+
+    <div class="obs-grid">
+      <div class="obs-item">
+        <span class="obs-n">01</span>
+        <div class="obs-body">
+          <div class="obs-title">Un foglio per mese — nessuna vista aggregata nel file</div>
+          <div class="obs-desc">Il file è strutturato con un foglio per mese di scadenza. Non esiste un foglio di riepilogo annuale o cumulativo che aggreghi le serie mensili. La fotografia complessiva della retention richiede la lettura incrociata di tutti i fogli o l'elaborazione esterna dei dati.</div>
+        </div>
+      </div>
+
+      <div class="obs-item">
+        <span class="obs-n">02</span>
+        <div class="obs-body">
+          <div class="obs-title">I grafici a torta sono integrati nei fogli ma non estraibili via dati</div>
+          <div class="obs-desc">Ogni foglio mensile (da Febbraio 2025 in poi) contiene grafici a torta per Esito e Motivo non rinnovo, posizionati nelle righe 0–20 prima della tabella. I grafici sono elementi visivi nativi di Google Sheets / Excel e non sono estraibili come dati strutturati. Sono lo strumento principale di lettura rapida delle performance utilizzato da Lorella.</div>
+        </div>
+      </div>
+
+      <div class="obs-item flag">
+        <span class="obs-n">03</span>
+        <div class="obs-body">
+          <div class="obs-title">Campo VENDITE ASSEGNATE: etichette eterogenee nella stessa colonna</div>
+          <div class="obs-desc">La colonna VENDITE ASSEGNATE (introdotta da Ottobre 2025) ospita tre tipologie di valore distinte: nomi di persona (MARGHE, SARA, CHIARA…), tipologie di rinnovo (FLEX, MENSILI IN SCADENZA) ed esiti provvisori (NESSUNA RISPOSTA). Questa eterogeneità rende il campo non filtrabile per analisi di performance per persona senza normalizzazione preventiva.</div>
+        </div>
+      </div>
+
+      <div class="obs-item flag">
+        <span class="obs-n">04</span>
+        <div class="obs-body">
+          <div class="obs-title">Vocabolario Motivo parzialmente non rispettato</div>
+          <div class="obs-desc">Il Foglio26 definisce un vocabolario controllato per il campo Motivo non rinnovo. Nell'uso pratico, varianti semanticamente equivalenti vengono inserite come testo libero: "Mai venuta" / "Mai venuto", "Bimbo con family" / "Bimbo in family" / "Bimbo Family", "Trasferimento altra struttura" / "Altra struttura". Le varianti non vengono aggregate automaticamente, producendo una frammentazione dei conteggi per categoria.</div>
+        </div>
+      </div>
+
+      <div class="obs-item">
+        <span class="obs-n">05</span>
+        <div class="obs-body">
+          <div class="obs-title">Azionisti tracciati con foglio separato, non aggregabile con la serie mensile</div>
+          <div class="obs-desc">Gli Azionisti hanno una struttura di abbonamento diversa (Member Club 2.1, rinnovo annuale a dicembre) e un tasso di retention differente (95–97% vs 63–86% per i soci regolari). Il file separa correttamente le due popolazioni, ma non esiste una vista che permetta di leggere la retention complessiva del club (soci + azionisti) come dato unificato.</div>
+        </div>
+      </div>
+
+      <div class="obs-item">
+        <span class="obs-n">06</span>
+        <div class="obs-body">
+          <div class="obs-title">Il campo NrGiorniAssenza è presente dal Dicembre 2024 ma la compilazione è discontinua</div>
+          <div class="obs-desc">Il campo NrGiorniAssenza (giorni dall'ultimo accesso alla data di scadenza) è strutturalmente presente dalla versione V2 (Dicembre 2024). È uno degli indicatori predittivi di rischio churning più diretti disponibili nel dato. La compilazione dipende dall'esportazione dal gestionale INFORYOU al momento della preparazione del foglio mensile e non è uniforme tra tutti i fogli.</div>
+        </div>
+      </div>
+
+      <div class="obs-item">
+        <span class="obs-n">07</span>
+        <div class="obs-body">
+          <div class="obs-title">Nessun identificativo univoco per socio tra i fogli</div>
+          <div class="obs-desc">I record nei fogli mensili sono identificati da Cognome + Nome. Non esiste un codice socio che permetta di tracciare lo stesso individuo su più mesi (es. un socio che non rinnova a dicembre e poi torna ad aprile) senza matching manuale per nome. La ricorrenza dello stesso socio in mesi diversi — come RECUPERO — non è automaticamente collegata.</div>
+        </div>
+      </div>
+
+      <div class="obs-item flag">
+        <span class="obs-n">08</span>
+        <div class="obs-body">
+          <div class="obs-title">Settembre è il mese con il volume più alto — 293 soci nel 2025</div>
+          <div class="obs-desc">Il foglio Settembre 2025 ha 293 record, quasi il doppio della media mensile (~185). Corrisponde alla finestra di rinnovo stagionale post-estate. Il tasso di retention di settembre (64.5%) è tra i più bassi dell'anno, ma la massa di non-rinnovi (104 soci) è assoluta. La struttura attuale non distingue "non rinnova definitivamente" da "non rinnova in settembre ma tornerà" (es. soci con abbonamento mensile o invernale).</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
