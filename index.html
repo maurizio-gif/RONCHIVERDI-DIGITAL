@@ -263,6 +263,37 @@ footer { background: rgba(0,0,0,0.4); padding: 40px 48px; border-top: 1px solid 
 
 .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .fade-up.visible { opacity: 1; transform: none; }
+
+/* ORG CHART */
+.org-section { padding: 0 48px 80px; }
+.org-section-inner { max-width: 1100px; margin: 0 auto; }
+.org-tabs { display: flex; gap: 12px; margin-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.org-tab { font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.4); padding: 10px 0 12px; border-bottom: 2px solid transparent; cursor: pointer; margin-bottom: -1px; transition: color 0.2s, border-color 0.2s; background: none; border-top: none; border-left: none; border-right: none; }
+.org-tab.active { color: #E8D46A; border-bottom-color: #E8D46A; }
+.org-chart { display: none; }
+.org-chart.active { display: block; }
+.org-tree { display: flex; flex-direction: column; align-items: center; gap: 0; }
+.org-level { display: flex; justify-content: center; gap: 12px; position: relative; width: 100%; }
+.org-connector-v { width: 1px; height: 32px; background: rgba(232,212,106,0.3); margin: 0 auto; }
+.org-branches { display: flex; justify-content: center; gap: 12px; width: 100%; position: relative; }
+.org-branch { display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0; }
+.org-branch-connector { width: 1px; height: 32px; background: rgba(232,212,106,0.3); }
+.org-node { padding: 12px 16px; border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; text-align: center; background: rgba(255,255,255,0.04); transition: background 0.2s, border-color 0.2s; min-width: 110px; max-width: 160px; }
+.org-node:hover { background: rgba(232,212,106,0.08); border-color: rgba(232,212,106,0.4); }
+.org-node.top { background: rgba(232,212,106,0.12); border-color: rgba(232,212,106,0.5); }
+.org-node.collab { border-radius: 50px; border-style: dashed; border-color: rgba(184,150,90,0.5); background: rgba(184,150,90,0.06); }
+.org-node-name { font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #FAF8F4; line-height: 1.3; margin-bottom: 4px; }
+.org-node-role { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 12px; font-weight: 300; font-style: italic; color: rgba(255,255,255,0.5); line-height: 1.3; }
+.org-node.collab .org-node-role { color: #B8965A; }
+.org-node.top .org-node-name { color: #E8D46A; }
+.org-legend { display: flex; gap: 24px; margin-top: 40px; flex-wrap: wrap; }
+.org-legend-item { display: flex; align-items: center; gap: 10px; font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+.org-legend-box { width: 28px; height: 16px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.04); }
+.org-legend-pill { width: 36px; height: 16px; border-radius: 50px; border: 1px dashed rgba(184,150,90,0.5); background: rgba(184,150,90,0.06); }
+.org-sub-members { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin-top: 0; }
+.org-node.sm { padding: 8px 12px; min-width: 80px; max-width: 120px; }
+.org-node.sm .org-node-name { font-size: 10px; }
+@media (max-width: 640px) { .org-section { padding: 0 20px 60px; } .org-node { min-width: 80px; max-width: 120px; padding: 10px; } .org-node-name { font-size: 10px; } .org-branches { gap: 6px; } }
 </style>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Audit Digitale · Ronchiverdi">
@@ -372,7 +403,6 @@ footer { background: rgba(0,0,0,0.4); padding: 40px 48px; border-top: 1px solid 
       <div class="meta-item"><div class="meta-label">Cliente</div><div class="meta-value">Ronchiverdi Sport Club — Torino</div></div>
       <div class="meta-item"><div class="meta-label">Consulente</div><div class="meta-value">Maurizio Taruggi · Ready 2 Digital</div></div>
       <div class="meta-item"><div class="meta-label">Avvio</div><div class="meta-value">Aprile 2026</div></div>
-      <div class="meta-item"><div class="meta-label">Stato</div><div class="meta-value">In corso · Call #4 completata</div></div>
     </div>
   </div>
 </section>
@@ -404,175 +434,41 @@ footer { background: rgba(0,0,0,0.4); padding: 40px 48px; border-top: 1px solid 
 </section>
 
 <!-- PROGRESS -->
-<div class="progress-bar-wrap">
-  <span class="progress-label">Avanzamento audit</span>
-  <div class="progress-track"><div class="progress-fill" id="prog"></div></div>
-  <span class="progress-pct">4 / 9+ step</span>
-</div>
 
 <!-- JOURNEY MAP -->
 <section class="journey-section fade-up">
   <div class="journey-inner">
     <div class="section-label">Customer Journey Map</div>
-    <div class="journey-title">Step <em>analizzati</em> e da analizzare</div>
+    <div class="journey-title">Gli step del <em>Customer Journey</em></div>
     <div class="journey-steps">
-      <div class="j-step analyzed">
+      <div class="j-step">
         <div class="j-step-num">Step 1</div>
         <div class="j-step-name">Attraction</div>
-        <div class="j-step-status">✓ Analizzato</div>
       </div>
-      <div class="j-step analyzed">
+      <div class="j-step">
         <div class="j-step-num">Step 2</div>
         <div class="j-step-name">Data Collection</div>
-        <div class="j-step-status">✓ Analizzato</div>
       </div>
-      <div class="j-step analyzed">
+      <div class="j-step">
         <div class="j-step-num">Step 3</div>
         <div class="j-step-name">Lead Management</div>
-        <div class="j-step-status">✓ Analizzato</div>
       </div>
-      <div class="j-step analyzed">
+      <div class="j-step">
         <div class="j-step-num">Step 4</div>
         <div class="j-step-name">Iscrizione &amp; Pagamento</div>
-        <div class="j-step-status">✓ Analizzato</div>
       </div>
-      <div class="j-step todo">
+      <div class="j-step">
         <div class="j-step-num">Step 5</div>
         <div class="j-step-name">Onboarding</div>
-        <div class="j-step-status">— In agenda</div>
       </div>
-      <div class="j-step todo">
+      <div class="j-step">
         <div class="j-step-num">Step 6</div>
-        <div class="j-step-name">Retention & Rinnovi</div>
-        <div class="j-step-status">— In agenda</div>
+        <div class="j-step-name">Retention &amp; Rinnovi</div>
       </div>
-      <div class="j-step todo">
+      <div class="j-step">
         <div class="j-step-num">Step 7</div>
-        <div class="j-step-name">Referral & Advocacy</div>
-        <div class="j-step-status">— In agenda</div>
+        <div class="j-step-name">Referral &amp; Advocacy</div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- CALLS -->
-<section class="calls-section">
-  <div class="calls-section-inner">
-    <div class="section-label">Verbali delle sessioni</div>
-    <h2 class="section-title">Le <em>call dell'audit</em></h2>
-
-    <div class="calls-grid">
-
-      <!-- CALL 1 -->
-      <a class="call-card" href="call-1.html">
-        <div class="call-card-num">1</div>
-        <div class="call-card-body">
-          <div class="call-card-top">
-            <span class="call-tag done">Completata</span>
-            <span class="call-date">Aprile 2026</span>
-          </div>
-          <div class="call-card-title">Prima Call — <em>Inquadramento & Struttura</em></div>
-          <div class="call-card-desc">Sessione di apertura dell'audit: presentazione del metodo, inquadramento del club (business unit, organizzazione, stagionalità), prima lettura del Customer Journey a macro-livello. Definizione del perimetro di lavoro.</div>
-          <div class="call-topics">
-            <span class="call-topic">Business Unit</span>
-            <span class="call-topic">Organizzazione interna</span>
-            <span class="call-topic">Stagionalità</span>
-            <span class="call-topic">Customer Journey overview</span>
-            <span class="call-topic">Metodo audit</span>
-          </div>
-          <div class="call-cta">Leggi il verbale <span class="arrow">→</span></div>
-        </div>
-      </a>
-
-      <!-- CALL 2 -->
-      <a class="call-card" href="call-2.html">
-        <div class="call-card-num">2</div>
-        <div class="call-card-body">
-          <div class="call-card-top">
-            <span class="call-tag done">Completata</span>
-            <span class="call-date">30 aprile 2026</span>
-          </div>
-          <div class="call-card-title">Seconda Call — <em>Attraction, Data & Nuoto</em></div>
-          <div class="call-card-desc">Analisi dei 6 canali di comunicazione esterna (social, ADV, sito, referral, fisica, eventi), mapping delle criticità di raccolta dati, deep dive completo sul verticale Nuoto Young School e primo progetto di onboarding Fitness per i nuovi iscritti.</div>
-          <div class="call-topics">
-            <span class="call-topic">Step 1 — Attraction</span>
-            <span class="call-topic">Step 2 — Data Collection</span>
-            <span class="call-topic">6 canali di comunicazione</span>
-            <span class="call-topic">Deep dive Nuoto</span>
-            <span class="call-topic">Onboarding Fitness</span>
-            <span class="call-topic">Knowledge Base</span>
-            <span class="call-topic">WhatsApp API</span>
-          </div>
-          <div class="call-cta">Leggi il verbale <span class="arrow">→</span></div>
-        </div>
-      </a>
-
-      <!-- CALL 3 — COMPLETATA -->
-      <a class="call-card" href="call-3.html">
-        <div class="call-card-num">3</div>
-        <div class="call-card-body">
-          <div class="call-card-top">
-            <span class="call-tag done">Completata</span>
-            <span class="call-date">5 maggio 2026</span>
-          </div>
-          <div class="call-card-title">Terza Call &mdash; <em>Tennis &amp; Lead Management</em></div>
-          <div class="call-card-desc">Deep dive sulla Business Unit Tennis con Stefano Bertone: struttura, processi, 118 atleti, analisi file Excel. Seconda parte dedicata al processo di gestione lead adulti: pipeline, conversione, prodotto civetta, strategia WhatsApp.</div>
-          <div class="call-topics">
-            <span class="call-topic">Verticale Tennis</span>
-            <span class="call-topic">118 atleti &middot; &euro;202K</span>
-            <span class="call-topic">Step 3 &mdash; Lead Management</span>
-            <span class="call-topic">Pipeline adulti</span>
-            <span class="call-topic">Prodotto civetta</span>
-            <span class="call-topic">WhatsApp &amp; AI agent</span>
-          </div>
-          <div class="call-cta">Leggi il verbale <span>&#x2192;</span></div>
-        </div>
-      </a>
-
-      <!-- LEAD INTELLIGENCE -->
-      <a class="call-card" href="lead-intelligence.html">
-        <div class="call-card-num">&#10070;</div>
-        <div class="call-card-body">
-          <div class="call-card-top">
-            <span class="call-tag done">Data Intelligence</span>
-            <span class="call-date">Maggio 2026</span>
-          </div>
-          <div class="call-card-title">Lead Intelligence &mdash; <em>16 Campagne, una sola foto</em></div>
-          <div class="call-card-desc">Consolidamento di tutti i fogli di lead generation Ronchiverdi (set 2024 &rarr; mag 2026): ~480 lead, distribuzione per sport e canale, funnel di conversione reale, deep dive Spring Padel Ambassador e gap analysis del processo con roadmap di priorit&agrave;.</div>
-          <div class="call-topics">
-            <span class="call-topic">~480 lead aggregati</span>
-            <span class="call-topic">16 fogli analizzati</span>
-            <span class="call-topic">Funnel &amp; outcome</span>
-            <span class="call-topic">Spring Padel Ambassador</span>
-            <span class="call-topic">Gap analysis</span>
-            <span class="call-topic">Roadmap to convert</span>
-          </div>
-          <div class="call-cta">Apri il report <span>&#x2192;</span></div>
-        </div>
-      </a>
-
-      <!-- CALL 4 — COMPLETATA -->
-      <a class="call-card" href="call-4.html">
-        <div class="call-card-num">4</div>
-        <div class="call-card-body">
-          <div class="call-card-top">
-            <span class="call-tag done">Completata</span>
-            <span class="call-date">8 maggio 2026</span>
-          </div>
-          <div class="call-card-title">Quarta Call &mdash; <em>Iscrizione &amp; Pagamenti</em></div>
-          <div class="call-card-desc">Procedura amministrativa di iscrizione su InForYou, firma Wacom, ciclo TSPay/Cofidis, gestione insoluti con pipeline di escalation, esternalizzazione certificati medici a Kiron, riorganizzazione reception e totem, tesseramento CSI.</div>
-          <div class="call-topics">
-            <span class="call-topic">Procedura iscrizione</span>
-            <span class="call-topic">TSPay &amp; Cofidis</span>
-            <span class="call-topic">Pipeline insoluti</span>
-            <span class="call-topic">Certificati Kiron</span>
-            <span class="call-topic">Reception &amp; totem</span>
-            <span class="call-topic">Tesseramento CSI</span>
-          </div>
-          <div class="call-cta">Leggi il verbale <span>&#x2192;</span></div>
-        </div>
-      </a>
-
     </div>
   </div>
 </section>
@@ -610,73 +506,115 @@ footer { background: rgba(0,0,0,0.4); padding: 40px 48px; border-top: 1px solid 
     <h2 class="section-title">Le <em>persone</em> coinvolte</h2>
     <div class="team-grid">
       <div class="team-chip lead">
+        <div class="team-avatar ta-v">VZ</div>
+        <div>
+          <div class="team-info-name">Vittorio Zunino</div>
+          <div class="team-info-role">Amministratore Unico</div>
+        </div>
+      </div>
+      <div class="team-chip lead">
         <div class="team-avatar ta-mt">MR</div>
         <div>
           <div class="team-info-name">Marco Rolle</div>
-          <div class="team-info-role">Manager · Ronchiverdi</div>
+          <div class="team-info-role">Club Manager</div>
         </div>
       </div>
       <div class="team-chip">
         <div class="team-avatar ta-v">PZ</div>
         <div>
           <div class="team-info-name">Paola Zavattero</div>
-          <div class="team-info-role">CFO · Ronchiverdi</div>
+          <div class="team-info-role">CFO</div>
         </div>
       </div>
       <div class="team-chip">
         <div class="team-avatar ta-v">LG</div>
         <div>
           <div class="team-info-name">Lorella Gravante</div>
-          <div class="team-info-role">Direzione Commerciale</div>
+          <div class="team-info-role">Resp. Sviluppo Club</div>
         </div>
       </div>
       <div class="team-chip">
-        <div class="team-avatar ta-v">VZ</div>
+        <div class="team-avatar ta-l">MG</div>
         <div>
-          <div class="team-info-name">Vittorio Zunino</div>
-          <div class="team-info-role">Amministratore Delegato</div>
+          <div class="team-info-name">Maria Grazia Francaviglia</div>
+          <div class="team-info-role">Resp. Amministrativa</div>
         </div>
       </div>
       <div class="team-chip">
-        <div class="team-avatar ta-l">Lo</div>
+        <div class="team-avatar ta-l">RO</div>
         <div>
-          <div class="team-info-name">Loris</div>
-          <div class="team-info-role">Fitness · Customer Care</div>
+          <div class="team-info-name">Rita Oliverio</div>
+          <div class="team-info-role">Resp. Accoglienza</div>
         </div>
       </div>
       <div class="team-chip">
-        <div class="team-avatar ta-l">S</div>
+        <div class="team-avatar ta-l">MD</div>
         <div>
-          <div class="team-info-name">Sara</div>
-          <div class="team-info-role">Coordinatrice Scuola Nuoto</div>
+          <div class="team-info-name">Margherita DiMauro</div>
+          <div class="team-info-role">Rinnovi · Reception</div>
+        </div>
+      </div>
+      <div class="team-chip">
+        <div class="team-avatar ta-l">CP</div>
+        <div>
+          <div class="team-info-name">Chiara Pautasso</div>
+          <div class="team-info-role">Digitalizzazione · Reception</div>
+        </div>
+      </div>
+      <div class="team-chip">
+        <div class="team-avatar ta-l">JC</div>
+        <div>
+          <div class="team-info-name">Jasmine Catalano</div>
+          <div class="team-info-role">New Business · Reception</div>
+        </div>
+      </div>
+      <div class="team-chip">
+        <div class="team-avatar ta-l">LC</div>
+        <div>
+          <div class="team-info-name">Loris Citterio</div>
+          <div class="team-info-role">Coord. Sala Pesi · Customer Care</div>
+        </div>
+      </div>
+      <div class="team-chip">
+        <div class="team-avatar ta-l">ST</div>
+        <div>
+          <div class="team-info-name">Sara Tugnolo</div>
+          <div class="team-info-role">Resp. Piscine e Young School</div>
+        </div>
+      </div>
+      <div class="team-chip">
+        <div class="team-avatar ta-l">SB</div>
+        <div>
+          <div class="team-info-name">Stefano Bertone</div>
+          <div class="team-info-role">Coord. Tennis e Young School</div>
+        </div>
+      </div>
+      <div class="team-chip">
+        <div class="team-avatar ta-l">DC</div>
+        <div>
+          <div class="team-info-name">Davide Casale</div>
+          <div class="team-info-role">Coord. Padel</div>
+        </div>
+      </div>
+      <div class="team-chip">
+        <div class="team-avatar ta-l">LC</div>
+        <div>
+          <div class="team-info-name">Laura Cristina</div>
+          <div class="team-info-role">Coord. Fitness e Musicali</div>
         </div>
       </div>
       <div class="team-chip">
         <div class="team-avatar ta-l">GM</div>
         <div>
           <div class="team-info-name">Giorgio Mortara</div>
-          <div class="team-info-role">Resp. Triathlon &amp; Running</div>
-        </div>
-      </div>
-      <div class="team-chip">
-        <div class="team-avatar ta-l">C</div>
-        <div>
-          <div class="team-info-name">Carolina</div>
-          <div class="team-info-role">Reception · Operations</div>
+          <div class="team-info-role">Coord. Triathlon</div>
         </div>
       </div>
       <div class="team-chip">
         <div class="team-avatar ta-l">Si</div>
         <div>
           <div class="team-info-name">Simone</div>
-          <div class="team-info-role">Digital Marketing · in arrivo</div>
-        </div>
-      </div>
-      <div class="team-chip">
-        <div class="team-avatar ta-l">AG</div>
-        <div>
-          <div class="team-info-name">Agenzia</div>
-          <div class="team-info-role">Brand · Sito · ADV</div>
+          <div class="team-info-role">Digital &amp; ADV · dal 1 maggio 2026</div>
         </div>
       </div>
       <div class="team-chip consultant">
@@ -686,6 +624,174 @@ footer { background: rgba(0,0,0,0.4); padding: 40px 48px; border-top: 1px solid 
           <div class="team-info-role">Consulente · Ready 2 Digital</div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORGANIGRAMMA -->
+<section class="org-section fade-up">
+  <div class="org-section-inner">
+    <div class="org-tabs">
+      <button class="org-tab active" onclick="showOrg('generale', this)">Struttura Generale</button>
+      <button class="org-tab" onclick="showOrg('sportivo', this)">Settore Sportivo</button>
+    </div>
+
+    <!-- CHART 1: STRUTTURA GENERALE -->
+    <div class="org-chart active" id="org-generale">
+      <div class="org-tree">
+        <div class="org-level" style="gap:20px;align-items:flex-start;">
+          <div class="org-branch" style="flex:0 0 auto;">
+            <div class="org-node top">
+              <div class="org-node-name">Zunino Vittorio</div>
+              <div class="org-node-role">Amministratore Unico</div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;flex:0 0 auto;margin-top:8px;">
+            <div class="org-node collab">
+              <div class="org-node-name">Zavattero Paola</div>
+              <div class="org-node-role">CFO</div>
+            </div>
+          </div>
+        </div>
+        <div class="org-connector-v"></div>
+        <div class="org-level">
+          <div class="org-node top" style="min-width:150px;">
+            <div class="org-node-name">Rolle Marco</div>
+            <div class="org-node-role">Club Manager</div>
+          </div>
+        </div>
+        <div class="org-connector-v"></div>
+        <div class="org-branches">
+          <div class="org-branch">
+            <div class="org-branch-connector"></div>
+            <div class="org-node">
+              <div class="org-node-name">Francaviglia M.G.</div>
+              <div class="org-node-role">Resp. Amministrativa</div>
+            </div>
+          </div>
+          <div class="org-branch">
+            <div class="org-branch-connector"></div>
+            <div class="org-node" style="border-color:rgba(232,212,106,0.35);">
+              <div class="org-node-name">Gravante Lorella</div>
+              <div class="org-node-role">Resp. Sviluppo Club</div>
+            </div>
+            <div class="org-connector-v"></div>
+            <div class="org-branches" style="gap:8px;">
+              <div class="org-branch">
+                <div class="org-branch-connector"></div>
+                <div class="org-node">
+                  <div class="org-node-name">Oliverio Rita</div>
+                  <div class="org-node-role">Resp. Accoglienza</div>
+                </div>
+                <div class="org-connector-v"></div>
+                <div class="org-sub-members">
+                  <div class="org-node sm"><div class="org-node-name">Agnoletto S.</div></div>
+                  <div class="org-node sm"><div class="org-node-name">Pautasso C.</div></div>
+                  <div class="org-node sm"><div class="org-node-name">Perrone F.</div></div>
+                  <div class="org-node sm"><div class="org-node-name">DiMauro M.</div></div>
+                  <div class="org-node sm"><div class="org-node-name">Cammarano L.</div></div>
+                  <div class="org-node sm"><div class="org-node-name">Catalano J.</div></div>
+                </div>
+              </div>
+              <div class="org-branch">
+                <div class="org-branch-connector"></div>
+                <div class="org-node collab">
+                  <div class="org-node-name">Porcella Carola</div>
+                  <div class="org-node-role">Sviluppo Club</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="org-branch">
+            <div class="org-branch-connector"></div>
+            <div class="org-node">
+              <div class="org-node-name">Sbaglia Rezio</div>
+              <div class="org-node-role">Resp. Manutenzione</div>
+            </div>
+            <div class="org-connector-v"></div>
+            <div class="org-sub-members">
+              <div class="org-node sm"><div class="org-node-name">Faenzi G.</div></div>
+              <div class="org-node sm"><div class="org-node-name">Pascale G.</div></div>
+              <div class="org-node sm"><div class="org-node-name">Tridico C.</div></div>
+              <div class="org-node sm"><div class="org-node-name">Fofana M.</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHART 2: SETTORE SPORTIVO -->
+    <div class="org-chart" id="org-sportivo">
+      <div class="org-tree">
+        <div class="org-level">
+          <div class="org-node top">
+            <div class="org-node-name">Zunino Vittorio</div>
+            <div class="org-node-role">Amministratore Unico</div>
+          </div>
+        </div>
+        <div class="org-connector-v"></div>
+        <div class="org-level">
+          <div class="org-node top" style="min-width:150px;">
+            <div class="org-node-name">Rolle Marco</div>
+            <div class="org-node-role">Club Manager</div>
+          </div>
+        </div>
+        <div class="org-connector-v"></div>
+        <div class="org-branches" style="gap:8px;">
+          <div class="org-branch">
+            <div class="org-branch-connector"></div>
+            <div class="org-node">
+              <div class="org-node-name">Tugnolo Sara</div>
+              <div class="org-node-role">Resp. Piscine e Young School</div>
+            </div>
+            <div class="org-connector-v"></div>
+            <div class="org-node">
+              <div class="org-node-name">La Vasca N.</div>
+              <div class="org-node-role">Coord. Piscine</div>
+            </div>
+          </div>
+          <div class="org-branch">
+            <div class="org-branch-connector"></div>
+            <div class="org-node collab">
+              <div class="org-node-name">Bertone Stefano</div>
+              <div class="org-node-role">Coord. Tennis e Young School</div>
+            </div>
+          </div>
+          <div class="org-branch">
+            <div class="org-branch-connector"></div>
+            <div class="org-node collab">
+              <div class="org-node-name">Casale Davide</div>
+              <div class="org-node-role">Coord. Padel</div>
+            </div>
+          </div>
+          <div class="org-branch">
+            <div class="org-branch-connector"></div>
+            <div class="org-node collab">
+              <div class="org-node-name">Cristina Laura</div>
+              <div class="org-node-role">Coord. Fitness e Musicali</div>
+            </div>
+          </div>
+          <div class="org-branch">
+            <div class="org-branch-connector"></div>
+            <div class="org-node collab">
+              <div class="org-node-name">Citterio Loris</div>
+              <div class="org-node-role">Coord. Sala Pesi</div>
+            </div>
+          </div>
+          <div class="org-branch">
+            <div class="org-branch-connector"></div>
+            <div class="org-node collab">
+              <div class="org-node-name">Mortara Giorgio</div>
+              <div class="org-node-role">Coord. Triathlon</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="org-legend">
+      <div class="org-legend-item"><div class="org-legend-box"></div>Personale dipendente</div>
+      <div class="org-legend-item"><div class="org-legend-pill"></div>Collaboratore</div>
     </div>
   </div>
 </section>
@@ -827,10 +933,12 @@ footer { background: rgba(0,0,0,0.4); padding: 40px 48px; border-top: 1px solid 
 </script>
 
 <script>
-// Animate progress bar
-setTimeout(() => {
-  document.getElementById('prog').style.width = '33%';
-}, 300);
+function showOrg(id, btn) {
+  document.querySelectorAll('.org-chart').forEach(function(el) { el.classList.remove('active'); });
+  document.querySelectorAll('.org-tab').forEach(function(el) { el.classList.remove('active'); });
+  document.getElementById('org-' + id).classList.add('active');
+  btn.classList.add('active');
+}
 
 // Fade-up observer
 const obs = new IntersectionObserver(entries => {
