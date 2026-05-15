@@ -296,6 +296,16 @@ footer { background: rgba(0,0,0,0.4); padding: 40px 48px; border-top: 1px solid 
 @media (max-width: 640px) { .org-section { padding: 0 20px 60px; } .org-node { min-width: 80px; max-width: 120px; padding: 10px; } .org-node-name { font-size: 12px; } .org-branches { gap: 6px; } }
 body{font-weight:400;line-height:1.75;}
 strong,b{font-weight:600;}
+
+/* === FIX SCROLL ORIZZONTALE / MOBILE === */
+html, body { overflow-x: hidden; max-width: 100%; }
+*, *::before, *::after { min-width: 0; }
+img, svg, canvas, iframe, video { max-width: 100%; }
+@media(max-width:768px){
+  table { display: block; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .bar-key { width: 120px !important; }
+  .calendly-inline-widget { min-width: 0 !important; }
+}
 </style>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Audit Digitale · Ronchiverdi">
@@ -832,7 +842,7 @@ strong,b{font-weight:600;}
     </div>
 
     <div class="calendar-embed-wrap">
-          <div class="calendly-inline-widget" data-url="https://calendly.com/ready2digital/formazione?hide_event_type_details=1&hide_gdpr_banner=1" style="min-width:320px;height:700px;"></div>
+          <div class="calendly-inline-widget" data-url="https://calendly.com/ready2digital/formazione?hide_event_type_details=1&hide_gdpr_banner=1" style="min-width:0;height:700px;"></div>
           <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
         </div>
     </div>

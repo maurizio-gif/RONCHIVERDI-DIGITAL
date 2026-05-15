@@ -144,6 +144,16 @@ footer { padding: 48px; border-top: 1px solid rgba(255,255,255,0.07); display: f
 }
 body{font-weight:400;line-height:1.75;}
 strong,b{font-weight:600;}
+
+/* === FIX SCROLL ORIZZONTALE / MOBILE === */
+html, body { overflow-x: hidden; max-width: 100%; }
+*, *::before, *::after { min-width: 0; }
+img, svg, canvas, iframe, video { max-width: 100%; }
+@media(max-width:768px){
+  table { display: block; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .bar-key { width: 120px !important; }
+  .calendly-inline-widget { min-width: 0 !important; }
+}
 </style>
 </head>
 <body>
