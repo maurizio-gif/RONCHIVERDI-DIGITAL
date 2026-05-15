@@ -12,13 +12,13 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FAF8F4; font-size: 15px; line-height: 1.7; overflow-x: hidden; font-weight: 300; -webkit-font-smoothing: antialiased; }
+body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FFFFFF; font-size: 17px; line-height: 1.7; overflow-x: hidden; font-weight: 400; -webkit-font-smoothing: antialiased; }
 
 /* BACK NAV */
 .back-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: rgba(15,15,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.07); }
-.back-btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(250,248,244,0.55); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; transition: color 0.2s; padding: 8px 0; }
-.back-btn:hover { color: #E8D46A; }
-.back-btn .arrow { font-size: 16px; transition: transform 0.2s; }
+.back-btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: #FFFFFF; font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; transition: color 0.2s; padding: 8px 0; }
+.back-btn:hover { color: #F2DC4E; }
+.back-btn .arrow { font-size: 18px; transition: transform 0.2s; }
 .back-btn:hover .arrow { transform: translateX(-3px); }
 .back-nav-logo-link { display: flex; align-items: center; }
 .back-nav-logo { height: 36px; width: auto; filter: invert(1); mix-blend-mode: screen; opacity: 0.9; }
@@ -29,25 +29,25 @@ body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FAF8F4; fon
 .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 50% at 80% 30%, rgba(232,212,106,0.06) 0%, transparent 60%), radial-gradient(ellipse 50% 60% at 10% 80%, rgba(184,150,90,0.04) 0%, transparent 60%); pointer-events: none; }
 .hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
 .hero-eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
-.hero-eyebrow .tag { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(250,248,244,0.3); }
-.hero-eyebrow .tag.gold { color: #E8D46A; }
-.hero-eyebrow .sep { color: rgba(250,248,244,0.15); }
-.hero h1 { font-family: "Cormorant Garamond", serif; font-size: clamp(40px, 5.5vw, 68px); font-weight: 300; line-height: 1.05; color: #FAF8F4; margin-bottom: 22px; letter-spacing: -0.02em; }
-.hero h1 em { font-style: italic; color: #E8D46A; }
-.hero-sub { font-size: 14.5px; font-weight: 300; line-height: 1.75; color: rgba(250,248,244,0.5); max-width: 680px; margin-bottom: 36px; }
+.hero-eyebrow .tag { font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #FFFFFF; }
+.hero-eyebrow .tag.gold { color: #F2DC4E; }
+.hero-eyebrow .sep { color: #FFFFFF; }
+.hero h1 { font-family: "Cormorant Garamond", serif; font-size: clamp(40px, 5.5vw, 68px); font-weight: 400; line-height: 1.05; color: #FFFFFF; margin-bottom: 22px; letter-spacing: -0.02em; }
+.hero h1 em { font-style: italic; color: #F2DC4E; }
+.hero-sub { font-size: 16px; font-weight: 400; line-height: 1.75; color: #FFFFFF; max-width: 680px; margin-bottom: 36px; }
 .hero-meta { display: flex; flex-wrap: wrap; gap: 36px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.07); }
-.hero-meta-item .lbl { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(232,212,106,0.55); margin-bottom: 4px; }
-.hero-meta-item .val { font-size: 13px; font-weight: 400; color: rgba(250,248,244,0.75); }
+.hero-meta-item .lbl { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #F2DC4E; margin-bottom: 4px; }
+.hero-meta-item .val { font-size: 15px; font-weight: 400; color: #FFFFFF; }
 
 /* LAYOUT */
 .page { max-width: 1100px; margin: 0 auto; padding: 0 48px 100px; }
 
 /* SECTION */
 .section { padding: 64px 0; border-top: 1px solid rgba(255,255,255,0.06); }
-.section-eyebrow { font-family: "JetBrains Mono", monospace; font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(232,212,106,0.6); margin-bottom: 12px; }
-.section > h2 { font-family: "Cormorant Garamond", serif; font-size: clamp(26px, 3vw, 38px); font-weight: 300; line-height: 1.15; color: #FAF8F4; margin-bottom: 14px; }
-.section > h2 em { font-style: italic; color: #E8D46A; }
-.section-lead { font-size: 14px; color: rgba(250,248,244,0.5); max-width: 760px; line-height: 1.75; margin-bottom: 32px; }
+.section-eyebrow { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #F2DC4E; margin-bottom: 12px; }
+.section > h2 { font-family: "Cormorant Garamond", serif; font-size: clamp(26px, 3vw, 38px); font-weight: 400; line-height: 1.15; color: #FFFFFF; margin-bottom: 14px; }
+.section > h2 em { font-style: italic; color: #F2DC4E; }
+.section-lead { font-size: 16px; color: #FFFFFF; max-width: 760px; line-height: 1.75; margin-bottom: 32px; }
 
 /* GRIDS */
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
@@ -59,38 +59,38 @@ body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FAF8F4; fon
 .stat-card.gold { border-color: rgba(232,212,106,0.3); background: rgba(232,212,106,0.06); }
 .stat-card.green { border-color: rgba(90,180,120,0.22); background: rgba(90,180,120,0.05); }
 .stat-card.red { border-color: rgba(220,80,80,0.22); background: rgba(220,80,80,0.05); }
-.stat-num { font-family: "Cormorant Garamond", serif; font-size: 46px; font-weight: 300; line-height: 1; color: #E8D46A; margin-bottom: 6px; }
+.stat-num { font-family: "Cormorant Garamond", serif; font-size: 52px; font-weight: 400; line-height: 1; color: #F2DC4E; margin-bottom: 6px; }
 .stat-card.green .stat-num { color: #5CB85C; }
 .stat-card.red .stat-num { color: #E87A6A; }
-.stat-label { font-size: 12px; font-weight: 400; color: rgba(250,248,244,0.5); line-height: 1.45; }
-.stat-label strong { color: rgba(250,248,244,0.8); font-weight: 500; }
+.stat-label { font-size: 14px; font-weight: 400; color: #FFFFFF; line-height: 1.45; }
+.stat-label strong { color: #FFFFFF; font-weight: 500; }
 
 /* CARD */
 .card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 22px 26px; }
 .card.gold { border-color: rgba(232,212,106,0.22); background: rgba(232,212,106,0.04); }
 .card.green { border-color: rgba(90,180,120,0.2); background: rgba(90,180,120,0.04); }
 .card.red { border-color: rgba(220,80,80,0.2); background: rgba(220,80,80,0.04); }
-.card h3 { font-family: "Cormorant Garamond", serif; font-size: 21px; font-weight: 400; color: #FAF8F4; margin-bottom: 10px; line-height: 1.3; }
-.card h3 em { font-style: italic; color: #E8D46A; }
-.card p { font-size: 13.5px; color: rgba(250,248,244,0.55); line-height: 1.7; }
+.card h3 { font-family: "Cormorant Garamond", serif; font-size: 23px; font-weight: 400; color: #FFFFFF; margin-bottom: 10px; line-height: 1.3; }
+.card h3 em { font-style: italic; color: #F2DC4E; }
+.card p { font-size: 16px; color: #FFFFFF; line-height: 1.7; }
 .card p + p { margin-top: 8px; }
 .card ul { margin-top: 8px; padding-left: 0; list-style: none; }
-.card li { font-size: 13px; color: rgba(250,248,244,0.55); line-height: 1.65; padding-left: 18px; position: relative; margin-bottom: 5px; }
-.card li::before { content: "—"; position: absolute; left: 0; color: rgba(232,212,106,0.5); }
+.card li { font-size: 15px; color: #FFFFFF; line-height: 1.65; padding-left: 18px; position: relative; margin-bottom: 5px; }
+.card li::before { content: "—"; position: absolute; left: 0; color: #F2DC4E; }
 
 /* CHART CARD (light bg, like call-3) */
 .chart-section { background: #FAFAF8; border-radius: 14px; padding: 26px 28px; margin: 14px 0; }
-.chart-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 500; color: #0F0F0D; margin-bottom: 4px; }
-.chart-sub { font-size: 11.5px; color: #8A8578; margin-bottom: 18px; line-height: 1.5; }
+.chart-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 500; color: #0F0F0D; margin-bottom: 4px; }
+.chart-sub { font-size: 14px; color: #3A3833; margin-bottom: 18px; line-height: 1.5; }
 .chart-row { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
 .donut-wrap { position: relative; width: 175px; height: 175px; flex-shrink: 0; }
 .donut-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; pointer-events: none; }
-.donut-val { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; line-height: 1; color: #0F0F0D; }
-.donut-lbl { font-size: 10px; color: #8A8578; margin-top: 3px; letter-spacing: 0.05em; }
+.donut-val { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 400; line-height: 1; color: #0F0F0D; }
+.donut-lbl { font-size: 12px; color: #3A3833; margin-top: 3px; letter-spacing: 0.05em; }
 .ch-legend { display: flex; flex-direction: column; gap: 9px; flex: 1; min-width: 130px; }
-.ch-legend-row { display: flex; align-items: center; gap: 10px; font-size: 13px; color: #333; }
+.ch-legend-row { display: flex; align-items: center; gap: 10px; font-size: 15px; color: #333; }
 .ch-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-.ch-pct { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #0F0F0D; }
+.ch-pct { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #0F0F0D; }
 .charts-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
 .chart-canvas-wrap { position: relative; width: 100%; min-height: 280px; }
 .chart-canvas-wrap.tall { min-height: 360px; }
@@ -102,56 +102,56 @@ body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FAF8F4; fon
 .funnel-row:nth-child(3) { width: 60%; background: linear-gradient(90deg, rgba(232,212,106,0.14), rgba(232,212,106,0.03)); }
 .funnel-row:nth-child(4) { width: 32%; background: linear-gradient(90deg, rgba(90,180,120,0.18), rgba(90,180,120,0.04)); border-color: rgba(90,180,120,0.3); }
 .funnel-row:nth-child(5) { width: 12%; background: linear-gradient(90deg, rgba(90,180,120,0.28), rgba(90,180,120,0.08)); border-color: rgba(90,180,120,0.45); }
-.funnel-label { font-family: "Cormorant Garamond", serif; font-size: 18px; font-weight: 400; color: #FAF8F4; }
-.funnel-val { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #E8D46A; white-space: nowrap; }
-.funnel-pct { font-size: 11px; color: rgba(250,248,244,0.45); margin-left: 10px; }
+.funnel-label { font-family: "Cormorant Garamond", serif; font-size: 20px; font-weight: 400; color: #FFFFFF; }
+.funnel-val { font-family: 'JetBrains Mono', monospace; font-size: 15px; color: #F2DC4E; white-space: nowrap; }
+.funnel-pct { font-size: 13px; color: #FFFFFF; margin-left: 10px; }
 @media(max-width:768px){
   .funnel-row, .funnel-row:nth-child(2), .funnel-row:nth-child(3), .funnel-row:nth-child(4), .funnel-row:nth-child(5) { width: 100%; }
 }
 
 /* HEAT GRID — campaign x outcome */
-.heat-grid { display: grid; grid-template-columns: 200px repeat(5, 1fr); gap: 4px; margin: 20px 0; font-size: 11.5px; }
-.heat-head { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(232,212,106,0.55); padding: 8px 6px; text-align: center; }
+.heat-grid { display: grid; grid-template-columns: 200px repeat(5, 1fr); gap: 4px; margin: 20px 0; font-size: 14px; }
+.heat-head { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #F2DC4E; padding: 8px 6px; text-align: center; }
 .heat-head.first { text-align: left; }
-.heat-cell { padding: 9px 8px; text-align: center; border-radius: 6px; color: rgba(250,248,244,0.7); font-family: 'JetBrains Mono', monospace; }
-.heat-row-label { padding: 9px 8px; color: rgba(250,248,244,0.7); font-size: 12.5px; }
+.heat-cell { padding: 9px 8px; text-align: center; border-radius: 6px; color: #FFFFFF; font-family: 'JetBrains Mono', monospace; }
+.heat-row-label { padding: 9px 8px; color: #FFFFFF; font-size: 14px; }
 @media(max-width:768px){
-  .heat-grid { font-size: 10px; grid-template-columns: 130px repeat(5, 1fr); }
-  .heat-row-label { font-size: 11px; }
+  .heat-grid { font-size: 12px; grid-template-columns: 130px repeat(5, 1fr); }
+  .heat-row-label { font-size: 13px; }
 }
 
 /* GAP MATRIX */
 .gap-matrix { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px; position: relative; }
 .gap-q { padding: 28px 26px; border-radius: 14px; min-height: 240px; display: flex; flex-direction: column; gap: 10px; }
-.gap-q-label { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.7; }
-.gap-q h4 { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 500; line-height: 1.2; }
+.gap-q-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.7; }
+.gap-q h4 { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 500; line-height: 1.2; }
 .gap-q ul { padding-left: 0; list-style: none; margin-top: 6px; }
-.gap-q li { font-size: 13px; padding-left: 18px; position: relative; margin-bottom: 5px; line-height: 1.55; }
+.gap-q li { font-size: 15px; padding-left: 18px; position: relative; margin-bottom: 5px; line-height: 1.55; }
 .gap-q li::before { content: "▸"; position: absolute; left: 0; opacity: 0.6; }
 .gap-q.urgent { background: rgba(220,80,80,0.07); border: 1px solid rgba(220,80,80,0.28); color: #FAE0DC; }
 .gap-q.urgent .gap-q-label, .gap-q.urgent h4 { color: #E87A6A; }
 .gap-q.strategic { background: rgba(232,212,106,0.07); border: 1px solid rgba(232,212,106,0.28); color: #FAF1C8; }
-.gap-q.strategic .gap-q-label, .gap-q.strategic h4 { color: #E8D46A; }
+.gap-q.strategic .gap-q-label, .gap-q.strategic h4 { color: #F2DC4E; }
 .gap-q.quick { background: rgba(90,180,120,0.07); border: 1px solid rgba(90,180,120,0.28); color: #DAF5DC; }
 .gap-q.quick .gap-q-label, .gap-q.quick h4 { color: #5CB85C; }
-.gap-q.deferred { background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.08); color: rgba(250,248,244,0.55); }
-.gap-q.deferred .gap-q-label, .gap-q.deferred h4 { color: rgba(250,248,244,0.7); }
+.gap-q.deferred { background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.08); color: #FFFFFF; }
+.gap-q.deferred .gap-q-label, .gap-q.deferred h4 { color: #FFFFFF; }
 
 /* PROCESS / ROADMAP */
 .roadmap { display: flex; flex-direction: column; gap: 12px; margin-top: 22px; }
 .rm-step { display: flex; gap: 22px; align-items: flex-start; padding: 20px 24px; background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; }
 .rm-step.priority { border-color: rgba(232,212,106,0.3); background: rgba(232,212,106,0.05); }
-.rm-num { font-family: "Cormorant Garamond", serif; font-size: 38px; font-weight: 300; color: rgba(232,212,106,0.4); line-height: 1; flex-shrink: 0; width: 50px; }
-.rm-step.priority .rm-num { color: #E8D46A; }
+.rm-num { font-family: "Cormorant Garamond", serif; font-size: 43px; font-weight: 400; color: #F2DC4E; line-height: 1; flex-shrink: 0; width: 50px; }
+.rm-step.priority .rm-num { color: #F2DC4E; }
 .rm-body { flex: 1; }
-.rm-tag { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(232,212,106,0.7); background: rgba(232,212,106,0.1); padding: 3px 8px; border-radius: 4px; margin-bottom: 8px; }
-.rm-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; color: #FAF8F4; margin-bottom: 6px; }
-.rm-title em { font-style: italic; color: #E8D46A; }
-.rm-desc { font-size: 13px; color: rgba(250,248,244,0.55); line-height: 1.65; }
+.rm-tag { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #F2DC4E; background: rgba(232,212,106,0.1); padding: 3px 8px; border-radius: 4px; margin-bottom: 8px; }
+.rm-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: #FFFFFF; margin-bottom: 6px; }
+.rm-title em { font-style: italic; color: #F2DC4E; }
+.rm-desc { font-size: 15px; color: #FFFFFF; line-height: 1.65; }
 
 /* FOOTER */
-footer { border-top: 1px solid rgba(255,255,255,0.07); padding: 32px 48px; margin-top: 64px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; font-size: 12px; color: rgba(250,248,244,0.35); }
-footer em { color: #E8D46A; font-style: normal; }
+footer { border-top: 1px solid rgba(255,255,255,0.07); padding: 32px 48px; margin-top: 64px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; font-size: 14px; color: #FFFFFF; }
+footer em { color: #F2DC4E; font-style: normal; }
 
 /* FADE-UP */
 .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
@@ -165,6 +165,8 @@ footer em { color: #E8D46A; font-style: normal; }
   .gap-matrix { grid-template-columns: 1fr; }
   footer { flex-direction: column; gap: 14px; text-align: center; padding: 28px 20px; }
 }
+body{font-weight:400;line-height:1.75;}
+strong,b{font-weight:600;}
 </style>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Audit Digitale · Ronchiverdi">
@@ -221,22 +223,22 @@ footer em { color: #E8D46A; font-style: normal; }
     <p class="section-lead">Lorella conferma e approva l&rsquo;analisi, precisando il contesto storico e le variabili che influenzano la lettura dei dati. Prima di leggere i numeri, è essenziale capire il percorso.</p>
 
     <div class="card red" style="margin-bottom:24px;">
-      <h3 style="margin:0 0 14px;font-size:15px;font-family:'Jost',sans-serif;font-weight:500;color:rgba(250,224,220,0.9);">&#x26A0; Precisazioni sui dati</h3>
-      <ul style="margin:0;padding-left:18px;color:rgba(250,248,244,0.68);line-height:1.85;font-size:13.5px;">
-        <li>I link analizzati sono <strong style="color:#FAF8F4;">vecchi e mal gestiti — non attendibili per statistiche</strong>. Servivano a mostrare quanta difficoltà esiste nell&rsquo;unire lead da fonti diverse in un unico posto: confusione, non tutte le risposte inserite.</li>
-        <li>I lead <strong style="color:#FAF8F4;">Young School</strong> sono gestiti da un settore separato dal commerciale, senza formazione specifica né script &mdash; necessario confrontarsi con i responsabili di settore prima di trarre conclusioni sui loro tassi.</li>
-        <li>L&rsquo;unica risorsa formata nel commerciale è <strong style="color:#FAF8F4;">Carola</strong> (a breve anche Jasmine): ha le ratio più alte, ma una media affidabile è calcolabile solo su dati inseriti correttamente &mdash; cosa attualmente difficile da garantire.</li>
+      <h3 style="margin:0 0 14px;font-size:17px;font-family:'Jost',sans-serif;font-weight:500;color:rgba(250,224,220,0.9);">&#x26A0; Precisazioni sui dati</h3>
+      <ul style="margin:0;padding-left:18px;color:#FFFFFF;line-height:1.85;font-size:16px;">
+        <li>I link analizzati sono <strong style="color:#FFFFFF;">vecchi e mal gestiti — non attendibili per statistiche</strong>. Servivano a mostrare quanta difficoltà esiste nell&rsquo;unire lead da fonti diverse in un unico posto: confusione, non tutte le risposte inserite.</li>
+        <li>I lead <strong style="color:#FFFFFF;">Young School</strong> sono gestiti da un settore separato dal commerciale, senza formazione specifica né script &mdash; necessario confrontarsi con i responsabili di settore prima di trarre conclusioni sui loro tassi.</li>
+        <li>L&rsquo;unica risorsa formata nel commerciale è <strong style="color:#FFFFFF;">Carola</strong> (a breve anche Jasmine): ha le ratio più alte, ma una media affidabile è calcolabile solo su dati inseriti correttamente &mdash; cosa attualmente difficile da garantire.</li>
       </ul>
     </div>
 
-    <div style="font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(232,212,106,0.55);margin:28px 0 14px;font-family:'JetBrains Mono',monospace;">4 step &middot; 3 anni di lavoro</div>
+    <div style="font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#F2DC4E;margin:28px 0 14px;font-family:'JetBrains Mono',monospace;">4 step &middot; 3 anni di lavoro</div>
     <div class="roadmap">
       <div class="rm-step">
         <div class="rm-num">1</div>
         <div class="rm-body">
           <span class="rm-tag">Fondamenta</span>
           <div class="rm-title">Creazione della <em>struttura commerciale</em></div>
-          <div class="rm-desc">Costruita una struttura dedicata a new business e retention, con risorse, ruoli e responsabilità definiti. Oggi: <strong style="color:rgba(250,248,244,0.8);">6 risorse sulla retention + reception</strong>, <strong style="color:rgba(250,248,244,0.8);">1&frac12; nel new business</strong>.</div>
+          <div class="rm-desc">Costruita una struttura dedicata a new business e retention, con risorse, ruoli e responsabilità definiti. Oggi: <strong style="color:#FFFFFF;">6 risorse sulla retention + reception</strong>, <strong style="color:#FFFFFF;">1&frac12; nel new business</strong>.</div>
         </div>
       </div>
       <div class="rm-step priority">
@@ -244,7 +246,7 @@ footer em { color: #E8D46A; font-style: normal; }
         <div class="rm-body">
           <span class="rm-tag">New business &middot; prima Ylenia, poi Carola</span>
           <div class="rm-title">Focus e formazione sul <em>team new</em></div>
-          <div class="rm-desc">Formazione, metodo commerciale, ratio e training continuo sul team new. Risultato concreto: il new business genera oggi fino al <strong style="color:rgba(250,248,244,0.8);">40% del fatturato</strong>, con closing ratio in crescita costante grazie allo sviluppo delle competenze.</div>
+          <div class="rm-desc">Formazione, metodo commerciale, ratio e training continuo sul team new. Risultato concreto: il new business genera oggi fino al <strong style="color:#FFFFFF;">40% del fatturato</strong>, con closing ratio in crescita costante grazie allo sviluppo delle competenze.</div>
         </div>
       </div>
       <div class="rm-step">
@@ -252,7 +254,7 @@ footer em { color: #E8D46A; font-style: normal; }
         <div class="rm-body">
           <span class="rm-tag">Acquisizione &middot; da zero a un sistema</span>
           <div class="rm-title">Costruzione e organizzazione delle <em>fonti di lead</em></div>
-          <div class="rm-desc">Introdotta la segmentazione dei contatti per fonte — <strong style="color:rgba(250,248,244,0.8);">referral</strong>, campagne, guest pass, spontanei, altre fonti. Definito parallelamente il processo su come far arrivare i potenziali clienti e alimentare il flusso commerciale.</div>
+          <div class="rm-desc">Introdotta la segmentazione dei contatti per fonte — <strong style="color:#FFFFFF;">referral</strong>, campagne, guest pass, spontanei, altre fonti. Definito parallelamente il processo su come far arrivare i potenziali clienti e alimentare il flusso commerciale.</div>
         </div>
       </div>
       <div class="rm-step" style="border-color:rgba(220,80,80,0.28);background:rgba(220,80,80,0.04);">
@@ -260,16 +262,16 @@ footer em { color: #E8D46A; font-style: normal; }
         <div class="rm-body">
           <span class="rm-tag" style="color:rgba(220,110,90,0.85);background:rgba(220,80,80,0.12);">Gap aperto &middot; prossimo passo</span>
           <div class="rm-title" style="color:rgba(250,224,220,0.9);">Tracciabilità unica della <em style="color:#E87A6A;">conversione</em></div>
-          <div class="rm-desc">Quello che ancora manca: un <strong style="color:rgba(250,248,244,0.75);">unico punto di raccolta</strong>, monitoraggio dei risultati, visione chiara del funnel e passaggio tracciato dalla generazione del lead fino alla chiusura. In più: un vero supporto ADV strutturato.</div>
+          <div class="rm-desc">Quello che ancora manca: un <strong style="color:#FFFFFF;">unico punto di raccolta</strong>, monitoraggio dei risultati, visione chiara del funnel e passaggio tracciato dalla generazione del lead fino alla chiusura. In più: un vero supporto ADV strutturato.</div>
         </div>
       </div>
     </div>
 
     <div class="card green" style="margin-top:22px;display:flex;align-items:flex-start;gap:16px;">
-      <span style="font-size:26px;line-height:1.2;flex-shrink:0;">&#x1F331;</span>
+      <span style="font-size:29px;line-height:1.2;flex-shrink:0;">&#x1F331;</span>
       <div>
-        <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(90,180,120,0.7);font-family:'JetBrains Mono',monospace;margin-bottom:8px;">Nota di Lorella</div>
-        <p style="margin:0;color:rgba(218,245,220,0.85);line-height:1.75;font-size:14px;font-style:italic;">&ldquo;Finalmente con te e Simone possiamo farcela.&rdquo;</p>
+        <div style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(90,180,120,0.7);font-family:'JetBrains Mono',monospace;margin-bottom:8px;">Nota di Lorella</div>
+        <p style="margin:0;color:rgba(218,245,220,0.85);line-height:1.75;font-size:16px;font-style:italic;">&ldquo;Finalmente con te e Simone possiamo farcela.&rdquo;</p>
       </div>
     </div>
   </div>
@@ -311,7 +313,7 @@ footer em { color: #E8D46A; font-style: normal; }
         <div class="chart-row">
           <div class="donut-wrap"><canvas id="ch-sport"></canvas><div class="donut-center"><div class="donut-val">~480</div><div class="donut-lbl">lead</div></div></div>
           <div class="ch-legend">
-            <div class="ch-legend-row"><span class="ch-dot" style="background:#E8D46A"></span>Padel<span class="ch-pct">52%</span></div>
+            <div class="ch-legend-row"><span class="ch-dot" style="background:#F2DC4E"></span>Padel<span class="ch-pct">52%</span></div>
             <div class="ch-legend-row"><span class="ch-dot" style="background:#4A90D9"></span>Nuoto<span class="ch-pct">22%</span></div>
             <div class="ch-legend-row"><span class="ch-dot" style="background:#E87A3A"></span>Fitness/Lacertosus<span class="ch-pct">11%</span></div>
             <div class="ch-legend-row"><span class="ch-dot" style="background:#5CB85C"></span>Tennis<span class="ch-pct">8%</span></div>
@@ -393,7 +395,7 @@ footer em { color: #E8D46A; font-style: normal; }
           <div class="donut-wrap"><canvas id="ch-spring-orario"></canvas><div class="donut-center"><div class="donut-val">50%</div><div class="donut-lbl">sera</div></div></div>
           <div class="ch-legend">
             <div class="ch-legend-row"><span class="ch-dot" style="background:#4A90D9"></span>Sera<span class="ch-pct">50%</span></div>
-            <div class="ch-legend-row"><span class="ch-dot" style="background:#E8D46A"></span>Pomeriggio<span class="ch-pct">25%</span></div>
+            <div class="ch-legend-row"><span class="ch-dot" style="background:#F2DC4E"></span>Pomeriggio<span class="ch-pct">25%</span></div>
             <div class="ch-legend-row"><span class="ch-dot" style="background:#E87A3A"></span>Mattina<span class="ch-pct">12,5%</span></div>
             <div class="ch-legend-row"><span class="ch-dot" style="background:#8A8578"></span>Pausa pranzo<span class="ch-pct">12,5%</span></div>
           </div>
@@ -406,7 +408,7 @@ footer em { color: #E8D46A; font-style: normal; }
           <div class="donut-wrap"><canvas id="ch-spring-esiti"></canvas><div class="donut-center"><div class="donut-val">25%</div><div class="donut-lbl">in attesa</div></div></div>
           <div class="ch-legend">
             <div class="ch-legend-row"><span class="ch-dot" style="background:#5CB85C"></span>Soci<span class="ch-pct">12,5%</span></div>
-            <div class="ch-legend-row"><span class="ch-dot" style="background:#E8D46A"></span>Attendo risposta<span class="ch-pct">25%</span></div>
+            <div class="ch-legend-row"><span class="ch-dot" style="background:#F2DC4E"></span>Attendo risposta<span class="ch-pct">25%</span></div>
             <div class="ch-legend-row"><span class="ch-dot" style="background:#8A8578"></span>Non risponde<span class="ch-pct">25%</span></div>
             <div class="ch-legend-row"><span class="ch-dot" style="background:#E87A6A"></span>Numero errato/staccato<span class="ch-pct">19%</span></div>
             <div class="ch-legend-row"><span class="ch-dot" style="background:#B85C5C"></span>Non interessato<span class="ch-pct">12,5%</span></div>
@@ -616,7 +618,7 @@ footer em { color: #E8D46A; font-style: normal; }
 <script>
 Chart.defaults.font.family = "'Jost', sans-serif";
 Chart.defaults.color = '#8A8578';
-var _tt = { plugins: { tooltip: { backgroundColor: '#1a1a17', titleColor: '#E8D46A', bodyColor: '#ddd', padding: 10, cornerRadius: 6 }, legend: { display: false } }, maintainAspectRatio: false };
+var _tt = { plugins: { tooltip: { backgroundColor: '#1a1a17', titleColor: '#F2DC4E', bodyColor: '#ddd', padding: 10, cornerRadius: 6 }, legend: { display: false } }, maintainAspectRatio: false };
 
 // Volume per campagna
 new Chart(document.getElementById('ch-volume'), {
@@ -625,7 +627,7 @@ new Chart(document.getElementById('ch-volume'), {
     labels: ['Young School','Padel Adulti','San Valentino (form)','Padel Anziani','Padel Mamme','Mensile 169€','San Valentino ADV','Core/Lacertosus','Dicembre Omaggio','Spring Padel Ambass.','Pacchetti Padel Natale','Workout Lacertosus','Pacchetti Nuoto Natale','Gruppo FB Mamme'],
     datasets: [{
       data: [70, 70, 65, 60, 45, 40, 35, 27, 20, 16, 14, 12, 3, 3],
-      backgroundColor: ['#E8D46A','#E8D46A','#E8D46A','#E8D46A','#D4BE5E','#D4BE5E','#C0AA52','#A89146','#A89146','#90793A','#7A6630','#645427','#4A3F1E','#4A3F1E'],
+      backgroundColor: ['#F2DC4E','#F2DC4E','#F2DC4E','#F2DC4E','#D4BE5E','#D4BE5E','#C0AA52','#A89146','#A89146','#90793A','#7A6630','#645427','#4A3F1E','#4A3F1E'],
       borderRadius: 5
     }]
   },
@@ -635,7 +637,7 @@ new Chart(document.getElementById('ch-volume'), {
 // Sport donut
 new Chart(document.getElementById('ch-sport'), {
   type: 'doughnut',
-  data: { labels: ['Padel','Nuoto','Fitness','Tennis','Multisport'], datasets: [{ data:[52,22,11,8,7], backgroundColor:['#E8D46A','#4A90D9','#E87A3A','#5CB85C','#8A8578'], borderWidth:0, hoverOffset:6 }] },
+  data: { labels: ['Padel','Nuoto','Fitness','Tennis','Multisport'], datasets: [{ data:[52,22,11,8,7], backgroundColor:['#F2DC4E','#4A90D9','#E87A3A','#5CB85C','#8A8578'], borderWidth:0, hoverOffset:6 }] },
   options: Object.assign({}, _tt, { cutout:'68%' })
 });
 
@@ -654,11 +656,11 @@ new Chart(document.getElementById('ch-timeline'), {
     datasets: [{
       label: 'Lead/mese',
       data: [70, 90, 25, 45, 50, 95, 25, 8, 12, 6, 3, 4, 16],
-      borderColor: '#E8D46A',
+      borderColor: '#F2DC4E',
       backgroundColor: 'rgba(232,212,106,0.16)',
       tension: 0.32,
       fill: true,
-      pointBackgroundColor: '#E8D46A',
+      pointBackgroundColor: '#F2DC4E',
       pointBorderColor: '#fff',
       pointRadius: 4,
       pointHoverRadius: 6
@@ -680,14 +682,14 @@ new Chart(document.getElementById('ch-esiti'), {
 // Spring orario
 new Chart(document.getElementById('ch-spring-orario'), {
   type: 'doughnut',
-  data: { labels:['Sera','Pomeriggio','Mattina','Pausa pranzo'], datasets:[{ data:[50,25,12.5,12.5], backgroundColor:['#4A90D9','#E8D46A','#E87A3A','#8A8578'], borderWidth:0, hoverOffset:6 }] },
+  data: { labels:['Sera','Pomeriggio','Mattina','Pausa pranzo'], datasets:[{ data:[50,25,12.5,12.5], backgroundColor:['#4A90D9','#F2DC4E','#E87A3A','#8A8578'], borderWidth:0, hoverOffset:6 }] },
   options: Object.assign({}, _tt, { cutout:'68%' })
 });
 
 // Spring esiti
 new Chart(document.getElementById('ch-spring-esiti'), {
   type: 'doughnut',
-  data: { labels:['Soci','Attendo risposta','Non risponde','Numero errato/staccato','Non interessato','Senza tempo'], datasets:[{ data:[12.5,25,25,18.75,12.5,6.25], backgroundColor:['#5CB85C','#E8D46A','#8A8578','#E87A6A','#B85C5C','#6A6A66'], borderWidth:0, hoverOffset:6 }] },
+  data: { labels:['Soci','Attendo risposta','Non risponde','Numero errato/staccato','Non interessato','Senza tempo'], datasets:[{ data:[12.5,25,25,18.75,12.5,6.25], backgroundColor:['#5CB85C','#F2DC4E','#8A8578','#E87A6A','#B85C5C','#6A6A66'], borderWidth:0, hoverOffset:6 }] },
   options: Object.assign({}, _tt, { cutout:'68%' })
 });
 </script>
