@@ -10,13 +10,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FAF8F4; font-size: 15px; line-height: 1.7; overflow-x: hidden; font-weight: 300; -webkit-font-smoothing: antialiased; }
+body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FFFFFF; font-size: 17px; line-height: 1.7; overflow-x: hidden; font-weight: 400; -webkit-font-smoothing: antialiased; }
 
 .back-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: rgba(15,15,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.07); }
-.back-btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(250,248,244,0.55); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; transition: color 0.2s; }
-.back-btn:hover { color: #E8D46A; }
+.back-btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: #FFFFFF; font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; transition: color 0.2s; }
+.back-btn:hover { color: #F2DC4E; }
 .back-btn:hover .arrow { transform: translateX(-3px); }
-.arrow { font-size: 16px; transition: transform 0.2s; display: inline-block; }
+.arrow { font-size: 18px; transition: transform 0.2s; display: inline-block; }
 .back-nav-logo { height: 36px; width: auto; filter: invert(1); mix-blend-mode: screen; opacity: 0.9; }
 @media(max-width:640px){ .back-nav { padding: 0 20px; } .back-nav-logo { height: 28px; } }
 
@@ -24,31 +24,31 @@ body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FAF8F4; fon
 .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 80% 30%, rgba(232,212,106,0.05) 0%, transparent 60%); pointer-events: none; }
 .hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
 .eyebrow-row { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
-.tag { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(250,248,244,0.3); }
-.sep { color: rgba(250,248,244,0.15); }
-.hero h1 { font-family: "Cormorant Garamond", serif; font-size: clamp(36px, 5vw, 62px); font-weight: 300; line-height: 1.05; color: #FAF8F4; margin-bottom: 20px; letter-spacing: -0.02em; }
-.hero h1 em { font-style: italic; color: #E8D46A; }
-.hero-sub { font-size: 14px; font-weight: 300; line-height: 1.75; color: rgba(250,248,244,0.45); max-width: 660px; margin-bottom: 36px; }
+.tag { font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #FFFFFF; }
+.sep { color: #FFFFFF; }
+.hero h1 { font-family: "Cormorant Garamond", serif; font-size: clamp(36px, 5vw, 62px); font-weight: 400; line-height: 1.05; color: #FFFFFF; margin-bottom: 20px; letter-spacing: -0.02em; }
+.hero h1 em { font-style: italic; color: #F2DC4E; }
+.hero-sub { font-size: 16px; font-weight: 400; line-height: 1.75; color: #FFFFFF; max-width: 660px; margin-bottom: 36px; }
 .hero-meta { display: flex; flex-wrap: wrap; gap: 32px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.07); }
-.hero-meta-item .lbl { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(232,212,106,0.5); margin-bottom: 4px; }
-.hero-meta-item .val { font-size: 13px; font-weight: 400; color: rgba(250,248,244,0.7); }
+.hero-meta-item .lbl { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #F2DC4E; margin-bottom: 4px; }
+.hero-meta-item .val { font-size: 15px; font-weight: 400; color: #FFFFFF; }
 
 .page { max-width: 1100px; margin: 0 auto; padding: 0 48px 100px; }
 @media(max-width:640px){ .page { padding: 0 20px 80px; } .hero { padding: 100px 20px 56px; } }
 
 .section { padding: 64px 0; border-top: 1px solid rgba(255,255,255,0.06); }
 .section:first-of-type { border-top: none; }
-.section-eyebrow { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(232,212,106,0.5); margin-bottom: 10px; }
-.section-title { font-family: "Cormorant Garamond", serif; font-size: clamp(24px, 3vw, 38px); font-weight: 300; color: #FAF8F4; line-height: 1.1; margin-bottom: 8px; letter-spacing: -0.01em; }
-.section-title em { font-style: italic; color: #E8D46A; }
-.section-sub { font-size: 13px; font-weight: 300; color: rgba(250,248,244,0.4); max-width: 620px; margin-bottom: 36px; line-height: 1.7; }
+.section-eyebrow { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #F2DC4E; margin-bottom: 10px; }
+.section-title { font-family: "Cormorant Garamond", serif; font-size: clamp(24px, 3vw, 38px); font-weight: 400; color: #FFFFFF; line-height: 1.1; margin-bottom: 8px; letter-spacing: -0.01em; }
+.section-title em { font-style: italic; color: #F2DC4E; }
+.section-sub { font-size: 15px; font-weight: 400; color: #FFFFFF; max-width: 620px; margin-bottom: 36px; line-height: 1.7; }
 
 .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 @media(max-width:900px){ .stats-grid { grid-template-columns: repeat(2, 1fr); } }
 .stat-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 22px 20px; }
-.stat-card .stat-num { font-family: "Cormorant Garamond", serif; font-size: 42px; font-weight: 300; color: #E8D46A; line-height: 1; margin-bottom: 6px; letter-spacing: -0.02em; }
-.stat-card .stat-lbl { font-size: 11px; font-weight: 400; color: rgba(250,248,244,0.35); line-height: 1.4; }
-.stat-card .stat-note { font-family: "JetBrains Mono", monospace; font-size: 9px; color: rgba(250,248,244,0.2); margin-top: 4px; letter-spacing: 0.08em; }
+.stat-card .stat-num { font-family: "Cormorant Garamond", serif; font-size: 47px; font-weight: 400; color: #F2DC4E; line-height: 1; margin-bottom: 6px; letter-spacing: -0.02em; }
+.stat-card .stat-lbl { font-size: 13px; font-weight: 400; color: #FFFFFF; line-height: 1.4; }
+.stat-card .stat-note { font-family: "JetBrains Mono", monospace; font-size: 11px; color: #FFFFFF; margin-top: 4px; letter-spacing: 0.08em; }
 
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 @media(max-width:760px){ .two-col { grid-template-columns: 1fr; } }
@@ -59,15 +59,15 @@ body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FAF8F4; fon
 
 /* FIELDS */
 .fields-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-.field-tag { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.06em; padding: 5px 10px; border-radius: 6px; }
-.field-tag.v1 { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); color: rgba(250,248,244,0.35); }
+.field-tag { font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: 0.06em; padding: 5px 10px; border-radius: 6px; }
+.field-tag.v1 { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); color: #FFFFFF; }
 .field-tag.v2 { background: rgba(90,180,120,0.04); border: 1px solid rgba(90,180,120,0.18); color: rgba(130,200,155,0.75); }
 .field-tag.v3 { background: rgba(90,140,210,0.04); border: 1px solid rgba(90,140,210,0.2); color: rgba(140,185,240,0.7); }
 
 /* BARS */
-.distrib-label { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(250,248,244,0.25); margin-bottom: 12px; }
+.distrib-label { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #FFFFFF; margin-bottom: 12px; }
 .bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 7px; }
-.bar-key { font-size: 12px; color: rgba(250,248,244,0.4); width: 210px; flex-shrink: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bar-key { font-size: 14px; color: #FFFFFF; width: 210px; flex-shrink: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .bar-key.wide { width: 180px; }
 .bar-track { flex: 1; height: 6px; background: rgba(255,255,255,0.05); border-radius: 3px; overflow: hidden; }
 .bar-fill { height: 100%; border-radius: 3px; }
@@ -76,70 +76,72 @@ body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FAF8F4; fon
 .bar-fill.gold-lo { background: rgba(232,212,106,0.15); }
 .bar-fill.green { background: rgba(90,180,120,0.45); }
 .bar-fill.red { background: rgba(200,80,80,0.35); }
-.bar-val { font-family: "JetBrains Mono", monospace; font-size: 10px; color: rgba(250,248,244,0.3); width: 34px; text-align: right; flex-shrink: 0; }
+.bar-val { font-family: "JetBrains Mono", monospace; font-size: 12px; color: #FFFFFF; width: 34px; text-align: right; flex-shrink: 0; }
 
 /* RETENTION TIMELINE */
 .timeline-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; margin-bottom: 24px; }
 .month-cell { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 14px 12px; text-align: center; }
-.month-cell .m-name { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,248,244,0.3); margin-bottom: 6px; }
-.month-cell .m-pct { font-family: "Cormorant Garamond", serif; font-size: 26px; font-weight: 300; line-height: 1; }
-.month-cell .m-n { font-size: 10px; color: rgba(250,248,244,0.2); margin-top: 3px; }
+.month-cell .m-name { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #FFFFFF; margin-bottom: 6px; }
+.month-cell .m-pct { font-family: "Cormorant Garamond", serif; font-size: 29px; font-weight: 400; line-height: 1; }
+.month-cell .m-n { font-size: 12px; color: #FFFFFF; margin-top: 3px; }
 .month-cell.hi .m-pct { color: rgba(130,200,155,0.9); }
-.month-cell.mid .m-pct { color: rgba(232,212,106,0.8); }
+.month-cell.mid .m-pct { color: #F2DC4E; }
 .month-cell.lo .m-pct { color: rgba(220,120,100,0.8); }
 
 /* CALLOUT */
 .callout { border-left: 2px solid rgba(232,212,106,0.4); padding: 16px 20px; margin: 20px 0; background: rgba(232,212,106,0.03); border-radius: 0 8px 8px 0; }
-.callout p { font-size: 13px; font-weight: 300; color: rgba(250,248,244,0.5); line-height: 1.7; }
-.callout strong { font-weight: 500; color: rgba(250,248,244,0.7); }
+.callout p { font-size: 15px; font-weight: 400; color: #FFFFFF; line-height: 1.7; }
+.callout strong { font-weight: 500; color: #FFFFFF; }
 
 /* DATA NOTE */
 .data-note { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 14px 18px; margin-top: 14px; }
-.data-note .dn-label { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(250,248,244,0.2); margin-bottom: 5px; }
-.data-note p { font-size: 12px; font-weight: 300; color: rgba(250,248,244,0.35); line-height: 1.65; }
+.data-note .dn-label { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #FFFFFF; margin-bottom: 5px; }
+.data-note p { font-size: 14px; font-weight: 400; color: #FFFFFF; line-height: 1.65; }
 
 /* MINI STAT */
 .mini-stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 28px; }
 @media(max-width:640px){ .mini-stat-grid { grid-template-columns: 1fr 1fr; } }
 .mini-stat { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 16px 16px; }
-.mini-stat .num { font-family: "Cormorant Garamond", serif; font-size: 30px; font-weight: 300; color: #FAF8F4; line-height: 1; margin-bottom: 4px; }
-.mini-stat .lbl { font-size: 10px; color: rgba(250,248,244,0.3); font-weight: 400; line-height: 1.35; }
+.mini-stat .num { font-family: "Cormorant Garamond", serif; font-size: 34px; font-weight: 400; color: #FFFFFF; line-height: 1; margin-bottom: 4px; }
+.mini-stat .lbl { font-size: 12px; color: #FFFFFF; font-weight: 400; line-height: 1.35; }
 
 /* ESITO PILL ROW */
 .esito-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
-.esito-pill { display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 8px; font-size: 12px; border: 1px solid; }
+.esito-pill { display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 8px; font-size: 14px; border: 1px solid; }
 .esito-pill.rinnov { border-color: rgba(90,180,120,0.25); color: rgba(130,200,155,0.8); background: rgba(90,180,120,0.04); }
 .esito-pill.non-rinnov { border-color: rgba(200,80,80,0.25); color: rgba(220,130,130,0.8); background: rgba(200,80,80,0.04); }
-.esito-pill.other { border-color: rgba(255,255,255,0.1); color: rgba(250,248,244,0.35); background: rgba(255,255,255,0.02); }
-.esito-pill .ep-label { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.1em; }
+.esito-pill.other { border-color: rgba(255,255,255,0.1); color: #FFFFFF; background: rgba(255,255,255,0.02); }
+.esito-pill .ep-label { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.1em; }
 
 /* OBS */
 .obs-grid { display: flex; flex-direction: column; gap: 12px; }
 .obs-item { display: flex; gap: 16px; align-items: flex-start; padding: 18px 20px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; }
-.obs-n { font-family: "JetBrains Mono", monospace; font-size: 11px; color: rgba(232,212,106,0.35); flex-shrink: 0; width: 22px; padding-top: 1px; }
+.obs-n { font-family: "JetBrains Mono", monospace; font-size: 13px; color: #F2DC4E; flex-shrink: 0; width: 22px; padding-top: 1px; }
 .obs-body { flex: 1; }
-.obs-title { font-size: 13px; font-weight: 500; color: rgba(250,248,244,0.75); margin-bottom: 4px; }
-.obs-desc { font-size: 13px; font-weight: 300; color: rgba(250,248,244,0.4); line-height: 1.65; }
+.obs-title { font-size: 15px; font-weight: 500; color: #FFFFFF; margin-bottom: 4px; }
+.obs-desc { font-size: 15px; font-weight: 400; color: #FFFFFF; line-height: 1.65; }
 .obs-item.flag { border-color: rgba(200,160,60,0.18); background: rgba(200,160,60,0.03); }
-.obs-item.flag .obs-n { color: rgba(232,212,106,0.6); }
+.obs-item.flag .obs-n { color: #F2DC4E; }
 
 /* EVOLUTION TABLE */
-.evo-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 24px; }
-.evo-table th { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,248,244,0.25); padding: 8px 12px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.06); }
-.evo-table td { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: rgba(250,248,244,0.5); vertical-align: top; }
-.evo-table td:first-child { font-weight: 400; color: rgba(250,248,244,0.7); white-space: nowrap; }
+.evo-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 24px; }
+.evo-table th { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #FFFFFF; padding: 8px 12px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.evo-table td { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: #FFFFFF; vertical-align: top; }
+.evo-table td:first-child { font-weight: 400; color: #FFFFFF; white-space: nowrap; }
 .evo-table tr:last-child td { border-bottom: none; }
-.evo-table .badge { display: inline-block; font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.08em; padding: 3px 7px; border-radius: 4px; margin-right: 4px; }
+.evo-table .badge { display: inline-block; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.08em; padding: 3px 7px; border-radius: 4px; margin-right: 4px; }
 .badge-new { background: rgba(90,180,120,0.1); border: 1px solid rgba(90,180,120,0.2); color: rgba(130,200,155,0.8); }
 .badge-chg { background: rgba(90,140,210,0.1); border: 1px solid rgba(90,140,210,0.2); color: rgba(140,185,240,0.75); }
 
 /* STAFF CHART */
 .staff-grid { display: flex; flex-direction: column; gap: 8px; }
 .staff-row { display: flex; align-items: center; gap: 12px; }
-.staff-name { font-size: 12px; color: rgba(250,248,244,0.5); width: 160px; flex-shrink: 0; }
+.staff-name { font-size: 14px; color: #FFFFFF; width: 160px; flex-shrink: 0; }
 .staff-bar-track { flex: 1; height: 20px; background: rgba(255,255,255,0.03); border-radius: 4px; overflow: hidden; position: relative; }
 .staff-bar-fill { height: 100%; border-radius: 4px; background: rgba(232,212,106,0.2); }
-.staff-bar-val { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-family: "JetBrains Mono", monospace; font-size: 10px; color: rgba(250,248,244,0.4); }
+.staff-bar-val { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-family: "JetBrains Mono", monospace; font-size: 12px; color: #FFFFFF; }
+body{font-weight:400;line-height:1.75;}
+strong,b{font-weight:600;}
 </style>
 </head>
 <body>
@@ -427,38 +429,38 @@ body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FAF8F4; fon
       <div>
         <div class="distrib-label">Vocabolario Foglio26 — valori ammessi</div>
         <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px;">
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Lavoro</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Studio</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Salute</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Poca frequenza</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Prezzo</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Prezzo x frequenza</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Rate insolute</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Altro sport</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Bimbo con family</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Family</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Interruzione disciplinare</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Disdetta FLEX</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Mai venuto</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Mensili in scadenza</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Motivi personali</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Nessuna risposta</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Pigrizia / impegni</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Solo padel</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Solo periodi brevi</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Solo periodo estivo</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Solo tennis</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Sospensioni</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Sovraffolamento e prezzo</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Trasf. abitazione</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Trasf. altra struttura</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Trasf. lavoro</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Trasf. studio</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Utilizzo corporate</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Vacanza / torna a set.</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Inutilizzo</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Recupero</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:rgba(250,248,244,0.35)">Altra struttura</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Lavoro</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Studio</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Salute</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Poca frequenza</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Prezzo</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Prezzo x frequenza</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Rate insolute</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Altro sport</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Bimbo con family</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Family</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Interruzione disciplinare</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Disdetta FLEX</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Mai venuto</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Mensili in scadenza</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Motivi personali</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Nessuna risposta</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Pigrizia / impegni</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Solo padel</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Solo periodi brevi</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Solo periodo estivo</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Solo tennis</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Sospensioni</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Sovraffolamento e prezzo</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Trasf. abitazione</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Trasf. altra struttura</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Trasf. lavoro</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Trasf. studio</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Utilizzo corporate</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Vacanza / torna a set.</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Inutilizzo</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Recupero</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:4px;color:#FFFFFF">Altra struttura</span>
         </div>
 
         <div class="data-note">
