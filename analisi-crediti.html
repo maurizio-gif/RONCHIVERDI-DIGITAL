@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Controllo Crediti — Ronchiverdi Audit</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<meta property="og:title" content="Controllo Crediti — Ronchiverdi Audit">
+<meta property="og:description" content="Analisi as-is del file di controllo amministrativo crediti vs clienti — Ronchiverdi Sport Club">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Jost', sans-serif; background: #0F0F0D; color: #FAF8F4; font-size: 16px; line-height: 1.6; overflow-x: hidden; font-weight: 300; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: rgba(15,15,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.07); }
+.nav-left { display: flex; align-items: center; gap: 14px; }
+.nav-logo { display: flex; flex-direction: column; gap: 2px; text-decoration: none; }
+.nav-logo-img { height: 34px; width: auto; filter: invert(1); mix-blend-mode: screen; opacity: 0.9; }
+.nav-logo-name { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 500; color: #FAF8F4; line-height: 1; }
+.nav-logo-sub { font-size: 9.5px; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(232,212,106,0.65); }
+.nav-back { font-size: 11px; font-weight: 400; letter-spacing: 0.1em; color: rgba(250,248,244,0.45); text-decoration: none; border: 1px solid rgba(255,255,255,0.12); border-radius: 2px; padding: 6px 14px; transition: color 0.2s, border-color 0.2s; }
+.nav-back:hover { color: #E8D46A; border-color: rgba(232,212,106,0.4); }
+
+/* HERO */
+.hero { padding: 148px 48px 80px; max-width: 900px; }
+.hero-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(232,212,106,0.7); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+.hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: rgba(232,212,106,0.4); }
+.hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(38px, 6vw, 68px); font-weight: 300; line-height: 1.1; color: #FAF8F4; margin-bottom: 28px; }
+.hero h1 em { font-style: italic; color: #E8D46A; }
+.hero-lead { font-size: 16px; font-weight: 300; color: rgba(250,248,244,0.65); max-width: 620px; line-height: 1.75; margin-bottom: 36px; }
+.hero-meta { display: flex; gap: 32px; flex-wrap: wrap; }
+.hero-meta-item { display: flex; flex-direction: column; gap: 4px; }
+.hero-meta-label { font-size: 9px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(250,248,244,0.3); }
+.hero-meta-value { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #E8D46A; }
+
+/* DIVIDER */
+.divider { width: 100%; height: 1px; background: rgba(255,255,255,0.07); margin: 0; }
+
+/* PAGE */
+.page { max-width: 900px; margin: 0 auto; padding: 64px 48px; border-top: 1px solid rgba(255,255,255,0.07); }
+.page:first-of-type { border-top: none; }
+.section-label { font-size: 9.5px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(232,212,106,0.6); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+.section-label::before { content: ''; width: 18px; height: 1px; background: rgba(232,212,106,0.35); }
+.section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(26px, 4vw, 38px); font-weight: 300; line-height: 1.2; margin-bottom: 16px; }
+.section-title em { font-style: italic; color: #E8D46A; }
+.section-body { font-size: 15px; font-weight: 300; color: rgba(250,248,244,0.7); line-height: 1.75; margin-bottom: 40px; max-width: 680px; }
+
+/* OBS ITEMS */
+.obs-list { display: flex; flex-direction: column; gap: 16px; margin-top: 32px; }
+.obs-item { display: flex; gap: 16px; align-items: flex-start; padding: 18px 22px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; }
+.obs-item.flag { border-color: rgba(232,212,106,0.25); background: rgba(232,212,106,0.04); }
+.obs-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(232,212,106,0.5); flex-shrink: 0; margin-top: 7px; }
+.obs-item.flag .obs-dot { background: #E8D46A; }
+.obs-item span { font-size: 14px; font-weight: 300; color: rgba(250,248,244,0.75); line-height: 1.65; }
+.obs-item span strong { font-weight: 500; color: #FAF8F4; }
+
+/* SHEET GRID */
+.sheet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 32px; }
+.sheet-card { padding: 18px 22px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; }
+.sheet-card.primary { border-color: rgba(232,212,106,0.3); background: rgba(232,212,106,0.04); }
+.sheet-card.historic { border-color: rgba(140,180,140,0.25); background: rgba(140,180,140,0.03); }
+.sheet-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(232,212,106,0.6); margin-bottom: 8px; }
+.sheet-card.historic .sheet-label { color: rgba(140,200,140,0.7); }
+.sheet-name { font-size: 13px; font-weight: 500; color: #FAF8F4; margin-bottom: 6px; line-height: 1.3; }
+.sheet-desc { font-size: 12px; font-weight: 300; color: rgba(250,248,244,0.5); line-height: 1.5; }
+
+/* LAYER DIAGRAM */
+.layer-stack { display: flex; flex-direction: column; gap: 8px; margin-top: 32px; }
+.layer { padding: 20px 26px; border-radius: 4px; position: relative; }
+.layer-3 { background: rgba(232,212,106,0.08); border: 1px solid rgba(232,212,106,0.3); }
+.layer-2 { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); }
+.layer-1 { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); }
+.layer-num { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(232,212,106,0.55); margin-bottom: 6px; }
+.layer-2 .layer-num, .layer-1 .layer-num { color: rgba(250,248,244,0.3); }
+.layer-title { font-size: 14px; font-weight: 500; color: #FAF8F4; margin-bottom: 6px; }
+.layer-body { font-size: 13px; font-weight: 300; color: rgba(250,248,244,0.6); line-height: 1.55; }
+.layer-arrow { text-align: center; font-size: 18px; color: rgba(255,255,255,0.2); line-height: 1; }
+
+/* STATUS CATEGORIES */
+.cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 28px; }
+.cat-item { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 4px; }
+.cat-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.cat-dot.green { background: #5DBB7A; }
+.cat-dot.yellow { background: #E8C44A; }
+.cat-dot.red { background: #D95E5E; }
+.cat-dot.grey { background: rgba(250,248,244,0.3); }
+.cat-name { font-size: 13px; font-weight: 400; color: #FAF8F4; line-height: 1.3; }
+.cat-sub { font-size: 11px; font-weight: 300; color: rgba(250,248,244,0.45); }
+
+/* COLUMN TABLE */
+.col-table { width: 100%; border-collapse: collapse; margin-top: 28px; }
+.col-table th { font-size: 9.5px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(232,212,106,0.6); text-align: left; padding: 10px 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.col-table td { font-size: 13px; font-weight: 300; color: rgba(250,248,244,0.75); padding: 11px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: top; line-height: 1.5; }
+.col-table tr:last-child td { border-bottom: none; }
+.col-table td:first-child { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: rgba(232,212,106,0.8); white-space: nowrap; }
+.col-table td.key-col { color: #E8D46A; font-weight: 500; font-family: 'Jost', sans-serif; font-size: 13px; }
+.col-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+/* FORMULA BLOCK */
+.formula-list { display: flex; flex-direction: column; gap: 10px; margin-top: 28px; }
+.formula-item { display: grid; grid-template-columns: 200px 1fr; gap: 20px; padding: 14px 20px; background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.07); border-radius: 4px; align-items: start; }
+.formula-fn { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: rgba(232,212,106,0.85); font-weight: 400; padding-top: 1px; }
+.formula-desc { font-size: 13px; font-weight: 300; color: rgba(250,248,244,0.7); line-height: 1.55; }
+
+/* STATUS INDICATORS */
+.status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 28px; }
+.status-card { padding: 20px 22px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; }
+.status-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.status-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.status-dot.ok { background: #5DBB7A; box-shadow: 0 0 6px rgba(93,187,122,0.4); }
+.status-dot.warn { background: #E8C44A; box-shadow: 0 0 6px rgba(232,196,74,0.4); }
+.status-dot.ko { background: #D95E5E; box-shadow: 0 0 6px rgba(217,94,94,0.4); }
+.status-label { font-size: 13px; font-weight: 500; color: #FAF8F4; }
+.status-body { font-size: 12px; font-weight: 300; color: rgba(250,248,244,0.55); line-height: 1.55; }
+
+/* GAP LIST */
+.gap-list { display: flex; flex-direction: column; gap: 12px; margin-top: 28px; }
+.gap-item { display: grid; grid-template-columns: 40px 1fr; gap: 16px; padding: 18px 22px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; align-items: start; }
+.gap-item.critical { border-color: rgba(217,94,94,0.3); background: rgba(217,94,94,0.04); }
+.gap-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: rgba(250,248,244,0.25); font-weight: 400; padding-top: 2px; }
+.gap-item.critical .gap-num { color: rgba(217,94,94,0.6); }
+.gap-text { font-size: 14px; font-weight: 300; color: rgba(250,248,244,0.75); line-height: 1.6; }
+.gap-text strong { font-weight: 500; color: #FAF8F4; }
+.gap-item.critical .gap-text { color: rgba(250,248,244,0.85); }
+
+/* FOOTER */
+footer { padding: 48px; border-top: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-copy { font-size: 11px; color: rgba(250,248,244,0.25); letter-spacing: 0.06em; }
+.footer-copy em { color: rgba(232,212,106,0.5); font-style: normal; }
+
+@media (max-width: 680px) {
+  nav { padding: 0 20px; }
+  .hero { padding: 120px 20px 60px; }
+  .page { padding: 48px 20px; }
+  .sheet-grid { grid-template-columns: 1fr; }
+  .cat-grid { grid-template-columns: 1fr; }
+  .formula-item { grid-template-columns: 1fr; gap: 6px; }
+  .status-grid { grid-template-columns: 1fr; }
+  .gap-item { grid-template-columns: 32px 1fr; }
+  footer { padding: 32px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <img src="logo.png" alt="Ronchiverdi" class="nav-logo-img">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-name">Ronchiverdi</span>
+      <span class="nav-logo-sub">Audit Digitale</span>
+    </a>
+  </div>
+  <a href="index.html" class="nav-back">← Indice</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-eyebrow">Controllo Amministrativo &middot; 2026</div>
+  <h1>Crediti <em>vs Clienti</em></h1>
+  <p class="hero-lead">
+    Analisi strutturale as-is del file di monitoraggio dei crediti in essere verso i soci — abbonamenti e altri settori. Fotografia del modello gestionale, dell'architettura dei dati e dei punti di fragilità, senza esposizione di dati sensibili.
+  </p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">File</span>
+      <span class="hero-meta-value">2026 CONTROLLO STATO CREDITI</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Fogli</span>
+      <span class="hero-meta-value">13 sheet</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Linee di business</span>
+      <span class="hero-meta-value">Abbonamenti · Altri Settori</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Orizzonte temporale</span>
+      <span class="hero-meta-value">Dic 2024 → Apr 2026</span>
+    </div>
+  </div>
+</header>
+
+<!-- ARCHITETTURA A TRE LIVELLI -->
+<div class="page">
+  <div class="section-label">Architettura del modello</div>
+  <h2 class="section-title">Tre livelli di <em>aggregazione</em></h2>
+  <p class="section-body">
+    Il file segue un pattern piramidale: i dati grezzi mensili fluiscono verso livelli progressivamente più sintetici, fino ai due fogli di riepilogo direzionale. Ogni livello è collegato al precedente tramite riferimenti diretti e funzioni SUMIF.
+  </p>
+
+  <div class="layer-stack">
+    <div class="layer layer-3">
+      <div class="layer-num">Livello 3 — Dashboard direzionale</div>
+      <div class="layer-title">RECAP ABBONAMENTI &amp; RECAP ALTRI SETTORI</div>
+      <div class="layer-body">Visione multi-mese (Dic 2024 → Apr 2026) con indicatori di rischio credito per canale di pagamento, percentuali sul venduto e DSO (Days Sales Outstanding). È il punto di lettura per la direzione.</div>
+    </div>
+    <div class="layer-arrow">↑</div>
+    <div class="layer layer-2">
+      <div class="layer-num">Livello 2 — Mini-riepilogo mensile</div>
+      <div class="layer-title">Zona A: aggregazione per categoria (in testa a ogni foglio di dettaglio)</div>
+      <div class="layer-body">Ogni foglio mensile contiene nella sua parte superiore un piccolo prospetto SUMIF che somma gli importi per categoria di stato credito. È il raccordo tra dato grezzo e RECAP.</div>
+    </div>
+    <div class="layer-arrow">↑</div>
+    <div class="layer layer-1">
+      <div class="layer-num">Livello 1 — Dati grezzi mensili</div>
+      <div class="layer-title">Zona B: registro rate (11 fogli di dettaglio)</div>
+      <div class="layer-body">Uno snapshot mensile per ciascuna linea di business e ciascun mese monitorato. Ogni riga rappresenta una rata, classificata con un'etichetta di stato credito nella colonna chiave.</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAPPA DEI 13 FOGLI -->
+<div class="page">
+  <div class="section-label">Mappa dei fogli</div>
+  <h2 class="section-title">13 sheet, <em>3 famiglie</em></h2>
+  <p class="section-body">
+    I fogli si dividono in tre famiglie omogenee: i riepiloghi direzionali, i dettagli mensili degli abbonamenti e i dettagli mensili degli altri settori (corsi, tennis, etc.). Un foglio storico separa i contratti del 2024 ancora aperti.
+  </p>
+
+  <div class="sheet-grid">
+    <div class="sheet-card primary">
+      <div class="sheet-label">Riepilogo · 2 fogli</div>
+      <div class="sheet-name">RECAP ABBONAMENTI</div>
+      <div class="sheet-desc">Serie storica mensile con KPI di rischio credito, percentuali sul venduto e DSO.</div>
+    </div>
+    <div class="sheet-card primary">
+      <div class="sheet-label">Riepilogo · 2 fogli</div>
+      <div class="sheet-name">RECAP ALTRI SETTORI</div>
+      <div class="sheet-desc">Stesso schema del RECAP Abbonamenti per la linea corsi/tennis/altri.</div>
+    </div>
+
+    <div class="sheet-card">
+      <div class="sheet-label">Dettaglio Abbonamenti · 5 fogli</div>
+      <div class="sheet-name">ABBON. DA INC. — Aprile 2026</div>
+      <div class="sheet-desc">Snapshot più recente. ~1.400 righe. Maggiore volume.</div>
+    </div>
+    <div class="sheet-card">
+      <div class="sheet-label">Dettaglio Abbonamenti · 5 fogli</div>
+      <div class="sheet-name">ABBON. DA INC. — Marzo 2026</div>
+      <div class="sheet-desc">Progressione mensile. ~1.280 righe.</div>
+    </div>
+    <div class="sheet-card">
+      <div class="sheet-label">Dettaglio Abbonamenti · 5 fogli</div>
+      <div class="sheet-name">ABBON. DA INC. — Febbraio 2026</div>
+      <div class="sheet-desc"></div>
+    </div>
+    <div class="sheet-card">
+      <div class="sheet-label">Dettaglio Abbonamenti · 5 fogli</div>
+      <div class="sheet-name">ABBON. DA INC. — Gennaio 2026</div>
+      <div class="sheet-desc"></div>
+    </div>
+    <div class="sheet-card">
+      <div class="sheet-label">Dettaglio Abbonamenti · 5 fogli</div>
+      <div class="sheet-name">ABBON. DA INC. — Dicembre 2025</div>
+      <div class="sheet-desc">Snapshot più datato del ciclo corrente.</div>
+    </div>
+
+    <div class="sheet-card">
+      <div class="sheet-label">Dettaglio Altri Settori · 5 fogli</div>
+      <div class="sheet-name">ALTRI SETT. DA INC. — Aprile 2026</div>
+      <div class="sheet-desc">~144 righe. Volume nettamente inferiore agli abbonamenti.</div>
+    </div>
+    <div class="sheet-card">
+      <div class="sheet-label">Dettaglio Altri Settori · 5 fogli</div>
+      <div class="sheet-name">ALTRI SETT. DA INC. — Marzo 2026</div>
+      <div class="sheet-desc">~119 righe.</div>
+    </div>
+    <div class="sheet-card">
+      <div class="sheet-label">Dettaglio Altri Settori · 5 fogli</div>
+      <div class="sheet-name">ALTRI SETT. DA INC. — Febbraio, Gen, Dic</div>
+      <div class="sheet-desc">Stessa struttura per i mesi precedenti.</div>
+    </div>
+
+    <div class="sheet-card historic" style="grid-column: 1 / -1;">
+      <div class="sheet-label">Storico · 1 foglio</div>
+      <div class="sheet-name">CONTRATTI 2024 DA INCASSARE</div>
+      <div class="sheet-desc">Coda dei crediti dell'anno precedente ancora aperti al 2026. ~20 righe. Struttura tabellare semplice, senza mini-riepilogo SUMIF. Include una colonna aggiuntiva: <strong>RinnovoAutomatico</strong>.</div>
+    </div>
+  </div>
+</div>
+
+<!-- STRUTTURA FOGLI DI DETTAGLIO -->
+<div class="page">
+  <div class="section-label">Struttura dati</div>
+  <h2 class="section-title">Colonne dei <em>fogli di dettaglio</em></h2>
+  <p class="section-body">
+    Ogni foglio mensile è diviso in due zone funzionali. La Zona A (in testa, ~10 righe) è il mini-riepilogo SUMIF per categoria. La Zona B è il registro completo delle rate, con struttura colonnare identica per tutti gli snapshot.
+  </p>
+
+  <table class="col-table">
+    <thead>
+      <tr>
+        <th>Colonna</th>
+        <th>Etichetta</th>
+        <th>Tipo / Note</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>A</td>
+        <td>DataRata</td>
+        <td>Data di scadenza della rata. Asse temporale principale di classificazione.</td>
+      </tr>
+      <tr>
+        <td>B</td>
+        <td>ImportoRata</td>
+        <td>Valore monetario della singola rata. Colonna aggregata dal SUMIF.</td>
+      </tr>
+      <tr>
+        <td>C</td>
+        <td>Cognome</td>
+        <td>Anagrafica socio. Dato personale — non pubblicato.</td>
+      </tr>
+      <tr>
+        <td>D</td>
+        <td>Nome</td>
+        <td>Anagrafica socio. Dato personale — non pubblicato.</td>
+      </tr>
+      <tr>
+        <td>E</td>
+        <td>Abbonamento (tipologia)</td>
+        <td>Categoria di abbonamento acquistato. Nei fogli <em>Altri Settori</em> questa diventa "CategoriaAbbonamento" e si aggiunge una colonna F con il nome prodotto specifico.</td>
+      </tr>
+      <tr>
+        <td>F</td>
+        <td>DataInizioAbbonamento</td>
+        <td>Data di attivazione del contratto.</td>
+      </tr>
+      <tr>
+        <td>G</td>
+        <td>DataFineAbbonamento</td>
+        <td>Data di scadenza del contratto.</td>
+      </tr>
+      <tr>
+        <td>H</td>
+        <td>DataInserimentoAbbonamento</td>
+        <td>Timestamp di registrazione nel sistema gestionale.</td>
+      </tr>
+      <tr>
+        <td>I</td>
+        <td>VenditoreAbbonamento</td>
+        <td>Riferimento all'operatore di vendita. Collegamento implicito al daily sales.</td>
+      </tr>
+      <tr>
+        <td>J</td>
+        <td>Motivazione</td>
+        <td>Etichetta semi-standard: <em>Nuova iscrizione</em>, <em>Rinnovo iscrizione</em>. Valori da sistema gestionale, non validati in Excel.</td>
+      </tr>
+      <tr>
+        <td>K</td>
+        <td>PagamentoRID</td>
+        <td>Modalità di pagamento RID: <em>RID Carta</em> o <em>NO RID</em>. Valori codificati da esportazione gestionale.</td>
+      </tr>
+      <tr>
+        <td>L</td>
+        <td class="key-col">Categoria stato credito ← colonna chiave</td>
+        <td>Campo classificatorio su cui girano tutti i SUMIF. Determina il posizionamento di ogni rata nel report di rischio. Inserita manualmente o via esportazione.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- CATEGORIE DI STATO CREDITO -->
+<div class="page">
+  <div class="section-label">Classificazione</div>
+  <h2 class="section-title">Le sei categorie di <em>stato credito</em></h2>
+  <p class="section-body">
+    Il sistema di classificazione del rischio è basato su sei etichette testuali, tre per canale di pagamento (TS Pay e Altri Metodi) più Cofidis. La distinzione tra "a scadere" e "scaduto" determina l'urgenza di intervento; la qualifica "insolvente" identifica i casi critici.
+  </p>
+
+  <div class="cat-grid">
+    <div class="cat-item">
+      <div class="cat-dot green"></div>
+      <div>
+        <div class="cat-name">TS Pay — A Scadere</div>
+        <div class="cat-sub">Rata futura, canale TS Pay. Rischio potenziale.</div>
+      </div>
+    </div>
+    <div class="cat-item">
+      <div class="cat-dot yellow"></div>
+      <div>
+        <div class="cat-name">TS Pay — A Scadere Insolventi</div>
+        <div class="cat-sub">Rata futura, cliente già classificato insolvente.</div>
+      </div>
+    </div>
+    <div class="cat-item">
+      <div class="cat-dot red"></div>
+      <div>
+        <div class="cat-name">TS Pay — Scaduto</div>
+        <div class="cat-sub">Rata passata non incassata, canale TS Pay.</div>
+      </div>
+    </div>
+    <div class="cat-item">
+      <div class="cat-dot green"></div>
+      <div>
+        <div class="cat-name">Altri Metodi — A Scadere</div>
+        <div class="cat-sub">Rata futura, pagamento non RID né Cofidis.</div>
+      </div>
+    </div>
+    <div class="cat-item">
+      <div class="cat-dot red"></div>
+      <div>
+        <div class="cat-name">Altri Metodi — Scaduto</div>
+        <div class="cat-sub">Mancato incasso su canale non automatizzato.</div>
+      </div>
+    </div>
+    <div class="cat-item">
+      <div class="cat-dot grey"></div>
+      <div>
+        <div class="cat-name">Cofidis</div>
+        <div class="cat-sub">Finanziamento tramite Cofidis. Classificazione separata.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="obs-list" style="margin-top: 28px;">
+    <div class="obs-item">
+      <div class="obs-dot"></div>
+      <span>I fogli <strong>Altri Settori</strong> usano solo 4 categorie su 6: assenti le varianti "insolvente" e "Cofidis". Il rischio non è quindi monitorato con la stessa granularità su tutte le linee di business.</span>
+    </div>
+    <div class="obs-item">
+      <div class="obs-dot"></div>
+      <span>Le categorie sono valori testuali inseriti campo per campo. <strong>Non esiste validazione Excel</strong> (dropdown, data validation) che prevenga typo o valori non standard: un errore di digitazione escluderebbe silenziosamente una riga dal SUMIF.</span>
+    </div>
+  </div>
+</div>
+
+<!-- FORMULE E INDICATORI -->
+<div class="page">
+  <div class="section-label">Logica analitica</div>
+  <h2 class="section-title">Formule e <em>indicatori di rischio</em></h2>
+  <p class="section-body">
+    I fogli RECAP calcolano in modo automatico una serie di KPI finanziari a partire dai sub-totali dei fogli di dettaglio. Tutto il motore analitico è costruito con formule Excel standard, senza macro VBA né Power Query.
+  </p>
+
+  <div class="formula-list">
+    <div class="formula-item">
+      <div class="formula-fn">Venduto − Cofidis − TS Pay</div>
+      <div class="formula-desc">Deriva il transato "altri metodi di pagamento" come grandezza residuale. Approccio indiretto: il dato non viene estratto direttamente ma calcolato per differenza.</div>
+    </div>
+    <div class="formula-item">
+      <div class="formula-fn">SUMIF(colonna_L, categoria, colonna_B)</div>
+      <div class="formula-desc">Cuore operativo del modello. Aggrega gli importi delle rate per ciascuna delle sei categorie di stato credito. Ogni mini-riepilogo e ogni RECAP vi si basa.</div>
+    </div>
+    <div class="formula-item">
+      <div class="formula-fn">Insolventi + A scadere</div>
+      <div class="formula-desc">Totale rischio crediti per canale. Somma l'esposizione attuale (scaduto non incassato) con quella potenziale (rate future di clienti già insolventi).</div>
+    </div>
+    <div class="formula-item">
+      <div class="formula-fn">Crediti / Venduto</div>
+      <div class="formula-desc">Percentuale di rischio credito sul venduto — calcolata per canale (TS Pay, altri metodi) e a livello complessivo. Indicatore di intensità del rischio relativo al fatturato.</div>
+    </div>
+    <div class="formula-item">
+      <div class="formula-fn">(Ins. + A scad.) / Venduto × 365</div>
+      <div class="formula-desc"><strong>DSO — Days Sales Outstanding.</strong> Misura i giorni medi di esposizione creditizia: quanti giorni di fatturato sono "bloccati" in crediti non ancora incassati. Indicatore standard del rischio di liquidità.</div>
+    </div>
+    <div class="formula-item">
+      <div class="formula-fn">=NomeFoglio!C4</div>
+      <div class="formula-desc">Riferimenti incrociati tra fogli: i RECAP pescano i sub-totali direttamente dai mini-riepiloghi dei fogli di dettaglio mensile. La catena di dipendenze è manuale e va aggiornata ogni volta che si crea un nuovo foglio.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ANALISI AS-IS -->
+<div class="page">
+  <div class="section-label">Analisi as-is</div>
+  <h2 class="section-title">Punti di forza e <em>fragilità</em></h2>
+  <p class="section-body">
+    Il modello è funzionalmente completo per il controllo mensile del rischio crediti. Tuttavia presenta alcune vulnerabilità strutturali che ne limitano l'affidabilità nel tempo e la scalabilità.
+  </p>
+
+  <div class="status-grid">
+    <div class="status-card">
+      <div class="status-row">
+        <div class="status-dot ok"></div>
+        <div class="status-label">Framework analitico solido</div>
+      </div>
+      <div class="status-body">La separazione in tre livelli (dati → aggregazione → riepilogo) è un'architettura corretta. Gli indicatori scelti (DSO, % rischio su venduto) sono metriche di controllo finanziario standard.</div>
+    </div>
+    <div class="status-card">
+      <div class="status-row">
+        <div class="status-dot ok"></div>
+        <div class="status-label">Copertura temporale</div>
+      </div>
+      <div class="status-body">La serie storica mensile da dicembre 2024 ad aprile 2026 permette letture di trend. La distinzione tra ciclo corrente e arretrati 2024 è una scelta architetturale corretta.</div>
+    </div>
+    <div class="status-card">
+      <div class="status-row">
+        <div class="status-dot warn"></div>
+        <div class="status-label">Aggiornamento manuale</div>
+      </div>
+      <div class="status-body">Ogni nuovo mese richiede la creazione di un nuovo foglio, l'aggiornamento manuale dei riferimenti nei RECAP e la compilazione della colonna di classificazione. Nessuna automazione.</div>
+    </div>
+    <div class="status-card">
+      <div class="status-row">
+        <div class="status-dot warn"></div>
+        <div class="status-label">Classificazione senza presidio</div>
+      </div>
+      <div class="status-body">La colonna chiave (stato credito) è testo libero senza validazione Excel. Un solo valore errato esclude la riga da tutti i calcoli senza generare alcun errore visibile.</div>
+    </div>
+    <div class="status-card">
+      <div class="status-row">
+        <div class="status-dot warn"></div>
+        <div class="status-label">Asimmetria tra linee di business</div>
+      </div>
+      <div class="status-body">Gli Abbonamenti usano 6 categorie di classificazione, gli Altri Settori solo 4. L'analisi del rischio non è omogenea e i RECAP non sono completamente comparabili tra le due linee.</div>
+    </div>
+    <div class="status-card">
+      <div class="status-row">
+        <div class="status-dot ko"></div>
+        <div class="status-label">Nessuna pivot né grafico</div>
+      </div>
+      <div class="status-body">Nonostante la serie storica mensile, non esiste alcuna visualizzazione del trend. L'analisi dell'andamento del DSO e del rischio credito nel tempo si fa a occhio sulle celle dei RECAP.</div>
+    </div>
+    <div class="status-card">
+      <div class="status-row">
+        <div class="status-dot ko"></div>
+        <div class="status-label">Nessun collegamento al gestionale</div>
+      </div>
+      <div class="status-body">I dati sono probabilmente esportati manualmente dal sistema gestionale e incollati nel foglio. Non c'è alimentazione automatica: ogni snapshot è un'istantanea statica al momento dell'esportazione.</div>
+    </div>
+    <div class="status-card">
+      <div class="status-row">
+        <div class="status-dot ko"></div>
+        <div class="status-label">Catena di dipendenze fragile</div>
+      </div>
+      <div class="status-body">I riferimenti incrociati RECAP→dettaglio sono hardcoded su nomi e posizioni di foglio specifici. Rinominare un foglio o spostare un dato rompe silenziosamente il calcolo nei RECAP.</div>
+    </div>
+  </div>
+</div>
+
+<!-- GAP ANALYSIS -->
+<div class="page">
+  <div class="section-label">Gap analysis</div>
+  <h2 class="section-title">Cosa <em>manca</em> oggi</h2>
+  <p class="section-body">
+    Il confronto tra le funzionalità del modello attuale e le esigenze di un controllo crediti efficace evidenzia gap strutturali che non possono essere risolti con aggiustamenti parziali al file Excel.
+  </p>
+
+  <div class="gap-list">
+    <div class="gap-item critical">
+      <div class="gap-num">G1</div>
+      <div class="gap-text"><strong>Nessuna fonte unica di verità.</strong> Lo stesso cliente può apparire in fogli diversi con stati credito potenzialmente incoerenti. Non esiste un registro anagrafico centralizzato dei crediti aperti per singolo socio.</div>
+    </div>
+    <div class="gap-item critical">
+      <div class="gap-num">G2</div>
+      <div class="gap-text"><strong>Il dato diventa stale immediatamente.</strong> Ogni foglio è uno snapshot statico. Se un cliente paga dopo la data di esportazione, il suo credito rimane nel file come aperto fino al mese successivo. Il file non è live.</div>
+    </div>
+    <div class="gap-item critical">
+      <div class="gap-num">G3</div>
+      <div class="gap-text"><strong>Nessun workflow di sollecito.</strong> Il file identifica i crediti a rischio ma non genera alcuna azione: niente alert, niente lista di chiamate, niente tracciamento dei tentativi di recupero. Il dato non si traduce in processo operativo.</div>
+    </div>
+    <div class="gap-item">
+      <div class="gap-num">G4</div>
+      <div class="gap-text"><strong>Il DSO non è disaggregabile.</strong> L'indicatore Days Sales Outstanding è calcolato a livello aggregato. Non è possibile vedere il DSO per segmento di abbonamento, per venditore, o per fascia anagrafica del socio.</div>
+    </div>
+    <div class="gap-item">
+      <div class="gap-num">G5</div>
+      <div class="gap-text"><strong>La colonna "Motivazione" non è sfruttata.</strong> Il campo distingue nuove iscrizioni da rinnovi ma non viene utilizzato in nessun calcolo o segmentazione nel file. È un dato presente ma cieco.</div>
+    </div>
+    <div class="gap-item">
+      <div class="gap-num">G6</div>
+      <div class="gap-text"><strong>Il dato "VenditoreAbbonamento" è presente ma non analizzato.</strong> Non esiste nessun prospetto che mostri il rischio credito per venditore — un'informazione potenzialmente utile per valutare la qualità commerciale delle vendite.</div>
+    </div>
+    <div class="gap-item">
+      <div class="gap-num">G7</div>
+      <div class="gap-text"><strong>Nessuna visualizzazione del trend.</strong> I RECAP contengono 13 colonne mensili di dati ma non c'è nessun grafico che mostri l'evoluzione del DSO, dell'esposizione o delle percentuali di rischio nel tempo.</div>
+    </div>
+    <div class="gap-item">
+      <div class="gap-num">G8</div>
+      <div class="gap-text"><strong>Asimmetria di monitoraggio tra linee di business.</strong> La linea Abbonamenti ha 5 snapshot mensili contro 5 degli Altri Settori, ma con 6 categorie contro 4. L'analisi comparativa tra le due linee è limitata strutturalmente.</div>
+    </div>
+    <div class="gap-item">
+      <div class="gap-num">G9</div>
+      <div class="gap-text"><strong>Nessuna gestione degli stati di avanzamento recupero.</strong> Un credito classificato "scaduto" non ha modo di tracciare lo stato del recupero (primo contatto, piano di rientro, in contenzioso, irrecuperabile). Il file è binario: aperto o non presente.</div>
+    </div>
+    <div class="gap-item">
+      <div class="gap-num">G10</div>
+      <div class="gap-text"><strong>Il Cofidis è un punto cieco.</strong> La categoria Cofidis appare nei RECAP solo come percentuale sul venduto, senza disaggregazione per stato (a scadere / scaduto / insolvente). Il rischio reale del portafoglio Cofidis non è visibile.</div>
+    </div>
+  </div>
+</div>
+
+<!-- OSSERVAZIONI STRUTTURALI -->
+<div class="page">
+  <div class="section-label">Osservazioni strutturali</div>
+  <h2 class="section-title">Note per <em>l'evoluzione</em></h2>
+
+  <div class="obs-list">
+    <div class="obs-item flag">
+      <div class="obs-dot"></div>
+      <span><strong>Il modello è già un asset, non va rimpiazzato.</strong> L'architettura a tre livelli, la scelta degli indicatori (DSO, % rischio), la separazione per canale di pagamento e la distinzione tra corrente e arretrati 2024 sono scelte corrette che vanno preservate in qualsiasi evoluzione digitale.</span>
+    </div>
+    <div class="obs-item">
+      <div class="obs-dot"></div>
+      <span><strong>La priorità non è lo strumento, è il dato.</strong> Il problema principale non è che il file è Excel: è che il dato di partenza è un'esportazione manuale e statica. Il primo passo evolutivo è alimentare automaticamente dal gestionale, qualunque sia il contenitore.</span>
+    </div>
+    <div class="obs-item">
+      <div class="obs-dot"></div>
+      <span><strong>La colonna "stato credito" è il nodo critico.</strong> Tutta la logica analitica ruota attorno a questa etichetta. Standardizzarla (con un dominio fisso di valori, validato a monte nel gestionale) è il singolo intervento a più alto impatto sulla qualità del dato.</span>
+    </div>
+    <div class="obs-item">
+      <div class="obs-dot"></div>
+      <span><strong>Il DSO è la metrica più preziosa.</strong> È l'unico indicatore del file che mette in relazione il rischio con il volume di business. Va reso visibile nel tempo (grafico di trend) e disaggregato almeno per linea di business e per tipologia di pagamento.</span>
+    </div>
+    <div class="obs-item">
+      <div class="obs-dot"></div>
+      <span><strong>Il file non distingue "non ancora incassato" da "irrecuperabile".</strong> Tutti i crediti scaduti sono trattati allo stesso modo indipendentemente dall'anzianità del mancato pagamento. Un aging dei crediti (0–30gg, 31–60gg, 60+gg) sarebbe il passo più semplice per prioritizzare il recupero.</span>
+    </div>
+    <div class="obs-item">
+      <div class="obs-dot"></div>
+      <span><strong>Potenziale collegamento con l'analisi rinnovi.</strong> Il dato "Motivazione" (nuova iscrizione vs rinnovo) e il dato "DataFineAbbonamento" presenti in questo file sono le stesse variabili chiave monitorate nel file rinnovi. Esiste un'opportunità di incrocio dati per capire se i crediti scaduti si concentrano su nuovi soci o su rinnovi.</span>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-copy">Ronchiverdi Sport Club — Audit Digitale 2026 · <em>Maurizio Taruggi</em></span>
+  <span class="footer-copy">Analisi strutturale — nessun dato sensibile esposto</span>
+</footer>
+
+</body>
+</html>

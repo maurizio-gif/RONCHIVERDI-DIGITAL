@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customer Care — Call 14 maggio 2026 · Ronchiverdi Audit</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FAF8F4; font-size: 15px; line-height: 1.7; overflow-x: hidden; font-weight: 300; -webkit-font-smoothing: antialiased; }
+
+.back-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: rgba(15,15,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.07); }
+.back-btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(250,248,244,0.55); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; transition: color 0.2s; }
+.back-btn:hover { color: #E8D46A; }
+.back-btn:hover .arrow { transform: translateX(-3px); }
+.arrow { font-size: 16px; transition: transform 0.2s; display: inline-block; }
+.back-nav-logo { height: 36px; width: auto; filter: invert(1); mix-blend-mode: screen; opacity: 0.9; }
+@media(max-width:640px){ .back-nav { padding: 0 20px; } .back-nav-logo { height: 28px; } }
+
+.hero { padding: 120px 48px 72px; position: relative; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 80% 30%, rgba(232,212,106,0.05) 0%, transparent 60%); pointer-events: none; }
+.hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+.eyebrow-row { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+.tag { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(250,248,244,0.3); }
+.sep { color: rgba(250,248,244,0.15); }
+.hero h1 { font-family: "Cormorant Garamond", serif; font-size: clamp(36px, 5vw, 62px); font-weight: 300; line-height: 1.05; color: #FAF8F4; margin-bottom: 20px; letter-spacing: -0.02em; }
+.hero h1 em { font-style: italic; color: #E8D46A; }
+.hero-sub { font-size: 14px; font-weight: 300; line-height: 1.75; color: rgba(250,248,244,0.45); max-width: 660px; margin-bottom: 36px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 32px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.07); }
+.hero-meta-item .lbl { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(232,212,106,0.5); margin-bottom: 4px; }
+.hero-meta-item .val { font-size: 13px; font-weight: 400; color: rgba(250,248,244,0.7); }
+
+.page { max-width: 1100px; margin: 0 auto; padding: 0 48px 100px; }
+@media(max-width:640px){ .page { padding: 0 20px 80px; } .hero { padding: 100px 20px 56px; } }
+
+.section { padding: 64px 0; border-top: 1px solid rgba(255,255,255,0.06); }
+.section-eyebrow { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(232,212,106,0.5); margin-bottom: 10px; }
+.section-title { font-family: "Cormorant Garamond", serif; font-size: clamp(24px, 3vw, 38px); font-weight: 300; color: #FAF8F4; line-height: 1.1; margin-bottom: 8px; letter-spacing: -0.01em; }
+.section-title em { font-style: italic; color: #E8D46A; }
+.section-sub { font-size: 13px; font-weight: 300; color: rgba(250,248,244,0.4); max-width: 680px; margin-bottom: 36px; line-height: 1.7; }
+
+/* PARTICIPANTS */
+.people-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+.person-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 12px 16px; }
+.person-card .p-name { font-size: 13px; font-weight: 500; color: rgba(250,248,244,0.8); margin-bottom: 3px; }
+.person-card .p-role { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.1em; color: rgba(250,248,244,0.3); }
+.person-card.ext { border-color: rgba(232,212,106,0.2); background: rgba(232,212,106,0.02); }
+.person-card.ext .p-role { color: rgba(232,212,106,0.5); }
+.person-card.absent { opacity: 0.5; }
+
+/* PILLARS */
+.pillar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; }
+@media(max-width:760px){ .pillar-grid { grid-template-columns: 1fr; } }
+.pillar-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 28px 24px; }
+.pillar-card .pil-n { font-family: "Cormorant Garamond", serif; font-size: 52px; font-weight: 300; color: rgba(232,212,106,0.2); line-height: 1; margin-bottom: 12px; }
+.pillar-card .pil-title { font-size: 14px; font-weight: 500; color: rgba(250,248,244,0.8); margin-bottom: 6px; }
+.pillar-card .pil-desc { font-size: 12px; font-weight: 300; color: rgba(250,248,244,0.35); line-height: 1.65; }
+
+/* AS IS — STATUS */
+.area-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+@media(max-width:800px){ .area-grid { grid-template-columns: 1fr; } }
+.area-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 24px 22px; }
+.area-card .area-label { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(250,248,244,0.2); margin-bottom: 10px; }
+.area-card .area-title { font-size: 14px; font-weight: 500; color: rgba(250,248,244,0.75); margin-bottom: 14px; }
+.status-list { display: flex; flex-direction: column; gap: 7px; }
+.status-row { display: flex; align-items: flex-start; gap: 10px; font-size: 12px; color: rgba(250,248,244,0.45); line-height: 1.5; }
+.status-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+.status-dot.ok { background: rgba(90,180,120,0.7); }
+.status-dot.warn { background: rgba(232,212,106,0.6); }
+.status-dot.ko { background: rgba(200,80,80,0.65); }
+.status-row strong { font-weight: 500; color: rgba(250,248,244,0.65); }
+
+/* GAP ANALYSIS */
+.gap-grid { display: flex; flex-direction: column; gap: 10px; }
+.gap-item { display: flex; gap: 16px; align-items: flex-start; padding: 16px 20px; border-radius: 12px; border: 1px solid rgba(200,80,80,0.15); background: rgba(200,80,80,0.03); }
+.gap-n { font-family: "JetBrains Mono", monospace; font-size: 11px; color: rgba(200,80,80,0.5); flex-shrink: 0; width: 24px; padding-top: 1px; }
+.gap-body .gap-title { font-size: 13px; font-weight: 500; color: rgba(250,248,244,0.75); margin-bottom: 4px; }
+.gap-body .gap-desc { font-size: 13px; font-weight: 300; color: rgba(250,248,244,0.4); line-height: 1.65; }
+.gap-item.critical { border-color: rgba(200,80,80,0.28); background: rgba(200,80,80,0.05); }
+.gap-item.critical .gap-n { color: rgba(220,100,80,0.8); }
+
+/* PROPOSALS */
+.proposal-grid { display: flex; flex-direction: column; gap: 10px; }
+.proposal-item { display: flex; gap: 16px; align-items: flex-start; padding: 16px 20px; border-radius: 12px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); }
+.proposal-n { font-family: "JetBrains Mono", monospace; font-size: 11px; color: rgba(232,212,106,0.4); flex-shrink: 0; width: 24px; padding-top: 1px; }
+.proposal-body { flex: 1; }
+.proposal-title { font-size: 13px; font-weight: 500; color: rgba(250,248,244,0.75); margin-bottom: 4px; }
+.proposal-desc { font-size: 13px; font-weight: 300; color: rgba(250,248,244,0.4); line-height: 1.65; }
+.proposal-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.prop-tag { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.08em; padding: 3px 8px; border-radius: 4px; }
+.prop-tag.quick { background: rgba(90,180,120,0.08); border: 1px solid rgba(90,180,120,0.2); color: rgba(130,200,155,0.75); }
+.prop-tag.medium { background: rgba(232,212,106,0.06); border: 1px solid rgba(232,212,106,0.18); color: rgba(232,212,106,0.6); }
+.prop-tag.struct { background: rgba(90,140,210,0.06); border: 1px solid rgba(90,140,210,0.2); color: rgba(140,185,240,0.65); }
+.prop-tag.tool { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); color: rgba(250,248,244,0.3); }
+
+/* ACTION POINTS */
+.action-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.action-table th { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,248,244,0.25); padding: 8px 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.action-table td { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.04); color: rgba(250,248,244,0.5); vertical-align: top; }
+.action-table td:first-child { white-space: nowrap; }
+.action-table tr:last-child td { border-bottom: none; }
+.action-owner { font-family: "JetBrains Mono", monospace; font-size: 10px; display: inline-block; padding: 2px 8px; border-radius: 4px; background: rgba(232,212,106,0.07); border: 1px solid rgba(232,212,106,0.2); color: rgba(232,212,106,0.7); white-space: nowrap; }
+
+/* AGENDA */
+.agenda-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media(max-width:760px){ .agenda-grid { grid-template-columns: 1fr; } }
+.agenda-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 24px 20px; }
+.agenda-card .ag-day { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(232,212,106,0.5); margin-bottom: 10px; }
+.agenda-card .ag-title { font-size: 14px; font-weight: 500; color: rgba(250,248,244,0.75); margin-bottom: 14px; }
+.agenda-slot { display: flex; gap: 10px; margin-bottom: 10px; align-items: flex-start; }
+.ag-time { font-family: "JetBrains Mono", monospace; font-size: 10px; color: rgba(232,212,106,0.4); flex-shrink: 0; width: 42px; padding-top: 1px; }
+.ag-desc { font-size: 12px; color: rgba(250,248,244,0.45); line-height: 1.5; }
+
+/* QUOTE */
+.quote-block { border-left: 2px solid rgba(232,212,106,0.35); padding: 14px 20px; margin: 16px 0; background: rgba(232,212,106,0.02); border-radius: 0 8px 8px 0; }
+.quote-block p { font-size: 13px; font-style: italic; font-weight: 300; color: rgba(250,248,244,0.45); line-height: 1.7; }
+.quote-block .q-who { font-family: "JetBrains Mono", monospace; font-size: 9px; font-style: normal; color: rgba(250,248,244,0.2); margin-top: 6px; letter-spacing: 0.1em; }
+
+/* DATA NOTE */
+.data-note { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 14px 18px; margin-top: 12px; }
+.data-note .dn-label { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(250,248,244,0.2); margin-bottom: 5px; }
+.data-note p { font-size: 12px; font-weight: 300; color: rgba(250,248,244,0.35); line-height: 1.65; }
+
+/* CALLOUT */
+.callout { border-left: 2px solid rgba(232,212,106,0.4); padding: 16px 20px; margin: 20px 0; background: rgba(232,212,106,0.03); border-radius: 0 8px 8px 0; }
+.callout p { font-size: 13px; font-weight: 300; color: rgba(250,248,244,0.5); line-height: 1.7; }
+.callout strong { font-weight: 500; color: rgba(250,248,244,0.7); }
+
+/* TWO COL */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+@media(max-width:760px){ .two-col { grid-template-columns: 1fr; } }
+
+/* STAT ROW */
+.kpi-row { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 28px; }
+.kpi-chip { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 14px 18px; }
+.kpi-chip .kc-n { font-family: "Cormorant Garamond", serif; font-size: 32px; font-weight: 300; color: #E8D46A; line-height: 1; margin-bottom: 3px; }
+.kpi-chip .kc-l { font-size: 10px; color: rgba(250,248,244,0.3); font-weight: 400; }
+
+/* DISTRIB LABEL */
+.distrib-label { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(250,248,244,0.25); margin-bottom: 12px; }
+</style>
+</head>
+<body>
+
+<nav class="back-nav">
+  <a href="index.html" class="back-btn"><span class="arrow">←</span> Indice</a>
+  <img src="ronchiverdi-logo.jpg" alt="Ronchiverdi" class="back-nav-logo">
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow-row">
+      <span class="tag">Ronchiverdi Sport Club</span>
+      <span class="sep">·</span>
+      <span class="tag">Audit digitale</span>
+      <span class="sep">·</span>
+      <span class="tag">Customer Care</span>
+    </div>
+    <h1>Call <em>Customer Care</em><br>14 maggio 2026</h1>
+    <p class="hero-sub">Sintesi operativa della call di allineamento sul comparto customer care. Analisi dello stato attuale, gap identificati e proposte emerse. Fonte: verbale Gemini Notes + trascrizione completa.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><div class="lbl">Data</div><div class="val">14 maggio 2026</div></div>
+      <div class="hero-meta-item"><div class="lbl">Durata</div><div class="val">~2h 09m</div></div>
+      <div class="hero-meta-item"><div class="lbl">Partecipanti</div><div class="val">11 persone</div></div>
+      <div class="hero-meta-item"><div class="lbl">Focus</div><div class="val">Customer care, onboarding, segnalazioni, reporting</div></div>
+      <div class="hero-meta-item"><div class="lbl">Fase progetto</div><div class="val">Audit — stato attuale</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="page">
+
+  <!-- PARTECIPANTI -->
+  <section class="section" style="border-top:none; padding-top:48px;">
+    <div class="section-eyebrow">Partecipanti</div>
+    <h2 class="section-title">Chi era <em>in call</em></h2>
+    <p class="section-sub">Team Ronchiverdi + consulente esterno. Non tutti presenti per l'intera durata.</p>
+
+    <div class="distrib-label">Consulente esterno</div>
+    <div class="people-grid" style="margin-bottom:20px;">
+      <div class="person-card ext">
+        <div class="p-name">Maurizio Taruggi</div>
+        <div class="p-role">Consulente digitale — esterno</div>
+      </div>
+    </div>
+
+    <div class="distrib-label">Team Ronchiverdi</div>
+    <div class="people-grid">
+      <div class="person-card">
+        <div class="p-name">Paola</div>
+        <div class="p-role">Coordinatrice — agenda e coordinamento</div>
+      </div>
+      <div class="person-card">
+        <div class="p-name">Margherita</div>
+        <div class="p-role">Responsabile retention — gestisce la maggior parte dei rinnovi</div>
+      </div>
+      <div class="person-card">
+        <div class="p-name">Chiara</div>
+        <div class="p-role">Digitalizzazione + estrazione dati Team System / E-for-You</div>
+      </div>
+      <div class="person-card">
+        <div class="p-name">Loris</div>
+        <div class="p-role">Onboarding nuovi soci — CRM tecnico</div>
+      </div>
+      <div class="person-card">
+        <div class="p-name">Marco Rolle</div>
+        <div class="p-role">Operations — m.rolle@ronchiverdi.it</div>
+      </div>
+      <div class="person-card">
+        <div class="p-name">Simone</div>
+        <div class="p-role">Risorsa tecnica — manutenzione processi digitali</div>
+      </div>
+      <div class="person-card">
+        <div class="p-name">Maria Grazia</div>
+        <div class="p-role">Finance / amministrazione</div>
+      </div>
+      <div class="person-card">
+        <div class="p-name">Lorella</div>
+        <div class="p-role">Direzione — citata, non direttamente attiva in call</div>
+      </div>
+      <div class="person-card absent">
+        <div class="p-name">Fabio</div>
+        <div class="p-role">Responsabile piscina / scuole sportive — appuntamento martedì</div>
+      </div>
+      <div class="person-card absent">
+        <div class="p-name">Stefano</div>
+        <div class="p-role">Responsabile tennis — da convocare mercoledì (disponibilità da verificare)</div>
+      </div>
+    </div>
+    <div class="data-note">
+      <div class="dn-label">Nota</div>
+      <p>Le card in grigio indicano persone citate ma non presenti in call. "Absent" non indica assenza dall'azienda ma dalla specifica sessione del 14 maggio.</p>
+    </div>
+  </section>
+
+  <!-- TRE PILASTRI -->
+  <section class="section">
+    <div class="section-eyebrow">Framework operativo</div>
+    <h2 class="section-title">I tre <em>pilastri</em> del customer care</h2>
+    <p class="section-sub">Definiti da Maurizio Taruggi durante la call come struttura concettuale per organizzare l'operatività della segreteria e del customer care.</p>
+
+    <div class="pillar-grid">
+      <div class="pillar-card">
+        <div class="pil-n">1</div>
+        <div class="pil-title">Gestione reclami</div>
+        <div class="pil-desc">Raccolta strutturata, categorizzazione, smistamento ai responsabili, tracciamento esito e dashboard statistiche. Oggi: Excel manuale non strutturato.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pil-n">2</div>
+        <div class="pil-title">Risposte a richieste ordinarie</div>
+        <div class="pil-desc">Gestione delle domande frequenti in sede e al telefono (app, prenotazioni, certificati, pagamenti). Oggi: verbale, ripetitiva, non standardizzata.</div>
+      </div>
+      <div class="pillar-card">
+        <div class="pil-n">3</div>
+        <div class="pil-title">Fidelizzazione e soddisfazione</div>
+        <div class="pil-desc">Azioni proattive per misurare e migliorare la soddisfazione del socio. Oggi: assente. Nessuna chiamata di cortesia, nessun sondaggio, nessun follow-up sistematico.</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p><strong>Metodologia di lavoro definita:</strong> il progetto si svolge in tre fasi sequenziali — (1) analisi stato attuale, (2) gap analysis, (3) scenari e soluzioni. La call del 14 maggio è fase 1. Le soluzioni dipendono dall'organizzazione delle risorse umane (organigramma, capiprogetto) e dalla capacità operativa di Simone.</p>
+    </div>
+  </section>
+
+  <!-- ANALISI AS IS -->
+  <section class="section">
+    <div class="section-eyebrow">Analisi As Is</div>
+    <h2 class="section-title">Stato <em>attuale</em> per area</h2>
+    <p class="section-sub">Fotografia dello stato operativo del comparto customer care e dei processi correlati, come emerge dalla trascrizione della call. Verde = funzionante, giallo = parziale/problematico, rosso = assente o critico.</p>
+
+    <div class="kpi-row">
+      <div class="kpi-chip"><div class="kc-n">52%</div><div class="kc-l">Tasso di rinnovo nuovi iscritti</div></div>
+      <div class="kpi-chip"><div class="kc-n">~3.200</div><div class="kc-l">Soci totali (2.400 adulti + ~800 bambini)</div></div>
+      <div class="kpi-chip"><div class="kc-n">8</div><div class="kc-l">Segnalazioni sovraffollamento in 1 settimana</div></div>
+      <div class="kpi-chip"><div class="kc-n">5</div><div class="kc-l">Persone nel team retention</div></div>
+      <div class="kpi-chip"><div class="kc-n">~20</div><div class="kc-l">Persone che accedono ai file Excel di reporting</div></div>
+    </div>
+
+    <div class="area-grid">
+
+      <div class="area-card">
+        <div class="area-label">Gestionale / Sistemi</div>
+        <div class="area-title">Infor E-for-You + Technogym</div>
+        <div class="status-list">
+          <div class="status-row"><div class="status-dot ok"></div><span>Infor E-for-You on-premise: caricamento abbonamenti, tornello, certificati medici, prenotazioni (via Technogym)</span></div>
+          <div class="status-row"><div class="status-dot ok"></div><span>Chiara esperta di estrazione dati da Team System — principale riferimento interno</span></div>
+          <div class="status-row"><div class="status-dot warn"></div><span>Software di vecchia generazione — non progettato per logiche di processo. Configurabilità eccessiva che produce complessità nella gestione di rate e pagamenti</span></div>
+          <div class="status-row"><div class="status-dot ko"></div><span>Statistiche abbonamenti distorte: gli abbonamenti Flex ricorrenti sono trattati come nuovi rinnovi ogni mese — impossibile estrarre dato pulito di nuovi vs rinnovi</span></div>
+          <div class="status-row"><div class="status-dot ko"></div><span>Impossibile distinguere automaticamente nuovo vero da ex socio che si reiscrive — dipende dalla memoria personale di Loris</span></div>
+        </div>
+      </div>
+
+      <div class="area-card">
+        <div class="area-label">Onboarding nuovo socio</div>
+        <div class="area-title">Post-vendita e attivazione</div>
+        <div class="status-list">
+          <div class="status-row"><div class="status-dot warn"></div><span>Technogym invia email automatica al momento dell'iscrizione per far scaricare l'app — quasi mai aperta dagli utenti</span></div>
+          <div class="status-row"><div class="status-dot warn"></div><span>Loris filtra manualmente i nuovi iscritti da E-for-You ogni giorno, invia messaggi e chiama chi risponde — processo dipendente dalla persona</span></div>
+          <div class="status-row"><div class="status-dot ko"></div><span>Nessuna welcome email strutturata di onboarding (confermato in call)</span></div>
+          <div class="status-row"><div class="status-dot ko"></div><span>Nessuna sequenza comunicativa post-iscrizione: il cliente è abbandonato a se stesso dopo la firma del contratto</span></div>
+          <div class="status-row"><div class="status-dot ko"></div><span>Le app (tennis, padel, corsi, Tecnogym) non vengono scaricate al momento dell'iscrizione — la segreteria le spiega verbalmente in seguito, caso per caso</span></div>
+        </div>
+      </div>
+
+      <div class="area-card">
+        <div class="area-label">Comunicazione email</div>
+        <div class="area-title">Email e caselle</div>
+        <div class="status-list">
+          <div class="status-row"><div class="status-dot ok"></div><span>Casella email su Outlook 365 in cloud — ricercabile per mittente, oggetto, allegato</span></div>
+          <div class="status-row"><div class="status-dot warn"></div><span>Email automatiche da Infor: solo testo, lunghe — non lette dai soci</span></div>
+          <div class="status-row"><div class="status-dot ko"></div><span>Troppi account email specifici — nessuna casella dedicata assistenza/customer care separata da "info" generale</span></div>
+          <div class="status-row"><div class="status-dot ko"></div><span>Nessun sistema di ticket o gestione strutturata delle richieste in entrata via email</span></div>
+        </div>
+      </div>
+
+      <div class="area-card">
+        <div class="area-label">Modulistica e archiviazione</div>
+        <div class="area-title">Contratti, certificati, documenti</div>
+        <div class="status-list">
+          <div class="status-row"><div class="status-dot warn"></div><span>Certificati medici: ricevuti fisicamente, scansionati e caricati come PDF sul profilo cliente in gestionale — procedura parziale</span></div>
+          <div class="status-row"><div class="status-dot ko"></div><span>Template certificato medico non unificato: regolamento dice "generico", Young School dice "con ECG" — ogni operatrice fornisce istruzioni diverse</span></div>
+          <div class="status-row"><div class="status-dot ko"></div><span>Nessun metodo logico condiviso per archiviazione documenti — protocollazione dei certificati attualmente caotica e senza standard</span></div>
+          <div class="status-row"><div class="status-dot ko"></div><span>Tutta la modulistica (contratti, moduli disdetta, scarichi di responsabilità) è ancora cartacea</span></div>
+        </div>
+      </div>
+
+      <div class="area-card">
+        <div class="area-label">Segnalazioni / Lamentele</div>
+        <div class="area-title">Raccolta e gestione reclami</div>
+        <div class="status-list">
+          <div class="status-row"><div class="status-dot warn"></div><span>Lorella gestisce le segnalazioni e ha iniziato a registrare anche l'ora — segnale di attenzione crescente al dato</span></div>
+          <div class="status-row"><div class="status-dot ko"></div><span>Strumento: file Excel manuale — nessuna struttura di categorie, nessuno smistamento automatico ai responsabili</span></div>
+          <div class="status-row"><div class="status-dot ko"></div><span>Nessuna dashboard statistiche sulle segnalazioni — impossibile leggere trend in tempo reale</span></div>
+          <div class="status-row"><div class="status-dot ko"></div><span>8 segnalazioni per sovraffollamento in una settimana (inclusa piscina) + lamentele per parcheggio — volume crescente non tracciato strutturalmente</span></div>
+        </div>
+      </div>
+
+      <div class="area-card">
+        <div class="area-label">Customer care attivo</div>
+        <div class="area-title">Follow-up, soddisfazione, fidelizzazione</div>
+        <div class="status-list">
+          <div class="status-row"><div class="status-dot warn"></div><span>Il contatto con il socio avviene quotidianamente alla reception — relazione informale ma non strutturata</span></div>
+          <div class="status-row"><div class="status-dot ko"></div><span><strong>Non esiste nessuna struttura attiva di customer care</strong> (confermato in call: "È tutto da fare")</span></div>
+          <div class="status-row"><div class="status-dot ko"></div><span>Nessuna chiamata di cortesia (service call)</span></div>
+          <div class="status-row"><div class="status-dot ko"></div><span>Nessun sondaggio di soddisfazione — nessun NPS o meccanismo pull</span></div>
+          <div class="status-row"><div class="status-dot ko"></div><span>Nessun CRM per storicizzare le interazioni con i soci</span></div>
+        </div>
+      </div>
+
+      <div class="area-card">
+        <div class="area-label">Reporting e dati</div>
+        <div class="area-title">Reportistica e statistiche</div>
+        <div class="status-list">
+          <div class="status-row"><div class="status-dot warn"></div><span>Dati motivi di non rinnovo già tracciati su Google Sheet (Lavoro 154, Studio 86, Poca frequenza 69, Salute 60) — dato esistente ma non integrato</span></div>
+          <div class="status-row"><div class="status-dot ko"></div><span>~20 persone accedono agli stessi file Excel di reporting — rischio cancellazioni accidentali, nessuna integrità garantita</span></div>
+          <div class="status-row"><div class="status-dot ko"></div><span>Statistiche abbonamenti non affidabili: i Flex falsano i conteggi di nuovi iscritti vs rinnovi</span></div>
+          <div class="status-row"><div class="status-dot ko"></div><span>Nessuna reportistica dinamica — ogni estrazione è manuale da Infor</span></div>
+        </div>
+      </div>
+
+      <div class="area-card">
+        <div class="area-label">Gestione manutenzione e pulizie</div>
+        <div class="area-title">Tracciamento interventi</div>
+        <div class="status-list">
+          <div class="status-row"><div class="status-dot ko"></div><span>Nessun form digitale per registrazione interventi di pulizia o manutenzione</span></div>
+          <div class="status-row"><div class="status-dot ko"></div><span>Nessun timestamp automatico sugli interventi — impossibile risposta oggettiva a verifiche ASL</span></div>
+          <div class="status-row"><div class="status-dot ko"></div><span>Operatività del settore non tracciata strutturalmente</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="quote-block">
+      <p>"Al momento non c'è nessuna struttura attiva di customer care o chiamate di cortesia. Il rapporto con l'utente si limita all'approccio giornaliero presso la reception. Non esiste la service call. È tutto da fare."</p>
+      <div class="q-who">Ronchiverdi Sport Club — trascrizione call 01:00:59</div>
+    </div>
+
+    <div class="quote-block">
+      <p>"Alle 18:00-19:00 c'è il delirio in reception — certificati, finanziamenti, pagamenti campo padel contemporaneamente. Il braccialetto non passa perché il pagamento è scaduto."</p>
+      <div class="q-who">Chiara — trascrizione call 01:09:08</div>
+    </div>
+  </section>
+
+  <!-- GAP ANALYSIS -->
+  <section class="section">
+    <div class="section-eyebrow">Gap Analysis</div>
+    <h2 class="section-title">Cosa <em>manca</em> — priorità</h2>
+    <p class="section-sub">Gap identificati durante la call, ordinati per area funzionale. I gap critici (bordo più scuro) sono quelli che bloccano o distorcono processi già esistenti.</p>
+
+    <div class="two-col" style="align-items: start;">
+      <div>
+        <div class="distrib-label" style="margin-bottom:16px;">Onboarding e comunicazione</div>
+        <div class="gap-grid">
+          <div class="gap-item critical">
+            <span class="gap-n">G1</span>
+            <div class="gap-body">
+              <div class="gap-title">Nessuna sequenza di onboarding post-iscrizione</div>
+              <div class="gap-desc">Il nuovo socio firma il contratto e non riceve nessuna comunicazione strutturata che spieghi come funziona il club, come prenotare, come usare i servizi. La welcome email è assente. Il percorso del cliente si spezza immediatamente dopo la vendita.</div>
+            </div>
+          </div>
+          <div class="gap-item">
+            <span class="gap-n">G2</span>
+            <div class="gap-body">
+              <div class="gap-title">Nessuna guida standardizzata per i nuovi soci</div>
+              <div class="gap-desc">Le istruzioni su app, prenotazioni, regole del club vengono date verbalmente da ogni operatrice in modo diverso. Rischio di incoerenze e contestazioni ("Lorella me l'ha detto lei"). Nessuna versione scritta ufficiale accessibile al socio.</div>
+            </div>
+          </div>
+          <div class="gap-item">
+            <span class="gap-n">G3</span>
+            <div class="gap-body">
+              <div class="gap-title">Template certificato medico non unificato</div>
+              <div class="gap-desc">Tre versioni in circolazione: regolamento (generico), Young School (con ECG), istruzioni verbali (variabile). Ogni operatrice gestisce le contestazioni a modo suo. Manca un documento unico con normativa di riferimento, requisiti ECG e facsimile del Ministero della Salute.</div>
+            </div>
+          </div>
+          <div class="gap-item">
+            <span class="gap-n">G4</span>
+            <div class="gap-body">
+              <div class="gap-title">Casella email customer care assente</div>
+              <div class="gap-desc">Nessuna casella dedicata all'assistenza separata dall'email "info" generale. Le richieste di assistenza si mischiano con le comunicazioni generali. Nessun sistema di ticket o prioritizzazione delle richieste in entrata.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="distrib-label" style="margin-top:28px; margin-bottom:16px;">Sistemi e dati</div>
+        <div class="gap-grid">
+          <div class="gap-item critical">
+            <span class="gap-n">G5</span>
+            <div class="gap-body">
+              <div class="gap-title">Statistiche abbonamenti non affidabili (Flex)</div>
+              <div class="gap-desc">Gli abbonamenti Flex ricorrenti sono caricati come nuovi rinnovi mensili — le statistiche di "nuovi iscritti" e "rinnovi" sono strutturalmente distorte. Impossibile leggere il dato reale senza pulizia manuale. Da analizzare con Infor durante la visita in sede.</div>
+            </div>
+          </div>
+          <div class="gap-item critical">
+            <span class="gap-n">G6</span>
+            <div class="gap-body">
+              <div class="gap-title">Nessuna distinzione automatica nuovo vs ex socio</div>
+              <div class="gap-desc">Il processo di onboarding di Loris dipende dalla sua conoscenza personale dei soci. Un ex socio che si reiscrive dopo anni (es. "al club da 20 anni") appare come "nuovo" nel sistema. Nessun criterio automatizzato definito per classificare primo abbonamento vs riacquisto.</div>
+            </div>
+          </div>
+          <div class="gap-item">
+            <span class="gap-n">G7</span>
+            <div class="gap-body">
+              <div class="gap-title">Reporting distribuito su ~20 persone in Excel — fragile</div>
+              <div class="gap-desc">Nessuna integrità dei dati garantita. Rischio di cancellazioni accidentali, modifiche non tracciate, versioni divergenti. Impossibile aggregare automaticamente. Il passaggio Excel → Google Sheets → database è identificato come evoluzione necessaria.</div>
+            </div>
+          </div>
+          <div class="gap-item">
+            <span class="gap-n">G8</span>
+            <div class="gap-body">
+              <div class="gap-title">Nessun CRM per storicizzare le interazioni con i soci</div>
+              <div class="gap-desc">Le conversazioni, le note sui casi difficili, le promesse fatte ai soci esistono solo nella memoria del personale. "Quello che Loris ha detto a Lorella 6 mesi fa potrebbe essere dimenticato — è oro per l'azienda storicizzarlo." Nessuno strumento attuale per questo scopo.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="distrib-label" style="margin-bottom:16px;">Customer care e segnalazioni</div>
+        <div class="gap-grid">
+          <div class="gap-item critical">
+            <span class="gap-n">G9</span>
+            <div class="gap-body">
+              <div class="gap-title">Customer care attivo: struttura completamente assente</div>
+              <div class="gap-desc">Nessuna chiamata di cortesia, nessun sondaggio di soddisfazione, nessun NPS, nessun follow-up sistematico sui soci. Il contatto proattivo con il socio non esiste come processo strutturato. Il terzo pilastro (fidelizzazione) è interamente da costruire.</div>
+            </div>
+          </div>
+          <div class="gap-item">
+            <span class="gap-n">G10</span>
+            <div class="gap-body">
+              <div class="gap-title">Segnalazioni gestite senza struttura — nessuna dashboard</div>
+              <div class="gap-desc">File Excel manuale, nessuna categoria standardizzata, nessuno smistamento automatico al responsabile competente, nessun tracciamento dell'esito. 8 segnalazioni per sovraffollamento in una settimana: dato esistente ma non processabile in tempo reale.</div>
+            </div>
+          </div>
+          <div class="gap-item">
+            <span class="gap-n">G11</span>
+            <div class="gap-body">
+              <div class="gap-title">Nessun tracciamento interventi manutenzione/pulizie</div>
+              <div class="gap-desc">Nessun form digitale per registrare chi ha fatto cosa, quando e con quali prodotti. In caso di verifica ASL, nessun dato oggettivo disponibile. Gli interventi non sono misurabili né ottimizzabili.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="distrib-label" style="margin-top:28px; margin-bottom:16px;">Processi e organizzazione</div>
+        <div class="gap-grid">
+          <div class="gap-item critical">
+            <span class="gap-n">G12</span>
+            <div class="gap-body">
+              <div class="gap-title">Nessun organigramma formale con capiprogetto</div>
+              <div class="gap-desc">La digitalizzazione richiede responsabili nominati per ogni processo. Senza capiprogetto, i processi automatizzati muoiono nel giro di un anno ("ogni automazione deve avere un capoprogetto che la segue"). Prerequisito identificato per qualsiasi intervento digitale.</div>
+            </div>
+          </div>
+          <div class="gap-item">
+            <span class="gap-n">G13</span>
+            <div class="gap-body">
+              <div class="gap-title">Rischio silos — ogni reparto adotta soluzioni proprie</div>
+              <div class="gap-desc">Senza processi condivisi, il cliente parla con Ronchiverdi come se fossero soggetti diversi. Ogni responsabile adotta la propria strategia. Il passaggio a logica circolare (il cliente parla con Ronchiverdi come entità unica) richiede standardizzazione orizzontale.</div>
+            </div>
+          </div>
+          <div class="gap-item">
+            <span class="gap-n">G14</span>
+            <div class="gap-body">
+              <div class="gap-title">Iscrizioni scuole sportive: processo completamente manuale</div>
+              <div class="gap-desc">Le prove di nuoto (agonismo, pallanuoto), le prove di tennis, le iscrizioni corsi: nessun form digitale, nessun calendario automatizzato, nessuna raccolta dati genitori strutturata. Settore identificato come prima priorità di digitalizzazione.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROPOSTE EMERSE -->
+  <section class="section">
+    <div class="section-eyebrow">Proposte emerse</div>
+    <h2 class="section-title">Interventi <em>discussi in call</em></h2>
+    <p class="section-sub">Proposte e soluzioni emerse durante la call, attribuite al proponente quando identificabile. Organizzate per area funzionale. I tag indicano l'orizzonte temporale e lo strumento.</p>
+
+    <div class="distrib-label" style="margin-bottom:20px;">Onboarding e comunicazione</div>
+    <div class="proposal-grid" style="margin-bottom:32px;">
+
+      <div class="proposal-item">
+        <span class="proposal-n">P1</span>
+        <div class="proposal-body">
+          <div class="proposal-title">Email di onboarding strutturata — welcome sequence</div>
+          <div class="proposal-desc">Non una singola email di benvenuto ma una sequenza strutturata che accompagna il nuovo socio nelle prime settimane: benvenuto → certificato medico → download app → come prenotare → come funziona il club. Condizionale per area (tennis, padel, fitness). Assegnata a Margherita per analisi di fattibilità tecnica.</div>
+          <div class="proposal-tags"><span class="prop-tag medium">Medio termine</span><span class="prop-tag tool">Infor + automazione email</span></div>
+        </div>
+      </div>
+
+      <div class="proposal-item">
+        <span class="proposal-n">P2</span>
+        <div class="proposal-body">
+          <div class="proposal-title">Sottodominio soci — knowledge base non indicizzata</div>
+          <div class="proposal-desc">Un sottodominio del sito Ronchiverdi, non indicizzato dai motori di ricerca, accessibile solo ai soci iscritti. Contiene: guide alle app, procedure di prenotazione, regole del club, FAQ, decalogo di funzionamento. Le email di onboarding mandano il link. Eliminazione della spiegazione verbale ripetuta in segreteria.</div>
+          <div class="proposal-tags"><span class="prop-tag medium">Medio termine</span><span class="prop-tag tool">Sito web — sottodominio</span></div>
+        </div>
+      </div>
+
+      <div class="proposal-item">
+        <span class="proposal-n">P3</span>
+        <div class="proposal-body">
+          <div class="proposal-title">Form FAQ con AI — base per knowledge base e sito</div>
+          <div class="proposal-desc">Maurizio invia un form strutturato (domanda frequente, risposta, categoria). Il team compila le FAQ in ordine sparso. L'AI razionalizza e normalizza le categorie. Il database risultante diventa il contenuto del sottodominio soci e può generare un primo sito FAQ con 15+ articoli. Aggiornabile nel tempo.</div>
+          <div class="proposal-tags"><span class="prop-tag quick">Immediato</span><span class="prop-tag tool">Google Form + AI</span></div>
+        </div>
+      </div>
+
+      <div class="proposal-item">
+        <span class="proposal-n">P4</span>
+        <div class="proposal-body">
+          <div class="proposal-title">Template unico certificato medico — con normativa</div>
+          <div class="proposal-desc">Un documento unico che specifica: tipo di certificato richiesto (non agonistico), se serve ECG, da chi deve essere fatto (medico curante o sportivo), la normativa di riferimento (Ministero della Salute + ASL), facsimile da mostrare al socio. Pubblicato su sottodominio e inserito nella sequenza di onboarding. Elimina le contestazioni e scarica il personale senza formazione specifica.</div>
+          <div class="proposal-tags"><span class="prop-tag quick">Immediato</span><span class="prop-tag tool">Documento unico</span></div>
+        </div>
+      </div>
+
+      <div class="proposal-item">
+        <span class="proposal-n">P5</span>
+        <div class="proposal-body">
+          <div class="proposal-title">Archiviazione certificati via email cloud (Outlook 365)</div>
+          <div class="proposal-desc">Eliminare la gestione cartacea. Il socio manda foto del certificato via email. Rimane come allegato nella casella Outlook 365 (cloud) — ricercabile per mittente, oggetto e contenuto allegato. Nessun tocco fisico del documento, responsabilità della veridicità rimane al socio che lo ha inviato. Alternativa: scansione + salvataggio cloud con indice di ricerca.</div>
+          <div class="proposal-tags"><span class="prop-tag quick">Immediato</span><span class="prop-tag tool">Outlook 365</span></div>
+        </div>
+      </div>
+
+      <div class="proposal-item">
+        <span class="proposal-n">P6</span>
+        <div class="proposal-body">
+          <div class="proposal-title">Casella email dedicata assistenza — tipo ticket</div>
+          <div class="proposal-desc">Non "info@" ma una casella specifica per customer care e assistenza. Primo livello: tutto passa da lì. Riduzione dello spam sulla casella info. Gestione strutturata come ticket: ogni richiesta ha uno stato (aperta, in gestione, chiusa). Separazione tra comunicazioni generali e richieste di assistenza.</div>
+          <div class="proposal-tags"><span class="prop-tag quick">Immediato</span><span class="prop-tag tool">Outlook 365 / ticket</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="distrib-label" style="margin-bottom:20px;">Segnalazioni e customer care</div>
+    <div class="proposal-grid" style="margin-bottom:32px;">
+
+      <div class="proposal-item">
+        <span class="proposal-n">P7</span>
+        <div class="proposal-body">
+          <div class="proposal-title">Form digitale segnalazioni — con logica condizionale</div>
+          <div class="proposal-desc">QR code in punti strategici del club che aprono un form strutturato per segnalazioni: categoria (sovraffollamento, attrezzatura, pulizia, servizi…) → database Airtable → notifica automatica al responsabile di competenza → tracciamento esito → dashboard statistiche in tempo reale. Una segnalazione per sovraffollamento genera un task per il customer care che richiama il socio e registra l'esito.</div>
+          <div class="proposal-tags"><span class="prop-tag medium">Medio termine</span><span class="prop-tag tool">Airtable + QR code</span></div>
+        </div>
+      </div>
+
+      <div class="proposal-item">
+        <span class="proposal-n">P8</span>
+        <div class="proposal-body">
+          <div class="proposal-title">Form digitale pulizie e manutenzione — timestamp automatico</div>
+          <div class="proposal-desc">Form digitale compilato dall'operatore al momento dell'intervento: nome operatore, tipo intervento, superficie/area, prodotto utilizzato, note, timestamp automatico. Dati in database con dashboard. Risposta oggettiva e immediata a verifiche ASL. Storico degli interventi disponibile senza dipendenza dalla memoria del personale.</div>
+          <div class="proposal-tags"><span class="prop-tag medium">Medio termine</span><span class="prop-tag tool">Airtable + form</span></div>
+        </div>
+      </div>
+
+      <div class="proposal-item">
+        <span class="proposal-n">P9</span>
+        <div class="proposal-body">
+          <div class="proposal-title">Logica pull per la customer satisfaction — no telefonate</div>
+          <div class="proposal-desc">Il target di Ronchiverdi (professionisti molto occupati) non risponde alle telefonate a freddo. Meccanismo pull: survey automatica post-scadenza o post-interazione → se soddisfazione non massima → intervento umano del responsabile. NPS automatizzato. Evita il modello invasivo delle chiamate di cortesia. Richiede un capoprogetto che mantiene viva l'automazione nel tempo.</div>
+          <div class="proposal-tags"><span class="prop-tag medium">Medio termine</span><span class="prop-tag tool">Email automation + survey</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="distrib-label" style="margin-bottom:20px;">Dati, CRM e reporting</div>
+    <div class="proposal-grid" style="margin-bottom:32px;">
+
+      <div class="proposal-item">
+        <span class="proposal-n">P10</span>
+        <div class="proposal-body">
+          <div class="proposal-title">Airtable come database centrale — sostituzione Excel</div>
+          <div class="proposal-desc">Database no-code per centralizzare: abbonamenti (scadenze, disdette), segnalazioni, CRM soci, task follow-up, reportistica. Campi obbligatori per garantire qualità del dato. Viste filtrate per ogni ruolo (Loris vede solo i suoi nuovi da contattare). Sostituisce i file Excel distribuiti tra ~20 persone. Infor rimane per: caricamento abbonamento, tornello, certificati, prenotazioni Technogym. Tutto il pre/post abbonamento → Airtable.</div>
+          <div class="proposal-tags"><span class="prop-tag struct">Strutturale</span><span class="prop-tag tool">Airtable</span></div>
+        </div>
+      </div>
+
+      <div class="proposal-item">
+        <span class="proposal-n">P11</span>
+        <div class="proposal-body">
+          <div class="proposal-title">CRM tecnico con Technogym Map — storicizzazione interazioni</div>
+          <div class="proposal-desc">Technogym Map permette di fissare appuntamenti e tracciare la relazione tecnico-cliente. Possibilità di creare flussi di automazione condizionali a determinate azioni. Da valutare come strumento CRM tecnico in parallelo o alternativa ad Airtable per il segmento fitness/wellness. Obiettivo: storicizzare le conversazioni con i soci (il "gold" informativo che oggi è nella memoria di Loris).</div>
+          <div class="proposal-tags"><span class="prop-tag medium">Medio termine</span><span class="prop-tag tool">Technogym Map</span></div>
+        </div>
+      </div>
+
+      <div class="proposal-item">
+        <span class="proposal-n">P12</span>
+        <div class="proposal-body">
+          <div class="proposal-title">Reportistica dinamica abbonamenti in Airtable</div>
+          <div class="proposal-desc">Reportistica che classifica automaticamente: nuovi iscritti (primo abbonamento negli ultimi X anni), riacquisti (ex soci), rinnovi standard, abbonamenti Flex (separati dai rinnovi). Richiede prima la definizione del criterio con Infor durante la visita in sede (analisi estrazioni). Sostituisce l'attuale estrazione manuale da Infor con una vista sempre aggiornata.</div>
+          <div class="proposal-tags"><span class="prop-tag struct">Strutturale</span><span class="prop-tag tool">Airtable + Infor</span></div>
+        </div>
+      </div>
+
+      <div class="proposal-item">
+        <span class="proposal-n">P13</span>
+        <div class="proposal-body">
+          <div class="proposal-title">AI per quality check dei task e analisi qualitativa</div>
+          <div class="proposal-desc">Agenti AI integrati in Airtable per: (1) verificare che i task siano compilati correttamente — alert se una nota è troppo vaga o incompleta; (2) analisi qualitativa delle interazioni del personale con i soci — non solo "quante chiamate" ma "come è stata gestita questa conversazione". Passaggio da valutazione quantitativa a qualitativa della performance.</div>
+          <div class="proposal-tags"><span class="prop-tag struct">Strutturale</span><span class="prop-tag tool">Airtable + AI agents</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="distrib-label" style="margin-bottom:20px;">Accoglienza e guest register</div>
+    <div class="proposal-grid">
+
+      <div class="proposal-item">
+        <span class="proposal-n">P14</span>
+        <div class="proposal-body">
+          <div class="proposal-title">QR code per walk-in — guest register digitale</div>
+          <div class="proposal-desc">Sostituzione del Guest Register cartaceo con QR code in ingresso: il visitatore usa il proprio dispositivo per compilare un form (nome, telefono, interesse, fonte). Record diretto in Airtable. Il QR code è preferito al totem per la raccolta dati (nessuna manutenzione hardware, usa il dispositivo del cliente). Il totem mantiene utilità come display visivo (orari, attività, listino).</div>
+          <div class="proposal-tags"><span class="prop-tag medium">Medio termine</span><span class="prop-tag tool">QR code + Airtable</span></div>
+        </div>
+      </div>
+
+      <div class="proposal-item">
+        <span class="proposal-n">P15</span>
+        <div class="proposal-body">
+          <div class="proposal-title">Form digitale iscrizioni scuola nuoto — primo settore pilota</div>
+          <div class="proposal-desc">Identificato come prima priorità di digitalizzazione. Form con: selezione categoria (agonismo, pallanuoto Under 14), requisiti minimi, calendario automatizzato con slot disponibili, logica condizionale (adulti → errore), dati genitore e consensi privacy, email automatica di riepilogo + istruzioni dopo 5 minuti. Dashboard per responsabile vasca con prove da gestire, livello attribuito, note tecniche.</div>
+          <div class="proposal-tags"><span class="prop-tag medium">Prima priorità</span><span class="prop-tag tool">Airtable + form + email</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ACTION POINTS -->
+  <section class="section">
+    <div class="section-eyebrow">Action points</div>
+    <h2 class="section-title">Compiti <em>assegnati</em></h2>
+    <p class="section-sub">Task definiti durante la call con responsabile nominato. Fonte: Gemini Notes — sezione "Passaggi successivi".</p>
+
+    <table class="action-table">
+      <thead>
+        <tr>
+          <th>Responsabile</th>
+          <th>Task</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="action-owner">Margherita</span></td>
+          <td>Analizzare la fattibilità dell'implementazione dell'email di onboarding per i nuovi soci. Riproporre la soluzione fino ad approvazione definitiva (sì/no).</td>
+        </tr>
+        <tr>
+          <td><span class="action-owner">Il gruppo</span></td>
+          <td>Compilare il form FAQ inviato da Maurizio: domanda frequente + risposta + categoria. Usare categorie specifiche per la razionalizzazione AI.</td>
+        </tr>
+        <tr>
+          <td><span class="action-owner">Il gruppo</span></td>
+          <td>Standardizzare il template del certificato medico: definire tipo, requisiti ECG, da chi deve essere fatto, normativa di riferimento.</td>
+        </tr>
+        <tr>
+          <td><span class="action-owner">Loris + gruppo</span></td>
+          <td>Definire la metodologia con Infor per distinguere i nuovi iscritti (primo abbonamento negli ultimi X anni) dagli ex clienti/rinnovi.</td>
+        </tr>
+        <tr>
+          <td><span class="action-owner">Loris</span></td>
+          <td>Valutare la creazione di una reportistica dinamica delle iscrizioni in Airtable per snellire l'estrazione dati da E-for-You.</td>
+        </tr>
+        <tr>
+          <td><span class="action-owner">Il gruppo</span></td>
+          <td>Definire la metodologia operativa per raccogliere le lamentele: categorizzare le informazioni richieste per la creazione del form/database.</td>
+        </tr>
+        <tr>
+          <td><span class="action-owner">Chiara</span></td>
+          <td>Creare una lista delle richieste ricorrenti on site presentate dagli iscritti alla reception.</td>
+        </tr>
+        <tr>
+          <td><span class="action-owner">Il gruppo</span></td>
+          <td>Preparare una lista che riassuma l'operatività della segreteria sui 3 pilastri: lamentele, soddisfazione/fidelizzazione, richieste ordinarie.</td>
+        </tr>
+        <tr>
+          <td><span class="action-owner">Ronchiverdi</span></td>
+          <td>Concordare i punti e l'agenda della prossima visita in sede con Maurizio. Definire data/orario per incontro martedì con Fabio. Convocare debriefing mercoledì 9:30.</td>
+        </tr>
+        <tr>
+          <td><span class="action-owner">Ronchiverdi</span></td>
+          <td>Condurre Maurizio nel tour critico del club lunedì mattina. Verificare disponibilità Stefano Tennis per mercoledì.</td>
+        </tr>
+        <tr>
+          <td><span class="action-owner">Ronchiverdi</span></td>
+          <td>Inviare contatti di 2 hotel vicini alla struttura a Maurizio Taruggi (zona Mandria/Venaria o collinare).</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- AGENDA VISITA -->
+  <section class="section">
+    <div class="section-eyebrow">Visita in sede</div>
+    <h2 class="section-title">Agenda <em>tre giorni</em></h2>
+    <p class="section-sub">Piano della visita operativa in sede concordato durante la call. Settimana successiva al 14 maggio 2026.</p>
+
+    <div class="agenda-grid">
+      <div class="agenda-card">
+        <div class="ag-day">Lunedì</div>
+        <div class="ag-title">Audit operativo in sede</div>
+        <div class="agenda-slot"><div class="ag-time">10:00</div><div class="ag-desc">Arrivo — tour critico del club (~1,5 ore)</div></div>
+        <div class="agenda-slot"><div class="ag-time">12:00</div><div class="ag-desc">Debriefing con Marco Rolle</div></div>
+        <div class="agenda-slot"><div class="ag-time">13:00</div><div class="ag-desc">Pranzo</div></div>
+        <div class="agenda-slot"><div class="ag-time">14:00</div><div class="ag-desc">Affiancamento segreteria — pomeriggio completo fino alle ~19:00. Obiettivo: osservare il "delirio" delle 18:00-19:00</div></div>
+      </div>
+      <div class="agenda-card">
+        <div class="ag-day">Martedì</div>
+        <div class="ag-title">Reportistica e scuole sportive</div>
+        <div class="agenda-slot"><div class="ag-time">09:00</div><div class="ag-desc">Call con Kiron</div></div>
+        <div class="agenda-slot"><div class="ag-time">10:00</div><div class="ag-desc">Analisi reportistica amministrativa e finance con Paola e Maria Grazia (~2 ore)</div></div>
+        <div class="agenda-slot"><div class="ag-time">12:30</div><div class="ag-desc">Sessione con Lorella</div></div>
+        <div class="agenda-slot"><div class="ag-time">14:00</div><div class="ag-desc">Pomeriggio piscina e scuole sportive</div></div>
+        <div class="agenda-slot"><div class="ag-time">15:00</div><div class="ag-desc">Sessione con Fabio — fino alle 17:00</div></div>
+      </div>
+      <div class="agenda-card">
+        <div class="ag-day">Mercoledì</div>
+        <div class="ag-title">Debriefing e tennis</div>
+        <div class="agenda-slot"><div class="ag-time">09:30</div><div class="ag-desc">Debriefing complessivo dei tre giorni</div></div>
+        <div class="agenda-slot"><div class="ag-time">Tarda matt.</div><div class="ag-desc">Incontro con Stefano (Tennis) — previa verifica disponibilità</div></div>
+        <div class="agenda-slot"><div class="ag-time">Pomeriggio</div><div class="ag-desc">Approfondimenti operativi e chiusura audit</div></div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:24px;">
+      <p><strong>Prima priorità di digitalizzazione identificata:</strong> scuola nuoto — volume più alto di dati, esperienza pregressa di Maurizio Taruggi nel settore. Il progetto è ancora in fase di audit: "Non dobbiamo andare troppo nell'analitico. In progettazione si adatteranno processo e strumenti."</p>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

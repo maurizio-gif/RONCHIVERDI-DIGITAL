@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Sales e Guest Register — Ronchiverdi Audit</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FAF8F4; font-size: 15px; line-height: 1.7; overflow-x: hidden; font-weight: 300; -webkit-font-smoothing: antialiased; }
+
+.back-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: rgba(15,15,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.07); }
+.back-btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: rgba(250,248,244,0.55); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; transition: color 0.2s; }
+.back-btn:hover { color: #E8D46A; }
+.back-btn:hover .arrow { transform: translateX(-3px); }
+.arrow { font-size: 16px; transition: transform 0.2s; display: inline-block; }
+.back-nav-logo { height: 36px; width: auto; filter: invert(1); mix-blend-mode: screen; opacity: 0.9; }
+@media(max-width:640px){ .back-nav { padding: 0 20px; } .back-nav-logo { height: 28px; } }
+
+.hero { padding: 120px 48px 72px; position: relative; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 80% 30%, rgba(232,212,106,0.05) 0%, transparent 60%); pointer-events: none; }
+.hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+.eyebrow-row { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+.tag { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(250,248,244,0.3); }
+.sep { color: rgba(250,248,244,0.15); }
+.hero h1 { font-family: "Cormorant Garamond", serif; font-size: clamp(36px, 5vw, 62px); font-weight: 300; line-height: 1.05; color: #FAF8F4; margin-bottom: 20px; letter-spacing: -0.02em; }
+.hero h1 em { font-style: italic; color: #E8D46A; }
+.hero-sub { font-size: 14px; font-weight: 300; line-height: 1.75; color: rgba(250,248,244,0.45); max-width: 660px; margin-bottom: 36px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 32px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.07); }
+.hero-meta-item .lbl { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(232,212,106,0.5); margin-bottom: 4px; }
+.hero-meta-item .val { font-size: 13px; font-weight: 400; color: rgba(250,248,244,0.7); }
+
+.page { max-width: 1100px; margin: 0 auto; padding: 0 48px 100px; }
+@media(max-width:640px){ .page { padding: 0 20px 80px; } .hero { padding: 100px 20px 56px; } }
+
+.section { padding: 64px 0; border-top: 1px solid rgba(255,255,255,0.06); }
+.section-eyebrow { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(232,212,106,0.5); margin-bottom: 10px; }
+.section-title { font-family: "Cormorant Garamond", serif; font-size: clamp(24px, 3vw, 38px); font-weight: 300; color: #FAF8F4; line-height: 1.1; margin-bottom: 8px; letter-spacing: -0.01em; }
+.section-title em { font-style: italic; color: #E8D46A; }
+.section-sub { font-size: 13px; font-weight: 300; color: rgba(250,248,244,0.4); max-width: 620px; margin-bottom: 36px; line-height: 1.7; }
+
+/* STAT CARDS */
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+@media(max-width:900px){ .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+.stat-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 22px 20px; }
+.stat-card .stat-num { font-family: "Cormorant Garamond", serif; font-size: 42px; font-weight: 300; color: #E8D46A; line-height: 1; margin-bottom: 6px; letter-spacing: -0.02em; }
+.stat-card .stat-lbl { font-size: 11px; font-weight: 400; color: rgba(250,248,244,0.35); line-height: 1.4; }
+.stat-card .stat-note { font-family: "JetBrains Mono", monospace; font-size: 9px; color: rgba(250,248,244,0.2); margin-top: 4px; letter-spacing: 0.08em; }
+
+/* RATIO CARDS */
+.ratio-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+@media(max-width:900px){ .ratio-grid { grid-template-columns: repeat(2, 1fr); } }
+.ratio-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 26px 22px; }
+.ratio-card .rc-eyebrow { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(232,212,106,0.5); margin-bottom: 6px; }
+.ratio-card .rc-formula { font-family: "JetBrains Mono", monospace; font-size: 9px; color: rgba(250,248,244,0.18); margin-bottom: 14px; }
+.ratio-card .rc-pct { font-family: "Cormorant Garamond", serif; font-size: 56px; font-weight: 300; line-height: 1; color: #FAF8F4; letter-spacing: -0.03em; margin-bottom: 4px; }
+.ratio-card .rc-name { font-size: 11px; font-weight: 400; color: rgba(250,248,244,0.4); line-height: 1.4; margin-bottom: 12px; }
+.ratio-card .rc-cmp { font-size: 11px; color: rgba(250,248,244,0.25); }
+.ratio-card .rc-cmp strong { font-weight: 500; color: rgba(250,248,244,0.45); }
+.delta { font-family: "JetBrains Mono", monospace; font-size: 10px; margin-left: 5px; }
+.delta.up { color: rgba(90,180,120,0.75); }
+.delta.dn { color: rgba(200,100,80,0.7); }
+.delta.neu { color: rgba(250,248,244,0.3); }
+
+/* COMPARISON TABLE */
+.cmp-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.cmp-table th { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,248,244,0.25); padding: 8px 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.cmp-table th:not(:first-child) { text-align: right; }
+.cmp-table td { padding: 11px 14px; border-bottom: 1px solid rgba(255,255,255,0.04); color: rgba(250,248,244,0.45); vertical-align: middle; }
+.cmp-table td:first-child { color: rgba(250,248,244,0.7); font-weight: 400; }
+.cmp-table td:not(:first-child) { text-align: right; font-family: "JetBrains Mono", monospace; font-size: 11px; }
+.cmp-table tr:last-child td { border-bottom: none; }
+.cmp-table .cur { color: #FAF8F4 !important; font-weight: 500; }
+.cmp-table .up { color: rgba(90,180,120,0.75); }
+.cmp-table .dn { color: rgba(200,100,80,0.7); }
+
+/* ACTIVITY VOLUME */
+.volume-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 32px; }
+@media(max-width:760px){ .volume-grid { grid-template-columns: repeat(2, 1fr); } }
+.volume-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 20px 18px; }
+.volume-card .vc-n { font-family: "Cormorant Garamond", serif; font-size: 36px; font-weight: 300; color: #FAF8F4; line-height: 1; margin-bottom: 4px; }
+.volume-card .vc-lbl { font-size: 11px; color: rgba(250,248,244,0.35); line-height: 1.4; }
+.volume-card .vc-sub { font-family: "JetBrains Mono", monospace; font-size: 9px; color: rgba(232,212,106,0.4); margin-top: 5px; }
+.volume-card.accent { border-color: rgba(232,212,106,0.15); background: rgba(232,212,106,0.02); }
+.volume-card.accent .vc-n { color: #E8D46A; }
+
+/* BARS */
+.distrib-label { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(250,248,244,0.25); margin-bottom: 12px; }
+.bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 7px; }
+.bar-key { font-size: 12px; color: rgba(250,248,244,0.4); width: 220px; flex-shrink: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bar-track { flex: 1; height: 6px; background: rgba(255,255,255,0.05); border-radius: 3px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 3px; }
+.bar-fill.gold-hi { background: rgba(232,212,106,0.55); }
+.bar-fill.gold-mid { background: rgba(232,212,106,0.3); }
+.bar-fill.gold-lo { background: rgba(232,212,106,0.15); }
+.bar-fill.green { background: rgba(90,180,120,0.45); }
+.bar-fill.blue { background: rgba(90,140,210,0.35); }
+.bar-val { font-family: "JetBrains Mono", monospace; font-size: 10px; color: rgba(250,248,244,0.3); width: 34px; text-align: right; flex-shrink: 0; }
+
+/* TWO COL */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+@media(max-width:760px){ .two-col { grid-template-columns: 1fr; } }
+
+/* CALLOUT */
+.callout { border-left: 2px solid rgba(232,212,106,0.4); padding: 16px 20px; margin: 20px 0; background: rgba(232,212,106,0.03); border-radius: 0 8px 8px 0; }
+.callout p { font-size: 13px; font-weight: 300; color: rgba(250,248,244,0.5); line-height: 1.7; }
+.callout strong { font-weight: 500; color: rgba(250,248,244,0.7); }
+
+/* DATA NOTE */
+.data-note { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 14px 18px; margin-top: 14px; }
+.data-note .dn-label { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(250,248,244,0.2); margin-bottom: 5px; }
+.data-note p { font-size: 12px; font-weight: 300; color: rgba(250,248,244,0.35); line-height: 1.65; }
+
+/* OBS */
+.obs-grid { display: flex; flex-direction: column; gap: 12px; }
+.obs-item { display: flex; gap: 16px; align-items: flex-start; padding: 18px 20px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; }
+.obs-n { font-family: "JetBrains Mono", monospace; font-size: 11px; color: rgba(232,212,106,0.35); flex-shrink: 0; width: 22px; padding-top: 1px; }
+.obs-body { flex: 1; }
+.obs-title { font-size: 13px; font-weight: 500; color: rgba(250,248,244,0.75); margin-bottom: 4px; }
+.obs-desc { font-size: 13px; font-weight: 300; color: rgba(250,248,244,0.4); line-height: 1.65; }
+.obs-item.flag { border-color: rgba(200,160,60,0.18); background: rgba(200,160,60,0.03); }
+.obs-item.flag .obs-n { color: rgba(232,212,106,0.6); }
+
+/* ZONE BADGE */
+.zone-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+@media(max-width:640px){ .zone-row { grid-template-columns: 1fr; } }
+.zone-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 22px 22px; }
+.zone-card .z-label { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(232,212,106,0.5); margin-bottom: 8px; }
+.zone-card .z-title { font-size: 14px; font-weight: 500; color: rgba(250,248,244,0.8); margin-bottom: 8px; }
+.zone-card .z-desc { font-size: 12px; font-weight: 300; color: rgba(250,248,244,0.35); line-height: 1.65; }
+.zone-card .z-cols { font-family: "JetBrains Mono", monospace; font-size: 9px; color: rgba(250,248,244,0.2); margin-top: 10px; }
+
+/* FIELD TAGS */
+.fields-grid { display: flex; flex-wrap: wrap; gap: 7px; }
+.field-tag { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.05em; padding: 4px 9px; border-radius: 5px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); color: rgba(250,248,244,0.35); }
+
+/* REFERRAL HIGHLIGHT */
+.ref-highlight { background: rgba(232,212,106,0.03); border: 1px solid rgba(232,212,106,0.15); border-radius: 14px; padding: 28px 28px; margin-bottom: 24px; display: flex; align-items: center; gap: 28px; }
+.ref-num { font-family: "Cormorant Garamond", serif; font-size: 80px; font-weight: 300; color: #E8D46A; line-height: 1; flex-shrink: 0; letter-spacing: -0.04em; }
+.ref-body .ref-title { font-size: 14px; font-weight: 500; color: rgba(250,248,244,0.75); margin-bottom: 6px; }
+.ref-body .ref-desc { font-size: 13px; font-weight: 300; color: rgba(250,248,244,0.4); line-height: 1.7; max-width: 560px; }
+@media(max-width:640px){ .ref-highlight { flex-direction: column; gap: 16px; } .ref-num { font-size: 60px; } }
+
+/* DAILY SPARKLINE */
+.daily-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); gap: 8px; margin-bottom: 24px; }
+.day-cell { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 10px 8px; text-align: center; }
+.day-cell.off { opacity: 0.3; }
+.day-cell .d-date { font-family: "JetBrains Mono", monospace; font-size: 8px; letter-spacing: 0.08em; color: rgba(250,248,244,0.25); margin-bottom: 5px; }
+.day-cell .d-n { font-family: "Cormorant Garamond", serif; font-size: 22px; font-weight: 300; color: #FAF8F4; line-height: 1; }
+.day-cell .d-ref { font-size: 9px; color: rgba(232,212,106,0.4); margin-top: 2px; }
+.day-cell.hi-sales { border-color: rgba(90,180,120,0.2); background: rgba(90,180,120,0.03); }
+.day-cell.hi-sales .d-n { color: rgba(130,200,155,0.9); }
+</style>
+</head>
+<body>
+
+<nav class="back-nav">
+  <a href="index.html" class="back-btn"><span class="arrow">←</span> Indice</a>
+  <img src="ronchiverdi-logo.jpg" alt="Ronchiverdi" class="back-nav-logo">
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow-row">
+      <span class="tag">Ronchiverdi Sport Club</span>
+      <span class="sep">·</span>
+      <span class="tag">Audit digitale</span>
+      <span class="sep">·</span>
+      <span class="tag">Maggio 2026</span>
+    </div>
+    <h1>Daily Sales <em>&</em> Guest Register</h1>
+    <p class="hero-sub">Analisi dei due strumenti di tracciamento del comparto new member: il file Excel Daily Sales (maggio 2025, Ylenia) e il Guest Register cartaceo — modulo di registrazione dei tour spontanei e delle chiamate in entrata, introdotto 3 anni fa.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><div class="lbl">Mese di riferimento</div><div class="val">Maggio 2025</div></div>
+      <div class="hero-meta-item"><div class="lbl">Operatrice</div><div class="val">Ylenia</div></div>
+      <div class="hero-meta-item"><div class="lbl">Iscrizioni registrate</div><div class="val">71</div></div>
+      <div class="hero-meta-item"><div class="lbl">Giorni lavorativi tracciati</div><div class="val">23</div></div>
+      <div class="hero-meta-item"><div class="lbl">Responsabile</div><div class="val">Lorella</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="page">
+
+  <!-- CONTESTO OPERATIVO -->
+  <section class="section" style="border-top:none; padding-top:48px;">
+    <div class="section-eyebrow">Contesto operativo</div>
+    <h2 class="section-title">Ruolo del <em>modello</em></h2>
+    <p class="section-sub">Funzione e storia del Daily Sales nel comparto new. Fonte: Lorella.</p>
+
+    <div class="obs-grid">
+      <div class="obs-item">
+        <span class="obs-n">I</span>
+        <div class="obs-body">
+          <div class="obs-title">Strumento introdotto al momento dell'arrivo di Lorella</div>
+          <div class="obs-desc">Il Daily Sales è stato introdotto da Lorella al suo ingresso come primo strumento di tracciabilità dell'operato del comparto new member. Prima di questo file non esisteva un sistema strutturato di monitoraggio giornaliero delle attività di vendita.</div>
+        </div>
+      </div>
+
+      <div class="obs-item">
+        <span class="obs-n">II</span>
+        <div class="obs-body">
+          <div class="obs-title">Basato sul modello della ex consulente — esempio di compilazione eccellente</div>
+          <div class="obs-desc">Il file inoltrato è esemplare di maggio 2025, compilato da Ylenia che ha assimilato il metodo introdotto dall'ex consulente. Lorella lo indica come esempio di compilazione eccellente. Il modello è ora il riferimento per il training del team.</div>
+        </div>
+      </div>
+
+      <div class="obs-item">
+        <span class="obs-n">III</span>
+        <div class="obs-body">
+          <div class="obs-title">Strumento di lettura da remoto delle performance — base per il training</div>
+          <div class="obs-desc">Lorella lavora distante dalle ragazze e non le vive per tutto il giorno. Il Daily Sales è il canale primario attraverso cui legge l'operato del team: App.Ratio, Show.Ratio e Closing.Ratio determinano direttamente le sessioni di training e le azioni correttive.</div>
+        </div>
+      </div>
+
+      <div class="obs-item">
+        <span class="obs-n">IV</span>
+        <div class="obs-body">
+          <div class="obs-title">Obiettivi su tutto: chiamate giornaliere, appuntamenti, chiusure</div>
+          <div class="obs-desc">Le ragazze hanno target numerici su ogni fase del funnel — non solo sulle vendite finali. Il file traccia la performance lungo tutta la pipeline: numero di contatti/telefonate, appuntamenti fissati, appuntamenti svolti, chiusure. Tutti i campi sono strutturati per confrontare il dato reale con l'obiettivo.</div>
+        </div>
+      </div>
+
+      <div class="obs-item flag">
+        <span class="obs-n">→</span>
+        <div class="obs-body">
+          <div class="obs-title">Obiettivo: replicare il modello sulla retention — digitalizzare entrambi</div>
+          <div class="obs-desc">Lorella vuole replicare questo modello anche per il settore retention. Entrambi i file — Daily Sales e il corrispondente per la retention — sono identificati come priorità di digitalizzazione e automazione. L'attuale compilazione è manuale e dipende dalla disciplina della singola operatrice.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRUTTURA DEL MODELLO -->
+  <section class="section">
+    <div class="section-eyebrow">Struttura del file</div>
+    <h2 class="section-title">Due zone <em>affiancate</em></h2>
+    <p class="section-sub">Il file ha un solo foglio (Foglio1) con due blocchi funzionali affiancati: a sinistra il registro individuale delle iscrizioni, a destra il tracker KPI giornaliero. Le due zone sono parallele ma non collegate da formule incrociate.</p>
+
+    <div class="zone-row">
+      <div class="zone-card">
+        <div class="z-label">Zona sinistra — Colonne A–N</div>
+        <div class="z-title">Registro iscrizioni individuali</div>
+        <div class="z-desc">Un record per ogni nuovo socio iscritto nel mese. Contiene dati anagrafici (nome, età, sesso), dati commerciali (importo, tipo abbonamento, durata), canale di origine e motivazione. L'intestazione di sezione riporta il nome dell'operatrice: "GESTIONE ABBONAMENTI YLENIA".</div>
+        <div class="z-cols">Colonne: A–N · 71 record · Riga 3 = totali correnti</div>
+      </div>
+      <div class="zone-card">
+        <div class="z-label">Zona destra — Colonne P–AE</div>
+        <div class="z-title">Tracker KPI giornaliero</div>
+        <div class="z-desc">Un record per ogni giorno del mese (1–31 maggio). Traccia il funnel di vendita giornaliero: contatti effettuati, appuntamenti fissati, appuntamenti svolti (giorno stesso), walk-in, referral generati, vendite concluse, fatturato MTD. I giorni di riposo sono marcati "Off".</div>
+        <div class="z-cols">Colonne: P–AE · 31 righe · Riga 34 = totali mese · Riga 35 = benchmark 2024</div>
+      </div>
+    </div>
+
+    <div class="distrib-label">Campi — Zona sinistra (registro individuale)</div>
+    <div class="fields-grid" style="margin-bottom:20px;">
+      <span class="field-tag">n. sales</span>
+      <span class="field-tag">DATA</span>
+      <span class="field-tag">Canale origine</span>
+      <span class="field-tag">NOTE / Motivazione</span>
+      <span class="field-tag">NOME COGNOME</span>
+      <span class="field-tag">ETÀ</span>
+      <span class="field-tag">SEX</span>
+      <span class="field-tag">IMPORTO</span>
+      <span class="field-tag">QUOTA ISCR.</span>
+      <span class="field-tag">VISITA</span>
+      <span class="field-tag">TRIPLE PACK</span>
+      <span class="field-tag">MESI</span>
+      <span class="field-tag">NOTE</span>
+      <span class="field-tag">TELEFONO</span>
+    </div>
+
+    <div class="distrib-label">Campi — Zona destra (KPI giornaliero)</div>
+    <div class="fields-grid">
+      <span class="field-tag">OBIETTIVO (data)</span>
+      <span class="field-tag">GOAL GIORNALIERO</span>
+      <span class="field-tag">CONTATTI / TELEF.</span>
+      <span class="field-tag">APP.TI FISSATI</span>
+      <span class="field-tag">% APP. RATIO (=App/Contatti)</span>
+      <span class="field-tag">APP.TI GIORNO STESSO</span>
+      <span class="field-tag">APP.TI SVOLTI (G.S.)</span>
+      <span class="field-tag">% SHOW RATIO (=Svolti/G.S.)</span>
+      <span class="field-tag">% CLOSE APP.</span>
+      <span class="field-tag">WALK IN</span>
+      <span class="field-tag">WALK IN CHIUSI</span>
+      <span class="field-tag">% CLOSE RATIO (WI)</span>
+      <span class="field-tag">REFERRAL</span>
+      <span class="field-tag">TOTAL SALES</span>
+      <span class="field-tag">N. TRIPLE PACK</span>
+      <span class="field-tag">MTD €</span>
+    </div>
+  </section>
+
+  <!-- INDICATORI CHIAVE -->
+  <section class="section">
+    <div class="section-eyebrow">Indicatori di performance</div>
+    <h2 class="section-title">Le quattro <em>ratio</em></h2>
+    <p class="section-sub">Il modello misura quattro ratio di conversione lungo il funnel. I valori 2025 sono calcolati dai dati giornalieri del file. I valori 2024 sono hardcoded nel file come riga di benchmark.</p>
+
+    <div class="ratio-grid">
+      <div class="ratio-card">
+        <div class="rc-eyebrow">App. Ratio</div>
+        <div class="rc-formula">App.Fissati / Contatti</div>
+        <div class="rc-pct">53%</div>
+        <div class="rc-name">Conversione chiamata→appuntamento</div>
+        <div class="rc-cmp">2024: <strong>45%</strong><span class="delta up">+8pp ↑</span></div>
+      </div>
+      <div class="ratio-card">
+        <div class="rc-eyebrow">Show Ratio</div>
+        <div class="rc-formula">App.Svolti / App.G.S.</div>
+        <div class="rc-pct">89%</div>
+        <div class="rc-name">Presentazione all'appuntamento</div>
+        <div class="rc-cmp">2024: <strong>85%</strong><span class="delta up">+4pp ↑</span></div>
+      </div>
+      <div class="ratio-card">
+        <div class="rc-eyebrow">Close Ratio (App.)</div>
+        <div class="rc-formula">Vendite / App.Svolti</div>
+        <div class="rc-pct">77%</div>
+        <div class="rc-name">Chiusura su appuntamento svolto</div>
+        <div class="rc-cmp">2024: <strong>80%</strong><span class="delta dn">−3pp ↓</span></div>
+      </div>
+      <div class="ratio-card">
+        <div class="rc-eyebrow">Close Ratio (WI)</div>
+        <div class="rc-formula">WI Chiusi / Walk-in</div>
+        <div class="rc-pct">70%</div>
+        <div class="rc-name">Chiusura su walk-in spontaneo</div>
+        <div class="rc-cmp">2024: <strong>44%</strong><span class="delta up">+26pp ↑</span></div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <div class="distrib-label">Confronto 2025 vs 2024 — tutti gli indicatori</div>
+        <table class="cmp-table">
+          <thead>
+            <tr>
+              <th>Indicatore</th>
+              <th>2025</th>
+              <th>2024</th>
+              <th>Δ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>App. Ratio</td>
+              <td class="cur">53%</td>
+              <td>45%</td>
+              <td class="up">+8pp</td>
+            </tr>
+            <tr>
+              <td>Show Ratio</td>
+              <td class="cur">89%</td>
+              <td>85%</td>
+              <td class="up">+4pp</td>
+            </tr>
+            <tr>
+              <td>Close Ratio (App.)</td>
+              <td class="cur">77%</td>
+              <td>80%</td>
+              <td class="dn">−3pp</td>
+            </tr>
+            <tr>
+              <td>Close Ratio (Walk-in)</td>
+              <td class="cur">70%</td>
+              <td>44%</td>
+              <td class="up">+26pp</td>
+            </tr>
+            <tr>
+              <td>Walk-in totali</td>
+              <td class="cur">10</td>
+              <td>9</td>
+              <td>+1</td>
+            </tr>
+            <tr>
+              <td>Referral generati</td>
+              <td class="cur">134</td>
+              <td>71</td>
+              <td class="up">+89%</td>
+            </tr>
+            <tr>
+              <td>Triple Pack venduti</td>
+              <td class="cur">22</td>
+              <td>4</td>
+              <td class="up">×5.5</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="distrib-label">Struttura del funnel — Maggio 2025</div>
+        <div style="margin-bottom:8px;">
+          <div class="bar-row">
+            <span class="bar-key" style="width:200px;">Contatti effettuati</span>
+            <div class="bar-track"><div class="bar-fill gold-hi" style="width:100%"></div></div>
+            <span class="bar-val">176</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-key" style="width:200px;">App. fissati (→53%)</span>
+            <div class="bar-track"><div class="bar-fill gold-mid" style="width:53%"></div></div>
+            <span class="bar-val">93</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-key" style="width:200px;">App. svolti (→89%)</span>
+            <div class="bar-track"><div class="bar-fill gold-mid" style="width:45%"></div></div>
+            <span class="bar-val">79</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-key" style="width:200px;">Vendite da app. (→77%)</span>
+            <div class="bar-track"><div class="bar-fill green" style="width:35%"></div></div>
+            <span class="bar-val">~61</span>
+          </div>
+        </div>
+        <div class="data-note" style="margin-top:0;">
+          <div class="dn-label">Nota lettura funnel</div>
+          <p>Il tracker separa gli appuntamenti "fissati" oggi (per una data futura) dagli appuntamenti "del giorno stesso" (U). Show Ratio e Close Ratio si calcolano sulla colonna del giorno stesso. Le ~61 vendite da appuntamento + le 7 da walk-in = ~68, con 3 vendite residue da altri canali per arrivare a 71 totali.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOLUME ATTIVITÀ -->
+  <section class="section">
+    <div class="section-eyebrow">Volume di attività — Maggio 2025</div>
+    <h2 class="section-title">Dati di <em>attività mensile</em></h2>
+    <p class="section-sub">Aggregazione dei KPI assoluti del mese dai dati giornalieri del tracker.</p>
+
+    <div class="volume-grid">
+      <div class="volume-card">
+        <div class="vc-n">176</div>
+        <div class="vc-lbl">Contatti / telefonate effettuate</div>
+        <div class="vc-sub">vs 137 nel maggio 2024</div>
+      </div>
+      <div class="volume-card">
+        <div class="vc-n">93</div>
+        <div class="vc-lbl">Appuntamenti fissati</div>
+        <div class="vc-sub">App.Ratio: 53%</div>
+      </div>
+      <div class="volume-card">
+        <div class="vc-n">79</div>
+        <div class="vc-lbl">Appuntamenti svolti (giorno stesso)</div>
+        <div class="vc-sub">Show.Ratio: 89%</div>
+      </div>
+      <div class="volume-card">
+        <div class="vc-n">10</div>
+        <div class="vc-lbl">Walk-in spontanei</div>
+        <div class="vc-sub">7 chiusi — Close.WI 70%</div>
+      </div>
+      <div class="volume-card accent">
+        <div class="vc-n">134</div>
+        <div class="vc-lbl">Referral positivi generati</div>
+        <div class="vc-sub">vs 71 nel maggio 2024 (+89%)</div>
+      </div>
+      <div class="volume-card">
+        <div class="vc-n">71</div>
+        <div class="vc-lbl">Nuovi iscritti registrati</div>
+        <div class="vc-sub">22 con Triple Pack</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REFERRAL -->
+  <section class="section">
+    <div class="section-eyebrow">Referral</div>
+    <h2 class="section-title">La fonte <em>principale</em> del mese</h2>
+    <p class="section-sub">Il numero di referral positivi generati nel mese è tracciato giornalmente nella colonna AB del tracker. A maggio 2025 rappresenta la fonte di acquisizione numericamente più rilevante.</p>
+
+    <div class="ref-highlight">
+      <div class="ref-num">134</div>
+      <div class="ref-body">
+        <div class="ref-title">Referral positivi — Maggio 2025</div>
+        <div class="ref-desc">A maggio 2025 il canale referral (134 referral positivi) è stato la fonte principale per generare fatturato. Lorella nota che, senza il canale referral, i soli walk-in spontanei e i lead caldi da ADV avrebbero prodotto circa un terzo del risultato. Il confronto con il 2024 (71 referral) mostra una crescita del 89%.</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <div class="distrib-label">Distribuzione referral per giorno — top giorni</div>
+        <div class="bar-row"><span class="bar-key">02/05</span><div class="bar-track"><div class="bar-fill gold-hi" style="width:100%"></div></div><span class="bar-val">23</span></div>
+        <div class="bar-row"><span class="bar-key">24/05</span><div class="bar-track"><div class="bar-fill gold-hi" style="width:57%"></div></div><span class="bar-val">13</span></div>
+        <div class="bar-row"><span class="bar-key">10/05</span><div class="bar-track"><div class="bar-fill gold-mid" style="width:52%"></div></div><span class="bar-val">12</span></div>
+        <div class="bar-row"><span class="bar-key">29/05</span><div class="bar-track"><div class="bar-fill gold-mid" style="width:52%"></div></div><span class="bar-val">12</span></div>
+        <div class="bar-row"><span class="bar-key">27/05</span><div class="bar-track"><div class="bar-fill gold-mid" style="width:48%"></div></div><span class="bar-val">11</span></div>
+        <div class="bar-row"><span class="bar-key">28/05</span><div class="bar-track"><div class="bar-fill gold-lo" style="width:39%"></div></div><span class="bar-val">9</span></div>
+        <div class="bar-row"><span class="bar-key">13/05</span><div class="bar-track"><div class="bar-fill gold-lo" style="width:26%"></div></div><span class="bar-val">6</span></div>
+        <div class="bar-row"><span class="bar-key">22/05</span><div class="bar-track"><div class="bar-fill gold-lo" style="width:26%"></div></div><span class="bar-val">6</span></div>
+      </div>
+      <div>
+        <div class="callout">
+          <p><strong>Referral vs altri canali</strong>: i 134 referral positivi non corrispondono a 134 nuovi iscritti — il campo traccia i referral <em>generati</em> (contatti che un socio porta o segnala), non necessariamente quelli chiusi nello stesso mese. La voce "REF SOCIO POS" nel registro individuale (10 iscritti) indica i soci effettivamente entrati tramite referral nel mese. La differenza documenta il pipeline futuro generato dall'attività referral.</p>
+        </div>
+        <div class="data-note">
+          <div class="dn-label">Canale referral nel registro individuale</div>
+          <p>Le categorie nel campo Canale/Origine del registro: REF SOCIO (POS) = 10 iscritti, REF SOCIO = 6, SOCIO = 6, SOCIA = 2, REF LORIS = 1. Totale iscritti con origine referral-based = 25 su 71 (35%). Primo canale per volume di iscrizioni nel mese.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FONTI DI ACQUISIZIONE -->
+  <section class="section">
+    <div class="section-eyebrow">Fonti di acquisizione</div>
+    <h2 class="section-title">Canali e <em>origini</em></h2>
+    <p class="section-sub">Distribuzione dei 71 nuovi iscritti per canale di origine (colonna C) e per motivazione/contesto dichiarato (colonna D) nel registro individuale.</p>
+
+    <div class="two-col">
+      <div>
+        <div class="distrib-label">Canale di origine (col C)</div>
+        <div class="bar-row"><span class="bar-key">PHONE IN</span><div class="bar-track"><div class="bar-fill gold-hi" style="width:100%"></div></div><span class="bar-val">23</span></div>
+        <div class="bar-row"><span class="bar-key">EMAIL</span><div class="bar-track"><div class="bar-fill gold-mid" style="width:52%"></div></div><span class="bar-val">12</span></div>
+        <div class="bar-row"><span class="bar-key">REF SOCIO (POS)</span><div class="bar-track"><div class="bar-fill gold-mid" style="width:43%"></div></div><span class="bar-val">10</span></div>
+        <div class="bar-row"><span class="bar-key">WALK IN</span><div class="bar-track"><div class="bar-fill gold-lo" style="width:39%"></div></div><span class="bar-val">9</span></div>
+        <div class="bar-row"><span class="bar-key">REF SOCIO</span><div class="bar-track"><div class="bar-fill gold-lo" style="width:26%"></div></div><span class="bar-val">6</span></div>
+        <div class="bar-row"><span class="bar-key">SOCIO</span><div class="bar-track"><div class="bar-fill gold-lo" style="width:26%"></div></div><span class="bar-val">6</span></div>
+        <div class="bar-row"><span class="bar-key">SOCIA / SWITCH / Altro</span><div class="bar-track"><div class="bar-fill gold-lo" style="width:17%"></div></div><span class="bar-val">5</span></div>
+      </div>
+      <div>
+        <div class="distrib-label">Motivazione / contesto (col D — top)</div>
+        <div class="bar-row"><span class="bar-key">SPONSORIZZATA SUMMER</span><div class="bar-track"><div class="bar-fill blue" style="width:100%"></div></div><span class="bar-val">14</span></div>
+        <div class="bar-row"><span class="bar-key">ABITA QUI VICINO</span><div class="bar-track"><div class="bar-fill blue" style="width:93%"></div></div><span class="bar-val">13</span></div>
+        <div class="bar-row"><span class="bar-key">LAVORA QUI VICINO</span><div class="bar-track"><div class="bar-fill blue" style="width:79%"></div></div><span class="bar-val">11</span></div>
+        <div class="bar-row"><span class="bar-key">EX SOCIO / EX SOCIA</span><div class="bar-track"><div class="bar-fill blue" style="width:86%"></div></div><span class="bar-val">12</span></div>
+        <div class="bar-row"><span class="bar-key">SWITCH</span><div class="bar-track"><div class="bar-fill blue" style="width:29%"></div></div><span class="bar-val">4</span></div>
+        <div class="bar-row"><span class="bar-key">REF SOCIO</span><div class="bar-track"><div class="bar-fill blue" style="width:29%"></div></div><span class="bar-val">4</span></div>
+        <div class="bar-row"><span class="bar-key">NEWSLETTER SUMMER / Altro</span><div class="bar-track"><div class="bar-fill blue" style="width:21%"></div></div><span class="bar-val">~7</span></div>
+
+        <div class="data-note" style="margin-top:12px;">
+          <div class="dn-label">Nota</div>
+          <p>"SPONSORIZZATA SUMMER" (14 record) è la categoria singola più alta nel campo motivazione — indica iscrizioni legate a una promozione estiva specifica attiva a maggio 2025. Non è una categoria presente nel vocabolario standard del file e potrebbe essere stagionale.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGISTRO ISCRIZIONI -->
+  <section class="section">
+    <div class="section-eyebrow">Registro iscrizioni</div>
+    <h2 class="section-title">71 nuovi iscritti — <em>maggio 2025</em></h2>
+    <p class="section-sub">Analisi del registro individuale nella zona sinistra del file. Dati anagrafici, durata abbonamento, revenue e distribuzione Triple Pack.</p>
+
+    <div class="stats-grid" style="margin-bottom:32px;">
+      <div class="stat-card">
+        <div class="stat-num">71</div>
+        <div class="stat-lbl">Nuovi iscritti registrati</div>
+        <div class="stat-note">1 maggio – 29 maggio 2025</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">50</div>
+        <div class="stat-lbl">Anni — età media degli iscritti</div>
+        <div class="stat-note">Range: 7–87 anni</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">66%</div>
+        <div class="stat-lbl">Iscritti di genere femminile</div>
+        <div class="stat-note">47F · 24M su 71</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">22</div>
+        <div class="stat-lbl">Triple Pack venduti (€79 cad.)</div>
+        <div class="stat-note">vs 4 nel maggio 2024</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <div class="distrib-label">Durata abbonamento (col L — Mesi)</div>
+        <div class="bar-row"><span class="bar-key">12 mesi (annuale)</span><div class="bar-track"><div class="bar-fill gold-hi" style="width:100%"></div></div><span class="bar-val">38</span></div>
+        <div class="bar-row"><span class="bar-key">1 mese</span><div class="bar-track"><div class="bar-fill gold-mid" style="width:39%"></div></div><span class="bar-val">15</span></div>
+        <div class="bar-row"><span class="bar-key">6 mesi</span><div class="bar-track"><div class="bar-fill gold-lo" style="width:21%"></div></div><span class="bar-val">8</span></div>
+        <div class="bar-row"><span class="bar-key">4 mesi</span><div class="bar-track"><div class="bar-fill gold-lo" style="width:18%"></div></div><span class="bar-val">7</span></div>
+        <div class="bar-row"><span class="bar-key">2 mesi</span><div class="bar-track"><div class="bar-fill gold-lo" style="width:8%"></div></div><span class="bar-val">3</span></div>
+
+        <div class="data-note" style="margin-top:12px;">
+          <div class="dn-label">Revenue — nota metodologica</div>
+          <p>Il registro individuale somma €81.863 di IMPORTO su 68 record con importo compilato. Il campo MTD nel tracker KPI riporta €63.259 (hardcoded nel file). La differenza (~€18.600) non è riconciliabile dai dati del file: potrebbe riflettere una differenza di perimetro (es. esclusione di alcune voci) o un dato inserito prima della chiusura di alcune trattative.</p>
+        </div>
+      </div>
+      <div>
+        <div class="distrib-label">Quota iscrizione (col I)</div>
+        <div class="bar-row"><span class="bar-key">Non richiesta (waived)</span><div class="bar-track"><div class="bar-fill gold-hi" style="width:100%"></div></div><span class="bar-val">45</span></div>
+        <div class="bar-row"><span class="bar-key">€100</span><div class="bar-track"><div class="bar-fill gold-mid" style="width:44%"></div></div><span class="bar-val">20</span></div>
+        <div class="bar-row"><span class="bar-key">€50</span><div class="bar-track"><div class="bar-fill gold-lo" style="width:13%"></div></div><span class="bar-val">6</span></div>
+
+        <div class="distrib-label" style="margin-top:20px;">Visita di prova (col J)</div>
+        <div class="bar-row"><span class="bar-key">Non richiesta</span><div class="bar-track"><div class="bar-fill gold-hi" style="width:100%"></div></div><span class="bar-val">63</span></div>
+        <div class="bar-row"><span class="bar-key">€50</span><div class="bar-track"><div class="bar-fill gold-lo" style="width:13%"></div></div><span class="bar-val">8</span></div>
+
+        <div class="callout" style="margin-top:16px;">
+          <p>Caso notevole: il record <strong>CAPITAL CONSULTING SRL</strong> (vendita #70–71, €16.200) è la transazione di importo più alto del mese — una polizza aziendale che include 1 posto aggiuntivo gratuito per una socia F. L'importo unitario è di almeno 10× rispetto alla media degli altri contratti.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GIORNALIERO -->
+  <section class="section">
+    <div class="section-eyebrow">Andamento giornaliero</div>
+    <h2 class="section-title">Vendite e referral <em>per giorno</em></h2>
+    <p class="section-sub">Numero di vendite concluse e referral generati per ogni giorno lavorativo di maggio 2025. I giorni off (riposo) sono marcati in grigio.</p>
+
+    <div class="daily-grid">
+      <div class="day-cell"><div class="d-date">01/05</div><div class="d-n">2</div><div class="d-ref">5 ref</div></div>
+      <div class="day-cell hi-sales"><div class="d-date">02/05</div><div class="d-n">14</div><div class="d-ref">23 ref</div></div>
+      <div class="day-cell off"><div class="d-date">03/05</div><div class="d-n">—</div><div class="d-ref">off</div></div>
+      <div class="day-cell off"><div class="d-date">04/05</div><div class="d-n">—</div><div class="d-ref">off</div></div>
+      <div class="day-cell"><div class="d-date">05/05</div><div class="d-n">4</div><div class="d-ref">7 ref</div></div>
+      <div class="day-cell"><div class="d-date">06/05</div><div class="d-n">2</div><div class="d-ref">3 ref</div></div>
+      <div class="day-cell"><div class="d-date">07/05</div><div class="d-n">1</div><div class="d-ref">2 ref</div></div>
+      <div class="day-cell"><div class="d-date">08/05</div><div class="d-n">2</div><div class="d-ref">5 ref</div></div>
+      <div class="day-cell"><div class="d-date">09/05</div><div class="d-n">1</div><div class="d-ref">—</div></div>
+      <div class="day-cell"><div class="d-date">10/05</div><div class="d-n">5</div><div class="d-ref">12 ref</div></div>
+      <div class="day-cell off"><div class="d-date">11/05</div><div class="d-n">—</div><div class="d-ref">off</div></div>
+      <div class="day-cell"><div class="d-date">12/05</div><div class="d-n">5</div><div class="d-ref">3 ref</div></div>
+      <div class="day-cell"><div class="d-date">13/05</div><div class="d-n">3</div><div class="d-ref">6 ref</div></div>
+      <div class="day-cell"><div class="d-date">14/05</div><div class="d-n">2</div><div class="d-ref">4 ref</div></div>
+      <div class="day-cell"><div class="d-date">15/05</div><div class="d-n">2</div><div class="d-ref">—</div></div>
+      <div class="day-cell"><div class="d-date">16/05</div><div class="d-n">2</div><div class="d-ref">5 ref</div></div>
+      <div class="day-cell off"><div class="d-date">17/05</div><div class="d-n">—</div><div class="d-ref">off</div></div>
+      <div class="day-cell off"><div class="d-date">18/05</div><div class="d-n">—</div><div class="d-ref">off</div></div>
+      <div class="day-cell"><div class="d-date">19/05</div><div class="d-n">1</div><div class="d-ref">2 ref</div></div>
+      <div class="day-cell"><div class="d-date">20/05</div><div class="d-n">0</div><div class="d-ref">—</div></div>
+      <div class="day-cell"><div class="d-date">21/05</div><div class="d-n">0</div><div class="d-ref">—</div></div>
+      <div class="day-cell"><div class="d-date">22/05</div><div class="d-n">2</div><div class="d-ref">6 ref</div></div>
+      <div class="day-cell"><div class="d-date">23/05</div><div class="d-n">0</div><div class="d-ref">—</div></div>
+      <div class="day-cell"><div class="d-date">24/05</div><div class="d-n">5</div><div class="d-ref">13 ref</div></div>
+      <div class="day-cell off"><div class="d-date">25/05</div><div class="d-n">—</div><div class="d-ref">off</div></div>
+      <div class="day-cell"><div class="d-date">26/05</div><div class="d-n">2</div><div class="d-ref">6 ref</div></div>
+      <div class="day-cell"><div class="d-date">27/05</div><div class="d-n">5</div><div class="d-ref">11 ref</div></div>
+      <div class="day-cell hi-sales"><div class="d-date">28/05</div><div class="d-n">7</div><div class="d-ref">9 ref</div></div>
+      <div class="day-cell hi-sales"><div class="d-date">29/05</div><div class="d-n">7</div><div class="d-ref">12 ref</div></div>
+      <div class="day-cell off"><div class="d-date">30/05</div><div class="d-n">—</div><div class="d-ref">—</div></div>
+      <div class="day-cell off"><div class="d-date">31/05</div><div class="d-n">—</div><div class="d-ref">—</div></div>
+    </div>
+
+    <div class="data-note">
+      <div class="dn-label">Nota — fine mese</div>
+      <p>I giorni 28 e 29 maggio concentrano 14 vendite (20% del totale mensile) e 21 referral. Il giorno 02 maggio è il singolo giorno con più vendite (14) — include la vendita CAPITAL CONSULTING. L'andamento mostra una concentrazione nella prima settimana e nell'ultima settimana del mese, con una zona di calo nella terza settimana (20–23 maggio: 2 vendite totali, 3 giorni a zero).</p>
+    </div>
+  </section>
+
+  <!-- OSSERVAZIONI STRUTTURALI -->
+  <section class="section">
+    <div class="section-eyebrow">Osservazioni strutturali</div>
+    <h2 class="section-title">Caratteristiche del <em>modello attuale</em></h2>
+    <p class="section-sub">Descrizione oggettiva delle caratteristiche strutturali del file Daily Sales, come emergono dall'analisi del foglio di maggio 2025.</p>
+
+    <div class="obs-grid">
+      <div class="obs-item">
+        <span class="obs-n">01</span>
+        <div class="obs-body">
+          <div class="obs-title">Un file per mese, un foglio unico — nessuna serie storica interna</div>
+          <div class="obs-desc">Il file contiene un solo foglio (Foglio1) e copre un singolo mese. Il confronto anno su anno è garantito da una riga di benchmark 2024 hardcoded manualmente (riga 35). Non esiste una serie storica mensile automatica — ogni mese è un file separato.</div>
+        </div>
+      </div>
+
+      <div class="obs-item">
+        <span class="obs-n">02</span>
+        <div class="obs-body">
+          <div class="obs-title">Zona sinistra e zona destra non sono collegate da formule</div>
+          <div class="obs-desc">Il registro individuale (zone A–N) e il tracker KPI giornaliero (zone P–AE) sono strutture parallele ma non connesse. Total Sales nella zona destra è compilato manualmente o indipendentemente dall'elenco individuale. Una variazione in un record della zona sinistra non aggiorna automaticamente la zona destra.</div>
+        </div>
+      </div>
+
+      <div class="obs-item flag">
+        <span class="obs-n">03</span>
+        <div class="obs-body">
+          <div class="obs-title">La riga totali (riga 3) ha formule con range molto ampi — template per volumi futuri</div>
+          <div class="obs-desc">Le formule di somma nella riga 3 usano range H4:H212, I4:I210, J4:J391 — ben oltre i 71 record di maggio. Il template è progettato per gestire fino a ~200 iscrizioni in un mese. Questo indica che il file è nato come modello scalabile, non calibrato sul volume reale attuale.</div>
+        </div>
+      </div>
+
+      <div class="obs-item flag">
+        <span class="obs-n">04</span>
+        <div class="obs-body">
+          <div class="obs-title">MTD nel tracker e somma del registro individuale non coincidono</div>
+          <div class="obs-desc">Il valore MTD hardcoded nella riga totali del tracker è €63.259. La somma del campo IMPORTO nel registro individuale è €81.863. La differenza di ~€18.600 non è riconciliabile dai dati del file. Le due cifre potrebbero riferirsi a perimetri diversi (es. solo abbonamenti vs abbonamenti + accessori, o dato parziale inserito prima della chiusura del mese).</div>
+        </div>
+      </div>
+
+      <div class="obs-item">
+        <span class="obs-n">05</span>
+        <div class="obs-body">
+          <div class="obs-title">La colonna "Referral" traccia referral generati, non iscritti da referral</div>
+          <div class="obs-desc">Il campo REFERRAL nel tracker giornaliero (134 totali) misura i contatti/segnalazioni portate dai soci, non i contratti chiusi tramite referral nello stesso mese. Gli iscritti effettivamente arrivati tramite referral nel mese sono identificabili solo incrociando la colonna Canale del registro individuale (categorie REF SOCIO, SOCIO, SOCIA ecc.) — 25 su 71 (35%).</div>
+        </div>
+      </div>
+
+      <div class="obs-item">
+        <span class="obs-n">06</span>
+        <div class="obs-body">
+          <div class="obs-title">Il campo % CLOSE (APP.) nella riga totali è hardcoded — non calcolato</div>
+          <div class="obs-desc">Il valore 0.77 (77%) per il Close Ratio sugli appuntamenti nella riga 34 è inserito manualmente, non prodotto da formula. Gli altri totali della stessa riga usano formule SUM o divisione. L'hardcoding suggerisce che questa ratio è calcolata esternamente (o a mente) e poi inserita come valore definitivo a chiusura del mese.</div>
+        </div>
+      </div>
+
+      <div class="obs-item">
+        <span class="obs-n">07</span>
+        <div class="obs-body">
+          <div class="obs-title">Nessun identificativo univoco per socio — solo Cognome e Nome</div>
+          <div class="obs-desc">I record nel registro individuale sono identificati per nome e cognome. Non esiste un codice socio o ID che colleghi il nuovo iscritto al gestionale INFORYOU. La tracciabilità longitudinale (es. un ex socio che rientra, visibile nel campo "EX SOCIO" della colonna D) dipende dal matching manuale per nome.</div>
+        </div>
+      </div>
+
+      <div class="obs-item flag">
+        <span class="obs-n">08</span>
+        <div class="obs-body">
+          <div class="obs-title">Il modello è costruito per una singola operatrice — non multi-persona</div>
+          <div class="obs-desc">L'intestazione "GESTIONE ABBONAMENTI YLENIA" e la struttura mono-foglio del file indicano un modello pensato per tracciare l'operato di una singola persona. Non esiste una struttura per aggregare più operatrici nello stesso file, né per separare la performance individuale in un team multi-persona come la reception (dove la retention è ora distribuita su più figure).</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- DIVISORE GUEST REGISTER -->
+  <section class="section">
+    <div class="section-eyebrow">Strumento 2 di 2</div>
+    <h2 class="section-title">Guest Register — <em>modulo cartaceo</em></h2>
+    <p class="section-sub">Registro fisico dei visitatori spontanei (walk-in) e delle chiamate in entrata (phone-in). Introdotto 3 anni fa. Compilato a mano dalle operatrici al momento del contatto. Fonte: Lorella.</p>
+
+    <div class="obs-grid">
+      <div class="obs-item">
+        <span class="obs-n">→</span>
+        <div class="obs-body">
+          <div class="obs-title">Contesto operativo — parole di Lorella</div>
+          <div class="obs-desc">"Su questo guest register, introdotto 3 anni fa, segnamo i tour spontanei e phone-in. Ovviamente sarebbe un sogno digitalizzarlo."</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRUTTURA MODULO -->
+  <section class="section">
+    <div class="section-eyebrow">Struttura del modulo</div>
+    <h2 class="section-title">Campi e <em>layout</em></h2>
+    <p class="section-sub">Il modulo è su foglio A4 orizzontale, brandizzato Ronchiverdi, con 3 record per foglio. Ogni record copre una visita o una chiamata in entrata. I campi sono una combinazione di testo libero e checkbox.</p>
+
+    <div class="zone-row" style="grid-template-columns:1fr 1fr 1fr;">
+      <div class="zone-card">
+        <div class="z-label">Dati identificativi</div>
+        <div class="z-title">Anagrafica e contatto</div>
+        <div class="z-desc">Ora di arrivo/chiamata, nome e cognome, numero di telefono, indirizzo email. Nessun campo data sul singolo record — la data è presumibilmente sul foglio o desumibile dal contesto di archiviazione.</div>
+      </div>
+      <div class="zone-card">
+        <div class="z-label">Classificazione</div>
+        <div class="z-title">Canale e fonte di interesse</div>
+        <div class="z-desc">Due blocchi di checkbox: <strong>Canale di arrivo</strong> (Walk-in, Ref. Socio, Phone In, Referral) e <strong>Fonte/area di interesse</strong> (14 categorie tra sport, canali marketing e segmento). Selezione multipla ammessa.</div>
+      </div>
+      <div class="zone-card">
+        <div class="z-label">Esito</div>
+        <div class="z-title">Risultato del contatto</div>
+        <div class="z-desc">4 esiti possibili via checkbox: Nuova Vendita, Perso, Re-appuntamento, Richiamo. Campo testuale per il nome del consulente / sala di riferimento.</div>
+      </div>
+    </div>
+
+    <div class="two-col" style="margin-top:28px;">
+      <div>
+        <div class="distrib-label">Campi per record</div>
+        <div class="fields-grid">
+          <span class="field-tag">ORA</span>
+          <span class="field-tag">NOME COGNOME</span>
+          <span class="field-tag">TEL</span>
+          <span class="field-tag">MAIL</span>
+          <span class="field-tag">NOTE</span>
+        </div>
+
+        <div class="distrib-label" style="margin-top:16px;">Canale di arrivo (checkbox — 1 di 4)</div>
+        <div class="fields-grid">
+          <span class="field-tag">WALK IN</span>
+          <span class="field-tag">REF. SOCIO</span>
+          <span class="field-tag">PHONE IN</span>
+          <span class="field-tag">REFERRAL</span>
+        </div>
+
+        <div class="distrib-label" style="margin-top:16px;">Esito (checkbox — 1 di 4)</div>
+        <div class="fields-grid">
+          <span class="field-tag">NUOVA VENDITA</span>
+          <span class="field-tag">PERSO</span>
+          <span class="field-tag">RE-APPUNT.</span>
+          <span class="field-tag">RICHIAMO</span>
+        </div>
+
+        <div class="distrib-label" style="margin-top:16px;">Campo libero</div>
+        <div class="fields-grid">
+          <span class="field-tag">SALA / CONSULENTE</span>
+        </div>
+      </div>
+      <div>
+        <div class="distrib-label">Fonte / area di interesse (checkbox — multipla)</div>
+        <div class="fields-grid" style="margin-bottom:16px;">
+          <span class="field-tag">FITNESS</span>
+          <span class="field-tag">PADEL</span>
+          <span class="field-tag">TENNIS</span>
+          <span class="field-tag">NUOTO</span>
+          <span class="field-tag">SOCIAL</span>
+          <span class="field-tag">TRIATHLON</span>
+          <span class="field-tag">KIDS VILLAGE</span>
+          <span class="field-tag">RISTORANTE</span>
+          <span class="field-tag">EVENTI</span>
+          <span class="field-tag">CAMPAGNA INTERNA</span>
+          <span class="field-tag">CAMPAGNA ESTERNA</span>
+          <span class="field-tag">CONVENZIONE</span>
+          <span class="field-tag">EX SOCIO</span>
+          <span class="field-tag">ALTRO</span>
+        </div>
+
+        <div class="data-note">
+          <div class="dn-label">Nota tassonomia Fonte</div>
+          <p>Il blocco Fonte mescola tre categorie concettualmente distinte: <strong>area di interesse sportiva</strong> (FITNESS, PADEL, TENNIS, NUOTO, TRIATHLON), <strong>canale di acquisizione marketing</strong> (CAMPAGNA INTERNA, CAMPAGNA ESTERNA, CONVENZIONE) e <strong>segmento anagrafico</strong> (EX SOCIO). Le tre tipologie convivono nella stessa sezione checkbox senza separazione strutturale.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECORD VISIBILI NELLA FOTO -->
+  <section class="section">
+    <div class="section-eyebrow">Campione — modulo fotografato</div>
+    <h2 class="section-title">Record <em>leggibili</em> nel campione</h2>
+    <p class="section-sub">Il modulo fotografato contiene 3 record. La scrittura è parzialmente illeggibile. Di seguito la lettura dei campi identificabili con sufficiente certezza.</p>
+
+    <div class="obs-grid">
+      <div class="obs-item">
+        <span class="obs-n">R1</span>
+        <div class="obs-body">
+          <div class="obs-title">Record 1 — Phone In, ore 15:00</div>
+          <div class="obs-desc">Canale: <strong>PHONE IN</strong> (checkbox selezionata). Ora: 15:00. Nome parzialmente leggibile. Telefono presente. Email: X (non fornita o segnata come da acquisire). Fonte: area interesse selezionata (non completamente leggibile). Consulente: campo compilato. Esito: firma/nome consulente presente nel campo SALA CONSULENTE.</div>
+        </div>
+      </div>
+
+      <div class="obs-item">
+        <span class="obs-n">R2</span>
+        <div class="obs-body">
+          <div class="obs-title">Record 2 — Referral / Ref. Socio, ore 9:15</div>
+          <div class="obs-desc">Canale: <strong>REF. SOCIO</strong> e/o <strong>REFERRAL</strong> (checkbox selezionate). Ora: 9:15. Cognome leggibile come "Berola" o simile. Tel: 392-428...8247. Mail: note "x info club (sala)". Segmento <strong>EX SOCIO</strong> selezionato. Consulente: campo compilato. Esito: compilato in corsivo (non completamente decifrabile).</div>
+        </div>
+      </div>
+
+      <div class="obs-item">
+        <span class="obs-n">R3</span>
+        <div class="obs-body">
+          <div class="obs-title">Record 3 — Phone In, ore 9:30</div>
+          <div class="obs-desc">Canale: <strong>PHONE IN</strong> (checkbox selezionata). Ora: 9:30. Nome parzialmente leggibile, cognome simile a "Dechorainne" o variante. Tel: 333...895... Mail: "x info club (Sala)". Nota laterale: "X no club". Esito: compilato in corsivo — leggibile come "Nuovo mensile..." (possibile nuova vendita mensile).</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:20px;">
+      <p>Il campione fotografato è una singola pagina del registro — 3 record su un numero imprecisato di fogli accumulati in 3 anni di utilizzo. Non è disponibile un dato aggregato sul volume totale di contatti registrati né sulla distribuzione degli esiti.</p>
+    </div>
+  </section>
+
+  <!-- OSSERVAZIONI STRUTTURALI GUEST REGISTER -->
+  <section class="section">
+    <div class="section-eyebrow">Osservazioni strutturali — Guest Register</div>
+    <h2 class="section-title">Caratteristiche del <em>modello cartaceo</em></h2>
+    <p class="section-sub">Descrizione oggettiva delle caratteristiche strutturali del Guest Register come emerge dall'analisi del modulo fotografato.</p>
+
+    <div class="obs-grid">
+      <div class="obs-item flag">
+        <span class="obs-n">01</span>
+        <div class="obs-body">
+          <div class="obs-title">Completamente cartaceo — nessuna copia digitale strutturata</div>
+          <div class="obs-desc">Il Guest Register è un modulo fisico stampato. Non esiste una controparte digitale. I dati raccolti (nomi, telefoni, email, canali, esiti) non sono aggregabili, ricercabili o analizzabili senza un processo manuale di trascrizione. Tre anni di contatti sono archiviati solo su carta.</div>
+        </div>
+      </div>
+
+      <div class="obs-item">
+        <span class="obs-n">02</span>
+        <div class="obs-body">
+          <div class="obs-title">3 record per foglio — layout a colonne affiancate</div>
+          <div class="obs-desc">Il modulo ospita 3 record per foglio A4 orizzontale, organizzati in colonne parallele. La struttura fisica limita la compilazione e rende difficile l'aggiunta di note estese. Il campo NOTE e il campo MAIL sono piccoli e tendono a contenere abbreviazioni ("x info club", "X no club").</div>
+        </div>
+      </div>
+
+      <div class="obs-item">
+        <span class="obs-n">03</span>
+        <div class="obs-body">
+          <div class="obs-title">Nessun campo data sul singolo record</div>
+          <div class="obs-desc">Ogni record ha ORA ma non DATA. La data è presumibilmente associata al foglio o all'archivio fisico (es. fascicolo mensile), non al singolo record. Questo rende impossibile ricostruire la sequenza temporale dei contatti senza un sistema di archiviazione esterno coerente.</div>
+        </div>
+      </div>
+
+      <div class="obs-item">
+        <span class="obs-n">04</span>
+        <div class="obs-body">
+          <div class="obs-title">Tassonomia Fonte ricca ma concettualmente eterogenea</div>
+          <div class="obs-desc">Il blocco FONTE ha 14 voci checkbox che mescolano sport di interesse (FITNESS, PADEL, TENNIS…), canale di acquisizione (CAMPAGNA INTERNA/ESTERNA, CONVENZIONE) e segmento anagrafico (EX SOCIO). La sovrapposizione concettuale rende ambigua l'analisi: una stessa voce può segnalare l'interesse dichiarato del visitatore o la fonte di provenienza del contatto.</div>
+        </div>
+      </div>
+
+      <div class="obs-item">
+        <span class="obs-n">05</span>
+        <div class="obs-body">
+          <div class="obs-title">Il campo ESITO è binario nella pratica — 4 opzioni ma 2 usi dominanti</div>
+          <div class="obs-desc">Le 4 opzioni di esito (NUOVA VENDITA, PERSO, RE-APPUNT., RICHIAMO) coprono la pipeline di un contatto. Nella pratica, NUOVA VENDITA e RICHIAMO/RE-APPUNT. sono probabilmente i valori più usati. Senza aggregazione, non è verificabile la distribuzione reale degli esiti né la quota di conversione sul totale dei contatti registrati.</div>
+        </div>
+      </div>
+
+      <div class="obs-item">
+        <span class="obs-n">06</span>
+        <div class="obs-body">
+          <div class="obs-title">Il campo SALA / CONSULENTE traccia chi ha gestito il contatto</div>
+          <div class="obs-desc">L'ultimo campo (testo libero) riporta il nome del consulente o la sala dove si è svolto il colloquio. Questo è l'unico campo che permette di associare un contatto a una persona del team. Senza digitalizzazione, l'analisi della performance per consulente richiede il conteggio manuale foglio per foglio.</div>
+        </div>
+      </div>
+
+      <div class="obs-item flag">
+        <span class="obs-n">07</span>
+        <div class="obs-body">
+          <div class="obs-title">Nessuna connessione con il Daily Sales Excel — i due strumenti sono silos separati</div>
+          <div class="obs-desc">Il Guest Register e il Daily Sales Excel tracciano entrambi contatti in entrata (walk-in e phone-in), ma non sono collegati. I walk-in chiusi nel tracker KPI giornaliero non hanno un riferimento al corrispondente record cartaceo del Guest Register. I 134 referral tracciati nel Daily Sales non hanno un corrispondente nel Guest Register. I due strumenti producono dati parziali e non riconciliabili senza un processo manuale.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
