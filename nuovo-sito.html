@@ -59,10 +59,7 @@ body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FFFFFF; fon
 .sol-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 32px; }
 @media(max-width:800px){ .sol-grid { grid-template-columns: 1fr; } }
 .sol { border-radius: 16px; padding: 26px 26px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); }
-.sol.rec { border-color: rgba(232,212,106,0.35); background: rgba(232,212,106,0.04); }
 .sol-rank { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #FFFFFF; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
-.sol.rec .sol-rank { color: #F2DC4E; }
-.sol-badge { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 9px; border-radius: 5px; background: rgba(232,212,106,0.15); color: #F2DC4E; border: 1px solid rgba(232,212,106,0.3); }
 .sol-name { font-family: "Cormorant Garamond", serif; font-size: 27px; font-weight: 500; color: #FFFFFF; line-height: 1.15; margin-bottom: 10px; }
 .sol-name em { font-style: italic; color: #F2DC4E; }
 .sol-desc { font-size: 14.5px; color: #FFFFFF; line-height: 1.65; }
@@ -79,11 +76,9 @@ body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FFFFFF; fon
 .cmp { width: 100%; border-collapse: collapse; }
 .cmp th, .cmp td { text-align: left; padding: 15px 18px; vertical-align: top; }
 .cmp thead th { font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #FFFFFF; background: rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.1); }
-.cmp thead th.rec { color: #F2DC4E; background: rgba(232,212,106,0.07); }
 .cmp tbody td { font-size: 14px; color: #FFFFFF; line-height: 1.55; border-bottom: 1px solid rgba(255,255,255,0.06); }
 .cmp tbody tr:last-child td { border-bottom: none; }
 .cmp td.crit { font-family: "Cormorant Garamond", serif; font-size: 18px; font-weight: 500; color: #FFFFFF; width: 22%; }
-.cmp td.rec { background: rgba(232,212,106,0.04); }
 .cmp .cell-rate { display: flex; gap: 8px; }
 .cmp .cell-rate .dot { margin-top: 5px; }
 
@@ -114,33 +109,15 @@ body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FFFFFF; fon
 .fit { margin-top: 14px; font-size: 14px; color: #FFFFFF; line-height: 1.6; padding: 12px 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; }
 .fit strong { color: #F2DC4E; font-weight: 600; }
 
-/* VERDICT */
-.verdict { background: rgba(232,212,106,0.05); border: 1px solid rgba(232,212,106,0.25); border-radius: 18px; padding: 34px 36px; margin-top: 30px; }
-@media(max-width:640px){ .verdict { padding: 26px 22px; } }
-.verdict-eyebrow { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #F2DC4E; margin-bottom: 12px; }
-.verdict-title { font-family: "Cormorant Garamond", serif; font-size: clamp(24px, 3vw, 34px); font-weight: 500; color: #FFFFFF; line-height: 1.2; margin-bottom: 16px; }
-.verdict-title em { font-style: italic; color: #F2DC4E; }
-.verdict p { font-size: 15.5px; color: #FFFFFF; line-height: 1.8; margin-bottom: 12px; }
-.verdict p:last-child { margin-bottom: 0; }
-.verdict strong { font-weight: 600; color: #F2DC4E; }
-
-/* ROLE SPLIT */
-.role-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 22px; }
-@media(max-width:700px){ .role-grid { grid-template-columns: 1fr; } }
-.role { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 22px 24px; }
-.role-who { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #F2DC4E; margin-bottom: 8px; }
-.role-t { font-family: "Cormorant Garamond", serif; font-size: 20px; font-weight: 500; color: #FFFFFF; margin-bottom: 8px; }
-.role-d { font-size: 14px; color: #FFFFFF; line-height: 1.6; }
-
-/* HOW IT WORKS — STEPS */
-.steps { display: flex; flex-direction: column; gap: 0; margin-top: 26px; }
-.step { display: flex; gap: 20px; align-items: flex-start; padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
-.step:last-child { border-bottom: none; }
-.step-n { font-family: "Cormorant Garamond", serif; font-size: 32px; font-style: italic; font-weight: 400; color: #F2DC4E; line-height: 1; min-width: 44px; }
-.step-body { flex: 1; }
-.step-t { font-family: "Cormorant Garamond", serif; font-size: 21px; font-weight: 500; color: #FFFFFF; margin-bottom: 5px; }
-.step-d { font-size: 14.5px; color: #FFFFFF; line-height: 1.65; }
-.step-d strong { font-weight: 600; }
+/* CHOOSE FRAMEWORK */
+.choose-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 30px; }
+@media(max-width:800px){ .choose-grid { grid-template-columns: 1fr; } }
+.choose { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 24px 26px; }
+.choose-name { font-family: "Cormorant Garamond", serif; font-size: 24px; font-weight: 500; color: #FFFFFF; line-height: 1.15; margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.choose-row { margin-bottom: 13px; }
+.choose-row:last-child { margin-bottom: 0; }
+.choose-k { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #F2DC4E; margin-bottom: 4px; }
+.choose-v { font-size: 14px; color: #FFFFFF; line-height: 1.6; }
 
 .note-box { background: rgba(232,212,106,0.03); border: 1px solid rgba(232,212,106,0.15); border-radius: 12px; padding: 16px 20px; margin-top: 24px; font-size: 14.5px; color: #FFFFFF; line-height: 1.7; }
 .note-box strong { font-weight: 600; color: #F2DC4E; }
@@ -185,12 +162,12 @@ img, svg, canvas, iframe, video { max-width: 100%; }
       <span class="tag">Maggio 2026</span>
     </div>
     <h1>Rifacimento del sito —<br><em>tre soluzioni a confronto</em></h1>
-    <p class="hero-sub">Ronchiverdi ha bisogno di un nuovo sito: stilisticamente di livello, capace di convertire i lead in prove e appuntamenti, con una buona profondità di contenuti e aggiornabile da personale non tecnico. Questo documento mette a confronto tre soluzioni professionali per capire quale risponde meglio a questi obiettivi.</p>
+    <p class="hero-sub">Ronchiverdi ha bisogno di un nuovo sito: stilisticamente di livello, capace di convertire i lead in prove e appuntamenti, con una buona profondità di contenuti e aggiornabile da personale non tecnico. Questo documento mette a confronto tre soluzioni professionali, valutandone punti di forza, limiti e contesti d'uso rispetto a questi obiettivi — senza indicare un vincitore.</p>
     <div class="hero-meta">
       <div class="hero-meta-item"><div class="lbl">Soluzioni valutate</div><div class="val">Wix &middot; WordPress+Elementor &middot; Astro+Decap</div></div>
       <div class="hero-meta-item"><div class="lbl">Obiettivo primario</div><div class="val">Conversione prove &amp; appuntamenti</div></div>
       <div class="hero-meta-item"><div class="lbl">Gestione contenuti</div><div class="val">IT interno + Segreteria</div></div>
-      <div class="hero-meta-item"><div class="lbl">Raccomandazione</div><div class="val">Astro + Decap CMS</div></div>
+      <div class="hero-meta-item"><div class="lbl">Criteri di confronto</div><div class="val">10 parametri di valutazione</div></div>
     </div>
   </div>
 </section>
@@ -248,7 +225,7 @@ img, svg, canvas, iframe, video { max-width: 100%; }
         </div>
       </div>
     </div>
-    <div class="assume-note">In sintesi: la comparazione presume un sito di livello, orientato alla conversione, mantenuto da personale interno su due livelli (segreteria e IT) e pensato per durare. È su questo scenario che vanno lette la tabella e la raccomandazione.</div>
+    <div class="assume-note">In sintesi: la comparazione presume un sito di livello, orientato alla conversione, mantenuto da personale interno su due livelli (segreteria e IT) e pensato per durare. È su questo scenario che vanno letti la tabella e lo schema di sintesi finale.</div>
   </div>
 
   <!-- OBIETTIVO -->
@@ -305,10 +282,10 @@ img, svg, canvas, iframe, video { max-width: 100%; }
         <div class="sol-name">WordPress<br>+ <em>Elementor</em></div>
         <div class="sol-desc">Lo standard di settore. CMS completo con editor visuale Elementor ed ecosistema sterminato di plugin. Molto flessibile, ma richiede manutenzione e aggiornamenti di sicurezza continui.</div>
       </div>
-      <div class="sol rec">
-        <div class="sol-rank">Soluzione C <span class="sol-badge">Consigliata</span></div>
+      <div class="sol">
+        <div class="sol-rank">Soluzione C</div>
         <div class="sol-name">Astro<br>+ <em>Decap CMS</em></div>
-        <div class="sol-desc">Sito su misura in HTML/CSS sviluppato con Claude Code nella struttura Astro, con Decap CMS per l'editing dei contenuti. Design senza limiti, sito statico velocissimo, contenuti di proprietà.</div>
+        <div class="sol-desc">Sito su misura in HTML/CSS sviluppato con Claude Code nella struttura Astro, con Decap CMS per l'editing dei contenuti. Design senza vincoli di template e ottime performance, a fronte di uno sviluppo iniziale e della necessità di un IT interno per le modifiche strutturali.</div>
       </div>
     </div>
   </div>
@@ -332,7 +309,7 @@ img, svg, canvas, iframe, video { max-width: 100%; }
             <th>Criterio</th>
             <th>Wix</th>
             <th>WordPress + Elementor</th>
-            <th class="rec">Astro + Decap</th>
+            <th>Astro + Decap</th>
           </tr>
         </thead>
         <tbody>
@@ -340,61 +317,61 @@ img, svg, canvas, iframe, video { max-width: 100%; }
             <td class="crit">Qualità e controllo del design</td>
             <td><div class="cell-rate"><span class="dot mid"></span><span>Buona, ma con un tetto: legata a editor e template.</span></div></td>
             <td><div class="cell-rate"><span class="dot mid"></span><span>Alta con un buon designer; Elementor dà ampio controllo visuale.</span></div></td>
-            <td class="rec"><div class="cell-rate"><span class="dot hi"></span><span>Massima: controllo totale del codice, nessun limite stilistico.</span></div></td>
+            <td><div class="cell-rate"><span class="dot hi"></span><span>Massima: controllo totale del codice, nessun limite stilistico.</span></div></td>
           </tr>
           <tr>
             <td class="crit">Modifiche semplici — Segreteria</td>
             <td><div class="cell-rate"><span class="dot hi"></span><span>Eccellente: editor visuale immediato, nessuna competenza richiesta.</span></div></td>
             <td><div class="cell-rate"><span class="dot mid"></span><span>Buono: Elementor è visuale ma ha una curva di apprendimento.</span></div></td>
-            <td class="rec"><div class="cell-rate"><span class="dot hi"></span><span>Eccellente: Decap offre un pannello editoriale semplice per testi, immagini e pagine da modello.</span></div></td>
+            <td><div class="cell-rate"><span class="dot hi"></span><span>Eccellente: Decap offre un pannello editoriale semplice per testi, immagini e pagine da modello.</span></div></td>
           </tr>
           <tr>
             <td class="crit">Modifiche strutturali — IT interno</td>
             <td><div class="cell-rate"><span class="dot lo"></span><span>Limitato: l'IT lavora solo entro i confini di Wix.</span></div></td>
             <td><div class="cell-rate"><span class="dot hi"></span><span>Ampio: l'IT gestisce temi, plugin e layout.</span></div></td>
-            <td class="rec"><div class="cell-rate"><span class="dot hi"></span><span>Pieno: l'IT (o Claude Code) modifica codice e struttura senza vincoli.</span></div></td>
+            <td><div class="cell-rate"><span class="dot hi"></span><span>Pieno: l'IT (o Claude Code) modifica codice e struttura senza vincoli.</span></div></td>
           </tr>
           <tr>
             <td class="crit">Conversione lead — prove &amp; appuntamenti</td>
             <td><div class="cell-rate"><span class="dot hi"></span><span>Form nativi + Wix Bookings integrato.</span></div></td>
             <td><div class="cell-rate"><span class="dot hi"></span><span>Ecosistema ricco: form, sistemi di prenotazione, integrazioni CRM.</span></div></td>
-            <td class="rec"><div class="cell-rate"><span class="dot hi"></span><span>Form e booking esterni integrati (Calendly, Cal.com, Tally) — già in uso.</span></div></td>
+            <td><div class="cell-rate"><span class="dot hi"></span><span>Form e booking esterni integrati (Calendly, Cal.com, Tally) — già in uso.</span></div></td>
           </tr>
           <tr>
             <td class="crit">Profondità e gestione dei contenuti</td>
             <td><div class="cell-rate"><span class="dot mid"></span><span>Buona, ma si appesantisce con il crescere del volume.</span></div></td>
             <td><div class="cell-rate"><span class="dot hi"></span><span>Eccellente: CMS completo, pensato per molti contenuti.</span></div></td>
-            <td class="rec"><div class="cell-rate"><span class="dot hi"></span><span>Eccellente: contenuti strutturati, gestiti in modo ordinato via Decap.</span></div></td>
+            <td><div class="cell-rate"><span class="dot hi"></span><span>Eccellente: contenuti strutturati, gestiti in modo ordinato via Decap.</span></div></td>
           </tr>
           <tr>
             <td class="crit">Performance &amp; SEO</td>
             <td><div class="cell-rate"><span class="dot mid"></span><span>Discreta, con controllo limitato sull'ottimizzazione.</span></div></td>
             <td><div class="cell-rate"><span class="dot mid"></span><span>SEO ottima; performance dipende da hosting e plugin, Elementor appesantisce.</span></div></td>
-            <td class="rec"><div class="cell-rate"><span class="dot hi"></span><span>Top: sito statico velocissimo, SEO e Core Web Vitals eccellenti.</span></div></td>
+            <td><div class="cell-rate"><span class="dot hi"></span><span>Elevata: sito statico leggero, SEO e Core Web Vitals molto buoni.</span></div></td>
           </tr>
           <tr>
             <td class="crit">Manutenzione e sicurezza</td>
             <td><div class="cell-rate"><span class="dot hi"></span><span>Nessun onere: tutto gestito da Wix.</span></div></td>
             <td><div class="cell-rate"><span class="dot lo"></span><span>Onerosa: aggiornamenti e patch di sicurezza ricorrenti a carico dell'IT.</span></div></td>
-            <td class="rec"><div class="cell-rate"><span class="dot hi"></span><span>Bassa: sito statico, nessun database o plugin da aggiornare.</span></div></td>
+            <td><div class="cell-rate"><span class="dot hi"></span><span>Bassa: sito statico, nessun database o plugin da aggiornare.</span></div></td>
           </tr>
           <tr>
             <td class="crit">Indipendenza e proprietà</td>
             <td><div class="cell-rate"><span class="dot lo"></span><span>Lock-in alto: il sito non è esportabile fuori da Wix.</span></div></td>
             <td><div class="cell-rate"><span class="dot mid"></span><span>Media: contenuti portabili, ma dipendenza dal tema e da Elementor.</span></div></td>
-            <td class="rec"><div class="cell-rate"><span class="dot hi"></span><span>Massima: codice e contenuti di proprietà, hosting portabile.</span></div></td>
+            <td><div class="cell-rate"><span class="dot hi"></span><span>Massima: codice e contenuti di proprietà, hosting portabile.</span></div></td>
           </tr>
           <tr>
             <td class="crit">Tempi di realizzazione</td>
             <td><div class="cell-rate"><span class="dot hi"></span><span>Rapidi — pochi giorni / poche settimane.</span></div></td>
             <td><div class="cell-rate"><span class="dot mid"></span><span>Medi — configurazione tema, plugin e contenuti.</span></div></td>
-            <td class="rec"><div class="cell-rate"><span class="dot mid"></span><span>Medi — sviluppo su misura, accelerato da Claude Code.</span></div></td>
+            <td><div class="cell-rate"><span class="dot mid"></span><span>Medi — sviluppo su misura, accelerato da Claude Code.</span></div></td>
           </tr>
           <tr>
             <td class="crit">Affidabilità professionale</td>
             <td><div class="cell-rate"><span class="dot mid"></span><span>Adeguata per una PMI; resta riconoscibile come sito da piattaforma.</span></div></td>
             <td><div class="cell-rate"><span class="dot hi"></span><span>Standard di settore, ampiamente collaudato.</span></div></td>
-            <td class="rec"><div class="cell-rate"><span class="dot hi"></span><span>Massima: approccio moderno (Jamstack), usato da siti di fascia alta.</span></div></td>
+            <td><div class="cell-rate"><span class="dot hi"></span><span>Elevata: approccio moderno (Jamstack), tecnicamente solido.</span></div></td>
           </tr>
         </tbody>
       </table>
@@ -465,95 +442,62 @@ img, svg, canvas, iframe, video { max-width: 100%; }
     <div class="dive">
       <div class="dive-head">
         <span class="dive-name">Astro + <em>Decap CMS</em></span>
-        <span class="dive-tag">Soluzione C &middot; Su misura &middot; Consigliata</span>
+        <span class="dive-tag">Soluzione C &middot; Su misura</span>
       </div>
       <div class="dive-cols">
         <div class="col-block pro">
           <div class="col-label">Punti di forza</div>
           <div class="pt-list">
-            <div class="pt"><div class="pt-dot"></div><div><strong>Design senza limiti.</strong> HTML/CSS su misura sviluppato con Claude Code: la qualità visiva non ha tetto.</div></div>
-            <div class="pt"><div class="pt-dot"></div><div><strong>Sito statico velocissimo.</strong> Astro genera pagine leggere: performance e SEO ai massimi livelli.</div></div>
+            <div class="pt"><div class="pt-dot"></div><div><strong>Design senza vincoli di template.</strong> HTML/CSS su misura sviluppato con Claude Code: la qualità visiva non ha tetto.</div></div>
+            <div class="pt"><div class="pt-dot"></div><div><strong>Sito statico e leggero.</strong> Astro genera pagine veloci, con buone performance, SEO e una superficie di sicurezza ridotta.</div></div>
             <div class="pt"><div class="pt-dot"></div><div><strong>Decap CMS</strong> dà alla segreteria un pannello semplice per modificare testi, immagini, news e pagine da modello.</div></div>
-            <div class="pt"><div class="pt-dot"></div><div><strong>Sicurezza e manutenzione minime:</strong> nessun database né plugin da aggiornare.</div></div>
-            <div class="pt"><div class="pt-dot"></div><div><strong>Proprietà totale:</strong> codice e contenuti restano di Ronchiverdi, hosting portabile, zero lock-in.</div></div>
+            <div class="pt"><div class="pt-dot"></div><div><strong>Proprietà e portabilità.</strong> Codice e contenuti restano di Ronchiverdi, l'hosting è cambiabile in qualsiasi momento: nessun lock-in.</div></div>
           </div>
         </div>
         <div class="col-block con">
           <div class="col-label">Limiti</div>
           <div class="pt-list">
-            <div class="pt"><div class="pt-dot"></div><div><strong>Le modifiche strutturali nuove</strong> (nuovi tipi di pagina, nuove sezioni) non si fanno "in autonomia": passano dall'IT interno o da Claude Code.</div></div>
-            <div class="pt"><div class="pt-dot"></div><div><strong>Richiede una buona configurazione iniziale:</strong> è l'investimento che abilita tutto il resto.</div></div>
-            <div class="pt"><div class="pt-dot"></div><div><strong>Meno fornitori generici</strong> rispetto a WordPress, ma lo sviluppo e le evoluzioni sono coperti da Claude Code.</div></div>
+            <div class="pt"><div class="pt-dot"></div><div><strong>Le modifiche strutturali nuove</strong> (nuovi tipi di pagina, nuove sezioni) non si fanno in autonomia: passano dall'IT interno o da Claude Code.</div></div>
+            <div class="pt"><div class="pt-dot"></div><div><strong>Nessun editor visuale del layout.</strong> A differenza di Wix ed Elementor, le modifiche grafiche non sono "drag &amp; drop" WYSIWYG.</div></div>
+            <div class="pt"><div class="pt-dot"></div><div><strong>Richiede una configurazione iniziale accurata</strong> prima di poter essere usato dalla segreteria.</div></div>
+            <div class="pt"><div class="pt-dot"></div><div><strong>Ecosistema più ristretto</strong> di WordPress: meno funzioni di terze parti pronte all'uso e meno fornitori generici sul mercato.</div></div>
           </div>
         </div>
       </div>
-      <div class="fit"><strong>Indicata se:</strong> si vuole un sito di livello, performante e di proprietà, con il modello di gestione a due livelli — segreteria per i contenuti, IT per la struttura. È esattamente lo scenario di Ronchiverdi.</div>
+      <div class="fit"><strong>Indicata se:</strong> si vuole un sito di livello, performante e di proprietà, con il modello di gestione a due livelli — segreteria per i contenuti, IT per la struttura.</div>
     </div>
   </div>
 
-  <!-- RACCOMANDAZIONE -->
+  <!-- COME ORIENTARE LA SCELTA -->
   <div class="block">
-    <div class="block-eyebrow">La sintesi</div>
-    <h2 class="block-title">La <em>raccomandazione</em></h2>
-    <div class="verdict">
-      <div class="verdict-eyebrow">Soluzione consigliata</div>
-      <div class="verdict-title">Astro + <em>Decap CMS</em>, sviluppato con Claude Code</div>
-      <p>È l'unica delle tre soluzioni che soddisfa <strong>tutti e cinque</strong> gli obiettivi senza compromessi: design di livello, conversione dei lead, profondità dei contenuti, aggiornabilità da non tecnici e standard professionale — con in più performance, sicurezza e proprietà che le altre due non garantiscono insieme.</p>
-      <p>Il vero punto a sfavore è onesto e va messo in chiaro: le modifiche strutturali nuove non sono "drag &amp; drop", passano dall'IT o da Claude Code. Ma questo combacia esattamente con il modello di gestione previsto da Ronchiverdi — ed è il prezzo, accettabile, della qualità del design e dell'indipendenza dalla piattaforma.</p>
-    </div>
-    <div class="role-grid">
-      <div class="role">
-        <div class="role-who">Segreteria</div>
-        <div class="role-t">Modifiche semplici, ogni giorno</div>
-        <div class="role-d">Tramite il pannello Decap: aggiornare testi, sostituire immagini, pubblicare news, modificare orari e contatti, creare pagine partendo da modelli già pronti. Nessuna competenza tecnica richiesta.</div>
-      </div>
-      <div class="role">
-        <div class="role-who">IT interno + Claude Code</div>
-        <div class="role-t">Modifiche strutturali, quando servono</div>
-        <div class="role-d">Nuovi tipi di pagina, nuove sezioni, integrazioni, restyling: si lavora sul repository Astro. L'IT interno gestisce il quotidiano tecnico, Claude Code accelera sviluppo ed evoluzioni importanti.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- COME FUNZIONA -->
-  <div class="block">
-    <div class="block-eyebrow">In pratica</div>
-    <h2 class="block-title">Come funziona la <em>soluzione consigliata</em></h2>
+    <div class="block-eyebrow">La lettura d'insieme</div>
+    <h2 class="block-title">Come orientare <em>la scelta</em></h2>
     <div class="block-sub">
-      <p>Quattro elementi, ognuno con un ruolo preciso. Insieme formano un sistema professionale, veloce da gestire e senza vincoli di piattaforma.</p>
+      <p>Dal confronto non emerge una soluzione "migliore" in assoluto: le tre rispondono bene a priorità diverse e impongono compromessi diversi. La scelta dipende da quale degli obiettivi fissati in apertura pesa di più per Ronchiverdi, e da quali rinunce si è disposti ad accettare in cambio.</p>
+      <p>Lo schema qui sotto riassume il profilo di ciascuna soluzione: non è una graduatoria, ma una mappa per incrociare le priorità del club con i punti di forza e i limiti emersi dall'analisi.</p>
     </div>
-    <div class="steps">
-      <div class="step">
-        <div class="step-n">1</div>
-        <div class="step-body">
-          <div class="step-t">Sviluppo — Astro + Claude Code</div>
-          <div class="step-d"><strong>Claude Code</strong> costruisce il sito in HTML/CSS su misura dentro la struttura <strong>Astro</strong>, che organizza pagine, componenti riutilizzabili e contenuti. È lo stesso approccio già usato per le pagine di questo audit.</div>
-        </div>
+    <div class="choose-grid">
+      <div class="choose">
+        <div class="choose-name">Wix</div>
+        <div class="choose-row"><div class="choose-k">Ottimizza</div><div class="choose-v">Velocità di realizzazione e autonomia totale della segreteria.</div></div>
+        <div class="choose-row"><div class="choose-k">Chiede in cambio</div><div class="choose-v">Un tetto sulla qualità del design e un vincolo totale alla piattaforma.</div></div>
+        <div class="choose-row"><div class="choose-k">Coerente se</div><div class="choose-v">La priorità è avere presto un sito gestibile senza alcun supporto tecnico.</div></div>
       </div>
-      <div class="step">
-        <div class="step-n">2</div>
-        <div class="step-body">
-          <div class="step-t">Editing — Decap CMS</div>
-          <div class="step-d"><strong>Decap</strong> si installa sopra Astro e fornisce un pannello di amministrazione semplice. La segreteria accede da browser e modifica i contenuti tramite moduli guidati, senza toccare codice.</div>
-        </div>
+      <div class="choose">
+        <div class="choose-name">WordPress + Elementor</div>
+        <div class="choose-row"><div class="choose-k">Ottimizza</div><div class="choose-v">Flessibilità funzionale e disponibilità di funzioni di terze parti.</div></div>
+        <div class="choose-row"><div class="choose-k">Chiede in cambio</div><div class="choose-v">Manutenzione e aggiornamenti di sicurezza continui a carico dell'IT.</div></div>
+        <div class="choose-row"><div class="choose-k">Coerente se</div><div class="choose-v">Servono molte integrazioni pronte e l'IT può dedicare tempo stabile alla gestione.</div></div>
       </div>
-      <div class="step">
-        <div class="step-n">3</div>
-        <div class="step-body">
-          <div class="step-t">Contenuti — nel repository, tracciati</div>
-          <div class="step-d">Testi e immagini vivono in un <strong>repository Git</strong>. Ogni modifica è registrata, attribuita e <strong>reversibile</strong>: si può sempre tornare a una versione precedente. Nessun database fragile da mantenere.</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-n">4</div>
-        <div class="step-body">
-          <div class="step-t">Pubblicazione — deploy automatico</div>
-          <div class="step-d">A ogni salvataggio il sito viene <strong>ricostruito e pubblicato automaticamente</strong> su hosting statico. Veloce, sicuro e a portabilità totale: l'hosting può essere cambiato in qualsiasi momento.</div>
-        </div>
+      <div class="choose">
+        <div class="choose-name">Astro + Decap</div>
+        <div class="choose-row"><div class="choose-k">Ottimizza</div><div class="choose-v">Qualità del design, performance e proprietà del codice.</div></div>
+        <div class="choose-row"><div class="choose-k">Chiede in cambio</div><div class="choose-v">Uno sviluppo iniziale su misura e un IT interno per le modifiche strutturali.</div></div>
+        <div class="choose-row"><div class="choose-k">Coerente se</div><div class="choose-v">La priorità è un sito di livello e di proprietà, con gestione su due livelli.</div></div>
       </div>
     </div>
     <div class="note-box">
-      <strong>Nota.</strong> I form di prenotazione di prove e appuntamenti restano una scelta libera: strumenti esterni come Calendly — già in uso in Ronchiverdi — si integrano nelle pagine Astro senza alcun vincolo, mantenendo lo stesso flusso di conversione su tutto il sito.
+      <strong>Un punto in comune.</strong> Sul fronte della conversione di prove e appuntamenti le tre soluzioni si equivalgono: i form e i sistemi di prenotazione possono essere nativi o esterni (es. Calendly, già in uso). Questo criterio, quindi, non è discriminante nella scelta.
     </div>
   </div>
 
