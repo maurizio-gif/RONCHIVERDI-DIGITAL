@@ -141,7 +141,8 @@ html, body { overflow-x: hidden; max-width: 100%; }
 img, svg, canvas, iframe, video { max-width: 100%; }
 @media(max-width:768px){
   table { display: block; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .cmp { min-width: 720px; }
+  .cmp-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .cmp { display: table; min-width: 720px; }
 }
 </style>
 </head>
@@ -213,13 +214,6 @@ img, svg, canvas, iframe, video { max-width: 100%; }
       <div class="assume">
         <div class="assume-mark">05</div>
         <div class="assume-body">
-          <div class="assume-t">Sviluppo ed evoluzioni con Claude Code</div>
-          <div class="assume-d">Per la soluzione su misura si assume che <strong>sviluppo iniziale ed evoluzioni importanti siano realizzati con Claude Code</strong>. Questo neutralizza il classico svantaggio del "fatto su misura": la dipendenza dalla reperibilità di sviluppatori esterni.</div>
-        </div>
-      </div>
-      <div class="assume">
-        <div class="assume-mark">06</div>
-        <div class="assume-body">
           <div class="assume-t">Orizzonte pluriennale</div>
           <div class="assume-d">Si assume che il sito sia un <strong>asset di lungo periodo</strong>, non un progetto usa-e-getta. Per questo proprietà del codice, indipendenza dalla piattaforma e costo di un'eventuale migrazione futura entrano a pieno titolo nella valutazione.</div>
         </div>
@@ -285,7 +279,7 @@ img, svg, canvas, iframe, video { max-width: 100%; }
       <div class="sol">
         <div class="sol-rank">Soluzione C</div>
         <div class="sol-name">Astro<br>+ <em>Decap CMS</em></div>
-        <div class="sol-desc">Sito su misura in HTML/CSS sviluppato con Claude Code nella struttura Astro, con Decap CMS per l'editing dei contenuti. Design senza vincoli di template e ottime performance, a fronte di uno sviluppo iniziale e della necessità di un IT interno per le modifiche strutturali.</div>
+        <div class="sol-desc">Sito su misura realizzato in codice, con il CMS Decap per i contenuti. Design e performance senza limiti di template, ma richiede sviluppo iniziale e gestione tecnica interna.</div>
       </div>
     </div>
   </div>
