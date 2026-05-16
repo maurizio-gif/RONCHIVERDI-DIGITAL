@@ -145,6 +145,16 @@ body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FFFFFF; fon
 .note-box { background: rgba(232,212,106,0.03); border: 1px solid rgba(232,212,106,0.15); border-radius: 12px; padding: 16px 20px; margin-top: 24px; font-size: 14.5px; color: #FFFFFF; line-height: 1.7; }
 .note-box strong { font-weight: 600; color: #F2DC4E; }
 
+/* ASSUMPTIONS */
+.assume-list { display: flex; flex-direction: column; gap: 12px; margin-top: 30px; }
+.assume { display: flex; gap: 18px; align-items: flex-start; background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.07); border-left: 2px solid rgba(232,212,106,0.5); border-radius: 0 12px 12px 0; padding: 20px 24px; }
+.assume-mark { font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: 0.08em; color: #F2DC4E; padding-top: 4px; min-width: 30px; flex-shrink: 0; }
+.assume-body { flex: 1; }
+.assume-t { font-family: "Cormorant Garamond", serif; font-size: 21px; font-weight: 500; color: #FFFFFF; line-height: 1.25; margin-bottom: 5px; }
+.assume-d { font-size: 14.5px; color: #FFFFFF; line-height: 1.65; }
+.assume-d strong { font-weight: 600; }
+.assume-note { margin-top: 18px; font-size: 14px; color: #FFFFFF; line-height: 1.7; font-style: italic; }
+
 body{font-weight:400;line-height:1.75;}
 strong,b{font-weight:600;}
 
@@ -186,6 +196,60 @@ img, svg, canvas, iframe, video { max-width: 100%; }
 </section>
 
 <div class="page">
+
+  <!-- PREMESSE -->
+  <div class="block">
+    <div class="block-eyebrow">Prima di leggere</div>
+    <h2 class="block-title">Le <em>premesse</em> della comparazione</h2>
+    <div class="block-sub">
+      <p>Ogni confronto vale solo quanto valgono le sue ipotesi di partenza. Questa comparazione è stata costruita sulle assunzioni qui sotto: rendono espliciti il contesto, il livello atteso e il modello di gestione con cui le tre soluzioni sono state valutate. Se una di queste premesse non corrisponde alla realtà di Ronchiverdi, le conclusioni vanno riviste di conseguenza.</p>
+    </div>
+    <div class="assume-list">
+      <div class="assume">
+        <div class="assume-mark">01</div>
+        <div class="assume-body">
+          <div class="assume-t">Livello estetico e tecnico alto</div>
+          <div class="assume-d">Si assume che il nuovo sito debba essere <strong>all'altezza del posizionamento di Ronchiverdi come club premium</strong>: design di fascia alta, cura del dettaglio, performance e qualità tecnica elevate. La comparazione non è valida per un sito "minimo" o puramente informativo, dove le differenze tra le soluzioni si appiattirebbero.</div>
+        </div>
+      </div>
+      <div class="assume">
+        <div class="assume-mark">02</div>
+        <div class="assume-body">
+          <div class="assume-t">Il sito è uno strumento di conversione</div>
+          <div class="assume-d">Si assume che l'obiettivo primario sia <strong>generare contatti — prove e appuntamenti</strong> — non semplicemente "essere presenti online". I criteri sono pesati di conseguenza. I form possono essere anche esterni (Calendly è già in uso): non è un requisito che siano nativi.</div>
+        </div>
+      </div>
+      <div class="assume">
+        <div class="assume-mark">03</div>
+        <div class="assume-body">
+          <div class="assume-t">Manutenzione gestita internamente</div>
+          <div class="assume-d">Si assume che <strong>non ci sarà un'agenzia esterna a contratto continuativo</strong>: la manutenzione dei contenuti è a carico della segreteria, quella tecnica e strutturale dell'IT interno. Una soluzione che dipende da manutenzione esterna costante avrebbe un profilo di valutazione diverso.</div>
+        </div>
+      </div>
+      <div class="assume">
+        <div class="assume-mark">04</div>
+        <div class="assume-body">
+          <div class="assume-t">Competenza IT interna disponibile</div>
+          <div class="assume-d">Si assume che Ronchiverdi disponga di <strong>una figura IT interna</strong> in grado di gestire le modifiche strutturali e il repository del sito. È un presupposto centrale: senza questa figura, la soluzione su misura perde uno dei suoi appoggi.</div>
+        </div>
+      </div>
+      <div class="assume">
+        <div class="assume-mark">05</div>
+        <div class="assume-body">
+          <div class="assume-t">Sviluppo ed evoluzioni con Claude Code</div>
+          <div class="assume-d">Per la soluzione su misura si assume che <strong>sviluppo iniziale ed evoluzioni importanti siano realizzati con Claude Code</strong>. Questo neutralizza il classico svantaggio del "fatto su misura": la dipendenza dalla reperibilità di sviluppatori esterni.</div>
+        </div>
+      </div>
+      <div class="assume">
+        <div class="assume-mark">06</div>
+        <div class="assume-body">
+          <div class="assume-t">Orizzonte pluriennale</div>
+          <div class="assume-d">Si assume che il sito sia un <strong>asset di lungo periodo</strong>, non un progetto usa-e-getta. Per questo proprietà del codice, indipendenza dalla piattaforma e costo di un'eventuale migrazione futura entrano a pieno titolo nella valutazione.</div>
+        </div>
+      </div>
+    </div>
+    <div class="assume-note">In sintesi: la comparazione presume un sito di livello, orientato alla conversione, mantenuto da personale interno su due livelli (segreteria e IT) e pensato per durare. È su questo scenario che vanno lette la tabella e la raccomandazione.</div>
+  </div>
 
   <!-- OBIETTIVO -->
   <div class="block">
