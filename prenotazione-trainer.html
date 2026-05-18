@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prenotazione Personal Trainer — Ronchiverdi</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<meta property="og:title" content="Prenotazione Personal Trainer — Ronchiverdi">
+<meta property="og:description" content="Modulo di prenotazione sessione personal training — Ronchiverdi Sport Club">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Jost', sans-serif; background: #0F0F0D; color: #FFFFFF; font-size: 18px; line-height: 1.6; overflow-x: hidden; font-weight: 400; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: rgba(15,15,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.07); }
+.nav-left { display: flex; align-items: center; gap: 14px; }
+.nav-logo { display: flex; flex-direction: column; gap: 2px; text-decoration: none; }
+.nav-logo-img { height: 34px; width: auto; border-radius: 3px; }
+.nav-logo-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 500; color: #FFFFFF; line-height: 1; }
+.nav-logo-sub { font-size: 11px; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: #F2DC4E; }
+.nav-back { font-size: 13px; font-weight: 400; letter-spacing: 0.1em; color: #FFFFFF; text-decoration: none; border: 1px solid rgba(255,255,255,0.12); border-radius: 2px; padding: 6px 14px; transition: color 0.2s, border-color 0.2s; }
+.nav-back:hover { color: #F2DC4E; border-color: rgba(232,212,106,0.4); }
+
+/* HERO */
+.hero { padding: 148px 48px 56px; max-width: 760px; }
+.hero-eyebrow { font-size: 12px; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase; color: #F2DC4E; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+.hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: rgba(232,212,106,0.4); }
+.hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(38px, 6vw, 60px); font-weight: 400; line-height: 1.1; color: #FFFFFF; margin-bottom: 24px; }
+.hero h1 em { font-style: italic; color: #F2DC4E; }
+.hero-lead { font-size: 17px; font-weight: 400; color: rgba(255,255,255,0.8); max-width: 560px; line-height: 1.7; }
+
+/* FORM */
+.form-wrap { max-width: 760px; margin: 0 auto; padding: 0 48px 96px; }
+form { display: flex; flex-direction: column; gap: 28px; }
+.field { display: flex; flex-direction: column; gap: 10px; }
+.field-label { font-size: 12px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: #F2DC4E; display: flex; align-items: center; gap: 10px; }
+.field-label::before { content: ''; width: 16px; height: 1px; background: rgba(232,212,106,0.35); }
+.field-hint { font-size: 13px; color: rgba(255,255,255,0.5); font-weight: 300; }
+
+input[type=text], input[type=date], select {
+  font-family: 'Jost', sans-serif; font-size: 16px; color: #FFFFFF;
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 4px; padding: 14px 16px; width: 100%;
+  transition: border-color 0.2s, background 0.2s;
+}
+input::placeholder { color: rgba(255,255,255,0.3); }
+input:focus, select:focus { outline: none; border-color: rgba(232,212,106,0.55); background: rgba(232,212,106,0.04); }
+select { appearance: none; -webkit-appearance: none; cursor: pointer;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'><path d='M3 5l4 4 4-4' stroke='%23F2DC4E' stroke-width='1.4' fill='none'/></svg>");
+  background-repeat: no-repeat; background-position: right 16px center; padding-right: 42px;
+}
+input[type=date] { color-scheme: dark; }
+
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+/* SEGMENT (tipo prestazione) */
+.segment { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.seg-opt { position: relative; }
+.seg-opt input { position: absolute; opacity: 0; pointer-events: none; }
+.seg-opt label {
+  display: block; cursor: pointer; padding: 18px 20px; border-radius: 4px;
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.12);
+  transition: border-color 0.2s, background 0.2s;
+}
+.seg-opt label .seg-title { font-size: 16px; font-weight: 500; color: #FFFFFF; display: block; margin-bottom: 4px; }
+.seg-opt label .seg-desc { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.5); }
+.seg-opt input:checked + label { border-color: rgba(232,212,106,0.6); background: rgba(232,212,106,0.07); }
+.seg-opt input:checked + label .seg-title { color: #F2DC4E; }
+.seg-opt input:focus-visible + label { border-color: rgba(232,212,106,0.6); }
+
+/* TIMESTAMP */
+.timestamp-box { display: flex; flex-direction: column; gap: 6px; padding: 16px 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; }
+.timestamp-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+.timestamp-value { font-family: 'JetBrains Mono', monospace; font-size: 16px; color: #F2DC4E; }
+
+/* SUBMIT */
+.submit-btn {
+  font-family: 'Jost', sans-serif; font-size: 14px; font-weight: 500; letter-spacing: 0.14em;
+  text-transform: uppercase; color: #0F0F0D; background: #F2DC4E;
+  border: none; border-radius: 4px; padding: 16px 32px; cursor: pointer;
+  align-self: flex-start; transition: background 0.2s, transform 0.1s;
+}
+.submit-btn:hover { background: #E8C44A; }
+.submit-btn:active { transform: scale(0.98); }
+
+/* RECAP */
+.recap { display: none; margin-top: 8px; padding: 28px; background: rgba(232,212,106,0.05); border: 1px solid rgba(232,212,106,0.3); border-radius: 6px; }
+.recap.show { display: block; }
+.recap-head { font-family: 'Cormorant Garamond', serif; font-size: 26px; color: #F2DC4E; margin-bottom: 20px; }
+.recap-grid { display: flex; flex-direction: column; gap: 12px; }
+.recap-line { display: flex; justify-content: space-between; gap: 20px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.recap-line:last-child { border-bottom: none; }
+.recap-k { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+.recap-v { font-size: 15px; color: #FFFFFF; text-align: right; }
+.recap-actions { display: flex; gap: 12px; margin-top: 22px; flex-wrap: wrap; }
+.recap-btn { font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 11px 22px; border-radius: 4px; cursor: pointer; background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #FFFFFF; transition: border-color 0.2s, color 0.2s; }
+.recap-btn:hover { border-color: rgba(232,212,106,0.5); color: #F2DC4E; }
+
+/* FOOTER */
+footer { padding: 48px; border-top: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-copy { font-size: 13px; color: rgba(255,255,255,0.6); letter-spacing: 0.06em; }
+.footer-copy em { color: #F2DC4E; font-style: normal; }
+
+@media (max-width: 640px) {
+  nav { padding: 0 20px; }
+  .hero { padding: 120px 20px 40px; }
+  .form-wrap { padding: 0 20px 64px; }
+  .row, .segment { grid-template-columns: 1fr; }
+  footer { padding: 32px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <img src="ronchiverdi-logo.jpg" alt="Ronchiverdi" class="nav-logo-img">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-name">Ronchiverdi</span>
+      <span class="nav-logo-sub">Personal Training</span>
+    </a>
+  </div>
+  <a href="index.html" class="nav-back">← Indice</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Modulo prenotazione</div>
+  <h1>Prenotazione <em>sessione</em></h1>
+  <p class="hero-lead">Compila il modulo per registrare una sessione di personal training. Tutti i campi sono obbligatori.</p>
+</section>
+
+<!-- FORM -->
+<div class="form-wrap">
+  <form id="bookingForm" novalidate>
+
+    <div class="field">
+      <span class="field-label">Personal Trainer</span>
+      <input type="text" id="trainer" name="trainer" placeholder="Nome e cognome del trainer" autocomplete="name" required>
+    </div>
+
+    <div class="field">
+      <span class="field-label">Cliente</span>
+      <input type="text" id="cliente" name="cliente" placeholder="Nome e cognome del cliente" required>
+    </div>
+
+    <div class="field">
+      <span class="field-label">Tipo di prestazione</span>
+      <div class="segment">
+        <div class="seg-opt">
+          <input type="radio" id="tipo-pt" name="tipo" value="Personal Training" required>
+          <label for="tipo-pt">
+            <span class="seg-title">Personal Training</span>
+            <span class="seg-desc">Sessione singola</span>
+          </label>
+        </div>
+        <div class="seg-opt">
+          <input type="radio" id="tipo-tp" name="tipo" value="Triple Pack">
+          <label for="tipo-tp">
+            <span class="seg-title">Triple Pack</span>
+            <span class="seg-desc">Pacchetto da tre sessioni</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <span class="field-label">Data</span>
+        <input type="date" id="data" name="data" required>
+      </div>
+      <div class="field">
+        <span class="field-label">Orario d'inizio</span>
+        <select id="orario" name="orario" required>
+          <option value="" disabled selected>Seleziona orario</option>
+        </select>
+        <span class="field-hint">Disponibile dalle 08:00 alle 22:00, ogni 15 minuti.</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <span class="field-label">Registrazione</span>
+      <div class="timestamp-box">
+        <span class="timestamp-label">Compilato il</span>
+        <span class="timestamp-value" id="timestampText">—</span>
+      </div>
+      <input type="hidden" id="timestamp" name="timestamp">
+    </div>
+
+    <button type="submit" class="submit-btn">Conferma prenotazione</button>
+  </form>
+
+  <!-- RECAP -->
+  <div class="recap" id="recap">
+    <div class="recap-head">Prenotazione registrata</div>
+    <div class="recap-grid" id="recapGrid"></div>
+    <div class="recap-actions">
+      <button type="button" class="recap-btn" onclick="window.print()">Stampa</button>
+      <button type="button" class="recap-btn" id="newBtn">Nuova prenotazione</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-copy">Ronchiverdi Sport Club — <em>Personal Training</em></span>
+  <span class="footer-copy">Modulo interno — uso staff</span>
+</footer>
+
+<script>
+(function () {
+  // --- Popola gli orari: 08:00 → 22:00 ogni 15 minuti ---
+  var orario = document.getElementById('orario');
+  for (var m = 8 * 60; m <= 22 * 60; m += 15) {
+    var hh = String(Math.floor(m / 60)).padStart(2, '0');
+    var mm = String(m % 60).padStart(2, '0');
+    var t = hh + ':' + mm;
+    var opt = document.createElement('option');
+    opt.value = t;
+    opt.textContent = t;
+    orario.appendChild(opt);
+  }
+
+  // --- Timestamp di compilazione (fissato all'apertura del modulo) ---
+  function formatTimestamp(d) {
+    var pad = function (n) { return String(n).padStart(2, '0'); };
+    return pad(d.getDate()) + '/' + pad(d.getMonth() + 1) + '/' + d.getFullYear() +
+           ' · ' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+  }
+  var now = new Date();
+  document.getElementById('timestamp').value = now.toISOString();
+  document.getElementById('timestampText').textContent = formatTimestamp(now);
+
+  // --- Data minima: oggi ---
+  var dataInput = document.getElementById('data');
+  var pad = function (n) { return String(n).padStart(2, '0'); };
+  dataInput.min = now.getFullYear() + '-' + pad(now.getMonth() + 1) + '-' + pad(now.getDate());
+
+  // --- Submit ---
+  var form = document.getElementById('bookingForm');
+  var recap = document.getElementById('recap');
+  var recapGrid = document.getElementById('recapGrid');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+
+    var tipo = form.querySelector('input[name="tipo"]:checked');
+    var dataVal = dataInput.value.split('-');
+    var rows = [
+      ['Personal Trainer', document.getElementById('trainer').value.trim()],
+      ['Cliente', document.getElementById('cliente').value.trim()],
+      ['Prestazione', tipo ? tipo.value : ''],
+      ['Data sessione', dataVal[2] + '/' + dataVal[1] + '/' + dataVal[0]],
+      ['Orario d’inizio', orario.value],
+      ['Compilato il', document.getElementById('timestampText').textContent]
+    ];
+
+    recapGrid.innerHTML = '';
+    rows.forEach(function (r) {
+      var line = document.createElement('div');
+      line.className = 'recap-line';
+      var k = document.createElement('span');
+      k.className = 'recap-k';
+      k.textContent = r[0];
+      var v = document.createElement('span');
+      v.className = 'recap-v';
+      v.textContent = r[1];
+      line.appendChild(k);
+      line.appendChild(v);
+      recapGrid.appendChild(line);
+    });
+
+    form.style.display = 'none';
+    recap.classList.add('show');
+    recap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  // --- Nuova prenotazione ---
+  document.getElementById('newBtn').addEventListener('click', function () {
+    form.reset();
+    form.style.display = 'flex';
+    recap.classList.remove('show');
+    var d = new Date();
+    document.getElementById('timestamp').value = d.toISOString();
+    document.getElementById('timestampText').textContent = formatTimestamp(d);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
+
+</body>
+</html>
