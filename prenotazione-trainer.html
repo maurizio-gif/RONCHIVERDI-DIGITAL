@@ -12,47 +12,57 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Jost', sans-serif; background: #0F0F0D; color: #FFFFFF; font-size: 18px; line-height: 1.6; overflow-x: hidden; font-weight: 400; }
+body { font-family: 'Jost', sans-serif; background: #FFFFFF; color: #1A1A18; font-size: 18px; line-height: 1.6; overflow-x: hidden; font-weight: 400; }
 
 /* NAV */
-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: rgba(15,15,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.07); }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.08); }
 .nav-left { display: flex; align-items: center; gap: 14px; }
 .nav-logo { display: flex; flex-direction: column; gap: 2px; text-decoration: none; }
 .nav-logo-img { height: 34px; width: auto; border-radius: 3px; }
-.nav-logo-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 500; color: #FFFFFF; line-height: 1; }
-.nav-logo-sub { font-size: 11px; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: #F2DC4E; }
-.nav-back { font-size: 13px; font-weight: 400; letter-spacing: 0.1em; color: #FFFFFF; text-decoration: none; border: 1px solid rgba(255,255,255,0.12); border-radius: 2px; padding: 6px 14px; transition: color 0.2s, border-color 0.2s; }
-.nav-back:hover { color: #F2DC4E; border-color: rgba(232,212,106,0.4); }
+.nav-logo-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 500; color: #1A1A18; line-height: 1; }
+.nav-logo-sub { font-size: 11px; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: #8A7414; }
+.nav-back { font-size: 13px; font-weight: 400; letter-spacing: 0.1em; color: #1A1A18; text-decoration: none; border: 1px solid rgba(0,0,0,0.15); border-radius: 2px; padding: 6px 14px; transition: color 0.2s, border-color 0.2s; }
+.nav-back:hover { color: #8A7414; border-color: rgba(138,116,20,0.45); }
 
 /* HERO */
 .hero { padding: 148px 48px 56px; max-width: 760px; }
-.hero-eyebrow { font-size: 12px; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase; color: #F2DC4E; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
-.hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: rgba(232,212,106,0.4); }
-.hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(38px, 6vw, 60px); font-weight: 400; line-height: 1.1; color: #FFFFFF; margin-bottom: 24px; }
-.hero h1 em { font-style: italic; color: #F2DC4E; }
-.hero-lead { font-size: 17px; font-weight: 400; color: rgba(255,255,255,0.8); max-width: 560px; line-height: 1.7; }
+.hero-eyebrow { font-size: 12px; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase; color: #8A7414; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+.hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: rgba(138,116,20,0.45); }
+.hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(38px, 6vw, 60px); font-weight: 400; line-height: 1.1; color: #1A1A18; margin-bottom: 24px; }
+.hero h1 em { font-style: italic; color: #8A7414; }
+.hero-lead { font-size: 17px; font-weight: 400; color: rgba(0,0,0,0.7); max-width: 580px; line-height: 1.7; }
+.hero-lead + .hero-lead { margin-top: 14px; }
+
+/* PROCEDURA */
+.procedure { max-width: 580px; margin-top: 28px; padding: 24px 26px; background: #FAFAF6; border: 1px solid rgba(0,0,0,0.09); border-left: 3px solid #F2DC4E; border-radius: 6px; }
+.procedure-title { font-size: 12px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: #8A7414; margin-bottom: 16px; }
+.procedure ol { list-style: none; counter-reset: step; display: flex; flex-direction: column; gap: 12px; }
+.procedure li { counter-increment: step; position: relative; padding-left: 38px; font-size: 15px; line-height: 1.6; color: rgba(0,0,0,0.78); }
+.procedure li::before { content: counter(step); position: absolute; left: 0; top: 0; width: 24px; height: 24px; border-radius: 50%; background: #F2DC4E; color: #1A1A18; font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+.procedure li strong { font-weight: 600; color: #1A1A18; }
+.procedure-note { margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(0,0,0,0.08); font-size: 13px; color: rgba(0,0,0,0.55); }
 
 /* FORM */
 .form-wrap { max-width: 760px; margin: 0 auto; padding: 0 48px 96px; }
 form { display: flex; flex-direction: column; gap: 28px; }
 .field { display: flex; flex-direction: column; gap: 10px; }
-.field-label { font-size: 12px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: #F2DC4E; display: flex; align-items: center; gap: 10px; }
-.field-label::before { content: ''; width: 16px; height: 1px; background: rgba(232,212,106,0.35); }
-.field-hint { font-size: 13px; color: rgba(255,255,255,0.5); font-weight: 300; }
+.field-label { font-size: 12px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: #8A7414; display: flex; align-items: center; gap: 10px; }
+.field-label::before { content: ''; width: 16px; height: 1px; background: rgba(138,116,20,0.4); }
+.field-hint { font-size: 13px; color: rgba(0,0,0,0.5); font-weight: 300; }
 
 input[type=text], input[type=date], select {
-  font-family: 'Jost', sans-serif; font-size: 16px; color: #FFFFFF;
-  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.12);
+  font-family: 'Jost', sans-serif; font-size: 16px; color: #1A1A18;
+  background: #FAFAF8; border: 1px solid rgba(0,0,0,0.15);
   border-radius: 4px; padding: 14px 16px; width: 100%;
   transition: border-color 0.2s, background 0.2s;
 }
-input::placeholder { color: rgba(255,255,255,0.3); }
-input:focus, select:focus { outline: none; border-color: rgba(232,212,106,0.55); background: rgba(232,212,106,0.04); }
+input::placeholder { color: rgba(0,0,0,0.35); }
+input:focus, select:focus { outline: none; border-color: rgba(138,116,20,0.6); background: rgba(242,220,78,0.12); }
 select { appearance: none; -webkit-appearance: none; cursor: pointer;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'><path d='M3 5l4 4 4-4' stroke='%23F2DC4E' stroke-width='1.4' fill='none'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'><path d='M3 5l4 4 4-4' stroke='%238A7414' stroke-width='1.4' fill='none'/></svg>");
   background-repeat: no-repeat; background-position: right 16px center; padding-right: 42px;
 }
-input[type=date] { color-scheme: dark; }
+input[type=date] { color-scheme: light; }
 
 .row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
@@ -62,19 +72,19 @@ input[type=date] { color-scheme: dark; }
 .seg-opt input { position: absolute; opacity: 0; pointer-events: none; }
 .seg-opt label {
   display: block; cursor: pointer; padding: 18px 20px; border-radius: 4px;
-  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.12);
+  background: #FAFAF8; border: 1px solid rgba(0,0,0,0.15);
   transition: border-color 0.2s, background 0.2s;
 }
-.seg-opt label .seg-title { font-size: 16px; font-weight: 500; color: #FFFFFF; display: block; margin-bottom: 4px; }
-.seg-opt label .seg-desc { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.5); }
-.seg-opt input:checked + label { border-color: rgba(232,212,106,0.6); background: rgba(232,212,106,0.07); }
-.seg-opt input:checked + label .seg-title { color: #F2DC4E; }
-.seg-opt input:focus-visible + label { border-color: rgba(232,212,106,0.6); }
+.seg-opt label .seg-title { font-size: 16px; font-weight: 500; color: #1A1A18; display: block; margin-bottom: 4px; }
+.seg-opt label .seg-desc { font-size: 13px; font-weight: 300; color: rgba(0,0,0,0.5); }
+.seg-opt input:checked + label { border-color: rgba(138,116,20,0.6); background: rgba(242,220,78,0.18); }
+.seg-opt input:checked + label .seg-title { color: #8A7414; }
+.seg-opt input:focus-visible + label { border-color: rgba(138,116,20,0.6); }
 
 /* TIMESTAMP */
-.timestamp-box { display: flex; flex-direction: column; gap: 6px; padding: 16px 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; }
-.timestamp-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
-.timestamp-value { font-family: 'JetBrains Mono', monospace; font-size: 16px; color: #F2DC4E; }
+.timestamp-box { display: flex; flex-direction: column; gap: 6px; padding: 16px 18px; background: #FAFAF8; border: 1px solid rgba(0,0,0,0.12); border-radius: 4px; }
+.timestamp-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(0,0,0,0.45); }
+.timestamp-value { font-family: 'JetBrains Mono', monospace; font-size: 16px; color: #8A7414; }
 
 /* SUBMIT */
 .submit-btn {
@@ -87,22 +97,22 @@ input[type=date] { color-scheme: dark; }
 .submit-btn:active { transform: scale(0.98); }
 
 /* RECAP */
-.recap { display: none; margin-top: 8px; padding: 28px; background: rgba(232,212,106,0.05); border: 1px solid rgba(232,212,106,0.3); border-radius: 6px; }
+.recap { display: none; margin-top: 8px; padding: 28px; background: #FAFAF6; border: 1px solid rgba(138,116,20,0.3); border-left: 3px solid #F2DC4E; border-radius: 6px; }
 .recap.show { display: block; }
-.recap-head { font-family: 'Cormorant Garamond', serif; font-size: 26px; color: #F2DC4E; margin-bottom: 20px; }
+.recap-head { font-family: 'Cormorant Garamond', serif; font-size: 26px; color: #8A7414; margin-bottom: 20px; }
 .recap-grid { display: flex; flex-direction: column; gap: 12px; }
-.recap-line { display: flex; justify-content: space-between; gap: 20px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.recap-line { display: flex; justify-content: space-between; gap: 20px; padding-bottom: 10px; border-bottom: 1px solid rgba(0,0,0,0.1); }
 .recap-line:last-child { border-bottom: none; }
-.recap-k { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
-.recap-v { font-size: 15px; color: #FFFFFF; text-align: right; }
+.recap-k { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(0,0,0,0.5); }
+.recap-v { font-size: 15px; color: #1A1A18; text-align: right; }
 .recap-actions { display: flex; gap: 12px; margin-top: 22px; flex-wrap: wrap; }
-.recap-btn { font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 11px 22px; border-radius: 4px; cursor: pointer; background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #FFFFFF; transition: border-color 0.2s, color 0.2s; }
-.recap-btn:hover { border-color: rgba(232,212,106,0.5); color: #F2DC4E; }
+.recap-btn { font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 11px 22px; border-radius: 4px; cursor: pointer; background: transparent; border: 1px solid rgba(0,0,0,0.2); color: #1A1A18; transition: border-color 0.2s, color 0.2s; }
+.recap-btn:hover { border-color: rgba(138,116,20,0.55); color: #8A7414; }
 
 /* FOOTER */
-footer { padding: 48px; border-top: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-.footer-copy { font-size: 13px; color: rgba(255,255,255,0.6); letter-spacing: 0.06em; }
-.footer-copy em { color: #F2DC4E; font-style: normal; }
+footer { padding: 48px; border-top: 1px solid rgba(0,0,0,0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-copy { font-size: 13px; color: rgba(0,0,0,0.6); letter-spacing: 0.06em; }
+.footer-copy em { color: #8A7414; font-style: normal; }
 
 @media (max-width: 640px) {
   nav { padding: 0 20px; }
@@ -130,7 +140,20 @@ footer { padding: 48px; border-top: 1px solid rgba(255,255,255,0.07); display: f
 <section class="hero">
   <div class="hero-eyebrow">Modulo prenotazione</div>
   <h1>Prenotazione <em>sessione</em></h1>
-  <p class="hero-lead">Compila il modulo per registrare una sessione di personal training. Tutti i campi sono obbligatori.</p>
+  <p class="hero-lead">Questo modulo serve a registrare in modo puntuale ogni sessione di personal training erogata presso il club. La compilazione è a cura del trainer e va effettuata prima dell'inizio della sessione, così da garantire la tracciabilità delle prestazioni e la corretta rendicontazione verso amministrazione e cliente.</p>
+  <p class="hero-lead">Ogni invio genera un riepilogo stampabile da conservare o allegare al registro interno. Tutti i campi sono obbligatori: dati incompleti rendono la prenotazione non valida.</p>
+
+  <div class="procedure">
+    <div class="procedure-title">Procedura di compilazione</div>
+    <ol>
+      <li>Indica il tuo <strong>nome e cognome</strong> nel campo Personal Trainer: identifica chi eroga la sessione.</li>
+      <li>Inserisci il <strong>nome e cognome del cliente</strong> a cui è destinata la prestazione.</li>
+      <li>Seleziona il <strong>tipo di prestazione</strong>: sessione singola di Personal Training oppure Triple Pack (pacchetto da tre sessioni).</li>
+      <li>Specifica <strong>data e orario d'inizio</strong> effettivi: gli orari sono disponibili dalle 08:00 alle 22:00, a intervalli di 15 minuti.</li>
+      <li>Controlla l'<strong>orario di compilazione</strong> registrato in automatico, poi premi «Conferma prenotazione».</li>
+    </ol>
+    <div class="procedure-note">In caso di errore, usa «Nuova prenotazione» nel riepilogo per ricompilare il modulo da zero.</div>
+  </div>
 </section>
 
 <!-- FORM -->
