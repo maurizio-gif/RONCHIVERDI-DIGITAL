@@ -216,24 +216,26 @@ h1.hero-title em { font-style: italic; color: #F2DC4E; }
 .team-info-role { font-size: 13px; color: #FFFFFF; }
 
 /* CALENDAR / BOOKING */
-.calendar-section { padding: 80px 48px; background: #161613; border-top: 1px solid rgba(255,255,255,0.06); position: relative; overflow: hidden; }
+.calendar-section { padding: 80px 24px; background: #161613; border-top: 1px solid rgba(255,255,255,0.06); position: relative; overflow: hidden; }
 .calendar-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 30% 30%, rgba(232,212,106,0.04) 0%, transparent 60%); pointer-events: none; }
-.calendar-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
-.calendar-header { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; margin-bottom: 40px; }
-.calendar-intro { }
-.cal-eyebrow { font-size: 13px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #F2DC4E; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+.calendar-inner { max-width: 1400px; margin: 0 auto; position: relative; z-index: 1; }
+.calendar-header { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 40px; }
+.calendar-intro { max-width: 680px; }
+.cal-eyebrow { font-size: 13px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #F2DC4E; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; gap: 12px; }
 .cal-eyebrow::before { content: ''; width: 24px; height: 1px; background: rgba(232,212,106,0.5); }
-.cal-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 3.2vw, 42px); font-weight: 400; color: #FFFFFF; line-height: 1.15; letter-spacing: -0.01em; }
+.cal-eyebrow::after { content: ''; width: 24px; height: 1px; background: rgba(232,212,106,0.5); }
+.cal-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 3.2vw, 48px); font-weight: 400; color: #FFFFFF; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 28px; }
 .cal-title em { font-style: italic; color: #F2DC4E; }
-.calendar-side { font-size: 15px; color: #FFFFFF; line-height: 1.7; }
+.calendar-side { font-size: 15px; color: #FFFFFF; line-height: 1.75; max-width: 640px; }
 .calendar-side p { margin-bottom: 14px; }
-.calendar-side strong { color: #FFFFFF; font-weight: 500; }
-.calendar-meta-list { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.08); }
-.cal-meta-row { display: flex; gap: 14px; font-size: 14px; color: #FFFFFF; align-items: baseline; }
-.cal-meta-key { font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #F2DC4E; min-width: 70px; }
-.cal-meta-val { color: #FFFFFF; font-family: 'Cormorant Garamond', serif; font-size: 16px; }
+.calendar-side p:last-child { margin-bottom: 0; }
+.calendar-side strong { color: #FFFFFF; font-weight: 600; }
+.calendar-meta-list { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 24px 40px; margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); }
+.cal-meta-row { display: flex; flex-direction: column; gap: 4px; font-size: 14px; color: #FFFFFF; align-items: center; }
+.cal-meta-key { font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #F2DC4E; }
+.cal-meta-val { color: #FFFFFF; font-family: 'Cormorant Garamond', serif; font-size: 17px; }
 
-.calendar-embed-wrap { position: relative; background: #fff; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 32px 80px -24px rgba(0,0,0,0.7); min-height: 700px; }
+.calendar-embed-wrap { position: relative; background: #fff; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 32px 80px -24px rgba(0,0,0,0.7); min-height: 700px; margin-top: 48px; }
 .calendar-embed-wrap iframe { width: 100%; height: 700px; border: none; display: block; }
 .calendar-loading { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: #fff; color: #0F0F0D; font-family: 'Cormorant Garamond', serif; font-size: 18px; font-style: italic; opacity: 1; transition: opacity 0.3s; pointer-events: none; }
 .calendar-loading.hidden { opacity: 0; }
@@ -244,11 +246,13 @@ h1.hero-title em { font-style: italic; color: #F2DC4E; }
 .calendar-footnote a { color: #F2DC4E; text-decoration: none; border-bottom: 1px solid rgba(232,212,106,0.4); transition: border-color 0.2s; }
 .calendar-footnote a:hover { border-bottom-color: #F2DC4E; }
 
-@media(max-width:900px){
-  .calendar-header { grid-template-columns: 1fr; gap: 28px; }
-}
 @media(max-width:768px){
-  .calendar-section { padding: 56px 24px; }
+  .calendar-section { padding: 56px 20px; }
+  .calendar-header { text-align: left; align-items: flex-start; }
+  .cal-eyebrow { justify-content: flex-start; }
+  .cal-eyebrow::after { display: none; }
+  .calendar-meta-list { flex-direction: column; gap: 10px; align-items: flex-start; }
+  .cal-meta-row { align-items: flex-start; }
   .calendar-embed-wrap { border-radius: 14px; min-height: 640px; }
   .calendar-embed-wrap iframe { height: 640px; }
 }
@@ -406,6 +410,14 @@ img, svg, canvas, iframe, video { max-width: 100%; }
     <a href="prenotazione-trainer.html" class="nav-mobile-link">
       <span class="nav-mobile-link-tag">Personal Training &middot; 2026</span>
       <span class="nav-mobile-link-title">Prenotazione <em>sessione</em></span>
+    </a>
+    <a href="debriefing-amministrazione.html" class="nav-mobile-link">
+      <span class="nav-mobile-link-tag">Amministrazione &middot; 20 maggio 2026</span>
+      <span class="nav-mobile-link-title">Digitalizzazione <em>processi</em> amministrativi</span>
+    </a>
+    <a href="debriefing-commerciale.html" class="nav-mobile-link">
+      <span class="nav-mobile-link-tag">Commerciale &middot; 20 maggio 2026</span>
+      <span class="nav-mobile-link-title">Obiettivi <em>Lorella</em> &amp; Lead Management</span>
     </a>
   </div>
   <div class="nav-mobile-footer">Maurizio Taruggi · <em>Ready 2 Digital</em></div>
@@ -826,8 +838,8 @@ img, svg, canvas, iframe, video { max-width: 100%; }
         <h2 class="cal-title">Prenota una <em>call di audit</em><br>o una sessione di follow-up</h2>
       </div>
       <div class="calendar-side">
-        <p>Scegli direttamente uno slot disponibile nel calendario qui sotto. <strong>Le call di audit durano in media 90 minuti</strong>, le sessioni di follow-up tra 30 e 60.</p>
-        <p>Riceverai automaticamente l'invito calendar con il link Meet/Zoom e l'ordine del giorno della sessione.</p>
+        <p>Scegli direttamente <strong>uno slot disponibile</strong> nel calendario qui sotto. Le call di audit durano <strong>in media 90 minuti</strong>, le sessioni di follow-up <strong>tra 30 e 60 minuti</strong>.</p>
+        <p>Riceverai automaticamente l'<strong>invito calendar</strong> con il link Meet e l'<strong>ordine del giorno</strong> della sessione, così arrivi preparato senza scambi di email.</p>
         <div class="calendar-meta-list">
           <div class="cal-meta-row">
             <span class="cal-meta-key">Tipo</span>
