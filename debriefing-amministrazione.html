@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Debriefing Amministrazione &mdash; Digitalizzazione Processi &middot; Ronchiverdi Audit</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FFFFFF; font-size: 17px; line-height: 1.7; overflow-x: hidden; font-weight: 400; -webkit-font-smoothing: antialiased; }
+
+/* BACK NAV */
+.back-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: rgba(15,15,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.07); }
+.back-btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: #FFFFFF; font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; transition: color 0.2s; padding: 8px 0; }
+.back-btn:hover { color: #F2DC4E; }
+.back-btn .arrow { font-size: 18px; transition: transform 0.2s; }
+.back-btn:hover .arrow { transform: translateX(-3px); }
+.back-nav-logo-link { display: flex; align-items: center; }
+.back-nav-logo { height: 36px; width: auto; filter: invert(1); mix-blend-mode: screen; opacity: 0.9; }
+@media(max-width:640px){ .back-nav { padding: 0 20px; } .back-nav-logo { height: 28px; } }
+
+/* HERO */
+.hero { padding: 120px 48px 72px; position: relative; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 80% 30%, rgba(232,212,106,0.05) 0%, transparent 60%); pointer-events: none; }
+.hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+.hero-eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+.hero-eyebrow .tag { font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #FFFFFF; }
+.hero-eyebrow .sep { color: #FFFFFF; }
+.hero h1 { font-family: "Cormorant Garamond", serif; font-size: clamp(38px, 5vw, 62px); font-weight: 400; line-height: 1.05; color: #FFFFFF; margin-bottom: 20px; letter-spacing: -0.02em; }
+.hero h1 em { font-style: italic; color: #F2DC4E; }
+.hero-sub { font-size: 16px; font-weight: 400; line-height: 1.75; color: #FFFFFF; max-width: 720px; margin-bottom: 36px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 32px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.07); }
+.hero-meta-item .lbl { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #F2DC4E; margin-bottom: 4px; }
+.hero-meta-item .val { font-size: 15px; font-weight: 400; color: #FFFFFF; }
+.hero-parts { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+.hero-part-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 50px; padding: 8px 18px; font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: #FFFFFF; }
+.hero-part-badge.active { border-color: rgba(232,212,106,0.3); color: #F2DC4E; background: rgba(232,212,106,0.06); }
+
+/* LAYOUT */
+.page { max-width: 1100px; margin: 0 auto; padding: 0 48px 100px; }
+
+/* PART DIVIDER */
+.part-divider { margin: 0 -48px; padding: 40px 48px; background: rgba(255,255,255,0.02); border-top: 1px solid rgba(232,212,106,0.15); border-bottom: 1px solid rgba(232,212,106,0.15); }
+.part-number { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #F2DC4E; margin-bottom: 8px; }
+.part-title { font-family: "Cormorant Garamond", serif; font-size: clamp(28px, 4vw, 44px); font-weight: 400; color: #FFFFFF; line-height: 1.1; }
+.part-title em { font-style: italic; color: #F2DC4E; }
+.part-desc { font-size: 15px; color: #FFFFFF; margin-top: 8px; max-width: 620px; line-height: 1.7; }
+
+/* SECTION */
+.section { padding: 56px 0; border-top: 1px solid rgba(255,255,255,0.06); }
+.section:first-of-type { border-top: none; }
+.section-eyebrow { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #F2DC4E; margin-bottom: 12px; }
+.section > h2 { font-family: "Cormorant Garamond", serif; font-size: clamp(24px, 3vw, 36px); font-weight: 400; line-height: 1.15; color: #FFFFFF; margin-bottom: 24px; }
+.section > h2 em { font-style: italic; color: #F2DC4E; }
+
+/* PROSE */
+.prose { font-size: 16px; line-height: 1.8; color: #FFFFFF; }
+.prose p { margin-bottom: 12px; }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { color: #FFFFFF; font-weight: 500; }
+
+/* GRIDS */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 20px 0; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 20px 0; }
+
+/* CARD */
+.card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 22px 24px; }
+.card.gold { border-color: rgba(232,212,106,0.22); background: rgba(232,212,106,0.04); }
+.card.green { border-color: rgba(90,180,120,0.2); background: rgba(90,180,120,0.04); }
+.card.red { border-color: rgba(200,60,60,0.2); background: rgba(200,60,60,0.04); }
+.card-title { font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; color: #FFFFFF; }
+.card.gold .card-title { color: #F2DC4E; }
+.card.green .card-title { color: rgba(90,180,120,0.85); }
+.card.red .card-title { color: rgba(220,120,120,0.9); }
+.card-body { font-size: 16px; color: #FFFFFF; line-height: 1.7; }
+.card-body strong { color: #FFFFFF; font-weight: 500; }
+
+/* ITEMS */
+.item-list { display: flex; flex-direction: column; gap: 10px; }
+.item { display: flex; align-items: flex-start; gap: 10px; font-size: 16px; color: #FFFFFF; line-height: 1.65; }
+.dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; margin-top: 8px; }
+.dot.g { background: #5AB478; }
+.dot.r { background: #C84040; }
+.dot.y { background: #E0C840; }
+.dot.w { background: rgba(250,248,244,0.2); }
+.item strong { color: #FFFFFF; font-weight: 500; }
+
+/* STAT CARD */
+.stat-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 20px 22px; }
+.stat-card.gold { border-color: rgba(232,212,106,0.25); background: rgba(232,212,106,0.05); }
+.stat-card.green { border-color: rgba(90,180,120,0.2); background: rgba(90,180,120,0.04); }
+.stat-num { font-family: "Cormorant Garamond", serif; font-size: 45px; font-weight: 400; line-height: 1; color: #F2DC4E; margin-bottom: 6px; }
+.stat-label { font-size: 14px; font-weight: 400; color: #FFFFFF; line-height: 1.4; }
+.stat-label strong { color: #FFFFFF; font-weight: 500; }
+
+/* FLOW */
+.flow { display: flex; align-items: stretch; gap: 0; margin: 28px 0; overflow-x: auto; }
+.flow-step { flex: 1; min-width: 130px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); padding: 18px 14px; position: relative; }
+.flow-step:first-child { border-radius: 12px 0 0 12px; }
+.flow-step:last-child { border-radius: 0 12px 12px 0; }
+.flow-step + .flow-step { border-left: none; }
+.flow-num { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #FFFFFF; margin-bottom: 8px; }
+.flow-name { font-family: "Cormorant Garamond", serif; font-size: 16px; font-weight: 400; color: #FFFFFF; line-height: 1.3; }
+.flow-note { font-size: 13px; color: #FFFFFF; margin-top: 6px; line-height: 1.4; }
+.flow-arrow { position: absolute; right: -11px; top: 50%; transform: translateY(-50%); z-index: 2; width: 22px; height: 22px; border-radius: 50%; background: #0F0F0D; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 11px; color: #FFFFFF; }
+
+/* CALLOUT */
+.callout { background: rgba(232,212,106,0.06); border: 1px solid rgba(232,212,106,0.18); border-radius: 14px; padding: 22px 26px; margin: 24px 0; }
+.callout-label { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #F2DC4E; margin-bottom: 10px; }
+.callout p { font-size: 16px; line-height: 1.8; color: #FFFFFF; margin-bottom: 8px; }
+.callout p:last-child { margin-bottom: 0; }
+.callout strong { color: #FFFFFF; font-weight: 500; }
+
+/* TABLE */
+.data-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 15px; }
+.data-table th { padding: 10px 14px; text-align: left; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.1); color: #FFFFFF; }
+.data-table td { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: top; line-height: 1.55; color: #FFFFFF; }
+.data-table td:first-child { font-weight: 500; color: #FFFFFF; width: 22%; }
+.data-table tr:last-child td { border-bottom: none; }
+.badge { display: inline-block; font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; }
+.badge.red { background: rgba(200,60,60,0.2); color: rgba(220,120,120,0.95); }
+.badge.yellow { background: rgba(232,212,106,0.15); color: #F2DC4E; }
+.badge.green { background: rgba(90,180,120,0.15); color: rgba(90,180,120,0.95); }
+.badge.grey { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.55); }
+
+/* ROADMAP */
+.roadmap { display: flex; flex-direction: column; gap: 10px; margin: 24px 0; }
+.rm-item { display: flex; gap: 18px; align-items: flex-start; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 18px 22px; }
+.rm-item.p1 { border-color: rgba(200,60,60,0.25); }
+.rm-item.p2 { border-color: rgba(232,212,106,0.2); }
+.rm-item.p3 { border-color: rgba(90,180,120,0.18); }
+.rm-item.p4 { border-color: rgba(255,255,255,0.08); }
+.rm-priority { font-family: "Cormorant Garamond", serif; font-size: 36px; font-weight: 400; line-height: 1; flex-shrink: 0; width: 44px; }
+.rm-item.p1 .rm-priority { color: rgba(200,80,80,0.6); }
+.rm-item.p2 .rm-priority { color: #F2DC4E; }
+.rm-item.p3 .rm-priority { color: rgba(90,180,120,0.55); }
+.rm-item.p4 .rm-priority { color: rgba(255,255,255,0.2); }
+.rm-tag { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 9px; border-radius: 4px; margin-bottom: 6px; }
+.p1 .rm-tag { background: rgba(200,60,60,0.15); color: rgba(220,100,100,0.95); }
+.p2 .rm-tag { background: rgba(232,212,106,0.12); color: #F2DC4E; }
+.p3 .rm-tag { background: rgba(90,180,120,0.12); color: rgba(90,180,120,0.9); }
+.p4 .rm-tag { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.4); }
+.rm-title { font-family: "Cormorant Garamond", serif; font-size: 19px; font-weight: 400; color: #FFFFFF; margin-bottom: 4px; }
+.rm-desc { font-size: 15px; color: #FFFFFF; line-height: 1.6; }
+
+/* PHASE BLOCK */
+.phase-block { display: flex; gap: 0; margin: 24px 0; border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; overflow: hidden; }
+.phase { flex: 1; padding: 24px 22px; border-right: 1px solid rgba(255,255,255,0.06); }
+.phase:last-child { border-right: none; }
+.phase.active { background: rgba(232,212,106,0.05); border-right-color: rgba(232,212,106,0.1); }
+.phase-label { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #F2DC4E; margin-bottom: 8px; }
+.phase.inactive .phase-label { color: rgba(255,255,255,0.3); }
+.phase-title { font-family: "Cormorant Garamond", serif; font-size: 20px; font-weight: 400; color: #FFFFFF; margin-bottom: 8px; line-height: 1.2; }
+.phase.inactive .phase-title { color: rgba(255,255,255,0.45); }
+.phase-desc { font-size: 14px; color: #FFFFFF; line-height: 1.65; }
+.phase.inactive .phase-desc { color: rgba(255,255,255,0.35); }
+.phase-status { display: inline-block; margin-top: 12px; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; background: rgba(232,212,106,0.12); color: #F2DC4E; }
+.phase.inactive .phase-status { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.3); }
+
+/* FILE BLOCK */
+.file-block { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
+.file-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 20px 22px; }
+.file-card.gold { border-color: rgba(232,212,106,0.2); background: rgba(232,212,106,0.04); }
+.file-tag { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #F2DC4E; margin-bottom: 8px; }
+.file-name { font-family: "Cormorant Garamond", serif; font-size: 19px; font-weight: 400; color: #FFFFFF; margin-bottom: 8px; line-height: 1.2; }
+.file-desc { font-size: 14px; color: #FFFFFF; line-height: 1.6; }
+
+/* FOOTER */
+footer { background: rgba(0,0,0,0.3); padding: 40px 48px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; }
+.f-info { font-size: 15px; color: #FFFFFF; }
+.f-info strong { color: #FFFFFF; }
+.f-brand { font-family: "Cormorant Garamond", serif; font-size: 17px; color: #FFFFFF; }
+.f-brand em { font-style: italic; color: #F2DC4E; }
+
+.fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-up.visible { opacity: 1; transform: none; }
+
+@media(max-width:900px){
+  .hero { padding: 100px 24px 52px; }
+  .page { padding: 0 24px 72px; }
+  .grid-2, .grid-3, .grid-4, .file-block { grid-template-columns: 1fr; }
+  .phase-block { flex-direction: column; }
+  .phase { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .phase:last-child { border-bottom: none; }
+  footer { flex-direction: column; gap: 14px; text-align: center; padding: 28px 20px; }
+  .part-divider { margin: 0 -24px; padding: 32px 24px; }
+}
+html, body { overflow-x: hidden; max-width: 100%; }
+*, *::before, *::after { min-width: 0; }
+strong, b { font-weight: 600; }
+</style>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Audit Digitale · Ronchiverdi">
+<meta property="og:title" content="Debriefing Amministrazione — Digitalizzazione Processi · Ronchiverdi">
+<meta property="og:description" content="Priorità e roadmap per la digitalizzazione dei processi amministrativi: HR software Athletics, analisi Excel con Claude, suite form dipendenti, gestione crediti.">
+<meta property="og:image" content="https://maurizio-gif.github.io/RONCHIVERDI-DIGITAL/og-image.jpg">
+<meta property="og:url" content="https://maurizio-gif.github.io/RONCHIVERDI-DIGITAL/debriefing-amministrazione.html">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+
+<nav class="back-nav">
+  <a href="index.html" class="back-btn">
+    <span class="arrow">←</span>
+    <span>Torna all'indice</span>
+  </a>
+  <a href="index.html" class="back-nav-logo-link">
+    <img src="ronchiverdi-logo.jpg" class="back-nav-logo" alt="Ronchiverdi">
+  </a>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <span class="tag">Debriefing</span>
+      <span class="sep">/</span>
+      <span class="tag">20 maggio 2026</span>
+      <span class="sep">/</span>
+      <span class="tag">Amministrazione</span>
+    </div>
+    <h1>Digitalizzazione <em>Processi</em><br>Amministrativi</h1>
+    <p class="hero-sub">Definizione delle priorità operative per la digitalizzazione end-to-end dell&rsquo;area amministrativa: gestione HR collaboratori, controllo di gestione con Claude, suite form dipendenti e pipeline crediti. Roadmap con focus su stagionalità e impatto immediato.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><span class="lbl">Data</span><span class="val">20 maggio 2026</span></div>
+      <div class="hero-meta-item"><span class="lbl">Area</span><span class="val">Amministrazione</span></div>
+      <div class="hero-meta-item"><span class="lbl">Condotto da</span><span class="val">Maurizio Taruggi</span></div>
+      <div class="hero-meta-item"><span class="lbl">Priorità identificate</span><span class="val">4 filoni + roadmap Claude</span></div>
+    </div>
+    <div class="hero-parts">
+      <div class="hero-part-badge active">P1 &mdash; Athletics HR</div>
+      <div class="hero-part-badge active">P2 &mdash; Claude + Excel</div>
+      <div class="hero-part-badge active">P3 &mdash; Form Dipendenti</div>
+      <div class="hero-part-badge active">P4 &mdash; Gestione Crediti</div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- PANORAMICA PRIORITÀ -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">Panoramica &middot; Roadmap di progetto</div>
+    <h2>Le quattro <em>priorità</em> identificate</h2>
+    <div class="prose" style="margin-bottom: 24px;">
+      <p>Il debriefing ha prodotto quattro filoni di lavoro ordinati per urgenza e impatto. I criteri di prioritizzazione combinano <strong>importanza strategica</strong>, <strong>stagionalità</strong> (scadenze legate al ciclo annuale del personale) e <strong>velocità di messa a terra</strong>.</p>
+    </div>
+
+    <div class="roadmap">
+      <div class="rm-item p1">
+        <div class="rm-priority">1</div>
+        <div>
+          <div class="rm-tag">Priorità Alta &middot; Urgenza stagionale</div>
+          <div class="rm-title">Software Athletics &mdash; Gestione HR collaboratori</div>
+          <div class="rm-desc">Implementazione end-to-end del dato collaboratore: contratti digitali, dati personali self-service, rilevazione ore, cedolini, F24 e Certificazioni Uniche.</div>
+        </div>
+      </div>
+      <div class="rm-item p2">
+        <div class="rm-priority">2</div>
+        <div>
+          <div class="rm-tag">Quick Win &middot; Impatto immediato</div>
+          <div class="rm-title">Claude per analisi Excel &mdash; Controllo di gestione</div>
+          <div class="rm-desc">Utilizzo strutturato di Claude per incrociare ricavi (InfoReu) e costi personale (team interno) con calcolo automatico della marginalità per centro di costo/ricavo.</div>
+        </div>
+      </div>
+      <div class="rm-item p3">
+        <div class="rm-priority">3</div>
+        <div>
+          <div class="rm-tag">Medio termine &middot; Strutturazione</div>
+          <div class="rm-title">Suite Form dipendenti &mdash; Richieste formali digitali</div>
+          <div class="rm-desc">Form digitali per ferie, permessi, note spese e richieste varie. I dati confluiscono in un database centralizzato (Airtable o Supabase) per una gestione ordinata da parte del team amministrazione.</div>
+        </div>
+      </div>
+      <div class="rm-item p4">
+        <div class="rm-priority">4</div>
+        <div>
+          <div class="rm-tag">Non urgente &middot; Prerequisiti da completare</div>
+          <div class="rm-title">Gestione Crediti &mdash; Dashboard e pipeline operativa</div>
+          <div class="rm-desc">Richiede prima un&rsquo;analisi approfondita del gestionale ForYou e un potenziale snellimento delle formule di abbonamento. Poi: dashboard settimanale + pipeline amministrazione/segreteria.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ PRIORITÀ 1: ATHLETICS ══════════════════ -->
+  <div class="part-divider fade-up">
+    <div class="part-number">Priorità 1 &mdash; Urgenza stagionale</div>
+    <div class="part-title">Software <em>Athletics</em> &mdash; HR end-to-end</div>
+    <div class="part-desc">Piattaforma di gestione completa del collaboratore, dalla firma del contratto al cedolino. Motivazione principale: stagionalità dei cicli paghe e scadenze fiscali.</div>
+  </div>
+
+  <div class="section fade-up">
+    <div class="section-eyebrow">1.01 &middot; Perimetro funzionale</div>
+    <h2>Cosa copre <em>Athletics</em></h2>
+    <div class="prose" style="margin-bottom: 20px;">
+      <p>Athletics permette di avere una gestione <strong>end-to-end del dato collaboratore</strong>: dal momento dell&rsquo;inserimento in anagrafica fino alla reportistica annuale. Il collaboratore partecipa attivamente alla digitalizzazione in autonomia, riducendo il carico manuale sull&rsquo;ufficio amministrativo.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="card gold">
+        <div class="card-title">Onboarding digitale</div>
+        <div class="card-body">
+          Raccolta dati personali in autonomia dal collaboratore. Caricamento documenti e firma digitale del contratto direttamente sulla piattaforma.
+        </div>
+      </div>
+      <div class="card gold">
+        <div class="card-title">Rilevazione ore</div>
+        <div class="card-body">
+          Inserimento ore da parte del collaboratore. Verifica e validazione del responsabile di settore prima dell&rsquo;elaborazione del cedolino.
+        </div>
+      </div>
+      <div class="card gold">
+        <div class="card-title">Payroll &amp; adempimenti</div>
+        <div class="card-body">
+          Elaborazione cedolini, F24 mensile e Certificazioni Uniche a fine anno. Reportistica automatica sempre disponibile.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-up">
+    <div class="section-eyebrow">1.02 &middot; Flusso operativo</div>
+    <h2>Il ciclo del <em>collaboratore</em> in Athletics</h2>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-num">01</div>
+        <div class="flow-name">Inserimento anagrafica</div>
+        <div class="flow-note">Dati personali e documenti caricati in autonomia dal collaboratore</div>
+        <div class="flow-arrow">&#10095;</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">02</div>
+        <div class="flow-name">Contratto digitale</div>
+        <div class="flow-note">Firma elettronica e archiviazione automatica</div>
+        <div class="flow-arrow">&#10095;</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">03</div>
+        <div class="flow-name">Ore lavorate</div>
+        <div class="flow-note">Inserimento dal collaboratore + validazione responsabile settore</div>
+        <div class="flow-arrow">&#10095;</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">04</div>
+        <div class="flow-name">Elaborazione cedolino</div>
+        <div class="flow-note">Calcolo automatico e distribuzione al collaboratore</div>
+        <div class="flow-arrow">&#10095;</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">05</div>
+        <div class="flow-name">Adempimenti fiscali</div>
+        <div class="flow-note">F24 mensile &middot; CU a fine anno &middot; reportistica automatica</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">Perché è priorità 1</div>
+      <p><strong>Stagionalità:</strong> i cicli paghe hanno scadenze fisse mensili e annuali (F24, CU). L&rsquo;implementazione di Athletics prima dell&rsquo;estate consente di avere il sistema rodato prima delle scadenze di fine anno. Ritardare significa un altro ciclo gestito manualmente.</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════ PRIORITÀ 2: CLAUDE + EXCEL ══════════════════ -->
+  <div class="part-divider fade-up">
+    <div class="part-number">Priorità 2 &mdash; Quick win</div>
+    <div class="part-title">Claude per <em>analisi Excel</em> &mdash; Controllo di gestione</div>
+    <div class="part-desc">Utilizzo strutturato di Claude per incrociare ricavi e costi per centro di costo/ricavo, producendo una marginalità automatica. Impatto immediato, senza infrastruttura aggiuntiva.</div>
+  </div>
+
+  <div class="section fade-up">
+    <div class="section-eyebrow">2.01 &middot; I due file sorgente</div>
+    <h2>Architettura dei <em>dati di input</em></h2>
+    <div class="prose" style="margin-bottom: 18px;">
+      <p>Il controllo di gestione si basa su <strong>due estrazioni distinte</strong> che oggi vengono gestite separatamente. L&rsquo;obiettivo è incrociare i centri di costo e i centri di ricavo per calcolare la marginalità per settore in modo automatico.</p>
+    </div>
+
+    <div class="file-block">
+      <div class="file-card gold">
+        <div class="file-tag">File A &middot; Estratto da InfoReu</div>
+        <div class="file-name">Ricavi e vendite<br>mese per mese</div>
+        <div class="file-desc">Estrazione periodica dal gestionale InfoReu contenente i ricavi per categoria di abbonamento, servizio e periodo. Base per il centro di ricavo.</div>
+      </div>
+      <div class="file-card gold">
+        <div class="file-tag">File B &middot; Prodotto dal team interno</div>
+        <div class="file-name">Recap costi personale<br>diretto per settore</div>
+        <div class="file-desc">Report prodotto internamente con il dettaglio dei costi del personale diretto suddivisi per ogni settore operativo. Base per il centro di costo.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-up">
+    <div class="section-eyebrow">2.02 &middot; Output atteso</div>
+    <h2>Marginalità automatica per <em>centro di costo</em></h2>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Settore</th>
+          <th>Centro di ricavo (File A)</th>
+          <th>Centro di costo (File B)</th>
+          <th>Marginalità</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Piscine</td>
+          <td>Ricavi abbonamenti + ingressi</td>
+          <td>Costo istruttori + manutenzione</td>
+          <td><span class="badge yellow">Calcolata</span></td>
+        </tr>
+        <tr>
+          <td>Tennis</td>
+          <td>Ricavi lezioni + tornei</td>
+          <td>Costo maestri + campi</td>
+          <td><span class="badge yellow">Calcolata</span></td>
+        </tr>
+        <tr>
+          <td>Fitness &amp; Musicali</td>
+          <td>Ricavi corsi + tessere</td>
+          <td>Costo istruttori + attrezzatura</td>
+          <td><span class="badge yellow">Calcolata</span></td>
+        </tr>
+        <tr>
+          <td>Padel</td>
+          <td>Ricavi prenotazioni + lezioni</td>
+          <td>Costo coordinatori + campo</td>
+          <td><span class="badge yellow">Calcolata</span></td>
+        </tr>
+        <tr>
+          <td>Triathlon</td>
+          <td>Ricavi iscrizioni + allenamenti</td>
+          <td>Costo coordinatori + eventi</td>
+          <td><span class="badge yellow">Calcolata</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <div class="callout-label">Perché è una quick win</div>
+      <p>Non richiede infrastruttura aggiuntiva: si parte subito in <strong>modalità chat</strong>, caricando i file Excel in Claude e affinando progressivamente i prompt. L&rsquo;impatto sul controllo di gestione è immediato e non dipende da altri progetti in corso.</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════ PRIORITÀ 3: FORM DIPENDENTI ══════════════════ -->
+  <div class="part-divider fade-up">
+    <div class="part-number">Priorità 3 &mdash; Strutturazione medio termine</div>
+    <div class="part-title">Suite <em>Form dipendenti</em> &mdash; Richieste formali digitali</div>
+    <div class="part-desc">Creazione di una suite di form digitali accessibili ai dipendenti per comunicare ferie, permessi, note spese e richieste varie. I dati arrivano ordinati al team di amministrazione tramite database centralizzato.</div>
+  </div>
+
+  <div class="section fade-up">
+    <div class="section-eyebrow">3.01 &middot; Tipologie di form</div>
+    <h2>Cosa copre <em>la suite</em></h2>
+
+    <div class="grid-2">
+      <div class="item-list">
+        <div class="item"><div class="dot y"></div><span><strong>Richiesta ferie</strong> — date, sostituzione, approvazione responsabile</span></div>
+        <div class="item"><div class="dot y"></div><span><strong>Richiesta permesso</strong> — tipologia, durata, motivazione</span></div>
+        <div class="item"><div class="dot y"></div><span><strong>Nota spese</strong> — importo, categoria, allegato ricevuta</span></div>
+        <div class="item"><div class="dot y"></div><span><strong>Richieste varie</strong> — form generico per comunicazioni formali</span></div>
+      </div>
+      <div class="item-list">
+        <div class="item"><div class="dot w"></div><span><strong>Accesso dipendente</strong> — link diretto o QR code, senza login complesso</span></div>
+        <div class="item"><div class="dot w"></div><span><strong>Notifica automatica</strong> — il team admin riceve la richiesta appena inviata</span></div>
+        <div class="item"><div class="dot w"></div><span><strong>Storico centralizzato</strong> — tutte le richieste archiviate e filtrabili per dipendente/data</span></div>
+        <div class="item"><div class="dot w"></div><span><strong>Status tracciato</strong> — in attesa / approvato / rifiutato, visibile al dipendente</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-up">
+    <div class="section-eyebrow">3.02 &middot; Stack tecnologico</div>
+    <h2>Database e <em>strumenti da decidere</em></h2>
+    <div class="prose" style="margin-bottom: 20px;">
+      <p>La scelta del database è ancora aperta. I candidati principali sono <strong>Airtable</strong> (interfaccia no-code, ottima per il team admin), <strong>Supabase</strong> (open-source, più flessibile per future integrazioni) o alternative simili. La decisione dipenderà dall&rsquo;ecosistema che si sceglierà per l&rsquo;intera area amministrativa.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-title">Form (frontend)</div>
+        <div class="card-body">Tally, Typeform o form nativi Airtable. Compilazione da mobile senza app installata.</div>
+      </div>
+      <div class="card gold">
+        <div class="card-title">Database (da decidere)</div>
+        <div class="card-body"><strong>Airtable</strong> oppure <strong>Supabase</strong>. Requisito: interfaccia semplice per il team admin e possibilità di automazioni.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Notifiche</div>
+        <div class="card-body">Email automatica o notifica WhatsApp al responsabile di competenza al momento dell&rsquo;invio del form.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ PRIORITÀ 4: CREDITI ══════════════════ -->
+  <div class="part-divider fade-up">
+    <div class="part-number">Priorità 4 &mdash; Non urgente · Prerequisiti da completare</div>
+    <div class="part-title">Gestione <em>Crediti</em> &mdash; Dashboard e pipeline operativa</div>
+    <div class="part-desc">Progetto a scope ampio che coinvolge amministrazione e segreteria. Non si può mettere a terra prima di completare l&rsquo;analisi del gestionale ForYou e valutare lo snellimento delle formule di abbonamento.</div>
+  </div>
+
+  <div class="section fade-up">
+    <div class="section-eyebrow">4.01 &middot; Prerequisiti</div>
+    <h2>Cosa serve fare <em>prima</em></h2>
+
+    <div class="item-list" style="margin-bottom: 28px;">
+      <div class="item"><div class="dot r"></div><span><strong>Analisi gestionale ForYou</strong> — capire come girano i dati di vendite, abbonamenti e pagamenti prima di progettare qualsiasi estrazione automatica.</span></div>
+      <div class="item"><div class="dot r"></div><span><strong>Mappatura formule di abbonamento</strong> — valutare se semplificare le tipologie esistenti, perché la complessità attuale impatta direttamente la gestione del credito.</span></div>
+      <div class="item"><div class="dot r"></div><span><strong>Valutazione file esistente</strong> — partire dall&rsquo;analisi del file di gestione crediti già in uso come baseline per capire gap e opportunità.</span></div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">Nota operativa</div>
+      <p>Il recupero crediti non è solo un problema di dati: è un processo operativo che coinvolge <strong>sia il team amministrazione</strong> (controllo e reportistica) <strong>sia la segreteria</strong> (contatto diretto con il cliente per il recupero). Il progetto va affrontato a 360 gradi, non solo come estrazione dati.</p>
+    </div>
+  </div>
+
+  <div class="section fade-up">
+    <div class="section-eyebrow">4.02 &middot; Scope del progetto (quando maturo)</div>
+    <h2>Dashboard e pipeline <em>crediti</em></h2>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Dashboard settimanale</div>
+        <div class="card-body">
+          Aggiornamento automatico ogni settimana con stato dei crediti aperti, scaduti per fascia temporale, importi totali e trend rispetto alla settimana precedente.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Pipeline operativa</div>
+        <div class="card-body">
+          Vista Kanban per la segreteria con lo stato di recupero per ogni cliente: da contattare → contattato → accordo → incassato → escalation.
+        </div>
+      </div>
+    </div>
+
+    <table class="data-table" style="margin-top: 24px;">
+      <thead>
+        <tr>
+          <th>Reparto</th>
+          <th>Ruolo nel processo</th>
+          <th>Strumento</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Amministrazione</td>
+          <td>Controllo dati, reportistica settimanale, escalation formale</td>
+          <td><span class="badge yellow">Dashboard</span></td>
+        </tr>
+        <tr>
+          <td>Segreteria</td>
+          <td>Contatto diretto col cliente, aggiornamento stato recupero</td>
+          <td><span class="badge yellow">Pipeline operativa</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ══════════════════ ROADMAP CLAUDE ══════════════════ -->
+  <div class="part-divider fade-up">
+    <div class="part-number">Trasversale &mdash; Tutte le priorità</div>
+    <div class="part-title">Utilizzo strutturato di <em>Claude</em></div>
+    <div class="part-desc">Due fasi distinte di adozione: si parte subito in chat affinando la metodologia di prompting, poi si evolve verso un repository condiviso quando il volume dei dati lo richiede.</div>
+  </div>
+
+  <div class="section fade-up">
+    <div class="section-eyebrow">Roadmap &middot; Adozione progressiva</div>
+    <h2>Dalla <em>chat</em> al repository condiviso</h2>
+
+    <div class="phase-block">
+      <div class="phase active">
+        <div class="phase-label">Fase 1 &middot; Attiva ora</div>
+        <div class="phase-title">Modalità chat &amp; prompting</div>
+        <div class="phase-desc">Si caricano i file Excel direttamente nella chat di Claude e si affinano progressivamente i prompt per ottenere le analisi desiderate. Nessuna infrastruttura richiesta, partenza immediata. Focus su: analisi ricavi/costi, marginalità, controllo dati crediti.</div>
+        <div class="phase-status">In corso</div>
+      </div>
+      <div class="phase inactive">
+        <div class="phase-label">Fase 2 &middot; Quando i dati crescono</div>
+        <div class="phase-title">Claude Code + database condiviso</div>
+        <div class="phase-desc">Quando il volume dei dati aumenta, conviene passare a un repository strutturato su cui lavorare in modo incrementale con Claude Code. Richiede un&rsquo;analisi e uno studio dedicato prima di essere implementata. Non è urgente oggi.</div>
+        <div class="phase-status">Pianificato</div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top: 24px;">
+      <div class="callout-label">Vantaggio della Fase 2</div>
+      <p>A differenza della chat, con un repository condiviso ogni analisi <strong>migliora quella precedente</strong>: i prompt, gli script e le trasformazioni dei dati si accumulano nel tempo. Il team può intervenire, correggere e arricchire la base dati senza ripartire da zero ad ogni sessione.</p>
+    </div>
+  </div>
+
+  <!-- RIEPILOGO FINALE -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">Riepilogo &middot; Prossimi passi</div>
+    <h2>Cosa <em>fare ora</em></h2>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Priorità</th>
+          <th>Azione immediata</th>
+          <th>Owner</th>
+          <th>Stato</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>P1 &mdash; Athletics</td>
+          <td>Avviare contatto con il fornitore Athletics per demo e piano di implementazione</td>
+          <td>Amministrazione</td>
+          <td><span class="badge red">Da avviare</span></td>
+        </tr>
+        <tr>
+          <td>P2 &mdash; Claude + Excel</td>
+          <td>Raccogliere le prime estrazioni InfoReu + recap costi personale e testare i prompt in chat</td>
+          <td>Amministrazione + Taruggi</td>
+          <td><span class="badge red">Da avviare</span></td>
+        </tr>
+        <tr>
+          <td>P3 &mdash; Form</td>
+          <td>Scegliere il database (Airtable vs Supabase) e prototipare il primo form ferie</td>
+          <td>Taruggi</td>
+          <td><span class="badge grey">In pianificazione</span></td>
+        </tr>
+        <tr>
+          <td>P4 &mdash; Crediti</td>
+          <td>Analisi gestionale ForYou: mappare il flusso dati vendite/abbonamenti/pagamenti</td>
+          <td>Amministrazione</td>
+          <td><span class="badge grey">Prerequisito</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<footer>
+  <div class="f-info"><strong>Ronchiverdi Sport Club</strong> &times; Maurizio Taruggi &mdash; Audit Digitale 2026 &middot; Documento riservato</div>
+  <div class="f-brand"><em>Ready 2 Digital</em></div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.06 });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

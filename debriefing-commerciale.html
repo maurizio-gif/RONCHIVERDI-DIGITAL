@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Debriefing Commerciale &mdash; Lorella Gravante &middot; Ronchiverdi Audit</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FFFFFF; font-size: 17px; line-height: 1.7; overflow-x: hidden; font-weight: 400; -webkit-font-smoothing: antialiased; }
+
+.back-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: rgba(15,15,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.07); }
+.back-btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: #FFFFFF; font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; transition: color 0.2s; padding: 8px 0; }
+.back-btn:hover { color: #F2DC4E; }
+.back-btn .arrow { font-size: 18px; transition: transform 0.2s; }
+.back-btn:hover .arrow { transform: translateX(-3px); }
+.back-nav-logo-link { display: flex; align-items: center; }
+.back-nav-logo { height: 36px; width: auto; filter: invert(1); mix-blend-mode: screen; opacity: 0.9; }
+@media(max-width:640px){ .back-nav { padding: 0 20px; } .back-nav-logo { height: 28px; } }
+
+.hero { padding: 120px 48px 72px; position: relative; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 80% 30%, rgba(232,212,106,0.05) 0%, transparent 60%); pointer-events: none; }
+.hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+.hero-eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+.hero-eyebrow .tag { font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #FFFFFF; }
+.hero-eyebrow .sep { color: #FFFFFF; }
+.hero h1 { font-family: "Cormorant Garamond", serif; font-size: clamp(38px, 5vw, 62px); font-weight: 400; line-height: 1.05; color: #FFFFFF; margin-bottom: 20px; letter-spacing: -0.02em; }
+.hero h1 em { font-style: italic; color: #F2DC4E; }
+.hero-sub { font-size: 16px; font-weight: 400; line-height: 1.75; color: #FFFFFF; max-width: 720px; margin-bottom: 36px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 32px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.07); }
+.hero-meta-item .lbl { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #F2DC4E; margin-bottom: 4px; }
+.hero-meta-item .val { font-size: 15px; font-weight: 400; color: #FFFFFF; }
+.hero-parts { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+.hero-part-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 50px; padding: 8px 18px; font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: #FFFFFF; }
+.hero-part-badge.active { border-color: rgba(232,212,106,0.3); color: #F2DC4E; background: rgba(232,212,106,0.06); }
+
+.page { max-width: 1100px; margin: 0 auto; padding: 0 48px 100px; }
+
+.part-divider { margin: 0 -48px; padding: 40px 48px; background: rgba(255,255,255,0.02); border-top: 1px solid rgba(232,212,106,0.15); border-bottom: 1px solid rgba(232,212,106,0.15); }
+.part-number { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #F2DC4E; margin-bottom: 8px; }
+.part-title { font-family: "Cormorant Garamond", serif; font-size: clamp(28px, 4vw, 44px); font-weight: 400; color: #FFFFFF; line-height: 1.1; }
+.part-title em { font-style: italic; color: #F2DC4E; }
+.part-desc { font-size: 15px; color: #FFFFFF; margin-top: 8px; max-width: 640px; line-height: 1.7; }
+
+.section { padding: 56px 0; border-top: 1px solid rgba(255,255,255,0.06); }
+.section:first-of-type { border-top: none; }
+.section-eyebrow { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #F2DC4E; margin-bottom: 12px; }
+.section > h2 { font-family: "Cormorant Garamond", serif; font-size: clamp(24px, 3vw, 36px); font-weight: 400; line-height: 1.15; color: #FFFFFF; margin-bottom: 24px; }
+.section > h2 em { font-style: italic; color: #F2DC4E; }
+
+.prose { font-size: 16px; line-height: 1.8; color: #FFFFFF; }
+.prose p { margin-bottom: 12px; }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { font-weight: 500; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 20px 0; }
+
+.card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 22px 24px; }
+.card.gold { border-color: rgba(232,212,106,0.22); background: rgba(232,212,106,0.04); }
+.card.green { border-color: rgba(90,180,120,0.2); background: rgba(90,180,120,0.04); }
+.card.red { border-color: rgba(200,60,60,0.2); background: rgba(200,60,60,0.04); }
+.card-title { font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.card.gold .card-title { color: #F2DC4E; }
+.card.green .card-title { color: rgba(90,180,120,0.85); }
+.card.red .card-title { color: rgba(220,120,120,0.9); }
+.card .card-title { color: #FFFFFF; }
+.card-body { font-size: 15px; color: #FFFFFF; line-height: 1.7; }
+
+.item-list { display: flex; flex-direction: column; gap: 10px; }
+.item { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; color: #FFFFFF; line-height: 1.65; }
+.dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; margin-top: 9px; }
+.dot.g { background: #5AB478; }
+.dot.r { background: #C84040; }
+.dot.y { background: #E0C840; }
+.dot.w { background: rgba(250,248,244,0.2); }
+.item strong { font-weight: 500; }
+
+.flow { display: flex; align-items: stretch; gap: 0; margin: 28px 0; overflow-x: auto; }
+.flow-step { flex: 1; min-width: 120px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); padding: 18px 14px; position: relative; }
+.flow-step:first-child { border-radius: 12px 0 0 12px; }
+.flow-step:last-child { border-radius: 0 12px 12px 0; }
+.flow-step + .flow-step { border-left: none; }
+.flow-step.gold { background: rgba(232,212,106,0.05); border-color: rgba(232,212,106,0.2); }
+.flow-num { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #FFFFFF; margin-bottom: 8px; }
+.flow-name { font-family: "Cormorant Garamond", serif; font-size: 16px; font-weight: 400; color: #FFFFFF; line-height: 1.3; }
+.flow-step.gold .flow-name { color: #F2DC4E; }
+.flow-note { font-size: 13px; color: #FFFFFF; margin-top: 6px; line-height: 1.4; }
+.flow-arrow { position: absolute; right: -11px; top: 50%; transform: translateY(-50%); z-index: 2; width: 22px; height: 22px; border-radius: 50%; background: #0F0F0D; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 11px; color: #FFFFFF; }
+
+.callout { background: rgba(232,212,106,0.06); border: 1px solid rgba(232,212,106,0.18); border-radius: 14px; padding: 22px 26px; margin: 24px 0; }
+.callout-label { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #F2DC4E; margin-bottom: 10px; }
+.callout p { font-size: 16px; line-height: 1.8; color: #FFFFFF; margin-bottom: 8px; }
+.callout p:last-child { margin-bottom: 0; }
+.callout strong { font-weight: 500; }
+
+.data-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 15px; }
+.data-table th { padding: 10px 14px; text-align: left; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.1); color: #FFFFFF; }
+.data-table td { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: top; line-height: 1.55; color: #FFFFFF; }
+.data-table td:first-child { font-weight: 500; width: 24%; }
+.data-table tr:last-child td { border-bottom: none; }
+
+.badge { display: inline-block; font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; }
+.badge.red { background: rgba(200,60,60,0.2); color: rgba(220,120,120,0.95); }
+.badge.yellow { background: rgba(232,212,106,0.15); color: #F2DC4E; }
+.badge.green { background: rgba(90,180,120,0.15); color: rgba(90,180,120,0.95); }
+.badge.grey { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.45); }
+
+.roadmap { display: flex; flex-direction: column; gap: 10px; margin: 24px 0; }
+.rm-item { display: flex; gap: 18px; align-items: flex-start; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 18px 22px; }
+.rm-item.p1 { border-color: rgba(200,60,60,0.25); }
+.rm-item.p2 { border-color: rgba(232,212,106,0.2); }
+.rm-item.p3 { border-color: rgba(90,180,120,0.18); }
+.rm-priority { font-family: "Cormorant Garamond", serif; font-size: 36px; font-weight: 400; line-height: 1; flex-shrink: 0; width: 44px; }
+.rm-item.p1 .rm-priority { color: rgba(200,80,80,0.6); }
+.rm-item.p2 .rm-priority { color: #F2DC4E; }
+.rm-item.p3 .rm-priority { color: rgba(90,180,120,0.55); }
+.rm-tag { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 9px; border-radius: 4px; margin-bottom: 6px; }
+.p1 .rm-tag { background: rgba(200,60,60,0.15); color: rgba(220,100,100,0.95); }
+.p2 .rm-tag { background: rgba(232,212,106,0.12); color: #F2DC4E; }
+.p3 .rm-tag { background: rgba(90,180,120,0.12); color: rgba(90,180,120,0.9); }
+.rm-title { font-family: "Cormorant Garamond", serif; font-size: 19px; font-weight: 400; color: #FFFFFF; margin-bottom: 4px; }
+.rm-desc { font-size: 15px; color: #FFFFFF; line-height: 1.6; }
+
+.pipeline { display: flex; flex-direction: column; gap: 0; margin: 24px 0; border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; overflow: hidden; }
+.pipe-step { display: flex; gap: 18px; padding: 16px 22px; background: rgba(255,255,255,0.02); border-bottom: 1px solid rgba(255,255,255,0.05); align-items: flex-start; }
+.pipe-step:last-child { border-bottom: none; }
+.pipe-step.active { background: rgba(232,212,106,0.04); }
+.pipe-num { font-family: "Cormorant Garamond", serif; font-size: 28px; font-weight: 400; line-height: 1; flex-shrink: 0; width: 40px; color: #F2DC4E; }
+.pipe-body { flex: 1; }
+.pipe-title { font-size: 15px; font-weight: 500; color: #FFFFFF; margin-bottom: 3px; }
+.pipe-desc { font-size: 14px; color: #FFFFFF; line-height: 1.55; }
+
+footer { background: rgba(0,0,0,0.3); padding: 40px 48px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; }
+.f-info { font-size: 15px; color: #FFFFFF; }
+.f-info strong { color: #FFFFFF; }
+.f-brand { font-family: "Cormorant Garamond", serif; font-size: 17px; color: #FFFFFF; }
+.f-brand em { font-style: italic; color: #F2DC4E; }
+
+.fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-up.visible { opacity: 1; transform: none; }
+
+@media(max-width:900px){
+  .hero { padding: 100px 24px 52px; }
+  .page { padding: 0 24px 72px; }
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 14px; text-align: center; padding: 28px 20px; }
+  .part-divider { margin: 0 -24px; padding: 32px 24px; }
+}
+html, body { overflow-x: hidden; max-width: 100%; }
+*, *::before, *::after { min-width: 0; }
+strong, b { font-weight: 600; }
+</style>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Audit Digitale · Ronchiverdi">
+<meta property="og:title" content="Debriefing Commerciale — Lorella Gravante · Ronchiverdi">
+<meta property="og:description" content="Obiettivi di digitalizzazione del settore commerciale: database unico lead, gestione segnalazioni, rinnovi integrati nel CRM.">
+<meta property="og:image" content="https://maurizio-gif.github.io/RONCHIVERDI-DIGITAL/og-image.jpg">
+<meta property="og:url" content="https://maurizio-gif.github.io/RONCHIVERDI-DIGITAL/debriefing-commerciale.html">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+
+<nav class="back-nav">
+  <a href="index.html" class="back-btn">
+    <span class="arrow">←</span>
+    <span>Torna all'indice</span>
+  </a>
+  <a href="index.html" class="back-nav-logo-link">
+    <img src="ronchiverdi-logo.jpg" class="back-nav-logo" alt="Ronchiverdi">
+  </a>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <span class="tag">Debriefing</span>
+      <span class="sep">/</span>
+      <span class="tag">20 maggio 2026</span>
+      <span class="sep">/</span>
+      <span class="tag">Settore Commerciale</span>
+    </div>
+    <h1>Obiettivi <em>Commerciali</em><br>&amp; Lead Management</h1>
+    <p class="hero-sub">Roadmap di digitalizzazione del settore commerciale con Lorella Gravante: database unico dei lead, gestione strutturata delle segnalazioni e integrazione dei rinnovi nel CRM. Tre obiettivi distinti, con priorità e sequenza di implementazione definite.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><span class="lbl">Referente</span><span class="val">Lorella Gravante &mdash; Resp. Sviluppo Club</span></div>
+      <div class="hero-meta-item"><span class="lbl">Data</span><span class="val">20 maggio 2026</span></div>
+      <div class="hero-meta-item"><span class="lbl">Condotto da</span><span class="val">Maurizio Taruggi</span></div>
+    </div>
+    <div class="hero-parts">
+      <div class="hero-part-badge active">OB1 &mdash; Database unico Lead</div>
+      <div class="hero-part-badge active">OB2 &mdash; Segnalazioni</div>
+      <div class="hero-part-badge active">OB3 &mdash; Rinnovi nel CRM</div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- PANORAMICA -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">Panoramica &middot; I tre obiettivi</div>
+    <h2>La roadmap del <em>settore commerciale</em></h2>
+    <div class="prose" style="margin-bottom:24px;">
+      <p>I tre obiettivi sono interdipendenti: il <strong>database unico dei lead</strong> è la fondazione su cui si costruisce tutto il resto. Le segnalazioni e i rinnovi possono procedere in parallelo una volta che la struttura CRM è definita.</p>
+    </div>
+    <div class="roadmap">
+      <div class="rm-item p1">
+        <div class="rm-priority">1</div>
+        <div>
+          <div class="rm-tag">Fondazione &middot; Alta priorità</div>
+          <div class="rm-title">Database unico Lead &mdash; dal sito al CRM</div>
+          <div class="rm-desc">Digitalizzazione completa della raccolta lead da sito, RDV e guest register. Form profilati per attività. CRM per follow-up consulenti. Tour prenotabile con Tally.</div>
+        </div>
+      </div>
+      <div class="rm-item p2">
+        <div class="rm-priority">2</div>
+        <div>
+          <div class="rm-tag">Parallelizzabile &middot; Media priorità</div>
+          <div class="rm-title">Gestione Segnalazioni &mdash; pipeline e KPI</div>
+          <div class="rm-desc">Form digitale (QR nel club + link), pipeline con status, coinvolgimento responsabili di settore, template email standardizzati, indici di performance da calibrare al go-live.</div>
+        </div>
+      </div>
+      <div class="rm-item p2">
+        <div class="rm-priority">3</div>
+        <div>
+          <div class="rm-tag">Integrazione CRM &middot; Media priorità</div>
+          <div class="rm-title">Rinnovi nel CRM &mdash; task e analisi performance</div>
+          <div class="rm-desc">Uscita da InfoReu + Google Sheet verso il CRM: gestione rinnovi con task assegnati, follow-up tracciato, analisi quantitativa e qualitativa per persona responsabile.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ OB1: DATABASE UNICO LEAD ══════════ -->
+  <div class="part-divider fade-up">
+    <div class="part-number">Obiettivo 1 &mdash; Fondazione</div>
+    <div class="part-title">Database unico <em>Lead</em></div>
+    <div class="part-desc">Raccogliere tutti i lead in un unico posto, indipendentemente dalla fonte. Profilarli per attività di interesse. Gestire il follow-up dei consulenti in modo strutturato e tracciabile.</div>
+  </div>
+
+  <div class="section fade-up">
+    <div class="section-eyebrow">1.01 &middot; Fonti del lead</div>
+    <h2>Da dove arrivano <em>i lead oggi</em></h2>
+    <div class="prose" style="margin-bottom:20px;">
+      <p>I lead entrano da tre canali distinti che oggi non confluiscono in un unico database. L&rsquo;obiettivo è avere un&rsquo;<strong>unica source of truth</strong> indipendentemente da dove è partito il primo contatto.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card gold">
+        <div class="card-title">Sito web</div>
+        <div class="card-body">
+          Form profilati per pagina e attività di interesse. Chi atterra sulla pagina piscine vede un form diverso da chi atterra sul tennis o sul fitness. Profilazione automatica dal primo tocco.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">RDV</div>
+        <div class="card-body">
+          Richieste di visita e contatti raccolti fuori dal sito (eventi, passaparola, campagne ADV). Devono entrare nel database con lo stesso schema dati del form online.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Guest Register</div>
+        <div class="card-body">
+          Gli ospiti che entrano con accesso giornaliero o accompagnati. Dato già parzialmente raccolto: da strutturare per renderlo utilizzabile nel CRM e nel follow-up commerciale.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-up">
+    <div class="section-eyebrow">1.02 &middot; Segmentazione</div>
+    <h2>Suddivisione tra <em>core e scuole sport</em></h2>
+    <div class="prose" style="margin-bottom:20px;">
+      <p>Ogni lead nel database viene classificato fin dall&rsquo;ingresso in una delle due macro-categorie. Questa suddivisione determina il percorso di follow-up, il consulente assegnato e le metriche di conversione da monitorare.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card gold">
+        <div class="card-title">Attività Core</div>
+        <div class="card-body">
+          <div class="item-list">
+            <div class="item"><div class="dot y"></div><span>Abbonamenti fitness, piscina adulti, padel</span></div>
+            <div class="item"><div class="dot y"></div><span>Percorso di vendita gestito dai consulenti in segreteria</span></div>
+            <div class="item"><div class="dot y"></div><span>Conversione tipicamente più rapida (1&ndash;3 contatti)</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Scuole Sport</div>
+        <div class="card-body">
+          <div class="item-list">
+            <div class="item"><div class="dot w"></div><span>Nuoto, tennis, triathlon, young school</span></div>
+            <div class="item"><div class="dot w"></div><span>Percorso con prova tecnica gestita dal referente BU</span></div>
+            <div class="item"><div class="dot w"></div><span>Conversione più lunga, più touchpoint necessari</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-up">
+    <div class="section-eyebrow">1.03 &middot; Form sul sito</div>
+    <h2>Due form distinti per <em>ogni esigenza</em></h2>
+    <div class="prose" style="margin-bottom:20px;">
+      <p>Sul sito coesistono due form con funzioni diverse. Non si sostituiscono: si complementano per coprire due intenzioni d&rsquo;acquisto diverse.</p>
+    </div>
+    <div class="grid-2" style="margin-bottom:28px;">
+      <div class="card">
+        <div class="card-title">Contattaci &mdash; profilazione</div>
+        <div class="card-body">
+          Form di richiesta informazioni con campi di profilazione: attività di interesse, età, disponibilità oraria, come ha conosciuto il club. Il lead entra nel CRM e viene assegnato al consulente di competenza per il follow-up.
+        </div>
+      </div>
+      <div class="card gold">
+        <div class="card-title">Prenota un Tour &mdash; Tally</div>
+        <div class="card-body">
+          Prenotazione autonoma di una visita guidata al club. Strumento scelto: <strong>Tally.so</strong> per la semplicità di configurazione degli slot e i follow-up automatici via mail (conferma, reminder 24h prima, follow-up post-visita).
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">Perché Tally per il tour</div>
+      <p>Tally permette di configurare la disponibilità degli slot, inviare conferme automatiche via email e impostare reminder senza integrazioni complesse. È lo strumento più rapido da mettere a terra per <strong>eliminare il collo di bottiglia attuale</strong> dove la prenotazione avviene per telefono o WhatsApp senza tracciabilità.</p>
+    </div>
+  </div>
+
+  <div class="section fade-up">
+    <div class="section-eyebrow">1.04 &middot; CRM e follow-up</div>
+    <h2>Gestione del lead <em>fino alla conversione</em></h2>
+    <div class="prose" style="margin-bottom:20px;">
+      <p>Tutti i lead confluiscono nel CRM con i dati di profilazione già precompilati. Da lì i consulenti gestiscono il follow-up con stati tracciati, task assegnati e storico delle interazioni visibile a tutto il team.</p>
+    </div>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-num">01</div>
+        <div class="flow-name">Lead entra</div>
+        <div class="flow-note">Form sito, RDV, guest register</div>
+        <div class="flow-arrow">&#10095;</div>
+      </div>
+      <div class="flow-step gold">
+        <div class="flow-num">02</div>
+        <div class="flow-name">CRM</div>
+        <div class="flow-note">Profilato e assegnato al consulente</div>
+        <div class="flow-arrow">&#10095;</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">03</div>
+        <div class="flow-name">Primo contatto</div>
+        <div class="flow-note">Chiamata / WhatsApp / mail tracciati</div>
+        <div class="flow-arrow">&#10095;</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">04</div>
+        <div class="flow-name">Tour / Prova</div>
+        <div class="flow-note">Visita al club o prova tecnica BU</div>
+        <div class="flow-arrow">&#10095;</div>
+      </div>
+      <div class="flow-step gold">
+        <div class="flow-num">05</div>
+        <div class="flow-name">Iscrizione</div>
+        <div class="flow-note">Chiusura in segreteria con dato già nel sistema</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ OB2: SEGNALAZIONI ══════════ -->
+  <div class="part-divider fade-up">
+    <div class="part-number">Obiettivo 2 &mdash; Parallelizzabile</div>
+    <div class="part-title">Gestione <em>Segnalazioni</em> &mdash; pipeline e KPI</div>
+    <div class="part-desc">Digitalizzazione completa del processo di raccolta, classificazione e gestione delle lamentele e segnalazioni. Dal QR code nel club fino alla chiusura del ticket con il cliente.</div>
+  </div>
+
+  <div class="section fade-up">
+    <div class="section-eyebrow">2.01 &middot; Raccolta</div>
+    <h2>Come entra <em>la segnalazione</em></h2>
+    <div class="prose" style="margin-bottom:20px;">
+      <p>Il form di segnalazione deve essere accessibile sia dal personale di segreteria (che lo compila per conto del cliente) sia direttamente dal cliente in autonomia, senza dover passare dalla reception.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-title">QR code nel club</div>
+        <div class="card-body">
+          Affissi nelle aree strategiche: spogliatoi, reception, aree comuni. Il cliente inquadra, compila, invia. Nessuna app richiesta.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Link in comunicazioni</div>
+        <div class="card-body">
+          Inserito nella technology map del club e nelle email periodiche. Accessibile da smartphone in qualsiasi momento, anche a casa.
+        </div>
+      </div>
+      <div class="card gold">
+        <div class="card-title">Compilazione in segreteria</div>
+        <div class="card-body">
+          Il consulente raccoglie verbalmente la segnalazione e la inserisce nel sistema per conto del cliente. Il dato entra sempre nello stesso database.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-up">
+    <div class="section-eyebrow">2.02 &middot; Pipeline</div>
+    <h2>Gli stati della <em>segnalazione</em></h2>
+
+    <div class="pipeline">
+      <div class="pipe-step active">
+        <div class="pipe-num">01</div>
+        <div class="pipe-body">
+          <div class="pipe-title">Ricevuta</div>
+          <div class="pipe-desc">La segnalazione entra nel database. Notifica automatica all&rsquo;amministrazione e, se il settore è identificato, al responsabile di competenza.</div>
+        </div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">02</div>
+        <div class="pipe-body">
+          <div class="pipe-title">In lavorazione</div>
+          <div class="pipe-desc">Il responsabile assegnato prende in carico. Aggiorna lo stato e inserisce le prime note interne sull&rsquo;iter di risoluzione.</div>
+        </div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">03</div>
+        <div class="pipe-body">
+          <div class="pipe-title">Risposta inviata</div>
+          <div class="pipe-desc">Il cliente riceve una comunicazione via email (template standardizzato) con l&rsquo;aggiornamento sulla sua segnalazione.</div>
+        </div>
+      </div>
+      <div class="pipe-step active">
+        <div class="pipe-num">04</div>
+        <div class="pipe-body">
+          <div class="pipe-title">Chiusa</div>
+          <div class="pipe-desc">Segnalazione risolta e chiusa nel sistema. Il dato rimane storicizzato per l&rsquo;analisi dei KPI.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:24px;">
+      <div class="card">
+        <div class="card-title">Coinvolgimento responsabili</div>
+        <div class="card-body">
+          Se la segnalazione riguarda un settore specifico (piscine, tennis, fitness&hellip;) il sistema notifica direttamente il responsabile di quel settore, che diventa owner del task di risoluzione.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Template email</div>
+        <div class="card-body">
+          Comunicazioni standardizzate per ogni stato della pipeline: conferma ricezione, aggiornamento in lavorazione, comunicazione di chiusura. Tono uniforme, brand coerente.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-up">
+    <div class="section-eyebrow">2.03 &middot; KPI e analisi</div>
+    <h2>Performance e <em>classificazione</em></h2>
+    <div class="prose" style="margin-bottom:20px;">
+      <p>I KPI non si fissano prima di andare live: si osservano i dati reali per le prime settimane, si capiscono le logiche di distribuzione e classificazione delle segnalazioni, poi si definiscono le soglie di riferimento.</p>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Indicatore</th>
+          <th>Descrizione</th>
+          <th>Disponibile</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Tempo medio di chiusura</td>
+          <td>Dal momento della ricezione alla chiusura del ticket</td>
+          <td><span class="badge yellow">Post go-live</span></td>
+        </tr>
+        <tr>
+          <td>Volume per settore</td>
+          <td>Distribuzione delle segnalazioni per area del club</td>
+          <td><span class="badge yellow">Post go-live</span></td>
+        </tr>
+        <tr>
+          <td>Tasso di risposta</td>
+          <td>% segnalazioni con almeno una comunicazione al cliente</td>
+          <td><span class="badge yellow">Post go-live</span></td>
+        </tr>
+        <tr>
+          <td>Classificazione tipologie</td>
+          <td>Categorie delle segnalazioni da definire dopo analisi iniziale</td>
+          <td><span class="badge grey">Da calibrare</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <div class="callout-label">Approccio corretto</div>
+      <p>La tentazione di pre-classificare le segnalazioni prima di avere dati reali porta spesso a tassonomie inutili. <strong>Prima si raccolgono i dati grezzi</strong>, poi si analizzano i pattern e si costruisce una classificazione che riflette la realtà del club, non ipotesi teoriche.</p>
+    </div>
+  </div>
+
+  <!-- ══════════ OB3: RINNOVI ══════════ -->
+  <div class="part-divider fade-up">
+    <div class="part-number">Obiettivo 3 &mdash; Integrazione CRM</div>
+    <div class="part-title">Rinnovi <em>nel CRM</em> &mdash; da Excel a task tracciati</div>
+    <div class="part-desc">Eliminare il ciclo manuale InfoReu → Google Sheet / Excel e portare la gestione dei rinnovi direttamente nel CRM, con task assegnati, follow-up tracciato e analisi delle performance per persona.</div>
+  </div>
+
+  <div class="section fade-up">
+    <div class="section-eyebrow">3.01 &middot; Situazione attuale vs obiettivo</div>
+    <h2>Da estrazione manuale a <em>gestione integrata</em></h2>
+
+    <div class="grid-2" style="margin-bottom:28px;">
+      <div class="card red">
+        <div class="card-title">As-is &mdash; oggi</div>
+        <div class="card-body">
+          <div class="item-list">
+            <div class="item"><div class="dot r"></div><span>Estrazione manuale da InfoReu degli abbonati in scadenza</span></div>
+            <div class="item"><div class="dot r"></div><span>Caricamento su Google Sheet o Excel</span></div>
+            <div class="item"><div class="dot r"></div><span>Gestione follow-up non tracciata, dipende dalla persona</span></div>
+            <div class="item"><div class="dot r"></div><span>Nessuna analisi strutturata delle performance di rinnovo</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card green">
+        <div class="card-title">To-be &mdash; obiettivo</div>
+        <div class="card-body">
+          <div class="item-list">
+            <div class="item"><div class="dot g"></div><span>Rinnovi inseriti direttamente nel CRM (manuale o con integrazione futura)</span></div>
+            <div class="item"><div class="dot g"></div><span>Task automatici assegnati alla persona responsabile del rinnovo</span></div>
+            <div class="item"><div class="dot g"></div><span>Follow-up tracciato: ogni interazione registrata nel profilo del socio</span></div>
+            <div class="item"><div class="dot g"></div><span>Dashboard con KPI quantitativi e qualitativi per persona e periodo</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-up">
+    <div class="section-eyebrow">3.02 &middot; Flusso operativo</div>
+    <h2>Come funziona <em>il rinnovo nel CRM</em></h2>
+
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-num">01</div>
+        <div class="flow-name">Scadenza imminente</div>
+        <div class="flow-note">Il CRM genera automaticamente il task di rinnovo X giorni prima</div>
+        <div class="flow-arrow">&#10095;</div>
+      </div>
+      <div class="flow-step gold">
+        <div class="flow-num">02</div>
+        <div class="flow-name">Assegnazione</div>
+        <div class="flow-note">Task assegnato al consulente o al team responsabile</div>
+        <div class="flow-arrow">&#10095;</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">03</div>
+        <div class="flow-name">Contatto</div>
+        <div class="flow-note">Telefonata, WhatsApp o mail &mdash; interazione loggata nel profilo</div>
+        <div class="flow-arrow">&#10095;</div>
+      </div>
+      <div class="flow-step gold">
+        <div class="flow-num">04</div>
+        <div class="flow-name">Esito</div>
+        <div class="flow-note">Rinnovato / non rinnovato / rimandato &mdash; stato aggiornato</div>
+        <div class="flow-arrow">&#10095;</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">05</div>
+        <div class="flow-name">Analisi</div>
+        <div class="flow-note">Performance per persona, motivi di mancato rinnovo, trend mensile</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-up">
+    <div class="section-eyebrow">3.03 &middot; KPI rinnovi</div>
+    <h2>Analisi <em>quantitativa e qualitativa</em></h2>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Analisi quantitativa</div>
+        <div class="card-body">
+          <div class="item-list">
+            <div class="item"><div class="dot y"></div><span>Tasso di rinnovo per mese e per stagione</span></div>
+            <div class="item"><div class="dot y"></div><span>Performance per consulente: quanti rinnovati su quanti in carico</span></div>
+            <div class="item"><div class="dot y"></div><span>Tempo medio di chiusura del rinnovo dal primo contatto</span></div>
+            <div class="item"><div class="dot y"></div><span>% mancati rinnovi per fascia di abbonamento</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Analisi qualitativa</div>
+        <div class="card-body">
+          <div class="item-list">
+            <div class="item"><div class="dot w"></div><span>Motivi di mancato rinnovo classificati (prezzo, servizio, cambio abitudini&hellip;)</span></div>
+            <div class="item"><div class="dot w"></div><span>Note del consulente sull&rsquo;interazione con il socio</span></div>
+            <div class="item"><div class="dot w"></div><span>Segnali di rischio identificati prima della scadenza</span></div>
+            <div class="item"><div class="dot w"></div><span>Feedback raccolti durante il processo di rinnovo</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIEPILOGO -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">Riepilogo &middot; Prossimi passi</div>
+    <h2>Cosa <em>fare ora</em></h2>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Obiettivo</th>
+          <th>Azione immediata</th>
+          <th>Owner</th>
+          <th>Stato</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>OB1 &mdash; Lead DB</td>
+          <td>Scegliere il CRM. Prototipare i form per sito (Contattaci + Tour con Tally). Definire lo schema dati del lead</td>
+          <td>Taruggi + Lorella</td>
+          <td><span class="badge red">Da avviare</span></td>
+        </tr>
+        <tr>
+          <td>OB1 &mdash; Guest Register</td>
+          <td>Mappare i dati già raccolti nel guest register e definire come importarli nel CRM</td>
+          <td>Lorella + Segreteria</td>
+          <td><span class="badge red">Da avviare</span></td>
+        </tr>
+        <tr>
+          <td>OB2 &mdash; Segnalazioni</td>
+          <td>Creare il form di segnalazione e i QR code. Definire la pipeline degli stati nel CRM</td>
+          <td>Taruggi</td>
+          <td><span class="badge grey">In pianificazione</span></td>
+        </tr>
+        <tr>
+          <td>OB2 &mdash; Template email</td>
+          <td>Scrivere i template per conferma ricezione, aggiornamento e chiusura</td>
+          <td>Lorella + Taruggi</td>
+          <td><span class="badge grey">In pianificazione</span></td>
+        </tr>
+        <tr>
+          <td>OB3 &mdash; Rinnovi</td>
+          <td>Una volta scelto il CRM, strutturare il flusso di import rinnovi e i task automatici</td>
+          <td>Taruggi + Amministrazione</td>
+          <td><span class="badge grey">Dipende da OB1</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<footer>
+  <div class="f-info"><strong>Ronchiverdi Sport Club</strong> &times; Maurizio Taruggi &mdash; Audit Digitale 2026 &middot; Documento riservato</div>
+  <div class="f-brand"><em>Ready 2 Digital</em></div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.06 });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
