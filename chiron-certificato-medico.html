@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Certificato Medico &amp; Partnership Chiron &middot; Ronchiverdi Audit</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FFFFFF; font-size: 17px; line-height: 1.7; overflow-x: hidden; font-weight: 400; -webkit-font-smoothing: antialiased; }
+
+.back-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: rgba(15,15,13,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.07); }
+.back-btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: #FFFFFF; font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; transition: color 0.2s; padding: 8px 0; }
+.back-btn:hover { color: #F2DC4E; }
+.back-btn .arrow { font-size: 18px; transition: transform 0.2s; }
+.back-btn:hover .arrow { transform: translateX(-3px); }
+.back-nav-logo-link { display: flex; align-items: center; }
+.back-nav-logo { height: 36px; width: auto; filter: invert(1); mix-blend-mode: screen; opacity: 0.9; }
+@media(max-width:640px){ .back-nav { padding: 0 20px; } .back-nav-logo { height: 28px; } }
+
+.hero { padding: 120px 48px 72px; position: relative; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 80% 30%, rgba(232,212,106,0.05) 0%, transparent 60%); pointer-events: none; }
+.hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+.hero-eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+.hero-eyebrow .tag { font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #FFFFFF; }
+.hero-eyebrow .sep { color: rgba(255,255,255,0.3); }
+.hero h1 { font-family: "Cormorant Garamond", serif; font-size: clamp(38px, 5vw, 62px); font-weight: 400; line-height: 1.05; color: #FFFFFF; margin-bottom: 20px; letter-spacing: -0.02em; }
+.hero h1 em { font-style: italic; color: #F2DC4E; }
+.hero-sub { font-size: 16px; font-weight: 400; line-height: 1.75; color: #FFFFFF; max-width: 720px; margin-bottom: 36px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 32px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.07); }
+.hero-meta-item .lbl { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #F2DC4E; margin-bottom: 4px; }
+.hero-meta-item .val { font-size: 15px; font-weight: 400; color: #FFFFFF; }
+.hero-parts { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+.hero-part-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 50px; padding: 8px 18px; font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: #FFFFFF; }
+.hero-part-badge.active { border-color: rgba(232,212,106,0.3); color: #F2DC4E; background: rgba(232,212,106,0.06); }
+
+.page { max-width: 1100px; margin: 0 auto; padding: 0 48px 100px; }
+
+.part-divider { margin: 0 -48px; padding: 40px 48px; background: rgba(255,255,255,0.02); border-top: 1px solid rgba(232,212,106,0.15); border-bottom: 1px solid rgba(232,212,106,0.15); }
+.part-number { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #F2DC4E; margin-bottom: 8px; }
+.part-title { font-family: "Cormorant Garamond", serif; font-size: clamp(28px, 4vw, 44px); font-weight: 400; color: #FFFFFF; line-height: 1.1; }
+.part-title em { font-style: italic; color: #F2DC4E; }
+.part-desc { font-size: 15px; color: #FFFFFF; margin-top: 8px; max-width: 660px; line-height: 1.7; }
+
+.section { padding: 56px 0; border-top: 1px solid rgba(255,255,255,0.06); }
+.section:first-of-type { border-top: none; }
+.section-eyebrow { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #F2DC4E; margin-bottom: 12px; }
+.section > h2 { font-family: "Cormorant Garamond", serif; font-size: clamp(24px, 3vw, 36px); font-weight: 400; line-height: 1.15; color: #FFFFFF; margin-bottom: 24px; }
+.section > h2 em { font-style: italic; color: #F2DC4E; }
+
+.prose { font-size: 16px; line-height: 1.8; color: #FFFFFF; }
+.prose p { margin-bottom: 12px; }
+.prose p:last-child { margin-bottom: 0; }
+.prose strong { font-weight: 500; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 20px 0; }
+
+.card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 22px 24px; }
+.card.gold { border-color: rgba(232,212,106,0.22); background: rgba(232,212,106,0.04); }
+.card.green { border-color: rgba(90,180,120,0.2); background: rgba(90,180,120,0.04); }
+.card.red { border-color: rgba(200,60,60,0.2); background: rgba(200,60,60,0.04); }
+.card.blue { border-color: rgba(90,140,220,0.2); background: rgba(90,140,220,0.04); }
+.card-title { font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.card.gold .card-title { color: #F2DC4E; }
+.card.green .card-title { color: rgba(90,180,120,0.85); }
+.card.red .card-title { color: rgba(220,120,120,0.9); }
+.card.blue .card-title { color: rgba(130,170,240,0.9); }
+.card .card-title { color: #FFFFFF; }
+.card-body { font-size: 15px; color: #FFFFFF; line-height: 1.7; }
+.card-body strong { font-weight: 500; }
+
+.item-list { display: flex; flex-direction: column; gap: 10px; }
+.item { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; color: #FFFFFF; line-height: 1.65; }
+.dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; margin-top: 9px; }
+.dot.g { background: #5AB478; }
+.dot.r { background: #C84040; }
+.dot.y { background: #E0C840; }
+.dot.w { background: rgba(250,248,244,0.2); }
+.item strong { font-weight: 500; }
+
+.callout { background: rgba(232,212,106,0.06); border: 1px solid rgba(232,212,106,0.18); border-radius: 14px; padding: 22px 26px; margin: 24px 0; }
+.callout-label { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #F2DC4E; margin-bottom: 10px; }
+.callout p { font-size: 16px; line-height: 1.8; color: #FFFFFF; margin-bottom: 8px; }
+.callout p:last-child { margin-bottom: 0; }
+.callout strong { font-weight: 500; }
+
+.callout.red-callout { background: rgba(200,60,60,0.05); border-color: rgba(200,60,60,0.2); }
+.callout.red-callout .callout-label { color: rgba(220,120,120,0.9); }
+
+.callout.green-callout { background: rgba(90,180,120,0.05); border-color: rgba(90,180,120,0.2); }
+.callout.green-callout .callout-label { color: rgba(90,180,120,0.85); }
+
+/* FLOW */
+.flow { display: flex; align-items: stretch; gap: 0; margin: 28px 0; overflow-x: auto; }
+.flow-step { flex: 1; min-width: 140px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); padding: 20px 16px; position: relative; }
+.flow-step:first-child { border-radius: 12px 0 0 12px; }
+.flow-step:last-child { border-radius: 0 12px 12px 0; }
+.flow-step + .flow-step { border-left: none; }
+.flow-step.highlight { background: rgba(232,212,106,0.06); border-color: rgba(232,212,106,0.22); }
+.flow-num { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #F2DC4E; margin-bottom: 8px; }
+.flow-step.highlight .flow-num { color: #F2DC4E; }
+.flow-name { font-family: "Cormorant Garamond", serif; font-size: 16px; font-weight: 400; color: #FFFFFF; line-height: 1.3; }
+.flow-note { font-size: 13px; color: rgba(255,255,255,0.65); margin-top: 6px; line-height: 1.4; }
+.flow-arrow { position: absolute; right: -11px; top: 50%; transform: translateY(-50%); z-index: 2; width: 22px; height: 22px; border-radius: 50%; background: #0F0F0D; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 11px; color: #FFFFFF; }
+
+/* TRIGGER BOX */
+.trigger-box { background: rgba(232,212,106,0.08); border: 2px solid rgba(232,212,106,0.3); border-radius: 16px; padding: 28px 32px; margin: 28px 0; display: flex; align-items: flex-start; gap: 22px; }
+.trigger-icon { font-size: 32px; flex-shrink: 0; line-height: 1; margin-top: 2px; }
+.trigger-body { flex: 1; }
+.trigger-label { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #F2DC4E; margin-bottom: 8px; }
+.trigger-title { font-family: "Cormorant Garamond", serif; font-size: 26px; font-weight: 400; color: #FFFFFF; line-height: 1.2; margin-bottom: 10px; }
+.trigger-title em { font-style: italic; color: #F2DC4E; }
+.trigger-desc { font-size: 15px; color: rgba(255,255,255,0.85); line-height: 1.7; }
+.trigger-desc strong { color: #FFFFFF; font-weight: 500; }
+
+/* PRIVACY BLOCK */
+.privacy-block { background: rgba(200,60,60,0.05); border: 1px solid rgba(200,60,60,0.22); border-radius: 14px; padding: 24px 28px; margin: 28px 0; }
+.privacy-label { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(220,120,120,0.9); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.privacy-label::before { content: "⚠"; font-style: normal; }
+.privacy-title { font-family: "Cormorant Garamond", serif; font-size: 20px; font-weight: 400; color: #FFFFFF; margin-bottom: 12px; }
+.privacy-body { font-size: 15px; color: rgba(255,255,255,0.85); line-height: 1.7; }
+.privacy-body strong { color: #FFFFFF; font-weight: 500; }
+
+/* RESPONSIBILITY TABLE */
+.resp-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 15px; }
+.resp-table th { padding: 10px 14px; text-align: left; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.1); color: #F2DC4E; }
+.resp-table td { padding: 13px 14px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: top; line-height: 1.55; color: #FFFFFF; font-size: 15px; }
+.resp-table td:first-child { font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: 0.06em; color: rgba(255,255,255,0.6); white-space: nowrap; }
+.resp-table tr:last-child td { border-bottom: none; }
+.badge { display: inline-block; font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; }
+.badge.rverde { background: rgba(100,180,120,0.15); color: rgba(100,180,120,0.95); }
+.badge.chiron { background: rgba(232,212,106,0.15); color: #F2DC4E; }
+.badge.shared { background: rgba(90,140,220,0.15); color: rgba(130,170,240,0.9); }
+
+/* ROADMAP ITEMS */
+.rm-list { display: flex; flex-direction: column; gap: 10px; margin: 20px 0; }
+.rm-item { display: flex; gap: 18px; align-items: flex-start; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 18px 22px; }
+.rm-item.p1 { border-color: rgba(200,60,60,0.2); }
+.rm-item.p2 { border-color: rgba(232,212,106,0.15); }
+.rm-item.p3 { border-color: rgba(90,180,120,0.15); }
+.rm-num { font-family: "Cormorant Garamond", serif; font-size: 36px; font-weight: 400; line-height: 1; flex-shrink: 0; width: 44px; }
+.rm-item.p1 .rm-num { color: rgba(200,80,80,0.6); }
+.rm-item.p2 .rm-num { color: #F2DC4E; }
+.rm-item.p3 .rm-num { color: rgba(90,180,120,0.5); }
+.rm-tag { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 9px; border-radius: 4px; margin-bottom: 6px; }
+.p1 .rm-tag { background: rgba(200,60,60,0.15); color: rgba(220,100,100,0.95); }
+.p2 .rm-tag { background: rgba(232,212,106,0.12); color: #F2DC4E; }
+.p3 .rm-tag { background: rgba(90,180,120,0.12); color: rgba(90,180,120,0.9); }
+.rm-title { font-family: "Cormorant Garamond", serif; font-size: 19px; font-weight: 400; color: #FFFFFF; margin-bottom: 4px; }
+.rm-desc { font-size: 15px; color: rgba(255,255,255,0.8); line-height: 1.6; }
+.rm-desc strong { color: #FFFFFF; font-weight: 500; }
+
+footer { background: rgba(0,0,0,0.3); padding: 40px 48px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; }
+.f-info { font-size: 15px; color: rgba(255,255,255,0.6); }
+.f-info strong { color: #FFFFFF; }
+.f-brand { font-family: "Cormorant Garamond", serif; font-size: 17px; color: rgba(255,255,255,0.6); }
+.f-brand em { font-style: italic; color: #F2DC4E; }
+
+.fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-up.visible { opacity: 1; transform: none; }
+
+html, body { overflow-x: hidden; max-width: 100%; }
+*, *::before, *::after { min-width: 0; }
+
+@media(max-width:900px){
+  .hero { padding: 100px 24px 52px; }
+  .page { padding: 0 24px 72px; }
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 14px; text-align: center; padding: 28px 20px; }
+  .part-divider { margin: 0 -24px; padding: 32px 24px; }
+  .flow { flex-direction: column; gap: 2px; }
+  .flow-step { border-radius: 0 !important; border-left: 1px solid rgba(255,255,255,0.07) !important; border-top: none; }
+  .flow-step:first-child { border-radius: 12px 12px 0 0 !important; border-top: 1px solid rgba(255,255,255,0.07) !important; }
+  .flow-step:last-child { border-radius: 0 0 12px 12px !important; }
+  .flow-arrow { display: none; }
+  .trigger-box { flex-direction: column; gap: 12px; }
+}
+</style>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Audit Digitale · Ronchiverdi">
+<meta property="og:title" content="Certificato Medico & Partnership Chiron · Ronchiverdi">
+<meta property="og:description" content="Soluzione operativa per la gestione del certificato medico: comunicazione standard, automazione abbonamenti >€1.000 e partnership con Chiron.">
+<meta property="og:image" content="https://maurizio-gif.github.io/RONCHIVERDI-DIGITAL/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://maurizio-gif.github.io/RONCHIVERDI-DIGITAL/chiron-certificato-medico.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Certificato Medico & Partnership Chiron · Ronchiverdi">
+<meta name="twitter:description" content="Soluzione operativa per la gestione del certificato medico: comunicazione standard, automazione abbonamenti >€1.000 e partnership con Chiron.">
+<meta name="twitter:image" content="https://maurizio-gif.github.io/RONCHIVERDI-DIGITAL/og-image.jpg">
+</head>
+<body>
+
+<nav class="back-nav">
+  <a href="index.html" class="back-btn">
+    <span class="arrow">&#8592;</span>
+    <span>Torna all&rsquo;indice</span>
+  </a>
+  <a href="index.html" class="back-nav-logo-link">
+    <img src="ronchiverdi-logo.jpg" class="back-nav-logo" alt="Ronchiverdi">
+  </a>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <span class="tag">Partnership</span>
+      <span class="sep">/</span>
+      <span class="tag">Maggio 2026</span>
+      <span class="sep">/</span>
+      <span class="tag">Audit Digitale</span>
+    </div>
+    <h1>Certificato Medico &amp;<br><em>Partnership Chiron</em></h1>
+    <p class="hero-sub">Soluzione operativa emersa dalla call con Chiron: comunicazione standard per tutti gli iscritti, automazione selettiva per gli abbonamenti di valore superiore a &euro;1.000, visita medica gratuita come benefit esclusivo e aggiornamento della normativa privacy per l&rsquo;invio dei dati al partner.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><span class="lbl">Tipo</span><span class="val">Partnership &middot; Processo operativo</span></div>
+      <div class="hero-meta-item"><span class="lbl">Data</span><span class="val">Maggio 2026</span></div>
+      <div class="hero-meta-item"><span class="lbl">Partner</span><span class="val">Chiron</span></div>
+      <div class="hero-meta-item"><span class="lbl">Condotto da</span><span class="val">Maurizio Taruggi</span></div>
+    </div>
+    <div class="hero-parts">
+      <div class="hero-part-badge active">Parte I &mdash; Comunicazione Standard</div>
+      <div class="hero-part-badge active">Parte II &mdash; Automazione &amp; Processo</div>
+      <div class="hero-part-badge active">Parte III &mdash; Privacy &amp; Responsabilit&agrave;</div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- ══════════════ PARTE I: CONTESTO E CRITICITÀ ══════════════ -->
+  <div class="part-divider fade-up">
+    <div class="part-number">Parte I &mdash; Contesto</div>
+    <div class="part-title">Criticità emerse e <em>soluzione proposta</em></div>
+    <div class="part-desc">La call con Chiron ha fatto emergere una serie di inefficienze nella gestione attuale del certificato medico. La proposta risolve il problema in modo scalabile, separando nettamente le responsabilità e introducendo un'automazione mirata solo dove ha senso economico.</div>
+  </div>
+
+  <!-- I.01 CRITICITÀ -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">I.01 &middot; Criticità rilevate</div>
+    <h2>Cosa <em>non funziona</em> oggi</h2>
+    <div class="prose" style="margin-bottom:24px;">
+      <p>La call con Chiron ha evidenziato che il processo di gestione del certificato medico è attualmente non strutturato: mancano comunicazioni standard, il tipo di certificato richiesto non è chiaro per gli iscritti e la partnership con Chiron non è valorizzata né integrata nel flusso operativo.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card red">
+        <div class="card-title">Lato iscritto</div>
+        <div class="card-body">
+          <div class="item-list">
+            <div class="item"><div class="dot r"></div><span>Non sa quale tipo di certificato medico portare</span></div>
+            <div class="item"><div class="dot r"></div><span>Non conosce la modalit&agrave; e i tempi richiesti</span></div>
+            <div class="item"><div class="dot r"></div><span>Non &egrave; informato della partnership con Chiron</span></div>
+            <div class="item"><div class="dot r"></div><span>Non sa che pu&ograve; usufruire di una visita gratuita (se applicabile)</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card red">
+        <div class="card-title">Lato operativo</div>
+        <div class="card-body">
+          <div class="item-list">
+            <div class="item"><div class="dot r"></div><span>Nessun flusso automatico di trasmissione dati a Chiron</span></div>
+            <div class="item"><div class="dot r"></div><span>Nessun file condiviso per tracciare le visite effettuate</span></div>
+            <div class="item"><div class="dot r"></div><span>Competenze e responsabilit&agrave; non chiaramente definite</span></div>
+            <div class="item"><div class="dot r"></div><span>Privacy policy non aggiornata per l&rsquo;invio dati a terzi</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- I.02 SOLUZIONE -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">I.02 &middot; Soluzione proposta</div>
+    <h2>Due livelli di <em>intervento</em></h2>
+    <div class="prose" style="margin-bottom:24px;">
+      <p>La soluzione si articola su due piani distinti che non si sovrappongono: una <strong>comunicazione standard per tutti gli iscritti</strong> e un <strong>processo automatizzato selettivo</strong> riservato agli abbonamenti con corrispettivo superiore a &euro;1.000.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card gold">
+        <div class="card-title">Livello 1 &mdash; Tutti gli iscritti</div>
+        <div class="card-body">
+          <strong>Comunicazione standard</strong> inviata a tutti gli scritti, indipendentemente dal valore dell&rsquo;abbonamento. Include:
+          <div class="item-list" style="margin-top:12px;">
+            <div class="item"><div class="dot y"></div><span>Modalit&agrave; di consegna del certificato medico</span></div>
+            <div class="item"><div class="dot y"></div><span>Tipologia di certificato richiesta (sportivo agonistico / non agonistico)</span></div>
+            <div class="item"><div class="dot y"></div><span>Comunicazione della partnership con Chiron</span></div>
+            <div class="item"><div class="dot y"></div><span>Riferimento ai recapiti Chiron per chi volesse approfondire autonomamente</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card green">
+        <div class="card-title">Livello 2 &mdash; Abbonamenti &gt; €1.000</div>
+        <div class="card-body">
+          <strong>Automazione dedicata</strong> attivata solo al superamento della soglia. Include:
+          <div class="item-list" style="margin-top:12px;">
+            <div class="item"><div class="dot g"></div><span>Invio automatico del contatto dell&rsquo;iscritto alla lista Chiron</span></div>
+            <div class="item"><div class="dot g"></div><span>Verifica da parte di Chiron del diritto alla visita gratuita</span></div>
+            <div class="item"><div class="dot g"></div><span>Spunta su file condiviso delle visite effettivamente effettuate</span></div>
+            <div class="item"><div class="dot g"></div><span>Email di benvenuto con invito a prenotare autonomamente con Chiron</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ PARTE II: AUTOMAZIONE E PROCESSO ══════════════ -->
+  <div class="part-divider fade-up">
+    <div class="part-number">Parte II &mdash; Automazione &amp; Processo</div>
+    <div class="part-title">Il flusso operativo <em>passo per passo</em></div>
+    <div class="part-desc">Il trigger è univoco e non ambiguo: l&rsquo;acquisto di un abbonamento con valore superiore a €1.000. Tutto il processo di benefit e comunicazione parte esclusivamente da questo evento. Nessuna azione manuale richiesta al team Ronchiverdi.</div>
+  </div>
+
+  <!-- II.01 TRIGGER -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">II.01 &middot; Il trigger</div>
+    <h2>L&rsquo;evento che <em>attiva tutto</em></h2>
+
+    <div class="trigger-box">
+      <div class="trigger-icon">&#9889;</div>
+      <div class="trigger-body">
+        <div class="trigger-label">Trigger &middot; Evento unico</div>
+        <div class="trigger-title">Acquisto abbonamento con valore <em>&gt; €1.000</em></div>
+        <div class="trigger-desc">
+          Il processo di benefit e l&rsquo;omaggio della visita medica gratuita si attivano <strong>unicamente e automaticamente</strong> al momento dell&rsquo;acquisto di un abbonamento il cui corrispettivo supera la soglia di <strong>&euro;1.000</strong>. Nessun trigger alternativo, nessuna eccezione manuale. Questo garantisce chiarezza e separazione netta delle competenze.
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">Nota operativa</div>
+      <p>Il valore di &euro;1.000 &egrave; il corrispettivo dell&rsquo;abbonamento venduto, non il valore residuo o pro-rata. La verifica avviene al momento della registrazione dell&rsquo;acquisto nel sistema gestionale (InForYou), che &egrave; la fonte di verit&agrave; per l&rsquo;automazione.</p>
+    </div>
+  </div>
+
+  <!-- II.02 FLUSSO -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">II.02 &middot; Flusso operativo</div>
+    <h2>I cinque step del <em>processo automatizzato</em></h2>
+    <div class="prose" style="margin-bottom:24px;">
+      <p>Una volta attivato il trigger, il processo si svolge in autonomia. Il team Ronchiverdi non deve eseguire alcuna azione manuale. Chiron e l&rsquo;iscritto gestiscono il rapporto in modo diretto.</p>
+    </div>
+
+    <div class="flow">
+      <div class="flow-step highlight">
+        <div class="flow-num">01 &middot; Trigger</div>
+        <div class="flow-name">Acquisto abbonamento</div>
+        <div class="flow-note">Valore &gt; €1.000 registrato su InForYou</div>
+        <div class="flow-arrow">&#10095;</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">02 &middot; Automazione</div>
+        <div class="flow-name">Invio contatto a Chiron</div>
+        <div class="flow-note">Nome, email, tel. inviati alla lista dedicata Chiron</div>
+        <div class="flow-arrow">&#10095;</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">03 &middot; Email utente</div>
+        <div class="flow-name">Benvenuto &amp; invito prenotazione</div>
+        <div class="flow-note">Email automatica con info benefit e link/recapiti Chiron</div>
+        <div class="flow-arrow">&#10095;</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">04 &middot; Chiron</div>
+        <div class="flow-name">Verifica &amp; contatto</div>
+        <div class="flow-note">Chiron verifica il diritto e pu&ograve; contattare proattivamente l&rsquo;utente</div>
+        <div class="flow-arrow">&#10095;</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">05 &middot; Tracciamento</div>
+        <div class="flow-name">Spunta file condiviso</div>
+        <div class="flow-note">Chiron segna la visita effettuata sul file condiviso Ronchiverdi</div>
+      </div>
+    </div>
+
+    <div class="callout green-callout" style="margin-top:8px;">
+      <div class="callout-label">Doppio canale garantito</div>
+      <p>L&rsquo;iscritto pu&ograve; prenotare autonomamente con Chiron usando i recapiti ricevuti via email. <strong>In parallelo</strong>, Chiron ha comunque il contatto dell&rsquo;utente e pu&ograve; prendere lei l&rsquo;iniziativa di fissare l&rsquo;appuntamento. Nessun punto di frizione, massima copertura.</p>
+    </div>
+  </div>
+
+  <!-- II.03 COMUNICAZIONE STANDARD -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">II.03 &middot; Comunicazione per tutti gli iscritti</div>
+    <h2>La comunicazione <em>standard</em></h2>
+    <div class="prose" style="margin-bottom:24px;">
+      <p>Parallelamente all&rsquo;automazione selettiva, viene impostata una comunicazione standard che raggiunga <strong>tutti gli iscritti</strong> indipendentemente dal valore dell&rsquo;abbonamento. L&rsquo;obiettivo è eliminare ogni ambiguità sul certificato medico e dare visibilit&agrave; alla partnership.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Contenuto della comunicazione</div>
+        <div class="card-body">
+          <div class="item-list">
+            <div class="item"><div class="dot y"></div><span><strong>Modalit&agrave;:</strong> dove e come consegnare il certificato, scadenze, formati accettati</span></div>
+            <div class="item"><div class="dot y"></div><span><strong>Tipologia:</strong> certificato sportivo non agonistico (standard) o agonistico per discipline specifiche</span></div>
+            <div class="item"><div class="dot y"></div><span><strong>Partnership Chiron:</strong> presentazione del partner, servizi offerti, valore della collaborazione</span></div>
+            <div class="item"><div class="dot y"></div><span><strong>Recapiti Chiron:</strong> per chi vuole prendere contatto autonomamente con il centro medico</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Canali e timing</div>
+        <div class="card-body">
+          <div class="item-list">
+            <div class="item"><div class="dot w"></div><span><strong>Email transazionale</strong> al momento dell&rsquo;iscrizione / rinnovo (per tutti)</span></div>
+            <div class="item"><div class="dot w"></div><span><strong>Sezione dedicata</strong> nel kit di benvenuto digitale</span></div>
+            <div class="item"><div class="dot w"></div><span><strong>Eventuale reminder</strong> 30 giorni prima della scadenza del certificato</span></div>
+            <div class="item"><div class="dot w"></div><span><strong>Pagina FAQ</strong> sul sito con le istruzioni complete</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- II.04 FILE CONDIVISO -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">II.04 &middot; Tracciamento visite</div>
+    <h2>Il file condiviso <em>Chiron &times; Ronchiverdi</em></h2>
+    <div class="prose" style="margin-bottom:24px;">
+      <p>Per garantire trasparenza e tracciabilit&agrave;, Chiron avr&agrave; accesso a un file condiviso (es. Google Sheet o Airtable) in cui spunter&agrave; le visite effettivamente effettuate. Questo consente a Ronchiverdi di monitorare l&rsquo;utilizzo del benefit senza dover interfacciarsi con Chiron per ogni singolo caso.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card gold">
+        <div class="card-title">Ronchiverdi aggiunge</div>
+        <div class="card-body">Quando si attiva il trigger: nome, cognome, email, telefono, data acquisto abbonamento, valore abbonamento.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Chiron compila</div>
+        <div class="card-body">Data contatto, data visita effettuata, esito (visita completata / non presentato / riprogrammato).</div>
+      </div>
+      <div class="card green">
+        <div class="card-title">Visibilit&agrave; reciproca</div>
+        <div class="card-body">Entrambe le parti vedono lo stato di ogni iscritto avente diritto. Nessuna comunicazione manuale necessaria per il monitoraggio.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ PARTE III: PRIVACY E RESPONSABILITÀ ══════════════ -->
+  <div class="part-divider fade-up">
+    <div class="part-number">Parte III &mdash; Privacy &amp; Responsabilit&agrave;</div>
+    <div class="part-title">Normativa, consenso e <em>divisione dei ruoli</em></div>
+    <div class="part-desc">L&rsquo;invio dei dati personali degli iscritti a Chiron richiede un aggiornamento della privacy policy e la raccolta di un consenso esplicito. La chiarezza sui ruoli protegge sia Ronchiverdi che Chiron da responsabilit&agrave; non volute.</div>
+  </div>
+
+  <!-- III.01 PRIVACY -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">III.01 &middot; Aggiornamento normativa privacy</div>
+    <h2>Il consenso <em>da raccogliere</em></h2>
+
+    <div class="privacy-block">
+      <div class="privacy-label">Azione obbligatoria &middot; Da implementare prima del go-live</div>
+      <div class="privacy-title">Aggiornamento della Privacy Policy Ronchiverdi</div>
+      <div class="privacy-body">
+        L&rsquo;invio dei dati anagrafici degli iscritti a Chiron configura una <strong>comunicazione di dati a terzi</strong> ai sensi del GDPR. La privacy policy di Ronchiverdi deve essere aggiornata per prevedere <strong>esplicitamente questa finalit&agrave;</strong> e la relativa base giuridica (consenso o legittimo interesse, a seconda della valutazione del DPO).
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:24px;">
+      <div class="card">
+        <div class="card-title">Cosa va aggiornato</div>
+        <div class="card-body">
+          <div class="item-list">
+            <div class="item"><div class="dot y"></div><span>Informativa privacy (art. 13 GDPR): aggiungere Chiron come destinatario dei dati</span></div>
+            <div class="item"><div class="dot y"></div><span>Modulo iscrizione: aggiungere checkbox consenso invio dati a Chiron (se base giuridica = consenso)</span></div>
+            <div class="item"><div class="dot y"></div><span>Registro dei trattamenti: aggiungere il trattamento &ldquo;comunicazione dati a partner sanitario&rdquo;</span></div>
+            <div class="item"><div class="dot y"></div><span>DPA (Data Processing Agreement) con Chiron se agisce come responsabile del trattamento</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Logistica del consenso</div>
+        <div class="card-body">
+          <div class="item-list">
+            <div class="item"><div class="dot g"></div><span>Il consenso va raccolta <strong>al momento dell&rsquo;iscrizione</strong>, non a posteriori</span></div>
+            <div class="item"><div class="dot g"></div><span>Deve essere <strong>libero, specifico, informato e inequivocabile</strong></span></div>
+            <div class="item"><div class="dot g"></div><span>Per gli iscritti esistenti: campagna di <strong>re-consenso</strong> via email prima dell&rsquo;attivazione</span></div>
+            <div class="item"><div class="dot w"></div><span>Chi non presta consenso non pu&ograve; beneficiare della visita Chiron &mdash; ma pu&ograve; comunque contattare Chiron autonomamente</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- III.02 RESPONSABILITÀ -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">III.02 &middot; Divisione delle responsabilit&agrave;</div>
+    <h2>Chi fa <em>cosa</em></h2>
+    <div class="prose" style="margin-bottom:24px;">
+      <p>Il modello separa nettamente le competenze: Ronchiverdi gestisce il trigger commerciale e la comunicazione iniziale, Chiron gestisce la relazione medica e la pianificazione delle visite. Nessuna sovrapposizione, nessuna ambiguit&agrave;.</p>
+    </div>
+    <table class="resp-table">
+      <thead>
+        <tr>
+          <th>Step</th>
+          <th>Responsabile</th>
+          <th>Azione</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Vendita abbonamento</td>
+          <td><span class="badge rverde">Ronchiverdi</span></td>
+          <td>Registrazione su InForYou, verifica superamento soglia €1.000</td>
+        </tr>
+        <tr>
+          <td>Invio dati a Chiron</td>
+          <td><span class="badge rverde">Ronchiverdi</span></td>
+          <td>Automazione invia il contatto alla lista Chiron (solo con consenso privacy)</td>
+        </tr>
+        <tr>
+          <td>Email benvenuto iscritto</td>
+          <td><span class="badge rverde">Ronchiverdi</span></td>
+          <td>Email automatica con info sul benefit e recapiti Chiron</td>
+        </tr>
+        <tr>
+          <td>Verifica diritto alla visita</td>
+          <td><span class="badge chiron">Chiron</span></td>
+          <td>Chiron verifica che il contatto ricevuto abbia i requisiti per la visita gratuita</td>
+        </tr>
+        <tr>
+          <td>Prenotazione appuntamento</td>
+          <td><span class="badge shared">Condivisa</span></td>
+          <td>L&rsquo;iscritto prenota autonomamente oppure Chiron prende contatto proattivamente</td>
+        </tr>
+        <tr>
+          <td>Effettuazione visita</td>
+          <td><span class="badge chiron">Chiron</span></td>
+          <td>Visita medica eseguita presso le strutture Chiron</td>
+        </tr>
+        <tr>
+          <td>Tracciamento visita</td>
+          <td><span class="badge chiron">Chiron</span></td>
+          <td>Spunta sul file condiviso Ronchiverdi&times;Chiron della visita effettuata</td>
+        </tr>
+        <tr>
+          <td>Monitoraggio complessivo</td>
+          <td><span class="badge rverde">Ronchiverdi</span></td>
+          <td>Verifica periodica del file condiviso per monitorare tasso di utilizzo del benefit</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- III.03 ROADMAP IMPLEMENTAZIONE -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">III.03 &middot; Piano di implementazione</div>
+    <h2>I passi per il <em>go-live</em></h2>
+    <div class="rm-list">
+      <div class="rm-item p1">
+        <div class="rm-num">1</div>
+        <div>
+          <div class="rm-tag">Prerequisito &middot; Bloccante</div>
+          <div class="rm-title">Aggiornamento Privacy Policy e raccolta consensi</div>
+          <div class="rm-desc">Prima di qualsiasi automazione, aggiornare l&rsquo;informativa privacy, il modulo di iscrizione e avviare la campagna di re-consenso per gli iscritti esistenti. <strong>Nessuna automazione pu&ograve; partire senza questo step.</strong></div>
+        </div>
+      </div>
+      <div class="rm-item p1">
+        <div class="rm-num">2</div>
+        <div>
+          <div class="rm-tag">Prerequisito &middot; Bloccante</div>
+          <div class="rm-title">Accordo formale con Chiron e firma DPA</div>
+          <div class="rm-desc">Formalizzare la partnership con un contratto che includa le condizioni del benefit, il DPA per il trattamento dei dati e le modalit&agrave; di gestione del file condiviso.</div>
+        </div>
+      </div>
+      <div class="rm-item p2">
+        <div class="rm-num">3</div>
+        <div>
+          <div class="rm-tag">Fase 1 &middot; Comunicazione</div>
+          <div class="rm-title">Setup comunicazione standard per tutti gli iscritti</div>
+          <div class="rm-desc">Creare il template email con info sul certificato medico, la tipologia richiesta e la presentazione della partnership Chiron. Integrare nel flusso di onboarding esistente.</div>
+        </div>
+      </div>
+      <div class="rm-item p2">
+        <div class="rm-num">4</div>
+        <div>
+          <div class="rm-tag">Fase 2 &middot; Automazione</div>
+          <div class="rm-title">Configurazione automazione abbonamenti &gt; €1.000</div>
+          <div class="rm-desc">Impostare il trigger su InForYou (o via webhook), l&rsquo;invio automatico del contatto alla lista Chiron e l&rsquo;email dedicata per l&rsquo;iscritto premium. Configurare il file condiviso.</div>
+        </div>
+      </div>
+      <div class="rm-item p3">
+        <div class="rm-num">5</div>
+        <div>
+          <div class="rm-tag">Fase 3 &middot; Monitoraggio</div>
+          <div class="rm-title">Dashboard e report periodico utilizzo benefit</div>
+          <div class="rm-desc">Impostare una verifica mensile del file condiviso per misurare il tasso di utilizzo della visita gratuita e valutare l&rsquo;impatto della partnership sulla retention degli iscritti premium.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+<footer>
+  <div class="f-info"><strong>Ronchiverdi Sport Club</strong> &times; Maurizio Taruggi &mdash; Audit Digitale 2026 &middot; Documento riservato</div>
+  <div class="f-brand"><em>Ready 2 Digital</em></div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.06 });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
