@@ -136,6 +136,69 @@ body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FFFFFF; fon
 .badge.chiron { background: rgba(232,212,106,0.15); color: #F2DC4E; }
 .badge.shared { background: rgba(90,140,220,0.15); color: rgba(130,170,240,0.9); }
 
+/* ══ SWIMLANE WORKFLOW ══ */
+.wf-outer { margin: 28px 0; border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; overflow: hidden; }
+.wf-legend-row { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; padding: 14px 24px; background: rgba(255,255,255,0.02); border-bottom: 1px solid rgba(255,255,255,0.06); }
+.wf-legend-label { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-right: 4px; }
+.wf-leg { display: flex; align-items: center; gap: 7px; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
+.wf-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.wf-dot.rv { background: #F2DC4E; }
+.wf-dot.auto { background: rgba(255,255,255,0.35); }
+.wf-dot.ch { background: rgba(130,170,240,0.85); }
+.wf-dot.sh { background: rgba(90,180,120,0.8); }
+.wf-leg.rv { color: #F2DC4E; }
+.wf-leg.auto { color: rgba(255,255,255,0.5); }
+.wf-leg.ch { color: rgba(130,170,240,0.9); }
+.wf-leg.sh { color: rgba(90,180,120,0.85); }
+
+.wf-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.wf-diagram { min-width: 720px; display: grid; grid-template-rows: 1fr auto 1fr; position: relative; }
+
+/* Zone backgrounds */
+.wf-zone { padding: 20px 32px; }
+.wf-zone.rv-zone { background: rgba(232,212,106,0.03); border-bottom: 1px solid rgba(232,212,106,0.08); }
+.wf-zone.ch-zone { background: rgba(90,140,220,0.03); border-top: 1px solid rgba(90,140,220,0.08); }
+.wf-zone-row { display: flex; align-items: center; gap: 0; }
+
+/* Zone label strip */
+.wf-zone-strip { display: flex; align-items: center; gap: 8px; padding: 0 32px 0 24px; height: 100%; }
+.wf-zone-name { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; white-space: nowrap; }
+.wf-zone-name.rv { color: rgba(232,212,106,0.5); }
+.wf-zone-name.ch { color: rgba(130,170,240,0.5); }
+.wf-zone-rule { flex: 1; height: 1px; }
+.wf-zone-rule.rv { background: linear-gradient(90deg, rgba(232,212,106,0.15), transparent); }
+.wf-zone-rule.ch { background: linear-gradient(90deg, rgba(90,140,220,0.15), transparent); }
+
+/* Rail (center divider) */
+.wf-rail-row { position: relative; height: 48px; display: flex; align-items: center; }
+.wf-rail-line { position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: linear-gradient(90deg, rgba(232,212,106,0.25) 0% 40%, rgba(255,255,255,0.08) 40% 60%, rgba(90,140,220,0.2) 60% 100%); transform: translateY(-50%); }
+.wf-handoff-marker { position: absolute; left: 50%; transform: translateX(-50%); z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.wf-handoff-line { width: 1px; height: 100px; background: linear-gradient(to bottom, rgba(232,212,106,0.2), rgba(255,255,255,0.06), rgba(90,140,220,0.2)); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.wf-handoff-pill { background: rgba(15,15,13,0.95); border: 1px solid rgba(255,255,255,0.12); border-radius: 20px; padding: 3px 10px; font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.35); white-space: nowrap; position: relative; z-index: 2; }
+
+/* Step columns */
+.wf-steps-row { display: flex; align-items: stretch; padding: 0 32px; }
+.wf-step-col { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 0 8px; }
+
+/* Step node circle */
+.wf-circle { width: 52px; height: 52px; border-radius: 50%; border: 2px solid; display: flex; align-items: center; justify-content: center; font-family: "JetBrains Mono", monospace; font-size: 13px; font-weight: 500; position: relative; z-index: 2; flex-shrink: 0; }
+.wf-circle.rv { background: rgba(232,212,106,0.12); border-color: rgba(232,212,106,0.45); color: #F2DC4E; }
+.wf-circle.auto { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.7); }
+.wf-circle.ch { background: rgba(90,140,220,0.1); border-color: rgba(90,140,220,0.35); color: rgba(130,170,240,0.9); }
+.wf-circle.sh { background: rgba(90,180,120,0.08); border-color: rgba(90,180,120,0.3); color: rgba(90,180,120,0.85); }
+
+/* Step label */
+.wf-slabel { text-align: center; }
+.wf-slabel-name { font-family: "Cormorant Garamond", serif; font-size: 14px; font-weight: 400; color: #FFFFFF; line-height: 1.3; margin-bottom: 3px; }
+.wf-slabel-sub { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.08em; color: rgba(255,255,255,0.4); line-height: 1.3; }
+
+/* Connector lines between steps */
+.wf-connector { flex: none; width: 24px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.2); font-size: 14px; padding-bottom: 2px; position: relative; z-index: 2; }
+
+/* Spacer to align nodes to rail */
+.wf-spacer-top { flex: 1; min-height: 12px; }
+.wf-spacer-bot { flex: 1; min-height: 12px; }
+
 /* ROADMAP ITEMS */
 .rm-list { display: flex; flex-direction: column; gap: 10px; margin: 20px 0; }
 .rm-item { display: flex; gap: 18px; align-items: flex-start; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 18px 22px; }
@@ -272,6 +335,123 @@ html, body { overflow-x: hidden; max-width: 100%; }
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- WORKFLOW VISIVO -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">Workflow &middot; Visione d&rsquo;insieme</div>
+    <h2>Il processo <em>dall&rsquo;inizio alla fine</em></h2>
+
+    <div class="wf-outer">
+
+      <!-- LEGENDA -->
+      <div class="wf-legend-row">
+        <span class="wf-legend-label">Responsabile</span>
+        <span class="wf-leg rv"><span class="wf-dot rv"></span>Ronchiverdi</span>
+        <span class="wf-leg auto"><span class="wf-dot auto"></span>Automatico</span>
+        <span class="wf-leg ch"><span class="wf-dot ch"></span>Chiron</span>
+        <span class="wf-leg sh"><span class="wf-dot sh"></span>Condiviso</span>
+      </div>
+
+      <div class="wf-scroll">
+        <div class="wf-diagram">
+
+          <!-- ZONA RONCHIVERDI (riga alta) -->
+          <div class="wf-zone rv-zone">
+            <div class="wf-zone-strip">
+              <span class="wf-zone-name rv">Ronchiverdi + Sistema</span>
+              <div class="wf-zone-rule rv"></div>
+            </div>
+            <div class="wf-steps-row" style="padding-top:16px; padding-bottom:0;">
+              <!-- Step 01 -->
+              <div class="wf-step-col">
+                <div class="wf-slabel" style="margin-bottom:12px;">
+                  <div class="wf-slabel-name">Acquisto<br>abbonamento</div>
+                  <div class="wf-slabel-sub">&gt;€1.000 &middot; Trigger</div>
+                </div>
+                <div class="wf-circle rv">01</div>
+              </div>
+              <div class="wf-connector">&#8594;</div>
+              <!-- Step 02 -->
+              <div class="wf-step-col">
+                <div class="wf-slabel" style="margin-bottom:12px;">
+                  <div class="wf-slabel-name">Invio contatto<br>a Chiron</div>
+                  <div class="wf-slabel-sub">Automazione</div>
+                </div>
+                <div class="wf-circle auto">02</div>
+              </div>
+              <div class="wf-connector">&#8594;</div>
+              <!-- Step 03 -->
+              <div class="wf-step-col">
+                <div class="wf-slabel" style="margin-bottom:12px;">
+                  <div class="wf-slabel-name">Email benvenuto<br>iscritto</div>
+                  <div class="wf-slabel-sub">Automazione</div>
+                </div>
+                <div class="wf-circle auto">03</div>
+              </div>
+              <!-- spacer verso il centro -->
+              <div style="flex:1;"></div>
+              <div style="flex:1;"></div>
+              <div style="flex:1;"></div>
+              <div style="flex:1;"></div>
+              <div style="flex:1;"></div>
+            </div>
+          </div>
+
+          <!-- RAIL CENTRALE con handoff -->
+          <div class="wf-rail-row">
+            <div class="wf-rail-line"></div>
+            <div class="wf-handoff-marker">
+              <div class="wf-handoff-line"></div>
+              <div class="wf-handoff-pill">Handoff</div>
+            </div>
+          </div>
+
+          <!-- ZONA CHIRON (riga bassa) -->
+          <div class="wf-zone ch-zone">
+            <div class="wf-steps-row" style="padding-top:0; padding-bottom:16px;">
+              <!-- spacer verso il centro -->
+              <div style="flex:1;"></div>
+              <div style="flex:1;"></div>
+              <div style="flex:1;"></div>
+              <div style="flex:1;"></div>
+              <div style="flex:1;"></div>
+              <!-- Step 04 -->
+              <div class="wf-step-col">
+                <div class="wf-circle ch">04</div>
+                <div class="wf-slabel" style="margin-top:12px;">
+                  <div class="wf-slabel-name">Verifica<br>diritto visita</div>
+                  <div class="wf-slabel-sub">Chiron</div>
+                </div>
+              </div>
+              <div class="wf-connector">&#8594;</div>
+              <!-- Step 05 -->
+              <div class="wf-step-col">
+                <div class="wf-circle sh">05</div>
+                <div class="wf-slabel" style="margin-top:12px;">
+                  <div class="wf-slabel-name">Prenotazione<br>appuntamento</div>
+                  <div class="wf-slabel-sub">Iscritto o Chiron</div>
+                </div>
+              </div>
+              <div class="wf-connector">&#8594;</div>
+              <!-- Step 06 -->
+              <div class="wf-step-col">
+                <div class="wf-circle ch">06</div>
+                <div class="wf-slabel" style="margin-top:12px;">
+                  <div class="wf-slabel-name">Visita medica &amp;<br>file condiviso</div>
+                  <div class="wf-slabel-sub">Chiron</div>
+                </div>
+              </div>
+            </div>
+            <div class="wf-zone-strip" style="flex-direction:row-reverse;">
+              <span class="wf-zone-name ch">Chiron + Iscritto</span>
+              <div class="wf-zone-rule ch" style="background:linear-gradient(270deg,rgba(90,140,220,0.15),transparent);"></div>
+            </div>
+          </div>
+
+        </div><!-- /wf-diagram -->
+      </div><!-- /wf-scroll -->
+    </div><!-- /wf-outer -->
   </div>
 
   <!-- ══════════════ PARTE II: AUTOMAZIONE E PROCESSO ══════════════ -->
