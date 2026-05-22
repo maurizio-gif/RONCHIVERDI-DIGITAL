@@ -1271,19 +1271,56 @@
 
 <!-- ── 04 FLOW CONTRATTO ── -->
 <div class="section">
-  <div class="section-label">04 &mdash; n8n: inserimento contratto</div>
+  <div class="section-label">04 &mdash; n8n: inserimento contratto da XLS nightly</div>
+
+  <!-- Prerequisiti server -->
+  <div class="stat-card" style="margin-bottom:12px;border-left:3px solid rgba(129,140,248,0.5);">
+    <div class="stat-card-title" style="color:#818cf8;">Prerequisiti &mdash; accesso al server Ronchiverdi</div>
+    <div class="stat-row">
+      <span class="stat-key">Metodo consigliato</span>
+      <span class="stat-val base">SFTP &mdash; utente dedicato read-only sulla cartella export</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-key">Porta da aprire</span>
+      <span class="stat-val warn">22 (SSH/SFTP) o porta custom &mdash; whitelist IP n8n</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-key">Cartella export</span>
+      <span class="stat-val base">/export/abbonamenti/ &mdash; XLS aggiornato nightly dal gestionale</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-key">Alternativa cloud</span>
+      <span class="stat-val good">Gestionale esporta su OneDrive/Google Drive &rarr; n8n legge via API (no porte aperte)</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-key">Colonne XLS attese</span>
+      <span class="stat-val base">nome, cognome, email, telefono, tipo_abbonamento, data_inizio, data_fine, valore, stato</span>
+    </div>
+  </div>
+
   <div class="flow-card">
-    <div class="flow-card-title">Contratto firmato &rarr; chiude opportunit&agrave;</div>
+    <div class="flow-card-title">CRON notturno &rarr; legge XLS &rarr; aggiorna CRM</div>
     <div class="flow-steps">
 
       <div class="step">
         <div class="step-left">
-          <div class="step-dot trigger">+</div>
+          <div class="step-dot trigger">CR</div>
           <div class="step-line"></div>
         </div>
         <div class="step-right">
-          <div class="step-title">Inserimento contratto</div>
-          <div class="step-desc">Il commerciale inserisce il contratto su Softr &mdash; tipo, valore, date, collegato al contatto.</div>
+          <div class="step-title">Trigger CRON &mdash; ogni notte alle 03:00</div>
+          <div class="step-desc">n8n si sveglia, si connette via SFTP al server Ronchiverdi (o via API cloud se si usa OneDrive/Drive) e scarica il file XLS degli abbonamenti aggiornati.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left">
+          <div class="step-dot auto">XLS</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-right">
+          <div class="step-title">Parse XLS &rarr; array di righe</div>
+          <div class="step-desc">n8n legge il file con il nodo Spreadsheet File, normalizza i campi (trim, lowercase email, formato telefono) e itera su ogni riga.</div>
         </div>
       </div>
 
@@ -1293,8 +1330,19 @@
           <div class="step-line"></div>
         </div>
         <div class="step-right">
-          <div class="step-title">Trova opportunit&agrave; aperta</div>
-          <div class="step-desc">n8n cerca l&rsquo;opportunit&agrave; aperta collegata al <code>contatto_id</code>. Se pi&ugrave; di una, prende la pi&ugrave; recente.</div>
+          <div class="step-title">Per ogni riga: trova o crea il contatto</div>
+          <div class="step-desc">Cerca in Supabase per email OR telefono. Se non esiste crea il contatto con <code>sorgente = 'manuale'</code> e <code>stato = 'cliente_attivo'</code>. Se esiste aggiorna i campi mancanti.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left">
+          <div class="step-dot rv">SB</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-right">
+          <div class="step-title">Crea o aggiorna il contratto</div>
+          <div class="step-desc">Inserisce la riga in <code>contratti</code> (tipo, valore, date). Se il contratto esiste gi&agrave; (check su contatto_id + data_inizio) lo aggiorna senza duplicare.</div>
         </div>
       </div>
 
@@ -1304,8 +1352,8 @@
           <div class="step-line"></div>
         </div>
         <div class="step-right">
-          <div class="step-title">Opportunit&agrave; &rarr; VINTA</div>
-          <div class="step-desc">Imposta <code>stato_pipeline = 'vinta'</code>, scrive <code>chiusa_il = now()</code>, collega <code>contratto_id</code>.</div>
+          <div class="step-title">Chiude l&rsquo;opportunit&agrave; aperta &rarr; VINTA</div>
+          <div class="step-desc">Cerca l&rsquo;opportunit&agrave; aperta collegata al contatto (pi&ugrave; recente, stessa BU). Imposta <code>stato_pipeline = 'vinta'</code>, <code>chiusa_il = now()</code>. Se non esiste un&rsquo;opportunit&agrave; aperta, la crea e la chiude direttamente.</div>
         </div>
       </div>
 
@@ -1314,8 +1362,8 @@
           <div class="step-dot final">&#9733;</div>
         </div>
         <div class="step-right">
-          <div class="step-title">Aggiorna contatto</div>
-          <div class="step-desc">Imposta <code>stato = 'cliente_attivo'</code>. Da lead diventa cliente.</div>
+          <div class="step-title">Aggiorna stato contatto</div>
+          <div class="step-desc">Imposta <code>stato = 'cliente_attivo'</code>. Il lead diventa cliente. Log finale con numero di righe processate, create, aggiornate e in errore.</div>
         </div>
       </div>
 
