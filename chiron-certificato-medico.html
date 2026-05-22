@@ -37,6 +37,10 @@ body { font-family: "Jost", sans-serif; background: #0F0F0D; color: #FFFFFF; fon
 .hero-part-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 50px; padding: 8px 18px; font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: #FFFFFF; }
 .hero-part-badge.active { border-color: rgba(232,212,106,0.3); color: #F2DC4E; background: rgba(232,212,106,0.06); }
 
+.proposal-banner { display: flex; align-items: center; gap: 12px; background: rgba(255,107,53,0.07); border: 1px solid rgba(255,107,53,0.25); border-radius: 8px; padding: 14px 20px; margin-bottom: 40px; font-size: 14px; line-height: 1.5; color: rgba(255,255,255,0.85); }
+.proposal-banner .pb-tag { flex-shrink: 0; font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; background: rgba(255,107,53,0.15); border: 1px solid rgba(255,107,53,0.35); border-radius: 4px; padding: 3px 8px; color: #ff6b35; white-space: nowrap; }
+@media(max-width:640px){ .proposal-banner { flex-direction: column; align-items: flex-start; gap: 8px; } }
+
 .page { max-width: 1100px; margin: 0 auto; padding: 0 48px 100px; }
 
 .part-divider { margin: 0 -48px; padding: 40px 48px; background: rgba(255,255,255,0.02); border-top: 1px solid rgba(232,212,106,0.15); border-bottom: 1px solid rgba(232,212,106,0.15); }
@@ -270,6 +274,10 @@ html, body { overflow-x: hidden; max-width: 100%; }
 
 <div class="hero">
   <div class="hero-inner">
+    <div class="proposal-banner">
+      <span class="pb-tag">Proposta</span>
+      Questo documento descrive una proposta operativa emersa dalla call con Chiron. Non è ancora un processo attivo — i dettagli sono soggetti a revisione prima dell'implementazione.
+    </div>
     <div class="hero-eyebrow">
       <span class="tag">Partnership</span>
       <span class="sep">/</span>
