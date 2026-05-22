@@ -846,6 +846,141 @@
   </div>
 </div>
 
+<!-- ── 06 IDENTITY RESOLUTION ── -->
+<div class="section">
+  <div class="section-label">06 &mdash; Identity Resolution &amp; Tracking visite</div>
+
+  <!-- Spiegazione -->
+  <div class="flow-card" style="margin-bottom:12px;">
+    <div class="flow-card-title">Come funziona il browser_id</div>
+    <div class="flow-steps">
+
+      <div class="step">
+        <div class="step-left">
+          <div class="step-dot trigger">1</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-right">
+          <div class="step-title">Prima visita &mdash; anonima</div>
+          <div class="step-desc">Il sito genera un UUID e lo salva in <code>localStorage</code>. Ogni page view viene inviata a Supabase con questo ID anonimo. L&rsquo;utente &egrave; ancora sconosciuto.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left">
+          <div class="step-dot check">2</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-right">
+          <div class="step-title">Compilazione form &mdash; identit&agrave; risolta</div>
+          <div class="step-desc">Il <code>browser_id</code> viene aggiunto come campo nascosto al form. n8n lo riceve insieme ai dati, crea il contatto e salva il <code>browser_id</code> nel profilo. Da questo momento tutte le visite passate e future sono attribuite a quella persona.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left">
+          <div class="step-dot action">3</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-right">
+          <div class="step-title">Visite successive &mdash; utente riconosciuto</div>
+          <div class="step-desc">Il sito legge il <code>browser_id</code> dal <code>localStorage</code>, lo invia con ogni page view. Supabase sa chi &egrave;, quante volte &egrave; tornato, quali pagine ha visitato e da quanto tempo non si vede.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left">
+          <div class="step-dot final">4</div>
+        </div>
+        <div class="step-right">
+          <div class="step-title">Cross-device &mdash; magic link</div>
+          <div class="step-desc">Se l&rsquo;utente torna da un nuovo dispositivo &egrave; di nuovo anonimo. La soluzione: nell&rsquo;email di conferma form si include un link tracciato. Cliccandolo, il nuovo <code>browser_id</code> viene automaticamente collegato al contatto gi&agrave; esistente.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Schema DB aggiornato -->
+  <div class="stat-card" style="margin-bottom:12px;">
+    <div class="stat-card-title">Modifiche al DB &mdash; campi aggiuntivi</div>
+    <div class="stat-row">
+      <span class="stat-key" style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);">contatti</span>
+      <span class="stat-val base">+ <code>browser_id</code> text UNIQUE &nbsp;&nbsp; + <code>fbclid</code> text</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-key" style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent3);">page_views <span style="color:var(--dim);font-size:9px;">(nuova)</span></span>
+      <span class="stat-val base"><code>browser_id</code> · <code>url</code> · <code>referrer</code> · <code>ts</code></span>
+    </div>
+  </div>
+
+  <!-- Codice JS -->
+  <div style="background:var(--node);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px;">
+    <div style="padding:10px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--dim);">JS &mdash; da includere nel &lt;head&gt; del sito</span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent3);">tracker.js</span>
+    </div>
+    <pre style="padding:16px;font-family:'IBM Plex Mono',monospace;font-size:11px;line-height:1.7;color:var(--text);overflow-x:auto;"><span style="color:var(--dim);">// Genera o legge il browser_id</span>
+<span style="color:var(--accent4);">function</span> <span style="color:var(--accent);">getBrowserId</span>() {
+  <span style="color:var(--accent4);">let</span> id = localStorage.<span style="color:var(--accent3);">getItem</span>(<span style="color:var(--yellow);">'rvid'</span>);
+  <span style="color:var(--accent4);">if</span> (!id) {
+    id = <span style="color:var(--accent);">crypto</span>.randomUUID();
+    localStorage.<span style="color:var(--accent3);">setItem</span>(<span style="color:var(--yellow);">'rvid'</span>, id);
+  }
+  <span style="color:var(--accent4);">return</span> id;
+}
+
+<span style="color:var(--dim);">// Traccia ogni page view</span>
+<span style="color:var(--accent4);">function</span> <span style="color:var(--accent);">trackPageView</span>() {
+  fetch(<span style="color:var(--yellow);">'https://&lt;supabase&gt;/rest/v1/page_views'</span>, {
+    method: <span style="color:var(--yellow);">'POST'</span>,
+    headers: { <span style="color:var(--yellow);">'apikey'</span>: <span style="color:var(--yellow);">'&lt;anon_key&gt;'</span>, <span style="color:var(--yellow);">'Content-Type'</span>: <span style="color:var(--yellow);">'application/json'</span> },
+    body: JSON.<span style="color:var(--accent3);">stringify</span>({
+      browser_id: <span style="color:var(--accent);">getBrowserId</span>(),
+      url: location.href,
+      referrer: document.referrer
+    })
+  });
+}
+
+<span style="color:var(--dim);">// Inietta il browser_id nei form</span>
+document.<span style="color:var(--accent3);">querySelectorAll</span>(<span style="color:var(--yellow);">'form'</span>).<span style="color:var(--accent3);">forEach</span>(f => {
+  <span style="color:var(--accent4);">const</span> h = document.<span style="color:var(--accent3);">createElement</span>(<span style="color:var(--yellow);">'input'</span>);
+  h.type = <span style="color:var(--yellow);">'hidden'</span>; h.name = <span style="color:var(--yellow);">'browser_id'</span>;
+  h.value = <span style="color:var(--accent);">getBrowserId</span>();
+  f.<span style="color:var(--accent3);">appendChild</span>(h);
+});
+
+<span style="color:var(--accent);">trackPageView</span>();</pre>
+  </div>
+
+  <!-- Query utili -->
+  <div class="stat-card">
+    <div class="stat-card-title">Query utili &mdash; cosa puoi vedere in Supabase</div>
+    <div class="stat-row">
+      <span class="stat-key">Pagine visitate prima del form</span>
+      <span class="stat-val warn">page_views WHERE browser_id = X</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-key">Quante volte &egrave; tornato</span>
+      <span class="stat-val good">COUNT(DISTINCT DATE(ts))</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-key">Giorni dall&rsquo;ultima visita</span>
+      <span class="stat-val warn">NOW() - MAX(ts)</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-key">Lead caldi (tornati &gt; 2 volte)</span>
+      <span class="stat-val good">HAVING COUNT(DISTINCT DATE) &gt; 2</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-key">Attribuzione Meta (fbclid)</span>
+      <span class="stat-val base">contatti.fbclid IS NOT NULL</span>
+    </div>
+  </div>
+
+</div>
+
 <div class="page-footer">
   <span>Ronchiverdi Sport Club &times; Maurizio Taruggi &mdash; Audit Digitale 2026</span>
   <span>Ready 2 Digital</span>
