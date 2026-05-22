@@ -148,6 +148,7 @@
   .table-card.c2 { border-left: 3px solid var(--accent2); }
   .table-card.c3 { border-left: 3px solid var(--accent3); }
   .table-card.c4 { border-left: 3px solid var(--accent4); }
+  .table-card.c5 { border-left: 3px solid var(--yellow); }
 
   .table-header {
     padding: 14px 16px;
@@ -179,6 +180,8 @@
   .c2 .table-name { color: var(--accent2); }
   .c3 .table-name { color: var(--accent3); }
   .c4 .table-name { color: var(--accent4); }
+  .c5 .table-name { color: var(--yellow); }
+  .c5 .table-icon { background: rgba(255,200,0,0.12); color: var(--yellow); }
 
   .table-count {
     font-size: 11px;
@@ -587,8 +590,14 @@
         <span class="badge info">nuovo → in_gestione → appuntamento_preso → prova → vinta / persa</span>
       </div>
       <div class="field">
-        <span class="field-type">text</span>
-        <span class="field-name">assegnato_a</span>
+        <span class="field-type">uuid</span>
+        <span class="field-name fk">assegnato_a</span>
+        <span class="badge fk">FK → operatori</span>
+      </div>
+      <div class="field">
+        <span class="field-type">uuid</span>
+        <span class="field-name fk">creato_da</span>
+        <span class="badge fk">FK → operatori</span>
       </div>
       <div class="field">
         <span class="field-type">ts</span>
@@ -692,6 +701,43 @@
       </div>
     </div>
   </div>
+
+  <!-- OPERATORI -->
+  <div class="table-card c5" onclick="toggle(this)">
+    <div class="table-header">
+      <div class="table-icon">Op</div>
+      <div class="table-meta">
+        <div class="table-name">operatori</div>
+        <div class="table-count">Consulenti e staff interno — lookup per assegnazioni</div>
+      </div>
+      <div class="chevron">&#9660;</div>
+    </div>
+    <div class="table-body">
+      <div class="field">
+        <span class="field-type">uuid</span>
+        <span class="field-name pk">id</span>
+        <span class="badge pk">PK</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">nome</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">cognome</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">ruolo</span>
+        <span class="badge info">consulente / reception / admin</span>
+      </div>
+      <div class="field">
+        <span class="field-type">bool</span>
+        <span class="field-name">attivo</span>
+        <span class="badge qualif">filtra lista assegnazione</span>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ── 02 RELAZIONI ── -->
@@ -713,6 +759,14 @@
     <div class="relation-item">
       <div class="rel-dot" style="background:var(--accent4)"></div>
       <div class="rel-text"><strong>contatti</strong> 1 &rarr; N <strong>contratti</strong> (rinnovi)</div>
+    </div>
+    <div class="relation-item">
+      <div class="rel-dot" style="background:var(--yellow)"></div>
+      <div class="rel-text"><strong>operatori</strong> 1 &rarr; N <strong>opportunit&agrave;</strong>.assegnato_a</div>
+    </div>
+    <div class="relation-item">
+      <div class="rel-dot" style="background:var(--yellow)"></div>
+      <div class="rel-text"><strong>operatori</strong> 1 &rarr; N <strong>opportunit&agrave;</strong>.creato_da</div>
     </div>
   </div>
 
