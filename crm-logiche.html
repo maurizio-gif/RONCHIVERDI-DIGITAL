@@ -149,6 +149,7 @@
   .table-card.c3 { border-left: 3px solid var(--accent3); }
   .table-card.c4 { border-left: 3px solid var(--accent4); }
   .table-card.c5 { border-left: 3px solid var(--yellow); }
+  .table-card.c6 { border-left: 3px solid #f472b6; }
 
   .table-header {
     padding: 14px 16px;
@@ -182,6 +183,8 @@
   .c4 .table-name { color: var(--accent4); }
   .c5 .table-name { color: var(--yellow); }
   .c5 .table-icon { background: rgba(255,200,0,0.12); color: var(--yellow); }
+  .c6 .table-name { color: #f472b6; }
+  .c6 .table-icon { background: rgba(244,114,182,0.12); color: #f472b6; }
 
   .table-count {
     font-size: 11px;
@@ -755,6 +758,67 @@
       </div>
     </div>
   </div>
+
+  <!-- TASK -->
+  <div class="table-card c6" onclick="toggle(this)">
+    <div class="table-header">
+      <div class="table-icon">T</div>
+      <div class="table-meta">
+        <div class="table-name">task</div>
+        <div class="table-count">Azioni del consulente su un&rsquo;opportunit&agrave; — base per il lead scoring</div>
+      </div>
+      <div class="chevron">&#9660;</div>
+    </div>
+    <div class="table-body">
+      <div class="field">
+        <span class="field-type">uuid</span>
+        <span class="field-name pk">id</span>
+        <span class="badge pk">PK</span>
+      </div>
+      <div class="field">
+        <span class="field-type">uuid</span>
+        <span class="field-name fk">opportunit&agrave;_id</span>
+        <span class="badge fk">FK → opportunit&agrave;</span>
+      </div>
+      <div class="field">
+        <span class="field-type">uuid</span>
+        <span class="field-name fk">assegnato_a</span>
+        <span class="badge fk">FK → operatori</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">tipo</span>
+        <span class="badge info">chiamata / email / appuntamento / follow-up</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">stato</span>
+        <span class="badge info">da_fare / completato / annullato</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">prossima_azione</span>
+        <span class="badge qualif">visita / prova / iscrizione</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">propensione</span>
+        <span class="badge qualif">bassa / media / alta &rarr; score</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">nota</span>
+      </div>
+      <div class="field">
+        <span class="field-type">date</span>
+        <span class="field-name">scadenza</span>
+      </div>
+      <div class="field">
+        <span class="field-type">ts</span>
+        <span class="field-name">created_at</span>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ── 02 RELAZIONI ── -->
@@ -784,6 +848,14 @@
     <div class="relation-item">
       <div class="rel-dot" style="background:var(--yellow)"></div>
       <div class="rel-text"><strong>operatori</strong> 1 &rarr; N <strong>opportunit&agrave;</strong>.creato_da</div>
+    </div>
+    <div class="relation-item">
+      <div class="rel-dot" style="background:#f472b6"></div>
+      <div class="rel-text"><strong>opportunit&agrave;</strong> 1 &rarr; N <strong>task</strong></div>
+    </div>
+    <div class="relation-item">
+      <div class="rel-dot" style="background:#f472b6"></div>
+      <div class="rel-text"><strong>operatori</strong> 1 &rarr; N <strong>task</strong>.assegnato_a</div>
     </div>
   </div>
 
@@ -1199,18 +1271,22 @@ document.<span style="color:var(--accent3);">querySelectorAll</span>(<span style
       <div class="score-signal-logic">+10 per click su link email negli ultimi 30gg &mdash; nessun tetto. 3 click = 30 pt</div>
     </div>
 
-    <div class="score-signal" style="border-left:3px solid var(--yellow)">
+    <div class="score-signal" style="border-left:3px solid #f472b6">
       <div class="score-signal-top">
         <div>
-          <div class="score-signal-label">Valutazione consulente</div>
-          <div class="score-signal-source">fonte: opportunit&agrave;.priorit&agrave;</div>
+          <div class="score-signal-label">Analisi task consulente</div>
+          <div class="score-signal-source">fonte: task (ultimo completato)</div>
         </div>
-        <div class="score-signal-pts" style="color:var(--yellow)">0 / 20 / 40</div>
+        <div class="score-signal-pts" style="color:#f472b6">max 60</div>
       </div>
       <div class="score-bar-track">
-        <div class="score-bar-fill" style="width:50%;background:var(--yellow)"></div>
+        <div class="score-bar-fill" style="width:60%;background:#f472b6"></div>
       </div>
-      <div class="score-signal-logic">Il consulente imposta manualmente la priorit&agrave;: bassa (0) / media (20) / alta (40). Da sola pu&ograve; portare in zona caldo</div>
+      <div class="score-signal-logic">
+        Propensione: bassa +0 / media +15 / alta +30<br>
+        Prossima azione: visita +10 / prova +20 / iscrizione +30<br>
+        n8n legge il task completato pi&ugrave; recente.
+      </div>
     </div>
 
   </div>
@@ -1227,8 +1303,12 @@ document.<span style="color:var(--accent3);">querySelectorAll</span>(<span style
       <span class="stat-val base">text &mdash; freddo / tiepido / caldo</span>
     </div>
     <div class="stat-row">
-      <span class="stat-key">opportunit&agrave;.priorit&agrave;</span>
+      <span class="stat-key">task.propensione</span>
       <span class="stat-val base">enum: bassa / media / alta &mdash; input consulente</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-key">task.prossima_azione</span>
+      <span class="stat-val base">enum: visita / prova / iscrizione &mdash; input consulente</span>
     </div>
     <div class="stat-row">
       <span class="stat-key">email_events</span>
