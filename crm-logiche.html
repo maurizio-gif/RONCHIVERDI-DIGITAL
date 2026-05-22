@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>CRM — Schema &amp; Logiche &middot; Ronchiverdi Audit</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;600&display=swap');
+
+  :root {
+    --bg: #0a0e17;
+    --surface: #111827;
+    --border: #1e2d40;
+    --accent:  #00c9ff;
+    --accent2: #ff6b35;
+    --accent3: #7fff6b;
+    --accent4: #c084fc;
+    --yellow:  #ffc800;
+    --text:    #e2e8f0;
+    --dim:     #64748b;
+    --node:    #151f2e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    padding: 24px 16px 48px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* ── BACK NAV ── */
+  .back-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    height: 56px;
+    background: rgba(10,14,23,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--dim);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .back-btn:hover { color: var(--accent); }
+  .back-btn .arrow { font-size: 16px; transition: transform 0.2s; }
+  .back-btn:hover .arrow { transform: translateX(-3px); }
+  .back-nav-logo { height: 30px; width: auto; filter: invert(1); opacity: 0.7; }
+  @media(max-width:480px){ .back-nav { padding: 0 16px; } .back-nav-logo { height: 24px; } }
+
+  body { padding-top: 80px; }
+
+  /* ── HEADER ── */
+  .header { margin-bottom: 32px; }
+  .header-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .header h1 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .header p {
+    font-size: 12px;
+    color: var(--dim);
+    line-height: 1.5;
+  }
+
+  /* ── SECTION ── */
+  .section { margin-bottom: 32px; }
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: var(--dim);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── TABLE CARD ── */
+  .table-card {
+    background: var(--node);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .table-card.c1 { border-left: 3px solid var(--accent); }
+  .table-card.c2 { border-left: 3px solid var(--accent2); }
+  .table-card.c3 { border-left: 3px solid var(--accent3); }
+  .table-card.c4 { border-left: 3px solid var(--accent4); }
+
+  .table-header {
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .table-icon {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px; font-weight: 600;
+    flex-shrink: 0;
+  }
+  .c1 .table-icon { background: rgba(0,201,255,0.12); color: var(--accent); }
+  .c2 .table-icon { background: rgba(255,107,53,0.12); color: var(--accent2); }
+  .c3 .table-icon { background: rgba(127,255,107,0.12); color: var(--accent3); }
+  .c4 .table-icon { background: rgba(192,132,252,0.12); color: var(--accent4); }
+
+  .table-meta { flex: 1; }
+  .table-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px; font-weight: 600;
+  }
+  .c1 .table-name { color: var(--accent); }
+  .c2 .table-name { color: var(--accent2); }
+  .c3 .table-name { color: var(--accent3); }
+  .c4 .table-name { color: var(--accent4); }
+
+  .table-count {
+    font-size: 11px;
+    color: var(--dim);
+    margin-top: 1px;
+  }
+  .chevron {
+    color: var(--dim);
+    font-size: 12px;
+    transition: transform 0.2s;
+  }
+  .table-card.open .chevron { transform: rotate(180deg); }
+
+  .table-body {
+    display: none;
+    padding: 0 16px 14px;
+    border-top: 1px solid var(--border);
+  }
+  .table-card.open .table-body { display: block; }
+
+  .field {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    flex-wrap: wrap;
+  }
+  .field:last-child { border-bottom: none; }
+
+  .field-type {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    color: var(--dim);
+    background: rgba(255,255,255,0.05);
+    padding: 2px 6px;
+    border-radius: 4px;
+    min-width: 36px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .field-name { font-size: 13px; color: var(--text); flex: 1; }
+  .field-name.pk { color: var(--accent); font-weight: 600; }
+  .field-name.fk { color: var(--accent2); }
+
+  .badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+  .badge.pk    { background: rgba(0,201,255,0.15);   color: var(--accent); }
+  .badge.fk    { background: rgba(255,107,53,0.15);  color: var(--accent2); }
+  .badge.uniq  { background: rgba(127,255,107,0.15); color: var(--accent3); }
+  .badge.dedup { background: rgba(255,200,0,0.15);   color: var(--yellow); }
+  .badge.info  { background: rgba(192,132,252,0.15); color: var(--accent4); }
+
+  /* ── RELATIONS ── */
+  .relations { margin-bottom: 32px; }
+  .relation-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .relation-item:last-child { border-bottom: none; }
+  .rel-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent2);
+    flex-shrink: 0;
+  }
+  .rel-text {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--dim);
+  }
+  .rel-text strong { color: var(--text); font-weight: 600; }
+
+  /* ── FLOW ── */
+  .flow-card {
+    background: var(--node);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 16px;
+    margin-bottom: 12px;
+  }
+  .flow-card-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 18px;
+  }
+
+  .step {
+    display: flex;
+    gap: 14px;
+    position: relative;
+  }
+  .step:not(:last-child) { margin-bottom: 0; }
+
+  .step-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 36px;
+  }
+  .step-dot {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px; font-weight: 600;
+    flex-shrink: 0;
+  }
+  .step-dot.trigger { background: rgba(0,201,255,0.12);  color: var(--accent);  border: 1px solid var(--accent); }
+  .step-dot.check   { background: rgba(255,200,0,0.1);   color: var(--yellow);  border: 1px solid var(--yellow); }
+  .step-dot.branch  { background: rgba(255,107,53,0.1);  color: var(--accent2); border: 1px solid var(--accent2); }
+  .step-dot.action  { background: rgba(127,255,107,0.1); color: var(--accent3); border: 1px solid var(--accent3); }
+  .step-dot.final   { background: rgba(192,132,252,0.1); color: var(--accent4); border: 1px solid var(--accent4); }
+
+  .step-line {
+    width: 1px;
+    flex: 1;
+    min-height: 12px;
+    background: var(--border);
+    margin: 3px 0;
+  }
+
+  .step-right {
+    flex: 1;
+    padding-bottom: 20px;
+  }
+  .step:last-child .step-right { padding-bottom: 0; }
+
+  .step-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 36px;
+    margin-bottom: 4px;
+  }
+  .step-desc {
+    font-size: 12px;
+    color: var(--dim);
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    background: rgba(255,255,255,0.06);
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  /* ── BRANCHES ── */
+  .branches {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .branch {
+    border-radius: 8px;
+    padding: 12px 14px;
+    border: 1px solid;
+  }
+  .branch.new-c  { border-color: rgba(127,255,107,0.3); background: rgba(127,255,107,0.05); }
+  .branch.open-o { border-color: rgba(255,200,0,0.3);   background: rgba(255,200,0,0.05); }
+  .branch.clos-o { border-color: rgba(0,201,255,0.3);   background: rgba(0,201,255,0.05); }
+
+  .branch-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .new-c  .branch-title { color: var(--accent3); }
+  .open-o .branch-title { color: var(--yellow); }
+  .clos-o .branch-title { color: var(--accent); }
+
+  .branch-action {
+    font-size: 12px;
+    color: var(--dim);
+    display: flex;
+    gap: 6px;
+    margin-bottom: 4px;
+    line-height: 1.4;
+  }
+  .branch-action:last-child { margin-bottom: 0; }
+  .new-c  .branch-action::before { content: '→'; color: var(--accent3); flex-shrink: 0; }
+  .open-o .branch-action::before { content: '→'; color: var(--yellow); flex-shrink: 0; }
+  .clos-o .branch-action::before { content: '→'; color: var(--accent); flex-shrink: 0; }
+
+  /* ── STATS ── */
+  .stats-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .stat-card {
+    background: var(--node);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .stat-card-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    gap: 12px;
+  }
+  .stat-row:last-child { border-bottom: none; }
+  .stat-key { font-size: 12px; color: var(--dim); }
+  .stat-val {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    text-align: right;
+  }
+  .stat-val.good { color: var(--accent3); }
+  .stat-val.warn { color: var(--yellow); }
+  .stat-val.base { color: var(--text); }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--dim);
+    letter-spacing: 0.08em;
+  }
+</style>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Audit Digitale · Ronchiverdi">
+<meta property="og:title" content="CRM — Schema & Logiche · Ronchiverdi">
+<meta property="og:description" content="Struttura tabelle Supabase + flow n8n per deduplicazione contatti, gestione opportunità e inserimento contratti.">
+<meta property="og:image" content="https://maurizio-gif.github.io/RONCHIVERDI-DIGITAL/og-image.jpg">
+<meta property="og:url" content="https://maurizio-gif.github.io/RONCHIVERDI-DIGITAL/crm-logiche.html">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+
+<!-- BACK NAV -->
+<nav class="back-nav">
+  <a href="index.html" class="back-btn">
+    <span class="arrow">&#8592;</span>
+    <span>Torna all&rsquo;indice</span>
+  </a>
+  <a href="index.html">
+    <img src="ronchiverdi-logo.jpg" class="back-nav-logo" alt="Ronchiverdi">
+  </a>
+</nav>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-tag">Ready 2 Digital &middot; Audit Digitale 2026</div>
+  <h1>CRM &mdash; Schema &amp; Logica Deduplicazione</h1>
+  <p>Struttura tabelle Supabase + flow n8n per ogni form compilato e inserimento contratti</p>
+</div>
+
+<!-- ── 01 TABELLE ── -->
+<div class="section">
+  <div class="section-label">01 &mdash; Tabelle Supabase</div>
+
+  <!-- CONTATTI -->
+  <div class="table-card c1" onclick="toggle(this)">
+    <div class="table-header">
+      <div class="table-icon">C</div>
+      <div class="table-meta">
+        <div class="table-name">contatti</div>
+        <div class="table-count">Anagrafica unica per persona</div>
+      </div>
+      <div class="chevron">&#9660;</div>
+    </div>
+    <div class="table-body">
+      <div class="field">
+        <span class="field-type">uuid</span>
+        <span class="field-name pk">id</span>
+        <span class="badge pk">PK</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">email</span>
+        <span class="badge uniq">UNIQUE</span>
+        <span class="badge dedup">DEDUP</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">telefono</span>
+        <span class="badge uniq">UNIQUE</span>
+        <span class="badge dedup">DEDUP</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">nome</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">cognome</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">stato</span>
+        <span class="badge info">lead / cliente_attivo</span>
+      </div>
+      <div class="field">
+        <span class="field-type">ts</span>
+        <span class="field-name">created_at</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPPORTUNITÀ -->
+  <div class="table-card c2" onclick="toggle(this)">
+    <div class="table-header">
+      <div class="table-icon">O</div>
+      <div class="table-meta">
+        <div class="table-name">opportunit&agrave;</div>
+        <div class="table-count">Intenzione commerciale del contatto</div>
+      </div>
+      <div class="chevron">&#9660;</div>
+    </div>
+    <div class="table-body">
+      <div class="field">
+        <span class="field-type">uuid</span>
+        <span class="field-name pk">id</span>
+        <span class="badge pk">PK</span>
+      </div>
+      <div class="field">
+        <span class="field-type">uuid</span>
+        <span class="field-name fk">contatto_id</span>
+        <span class="badge fk">FK</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">stato_pipeline</span>
+        <span class="badge info">nuovo / in_gestione / vinta / persa</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">assegnato_a</span>
+      </div>
+      <div class="field">
+        <span class="field-type">ts</span>
+        <span class="field-name">aperta_il</span>
+      </div>
+      <div class="field">
+        <span class="field-type">ts</span>
+        <span class="field-name">chiusa_il</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORM SUBMISSIONS -->
+  <div class="table-card c3" onclick="toggle(this)">
+    <div class="table-header">
+      <div class="table-icon">F</div>
+      <div class="table-meta">
+        <div class="table-name">form_submissions</div>
+        <div class="table-count">Ogni compilazione ricevuta</div>
+      </div>
+      <div class="chevron">&#9660;</div>
+    </div>
+    <div class="table-body">
+      <div class="field">
+        <span class="field-type">uuid</span>
+        <span class="field-name pk">id</span>
+        <span class="badge pk">PK</span>
+      </div>
+      <div class="field">
+        <span class="field-type">uuid</span>
+        <span class="field-name fk">opportunit&agrave;_id</span>
+        <span class="badge fk">FK</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">tipo_form</span>
+        <span class="badge info">prova / contatto / evento</span>
+      </div>
+      <div class="field">
+        <span class="field-type">json</span>
+        <span class="field-name">dati_form</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">sorgente</span>
+      </div>
+      <div class="field">
+        <span class="field-type">ts</span>
+        <span class="field-name">ricevuto_il</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTRATTI -->
+  <div class="table-card c4" onclick="toggle(this)">
+    <div class="table-header">
+      <div class="table-icon">K</div>
+      <div class="table-meta">
+        <div class="table-name">contratti</div>
+        <div class="table-count">Contratti firmati, collega opp. &rarr; vinta</div>
+      </div>
+      <div class="chevron">&#9660;</div>
+    </div>
+    <div class="table-body">
+      <div class="field">
+        <span class="field-type">uuid</span>
+        <span class="field-name pk">id</span>
+        <span class="badge pk">PK</span>
+      </div>
+      <div class="field">
+        <span class="field-type">uuid</span>
+        <span class="field-name fk">contatto_id</span>
+        <span class="badge fk">FK</span>
+      </div>
+      <div class="field">
+        <span class="field-type">uuid</span>
+        <span class="field-name fk">opportunit&agrave;_id</span>
+        <span class="badge fk">FK</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">tipo_contratto</span>
+      </div>
+      <div class="field">
+        <span class="field-type">num</span>
+        <span class="field-name">valore</span>
+      </div>
+      <div class="field">
+        <span class="field-type">date</span>
+        <span class="field-name">data_inizio</span>
+      </div>
+      <div class="field">
+        <span class="field-type">date</span>
+        <span class="field-name">data_fine</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">stato</span>
+        <span class="badge info">attivo / scaduto</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 02 RELAZIONI ── -->
+<div class="section">
+  <div class="section-label">02 &mdash; Relazioni</div>
+  <div class="relations">
+    <div class="relation-item">
+      <div class="rel-dot" style="background:var(--accent)"></div>
+      <div class="rel-text"><strong>contatti</strong> 1 &rarr; N <strong>opportunit&agrave;</strong></div>
+    </div>
+    <div class="relation-item">
+      <div class="rel-dot" style="background:var(--accent2)"></div>
+      <div class="rel-text"><strong>opportunit&agrave;</strong> 1 &rarr; N <strong>form_submissions</strong></div>
+    </div>
+    <div class="relation-item">
+      <div class="rel-dot" style="background:var(--accent3)"></div>
+      <div class="rel-text"><strong>opportunit&agrave;</strong> 1 &rarr; 1 <strong>contratto</strong></div>
+    </div>
+    <div class="relation-item">
+      <div class="rel-dot" style="background:var(--accent4)"></div>
+      <div class="rel-text"><strong>contatti</strong> 1 &rarr; N <strong>contratti</strong> (rinnovi)</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 03 FLOW FORM ── -->
+<div class="section">
+  <div class="section-label">03 &mdash; n8n: ogni form compilato</div>
+  <div class="flow-card">
+    <div class="flow-card-title">Webhook &rarr; deduplicazione</div>
+    <div class="flow-steps">
+
+      <div class="step">
+        <div class="step-left">
+          <div class="step-dot trigger">W</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-right">
+          <div class="step-title">Webhook riceve il form</div>
+          <div class="step-desc">Qualsiasi form (prova, contatto, evento&hellip;). n8n estrae <code>email</code> e <code>telefono</code>.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left">
+          <div class="step-dot check">?</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-right">
+          <div class="step-title">Esiste il contatto?</div>
+          <div class="step-desc">Query Supabase: match su <code>email</code> OR <code>telefono</code>.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left">
+          <div class="step-dot branch">&#8918;</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-right">
+          <div class="step-title">3 scenari</div>
+          <div class="branches">
+            <div class="branch new-c">
+              <div class="branch-title">Contatto nuovo</div>
+              <div class="branch-action">Crea contatto</div>
+              <div class="branch-action">Crea opportunit&agrave; (stato: nuovo)</div>
+              <div class="branch-action">Registra form_submission</div>
+            </div>
+            <div class="branch open-o">
+              <div class="branch-title">Contatto esiste + opp. aperta</div>
+              <div class="branch-action">Nessun nuovo contatto</div>
+              <div class="branch-action">Nessuna nuova opportunit&agrave;</div>
+              <div class="branch-action">Aggiungi form_submission all&rsquo;opp. esistente</div>
+            </div>
+            <div class="branch clos-o">
+              <div class="branch-title">Contatto esiste + opp. chiusa</div>
+              <div class="branch-action">Nessun nuovo contatto</div>
+              <div class="branch-action">Crea nuova opportunit&agrave;</div>
+              <div class="branch-action">Registra form_submission</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left">
+          <div class="step-dot action">&#10003;</div>
+        </div>
+        <div class="step-right">
+          <div class="step-title">Notifica commerciale</div>
+          <div class="step-desc">Nuovo lead, o aggiornamento su lead esistente con flag &ldquo;compilazione multipla&rdquo;.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ── 04 FLOW CONTRATTO ── -->
+<div class="section">
+  <div class="section-label">04 &mdash; n8n: inserimento contratto</div>
+  <div class="flow-card">
+    <div class="flow-card-title">Contratto firmato &rarr; chiude opportunit&agrave;</div>
+    <div class="flow-steps">
+
+      <div class="step">
+        <div class="step-left">
+          <div class="step-dot trigger">+</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-right">
+          <div class="step-title">Inserimento contratto</div>
+          <div class="step-desc">Il commerciale inserisce il contratto su Softr &mdash; tipo, valore, date, collegato al contatto.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left">
+          <div class="step-dot check">?</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-right">
+          <div class="step-title">Trova opportunit&agrave; aperta</div>
+          <div class="step-desc">n8n cerca l&rsquo;opportunit&agrave; aperta collegata al <code>contatto_id</code>. Se pi&ugrave; di una, prende la pi&ugrave; recente.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left">
+          <div class="step-dot action">&#10003;</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-right">
+          <div class="step-title">Opportunit&agrave; &rarr; VINTA</div>
+          <div class="step-desc">Imposta <code>stato_pipeline = 'vinta'</code>, scrive <code>chiusa_il = now()</code>, collega <code>contratto_id</code>.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left">
+          <div class="step-dot final">&#9733;</div>
+        </div>
+        <div class="step-right">
+          <div class="step-title">Aggiorna contatto</div>
+          <div class="step-desc">Imposta <code>stato = 'cliente_attivo'</code>. Da lead diventa cliente.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ── 05 STATISTICHE ── -->
+<div class="section">
+  <div class="section-label">05 &mdash; Statistiche pulite</div>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-card-title">Metriche principali</div>
+      <div class="stat-row">
+        <span class="stat-key">Volume commerciale</span>
+        <span class="stat-val good">COUNT(opportunit&agrave;)</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-key">Reach reale</span>
+        <span class="stat-val good">COUNT(contatti unici)</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-key">Tasso conversione</span>
+        <span class="stat-val good">opp. vinte / totali</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-key">Valore medio contratto</span>
+        <span class="stat-val warn">AVG(contratti.valore)</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-key">Clienti attivi</span>
+        <span class="stat-val good">stato = attivo</span>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card-title">Segnali qualit&agrave; lead</div>
+      <div class="stat-row">
+        <span class="stat-key">1 form</span>
+        <span class="stat-val base">interesse standard</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-key">2 form diversi</span>
+        <span class="stat-val warn">interesse elevato</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-key">3+ form</span>
+        <span class="stat-val good">priorit&agrave; alta</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-key">Opp. chiusa + ritorna</span>
+        <span class="stat-val good">seconda chance</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-footer">
+  <span>Ronchiverdi Sport Club &times; Maurizio Taruggi &mdash; Audit Digitale 2026</span>
+  <span>Ready 2 Digital</span>
+</div>
+
+<script>
+  function toggle(card) {
+    card.classList.toggle('open');
+  }
+  document.querySelector('.table-card').classList.add('open');
+</script>
+</body>
+</html>
