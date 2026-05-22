@@ -433,10 +433,35 @@
 <div class="header">
   <div class="header-tag">Ready 2 Digital &middot; Audit Digitale 2026</div>
   <h1>CRM &mdash; Schema &amp; Logica Deduplicazione</h1>
-  <p>Struttura tabelle Supabase + flow n8n per ogni form compilato e inserimento contratti</p>
+  <p>I contatti vengono inseriti <strong style="color:var(--accent)">automaticamente via n8n</strong> dalle sorgenti esterne (sito, Meta Ads, referral, guest register). Struttura tabelle Supabase + flow di deduplicazione e inserimento contratti.</p>
 </div>
 
-<!-- ── 01 TABELLE ── -->
+<!-- ── 00 SORGENTI ── -->
+<div class="section">
+  <div class="section-label">00 &mdash; Sorgenti di ingestion automatica</div>
+  <div style="display:flex;flex-direction:column;gap:8px;">
+    <div style="background:var(--node);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--accent);min-width:90px;">SITO WEB</div>
+      <div style="font-size:12px;color:var(--dim);flex:1;">Form di contatto, richiesta prova gratuita, iscrizione newsletter &mdash; webhook diretto a n8n</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--dim);background:rgba(0,201,255,0.08);padding:3px 8px;border-radius:6px;">sorgente: sito</div>
+    </div>
+    <div style="background:var(--node);border:1px solid var(--border);border-left:3px solid var(--accent2);border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--accent2);min-width:90px;">META ADS</div>
+      <div style="font-size:12px;color:var(--dim);flex:1;">Lead form Facebook / Instagram &mdash; integrazione Meta Lead Ads API via n8n</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--dim);background:rgba(255,107,53,0.08);padding:3px 8px;border-radius:6px;">sorgente: meta</div>
+    </div>
+    <div style="background:var(--node);border:1px solid var(--border);border-left:3px solid var(--accent3);border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--accent3);min-width:90px;">REFERRAL</div>
+      <div style="font-size:12px;color:var(--dim);flex:1;">Segnalazioni da soci esistenti &mdash; form dedicato o inserimento manuale da Softr</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--dim);background:rgba(127,255,107,0.08);padding:3px 8px;border-radius:6px;">sorgente: referral</div>
+    </div>
+    <div style="background:var(--node);border:1px solid var(--border);border-left:3px solid var(--accent4);border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--accent4);min-width:90px;">GUEST REG.</div>
+      <div style="font-size:12px;color:var(--dim);flex:1;">Ospiti registrati alla reception &mdash; sincronizzazione automatica dal guest register digitale</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--dim);background:rgba(192,132,252,0.08);padding:3px 8px;border-radius:6px;">sorgente: guest_register</div>
+    </div>
+  </div>
+</div>
 <div class="section">
   <div class="section-label">01 &mdash; Tabelle Supabase</div>
 
@@ -562,6 +587,7 @@
       <div class="field">
         <span class="field-type">text</span>
         <span class="field-name">sorgente</span>
+        <span class="badge info">sito / meta / referral / guest_register</span>
       </div>
       <div class="field">
         <span class="field-type">ts</span>
@@ -657,8 +683,8 @@
           <div class="step-line"></div>
         </div>
         <div class="step-right">
-          <div class="step-title">Webhook riceve il form</div>
-          <div class="step-desc">Qualsiasi form (prova, contatto, evento&hellip;). n8n estrae <code>email</code> e <code>telefono</code>.</div>
+          <div class="step-title">n8n riceve il contatto dalla sorgente</div>
+          <div class="step-desc">Il contatto arriva in automatico da <code>sito</code>, <code>meta</code>, <code>referral</code> o <code>guest_register</code>. n8n normalizza il payload ed estrae <code>email</code> e <code>telefono</code>.</div>
         </div>
       </div>
 
