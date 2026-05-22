@@ -507,6 +507,21 @@
         <span class="badge info">lead / cliente_attivo</span>
       </div>
       <div class="field">
+        <span class="field-type">text[]</span>
+        <span class="field-name">attivita_interesse</span>
+        <span class="badge info">nuoto / tennis / padel / fitness / triathlon / …</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">obiettivo</span>
+        <span class="badge info">dimagrimento / tonificazione / performance / salute / sociale / …</span>
+      </div>
+      <div class="field">
+        <span class="field-type">bool</span>
+        <span class="field-name">gia_iscritto</span>
+        <span class="badge dedup">QUALIF</span>
+      </div>
+      <div class="field">
         <span class="field-type">ts</span>
         <span class="field-name">created_at</span>
       </div>
@@ -537,7 +552,7 @@
       <div class="field">
         <span class="field-type">text</span>
         <span class="field-name">stato_pipeline</span>
-        <span class="badge info">nuovo / in_gestione / vinta / persa</span>
+        <span class="badge info">nuovo → in_gestione → appuntamento_preso → prova → vinta / persa</span>
       </div>
       <div class="field">
         <span class="field-type">text</span>
@@ -666,6 +681,41 @@
     <div class="relation-item">
       <div class="rel-dot" style="background:var(--accent4)"></div>
       <div class="rel-text"><strong>contatti</strong> 1 &rarr; N <strong>contratti</strong> (rinnovi)</div>
+    </div>
+  </div>
+
+  <!-- Pipeline visiva -->
+  <div style="margin-top:16px;">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--dim);margin-bottom:12px;">Pipeline opportunità</div>
+    <div style="display:flex;align-items:center;gap:0;overflow-x:auto;padding-bottom:4px;">
+      <div style="background:rgba(0,201,255,0.08);border:1px solid rgba(0,201,255,0.25);border-radius:8px;padding:8px 14px;text-align:center;flex-shrink:0;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;">nuovo</div>
+        <div style="font-size:11px;color:var(--dim);margin-top:3px;">lead entrato</div>
+      </div>
+      <div style="color:var(--dim);font-size:14px;padding:0 6px;flex-shrink:0;">&#8594;</div>
+      <div style="background:rgba(255,200,0,0.06);border:1px solid rgba(255,200,0,0.2);border-radius:8px;padding:8px 14px;text-align:center;flex-shrink:0;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--yellow);letter-spacing:0.1em;text-transform:uppercase;">in_gestione</div>
+        <div style="font-size:11px;color:var(--dim);margin-top:3px;">contatto preso</div>
+      </div>
+      <div style="color:var(--dim);font-size:14px;padding:0 6px;flex-shrink:0;">&#8594;</div>
+      <div style="background:rgba(255,107,53,0.07);border:1px solid rgba(255,107,53,0.25);border-radius:8px;padding:8px 14px;text-align:center;flex-shrink:0;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent2);letter-spacing:0.1em;text-transform:uppercase;">appuntamento_preso</div>
+        <div style="font-size:11px;color:var(--dim);margin-top:3px;">meeting fissato</div>
+      </div>
+      <div style="color:var(--dim);font-size:14px;padding:0 6px;flex-shrink:0;">&#8594;</div>
+      <div style="background:rgba(192,132,252,0.07);border:1px solid rgba(192,132,252,0.25);border-radius:8px;padding:8px 14px;text-align:center;flex-shrink:0;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent4);letter-spacing:0.1em;text-transform:uppercase;">prova</div>
+        <div style="font-size:11px;color:var(--dim);margin-top:3px;">trial attivo</div>
+      </div>
+      <div style="color:var(--dim);font-size:14px;padding:0 6px;flex-shrink:0;">&#8594;</div>
+      <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0;">
+        <div style="background:rgba(127,255,107,0.07);border:1px solid rgba(127,255,107,0.25);border-radius:8px;padding:6px 14px;text-align:center;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent3);letter-spacing:0.1em;text-transform:uppercase;">vinta</div>
+        </div>
+        <div style="background:rgba(100,116,139,0.08);border:1px solid rgba(100,116,139,0.2);border-radius:8px;padding:6px 14px;text-align:center;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:0.1em;text-transform:uppercase;">persa</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
