@@ -49,6 +49,11 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; a
 .nav-mobile-link-title em { font-style: italic; color: #F2DC4E; }
 .nav-mobile-link.disabled { opacity: 0.3 !important; pointer-events: none; }
 .nav-mobile-link.disabled .nav-mobile-link-tag::after { content: ' · In arrivo'; color: #F2DC4E; }
+.nav-mobile-link.proposta { border-left: 2px solid rgba(255,107,53,0.35); padding-left: 14px; }
+.nav-mobile-link.proposta:nth-child(odd) { padding-left: 14px; }
+.nav-mobile-link.proposta:nth-child(even) { padding-left: 20px; border-left: 2px solid rgba(255,107,53,0.35); }
+.nav-mobile-link.proposta .nav-mobile-link-tag { color: rgba(255,107,53,0.85); }
+.nav-mobile-link.proposta .nav-mobile-link-tag::after { content: ' · Proposta'; color: rgba(255,107,53,0.65); }
 .nav-mobile-footer { padding-top: 28px; font-family: 'Cormorant Garamond', serif; font-size: 16px; font-style: italic; color: #FFFFFF; }
 .nav-mobile-footer em { color: #F2DC4E; font-style: normal; }
 
@@ -419,11 +424,11 @@ img, svg, canvas, iframe, video { max-width: 100%; }
       <span class="nav-mobile-link-tag">Commerciale &middot; 20 maggio 2026</span>
       <span class="nav-mobile-link-title">Obiettivi <em>Lorella</em> &amp; Lead Management</span>
     </a>
-    <a href="chiron-certificato-medico.html" class="nav-mobile-link">
+    <a href="chiron-certificato-medico.html" class="nav-mobile-link proposta">
       <span class="nav-mobile-link-tag">Partnership &middot; Maggio 2026</span>
       <span class="nav-mobile-link-title">Certificato Medico &amp; <em>Chiron</em></span>
     </a>
-    <a href="crm-logiche.html" class="nav-mobile-link">
+    <a href="crm-logiche.html" class="nav-mobile-link proposta">
       <span class="nav-mobile-link-tag">CRM &middot; Maggio 2026</span>
       <span class="nav-mobile-link-title">Schema &amp; <em>Logiche CRM</em></span>
     </a>

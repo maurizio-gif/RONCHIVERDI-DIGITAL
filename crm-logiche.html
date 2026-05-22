@@ -65,6 +65,32 @@
   .back-nav-logo { height: 30px; width: auto; filter: invert(1); opacity: 0.7; }
   @media(max-width:480px){ .back-nav { padding: 0 16px; } .back-nav-logo { height: 24px; } }
 
+  .proposal-notice {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: rgba(255,107,53,0.07);
+    border: 1px solid rgba(255,107,53,0.25);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 24px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    line-height: 1.6;
+    color: rgba(226,232,240,0.75);
+  }
+  .proposal-notice .pn-tag {
+    flex-shrink: 0;
+    background: rgba(255,107,53,0.15);
+    border: 1px solid rgba(255,107,53,0.35);
+    border-radius: 4px;
+    padding: 2px 7px;
+    color: #ff6b35;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 10px;
+    margin-top: 1px;
+    white-space: nowrap;
+  }
+
   body { padding-top: 80px; }
 
   /* ── HEADER ── */
@@ -428,6 +454,12 @@
     <img src="ronchiverdi-logo.jpg" class="back-nav-logo" alt="Ronchiverdi">
   </a>
 </nav>
+
+<!-- PROPOSAL NOTICE -->
+<div class="proposal-notice">
+  <span class="pn-tag">Ipotesi</span>
+  Questo schema è un'ipotesi progettuale futura — la struttura CRM non è ancora implementata. I dettagli di tabelle, flow e logiche sono soggetti a revisione.
+</div>
 
 <!-- HEADER -->
 <div class="header">
