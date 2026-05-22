@@ -423,6 +423,23 @@
   .stat-val.warn { color: var(--yellow); }
   .stat-val.base { color: var(--text); }
 
+  /* ── LEAD SCORING ── */
+  .score-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+  @media(max-width:600px){ .score-grid { grid-template-columns: 1fr; } }
+  .score-signal { background: var(--node); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+  .score-signal-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+  .score-signal-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600; color: var(--text); }
+  .score-signal-source { font-size: 10px; color: var(--dim); margin-top: 3px; }
+  .score-signal-pts { font-family: 'IBM Plex Mono', monospace; font-size: 20px; font-weight: 600; line-height: 1; white-space: nowrap; }
+  .score-signal-pts small { font-size: 10px; color: var(--dim); font-weight: 400; }
+  .score-bar-track { height: 4px; background: rgba(255,255,255,0.07); border-radius: 2px; overflow: hidden; margin-bottom: 8px; }
+  .score-bar-fill { height: 100%; border-radius: 2px; }
+  .score-signal-logic { font-size: 11px; color: var(--dim); line-height: 1.5; }
+  .score-thresholds { display: flex; gap: 8px; margin-bottom: 12px; }
+  .score-thr { flex: 1; background: var(--node); border: 1px solid var(--border); border-radius: 8px; padding: 12px 10px; text-align: center; }
+  .score-thr-range { font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .score-thr-label { font-size: 11px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.08em; }
+
   /* ── FOOTER ── */
   .page-footer {
     margin-top: 40px;
@@ -1112,6 +1129,145 @@ document.<span style="color:var(--accent3);">querySelectorAll</span>(<span style
     <div class="stat-row">
       <span class="stat-key">Attribuzione Meta (fbclid)</span>
       <span class="stat-val base">contatti.fbclid IS NOT NULL</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── 07 LEAD SCORING ── -->
+<div class="section">
+  <div class="section-label">07 &mdash; Lead Scoring automatico</div>
+
+  <!-- Thresholds -->
+  <div class="score-thresholds">
+    <div class="score-thr">
+      <div class="score-thr-range" style="color:var(--dim)">0 – 30</div>
+      <div class="score-thr-label">Freddo</div>
+    </div>
+    <div class="score-thr">
+      <div class="score-thr-range" style="color:var(--yellow)">31 – 60</div>
+      <div class="score-thr-label">Tiepido</div>
+    </div>
+    <div class="score-thr">
+      <div class="score-thr-range" style="color:var(--accent3)">61 – 100</div>
+      <div class="score-thr-label">Caldo</div>
+    </div>
+  </div>
+
+  <!-- 4 signal cards -->
+  <div class="score-grid">
+
+    <div class="score-signal" style="border-left:3px solid var(--accent)">
+      <div class="score-signal-top">
+        <div>
+          <div class="score-signal-label">Form compilati</div>
+          <div class="score-signal-source">fonte: form_submissions</div>
+        </div>
+        <div class="score-signal-pts" style="color:var(--accent)">30 <small>/ 100</small></div>
+      </div>
+      <div class="score-bar-track">
+        <div class="score-bar-fill" style="width:30%;background:var(--accent)"></div>
+      </div>
+      <div class="score-signal-logic">+10 per ogni form compilato negli ultimi 30gg &mdash; max 3 form (30 pt)</div>
+    </div>
+
+    <div class="score-signal" style="border-left:3px solid var(--accent3)">
+      <div class="score-signal-top">
+        <div>
+          <div class="score-signal-label">Accessi al sito</div>
+          <div class="score-signal-source">fonte: page_views</div>
+        </div>
+        <div class="score-signal-pts" style="color:var(--accent3)">25 <small>/ 100</small></div>
+      </div>
+      <div class="score-bar-track">
+        <div class="score-bar-fill" style="width:25%;background:var(--accent3)"></div>
+      </div>
+      <div class="score-signal-logic">+5 per sessione distinta negli ultimi 30gg &mdash; max 5 sessioni (25 pt)</div>
+    </div>
+
+    <div class="score-signal" style="border-left:3px solid var(--accent4)">
+      <div class="score-signal-top">
+        <div>
+          <div class="score-signal-label">Click email</div>
+          <div class="score-signal-source">fonte: email_events</div>
+        </div>
+        <div class="score-signal-pts" style="color:var(--accent4)">25 <small>/ 100</small></div>
+      </div>
+      <div class="score-bar-track">
+        <div class="score-bar-fill" style="width:25%;background:var(--accent4)"></div>
+      </div>
+      <div class="score-signal-logic">+5 per click su link email negli ultimi 30gg &mdash; max 5 click (25 pt)</div>
+    </div>
+
+    <div class="score-signal" style="border-left:3px solid var(--yellow)">
+      <div class="score-signal-top">
+        <div>
+          <div class="score-signal-label">Valutazione consulente</div>
+          <div class="score-signal-source">fonte: opportunit&agrave;.priorit&agrave;</div>
+        </div>
+        <div class="score-signal-pts" style="color:var(--yellow)">20 <small>/ 100</small></div>
+      </div>
+      <div class="score-bar-track">
+        <div class="score-bar-fill" style="width:20%;background:var(--yellow)"></div>
+      </div>
+      <div class="score-signal-logic">Il consulente imposta manualmente la priorit&agrave; del lead: bassa (0) / media (10) / alta (20)</div>
+    </div>
+
+  </div>
+
+  <!-- DB changes -->
+  <div class="stat-card" style="margin-bottom:12px;">
+    <div class="stat-card-title">Modifiche al DB</div>
+    <div class="stat-row">
+      <span class="stat-key">contatti.lead_score</span>
+      <span class="stat-val base">int &mdash; aggiornato nightly da n8n</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-key">contatti.score_tier</span>
+      <span class="stat-val base">text &mdash; freddo / tiepido / caldo</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-key">opportunit&agrave;.priorit&agrave;</span>
+      <span class="stat-val base">enum: bassa / media / alta &mdash; input consulente</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-key">email_events</span>
+      <span class="stat-val warn">nuova tabella &mdash; contact_id, tipo (open/click), ts</span>
+    </div>
+  </div>
+
+  <!-- n8n flow -->
+  <div class="flow-card">
+    <div class="flow-card-title">n8n: ricalcolo score notturno</div>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="step-node auto">CRON</div>
+        <div class="step-body">
+          <div class="step-title">Trigger giornaliero</div>
+          <div class="step-desc">Ogni notte alle 02:00 &mdash; scansiona tutti i contatti attivi.</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-node rv">SB</div>
+        <div class="step-body">
+          <div class="step-title">Legge i 4 segnali</div>
+          <div class="step-desc">Interroga form_submissions, page_views, email_events e opportunit&agrave;.priorit&agrave; per ciascun contatto.</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-node auto">CALC</div>
+        <div class="step-body">
+          <div class="step-title">Calcola il punteggio</div>
+          <div class="step-desc">Somma i 4 contributi &rarr; score 0&ndash;100 &rarr; assegna tier (freddo / tiepido / caldo).</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-node ch">PATCH</div>
+        <div class="step-body">
+          <div class="step-title">Aggiorna Supabase</div>
+          <div class="step-desc">PATCH su contatti: <code>lead_score</code> e <code>score_tier</code>. I lead caldi possono triggerare una notifica al consulente assegnato.</div>
+        </div>
+      </div>
     </div>
   </div>
 
