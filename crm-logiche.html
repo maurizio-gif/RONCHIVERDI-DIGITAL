@@ -1141,15 +1141,15 @@ document.<span style="color:var(--accent3);">querySelectorAll</span>(<span style
   <!-- Thresholds -->
   <div class="score-thresholds">
     <div class="score-thr">
-      <div class="score-thr-range" style="color:var(--dim)">0 – 30</div>
+      <div class="score-thr-range" style="color:var(--dim)">0 – 25</div>
       <div class="score-thr-label">Freddo</div>
     </div>
     <div class="score-thr">
-      <div class="score-thr-range" style="color:var(--yellow)">31 – 60</div>
+      <div class="score-thr-range" style="color:var(--yellow)">26 – 70</div>
       <div class="score-thr-label">Tiepido</div>
     </div>
     <div class="score-thr">
-      <div class="score-thr-range" style="color:var(--accent3)">61 – 100</div>
+      <div class="score-thr-range" style="color:var(--accent3)">71 +</div>
       <div class="score-thr-label">Caldo</div>
     </div>
   </div>
@@ -1163,12 +1163,12 @@ document.<span style="color:var(--accent3);">querySelectorAll</span>(<span style
           <div class="score-signal-label">Form compilati</div>
           <div class="score-signal-source">fonte: form_submissions</div>
         </div>
-        <div class="score-signal-pts" style="color:var(--accent)">30 <small>/ 100</small></div>
+        <div class="score-signal-pts" style="color:var(--accent)">+30 <small>/ form</small></div>
       </div>
       <div class="score-bar-track">
-        <div class="score-bar-fill" style="width:30%;background:var(--accent)"></div>
+        <div class="score-bar-fill" style="width:60%;background:var(--accent)"></div>
       </div>
-      <div class="score-signal-logic">+10 per ogni form compilato negli ultimi 30gg &mdash; max 3 form (30 pt)</div>
+      <div class="score-signal-logic">+30 per ogni form compilato negli ultimi 30gg &mdash; nessun tetto. 2 form = 60 pt (tiepido)</div>
     </div>
 
     <div class="score-signal" style="border-left:3px solid var(--accent3)">
@@ -1177,12 +1177,12 @@ document.<span style="color:var(--accent3);">querySelectorAll</span>(<span style
           <div class="score-signal-label">Accessi al sito</div>
           <div class="score-signal-source">fonte: page_views</div>
         </div>
-        <div class="score-signal-pts" style="color:var(--accent3)">25 <small>/ 100</small></div>
+        <div class="score-signal-pts" style="color:var(--accent3)">+10 <small>/ visita</small></div>
       </div>
       <div class="score-bar-track">
-        <div class="score-bar-fill" style="width:25%;background:var(--accent3)"></div>
+        <div class="score-bar-fill" style="width:30%;background:var(--accent3)"></div>
       </div>
-      <div class="score-signal-logic">+5 per sessione distinta negli ultimi 30gg &mdash; max 5 sessioni (25 pt)</div>
+      <div class="score-signal-logic">+10 per sessione distinta negli ultimi 30gg &mdash; nessun tetto. 3 visite = 30 pt</div>
     </div>
 
     <div class="score-signal" style="border-left:3px solid var(--accent4)">
@@ -1191,12 +1191,12 @@ document.<span style="color:var(--accent3);">querySelectorAll</span>(<span style
           <div class="score-signal-label">Click email</div>
           <div class="score-signal-source">fonte: email_events</div>
         </div>
-        <div class="score-signal-pts" style="color:var(--accent4)">25 <small>/ 100</small></div>
+        <div class="score-signal-pts" style="color:var(--accent4)">+10 <small>/ click</small></div>
       </div>
       <div class="score-bar-track">
-        <div class="score-bar-fill" style="width:25%;background:var(--accent4)"></div>
+        <div class="score-bar-fill" style="width:30%;background:var(--accent4)"></div>
       </div>
-      <div class="score-signal-logic">+5 per click su link email negli ultimi 30gg &mdash; max 5 click (25 pt)</div>
+      <div class="score-signal-logic">+10 per click su link email negli ultimi 30gg &mdash; nessun tetto. 3 click = 30 pt</div>
     </div>
 
     <div class="score-signal" style="border-left:3px solid var(--yellow)">
@@ -1205,12 +1205,12 @@ document.<span style="color:var(--accent3);">querySelectorAll</span>(<span style
           <div class="score-signal-label">Valutazione consulente</div>
           <div class="score-signal-source">fonte: opportunit&agrave;.priorit&agrave;</div>
         </div>
-        <div class="score-signal-pts" style="color:var(--yellow)">20 <small>/ 100</small></div>
+        <div class="score-signal-pts" style="color:var(--yellow)">0 / 20 / 40</div>
       </div>
       <div class="score-bar-track">
-        <div class="score-bar-fill" style="width:20%;background:var(--yellow)"></div>
+        <div class="score-bar-fill" style="width:50%;background:var(--yellow)"></div>
       </div>
-      <div class="score-signal-logic">Il consulente imposta manualmente la priorit&agrave; del lead: bassa (0) / media (10) / alta (20)</div>
+      <div class="score-signal-logic">Il consulente imposta manualmente la priorit&agrave;: bassa (0) / media (20) / alta (40). Da sola pu&ograve; portare in zona caldo</div>
     </div>
 
   </div>
