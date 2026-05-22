@@ -150,6 +150,9 @@
   .table-card.c4 { border-left: 3px solid var(--accent4); }
   .table-card.c5 { border-left: 3px solid var(--yellow); }
   .table-card.c6 { border-left: 3px solid #f472b6; }
+  .table-card.c7 { border-left: 3px solid #2dd4bf; }
+  .table-card.c8 { border-left: 3px solid #818cf8; }
+  .table-card.c9 { border-left: 3px solid #fbbf24; }
 
   .table-header {
     padding: 14px 16px;
@@ -185,6 +188,24 @@
   .c5 .table-icon { background: rgba(255,200,0,0.12); color: var(--yellow); }
   .c6 .table-name { color: #f472b6; }
   .c6 .table-icon { background: rgba(244,114,182,0.12); color: #f472b6; }
+  .c7 .table-name { color: #2dd4bf; }
+  .c7 .table-icon { background: rgba(45,212,191,0.12); color: #2dd4bf; }
+  .c8 .table-name { color: #818cf8; }
+  .c8 .table-icon { background: rgba(129,140,248,0.12); color: #818cf8; }
+  .c9 .table-name { color: #fbbf24; }
+  .c9 .table-icon { background: rgba(251,191,36,0.12); color: #fbbf24; }
+
+  .table-note {
+    margin: 8px 16px 14px;
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.03);
+    border-left: 2px solid rgba(255,200,0,0.3);
+    border-radius: 0 6px 6px 0;
+    font-size: 11px;
+    color: var(--dim);
+    line-height: 1.6;
+  }
+  .badge.null { background: rgba(100,116,139,0.15); color: var(--dim); }
 
   .table-count {
     font-size: 11px;
@@ -539,13 +560,13 @@
       <div class="field">
         <span class="field-type">text</span>
         <span class="field-name">email</span>
-        <span class="badge uniq">UNIQUE</span>
+        <span class="badge null">NULLABLE</span>
         <span class="badge dedup">DEDUP</span>
       </div>
       <div class="field">
         <span class="field-type">text</span>
         <span class="field-name">telefono</span>
-        <span class="badge uniq">UNIQUE</span>
+        <span class="badge null">NULLABLE</span>
         <span class="badge dedup">DEDUP</span>
       </div>
       <div class="field">
@@ -557,14 +578,23 @@
         <span class="field-name">cognome</span>
       </div>
       <div class="field">
+        <span class="field-type">date</span>
+        <span class="field-name">data_nascita</span>
+      </div>
+      <div class="field">
+        <span class="field-type">bool</span>
+        <span class="field-name">is_minore</span>
+        <span class="badge info">dedup via n8n (nome+cognome+data+genitore)</span>
+      </div>
+      <div class="field">
         <span class="field-type">text</span>
         <span class="field-name">stato</span>
-        <span class="badge info">lead / cliente_attivo</span>
+        <span class="badge info">lead / cliente_attivo / in_rinnovo / ex_cliente</span>
       </div>
       <div class="field">
         <span class="field-type">text[]</span>
         <span class="field-name">attivita_interesse</span>
-        <span class="badge info">nuoto / tennis / padel / fitness / triathlon / …</span>
+        <span class="badge info">nuoto / tennis / padel / fitness / triathlon / corporate / …</span>
       </div>
       <div class="field">
         <span class="field-type">text</span>
@@ -572,24 +602,44 @@
         <span class="badge info">dimagrimento / tonificazione / performance / salute / sociale / …</span>
       </div>
       <div class="field">
-        <span class="field-type">bool</span>
-        <span class="field-name">gia_iscritto</span>
-        <span class="badge dedup">QUALIF</span>
+        <span class="field-type">text</span>
+        <span class="field-name">sorgente</span>
+        <span class="badge info">sito / meta / referral / guest_register / evento / manuale</span>
+      </div>
+      <div class="field">
+        <span class="field-type">int</span>
+        <span class="field-name">lead_score</span>
+        <span class="badge dedup">aggiornato nightly</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">score_tier</span>
+        <span class="badge info">freddo / tiepido / caldo</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">browser_id</span>
+        <span class="badge uniq">UNIQUE</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">fbclid</span>
       </div>
       <div class="field">
         <span class="field-type">ts</span>
         <span class="field-name">created_at</span>
       </div>
     </div>
+    <div class="table-note">DEDUP ADULTI &rarr; UNIQUE su email OR telefono (almeno uno obbligatorio). DEDUP MINORI &rarr; n8n verifica: esiste contatto con stesso nome+cognome+data_nascita collegato allo stesso genitore?</div>
   </div>
 
-  <!-- OPPORTUNITÀ -->
-  <div class="table-card c2" onclick="toggle(this)">
+  <!-- RELAZIONI CONTATTO -->
+  <div class="table-card c7" onclick="toggle(this)">
     <div class="table-header">
-      <div class="table-icon">O</div>
+      <div class="table-icon">R</div>
       <div class="table-meta">
-        <div class="table-name">opportunit&agrave;</div>
-        <div class="table-count">Intenzione commerciale del contatto</div>
+        <div class="table-name">relazioni_contatto</div>
+        <div class="table-count">Collega minori ai loro referenti adulti (genitori, tutori)</div>
       </div>
       <div class="chevron">&#9660;</div>
     </div>
@@ -602,12 +652,118 @@
       <div class="field">
         <span class="field-type">uuid</span>
         <span class="field-name fk">contatto_id</span>
-        <span class="badge fk">FK</span>
+        <span class="badge fk">FK → contatti (beneficiario)</span>
+      </div>
+      <div class="field">
+        <span class="field-type">uuid</span>
+        <span class="field-name fk">contatto_correlato_id</span>
+        <span class="badge fk">FK → contatti (adulto correlato)</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">tipo_relazione</span>
+        <span class="badge info">genitore / tutore / accompagnatore</span>
+      </div>
+      <div class="field">
+        <span class="field-type">bool</span>
+        <span class="field-name">&egrave;_referente_commerciale</span>
+        <span class="badge dedup">chi contatta il commerciale</span>
+      </div>
+      <div class="field">
+        <span class="field-type">bool</span>
+        <span class="field-name">&egrave;_firmatario</span>
+        <span class="badge dedup">chi firma il contratto</span>
+      </div>
+      <div class="field">
+        <span class="field-type">bool</span>
+        <span class="field-name">&egrave;_contatto_emergenza</span>
+      </div>
+      <div class="field">
+        <span class="field-type">ts</span>
+        <span class="field-name">created_at</span>
+      </div>
+    </div>
+    <div class="table-note">Le comunicazioni automatiche (n8n, WhatsApp, email) vanno sempre al contatto con &egrave;_referente_commerciale = true, mai direttamente al minore.</div>
+  </div>
+
+  <!-- BUSINESS UNIT -->
+  <div class="table-card c8" onclick="toggle(this)">
+    <div class="table-header">
+      <div class="table-icon">BU</div>
+      <div class="table-meta">
+        <div class="table-name">business_unit</div>
+        <div class="table-count">Reparti commerciali del club &mdash; ogni opportunit&agrave; appartiene a una BU</div>
+      </div>
+      <div class="chevron">&#9660;</div>
+    </div>
+    <div class="table-body">
+      <div class="field">
+        <span class="field-type">uuid</span>
+        <span class="field-name pk">id</span>
+        <span class="badge pk">PK</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">nome</span>
+        <span class="badge info">fitness / nuoto_adulti / scuola_nuoto / tennis / padel / triathlon / corporate</span>
+      </div>
+      <div class="field">
+        <span class="field-type">uuid</span>
+        <span class="field-name fk">referente_default_id</span>
+        <span class="badge fk">FK → operatori (commerciale default)</span>
+      </div>
+      <div class="field">
+        <span class="field-type">bool</span>
+        <span class="field-name">attivo</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPPORTUNITÀ -->
+  <div class="table-card c2" onclick="toggle(this)">
+    <div class="table-header">
+      <div class="table-icon">O</div>
+      <div class="table-meta">
+        <div class="table-name">opportunit&agrave;</div>
+        <div class="table-count">Intenzione commerciale — una per BU, anche per minori</div>
+      </div>
+      <div class="chevron">&#9660;</div>
+    </div>
+    <div class="table-body">
+      <div class="field">
+        <span class="field-type">uuid</span>
+        <span class="field-name pk">id</span>
+        <span class="badge pk">PK</span>
+      </div>
+      <div class="field">
+        <span class="field-type">uuid</span>
+        <span class="field-name fk">contatto_id</span>
+        <span class="badge fk">FK → contatti (beneficiario, anche minore)</span>
+      </div>
+      <div class="field">
+        <span class="field-type">uuid</span>
+        <span class="field-name fk">referente_id</span>
+        <span class="badge fk">FK → contatti (chi contattare — sempre adulto)</span>
+      </div>
+      <div class="field">
+        <span class="field-type">uuid</span>
+        <span class="field-name fk">business_unit_id</span>
+        <span class="badge fk">FK → business_unit</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">tipo_opportunita</span>
+        <span class="badge info">acquisizione / rinnovo / upsell</span>
       </div>
       <div class="field">
         <span class="field-type">text</span>
         <span class="field-name">stato_pipeline</span>
-        <span class="badge info">nuovo → in_gestione → appuntamento_preso → prova → vinta / persa</span>
+        <span class="badge info">nuovo → nurturing → in_gestione → da_richiamare → no_show → appuntamento_preso → prova_prenotata → prova_completata → proposta_inviata → vinta / persa</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">motivo_persa</span>
+        <span class="badge info">prezzo / concorrenza / timing / non_qualificato / irraggiungibile</span>
       </div>
       <div class="field">
         <span class="field-type">uuid</span>
@@ -620,6 +776,11 @@
         <span class="badge fk">FK → operatori</span>
       </div>
       <div class="field">
+        <span class="field-type">date</span>
+        <span class="field-name">snooze_fino_al</span>
+        <span class="badge info">sospende dalla lista lavoro del commerciale</span>
+      </div>
+      <div class="field">
         <span class="field-type">ts</span>
         <span class="field-name">aperta_il</span>
       </div>
@@ -628,6 +789,7 @@
         <span class="field-name">chiusa_il</span>
       </div>
     </div>
+    <div class="table-note">Un contatto pu&ograve; avere opportunit&agrave; parallele su BU diverse (es. figlio in scuola nuoto + genitore in fitness = 2 opportunit&agrave; distinte). Ogni transizione di stato pu&ograve; triggerare un&rsquo;automazione n8n.</div>
   </div>
 
   <!-- FORM SUBMISSIONS -->
@@ -819,6 +981,71 @@
       </div>
     </div>
   </div>
+
+  <!-- COMUNICAZIONI -->
+  <div class="table-card c9" onclick="toggle(this)">
+    <div class="table-header">
+      <div class="table-icon">CM</div>
+      <div class="table-meta">
+        <div class="table-name">comunicazioni</div>
+        <div class="table-count">Log di ogni contatto outbound &mdash; manuale o automatico da n8n</div>
+      </div>
+      <div class="chevron">&#9660;</div>
+    </div>
+    <div class="table-body">
+      <div class="field">
+        <span class="field-type">uuid</span>
+        <span class="field-name pk">id</span>
+        <span class="badge pk">PK</span>
+      </div>
+      <div class="field">
+        <span class="field-type">uuid</span>
+        <span class="field-name fk">contatto_id</span>
+        <span class="badge fk">FK → contatti</span>
+      </div>
+      <div class="field">
+        <span class="field-type">uuid</span>
+        <span class="field-name fk">opportunit&agrave;_id</span>
+        <span class="badge fk">FK → opportunit&agrave;</span>
+        <span class="badge null">NULLABLE</span>
+      </div>
+      <div class="field">
+        <span class="field-type">uuid</span>
+        <span class="field-name fk">operatore_id</span>
+        <span class="badge fk">FK → operatori</span>
+        <span class="badge null">null se automatico</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">canale</span>
+        <span class="badge info">email / whatsapp / sms / telefono / di_persona</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">tipo</span>
+        <span class="badge info">outbound_manuale / outbound_automatico / inbound</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">oggetto</span>
+      </div>
+      <div class="field">
+        <span class="field-type">text</span>
+        <span class="field-name">esito</span>
+        <span class="badge info">inviato / consegnato / aperto / risposto / non_raggiunto / errore</span>
+      </div>
+      <div class="field">
+        <span class="field-type">bool</span>
+        <span class="field-name">&egrave;_automatico</span>
+        <span class="badge dedup">true se generato da n8n</span>
+      </div>
+      <div class="field">
+        <span class="field-type">ts</span>
+        <span class="field-name">inviato_il</span>
+      </div>
+    </div>
+    <div class="table-note">Base per il funnel consequenziale &mdash; n8n legge questa tabella per sapere quante volte &egrave; stato contattato un lead e con quale esito prima di triggerare la comunicazione successiva.</div>
+  </div>
 </div>
 
 <!-- ── 02 RELAZIONI ── -->
@@ -826,8 +1053,24 @@
   <div class="section-label">02 &mdash; Relazioni</div>
   <div class="relations">
     <div class="relation-item">
+      <div class="rel-dot" style="background:#2dd4bf"></div>
+      <div class="rel-text"><strong>contatti</strong> 1 &rarr; N <strong>relazioni_contatto</strong> (come beneficiario)</div>
+    </div>
+    <div class="relation-item">
+      <div class="rel-dot" style="background:#2dd4bf"></div>
+      <div class="rel-text"><strong>contatti</strong> 1 &rarr; N <strong>relazioni_contatto</strong> (come referente adulto)</div>
+    </div>
+    <div class="relation-item">
       <div class="rel-dot" style="background:var(--accent)"></div>
-      <div class="rel-text"><strong>contatti</strong> 1 &rarr; N <strong>opportunit&agrave;</strong></div>
+      <div class="rel-text"><strong>contatti</strong> 1 &rarr; N <strong>opportunit&agrave;</strong>.contatto_id (beneficiario)</div>
+    </div>
+    <div class="relation-item">
+      <div class="rel-dot" style="background:var(--accent)"></div>
+      <div class="rel-text"><strong>contatti</strong> 1 &rarr; N <strong>opportunit&agrave;</strong>.referente_id (chi contattare)</div>
+    </div>
+    <div class="relation-item">
+      <div class="rel-dot" style="background:#818cf8"></div>
+      <div class="rel-text"><strong>opportunit&agrave;</strong> N &rarr; 1 <strong>business_unit</strong></div>
     </div>
     <div class="relation-item">
       <div class="rel-dot" style="background:var(--accent2)"></div>
@@ -838,6 +1081,14 @@
       <div class="rel-text"><strong>opportunit&agrave;</strong> 1 &rarr; 1 <strong>contratto</strong></div>
     </div>
     <div class="relation-item">
+      <div class="rel-dot" style="background:#f472b6"></div>
+      <div class="rel-text"><strong>opportunit&agrave;</strong> 1 &rarr; N <strong>task</strong></div>
+    </div>
+    <div class="relation-item">
+      <div class="rel-dot" style="background:#fbbf24"></div>
+      <div class="rel-text"><strong>opportunit&agrave;</strong> 1 &rarr; N <strong>comunicazioni</strong></div>
+    </div>
+    <div class="relation-item">
       <div class="rel-dot" style="background:var(--accent4)"></div>
       <div class="rel-text"><strong>contatti</strong> 1 &rarr; N <strong>contratti</strong> (rinnovi)</div>
     </div>
@@ -846,16 +1097,12 @@
       <div class="rel-text"><strong>operatori</strong> 1 &rarr; N <strong>opportunit&agrave;</strong>.assegnato_a</div>
     </div>
     <div class="relation-item">
-      <div class="rel-dot" style="background:var(--yellow)"></div>
-      <div class="rel-text"><strong>operatori</strong> 1 &rarr; N <strong>opportunit&agrave;</strong>.creato_da</div>
-    </div>
-    <div class="relation-item">
-      <div class="rel-dot" style="background:#f472b6"></div>
-      <div class="rel-text"><strong>opportunit&agrave;</strong> 1 &rarr; N <strong>task</strong></div>
-    </div>
-    <div class="relation-item">
       <div class="rel-dot" style="background:#f472b6"></div>
       <div class="rel-text"><strong>operatori</strong> 1 &rarr; N <strong>task</strong>.assegnato_a</div>
+    </div>
+    <div class="relation-item">
+      <div class="rel-dot" style="background:#fbbf24"></div>
+      <div class="rel-text"><strong>operatori</strong> 1 &rarr; N <strong>comunicazioni</strong>.operatore_id</div>
     </div>
   </div>
 
@@ -863,32 +1110,52 @@
   <div style="margin-top:16px;">
     <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--dim);margin-bottom:12px;">Pipeline opportunità</div>
     <div style="display:flex;align-items:center;gap:0;overflow-x:auto;padding-bottom:4px;">
-      <div style="background:rgba(0,201,255,0.08);border:1px solid rgba(0,201,255,0.25);border-radius:8px;padding:8px 14px;text-align:center;flex-shrink:0;">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;">nuovo</div>
-        <div style="font-size:11px;color:var(--dim);margin-top:3px;">lead entrato</div>
+      <div style="background:rgba(0,201,255,0.08);border:1px solid rgba(0,201,255,0.25);border-radius:8px;padding:8px 12px;text-align:center;flex-shrink:0;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent);letter-spacing:0.08em;text-transform:uppercase;">nuovo</div>
+        <div style="font-size:10px;color:var(--dim);margin-top:3px;">lead entrato</div>
       </div>
-      <div style="color:var(--dim);font-size:14px;padding:0 6px;flex-shrink:0;">&#8594;</div>
-      <div style="background:rgba(255,200,0,0.06);border:1px solid rgba(255,200,0,0.2);border-radius:8px;padding:8px 14px;text-align:center;flex-shrink:0;">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--yellow);letter-spacing:0.1em;text-transform:uppercase;">in_gestione</div>
-        <div style="font-size:11px;color:var(--dim);margin-top:3px;">contatto preso</div>
+      <div style="color:var(--dim);font-size:14px;padding:0 4px;flex-shrink:0;">&#8594;</div>
+      <div style="background:rgba(45,212,191,0.07);border:1px solid rgba(45,212,191,0.2);border-radius:8px;padding:8px 12px;text-align:center;flex-shrink:0;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#2dd4bf;letter-spacing:0.08em;text-transform:uppercase;">nurturing</div>
+        <div style="font-size:10px;color:var(--dim);margin-top:3px;">warm-up auto</div>
       </div>
-      <div style="color:var(--dim);font-size:14px;padding:0 6px;flex-shrink:0;">&#8594;</div>
-      <div style="background:rgba(255,107,53,0.07);border:1px solid rgba(255,107,53,0.25);border-radius:8px;padding:8px 14px;text-align:center;flex-shrink:0;">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent2);letter-spacing:0.1em;text-transform:uppercase;">appuntamento_preso</div>
-        <div style="font-size:11px;color:var(--dim);margin-top:3px;">meeting fissato</div>
+      <div style="color:var(--dim);font-size:14px;padding:0 4px;flex-shrink:0;">&#8594;</div>
+      <div style="background:rgba(255,200,0,0.06);border:1px solid rgba(255,200,0,0.2);border-radius:8px;padding:8px 12px;text-align:center;flex-shrink:0;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--yellow);letter-spacing:0.08em;text-transform:uppercase;">in_gestione</div>
+        <div style="font-size:10px;color:var(--dim);margin-top:3px;">contatto preso</div>
       </div>
-      <div style="color:var(--dim);font-size:14px;padding:0 6px;flex-shrink:0;">&#8594;</div>
-      <div style="background:rgba(192,132,252,0.07);border:1px solid rgba(192,132,252,0.25);border-radius:8px;padding:8px 14px;text-align:center;flex-shrink:0;">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent4);letter-spacing:0.1em;text-transform:uppercase;">prova</div>
-        <div style="font-size:11px;color:var(--dim);margin-top:3px;">trial attivo</div>
+      <div style="color:var(--dim);font-size:14px;padding:0 4px;flex-shrink:0;">&#8594;</div>
+      <div style="background:rgba(129,140,248,0.07);border:1px solid rgba(129,140,248,0.2);border-radius:8px;padding:8px 12px;text-align:center;flex-shrink:0;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#818cf8;letter-spacing:0.08em;text-transform:uppercase;">da_richiamare</div>
+        <div style="font-size:10px;color:var(--dim);margin-top:3px;">follow-up</div>
       </div>
-      <div style="color:var(--dim);font-size:14px;padding:0 6px;flex-shrink:0;">&#8594;</div>
+      <div style="color:var(--dim);font-size:14px;padding:0 4px;flex-shrink:0;">&#8594;</div>
+      <div style="background:rgba(255,107,53,0.07);border:1px solid rgba(255,107,53,0.25);border-radius:8px;padding:8px 12px;text-align:center;flex-shrink:0;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent2);letter-spacing:0.08em;text-transform:uppercase;">appuntamento_preso</div>
+        <div style="font-size:10px;color:var(--dim);margin-top:3px;">meeting fissato</div>
+      </div>
+      <div style="color:var(--dim);font-size:14px;padding:0 4px;flex-shrink:0;">&#8594;</div>
+      <div style="background:rgba(192,132,252,0.07);border:1px solid rgba(192,132,252,0.25);border-radius:8px;padding:8px 12px;text-align:center;flex-shrink:0;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent4);letter-spacing:0.08em;text-transform:uppercase;">prova_prenotata</div>
+        <div style="font-size:10px;color:var(--dim);margin-top:3px;">trial fissato</div>
+      </div>
+      <div style="color:var(--dim);font-size:14px;padding:0 4px;flex-shrink:0;">&#8594;</div>
+      <div style="background:rgba(251,191,36,0.07);border:1px solid rgba(251,191,36,0.2);border-radius:8px;padding:8px 12px;text-align:center;flex-shrink:0;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#fbbf24;letter-spacing:0.08em;text-transform:uppercase;">prova_completata</div>
+        <div style="font-size:10px;color:var(--dim);margin-top:3px;">trial fatto</div>
+      </div>
+      <div style="color:var(--dim);font-size:14px;padding:0 4px;flex-shrink:0;">&#8594;</div>
+      <div style="background:rgba(244,114,182,0.07);border:1px solid rgba(244,114,182,0.2);border-radius:8px;padding:8px 12px;text-align:center;flex-shrink:0;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#f472b6;letter-spacing:0.08em;text-transform:uppercase;">proposta_inviata</div>
+        <div style="font-size:10px;color:var(--dim);margin-top:3px;">offerta inviata</div>
+      </div>
+      <div style="color:var(--dim);font-size:14px;padding:0 4px;flex-shrink:0;">&#8594;</div>
       <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0;">
-        <div style="background:rgba(127,255,107,0.07);border:1px solid rgba(127,255,107,0.25);border-radius:8px;padding:6px 14px;text-align:center;">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent3);letter-spacing:0.1em;text-transform:uppercase;">vinta</div>
+        <div style="background:rgba(127,255,107,0.07);border:1px solid rgba(127,255,107,0.25);border-radius:8px;padding:6px 12px;text-align:center;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--accent3);letter-spacing:0.08em;text-transform:uppercase;">vinta</div>
         </div>
-        <div style="background:rgba(100,116,139,0.08);border:1px solid rgba(100,116,139,0.2);border-radius:8px;padding:6px 14px;text-align:center;">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:0.1em;text-transform:uppercase;">persa</div>
+        <div style="background:rgba(100,116,139,0.08);border:1px solid rgba(100,116,139,0.2);border-radius:8px;padding:6px 12px;text-align:center;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:0.08em;text-transform:uppercase;">persa + motivo</div>
         </div>
       </div>
     </div>
@@ -964,6 +1231,40 @@
         </div>
       </div>
 
+    </div>
+  </div>
+
+  <div class="flow-card" style="margin-top:12px;">
+    <div class="flow-card-title">CASO SPECIALE &mdash; Minore senza email/telefono</div>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="step-node rv">1</div>
+        <div class="step-body">
+          <div class="step-title">Cerca o crea il genitore</div>
+          <div class="step-desc">n8n riceve form con dati bambino + dati genitore. Cerca genitore per email/telefono &rarr; crea se non esiste.</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-node check">2</div>
+        <div class="step-body">
+          <div class="step-title">Cerca il minore</div>
+          <div class="step-desc">Verifica se esiste contatto con stesso nome+cognome+data_nascita collegato allo stesso genitore_id.</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-node auto">3</div>
+        <div class="step-body">
+          <div class="step-title">Crea minore + relazione</div>
+          <div class="step-desc">Se il minore non esiste &rarr; crea contatto minore (is_minore=true) + riga in relazioni_contatto con tipo=genitore.</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-node ch">4</div>
+        <div class="step-body">
+          <div class="step-title">Crea opportunit&agrave; + indirizza comunicazioni</div>
+          <div class="step-desc">Crea opportunit&agrave; con contatto_id=minore, referente_id=genitore. Tutte le comunicazioni successive vengono indirizzate al genitore.</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -1348,6 +1649,14 @@ document.<span style="color:var(--accent3);">querySelectorAll</span>(<span style
           <div class="step-desc">PATCH su contatti: <code>lead_score</code> e <code>score_tier</code>. I lead caldi possono triggerare una notifica al consulente assegnato.</div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Snooze override -->
+  <div class="stat-card" style="margin-top:12px;border-left:3px solid rgba(129,140,248,0.5);">
+    <div class="stat-card-title" style="color:#818cf8;">OVERRIDE COMMERCIALE &mdash; snooze</div>
+    <div style="font-size:12px;color:var(--dim);line-height:1.65;">
+      Se <code>opportunit&agrave;.snooze_fino_al &gt; today</code>, il lead viene escluso dalla lista lavoro anche se lo score &egrave; alto. Il commerciale usa questo campo quando il lead ha detto &ldquo;richiamami tra X giorni&rdquo;. n8n alla mezzanotte rimuove automaticamente lo snooze scaduto e notifica il commerciale assegnato.
     </div>
   </div>
 
