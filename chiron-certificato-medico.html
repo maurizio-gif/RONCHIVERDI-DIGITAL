@@ -230,6 +230,9 @@ footer { background: rgba(0,0,0,0.3); padding: 40px 48px; border-top: 1px solid 
 .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .fade-up.visible { opacity: 1; transform: none; }
 
+.update-note { display: flex; align-items: flex-start; gap: 12px; background: rgba(90,140,220,0.06); border: 1px solid rgba(90,140,220,0.2); border-radius: 8px; padding: 14px 20px; margin-top: 14px; margin-bottom: 0; font-size: 14px; line-height: 1.5; color: rgba(255,255,255,0.85); }
+.update-note .un-tag { flex-shrink: 0; font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; background: rgba(90,140,220,0.12); border: 1px solid rgba(90,140,220,0.3); border-radius: 4px; padding: 3px 8px; color: rgba(130,170,240,0.9); white-space: nowrap; }
+
 html, body { overflow-x: hidden; max-width: 100%; }
 *, *::before, *::after { min-width: 0; }
 
@@ -277,6 +280,10 @@ html, body { overflow-x: hidden; max-width: 100%; }
     <div class="proposal-banner">
       <span class="pb-tag">Proposta</span>
       Questo documento descrive una proposta operativa emersa dalla call con Chiron. Non è ancora un processo attivo — i dettagli sono soggetti a revisione prima dell'implementazione.
+    </div>
+    <div class="update-note">
+      <span class="un-tag">Aggiornato</span>
+      Aggiornato a seguito della relazione DPO (Nimaja Consulting) e della call formale con i DPO delle parti del 19 maggio 2026.
     </div>
     <div class="hero-eyebrow">
       <span class="tag">Partnership</span>
@@ -333,12 +340,12 @@ html, body { overflow-x: hidden; max-width: 100%; }
       <div class="card green">
         <div class="card-title">Livello 2 &mdash; Abbonamenti &gt; €1.000</div>
         <div class="card-body">
-          <strong>Automazione dedicata</strong> attivata solo al superamento della soglia. Include:
+          <strong>Automazione dedicata</strong> attivata solo al superamento della soglia <strong>e con consenso esplicito</strong>. Include:
           <div class="item-list" style="margin-top:12px;">
-            <div class="item"><div class="dot g"></div><span>Invio automatico del contatto dell&rsquo;iscritto alla lista Chiron</span></div>
-            <div class="item"><div class="dot g"></div><span>Verifica da parte di Chiron del diritto alla visita gratuita</span></div>
-            <div class="item"><div class="dot g"></div><span>Spunta su file condiviso delle visite effettivamente effettuate</span></div>
-            <div class="item"><div class="dot g"></div><span>Email di benvenuto con invito a prenotare autonomamente con Chiron</span></div>
+            <div class="item"><div class="dot g"></div><span><strong>Solo con consenso:</strong> generazione codice voucher monouso univoco per l&rsquo;iscritto</span></div>
+            <div class="item"><div class="dot g"></div><span>Email automatica con voucher, descrizione del benefit Chiron e istruzioni per la prenotazione</span></div>
+            <div class="item"><div class="dot g"></div><span>Chiron valida il voucher al momento della visita e lo marca come utilizzato</span></div>
+            <div class="item"><div class="dot r"></div><span>Senza consenso: comunicazione standard con recapiti Chiron, prenotazione in autonomia</span></div>
           </div>
         </div>
       </div>
@@ -383,8 +390,8 @@ html, body { overflow-x: hidden; max-width: 100%; }
               <!-- Step 02 -->
               <div class="wf-step-col">
                 <div class="wf-slabel" style="margin-bottom:12px;">
-                  <div class="wf-slabel-name">Invio contatto<br>a Chiron</div>
-                  <div class="wf-slabel-sub">Automazione</div>
+                  <div class="wf-slabel-name">Generazione<br>voucher</div>
+                  <div class="wf-slabel-sub">Automazione &middot; Con consenso</div>
                 </div>
                 <div class="wf-circle auto">02</div>
               </div>
@@ -392,7 +399,7 @@ html, body { overflow-x: hidden; max-width: 100%; }
               <!-- Step 03 -->
               <div class="wf-step-col">
                 <div class="wf-slabel" style="margin-bottom:12px;">
-                  <div class="wf-slabel-name">Email benvenuto<br>iscritto</div>
+                  <div class="wf-slabel-name">Email voucher<br>&amp; info Chiron</div>
                   <div class="wf-slabel-sub">Automazione</div>
                 </div>
                 <div class="wf-circle auto">03</div>
@@ -446,7 +453,7 @@ html, body { overflow-x: hidden; max-width: 100%; }
               <div class="wf-step-col">
                 <div class="wf-circle ch">06</div>
                 <div class="wf-slabel" style="margin-top:12px;">
-                  <div class="wf-slabel-name">Visita medica &amp;<br>file condiviso</div>
+                  <div class="wf-slabel-name">Visita medica &amp;<br>validazione voucher</div>
                   <div class="wf-slabel-sub">Chiron</div>
                 </div>
               </div>
@@ -489,6 +496,12 @@ html, body { overflow-x: hidden; max-width: 100%; }
       <div class="callout-label">Nota operativa</div>
       <p>Il valore di &euro;1.000 &egrave; il corrispettivo dell&rsquo;abbonamento venduto, non il valore residuo o pro-rata. La verifica avviene al momento della registrazione dell&rsquo;acquisto nel sistema gestionale (InForYou), che &egrave; la fonte di verit&agrave; per l&rsquo;automazione.</p>
     </div>
+
+    <div class="callout red-callout" style="margin-top:16px;">
+      <div class="callout-label">Vincolo Privacy &middot; Consenso obbligatorio</div>
+      <p>L&rsquo;automazione pu&ograve; partire <strong>solo se l&rsquo;iscritto ha prestato consenso esplicito e separato</strong> all&rsquo;invio dei propri dati nell&rsquo;ambito della partnership Chiron. Senza consenso, il trigger non si attiva.</p>
+      <p>Se l&rsquo;iscritto non presta consenso, riceve comunque la comunicazione standard con i recapiti Chiron e pu&ograve; prenotare la visita autonomamente, presentandosi come iscritto Ronchiverdi.</p>
+    </div>
   </div>
 
   <!-- II.02 FLUSSO -->
@@ -508,32 +521,32 @@ html, body { overflow-x: hidden; max-width: 100%; }
       </div>
       <div class="flow-step">
         <div class="flow-num">02 &middot; Automazione</div>
-        <div class="flow-name">Invio contatto a Chiron</div>
-        <div class="flow-note">Nome, email, tel. inviati alla lista dedicata Chiron</div>
+        <div class="flow-name">Generazione voucher monouso</div>
+        <div class="flow-note">Codice univoco generato per l&rsquo;iscritto (solo con consenso esplicito)</div>
         <div class="flow-arrow">&#10095;</div>
       </div>
       <div class="flow-step">
-        <div class="flow-num">03 &middot; Email utente</div>
-        <div class="flow-name">Benvenuto &amp; invito prenotazione</div>
-        <div class="flow-note">Email automatica con info benefit e link/recapiti Chiron</div>
+        <div class="flow-num">03 &middot; Email iscritto</div>
+        <div class="flow-name">Benvenuto &amp; voucher Chiron</div>
+        <div class="flow-note">Email con codice voucher, info benefit, recapiti Chiron e istruzioni prenotazione</div>
         <div class="flow-arrow">&#10095;</div>
       </div>
       <div class="flow-step">
-        <div class="flow-num">04 &middot; Chiron</div>
-        <div class="flow-name">Verifica &amp; contatto</div>
-        <div class="flow-note">Chiron verifica il diritto e pu&ograve; contattare proattivamente l&rsquo;utente</div>
+        <div class="flow-num">04 &middot; Iscritto</div>
+        <div class="flow-name">Prenotazione autonoma</div>
+        <div class="flow-note">L&rsquo;iscritto contatta Chiron con il voucher e prenota la visita</div>
         <div class="flow-arrow">&#10095;</div>
       </div>
       <div class="flow-step">
-        <div class="flow-num">05 &middot; Tracciamento</div>
-        <div class="flow-name">Spunta file condiviso</div>
-        <div class="flow-note">Chiron segna la visita effettuata sul file condiviso Ronchiverdi</div>
+        <div class="flow-num">05 &middot; Chiron</div>
+        <div class="flow-name">Validazione voucher</div>
+        <div class="flow-note">Chiron marca il voucher come utilizzato sull&rsquo;applicativo dedicato</div>
       </div>
     </div>
 
     <div class="callout green-callout" style="margin-top:8px;">
-      <div class="callout-label">Doppio canale garantito</div>
-      <p>L&rsquo;iscritto pu&ograve; prenotare autonomamente con Chiron usando i recapiti ricevuti via email. <strong>In parallelo</strong>, Chiron ha comunque il contatto dell&rsquo;utente e pu&ograve; prendere lei l&rsquo;iniziativa di fissare l&rsquo;appuntamento. Nessun punto di frizione, massima copertura.</p>
+      <div class="callout-label">Handover netto</div>
+      <p>L&rsquo;iscritto prenota autonomamente con Chiron usando i recapiti ricevuti via email, <strong>presentando il proprio codice voucher</strong>. Da questo momento l&rsquo;iscritto interagisce direttamente con Chiron come partner esterno autonomo. Ronchiverdi non &egrave; parte del rapporto sanitario e non riceve alcun dato clinico.</p>
     </div>
   </div>
 
@@ -570,32 +583,108 @@ html, body { overflow-x: hidden; max-width: 100%; }
     </div>
   </div>
 
-  <!-- II.04 FILE CONDIVISO -->
+  <!-- II.04 SISTEMA VOUCHER -->
   <div class="section fade-up">
-    <div class="section-eyebrow">II.04 &middot; Tracciamento visite</div>
-    <h2>Il file condiviso <em>Chiron &times; Ronchiverdi</em></h2>
+    <div class="section-eyebrow">II.04 &middot; Sistema voucher</div>
+    <h2>Il modello operativo <em>a voucher monouso</em></h2>
     <div class="prose" style="margin-bottom:24px;">
-      <p>Per garantire trasparenza e tracciabilit&agrave;, Chiron avr&agrave; accesso a un file condiviso (es. Google Sheet o Airtable) in cui spunter&agrave; le visite effettivamente effettuate. Questo consente a Ronchiverdi di monitorare l&rsquo;utilizzo del benefit senza dover interfacciarsi con Chiron per ogni singolo caso.</p>
+      <p>Il file condiviso (Google Sheet / Airtable) &egrave; rimosso perch&eacute; eccede il perimetro dati consentito: conteneva dati sanitari e para-sanitari (esiti visita, date contatto) che non devono transitare attraverso sistemi condivisi tra i due titolari. Il sistema voucher sostituisce il file condiviso con un modello operativo a traccia amministrativa pura.</p>
     </div>
-    <div class="grid-3">
-      <div class="card gold">
-        <div class="card-title">Ronchiverdi aggiunge</div>
-        <div class="card-body">Quando si attiva il trigger: nome, cognome, email, telefono, data acquisto abbonamento, valore abbonamento.</div>
+
+    <div class="trigger-box" style="background:rgba(90,140,220,0.06);border-color:rgba(90,140,220,0.3);">
+      <div class="trigger-icon">&#127981;</div>
+      <div class="trigger-body">
+        <div class="trigger-label" style="color:rgba(130,170,240,0.9);">Flusso voucher &middot; Passo per passo</div>
+        <div class="trigger-title" style="font-size:20px;">Trigger: acquisto &gt;&euro;1.000 <em>+ consenso privacy</em></div>
+        <div class="trigger-desc">
+          Solo al verificarsi di entrambe le condizioni il sistema genera e invia il voucher. Nessuna trasmissione diretta di dati personali a Chiron da parte di Ronchiverdi.
+        </div>
       </div>
-      <div class="card">
-        <div class="card-title">Chiron compila</div>
-        <div class="card-body">Data contatto, data visita effettuata, esito (visita completata / non presentato / riprogrammato).</div>
+    </div>
+
+    <div class="rm-list" style="margin-top:20px;">
+      <div class="rm-item p2">
+        <div class="rm-num" style="font-size:24px;width:32px;">1</div>
+        <div>
+          <div class="rm-tag">Ronchiverdi</div>
+          <div class="rm-title">Generazione codice voucher monouso</div>
+          <div class="rm-desc">Al trigger (abbonamento &gt;&euro;1.000 + consenso), il sistema genera automaticamente un <strong>codice voucher univoco</strong> per l&rsquo;iscritto. Usa e getta: non riutilizzabile.</div>
+        </div>
       </div>
-      <div class="card green">
-        <div class="card-title">Visibilit&agrave; reciproca</div>
-        <div class="card-body">Entrambe le parti vedono lo stato di ogni iscritto avente diritto. Nessuna comunicazione manuale necessaria per il monitoraggio.</div>
+      <div class="rm-item p2">
+        <div class="rm-num" style="font-size:24px;width:32px;">2</div>
+        <div>
+          <div class="rm-tag">Iscritto</div>
+          <div class="rm-title">Email automatica con voucher e istruzioni</div>
+          <div class="rm-desc">L&rsquo;iscritto riceve email con: benvenuto e descrizione del benefit, nome e presentazione di Chiron, <strong>codice voucher personale</strong>, procedura di prenotazione (link, telefono o altro canale comunicato da Chiron), istruzioni per presentare il voucher.</div>
+        </div>
       </div>
+      <div class="rm-item p2">
+        <div class="rm-num" style="font-size:24px;width:32px;">3</div>
+        <div>
+          <div class="rm-tag">Chiron</div>
+          <div class="rm-title">Validazione e marcatura voucher</div>
+          <div class="rm-desc">Chiron valida il voucher al momento dell&rsquo;utilizzo tramite l&rsquo;applicativo dedicato e lo marca come &ldquo;bruciato&rdquo;. Il voucher non &egrave; pi&ugrave; riutilizzabile.</div>
+        </div>
+      </div>
+      <div class="rm-item p3">
+        <div class="rm-num" style="font-size:24px;width:32px;">4</div>
+        <div>
+          <div class="rm-tag">Ronchiverdi</div>
+          <div class="rm-title">Traccia amministrativa: voucher emesso / validato</div>
+          <div class="rm-desc">Lato Ronchiverdi resta solo la traccia amministrativa: <strong>voucher emesso</strong> / <strong>voucher validato</strong>. <strong>Nessun dato sanitario, nessun esito, nessuna conferma clinica.</strong> Dato amministrativo puro.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout red-callout" style="margin-top:20px;">
+      <div class="callout-label">Perimetro dati &middot; Cosa Ronchiverdi non riceve</div>
+      <p>Ronchiverdi <strong>non riceve nessun dato sanitario</strong>, nessun esito di visita, nessuna anamnesi, nessuna diagnosi, nessuna motivazione di non idoneit&agrave;. Il rapporto sanitario &egrave; esclusivamente tra l&rsquo;iscritto e Chiron.</p>
     </div>
   </div>
 
-  <!-- II.05 CERTIFICATO VIA EMAIL E PIATTAFORMA CHIRON -->
+  <!-- II.05 APPLICATIVO DI VALIDAZIONE CHIRON -->
   <div class="section fade-up">
-    <div class="section-eyebrow">II.05 &middot; Consegna del certificato</div>
+    <div class="section-eyebrow">II.05 &middot; Applicativo di validazione voucher</div>
+    <h2>Lo strumento <em>per Chiron</em></h2>
+    <div class="prose" style="margin-bottom:24px;">
+      <p>Ronchiverdi fornir&agrave; a Chiron un <strong>link dedicato a un applicativo web semplice</strong> per la gestione dei voucher. Nessuna installazione richiesta. Accesso tramite link con credenziali nominative fornite da Ronchiverdi.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card blue">
+        <div class="card-title">Funzionalit&agrave; per il personale Chiron</div>
+        <div class="card-body">
+          <div class="item-list">
+            <div class="item"><div class="dot y"></div><span>Inserire o scansionare il codice voucher presentato dall&rsquo;iscritto</span></div>
+            <div class="item"><div class="dot y"></div><span>Verificare la validit&agrave;: attivo / gi&agrave; utilizzato / non esistente</span></div>
+            <div class="item"><div class="dot y"></div><span>Marcare il voucher come utilizzato (&ldquo;bruciato&rdquo;) con un click</span></div>
+            <div class="item"><div class="dot y"></div><span>Visualizzare i dati minimi: codice voucher, nome iscritto, data emissione, stato</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card green">
+        <div class="card-title">Cosa l&rsquo;applicativo non contiene</div>
+        <div class="card-body">
+          <div class="item-list">
+            <div class="item"><div class="dot r"></div><span>Nessun dato sanitario</span></div>
+            <div class="item"><div class="dot r"></div><span>Nessun esito di visita o referto</span></div>
+            <div class="item"><div class="dot r"></div><span>Nessun accesso al gestionale Ronchiverdi</span></div>
+            <div class="item"><div class="dot g"></div><span>Gestione completa del benefit in autonomia, senza file condivisi o email manuali</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:16px;">
+      <div class="callout-label">Nota implementativa &middot; Piano di go-live</div>
+      <p>Sviluppo e deploy dell&rsquo;applicativo voucher (web app leggera, hosted da Ronchiverdi). <strong>Fornire a Chiron le credenziali di accesso e il link prima dell&rsquo;attivazione del trigger automatico.</strong> L&rsquo;applicativo deve essere operativo e testato prima del go-live dell&rsquo;automazione.</p>
+    </div>
+  </div>
+
+  <!-- II.06 CERTIFICATO VIA EMAIL E PIATTAFORMA CHIRON -->
+  <div class="section fade-up">
+    <div class="section-eyebrow">II.06 &middot; Consegna del certificato</div>
     <h2>La modalit&agrave; standard: <em>allegato via email</em></h2>
     <div class="prose" style="margin-bottom:24px;">
       <p>La modalit&agrave; ufficiale con cui Ronchiverdi accetta i certificati medici è l&rsquo;<strong>invio via email in allegato da parte del cliente</strong> a una casella dedicata. Questa procedura vale per tutti gli iscritti, indipendentemente da dove abbiano effettuato la visita — con Chiron o con un medico esterno.</p>
@@ -641,13 +730,19 @@ html, body { overflow-x: hidden; max-width: 100%; }
       <div class="callout-label">Piattaforma Chiron &middot; Verifica aggiuntiva</div>
       <p>In parallelo alla procedura email, Chiron mette a disposizione la propria piattaforma come <strong>strumento aggiuntivo di verifica dei certificati medici</strong> per i clienti Ronchiverdi. La segreteria potr&agrave; accedere all&rsquo;area riservata per una verifica ulteriore o per consultare i documenti digitalizzati dei clienti che hanno effettuato la visita tramite Chiron, senza dover richiedere nuovamente il certificato all&rsquo;iscritto.</p>
     </div>
+
+    <div class="callout red-callout" style="margin-top:16px;">
+      <div class="callout-label">Dati conservati da Ronchiverdi &middot; Perimetro minimo</div>
+      <p>Ronchiverdi conserva <strong>esclusivamente</strong> il certificato di idoneit&agrave; e la data di scadenza. Mai referti, anamnesi, diagnosi, esiti clinici, motivazioni di non idoneit&agrave;.</p>
+      <p>Nel gestionale e nel CRM, lo stato del certificato &egrave; espresso in termini <strong>amministrativi</strong>: <em>&ldquo;certificato presente e valido&rdquo;</em>, <em>&ldquo;certificato scaduto&rdquo;</em>, <em>&ldquo;certificato non acquisito&rdquo;</em>. Nessun dato sanitario nel gestionale.</p>
+    </div>
   </div>
 
   <!-- ══════════════ PARTE III: PRIVACY E RESPONSABILITÀ ══════════════ -->
   <div class="part-divider fade-up">
     <div class="part-number">Parte III &mdash; Privacy &amp; Responsabilit&agrave;</div>
     <div class="part-title">Normativa, consenso e <em>divisione dei ruoli</em></div>
-    <div class="part-desc">L&rsquo;invio dei dati personali degli iscritti a Chiron richiede un aggiornamento della privacy policy e la raccolta di un consenso esplicito. La chiarezza sui ruoli protegge sia Ronchiverdi che Chiron da responsabilit&agrave; non volute.</div>
+    <div class="part-desc">Ronchiverdi e Chiron sono due <strong>titolari autonomi del trattamento</strong> (EDPB 07/2020). Il sistema voucher minimizza il flusso di dati tra le parti. Il documento da formalizzare &egrave; un Protocollo Operativo tra Titolari Autonomi &mdash; non un DPA.</div>
   </div>
 
   <!-- III.01 PRIVACY -->
@@ -659,7 +754,7 @@ html, body { overflow-x: hidden; max-width: 100%; }
       <div class="privacy-label">Azione obbligatoria &middot; Da implementare prima del go-live</div>
       <div class="privacy-title">Aggiornamento della Privacy Policy Ronchiverdi</div>
       <div class="privacy-body">
-        L&rsquo;invio dei dati anagrafici degli iscritti a Chiron configura una <strong>comunicazione di dati a terzi</strong> ai sensi del GDPR. La privacy policy di Ronchiverdi deve essere aggiornata per prevedere <strong>esplicitamente questa finalit&agrave;</strong> e la relativa base giuridica (consenso o legittimo interesse, a seconda della valutazione del DPO).
+        Il sistema voucher minimizza la trasmissione di dati: il voucher &egrave; inviato direttamente all&rsquo;iscritto, che lo presenta autonomamente a Chiron. L&rsquo;applicativo di validazione contiene solo dati minimi (codice, nome, data emissione, stato). La privacy policy di Ronchiverdi deve essere aggiornata per prevedere questa finalit&agrave; e la base giuridica applicabile (<strong>consenso esplicito</strong>).
       </div>
     </div>
 
@@ -671,7 +766,7 @@ html, body { overflow-x: hidden; max-width: 100%; }
             <div class="item"><div class="dot y"></div><span>Informativa privacy (art. 13 GDPR): aggiungere Chiron come destinatario dei dati</span></div>
             <div class="item"><div class="dot y"></div><span>Modulo iscrizione: aggiungere checkbox consenso invio dati a Chiron (se base giuridica = consenso)</span></div>
             <div class="item"><div class="dot y"></div><span>Registro dei trattamenti: aggiungere il trattamento &ldquo;comunicazione dati a partner sanitario&rdquo;</span></div>
-            <div class="item"><div class="dot y"></div><span>DPA (Data Processing Agreement) con Chiron se agisce come responsabile del trattamento</span></div>
+            <div class="item"><div class="dot y"></div><span>Protocollo operativo tra titolari autonomi (non un DPA: Chiron non agisce per conto di Ronchiverdi)</span></div>
           </div>
         </div>
       </div>
@@ -694,7 +789,7 @@ html, body { overflow-x: hidden; max-width: 100%; }
     <div class="section-eyebrow">III.02 &middot; Divisione delle responsabilit&agrave;</div>
     <h2>Chi fa <em>cosa</em></h2>
     <div class="prose" style="margin-bottom:24px;">
-      <p>Il modello separa nettamente le competenze: Ronchiverdi gestisce il trigger commerciale e la comunicazione iniziale, Chiron gestisce la relazione medica e la pianificazione delle visite. Nessuna sovrapposizione, nessuna ambiguit&agrave;.</p>
+      <p>Ronchiverdi e Chiron sono due <strong>titolari autonomi del trattamento</strong> ai sensi del GDPR (EDPB 07/2020). Il modello separa nettamente le competenze: Ronchiverdi gestisce il trigger commerciale e la generazione del voucher, Chiron gestisce la relazione medica e le visite. Il documento da formalizzare &egrave; un <strong>Protocollo Operativo tra Titolari Autonomi</strong>, non un DPA.</p>
     </div>
     <table class="resp-table">
       <thead>
@@ -711,24 +806,19 @@ html, body { overflow-x: hidden; max-width: 100%; }
           <td>Registrazione su InForYou, verifica superamento soglia €1.000</td>
         </tr>
         <tr>
-          <td>Invio dati a Chiron</td>
+          <td>Generazione voucher</td>
           <td><span class="badge rverde">Ronchiverdi</span></td>
-          <td>Automazione invia il contatto alla lista Chiron (solo con consenso privacy)</td>
+          <td>Sistema genera voucher monouso e invia email all&rsquo;iscritto con codice e recapiti Chiron (solo con consenso esplicito)</td>
         </tr>
         <tr>
-          <td>Email benvenuto iscritto</td>
+          <td>Email voucher iscritto</td>
           <td><span class="badge rverde">Ronchiverdi</span></td>
-          <td>Email automatica con info sul benefit e recapiti Chiron</td>
+          <td>Email automatica con codice voucher, info benefit, recapiti Chiron e istruzioni di prenotazione</td>
         </tr>
         <tr>
-          <td>Verifica diritto alla visita</td>
-          <td><span class="badge chiron">Chiron</span></td>
-          <td>Chiron verifica che il contatto ricevuto abbia i requisiti per la visita gratuita</td>
-        </tr>
-        <tr>
-          <td>Prenotazione appuntamento</td>
-          <td><span class="badge shared">Condivisa</span></td>
-          <td>L&rsquo;iscritto prenota autonomamente oppure Chiron prende contatto proattivamente</td>
+          <td>Prenotazione visita</td>
+          <td><span class="badge shared">Iscritto</span></td>
+          <td>L&rsquo;iscritto contatta Chiron autonomamente presentando il codice voucher</td>
         </tr>
         <tr>
           <td>Effettuazione visita</td>
@@ -736,14 +826,14 @@ html, body { overflow-x: hidden; max-width: 100%; }
           <td>Visita medica eseguita presso le strutture Chiron</td>
         </tr>
         <tr>
-          <td>Tracciamento visita</td>
+          <td>Validazione voucher</td>
           <td><span class="badge chiron">Chiron</span></td>
-          <td>Spunta sul file condiviso Ronchiverdi&times;Chiron della visita effettuata</td>
+          <td>Chiron valida e marca il voucher come utilizzato sull&rsquo;applicativo dedicato (dato: codice, nome, stato)</td>
         </tr>
         <tr>
           <td>Monitoraggio complessivo</td>
           <td><span class="badge rverde">Ronchiverdi</span></td>
-          <td>Verifica periodica del file condiviso per monitorare tasso di utilizzo del benefit</td>
+          <td>Verifica periodica voucher emessi vs. validati per monitorare il tasso di utilizzo del benefit</td>
         </tr>
       </tbody>
     </table>
@@ -766,8 +856,8 @@ html, body { overflow-x: hidden; max-width: 100%; }
         <div class="rm-num">2</div>
         <div>
           <div class="rm-tag">Prerequisito &middot; Bloccante</div>
-          <div class="rm-title">Accordo formale con Chiron e firma DPA</div>
-          <div class="rm-desc">Formalizzare la partnership con un contratto che includa le condizioni del benefit, il DPA per il trattamento dei dati e le modalit&agrave; di gestione del file condiviso.</div>
+          <div class="rm-title">Protocollo Operativo tra Titolari Autonomi</div>
+          <div class="rm-desc">Disciplina le comunicazioni di dati tra le parti, i limiti di utilizzo, le misure di sicurezza del canale, le responsabilit&agrave; operative e le procedure di revoca degli accessi. <strong>Non &egrave; un DPA: Chiron non agisce per conto di Ronchiverdi.</strong></div>
         </div>
       </div>
       <div class="rm-item p2">
@@ -783,15 +873,23 @@ html, body { overflow-x: hidden; max-width: 100%; }
         <div>
           <div class="rm-tag">Fase 2 &middot; Automazione</div>
           <div class="rm-title">Configurazione automazione abbonamenti &gt; €1.000</div>
-          <div class="rm-desc">Impostare il trigger su InForYou (o via webhook), l&rsquo;invio automatico del contatto alla lista Chiron e l&rsquo;email dedicata per l&rsquo;iscritto premium. Configurare il file condiviso.</div>
+          <div class="rm-desc">Impostare il trigger su InForYou (o via webhook), la generazione automatica del voucher monouso e l&rsquo;email dedicata per l&rsquo;iscritto premium con codice voucher e recapiti Chiron.</div>
+        </div>
+      </div>
+      <div class="rm-item p2">
+        <div class="rm-num">5</div>
+        <div>
+          <div class="rm-tag">Fase 2 &middot; Voucher</div>
+          <div class="rm-title">Sviluppo e deploy applicativo voucher + credenziali Chiron</div>
+          <div class="rm-desc">Sviluppo e deploy dell&rsquo;applicativo voucher (web app leggera, hosted da Ronchiverdi). <strong>Definire con Chiron il canale di validazione e fornire le credenziali di accesso e il link prima dell&rsquo;attivazione del trigger automatico.</strong></div>
         </div>
       </div>
       <div class="rm-item p3">
-        <div class="rm-num">5</div>
+        <div class="rm-num">6</div>
         <div>
           <div class="rm-tag">Fase 3 &middot; Monitoraggio</div>
           <div class="rm-title">Dashboard e report periodico utilizzo benefit</div>
-          <div class="rm-desc">Impostare una verifica mensile del file condiviso per misurare il tasso di utilizzo della visita gratuita e valutare l&rsquo;impatto della partnership sulla retention degli iscritti premium.</div>
+          <div class="rm-desc">Impostare una verifica mensile dei voucher emessi vs. validati per misurare il tasso di utilizzo della visita gratuita e valutare l&rsquo;impatto della partnership sulla retention degli iscritti premium.</div>
         </div>
       </div>
     </div>
