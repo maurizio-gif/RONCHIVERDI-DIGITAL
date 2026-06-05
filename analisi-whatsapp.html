@@ -107,7 +107,7 @@ body { font-family: 'Jost', sans-serif; background: #F7F6F2; color: #1C1C18; fon
 .pc-head.blue { background: rgba(26,58,107,0.5); }
 .pc-head .brand { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #8B6C14; }
 .pc-head .plan { font-size: 15px; font-weight: 500; color: #1C1C18; }
-.pr-item { display: flex; justify-content: space-between; align-items: flex-start; padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); gap: 16px; }
+.pr-item { display: flex; justify-content: space-between; align-items: flex-start; padding: 14px 20px; border-bottom: 1px solid rgba(0,0,0,0.06); gap: 16px; }
 .pr-item:last-child { border-bottom: none; }
 .pk { font-size: 14px; color: #1C1C18; flex: 0 0 44%; line-height: 1.4; }
 .pv { font-size: 15px; font-weight: 400; color: #1C1C18; text-align: right; line-height: 1.4; }
@@ -123,7 +123,7 @@ body { font-family: 'Jost', sans-serif; background: #F7F6F2; color: #1C1C18; fon
 .tbl th { padding: 12px 16px; text-align: left; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; border-bottom: 1px solid rgba(0,0,0,0.09); color: #1C1C18; }
 .tbl th.hb { color: rgba(120,160,220,0.7); }
 .tbl th.hg { color: rgba(120,190,140,0.7); }
-.tbl td { padding: 13px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: top; line-height: 1.55; }
+.tbl td { padding: 13px 16px; border-bottom: 1px solid rgba(0,0,0,0.06); vertical-align: top; line-height: 1.55; }
 .tbl td:first-child { font-size: 14px; font-weight: 500; color: #1C1C18; width: 30%; }
 .tbl tr.tot td { background: rgba(232,212,106,0.05); font-weight: 500; border-top: 1px solid rgba(232,212,106,0.15); border-bottom: 1px solid rgba(232,212,106,0.15); }
 .tbl tr:last-child td { border-bottom: none; }
@@ -139,8 +139,8 @@ body { font-family: 'Jost', sans-serif; background: #F7F6F2; color: #1C1C18; fon
 .ctbl th:first-child { background: rgba(0,0,0,0.02); color: #1C1C18; width: 32%; border-bottom: 1px solid #E0DDD4; }
 .ctbl th.hb { background: rgba(26,58,107,0.5); color: rgba(150,190,240,0.9); border-bottom: 1px solid rgba(26,58,107,0.8); }
 .ctbl th.hg { background: rgba(30,61,40,0.5); color: rgba(120,190,140,0.9); border-bottom: 1px solid rgba(30,61,40,0.8); }
-.ctbl td { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: top; line-height: 1.6; color: #1C1C18; }
-.ctbl td:first-child { color: #1C1C18; font-weight: 400; font-size: 14px; background: rgba(255,255,255,0.015); }
+.ctbl td { padding: 12px 16px; border-bottom: 1px solid rgba(0,0,0,0.06); vertical-align: top; line-height: 1.6; color: #1C1C18; }
+.ctbl td:first-child { color: #1C1C18; font-weight: 400; font-size: 14px; background: rgba(0,0,0,0.015); }
 .ctbl tr:last-child td { border-bottom: none; }
 
 /* VERDICT */
@@ -658,8 +658,8 @@ if(ctxCosti) {
         }
       },
       scales: {
-        x: { grid: { display: false }, border: { display: false }, ticks: { color: 'rgba(250,248,244,0.5)', font: { size: 12 } } },
-        y: { grid: { color: 'rgba(255,255,255,0.06)' }, border: { display: false }, ticks: { color: 'rgba(250,248,244,0.35)', font: { size: 11 }, callback: function(v) { return '€' + v.toLocaleString('it-IT'); } } }
+        x: { grid: { display: false }, border: { display: false }, ticks: { color: 'rgba(0,0,0,0.45)', font: { size: 12 } } },
+        y: { grid: { color: 'rgba(0,0,0,0.08)' }, border: { display: false }, ticks: { color: 'rgba(0,0,0,0.35)', font: { size: 11 }, callback: function(v) { return '€' + v.toLocaleString('it-IT'); } } }
       }
     }
   });
@@ -688,9 +688,9 @@ if(ctxRadar) {
         r: {
           min: 0, max: 5,
           ticks: { stepSize: 1, display: false },
-          grid: { color: 'rgba(255,255,255,0.08)' },
-          angleLines: { color: 'rgba(255,255,255,0.06)' },
-          pointLabels: { color: 'rgba(250,248,244,0.55)', font: { size: 11 } }
+          grid: { color: 'rgba(0,0,0,0.1)' },
+          angleLines: { color: 'rgba(0,0,0,0.08)' },
+          pointLabels: { color: 'rgba(0,0,0,0.48)', font: { size: 11 } }
         }
       }
     }

@@ -37,7 +37,7 @@ body { font-family: "Jost", sans-serif; background: #F7F6F2; color: #1C1C18; fon
 .hero-part-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0,0,0,0.03); border: 1px solid #E0DDD4; border-radius: 50px; padding: 8px 18px; font-size: 14px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: #1C1C18; }
 .hero-part-badge.active { border-color: rgba(232,212,106,0.3); color: #8B6C14; background: rgba(232,212,106,0.06); }
 
-.proposal-banner { display: flex; align-items: center; gap: 12px; background: rgba(255,107,53,0.07); border: 1px solid rgba(255,107,53,0.25); border-radius: 8px; padding: 14px 20px; margin-bottom: 40px; font-size: 14px; line-height: 1.5; color: rgba(255,255,255,0.85); }
+.proposal-banner { display: flex; align-items: center; gap: 12px; background: rgba(255,107,53,0.07); border: 1px solid rgba(255,107,53,0.25); border-radius: 8px; padding: 14px 20px; margin-bottom: 40px; font-size: 14px; line-height: 1.5; color: rgba(0,0,0,0.65); }
 .proposal-banner .pb-tag { flex-shrink: 0; font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; background: rgba(255,107,53,0.15); border: 1px solid rgba(255,107,53,0.35); border-radius: 4px; padding: 3px 8px; color: #ff6b35; white-space: nowrap; }
 @media(max-width:640px){ .proposal-banner { flex-direction: column; align-items: flex-start; gap: 8px; } }
 
@@ -108,7 +108,7 @@ body { font-family: "Jost", sans-serif; background: #F7F6F2; color: #1C1C18; fon
 .flow-num { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #8B6C14; margin-bottom: 8px; }
 .flow-step.highlight .flow-num { color: #8B6C14; }
 .flow-name { font-family: "Cormorant Garamond", serif; font-size: 16px; font-weight: 400; color: #1C1C18; line-height: 1.3; }
-.flow-note { font-size: 13px; color: rgba(255,255,255,0.65); margin-top: 6px; line-height: 1.4; }
+.flow-note { font-size: 13px; color: rgba(0,0,0,0.5); margin-top: 6px; line-height: 1.4; }
 .flow-arrow { position: absolute; right: -11px; top: 50%; transform: translateY(-50%); z-index: 2; width: 22px; height: 22px; border-radius: 50%; background: #F7F6F2; border: 1px solid rgba(0,0,0,0.09); display: flex; align-items: center; justify-content: center; font-size: 11px; color: #1C1C18; }
 
 /* TRIGGER BOX */
@@ -118,7 +118,7 @@ body { font-family: "Jost", sans-serif; background: #F7F6F2; color: #1C1C18; fon
 .trigger-label { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #8B6C14; margin-bottom: 8px; }
 .trigger-title { font-family: "Cormorant Garamond", serif; font-size: 26px; font-weight: 400; color: #1C1C18; line-height: 1.2; margin-bottom: 10px; }
 .trigger-title em { font-style: italic; color: #8B6C14; }
-.trigger-desc { font-size: 15px; color: rgba(255,255,255,0.85); line-height: 1.7; }
+.trigger-desc { font-size: 15px; color: rgba(0,0,0,0.65); line-height: 1.7; }
 .trigger-desc strong { color: #1C1C18; font-weight: 500; }
 
 /* PRIVACY BLOCK */
@@ -126,13 +126,13 @@ body { font-family: "Jost", sans-serif; background: #F7F6F2; color: #1C1C18; fon
 .privacy-label { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(220,120,120,0.9); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
 .privacy-label::before { content: "⚠"; font-style: normal; }
 .privacy-title { font-family: "Cormorant Garamond", serif; font-size: 20px; font-weight: 400; color: #1C1C18; margin-bottom: 12px; }
-.privacy-body { font-size: 15px; color: rgba(255,255,255,0.85); line-height: 1.7; }
+.privacy-body { font-size: 15px; color: rgba(0,0,0,0.65); line-height: 1.7; }
 .privacy-body strong { color: #1C1C18; font-weight: 500; }
 
 /* RESPONSIBILITY TABLE */
 .resp-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 15px; }
 .resp-table th { padding: 10px 14px; text-align: left; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; border-bottom: 1px solid rgba(0,0,0,0.09); color: #8B6C14; }
-.resp-table td { padding: 13px 14px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: top; line-height: 1.55; color: #1C1C18; font-size: 15px; }
+.resp-table td { padding: 13px 14px; border-bottom: 1px solid rgba(0,0,0,0.06); vertical-align: top; line-height: 1.55; color: #1C1C18; font-size: 15px; }
 .resp-table td:first-child { font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: 0.06em; color: rgba(0,0,0,0.5); white-space: nowrap; }
 .resp-table tr:last-child td { border-bottom: none; }
 .badge { display: inline-block; font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; }
@@ -178,7 +178,7 @@ body { font-family: "Jost", sans-serif; background: #F7F6F2; color: #1C1C18; fon
 .wf-rail-line { position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: linear-gradient(90deg, rgba(232,212,106,0.25) 0% 40%, rgba(255,255,255,0.08) 40% 60%, rgba(90,140,220,0.2) 60% 100%); transform: translateY(-50%); }
 .wf-handoff-marker { position: absolute; left: 50%; transform: translateX(-50%); z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 4px; }
 .wf-handoff-line { width: 1px; height: 100px; background: linear-gradient(to bottom, rgba(232,212,106,0.2), rgba(255,255,255,0.06), rgba(90,140,220,0.2)); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-.wf-handoff-pill { background: rgba(247,246,242,0.97); border: 1px solid rgba(255,255,255,0.12); border-radius: 20px; padding: 3px 10px; font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(0,0,0,0.3); white-space: nowrap; position: relative; z-index: 2; }
+.wf-handoff-pill { background: rgba(247,246,242,0.97); border: 1px solid rgba(0,0,0,0.1); border-radius: 20px; padding: 3px 10px; font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(0,0,0,0.3); white-space: nowrap; position: relative; z-index: 2; }
 
 /* Step columns */
 .wf-steps-row { display: flex; align-items: stretch; padding: 0 32px; }
@@ -187,7 +187,7 @@ body { font-family: "Jost", sans-serif; background: #F7F6F2; color: #1C1C18; fon
 /* Step node circle */
 .wf-circle { width: 52px; height: 52px; border-radius: 50%; border: 2px solid; display: flex; align-items: center; justify-content: center; font-family: "JetBrains Mono", monospace; font-size: 13px; font-weight: 500; position: relative; z-index: 2; flex-shrink: 0; }
 .wf-circle.rv { background: rgba(232,212,106,0.12); border-color: rgba(232,212,106,0.45); color: #8B6C14; }
-.wf-circle.auto { background: rgba(0,0,0,0.04); border-color: rgba(255,255,255,0.2); color: rgba(0,0,0,0.55); }
+.wf-circle.auto { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.22); color: rgba(0,0,0,0.55); }
 .wf-circle.ch { background: rgba(90,140,220,0.1); border-color: rgba(90,140,220,0.35); color: rgba(130,170,240,0.9); }
 .wf-circle.sh { background: rgba(90,180,120,0.08); border-color: rgba(90,180,120,0.3); color: rgba(90,180,120,0.85); }
 
@@ -197,7 +197,7 @@ body { font-family: "Jost", sans-serif; background: #F7F6F2; color: #1C1C18; fon
 .wf-slabel-sub { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.08em; color: rgba(0,0,0,0.35); line-height: 1.3; }
 
 /* Connector lines between steps */
-.wf-connector { flex: none; width: 24px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.2); font-size: 14px; padding-bottom: 2px; position: relative; z-index: 2; }
+.wf-connector { flex: none; width: 24px; display: flex; align-items: center; justify-content: center; color: rgba(0,0,0,0.22); font-size: 14px; padding-bottom: 2px; position: relative; z-index: 2; }
 
 /* Spacer to align nodes to rail */
 .wf-spacer-top { flex: 1; min-height: 12px; }
@@ -218,7 +218,7 @@ body { font-family: "Jost", sans-serif; background: #F7F6F2; color: #1C1C18; fon
 .p2 .rm-tag { background: rgba(232,212,106,0.12); color: #8B6C14; }
 .p3 .rm-tag { background: rgba(90,180,120,0.12); color: rgba(90,180,120,0.9); }
 .rm-title { font-family: "Cormorant Garamond", serif; font-size: 19px; font-weight: 400; color: #1C1C18; margin-bottom: 4px; }
-.rm-desc { font-size: 15px; color: rgba(255,255,255,0.8); line-height: 1.6; }
+.rm-desc { font-size: 15px; color: rgba(0,0,0,0.6); line-height: 1.6; }
 .rm-desc strong { color: #1C1C18; font-weight: 500; }
 
 footer { background: rgba(0,0,0,0.3); padding: 40px 48px; border-top: 1px solid rgba(0,0,0,0.07); display: flex; justify-content: space-between; align-items: center; }
@@ -230,7 +230,7 @@ footer { background: rgba(0,0,0,0.3); padding: 40px 48px; border-top: 1px solid 
 .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .fade-up.visible { opacity: 1; transform: none; }
 
-.update-note { display: flex; align-items: flex-start; gap: 12px; background: rgba(90,140,220,0.06); border: 1px solid rgba(90,140,220,0.2); border-radius: 8px; padding: 14px 20px; margin-top: 14px; margin-bottom: 0; font-size: 14px; line-height: 1.5; color: rgba(255,255,255,0.85); }
+.update-note { display: flex; align-items: flex-start; gap: 12px; background: rgba(90,140,220,0.06); border: 1px solid rgba(90,140,220,0.2); border-radius: 8px; padding: 14px 20px; margin-top: 14px; margin-bottom: 0; font-size: 14px; line-height: 1.5; color: rgba(0,0,0,0.65); }
 .update-note .un-tag { flex-shrink: 0; font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; background: rgba(90,140,220,0.12); border: 1px solid rgba(90,140,220,0.3); border-radius: 4px; padding: 3px 8px; color: rgba(130,170,240,0.9); white-space: nowrap; }
 
 html, body { overflow-x: hidden; max-width: 100%; }

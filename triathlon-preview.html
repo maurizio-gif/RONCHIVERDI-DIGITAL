@@ -98,7 +98,7 @@ body { font-family: "Jost", sans-serif; background: #F7F6F2; color: #1C1C18; fon
 /* GAP TABLE */
 .gap-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 15px; }
 .gap-table th { padding: 10px 14px; text-align: left; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; border-bottom: 1px solid rgba(0,0,0,0.09); color: #1C1C18; }
-.gap-table td { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: top; line-height: 1.55; }
+.gap-table td { padding: 12px 14px; border-bottom: 1px solid rgba(0,0,0,0.06); vertical-align: top; line-height: 1.55; }
 .gap-table td:first-child { font-weight: 500; color: #1C1C18; width: 26%; font-size: 14px; }
 .gap-table tr:last-child td { border-bottom: none; }
 .badge { display: inline-block; font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; }
@@ -248,7 +248,7 @@ footer { background: rgba(0,0,0,0.3); padding: 40px 48px; border-top: 1px solid 
 }
 .conv-bar-track {
   height: 6px;
-  background: rgba(255,255,255,0.07);
+  background: rgba(0,0,0,0.04);
   border-radius: 3px;
   overflow: hidden;
 }
@@ -880,9 +880,9 @@ if(ctxGap) {
       },
       scales: {
         x: {
-          grid: { color: 'rgba(255,255,255,0.06)', drawBorder: false },
+          grid: { color: 'rgba(0,0,0,0.08)', drawBorder: false },
           ticks: {
-            color: 'rgba(250,248,244,0.35)',
+            color: 'rgba(0,0,0,0.35)',
             stepSize: 1,
             font: { family: "'Jost', sans-serif", size: 11 }
           },
@@ -892,7 +892,7 @@ if(ctxGap) {
         y: {
           grid: { display: false },
           ticks: {
-            color: 'rgba(250,248,244,0.65)',
+            color: 'rgba(0,0,0,0.55)',
             font: { family: "'Jost', sans-serif", size: 13 }
           },
           border: { display: false }
