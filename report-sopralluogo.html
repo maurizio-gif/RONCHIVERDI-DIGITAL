@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Report Sopralluogo — Ronchiverdi Audit</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Jost", sans-serif; background: #F7F6F2; color: #1C1C18; font-size: 17px; line-height: 1.7; overflow-x: hidden; font-weight: 400; -webkit-font-smoothing: antialiased; }
+
+/* PASSWORD GATE */
+#gate { position: fixed; inset: 0; z-index: 9999; background: #F7F6F2; display: flex; align-items: center; justify-content: center; padding: 24px; }
+#gate.hidden { display: none; }
+.gate-box { width: 100%; max-width: 400px; text-align: center; }
+.gate-logo { height: 44px; width: auto; margin-bottom: 48px; }
+.gate-eyebrow { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #8B6C14; margin-bottom: 14px; }
+.gate-title { font-family: "Cormorant Garamond", serif; font-size: 36px; font-weight: 400; color: #1C1C18; margin-bottom: 8px; line-height: 1.1; }
+.gate-title em { font-style: italic; color: #8B6C14; }
+.gate-sub { font-size: 14px; color: #8A8A80; margin-bottom: 36px; }
+.gate-field { width: 100%; background: #FFFFFF; border: 1.5px solid #D9D7CE; border-radius: 10px; padding: 15px 20px; font-family: "JetBrains Mono", monospace; font-size: 15px; color: #1C1C18; letter-spacing: 0.1em; text-align: center; outline: none; transition: border-color 0.2s, box-shadow 0.2s; margin-bottom: 12px; }
+.gate-field:focus { border-color: #C4A020; box-shadow: 0 0 0 3px rgba(196,160,32,0.12); }
+.gate-field.error { border-color: #C94040; animation: shake 0.3s ease; }
+@keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+.gate-btn { width: 100%; background: #1C1C18; color: #F7F6F2; border: none; border-radius: 10px; padding: 15px 20px; font-family: "Jost", sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+.gate-btn:hover { background: #333330; }
+.gate-error { font-size: 13px; color: #C94040; margin-top: 10px; min-height: 18px; }
+
+/* NAV */
+.back-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 64px; background: rgba(247,246,242,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid #E0DDD4; }
+.back-btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: #1C1C18; font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; transition: color 0.2s; }
+.back-btn:hover { color: #8B6C14; }
+.back-btn .arrow { font-size: 16px; transition: transform 0.2s; }
+.back-btn:hover .arrow { transform: translateX(-3px); }
+.back-nav-logo { height: 34px; width: auto; }
+.nav-right { display: flex; align-items: center; gap: 16px; }
+.nav-tag { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #8A8A80; }
+@media(max-width:640px){ .back-nav { padding: 0 20px; } .nav-tag { display: none; } .back-nav-logo { height: 28px; } }
+
+/* HERO */
+.hero { padding: 100px 48px 64px; background: #FFFFFF; border-bottom: 1px solid #E0DDD4; }
+.hero-inner { max-width: 1000px; margin: 0 auto; }
+.hero-eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+.hero-eyebrow .tag { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #8A8A80; }
+.hero-eyebrow .sep { color: #C8C5BB; }
+.hero-eyebrow .tag.hi { color: #8B6C14; font-weight: 500; }
+.hero h1 { font-family: "Cormorant Garamond", serif; font-size: clamp(36px, 5vw, 58px); font-weight: 400; line-height: 1.05; color: #1C1C18; margin-bottom: 18px; letter-spacing: -0.02em; }
+.hero h1 em { font-style: italic; color: #8B6C14; }
+.hero-sub { font-size: 16px; line-height: 1.8; color: #5A5A54; max-width: 680px; margin-bottom: 36px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 36px; padding-top: 28px; border-top: 1px solid #E8E5DC; }
+.hero-meta-item .lbl { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #8B6C14; margin-bottom: 4px; }
+.hero-meta-item .val { font-size: 14px; color: #1C1C18; font-weight: 500; }
+@media(max-width:640px){ .hero { padding: 88px 24px 48px; } }
+
+/* LAYOUT */
+.page { max-width: 1000px; margin: 0 auto; padding: 0 48px 100px; }
+@media(max-width:640px){ .page { padding: 0 20px 80px; } }
+
+/* MACRO BOX */
+.macro-box { margin: 52px 0 0; padding: 40px 44px; background: #FFFDF0; border: 1.5px solid #E8D570; border-radius: 16px; }
+.macro-box blockquote { font-family: "Cormorant Garamond", serif; font-size: clamp(19px, 2.2vw, 26px); font-style: italic; color: #1C1C18; line-height: 1.5; margin-bottom: 16px; }
+.macro-box .attrib { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #8B6C14; }
+.pilastri { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 28px; }
+.pilastro { background: #FFFFFF; border: 1px solid #E8E5DC; border-radius: 10px; padding: 22px 26px; }
+.pilastro-num { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #8B6C14; margin-bottom: 8px; }
+.pilastro-text { font-size: 14px; line-height: 1.7; color: #3A3A34; }
+.pilastro-text strong { color: #1C1C18; }
+@media(max-width:640px){ .pilastri { grid-template-columns: 1fr; } .macro-box { padding: 28px 22px; } }
+
+/* AREA */
+.area { margin-top: 64px; padding-top: 48px; border-top: 2px solid #E8E5DC; }
+.area-eyebrow { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: #8B6C14; margin-bottom: 8px; }
+.area-title { font-family: "Cormorant Garamond", serif; font-size: clamp(24px, 3vw, 36px); font-weight: 400; color: #1C1C18; margin-bottom: 0; line-height: 1.1; }
+.area-title em { font-style: italic; color: #8B6C14; }
+
+/* SUBSECTION */
+.sub { margin-top: 40px; padding-top: 28px; border-top: 1px solid #EDEAE0; }
+.sub-title { font-family: "Cormorant Garamond", serif; font-size: clamp(18px, 2vw, 23px); font-weight: 400; color: #1C1C18; margin-bottom: 18px; line-height: 1.2; }
+.sub-title em { font-style: italic; color: #8B6C14; }
+
+/* BADGES */
+.status-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+.badge { display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 50px; font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; }
+.badge-current { background: #F0EFEA; border: 1px solid #D4D1C6; color: #6B6B65; }
+.badge-opp { background: #FFFAE0; border: 1px solid #E8D570; color: #7A5C0A; }
+.badge-note { background: #FFF4ED; border: 1px solid #F0C89A; color: #9A5A20; }
+.badge-low { background: #F5F4F0; border: 1px solid #DDD9CE; color: #9A9A90; }
+
+/* INFO BLOCKS */
+.info-block { margin-bottom: 18px; }
+.info-label { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #9A9A90; margin-bottom: 7px; }
+.info-body { font-size: 15px; line-height: 1.78; color: #3A3A34; }
+.info-body strong { color: #1C1C18; font-weight: 600; }
+
+/* FLOW */
+.flow { background: #FFFFFF; border: 1px solid #E0DDD4; border-left: 3px solid #C4A020; border-radius: 0 10px 10px 0; padding: 22px 26px; margin: 18px 0; }
+.flow-label { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #8B6C14; margin-bottom: 14px; }
+.flow-step { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; font-size: 14px; color: #3A3A34; line-height: 1.6; }
+.flow-step:last-child { margin-bottom: 0; }
+.flow-arrow { color: #C4A020; flex-shrink: 0; margin-top: 2px; font-size: 12px; font-weight: 600; }
+.flow-step strong { color: #1C1C18; }
+
+/* NOTE BOX */
+.note-box { background: #FFF8F0; border-left: 3px solid #E8A050; padding: 14px 18px; border-radius: 0 8px 8px 0; margin: 14px 0; font-size: 14px; color: #5A3A1A; line-height: 1.7; }
+.note-box strong { color: #9A5A20; }
+
+/* LINK BOX */
+.link-box { background: #FDFBF0; border-left: 3px solid #C4A020; padding: 14px 18px; border-radius: 0 8px 8px 0; margin: 14px 0; font-size: 14px; color: #4A4A3A; line-height: 1.7; }
+.link-box strong { color: #7A5C0A; }
+
+/* BULLET LIST */
+.blist { list-style: none; margin: 10px 0; }
+.blist li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: #3A3A34; line-height: 1.7; margin-bottom: 8px; }
+.blist li::before { content: "—"; color: #C4A020; flex-shrink: 0; margin-top: 1px; font-weight: 600; }
+.blist li strong { color: #1C1C18; font-weight: 600; }
+
+/* ORDERED LIST */
+.olist { padding-left: 20px; font-size: 15px; color: #3A3A34; line-height: 1.78; }
+.olist li { margin-bottom: 6px; }
+.olist li strong { color: #1C1C18; font-weight: 600; }
+
+/* PRIORITY TABLE */
+.priority-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 14px; background: #FFFFFF; border-radius: 12px; overflow: hidden; border: 1px solid #E0DDD4; }
+.priority-table th { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #8A8A80; text-align: left; padding: 12px 18px; background: #F5F4F0; border-bottom: 1px solid #E0DDD4; }
+.priority-table td { padding: 14px 18px; border-bottom: 1px solid #F0EDE4; color: #3A3A34; vertical-align: top; line-height: 1.5; }
+.priority-table tr:last-child td { border-bottom: none; }
+.priority-table tr:hover td { background: #FAFAF6; }
+.priority-table .num { font-family: "JetBrains Mono", monospace; color: #B0A070; font-size: 12px; }
+.priority-table .high { color: #7A5C0A; font-weight: 600; }
+.priority-table .med { color: #9A6A20; }
+.priority-table .low { color: #B0AEA6; }
+
+/* ARCH GRID */
+.arch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+.arch-item { background: #FFFFFF; border: 1px solid #E0DDD4; border-radius: 10px; padding: 18px 20px; }
+.arch-item-label { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #9A9A90; margin-bottom: 5px; }
+.arch-item-tool { font-size: 14px; color: #7A5C0A; font-weight: 600; margin-bottom: 2px; }
+.arch-item-desc { font-size: 13px; color: #7A7A72; }
+@media(max-width:640px){ .arch-grid { grid-template-columns: 1fr; } }
+
+/* GUIDA */
+.guida { background: #FFFFFF; border: 1px solid #E0DDD4; border-radius: 16px; padding: 36px 40px; margin-top: 64px; }
+.guida-label { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #9A9A90; margin-bottom: 14px; }
+.guida blockquote { font-family: "Cormorant Garamond", serif; font-size: clamp(17px, 2vw, 22px); font-style: italic; color: #1C1C18; line-height: 1.55; }
+.guida .attrib { font-size: 13px; color: #8A8A80; margin-top: 14px; line-height: 1.6; }
+@media(max-width:640px){ .guida { padding: 26px 22px; } }
+
+/* FADE */
+.fade-up { opacity: 0; transform: translateY(16px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.fade-up.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div id="gate">
+  <div class="gate-box">
+    <img src="ronchiverdi-logo.jpg" alt="Ronchiverdi" class="gate-logo">
+    <div class="gate-eyebrow">Documento riservato</div>
+    <h1 class="gate-title">Report <em>Sopralluogo</em></h1>
+    <p class="gate-sub">Inserisci la password per accedere al documento</p>
+    <input type="password" id="gate-input" class="gate-field" placeholder="••••••••••" autocomplete="off">
+    <button class="gate-btn" onclick="checkPassword()">Accedi</button>
+    <div class="gate-error" id="gate-error"></div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div id="content" style="display:none">
+
+<nav class="back-nav">
+  <a href="index.html" class="back-btn">
+    <span class="arrow">←</span>
+    <span>Indice</span>
+  </a>
+  <div class="nav-right">
+    <span class="nav-tag">Giugno 2026</span>
+    <img src="ronchiverdi-logo.jpg" alt="Ronchiverdi" class="back-nav-logo">
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <span class="tag hi">Sopralluogo fisico</span>
+      <span class="sep">·</span>
+      <span class="tag">Ronchiverdi Sport Club</span>
+      <span class="sep">·</span>
+      <span class="tag">Giugno 2026</span>
+    </div>
+    <h1>Report<br><em>Sopralluogo</em></h1>
+    <p class="hero-sub">Sintesi strutturata delle rilevazioni effettuate in loco. Stato attuale dei processi operativi, criticità identificate e opportunità di digitalizzazione per area.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><div class="lbl">Elaborato da</div><div class="val">Maurizio Taruggi · Ready 2 Digital</div></div>
+      <div class="hero-meta-item"><div class="lbl">Partecipanti</div><div class="val">Marco Rolle, Paola Zavattero e referenti di settore</div></div>
+      <div class="hero-meta-item"><div class="lbl">Versione</div><div class="val">Bozza — in revisione</div></div>
+    </div>
+  </div>
+</header>
+
+<main class="page">
+
+  <!-- MACRO OBIETTIVO -->
+  <div class="macro-box fade-up">
+    <blockquote>"Devo riuscire a ottenere gli stessi riscontri di controllo che ho oggi, ma con un dispendio di energie del 40% in meno. Devo spostare le risorse dalla gestione del controllo delle confusioni alla gestione del servizio e del customer service."</blockquote>
+    <div class="attrib">Marco Rolle — Club Manager</div>
+    <div class="pilastri">
+      <div class="pilastro">
+        <div class="pilastro-num">Pilastro 1</div>
+        <div class="pilastro-text"><strong>Liberare risorse operative</strong> tramite digitalizzazione — stessa qualità di controllo, meno energia spesa. Convertire il tempo risparmiato in customer service e relazione.</div>
+      </div>
+      <div class="pilastro">
+        <div class="pilastro-num">Pilastro 2</div>
+        <div class="pilastro-text"><strong>Conservare il posizionamento</strong> — lo strumento è il mezzo, non il fine. Il fine è fatturato, soci, qualità del servizio. Lo standing premium va preservato in ogni scelta tecnologica.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AREA 1: PALESTRA -->
+  <section class="area fade-up">
+    <div class="area-eyebrow">Area 1</div>
+    <h2 class="area-title">Palestra <em>/ Sala Pesi</em></h2>
+
+    <div class="sub">
+      <h3 class="sub-title">1.1 — Totem all'ingresso</h3>
+      <div class="status-row">
+        <span class="badge badge-current">Stato attuale</span>
+        <span class="badge badge-low">Bassa priorità</span>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Situazione rilevata</div>
+        <div class="info-body">Il totem mostra il calendario di prenotazione MyWellness in sola lettura — nessun visitatore può prenotare senza prima registrarsi. Il QR code interno porta a una pagina statica dei trainer, senza call to action. Lo scopo attuale del totem non è chiaro né utilizzabile.</div>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Opportunità</div>
+        <ul class="blist">
+          <li>Ridefinire la funzione del totem come punto di accesso a servizi specifici</li>
+          <li>Possibili use case: prenotazione PT, noleggio armadietti, richiesta informazioni</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h3 class="sub-title">1.2 — Gestione armadietti a pagamento</h3>
+      <div class="status-row">
+        <span class="badge badge-current">Completamente manuale</span>
+        <span class="badge badge-opp">Database + reminder</span>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Situazione rilevata</div>
+        <div class="info-body">Armadietti numerati e intestati al cognome del socio. Nessun sistema di tracciamento scadenze o rinnovi — tutto gestito manualmente.</div>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Opportunità</div>
+        <ul class="blist">
+          <li><strong>Tabella:</strong> numero armadietto, nome/cognome socio, data inizio, data fine noleggio, importo</li>
+          <li><strong>Record ID</strong> agganciato all'anagrafica socio</li>
+          <li><strong>Reminder automatici</strong> a scadenza (email/SMS)</li>
+          <li><strong>Pipeline</strong> rinnovo / mancato rinnovo</li>
+          <li>Interfaccia di controllo per la segreteria</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h3 class="sub-title">1.3 — Prenotazione Personal Trainer</h3>
+      <div class="status-row">
+        <span class="badge badge-current">Registro cartaceo</span>
+        <span class="badge badge-note">Valenza legale da preservare</span>
+        <span class="badge badge-low">Bassa priorità</span>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Flusso attuale</div>
+        <div class="info-body">Il PT incassa direttamente dal cliente e rendiconta le lezioni eseguite a fine mese al responsabile tramite un <strong>registro cartaceo plurifirmato</strong> (nome istruttore, nome cliente, orario, firma istruttore). Il responsabile consegna il rendiconto all'amministrazione. Il PT versa una percentuale per lezione a Ronchi Verdi.</div>
+      </div>
+      <div class="note-box"><strong>Nota legale:</strong> il registro cartaceo ha una funzione di tutela lavoristica — la pluralità di firme dimostra la presenza di molteplici clienti. Va preservato o replicato digitalmente con equivalente valenza.</div>
+      <div class="info-block">
+        <div class="info-label">Opportunità</div>
+        <ul class="blist">
+          <li>Form digitale di registrazione lezione (istruttore + cliente + orario)</li>
+          <li>Rendiconto mensile automatico per il responsabile</li>
+          <li>Dashboard lezioni/percentuali per l'amministrazione</li>
+        </ul>
+      </div>
+      <div class="link-box"><strong>Connessione con roadmap:</strong> si sovrappone alla Priorità 3 (suite form dipendenti) e potenzialmente alla Priorità 1 (Athletics, gestione collaboratori).</div>
+    </div>
+  </section>
+
+  <!-- AREA 2: PISCINA -->
+  <section class="area fade-up">
+    <div class="area-eyebrow">Area 2</div>
+    <h2 class="area-title">Piscina — <em>Lezioni individuali</em></h2>
+
+    <div class="sub">
+      <h3 class="sub-title">2.1 — Prenotazione carnet lezioni</h3>
+      <div class="status-row">
+        <span class="badge badge-current">Processo funzionante</span>
+        <span class="badge badge-low">Non prioritario</span>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Tipologie carnet</div>
+        <div class="info-body">Due formati: <strong>40 minuti</strong> e <strong>60 minuti</strong>, prezzi differenti. Fascia utenti: dai bambini agli adulti.</div>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Flusso attuale</div>
+        <ol class="olist">
+          <li>Cliente chiama il numero esposto all'ingresso vasca</li>
+          <li>La coordinatrice verifica disponibilità e consiglia il carnet</li>
+          <li>Il cliente va in segreteria, paga, lascia il carnet</li>
+          <li>La coordinatrice fornisce il contatto dell'istruttore</li>
+          <li>Istruttore e cliente si accordano su orario e giorno</li>
+          <li>L'istruttore gestisce lo spazio in vasca</li>
+          <li>Ogni lezione: l'istruttore segna data e firma sul carnet fisico (il carnet lo mantiene l'istruttore)</li>
+          <li>Aggiornamento lezioni rimanenti via WhatsApp al cliente</li>
+        </ol>
+      </div>
+      <div class="info-block" style="margin-top:16px">
+        <div class="info-label">Valutazione del referente</div>
+        <div class="info-body">Il processo è ritenuto <strong>gestibile e ordinato</strong> con i volumi attuali (5–6 persone per istruttore, in calo). Non è una priorità di digitalizzazione immediata.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AREA 3: RISTORANTE -->
+  <section class="area fade-up">
+    <div class="area-eyebrow">Area 3</div>
+    <h2 class="area-title">Ristorante <em>Elements</em></h2>
+
+    <div class="sub">
+      <h3 class="sub-title">3.1 — Gestione eventi</h3>
+      <div class="status-row">
+        <span class="badge badge-opp">Priorità alta</span>
+        <span class="badge badge-current">Tutto manuale</span>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Situazione rilevata</div>
+        <div class="info-body">La responsabile dedica <strong>2,5–3 ore al giorno ai preventivi</strong>. I dati clienti sono dispersi tra calendario, WhatsApp e carta. Nessun database strutturato, nessuna pipeline di stato. La raccolta dati avviene manualmente ogni 3 mesi scorrendo il calendario.</div>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Flusso attuale</div>
+        <ul class="blist">
+          <li>Cliente chiama → verifica disponibilità manuale</li>
+          <li>Invio catalogo Bunketig via WhatsApp per qualificare sul prezzo</li>
+          <li>Se c'è allineamento → appuntamento in sede per il preventivo</li>
+          <li>Evento confermato → gestione operativa manuale</li>
+        </ul>
+      </div>
+      <div class="flow">
+        <div class="flow-label">Flusso digitalizzato proposto</div>
+        <div class="flow-step"><span class="flow-arrow">→</span><span><strong>Sito</strong> — form richiesta evento (data, orario, n. persone, tipologia)</span></div>
+        <div class="flow-step"><span class="flow-arrow">→</span><span><strong>Verifica automatica disponibilità</strong> sul database</span></div>
+        <div class="flow-step"><span class="flow-arrow">→</span><span><strong>Email automatica</strong> con listino pre-scremato in base al profilo richiesta</span></div>
+        <div class="flow-step"><span class="flow-arrow">→</span><span><strong>Prenotazione appuntamento</strong> su agenda condivisa (Cal.com)</span></div>
+        <div class="flow-step"><span class="flow-arrow">→</span><span><strong>Pipeline CRM:</strong> Interessato → Appuntamento → Confermato → Storico</span></div>
+        <div class="flow-step"><span class="flow-arrow">→</span><span><strong>Conferma:</strong> inserimento parametri (importo, tipologia, n. persone, data) → storico per controllo di gestione</span></div>
+      </div>
+      <div class="note-box"><strong>Attenzione:</strong> la responsabile tiene alla trattativa diretta col cliente come leva di upselling (da 30€ → 50–60€). L'automazione deve gestire la qualifica iniziale, non sostituire la relazione. Il sistema deve essere manutenibile in autonomia.</div>
+    </div>
+
+    <div class="sub">
+      <h3 class="sub-title">3.2 — Gestione ordini forniture</h3>
+      <div class="status-row">
+        <span class="badge badge-opp">Priorità media</span>
+        <span class="badge badge-current">WhatsApp + Excel</span>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Situazione rilevata</div>
+        <div class="info-body">Gli operatori effettuano ordini via WhatsApp diretto al fornitore e comunicano importo + settore + fornitore in una chat di gruppo. La responsabile trascrive manualmente su Excel ogni sabato. Le bolle di consegna sono gestite separatamente in amministrazione.</div>
+      </div>
+      <div class="flow">
+        <div class="flow-label">Flusso digitalizzato proposto</div>
+        <div class="flow-step"><span class="flow-arrow">→</span><span><strong>Form ordine:</strong> operatore inserisce fornitore, articoli, importo, data</span></div>
+        <div class="flow-step"><span class="flow-arrow">→</span><span><strong>Tabella condivisa</strong> con tutti gli ordini aperti</span></div>
+        <div class="flow-step"><span class="flow-arrow">→</span><span><strong>Arrivo bolla:</strong> operatore verifica conformità, fotografa bolla, la carica sull'ordine aperto</span></div>
+        <div class="flow-step"><span class="flow-arrow">→</span><span><strong>Amministrazione:</strong> lista bolle da caricare sul gestionale + spunta di chiusura</span></div>
+        <div class="flow-step"><span class="flow-arrow">→</span><span><strong>Report settimanale</strong> ordini disponibile per controllo di gestione (Di Pietro)</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AREA 4: CUSTOMER SERVICE -->
+  <section class="area fade-up">
+    <div class="area-eyebrow">Area 4 — Trasversale</div>
+    <h2 class="area-title">Customer Service <em>&amp; Segnalazioni</em></h2>
+
+    <div class="sub">
+      <h3 class="sub-title">4.1 — Segnalazioni manutenzione e pulizie</h3>
+      <div class="status-row">
+        <span class="badge badge-opp">Opportunità</span>
+        <span class="badge badge-current">Nessun sistema strutturato</span>
+      </div>
+      <ul class="blist" style="margin-top:6px">
+        <li><strong>Form:</strong> macrocategoria (single select), nome segnalatore, descrizione (long text), foto (opzionale)</li>
+        <li><strong>Database</strong> con storico completo delle segnalazioni</li>
+        <li><strong>Interfaccia manutentore:</strong> pipeline — preso in carico → in gestione → risolto / richiede acquisto</li>
+        <li><strong>Interfaccia ditta pulizie:</strong> analoga, con pipeline di risoluzione</li>
+        <li><strong>Interfaccia amministrativa:</strong> KPI, SLA, tempi medi di risoluzione</li>
+      </ul>
+    </div>
+
+    <div class="sub">
+      <h3 class="sub-title">4.2 — Gestione lamentele e reclami</h3>
+      <div class="status-row">
+        <span class="badge badge-current">Raccolta statica</span>
+        <span class="badge badge-opp">Routing + follow-up</span>
+      </div>
+      <div class="flow">
+        <div class="flow-label">Flusso proposto</div>
+        <div class="flow-step"><span class="flow-arrow">→</span><span>Form compilabile da segreteria <em>o</em> direttamente dal cliente</span></div>
+        <div class="flow-step"><span class="flow-arrow">→</span><span>Categorizzazione per area (palestra, piscina, ristorante, ecc.)</span></div>
+        <div class="flow-step"><span class="flow-arrow">→</span><span>Routing automatico al responsabile di settore</span></div>
+        <div class="flow-step"><span class="flow-arrow">→</span><span>Pipeline: Ricevuta → Presa in carico → Ricontatto cliente → Risolta</span></div>
+        <div class="flow-step"><span class="flow-arrow">→</span><span>Ricontatto gestito dal customer care segreteria (preferibile alla gestione diretta del responsabile)</span></div>
+      </div>
+      <div class="info-block" style="margin-top:14px">
+        <div class="info-label">Obiettivo analitico</div>
+        <div class="info-body">Trasformare la lamentela in dato strutturato. Esempio discusso: "La sala pesi è sempre piena" → il dato granulare (orario, macchinario, frequenza) permette di capire se serve un secondo attrezzo o una redistribuzione orari, evitando conclusioni affrettate.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AREA 5: NUOTO -->
+  <section class="area fade-up">
+    <div class="area-eyebrow">Area 5</div>
+    <h2 class="area-title">Nuoto — <em>Scuola nuoto &amp; coordinamento</em></h2>
+
+    <div class="sub">
+      <h3 class="sub-title">5.1 — Fabio: figura critica e accentrata</h3>
+      <div class="status-row">
+        <span class="badge badge-opp">Priorità alta</span>
+        <span class="badge badge-note">Single point of failure</span>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Situazione rilevata</div>
+        <div class="info-body">Fabio (coordinatore di vasca) è il punto di riferimento unico per tutta la scuola nuoto. Su di lui convergono: gestione prove di ingresso, relazione con i genitori, fidelizzazione utenti, assegnazione turni agli insegnanti, coordinamento operativo della vasca.</div>
+      </div>
+      <div class="note-box"><strong>Rischio:</strong> eccessivo accentramento — impossibilità di misurazione oggettiva delle performance e vulnerabilità operativa in caso di assenza.</div>
+      <div class="flow">
+        <div class="flow-label">CRM scuola nuoto proposto</div>
+        <div class="flow-step"><span class="flow-arrow">→</span><span><strong>Lead</strong> (genitore interessato) → Fabio gestisce il contatto e inserisce in CRM</span></div>
+        <div class="flow-step"><span class="flow-arrow">→</span><span><strong>Prova assegnata:</strong> insegnante + slot</span></div>
+        <div class="flow-step"><span class="flow-arrow">→</span><span><strong>Esito prova:</strong> conversione ad abbonamento / mancata conversione</span></div>
+        <div class="flow-step"><span class="flow-arrow">→</span><span><strong>Inserimento gruppo</strong> e assegnazione definitiva al maestro</span></div>
+        <div class="flow-step"><span class="flow-arrow">→</span><span><strong>Follow-up genitori:</strong> comunicazioni, progressi allievo</span></div>
+      </div>
+      <div class="info-block" style="margin-top:14px">
+        <div class="info-label">Funzionalità di misurazione</div>
+        <ul class="blist">
+          <li>Tasso di conversione lead → abbonamento (performance di Fabio)</li>
+          <li>Presenze allievi per insegnante</li>
+          <li>Note e progressi per allievo (visibili a Fabio e all'insegnante)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- AREA 6: TENNIS -->
+  <section class="area fade-up">
+    <div class="area-eyebrow">Area 6</div>
+    <h2 class="area-title">Tennis — <em>Gruppi &amp; CRM</em></h2>
+
+    <div class="sub">
+      <h3 class="sub-title">6.1 — Esigenza espressa da Stefano</h3>
+      <div class="status-row">
+        <span class="badge badge-opp">Priorità media</span>
+        <span class="badge badge-current">Non strutturato</span>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Situazione rilevata</div>
+        <div class="info-body">Gestione gruppi e lead non strutturata. Nessun sistema di tracciamento dall'interesse iniziale all'inserimento nel gruppo. Stefano ha espresso la volontà di strutturare questo processo.</div>
+      </div>
+      <div class="flow">
+        <div class="flow-label">CRM tennis proposto (struttura analoga al nuoto)</div>
+        <div class="flow-step"><span class="flow-arrow">→</span><span><strong>Lead</strong> (interessato al tennis) → acquisizione contatto e qualifica</span></div>
+        <div class="flow-step"><span class="flow-arrow">→</span><span><strong>Conversione ad abbonamento</strong> — aggiornamento automatico tramite cron notturno (integrazione database abbonamenti)</span></div>
+        <div class="flow-step"><span class="flow-arrow">→</span><span><strong>Inserimento nel gruppo</strong> corretto per livello</span></div>
+        <div class="flow-step"><span class="flow-arrow">→</span><span><strong>Assegnazione al maestro</strong></span></div>
+      </div>
+      <div class="link-box"><strong>Pattern ricorrente:</strong> nuoto e tennis richiedono la stessa architettura CRM. Un modello unico riusabile per entrambi i settori abbassa significativamente il costo di implementazione.</div>
+    </div>
+  </section>
+
+  <!-- AREA 7: SEGRETERIA -->
+  <section class="area fade-up">
+    <div class="area-eyebrow">Area 7</div>
+    <h2 class="area-title">Segreteria — <em>Ingressi non abbonati</em></h2>
+
+    <div class="sub">
+      <h3 class="sub-title">7.1 — Guest register e masterclass</h3>
+      <div class="status-row">
+        <span class="badge badge-current">Registro manuale</span>
+        <span class="badge badge-low">Bassa priorità</span>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Categorie di ingresso identificate</div>
+        <ul class="blist">
+          <li>Daily Pass / Guest Pass</li>
+          <li>Prenotazione campi</li>
+          <li>Prova struttura</li>
+          <li>Masterclass / eventi</li>
+          <li>Pantofole (accesso accompagnatore)</li>
+        </ul>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Opportunità</div>
+        <ul class="blist">
+          <li><strong>Masterclass ed eventi:</strong> landing page sul sito con form prenotazione → dati in database → nessuna gestione manuale in segreteria</li>
+          <li><strong>Guest pass / daily:</strong> form digitale in segreteria (sostituisce registro cartaceo)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- AREA 8: PRIVACY -->
+  <section class="area fade-up">
+    <div class="area-eyebrow">Area 8 — Trasversale</div>
+    <h2 class="area-title">Dati clienti <em>&amp; Privacy</em></h2>
+
+    <div class="sub">
+      <h3 class="sub-title">8.1 — Raccolta non strutturata</h3>
+      <div class="status-row">
+        <span class="badge badge-note">Criticità GDPR</span>
+        <span class="badge badge-current">Raccolta informale</span>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Situazione rilevata</div>
+        <div class="info-body">Dati raccolti in fase di prenotazione (telefono) senza consenso privacy sistematico. Consenso presente solo per clienti che acquistano eventi (ODS con clausola sul retro). La raccolta retrospettiva avviene ogni 3 mesi scorrendo manualmente il calendario.</div>
+      </div>
+      <div class="info-block">
+        <div class="info-label">Opportunità</div>
+        <ul class="blist">
+          <li>Form digitale di richiesta evento con <strong>consenso privacy integrato</strong></li>
+          <li>Database unico clienti con flag consenso marketing</li>
+          <li>Eliminazione della raccolta retrospettiva trimestrale da calendario</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARCHITETTURA -->
+  <section class="area fade-up">
+    <div class="area-eyebrow">Architettura di sistema</div>
+    <h2 class="area-title">Piattaforma <em>centralizzata</em></h2>
+    <p class="info-body" style="margin:16px 0 4px">Tutti i flussi convergono su un'unica piattaforma (Airtable), con automazioni via n8n e agenda condivisa via Cal.com già integrata nel progetto.</p>
+    <div class="arch-grid">
+      <div class="arch-item"><div class="arch-item-label">CRM eventi, nuoto, tennis</div><div class="arch-item-tool">Airtable</div><div class="arch-item-desc">Vista pipeline, multi-settore</div></div>
+      <div class="arch-item"><div class="arch-item-label">Ordini forniture + bolle</div><div class="arch-item-tool">Airtable</div><div class="arch-item-desc">Gestione per stato, visibilità per ruolo</div></div>
+      <div class="arch-item"><div class="arch-item-label">Segnalazioni manutenzione/pulizie</div><div class="arch-item-tool">Airtable</div><div class="arch-item-desc">Pipeline per categoria, KPI e SLA</div></div>
+      <div class="arch-item"><div class="arch-item-label">Lamentele e reclami</div><div class="arch-item-tool">Airtable</div><div class="arch-item-desc">Routing per settore, follow-up tracciato</div></div>
+      <div class="arch-item"><div class="arch-item-label">Armadietti</div><div class="arch-item-tool">Airtable</div><div class="arch-item-desc">Tabella con reminder automatici</div></div>
+      <div class="arch-item"><div class="arch-item-label">Automazioni</div><div class="arch-item-tool">n8n</div><div class="arch-item-desc">Email, reminder, routing automatico</div></div>
+      <div class="arch-item"><div class="arch-item-label">Agenda appuntamenti</div><div class="arch-item-tool">Cal.com</div><div class="arch-item-desc">Già integrato nel progetto</div></div>
+      <div class="arch-item"><div class="arch-item-label">Guest register, masterclass</div><div class="arch-item-tool">Form → Airtable</div><div class="arch-item-desc">Landing page sul sito</div></div>
+    </div>
+  </section>
+
+  <!-- PRIORITÀ -->
+  <section class="area fade-up">
+    <div class="area-eyebrow">Roadmap</div>
+    <h2 class="area-title">Priorità <em>suggerite</em></h2>
+    <p class="info-body" style="margin:14px 0 4px">Da validare con Marco, Paola e i referenti di settore.</p>
+    <table class="priority-table">
+      <thead>
+        <tr><th>#</th><th>Area</th><th>Impatto</th><th>Urgenza</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="num">01</td><td>Gestione eventi ristorante — form + CRM</td><td class="high">Alto</td><td class="high">Alta</td></tr>
+        <tr><td class="num">02</td><td>CRM nuoto — scuola nuoto e coordinamento Fabio</td><td class="high">Alto</td><td class="high">Alta</td></tr>
+        <tr><td class="num">03</td><td>CRM tennis — lead, conversioni, gruppi (Stefano)</td><td class="high">Alto</td><td class="med">Media</td></tr>
+        <tr><td class="num">04</td><td>Segnalazioni manutenzione e pulizie</td><td class="med">Medio</td><td class="med">Media</td></tr>
+        <tr><td class="num">05</td><td>Lamentele e reclami — routing strutturato</td><td class="med">Medio</td><td class="med">Media</td></tr>
+        <tr><td class="num">06</td><td>Ordini forniture ristorante</td><td class="med">Medio</td><td class="med">Media</td></tr>
+        <tr><td class="num">07</td><td>Armadietti — database + reminder</td><td class="med">Medio</td><td class="low">Bassa</td></tr>
+        <tr><td class="num">08</td><td>Guest register / masterclass</td><td class="low">Basso</td><td class="low">Bassa</td></tr>
+        <tr><td class="num">09</td><td>PT — registro digitale lezioni</td><td class="low">Basso</td><td class="low">Bassa</td></tr>
+        <tr><td class="num">10</td><td>Totem — ridefinizione scopo</td><td class="low">Da valutare</td><td class="low">Bassa</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- GUIDA PRINCIPIO -->
+  <div class="guida fade-up">
+    <div class="guida-label">Voce di Paola Zavattero — CFO</div>
+    <blockquote>"Tutto questo serve per liberare le risorse affinché facciano lavori di qualità, e non dedichino troppo tempo alla quantità."</blockquote>
+    <div class="attrib">L'obiettivo non è digitalizzare per digitalizzare — è convertire il tempo risparmiato in customer service e relazione.</div>
+  </div>
+
+</main>
+</div><!-- /content -->
+
+<script>
+(function() {
+  const KEY = 'rv_sopralluogo_auth';
+  const PASSWORD = 'ronchi2030';
+
+  function unlock() {
+    document.getElementById('gate').classList.add('hidden');
+    document.getElementById('content').style.display = 'block';
+    sessionStorage.setItem(KEY, '1');
+    initPage();
+  }
+
+  if (sessionStorage.getItem(KEY) === '1') unlock();
+
+  window.checkPassword = function() {
+    const val = document.getElementById('gate-input').value;
+    const field = document.getElementById('gate-input');
+    const err = document.getElementById('gate-error');
+    if (val === PASSWORD) {
+      err.textContent = '';
+      unlock();
+    } else {
+      field.classList.add('error');
+      err.textContent = 'Password non corretta.';
+      setTimeout(() => field.classList.remove('error'), 400);
+      field.value = '';
+      field.focus();
+    }
+  };
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !document.getElementById('gate').classList.contains('hidden')) {
+      window.checkPassword();
+    }
+  });
+
+  function initPage() {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(el => { if (el.isIntersecting) { el.target.classList.add('visible'); obs.unobserve(el.target); } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+  }
+})();
+</script>
+</body>
+</html>
