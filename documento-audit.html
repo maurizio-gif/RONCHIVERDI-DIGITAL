@@ -111,6 +111,11 @@ body {
   font-size: 9px; color: var(--text-dim);
   flex-shrink: 0; width: 18px;
 }
+.sidebar-nav-top { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
+.sidebar-nav-btn { display: block; padding: 8px 10px; border-radius: 7px; font-size: 11px; font-weight: 500; letter-spacing: 0.05em; text-decoration: none; color: var(--text-dim); background: rgba(0,0,0,0.04); transition: all 0.15s; text-align: center; }
+.sidebar-nav-btn:hover { color: var(--text); background: rgba(0,0,0,0.08); }
+.sidebar-nav-btn-gold { color: var(--gold) !important; background: var(--gold-light) !important; }
+.sidebar-nav-btn-gold:hover { background: #EDE0C0 !important; }
 .sidebar-print {
   margin-top: auto; padding-top: 20px;
   border-top: 1px solid var(--border);
@@ -444,6 +449,10 @@ p strong { font-weight: 600; }
   <!-- SIDEBAR -->
   <aside class="sidebar">
     <img src="ronchiverdi-logo.jpg" alt="Ronchiverdi" class="sidebar-logo">
+    <div class="sidebar-nav-top">
+      <a href="index.html" class="sidebar-nav-btn">← Menu principale</a>
+      <a href="audit-executive.html" class="sidebar-nav-btn sidebar-nav-btn-gold">Executive Summary ↗</a>
+    </div>
     <p class="sidebar-section-label">Documento</p>
     <ul class="sidebar-nav">
       <li><a href="#intro" class="nav-link"><span class="sidebar-num">—</span>Introduzione</a></li>
@@ -481,8 +490,12 @@ p strong { font-weight: 600; }
 
     <!-- MOBILE NAV -->
     <nav class="topnav">
+      <a href="index.html" style="font-size:12px;font-weight:500;color:var(--text-dim);text-decoration:none;">← Menu</a>
       <img src="ronchiverdi-logo.jpg" alt="Ronchiverdi" class="topnav-logo">
-      <button class="topnav-print" onclick="window.print()">Scarica PDF</button>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <a href="audit-executive.html" style="font-size:11px;font-weight:500;color:var(--gold);text-decoration:none;letter-spacing:.06em;">Executive ↗</a>
+        <button class="topnav-print" onclick="window.print()">PDF</button>
+      </div>
     </nav>
 
     <!-- HERO -->
