@@ -158,6 +158,24 @@ p strong { font-weight: 600; }
 .cta-btn.secondary { background: white; color: var(--text); border: 1.5px solid var(--border); }
 .cta-btn.secondary:hover { border-color: var(--gold); color: var(--gold); }
 
+/* === HUMAN BLOCK === */
+.human-block { background: #1C1C18; border-radius: 14px; padding: 40px 44px; margin-top: 36px; }
+.human-block-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(200,153,31,0.8); font-weight: 600; margin-bottom: 28px; }
+.human-block-inner { display: grid; grid-template-columns: 1fr 260px; gap: 44px; margin-bottom: 32px; }
+.human-block-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; line-height: 1.25; color: #F7F6F2; margin-bottom: 20px; }
+.human-block-left p { font-size: 14px; color: rgba(247,246,242,0.72); line-height: 1.75; margin-bottom: 14px; }
+.human-block-left p:last-child { margin-bottom: 0; }
+.human-block-left strong { color: rgba(247,246,242,0.92); font-weight: 600; }
+.human-funnel { display: flex; flex-direction: column; gap: 0; }
+.hf-title { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(200,153,31,0.7); margin-bottom: 12px; }
+.hf-item { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 7px; padding: 10px 14px; margin-bottom: 6px; font-size: 12px; color: rgba(247,246,242,0.65); line-height: 1.35; }
+.hf-item span { display: block; font-size: 11px; color: rgba(200,153,31,0.7); margin-top: 3px; }
+.hf-arrow { text-align: center; color: rgba(200,153,31,0.5); font-size: 18px; margin: 4px 0; }
+.hf-result { background: rgba(179,58,46,0.15); border: 1px solid rgba(179,58,46,0.3); border-radius: 7px; padding: 14px; font-size: 12px; color: #F7C0BA; line-height: 1.5; text-align: center; font-weight: 500; }
+.human-block-footer { padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 14px; color: rgba(247,246,242,0.65); line-height: 1.7; }
+.human-block-footer strong { color: #F7F6F2; font-weight: 600; }
+@media(max-width:800px){ .human-block { padding: 28px 24px; } .human-block-inner { grid-template-columns: 1fr; gap: 28px; } }
+
 /* === PRINT === */
 @media print {
   #gate, .topbar { display: none !important; }
@@ -230,7 +248,7 @@ p strong { font-weight: 600; }
 
 <!-- TEMA 1: IL PARADOSSO DI RONCHIVERDI -->
 <section class="section">
-  <p class="section-num">01 / 04</p>
+  <p class="section-num">01 / 05</p>
   <h2 class="section-title">Un club che <em>fidelizza bene</em><br>ma acquisisce poco</h2>
 
   <p class="lead">Il dato più significativo emerso dall'analisi non riguarda un problema — riguarda un <strong>punto di forza che non viene capitalizzato</strong>. Ronchiverdi mantiene i propri soci con un tasso di rinnovo <strong>superiore al 70%</strong>, una performance nettamente al di sopra della media del settore.</p>
@@ -257,7 +275,7 @@ p strong { font-weight: 600; }
 
 <!-- TEMA 2: L'EFFICIENZA OPERATIVA -->
 <section class="section">
-  <p class="section-num">02 / 04</p>
+  <p class="section-num">02 / 05</p>
   <h2 class="section-title">Il <em>costo nascosto</em><br>dei processi manuali</h2>
 
   <p class="lead">L'analisi ha rilevato che una quota significativa del tempo delle risorse operative viene assorbita da <strong>task ripetitivi, riconciliazioni manuali e attività di basso valore</strong> che potrebbero essere automatizzati o strutturati diversamente. La stima conservativa, basata sui costi del personale analizzati, è di un'inefficienza tra il <strong>25% e il 30% del totale ore lavorate</strong> nelle aree di segreteria, commerciale, amministrazione e manutenzione.</p>
@@ -307,9 +325,43 @@ p strong { font-weight: 600; }
   <p>L'obiettivo degli interventi proposti <strong>non è ridurre il personale</strong>. È spostare lo stesso personale da attività che non producono valore ad attività che lo producono: più relazione con i soci, meno ore su fogli Excel.</p>
 </section>
 
-<!-- TEMA 3: COMPLIANCE -->
+<!-- TEMA 3: MOTIVAZIONE -->
 <section class="section">
-  <p class="section-num">03 / 04</p>
+  <p class="section-num">03 / 05</p>
+  <h2 class="section-title">Il costo <em>umano</em><br>della complessità operativa</h2>
+
+  <p class="lead">L'efficienza si misura in euro. La motivazione no — ma è altrettanto reale. L'analisi ha rilevato un rischio concreto di <strong>demotivazione e burnout</strong> nel personale di reception, non per mancanza di impegno o capacità, ma per una ragione strutturale precisa.</p>
+
+  <div class="human-block">
+    <div class="human-block-label">La reception come punto di arrivo di tutto ciò che non è risolto a monte</div>
+    <div class="human-block-inner">
+      <div class="human-block-left">
+        <h3 class="human-block-title">Persone selezionate per la relazione, impiegate per la gestione</h3>
+        <p>Chi lavora in reception gestisce ogni giorno uno spettro di richieste che nessuna job description potrebbe anticipare: apre il tornello, fotocopia il certificato medico, spiega come funziona l'app, risponde alla domanda sul pagamento, gestisce il reclamo, prende nota della segnalazione, trova il documento.</p>
+        <p><strong>Non perché sia sbagliato che lo faccia — ma perché non esistono strumenti o procedure a monte che possano farlo al suo posto.</strong> Il socio che non trova risposta online si reca in sede. Il socio che non capisce come funziona il rinnovo chiama la reception. Il socio che ha perso la tessera, che non ricorda la scadenza del certificato, che vuole sapere gli orari della piscina — tutto converge sullo stesso punto fisico, sulle stesse persone, ogni giorno.</p>
+        <p>Il risultato è una doppia frustrazione: il socio che non ottiene risposta in autonomia si sente dipendente dalla sede; lo staff che assorbe ogni richiesta senza poterla deflettere si esaurisce progressivamente. <strong>Il rischio di burnout in questo tipo di ruolo non è ipotetico — è la conseguenza naturale di un'architettura operativa che scarica tutto su un unico punto.</strong></p>
+      </div>
+      <div class="human-block-right">
+        <div class="human-funnel">
+          <div class="hf-title">Tutto converge sulla reception</div>
+          <div class="hf-item">Sito senza risposte<br><span>→ il socio viene in sede</span></div>
+          <div class="hf-item">Nessuna knowledge base<br><span>→ risposta sempre manuale</span></div>
+          <div class="hf-item">Processi non automatizzati<br><span>→ ogni operazione è a mano</span></div>
+          <div class="hf-item">Nessun canale alternativo<br><span>→ unico punto di contatto</span></div>
+          <div class="hf-arrow">↓</div>
+          <div class="hf-result">Overload operativo<br>+ frustrazione reciproca<br>+ rischio burnout</div>
+        </div>
+      </div>
+    </div>
+    <div class="human-block-footer">
+      <strong>La soluzione non è togliere il contatto umano.</strong> È eliminare i compiti che non lo richiedono — per restituire alle persone il tempo e l'energia per fare ciò che solo loro sanno fare: accogliere, ascoltare, risolvere nel momento. Una knowledge base per i soci, procedure automatizzate e canali alternativi non sono strumenti di distanza — sono scudi che proteggono la qualità della relazione.
+    </div>
+  </div>
+</section>
+
+<!-- TEMA 4: COMPLIANCE -->
+<section class="section">
+  <p class="section-num">04 / 05</p>
   <h2 class="section-title">Il <em>rischio silenzioso</em><br>della compliance</h2>
 
   <p class="lead">Quando ogni processo dipende dall'iniziativa e dalla memoria di una persona specifica, il rischio di non conformità è strutturale — non colpevole. L'analisi ha identificato <strong>aree di esposizione concrete</strong> che richiedono intervento indipendentemente dalla trasformazione digitale.</p>
@@ -340,9 +392,9 @@ p strong { font-weight: 600; }
   <p>Questi non sono rischi teorici. Sono esposizioni reali che non dipendono da quanto bene le persone svolgono il loro lavoro — dipendono dal fatto che il processo non è strutturato in modo da garantire la conformità <em>indipendentemente</em> da chi è in servizio quel giorno.</p>
 </section>
 
-<!-- TEMA 4: LA DIREZIONE -->
+<!-- TEMA 5: LA DIREZIONE -->
 <section class="section">
-  <p class="section-num">04 / 04</p>
+  <p class="section-num">05 / 05</p>
   <h2 class="section-title">Un'organizzazione che<br><em>non pesa</em> quando cresce</h2>
 
   <p class="lead">La domanda che guida questo progetto non è "come cresciamo?" ma <strong>"come costruiamo un'organizzazione in grado di crescere senza appesantirsi?"</strong></p>
