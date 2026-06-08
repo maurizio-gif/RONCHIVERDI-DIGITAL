@@ -462,6 +462,7 @@ p strong { font-weight: 600; }
       <li><a href="#area9" class="nav-link"><span class="sidebar-num">09</span>Certificato medico</a></li>
       <li><a href="#area10" class="nav-link"><span class="sidebar-num">10</span>Infrastruttura digitale</a></li>
       <li><a href="#area11" class="nav-link"><span class="sidebar-num">11</span>Manutenzione</a></li>
+      <li><a href="#area12" class="nav-link" style="color:var(--gold);font-weight:500;"><span class="sidebar-num" style="color:var(--gold);">↗</span>Ristorante Elements</a></li>
     </ul>
     <p class="sidebar-section-label">Sintesi</p>
     <ul class="sidebar-nav">
@@ -614,6 +615,11 @@ p strong { font-weight: 600; }
             <td><span class="area-num-badge">11</span></td>
             <td><p class="area-row-name">Processi di manutenzione</p><p class="area-row-desc">Segnalazione e gestione degli interventi</p></td>
             <td><p class="area-row-desc">Canali informali, assenza tracciamento, pipeline interventi</p></td>
+          </tr>
+          <tr style="background:rgba(139,108,20,0.03);">
+            <td><span class="area-num-badge" style="background:var(--gold);">↗</span></td>
+            <td><p class="area-row-name" style="color:var(--gold);">Ristorante Elements</p><p class="area-row-desc">Progetto parallelo — non urgente</p></td>
+            <td><p class="area-row-desc">Gestione eventi (2,5–3h/giorno), ordini forniture, GDPR clienti</p></td>
           </tr>
         </tbody>
       </table>
@@ -979,6 +985,47 @@ p strong { font-weight: 600; }
         <p>Un <strong>form digitale di segnalazione guasti</strong> accessibile da tutto lo staff via QR o link: area, tipo di problema, urgenza, foto allegata.</p>
         <p>Un'<strong>interfaccia di controllo dedicata al team</strong>: lista interventi aperti, stato, priorità. Ogni manutentore vede cosa gli è assegnato, aggiorna in tempo reale e chiude il ticket a intervento completato.</p>
         <p>Una <strong>dashboard storica per il responsabile</strong>: aree con più interventi, attrezzature che richiedono manutenzione frequente, tempi medi di risoluzione. Un dato oggi inesistente che diventa strumento di pianificazione.</p>
+      </div>
+    </section>
+
+    <!-- AREA 12 — RISTORANTE ELEMENTS -->
+    <section class="area-section" id="area12" style="border-left:3px solid var(--gold);margin-left:-3px;">
+      <div class="area-header">
+        <span class="area-tag" style="background:var(--gold-light);color:var(--gold);">PROGETTO PARALLELO</span>
+        <div>
+          <h2 class="area-title">Ristorante <em>Elements</em></h2>
+          <p style="font-size:13px;color:var(--text-dim);margin-top:8px;">Perimetro separato dall'audit principale — analisi condotta durante il sopralluogo fisico. Non ha carattere d'urgenza ma richiede un intervento strutturato dedicato.</p>
+        </div>
+      </div>
+
+      <div class="block block-asis">
+        <div class="block-label"><span class="label-dot"></span>AS-IS — Situazione attuale</div>
+        <p>Il Ristorante Elements gestisce due flussi operativi principali: la <strong>gestione degli eventi privati</strong> (cene aziendali, ricorrenze, eventi sportivi) e la <strong>gestione degli ordini forniture</strong>. Entrambi avvengono interamente su canali manuali e non strutturati.</p>
+        <p>Per gli eventi: il cliente contatta telefonicamente la responsabile, che verifica la disponibilità manualmente, invia il catalogo via WhatsApp per qualificare il budget, fissa un appuntamento in sede per il preventivo e gestisce l'evento operativamente. <strong>La responsabile dedica 2,5–3 ore al giorno ai preventivi.</strong> Nessun database clienti, nessuna pipeline di stato: i dati vivono tra calendario, WhatsApp e carta. La raccolta retrospettiva avviene ogni tre mesi scorrendo manualmente il calendario.</p>
+        <p>Per le forniture: gli operatori effettuano ordini via WhatsApp diretto al fornitore e comunicano importo, settore e fornitore in una chat di gruppo. <strong>La responsabile trascrive manualmente su Excel ogni sabato.</strong> Le bolle di consegna sono gestite separatamente in amministrazione.</p>
+
+        <div class="stat-row">
+          <div class="stat-card"><div class="stat-number">2,5–3h</div><div class="stat-label">al giorno dedicate ai preventivi eventi dalla responsabile</div></div>
+          <div class="stat-card"><div class="stat-number">0</div><div class="stat-label">database strutturato dei clienti del ristorante</div></div>
+          <div class="stat-card"><div class="stat-number">Sab</div><div class="stat-label">trascrizione manuale Excel ordini forniture ogni settimana</div></div>
+        </div>
+      </div>
+
+      <div class="block block-gap">
+        <div class="block-label"><span class="label-dot"></span>GAP — Punti critici</div>
+        <p><strong>Efficienza operativa.</strong> 2,5–3 ore/giorno sulla gestione preventivi equivalgono a circa 600–750 ore/anno. Si tratta di tempo sottratto alla relazione con il cliente e alla gestione operativa dell'evento — le attività per cui la responsabile genera reale valore. Il processo è interamente nella sua testa: se non è disponibile, si ferma tutto.</p>
+        <p><strong>Dispersione del dato cliente.</strong> Non esiste nessun database strutturato dei clienti del ristorante. Ogni tre mesi si recupera il dato scorrendo il calendario a ritroso — un'operazione lenta, incompleta e non sistematica. La possibilità di fare follow-up, comunicazioni mirate o analisi sulla clientela ricorrente è oggi praticamente nulla.</p>
+        <p><strong>GDPR — raccolta senza consenso sistematico.</strong> I dati dei clienti (nome, telefono, email) vengono raccolti in fase di prenotazione senza consenso privacy formale. Il consenso esiste solo per chi firma l'ODS (ordine di servizio), con clausola sul retro — non per tutti i contatti acquisiti nelle fasi precedenti. Questo espone il ristorante a un rischio di non conformità concreto, analogo a quello già identificato nel perimetro principale del club.</p>
+        <p><strong>Ordini forniture non tracciati.</strong> La catena WhatsApp → chat di gruppo → Excel manuale del sabato crea un ritardo strutturale nella visibilità dei costi di acquisto. Non è possibile avere una fotografia aggiornata degli ordini in corso durante la settimana.</p>
+      </div>
+
+      <div class="block block-prop">
+        <div class="block-label"><span class="label-dot"></span>PROPOSTE — Direzioni di intervento</div>
+        <p><strong>CRM eventi su piattaforma dedicata</strong> (Airtable o integrazione nel CRM principale): form digitale di richiesta evento con consenso GDPR integrato, pipeline per stato (preventivo → confermato → in preparazione → completato), database clienti con storico e flag marketing. L'obiettivo non è sostituire la trattativa diretta — che la responsabile usa consapevolmente come leva di upselling da €30 a €50–60 — ma automatizzare la qualifica iniziale e liberarla dalla gestione documentale.</p>
+        <p>Il sistema deve essere <strong>manutenibile autonomamente</strong> dalla responsabile: semplice, senza dipendenze tecniche esterne per le operazioni quotidiane.</p>
+        <p><strong>Gestione ordini forniture</strong>: form digitale per la registrazione degli ordini, con database visibile in tempo reale per la responsabile. Eliminazione della trascrizione Excel manuale del sabato. Possibile integrazione con la gestione bolle lato amministrazione.</p>
+        <p><strong>Agenda Cal.com</strong> integrata con il CRM per la prenotazione degli appuntamenti di preventivo: il cliente qualificato prenota direttamente senza scambi di messaggi intermedi.</p>
+        <p>Nota architetturale: la scelta tra <strong>Airtable standalone</strong> (più rapido, più semplice per la responsabile) e <strong>integrazione in Supabase</strong> (coerente con l'ecosistema del club, ma più complessa) va valutata in fase di progettazione. Per un perimetro come questo, Airtable è probabilmente la scelta più sostenibile nel breve periodo.</p>
       </div>
     </section>
 
