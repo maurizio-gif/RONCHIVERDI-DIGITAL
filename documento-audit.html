@@ -1016,11 +1016,12 @@ p strong { font-weight: 600; }
         <p>Il Ristorante Elements gestisce due flussi operativi principali: la <strong>gestione degli eventi privati</strong> (cene aziendali, ricorrenze, eventi sportivi) e la <strong>gestione degli ordini forniture</strong>. Entrambi avvengono interamente su canali manuali e non strutturati.</p>
         <p>Per gli eventi: il cliente contatta telefonicamente la responsabile, che verifica la disponibilità manualmente, invia il catalogo via WhatsApp per qualificare il budget, fissa un appuntamento in sede per il preventivo e gestisce l'evento operativamente. <strong>La responsabile dedica 2,5–3 ore al giorno ai preventivi.</strong> Nessun database clienti, nessuna pipeline di stato: i dati vivono tra calendario, WhatsApp e carta. La raccolta retrospettiva avviene ogni tre mesi scorrendo manualmente il calendario.</p>
         <p>Per le forniture: gli operatori effettuano ordini via WhatsApp diretto al fornitore e comunicano importo, settore e fornitore in una chat di gruppo. <strong>La responsabile trascrive manualmente su Excel ogni sabato.</strong> Le bolle di consegna sono gestite separatamente in amministrazione.</p>
+        <p><strong>Presenza digitale assente.</strong> Ristorante Elements non dispone di un sito dedicato. Le richieste di eventi privati arrivano esclusivamente tramite passaparola, telefono o WhatsApp — non esiste un punto di ingresso online strutturato. Non c'è form di contatto, non c'è pagina con l'offerta eventi, non c'è un percorso che il cliente potenziale possa seguire autonomamente prima di contattare la responsabile.</p>
 
         <div class="stat-row">
           <div class="stat-card"><div class="stat-number">2,5–3h</div><div class="stat-label">al giorno dedicate ai preventivi eventi dalla responsabile</div></div>
           <div class="stat-card"><div class="stat-number">0</div><div class="stat-label">database strutturato dei clienti del ristorante</div></div>
-          <div class="stat-card"><div class="stat-number">Sab</div><div class="stat-label">trascrizione manuale Excel ordini forniture ogni settimana</div></div>
+          <div class="stat-card"><div class="stat-number">0</div><div class="stat-label">punti di ingresso digitali per richieste eventi</div></div>
         </div>
       </div>
 
@@ -1030,6 +1031,7 @@ p strong { font-weight: 600; }
         <p><strong>Dispersione del dato cliente.</strong> Non esiste nessun database strutturato dei clienti del ristorante. Ogni tre mesi si recupera il dato scorrendo il calendario a ritroso — un'operazione lenta, incompleta e non sistematica. La possibilità di fare follow-up, comunicazioni mirate o analisi sulla clientela ricorrente è oggi praticamente nulla.</p>
         <p><strong>GDPR — raccolta senza consenso sistematico.</strong> I dati dei clienti (nome, telefono, email) vengono raccolti in fase di prenotazione senza consenso privacy formale. Il consenso esiste solo per chi firma l'ODS (ordine di servizio), con clausola sul retro — non per tutti i contatti acquisiti nelle fasi precedenti. Questo espone il ristorante a un rischio di non conformità concreto, analogo a quello già identificato nel perimetro principale del club.</p>
         <p><strong>Ordini forniture non tracciati.</strong> La catena WhatsApp → chat di gruppo → Excel manuale del sabato crea un ritardo strutturale nella visibilità dei costi di acquisto. Non è possibile avere una fotografia aggiornata degli ordini in corso durante la settimana.</p>
+        <p><strong>Acquisizione completamente reattiva — senza dati di origine.</strong> L'assenza di un sito rende impossibile misurare quante richieste vengono generate dall'interesse online, da Google, dai social. Tutta l'acquisizione è affidata al passaparola e alla fortuna: il cliente deve sapere già dove chiamare. Non esiste funnel, non esiste tracciamento, non esiste possibilità di ottimizzare il processo di acquisizione perché il processo di acquisizione non esiste come tale.</p>
       </div>
 
       <div class="block block-prop">
@@ -1039,6 +1041,7 @@ p strong { font-weight: 600; }
         <p><strong>Gestione ordini forniture</strong>: form digitale per la registrazione degli ordini, con database visibile in tempo reale per la responsabile. Eliminazione della trascrizione Excel manuale del sabato. Possibile integrazione con la gestione bolle lato amministrazione.</p>
         <p><strong>Agenda Cal.com</strong> integrata con il CRM per la prenotazione degli appuntamenti di preventivo: il cliente qualificato prenota direttamente senza scambi di messaggi intermedi.</p>
         <p>Nota architetturale: la scelta tra <strong>Airtable standalone</strong> (più rapido, più semplice per la responsabile) e <strong>integrazione in Supabase</strong> (coerente con l'ecosistema del club, ma più complessa) va valutata in fase di progettazione. Per un perimetro come questo, Airtable è probabilmente la scelta più sostenibile nel breve periodo.</p>
+        <p><strong>Sito dedicato Ristorante Elements</strong> — punto di ingresso di tutte le richieste. L'origine delle richieste è il sito: senza di esso, il CRM e il form di contatto non hanno un canale di alimentazione strutturato. L'architettura prevista è la stessa del sito principale del club (Astro + Netlify), con una struttura più semplice: pagina dell'offerta eventi, galleria, form di richiesta con consenso GDPR integrato che alimenta direttamente il CRM. La coerenza tecnologica con il ramo sport garantisce manutenibilità unificata e coerenza di brand nell'ecosistema digitale di Ronchiverdi.</p>
       </div>
     </section>
 
