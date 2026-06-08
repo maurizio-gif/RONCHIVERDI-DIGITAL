@@ -49,6 +49,28 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; a
 .nav-mobile-link-title em { font-style: italic; color: #8B6C14; }
 .nav-mobile-link.disabled { opacity: 0.3 !important; pointer-events: none; }
 .nav-mobile-link.disabled .nav-mobile-link-tag::after { content: ' · In arrivo'; color: #8B6C14; }
+.nav-mobile-link.audit-featured { grid-column: 1 / -1; border-right: none; padding: 14px 16px; border-radius: 8px; background: rgba(139,108,20,0.07); border: 1px solid rgba(139,108,20,0.18) !important; border-bottom: 1px solid rgba(139,108,20,0.18) !important; margin-bottom: 6px; }
+/* AUDIT FEATURED SECTION */
+.audit-featured-section { padding: 80px 48px; background: #F7F6F2; }
+.audit-featured-inner { max-width: 1100px; margin: 0 auto; }
+.audit-featured-card { display: grid; grid-template-columns: 1fr 340px; gap: 56px; align-items: start; background: #fff; border: 1.5px solid rgba(139,108,20,0.25); border-radius: 20px; padding: 52px 56px; text-decoration: none; color: inherit; position: relative; overflow: hidden; transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s; }
+.audit-featured-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(120deg, rgba(139,108,20,0.04) 0%, transparent 55%); pointer-events: none; }
+.audit-featured-card:hover { border-color: rgba(139,108,20,0.55); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(139,108,20,0.1); }
+.audit-featured-eyebrow { font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: #8B6C14; margin-bottom: 18px; }
+.audit-featured-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(30px, 3vw, 42px); font-weight: 400; line-height: 1.05; color: #1C1C18; margin-bottom: 20px; }
+.audit-featured-title em { font-style: italic; color: #8B6C14; }
+.audit-featured-desc { font-family: 'Jost', sans-serif; font-size: 15px; color: #4A4A42; line-height: 1.7; margin-bottom: 24px; max-width: 500px; }
+.audit-featured-meta { display: flex; align-items: center; gap: 10px; font-family: 'Jost', sans-serif; font-size: 12px; color: #8B6C14; font-weight: 500; margin-bottom: 28px; flex-wrap: wrap; }
+.audit-sep { opacity: 0.4; }
+.audit-featured-cta { display: inline-flex; align-items: center; gap: 8px; font-family: 'Jost', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #1C1C18; }
+.audit-featured-cta .arrow { transition: transform 0.2s; }
+.audit-featured-card:hover .audit-featured-cta .arrow { transform: translateX(5px); }
+.audit-featured-right { padding-top: 4px; }
+.audit-area-list { display: flex; flex-direction: column; gap: 0; }
+.audit-area-item { display: flex; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid rgba(0,0,0,0.06); font-family: 'Jost', sans-serif; font-size: 13px; color: #4A4A42; }
+.audit-area-item:last-child { border-bottom: none; }
+.audit-area-num { font-family: 'Jost', sans-serif; font-size: 10px; font-weight: 600; color: #8B6C14; background: rgba(139,108,20,0.1); padding: 2px 7px; border-radius: 4px; letter-spacing: 0.08em; flex-shrink: 0; }
+@media(max-width:900px){ .audit-featured-card { grid-template-columns: 1fr; gap: 36px; padding: 36px 28px; } .audit-featured-section { padding: 56px 24px; } }
 .nav-mobile-link.verbale .nav-mobile-link-tag { color: #00c9ff; }
 .nav-mobile-link.verbale .nav-mobile-link-tag::before { content: '● '; font-size: 6px; vertical-align: middle; }
 .nav-mobile-link.analisi .nav-mobile-link-tag { color: #7fff6b; }
@@ -57,6 +79,8 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; a
 .nav-mobile-link.deep-dive .nav-mobile-link-tag::before { content: '● '; font-size: 6px; vertical-align: middle; }
 .nav-mobile-link.proposta .nav-mobile-link-tag { color: #ff6b35; }
 .nav-mobile-link.proposta .nav-mobile-link-tag::before { content: '● '; font-size: 6px; vertical-align: middle; }
+.nav-mobile-link.audit .nav-mobile-link-tag { color: #8B6C14; font-weight: 700; }
+.nav-mobile-link.audit .nav-mobile-link-tag::before { content: '★ '; font-size: 7px; vertical-align: middle; }
 .nav-cat-legend { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 20px; font-family: 'Jost', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(0,0,0,0.3); opacity: 0; transform: translateY(10px); transition: opacity 0.5s ease 0.15s, transform 0.5s ease 0.15s; }
 .nav-mobile.open .nav-cat-legend { opacity: 1; transform: translateY(0); }
 .cat-item { display: flex; align-items: center; gap: 5px; }
@@ -65,6 +89,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; a
 .cat-dot.analisi { color: #7fff6b; }
 .cat-dot.deep-dive { color: #c084fc; }
 .cat-dot.proposta { color: #ff6b35; }
+.cat-dot.audit { color: #8B6C14; }
 .nav-mobile-footer { padding-top: 28px; font-family: 'Cormorant Garamond', serif; font-size: 16px; font-style: italic; color: #1C1C18; }
 .nav-mobile-footer em { color: #8B6C14; font-style: normal; }
 
@@ -359,6 +384,7 @@ img, svg, canvas, iframe, video { max-width: 100%; }
 <div class="nav-mobile">
   <div class="nav-mobile-eyebrow">Audit Digitale · Ronchiverdi Sport Club</div>
   <div class="nav-cat-legend">
+    <span class="cat-item"><span class="cat-dot audit">★</span> Documento finale</span>
     <span class="cat-item"><span class="cat-dot verbale">●</span> Verbale</span>
     <span class="cat-item"><span class="cat-dot analisi">●</span> Analisi</span>
     <span class="cat-item"><span class="cat-dot deep-dive">●</span> Deep dive</span>
@@ -370,6 +396,10 @@ img, svg, canvas, iframe, video { max-width: 100%; }
       <span class="nav-mobile-link-title"><em>Indice</em> generale</span>
     </a>
     <!-- VERBALI -->
+    <a href="documento-audit.html" class="nav-mobile-link audit audit-featured">
+      <span class="nav-mobile-link-tag">★ Documento finale · Giugno 2026</span>
+      <span class="nav-mobile-link-title">Audit <em>Digitale</em> — Parte 1</span>
+    </a>
     <a href="call-1.html" class="nav-mobile-link verbale">
       <span class="nav-mobile-link-tag">Call #1 · Aprile 2026</span>
       <span class="nav-mobile-link-title">Inquadramento &amp; <em>Struttura</em></span>
@@ -867,6 +897,41 @@ img, svg, canvas, iframe, video { max-width: 100%; }
 </section>
 
 <!-- CALENDAR / BOOKING -->
+<section class="audit-featured-section fade-up">
+  <div class="audit-featured-inner">
+    <a href="documento-audit.html" class="audit-featured-card">
+      <div class="audit-featured-left">
+        <div class="audit-featured-eyebrow">★ Documento finale · Giugno 2026</div>
+        <h2 class="audit-featured-title">Audit <em>Digitale</em><br>Ronchiverdi — Parte 1</h2>
+        <p class="audit-featured-desc">Analisi completa di 11 aree operative: AS-IS, GAP e proposte di intervento. Documento riservato con impatto economico stimato, note di compliance e architettura digitale proposta.</p>
+        <div class="audit-featured-meta">
+          <span>11 aree analizzate</span>
+          <span class="audit-sep">·</span>
+          <span>&gt; €55.000 impatto stimato</span>
+          <span class="audit-sep">·</span>
+          <span>2 urgenze legali</span>
+        </div>
+        <div class="audit-featured-cta">Apri il documento <span class="arrow">→</span></div>
+      </div>
+      <div class="audit-featured-right">
+        <div class="audit-area-list">
+          <div class="audit-area-item"><span class="audit-area-num">01</span>Acquisizione contatto</div>
+          <div class="audit-area-item"><span class="audit-area-num">02</span>Gestione contatto</div>
+          <div class="audit-area-item"><span class="audit-area-num">03</span>Rinnovi e retention</div>
+          <div class="audit-area-item"><span class="audit-area-num">04</span>Customer care</div>
+          <div class="audit-area-item"><span class="audit-area-num">05</span>Comunicazioni</div>
+          <div class="audit-area-item"><span class="audit-area-num">06</span>Contratti e compliance</div>
+          <div class="audit-area-item"><span class="audit-area-num">07</span>Crediti e controllo</div>
+          <div class="audit-area-item"><span class="audit-area-num">08</span>HR e amministrazione</div>
+          <div class="audit-area-item"><span class="audit-area-num">09</span>Certificato medico</div>
+          <div class="audit-area-item"><span class="audit-area-num">10</span>Infrastruttura digitale</div>
+          <div class="audit-area-item"><span class="audit-area-num">11</span>Manutenzione</div>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
 <section class="calendar-section fade-up">
   <div class="calendar-inner">
 
