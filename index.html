@@ -70,7 +70,17 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; a
 .audit-area-item { display: flex; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid rgba(0,0,0,0.06); font-family: 'Jost', sans-serif; font-size: 13px; color: #4A4A42; }
 .audit-area-item:last-child { border-bottom: none; }
 .audit-area-num { font-family: 'Jost', sans-serif; font-size: 10px; font-weight: 600; color: #8B6C14; background: rgba(139,108,20,0.1); padding: 2px 7px; border-radius: 4px; letter-spacing: 0.08em; flex-shrink: 0; }
-@media(max-width:900px){ .audit-featured-card { grid-template-columns: 1fr; gap: 36px; padding: 36px 28px; } .audit-featured-section { padding: 56px 24px; } }
+.audit-docs-grid { display: grid; grid-template-columns: 1fr 380px; gap: 16px; align-items: start; }
+.audit-exec-card { display: flex; flex-direction: column; background: #1C1C18; border: 1.5px solid rgba(139,108,20,0.35); border-radius: 20px; padding: 44px 40px; text-decoration: none; color: inherit; transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s; }
+.audit-exec-card:hover { border-color: rgba(139,108,20,0.7); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.18); }
+.audit-exec-card .audit-featured-eyebrow { color: #C8991F; }
+.audit-exec-card .audit-featured-title { color: #F7F6F2; }
+.audit-exec-card .audit-featured-desc { color: rgba(247,246,242,0.6); }
+.audit-exec-card .audit-featured-cta { color: #C8991F; }
+.audit-exec-pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 28px; }
+.audit-exec-pill { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; padding: 5px 12px; border-radius: 20px; background: rgba(200,153,31,0.12); color: #C8991F; border: 1px solid rgba(200,153,31,0.2); }
+@media(max-width:1000px){ .audit-docs-grid { grid-template-columns: 1fr; } }
+@media(max-width:900px){ .audit-featured-card { grid-template-columns: 1fr; gap: 36px; padding: 36px 28px; } .audit-featured-section { padding: 56px 24px; } .audit-exec-card { padding: 36px 28px; } }
 .nav-mobile-link.verbale .nav-mobile-link-tag { color: #00c9ff; }
 .nav-mobile-link.verbale .nav-mobile-link-tag::before { content: '● '; font-size: 6px; vertical-align: middle; }
 .nav-mobile-link.analisi .nav-mobile-link-tag { color: #7fff6b; }
@@ -399,6 +409,10 @@ img, svg, canvas, iframe, video { max-width: 100%; }
     <a href="documento-audit.html" class="nav-mobile-link audit audit-featured">
       <span class="nav-mobile-link-tag">★ Documento finale · Giugno 2026</span>
       <span class="nav-mobile-link-title">Audit <em>Digitale</em> — Parte 1</span>
+    </a>
+    <a href="audit-executive.html" class="nav-mobile-link audit audit-featured" style="margin-top:4px;">
+      <span class="nav-mobile-link-tag">★ Executive Summary · Giugno 2026</span>
+      <span class="nav-mobile-link-title">Audit <em>Executive</em></span>
     </a>
     <a href="call-1.html" class="nav-mobile-link verbale">
       <span class="nav-mobile-link-tag">Call #1 · Aprile 2026</span>
@@ -899,36 +913,51 @@ img, svg, canvas, iframe, video { max-width: 100%; }
 <!-- CALENDAR / BOOKING -->
 <section class="audit-featured-section fade-up">
   <div class="audit-featured-inner">
-    <a href="documento-audit.html" class="audit-featured-card">
-      <div class="audit-featured-left">
-        <div class="audit-featured-eyebrow">★ Documento finale · Giugno 2026</div>
-        <h2 class="audit-featured-title">Audit <em>Digitale</em><br>Ronchiverdi — Parte 1</h2>
-        <p class="audit-featured-desc">Analisi completa di 11 aree operative: AS-IS, GAP e proposte di intervento. Documento riservato con impatto economico stimato, note di compliance e architettura digitale proposta.</p>
-        <div class="audit-featured-meta">
-          <span>11 aree analizzate</span>
-          <span class="audit-sep">·</span>
-          <span>&gt; €55.000 impatto stimato</span>
-          <span class="audit-sep">·</span>
-          <span>2 urgenze legali</span>
+    <div class="audit-docs-grid">
+      <a href="documento-audit.html" class="audit-featured-card">
+        <div class="audit-featured-left">
+          <div class="audit-featured-eyebrow">★ Documento finale · Giugno 2026</div>
+          <h2 class="audit-featured-title">Audit <em>Digitale</em><br>Ronchiverdi — Parte 1</h2>
+          <p class="audit-featured-desc">Analisi completa di 11 aree operative: AS-IS, GAP e proposte di intervento. Impatto economico stimato, note di compliance e architettura digitale proposta.</p>
+          <div class="audit-featured-meta">
+            <span>11 aree analizzate</span>
+            <span class="audit-sep">·</span>
+            <span>&gt; €55.000 stima</span>
+            <span class="audit-sep">·</span>
+            <span>2 urgenze legali</span>
+          </div>
+          <div class="audit-featured-cta">Apri il documento <span class="arrow">→</span></div>
         </div>
-        <div class="audit-featured-cta">Apri il documento <span class="arrow">→</span></div>
-      </div>
-      <div class="audit-featured-right">
-        <div class="audit-area-list">
-          <div class="audit-area-item"><span class="audit-area-num">01</span>Acquisizione contatto</div>
-          <div class="audit-area-item"><span class="audit-area-num">02</span>Gestione contatto</div>
-          <div class="audit-area-item"><span class="audit-area-num">03</span>Rinnovi e retention</div>
-          <div class="audit-area-item"><span class="audit-area-num">04</span>Customer care</div>
-          <div class="audit-area-item"><span class="audit-area-num">05</span>Comunicazioni</div>
-          <div class="audit-area-item"><span class="audit-area-num">06</span>Contratti e compliance</div>
-          <div class="audit-area-item"><span class="audit-area-num">07</span>Crediti e controllo</div>
-          <div class="audit-area-item"><span class="audit-area-num">08</span>HR e amministrazione</div>
-          <div class="audit-area-item"><span class="audit-area-num">09</span>Certificato medico</div>
-          <div class="audit-area-item"><span class="audit-area-num">10</span>Infrastruttura digitale</div>
-          <div class="audit-area-item"><span class="audit-area-num">11</span>Manutenzione</div>
+        <div class="audit-featured-right">
+          <div class="audit-area-list">
+            <div class="audit-area-item"><span class="audit-area-num">01</span>Acquisizione contatto</div>
+            <div class="audit-area-item"><span class="audit-area-num">02</span>Gestione contatto</div>
+            <div class="audit-area-item"><span class="audit-area-num">03</span>Rinnovi e retention</div>
+            <div class="audit-area-item"><span class="audit-area-num">04</span>Customer care</div>
+            <div class="audit-area-item"><span class="audit-area-num">05</span>Comunicazioni</div>
+            <div class="audit-area-item"><span class="audit-area-num">06</span>Contratti e compliance</div>
+            <div class="audit-area-item"><span class="audit-area-num">07</span>Crediti e controllo</div>
+            <div class="audit-area-item"><span class="audit-area-num">08</span>HR e amministrazione</div>
+            <div class="audit-area-item"><span class="audit-area-num">09</span>Certificato medico</div>
+            <div class="audit-area-item"><span class="audit-area-num">10</span>Infrastruttura digitale</div>
+            <div class="audit-area-item"><span class="audit-area-num">11</span>Manutenzione</div>
+          </div>
         </div>
-      </div>
-    </a>
+      </a>
+      <a href="audit-executive.html" class="audit-exec-card">
+        <div class="audit-featured-eyebrow">★ Executive Summary · Giugno 2026</div>
+        <h2 class="audit-featured-title" style="font-size:clamp(26px,2.4vw,34px);margin-bottom:16px;">Audit <em>Executive</em></h2>
+        <p class="audit-featured-desc" style="font-size:14px;">Lettura sintetica per la direzione: 4 temi chiave, impatto economico, urgenze di compliance e direzione strategica.</p>
+        <div class="audit-exec-pills">
+          <span class="audit-exec-pill">Retention &gt;70%</span>
+          <span class="audit-exec-pill">Lead acquisition</span>
+          <span class="audit-exec-pill">&gt;€55k inefficienze</span>
+          <span class="audit-exec-pill">Compliance</span>
+          <span class="audit-exec-pill">Piano in 3 fasi</span>
+        </div>
+        <div class="audit-featured-cta" style="margin-top:auto;">Apri l'executive summary <span class="arrow">→</span></div>
+      </a>
+    </div>
   </div>
 </section>
 

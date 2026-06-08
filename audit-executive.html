@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Executive Summary — Ronchiverdi Sport Club</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #F7F6F2;
+  --surface: #FFFFFF;
+  --border: rgba(0,0,0,0.08);
+  --text: #1C1C18;
+  --text-dim: #6B6B62;
+  --gold: #8B6C14;
+  --gold-light: #F5EDD6;
+  --danger: #B33A2E;
+  --danger-light: #FDF2F0;
+  --green: #2A5C30;
+  --green-light: #E8F2EA;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* === GATE === */
+#gate {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+}
+#gate.hidden { display: none; }
+.gate-box { width: 100%; max-width: 380px; text-align: center; }
+.gate-logo { height: 40px; margin-bottom: 48px; opacity: 0.8; }
+.gate-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+.gate-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; color: var(--text); margin-bottom: 8px; line-height: 1.1; }
+.gate-title em { font-style: italic; color: var(--gold); }
+.gate-sub { font-size: 13px; color: var(--text-dim); margin-bottom: 36px; line-height: 1.5; }
+.gate-input { width: 100%; background: white; border: 1.5px solid #D9D7CE; border-radius: 10px; padding: 14px 18px; font-family: 'Jost', sans-serif; font-size: 15px; color: var(--text); outline: none; transition: border-color 0.2s; margin-bottom: 10px; }
+.gate-input:focus { border-color: var(--gold); }
+.gate-btn { width: 100%; background: var(--text); color: white; border: none; border-radius: 10px; padding: 14px; font-family: 'Jost', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+.gate-btn:hover { background: #2C2C28; }
+.gate-error { font-size: 12px; color: var(--danger); margin-top: 10px; display: none; }
+
+/* === TOPBAR === */
+.topbar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(247,246,242,0.96); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 56px; height: 64px;
+}
+.topbar-logo { height: 28px; opacity: 0.8; }
+.topbar-center { display: flex; align-items: center; gap: 10px; }
+.topbar-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); }
+.topbar-right { display: flex; align-items: center; gap: 14px; }
+.btn-back { font-size: 12px; color: var(--text-dim); text-decoration: none; font-weight: 500; letter-spacing: 0.06em; transition: color 0.2s; }
+.btn-back:hover { color: var(--text); }
+.btn-print { display: flex; align-items: center; gap: 7px; padding: 9px 16px; border-radius: 7px; background: var(--text); color: white; border: none; font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+.btn-print:hover { background: #2C2C28; }
+
+/* === HERO === */
+.hero { padding: 80px 56px 72px; max-width: 900px; border-bottom: 1px solid var(--border); }
+.hero-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+.hero-title { font-family: 'Cormorant Garamond', serif; font-size: 62px; font-weight: 400; line-height: 1.0; color: var(--text); margin-bottom: 28px; }
+.hero-title em { font-style: italic; color: var(--gold); }
+.hero-sub { font-size: 17px; color: var(--text-dim); line-height: 1.65; max-width: 600px; margin-bottom: 48px; }
+.hero-meta { display: flex; gap: 40px; padding-top: 36px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+.meta-item {}
+.meta-label { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-dim); font-weight: 600; margin-bottom: 4px; }
+.meta-value { font-size: 14px; font-weight: 500; }
+
+/* === SECTIONS === */
+.section { padding: 72px 56px; border-bottom: 1px solid var(--border); max-width: 1100px; }
+.section-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; color: var(--text-dim); margin-bottom: 10px; }
+.section-title { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 400; line-height: 1.05; margin-bottom: 36px; }
+.section-title em { font-style: italic; }
+.section-title .accent { color: var(--gold); }
+p { font-size: 15px; line-height: 1.78; margin-bottom: 16px; }
+p:last-child { margin-bottom: 0; }
+p strong { font-weight: 600; }
+.lead { font-size: 17px; line-height: 1.7; }
+
+/* === BIG STAT ROW === */
+.big-stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin: 36px 0; }
+.big-stat { background: white; border-radius: 12px; padding: 28px 24px; border: 1px solid var(--border); }
+.big-stat-number { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 500; line-height: 1; margin-bottom: 8px; color: var(--gold); }
+.big-stat-number.danger { color: var(--danger); }
+.big-stat-number.green { color: var(--green); }
+.big-stat-label { font-size: 12px; color: var(--text-dim); line-height: 1.4; }
+
+/* === TENSION BOX === */
+.tension { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin: 36px 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+.tension-side { padding: 32px 36px; }
+.tension-side.left { background: #F0EDE4; }
+.tension-side.right { background: #E8F2EA; }
+.tension-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; margin-bottom: 14px; }
+.tension-side.left .tension-label { color: var(--text-dim); }
+.tension-side.right .tension-label { color: var(--green); }
+.tension-value { font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 500; line-height: 1; margin-bottom: 10px; }
+.tension-side.left .tension-value { color: var(--danger); }
+.tension-side.right .tension-value { color: var(--green); }
+.tension-desc { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+
+/* === IMPACT BAR CHART === */
+.impact-chart { margin: 32px 0; display: flex; flex-direction: column; gap: 12px; }
+.impact-row { display: grid; grid-template-columns: 200px 1fr 160px; align-items: center; gap: 16px; }
+.impact-label { font-size: 13px; font-weight: 500; }
+.impact-sub { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+.bar-track { height: 32px; background: rgba(0,0,0,0.05); border-radius: 6px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 6px; background: var(--gold); display: flex; align-items: center; padding-left: 12px; font-size: 11px; color: rgba(255,255,255,0.85); font-weight: 500; white-space: nowrap; }
+.bar-fill.red { background: var(--danger); }
+.impact-val { font-size: 13px; font-weight: 600; text-align: right; }
+.impact-divider { height: 1px; background: var(--text); opacity: 0.12; margin: 8px 0; }
+.impact-total { display: grid; grid-template-columns: 200px 1fr 160px; align-items: baseline; gap: 16px; margin-top: 4px; }
+.impact-total-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); }
+.impact-total-value { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 500; color: var(--gold); text-align: right; grid-column: 3; }
+.impact-total-note { font-size: 11px; color: var(--text-dim); text-align: right; grid-column: 3; margin-top: -4px; }
+
+/* === COMPLIANCE BLOCKS === */
+.compliance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 32px 0; }
+.c-block { background: white; border-radius: 10px; padding: 24px 28px; border: 1px solid var(--border); border-top: 3px solid; }
+.c-block.urgente { border-top-color: var(--danger); }
+.c-block.attenzione { border-top-color: #C07A00; }
+.c-block-badge { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600; margin-bottom: 10px; }
+.c-block.urgente .c-block-badge { color: var(--danger); }
+.c-block.attenzione .c-block-badge { color: #7A4E00; }
+.c-block-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 8px; line-height: 1.3; }
+.c-block-desc { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
+
+/* === FRAMEWORK === */
+.framework { margin: 36px 0; display: flex; flex-direction: column; gap: 3px; }
+.fw-step { display: flex; align-items: center; gap: 20px; padding: 20px 28px; background: white; border-radius: 10px; border: 1px solid var(--border); }
+.fw-step-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; color: var(--gold); background: var(--gold-light); padding: 4px 10px; border-radius: 5px; flex-shrink: 0; }
+.fw-step-body {}
+.fw-step-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+.fw-step-desc { font-size: 12px; color: var(--text-dim); line-height: 1.4; }
+
+/* === CLOSING QUOTE === */
+.closing { padding: 72px 56px 80px; border-bottom: 1px solid var(--border); }
+.closing-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+.closing-text { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 400; line-height: 1.4; color: var(--text); max-width: 780px; margin-bottom: 48px; }
+.closing-text em { font-style: italic; color: var(--gold); }
+.cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
+.cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 24px; border-radius: 10px; font-family: 'Jost', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; transition: all 0.2s; }
+.cta-btn.primary { background: var(--text); color: white; }
+.cta-btn.primary:hover { background: #2C2C28; }
+.cta-btn.secondary { background: white; color: var(--text); border: 1.5px solid var(--border); }
+.cta-btn.secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+/* === PRINT === */
+@media print {
+  #gate, .topbar { display: none !important; }
+  body { font-size: 10pt; background: white; }
+  .hero, .section, .closing { padding: 32px 40px; }
+  .section-title { font-size: 26pt; }
+  @page { size: A4 portrait; margin: 1.8cm 2cm; }
+  .section { page-break-inside: avoid; max-width: 100%; }
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 800px) {
+  .topbar { padding: 0 20px; }
+  .topbar-center { display: none; }
+  .hero { padding: 52px 24px 48px; }
+  .hero-title { font-size: 42px; }
+  .section { padding: 52px 24px; }
+  .section-title { font-size: 30px; }
+  .tension { grid-template-columns: 1fr; }
+  .compliance-grid { grid-template-columns: 1fr; }
+  .impact-row, .impact-total { grid-template-columns: 1fr; }
+  .bar-track { display: none; }
+  .impact-val { text-align: left; }
+  .impact-total-value, .impact-total-note { grid-column: 1; text-align: left; }
+  .closing { padding: 52px 24px 64px; }
+}
+</style>
+</head>
+<body>
+
+<!-- GATE -->
+<div id="gate">
+  <div class="gate-box">
+    <img src="ronchiverdi-logo.jpg" alt="Ronchiverdi" class="gate-logo">
+    <p class="gate-eyebrow">Documento riservato</p>
+    <h1 class="gate-title">Executive <em>Summary</em></h1>
+    <p class="gate-sub">Inserisci la password per accedere al documento.</p>
+    <input type="password" id="gate-pwd" class="gate-input" placeholder="Password">
+    <button class="gate-btn" onclick="checkGate()">Accedi</button>
+    <p class="gate-error" id="gate-err">Password errata. Riprova.</p>
+  </div>
+</div>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <img src="ronchiverdi-logo.jpg" alt="Ronchiverdi" class="topbar-logo">
+  <div class="topbar-center">
+    <span class="topbar-eyebrow">Executive Summary · Giugno 2026</span>
+  </div>
+  <div class="topbar-right">
+    <a href="documento-audit.html" class="btn-back">← Documento completo</a>
+    <button class="btn-print" onclick="window.print()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      PDF
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-label">Ronchiverdi Sport Club · Audit Digitale 2026</p>
+  <h1 class="hero-title">Quello che<br>i numeri <em>dicono</em></h1>
+  <p class="hero-sub lead">L'audit ha confermato una realtà paradossale: Ronchiverdi è un club con un'eccellente capacità di tenere i propri soci, ma con una struttura operativa che consuma risorse preziose in attività a basso valore — e una presenza esterna che non riflette la qualità di ciò che c'è dentro.</p>
+  <div class="hero-meta">
+    <div class="meta-item"><p class="meta-label">Aree analizzate</p><p class="meta-value">11 aree operative</p></div>
+    <div class="meta-item"><p class="meta-label">Periodo</p><p class="meta-value">Aprile — Giugno 2026</p></div>
+    <div class="meta-item"><p class="meta-label">Consulente</p><p class="meta-value">Maurizio Taruggi · Ready 2 Digital</p></div>
+  </div>
+</div>
+
+<!-- TEMA 1: IL PARADOSSO DI RONCHIVERDI -->
+<section class="section">
+  <p class="section-num">01 / 04</p>
+  <h2 class="section-title">Un club che <em>fidelizza bene</em><br>ma acquisisce poco</h2>
+
+  <p class="lead">Il dato più significativo emerso dall'analisi non riguarda un problema — riguarda un <strong>punto di forza che non viene capitalizzato</strong>. Ronchiverdi mantiene i propri soci con un tasso di rinnovo <strong>superiore al 70%</strong>, una performance nettamente al di sopra della media del settore.</p>
+
+  <div class="tension">
+    <div class="tension-side left">
+      <div class="tension-label">Acquisizione nuovi contatti</div>
+      <div class="tension-value">Bassa</div>
+      <div class="tension-desc">1–5 lead al mese dal sito web. Canali digitali non integrati, nessun funnel strutturato, Young School completamente fuori dal flusso commerciale.</div>
+    </div>
+    <div class="tension-side right">
+      <div class="tension-label">Retention dei soci esistenti</div>
+      <div class="tension-value">&gt; 70%</div>
+      <div class="tension-desc">Tasso di rinnovo superiore alla media di settore. La qualità del club si vede in chi sceglie di restare. Il problema è chi non arriva ancora.</div>
+    </div>
+  </div>
+
+  <p>Il divario tra queste due misure racconta una storia precisa: <strong>Ronchiverdi è percepito come eccellente da chi lo conosce, ma è invisibile a chi non lo conosce ancora.</strong> La scarsa presenza online — un sito che non genera contatti, canali social non strutturati, nessun funnel di acquisizione — limita il bacino di potenziali soci a chi arriva per passaparola o per caso.</p>
+
+  <p>Potenziare i canali di acquisizione non significa cambiare il posizionamento del club. Significa rendere visibile all'esterno ciò che già esiste all'interno. <strong>La qualità di Ronchiverdi è il miglior argomento di vendita: oggi non viene comunicata in modo sistematico.</strong></p>
+
+  <p>C'è però un prerequisito essenziale: la crescita del numero di soci non deve tradursi in crescita della complessità gestionale. Per questo il tema dell'acquisizione e il tema dei processi operativi sono inseparabili — e vanno affrontati insieme.</p>
+</section>
+
+<!-- TEMA 2: L'EFFICIENZA OPERATIVA -->
+<section class="section">
+  <p class="section-num">02 / 04</p>
+  <h2 class="section-title">Il <em>costo nascosto</em><br>dei processi manuali</h2>
+
+  <p class="lead">L'analisi ha rilevato che una quota significativa del tempo delle risorse operative viene assorbita da <strong>task ripetitivi, riconciliazioni manuali e attività di basso valore</strong> che potrebbero essere automatizzati o strutturati diversamente. La stima conservativa, basata sui costi del personale analizzati, è di un'inefficienza tra il <strong>25% e il 30% del totale ore lavorate</strong> nelle aree di segreteria, commerciale, amministrazione e manutenzione.</p>
+
+  <div class="impact-chart">
+    <div class="impact-row">
+      <div>
+        <div class="impact-label">Segreteria e vendita</div>
+        <div class="impact-sub">200–250 ore/mese · 6,4 FTE</div>
+      </div>
+      <div class="bar-track"><div class="bar-fill" style="width:80%">200–250 ore/mese</div></div>
+      <div class="impact-val">€ 35.000–44.000</div>
+    </div>
+    <div class="impact-row">
+      <div>
+        <div class="impact-label">Amministrazione</div>
+        <div class="impact-sub">40–60 ore/mese</div>
+      </div>
+      <div class="bar-track"><div class="bar-fill" style="width:46%">40–60 ore/mese</div></div>
+      <div class="impact-val">€ 16.000–25.000</div>
+    </div>
+    <div class="impact-row">
+      <div>
+        <div class="impact-label">Manutenzione</div>
+        <div class="impact-sub">20–30 ore/mese · 6 FTE</div>
+      </div>
+      <div class="bar-track"><div class="bar-fill" style="width:18%">20–30 ore/mese</div></div>
+      <div class="impact-val">€ 5.000–6.000</div>
+    </div>
+    <div class="impact-divider"></div>
+    <div class="impact-total">
+      <div class="impact-total-label">Stima totale</div>
+      <div></div>
+      <div class="impact-total-value">&gt; € 55.000</div>
+    </div>
+    <div class="impact-total">
+      <div></div>
+      <div></div>
+      <div class="impact-total-note">annui in ore a basso valore</div>
+    </div>
+  </div>
+
+  <p>Non è il costo di fare le cose. <strong>È il costo di farle nel modo sbagliato.</strong></p>
+
+  <p>Il problema non riguarda le persone: riguarda l'architettura su cui lavorano. Rinnovi, crediti, lead, segnalazioni — ognuno vive in un file separato. Nessuno parla con l'altro. Ogni decisione richiede che qualcuno riconcili manualmente le informazioni prima di poterla prendere. Il management spende tempo a costruire report invece di leggere dati già pronti.</p>
+
+  <p>L'obiettivo degli interventi proposti <strong>non è ridurre il personale</strong>. È spostare lo stesso personale da attività che non producono valore ad attività che lo producono: più relazione con i soci, meno ore su fogli Excel.</p>
+</section>
+
+<!-- TEMA 3: COMPLIANCE -->
+<section class="section">
+  <p class="section-num">03 / 04</p>
+  <h2 class="section-title">Il <em>rischio silenzioso</em><br>della compliance</h2>
+
+  <p class="lead">Quando ogni processo dipende dall'iniziativa e dalla memoria di una persona specifica, il rischio di non conformità è strutturale — non colpevole. L'analisi ha identificato <strong>aree di esposizione concrete</strong> che richiedono intervento indipendentemente dalla trasformazione digitale.</p>
+
+  <div class="compliance-grid">
+    <div class="c-block urgente">
+      <p class="c-block-badge">urgente</p>
+      <p class="c-block-title">Codice del Consumo</p>
+      <p class="c-block-desc">Clausole di rinnovo automatico non evidenziate, condizioni di recesso da riformulare, clausole potenzialmente vessatorie (art. 33) senza firma separata del consumatore.</p>
+    </div>
+    <div class="c-block urgente">
+      <p class="c-block-badge">urgente</p>
+      <p class="c-block-title">GDPR minori — Young School</p>
+      <p class="c-block-desc">Il modulo MOD001 presenta criticità nella gestione del consenso per i dati dei minori. Approfondimento con DPO esterno completato (call 19 maggio 2026).</p>
+    </div>
+    <div class="c-block attenzione">
+      <p class="c-block-badge">da strutturare</p>
+      <p class="c-block-title">Tesseramento CSI</p>
+      <p class="c-block-desc">Perché gli incassi siano qualificabili come corrispettivi istituzionali (con relativa detassazione), ogni socio deve essere tesserato al CSI al momento del pagamento. Non esiste oggi un processo che garantisca questo sistematicamente.</p>
+    </div>
+    <div class="c-block attenzione">
+      <p class="c-block-badge">da strutturare</p>
+      <p class="c-block-title">Contratti e comunicazioni</p>
+      <p class="c-block-desc">Alcune comunicazioni ai soci aggiungono obblighi (es. requisiti per il certificato medico) che non compaiono nel contratto firmato. I T&C non sono pubblici sul sito web.</p>
+    </div>
+  </div>
+
+  <p>Questi non sono rischi teorici. Sono esposizioni reali che non dipendono da quanto bene le persone svolgono il loro lavoro — dipendono dal fatto che il processo non è strutturato in modo da garantire la conformità <em>indipendentemente</em> da chi è in servizio quel giorno.</p>
+</section>
+
+<!-- TEMA 4: LA DIREZIONE -->
+<section class="section">
+  <p class="section-num">04 / 04</p>
+  <h2 class="section-title">Un'organizzazione che<br><em>non pesa</em> quando cresce</h2>
+
+  <p class="lead">La domanda che guida questo progetto non è "come cresciamo?" ma <strong>"come costruiamo un'organizzazione in grado di crescere senza appesantirsi?"</strong></p>
+
+  <p>Ronchiverdi ha una caratteristica rara: le persone ci tengono. Lo staff, i soci, il management — c'è un legame autentico con il club che non è replicabile da nessun sistema. <strong>Il rischio non è che la tecnologia distrugga questa relazione. Il rischio è che la complessità operativa la logori lentamente.</strong></p>
+
+  <p>Quando il customer care è reattivo — risponde ai problemi quando arrivano — il socio percepisce il servizio in funzione di quante cose vanno storte. Quando è <strong>proattivo</strong> — anticipa le scadenze, ricorda le informazioni giuste al momento giusto, risponde in tempo reale — il socio percepisce un club che si prende cura di lui prima ancora che lui lo chieda.</p>
+
+  <div class="framework">
+    <div class="fw-step">
+      <span class="fw-step-num">Fase 1</span>
+      <div class="fw-step-body">
+        <div class="fw-step-title">Fondamenta — Compliance e dati puliti</div>
+        <div class="fw-step-desc">Risolvere le urgenze legali, strutturare il tesseramento, allineare contratti e comunicazioni. Costruire un dato affidabile prima di automatizzare.</div>
+      </div>
+    </div>
+    <div class="fw-step">
+      <span class="fw-step-num">Fase 2</span>
+      <div class="fw-step-body">
+        <div class="fw-step-title">Struttura — Processi e sistemi connessi</div>
+        <div class="fw-step-desc">CRM, pipeline rinnovi, gestione HR con Athletis, dashboard operative per il management. Eliminare i silos, restituire tempo alle persone.</div>
+      </div>
+    </div>
+    <div class="fw-step">
+      <span class="fw-step-num">Fase 3</span>
+      <div class="fw-step-body">
+        <div class="fw-step-title">Crescita — Acquisizione e comunicazione</div>
+        <div class="fw-step-desc">Sito ridisegnato per generare lead, funnel strutturati per attività e Young School, comunicazione proattiva verso i soci. La struttura è pronta: si può crescere.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="big-stat-row">
+    <div class="big-stat">
+      <div class="big-stat-number green">&gt;70%</div>
+      <div class="big-stat-label">tasso di rinnovo attuale — da preservare e da raccontare</div>
+    </div>
+    <div class="big-stat">
+      <div class="big-stat-number">&gt;€ 55k</div>
+      <div class="big-stat-label">stima ore a basso valore — da convertire in valore reale</div>
+    </div>
+    <div class="big-stat">
+      <div class="big-stat-number danger">2</div>
+      <div class="big-stat-label">urgenze legali — da risolvere prima della prossima stagione</div>
+    </div>
+    <div class="big-stat">
+      <div class="big-stat-number">11</div>
+      <div class="big-stat-label">aree operative analizzate con piano di intervento definito</div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<div class="closing">
+  <p class="closing-label">La direzione</p>
+  <p class="closing-text">L'obiettivo non è un club più grande. È un club <em>più libero di essere sé stesso</em> — senza che la complessità operativa consumi le energie di chi lo fa funzionare ogni giorno.</p>
+  <div class="cta-row">
+    <a href="documento-audit.html" class="cta-btn primary">Leggi il documento completo →</a>
+    <a href="index.html" class="cta-btn secondary">← Torna all'indice</a>
+  </div>
+</div>
+
+<script>
+function checkGate() {
+  if (document.getElementById('gate-pwd').value === 'ronchi2030') {
+    document.getElementById('gate').classList.add('hidden');
+    try { localStorage.setItem('rv-exec-2026','1'); } catch(e){}
+  } else {
+    document.getElementById('gate-err').style.display = 'block';
+    var i = document.getElementById('gate-pwd');
+    i.style.borderColor = '#B33A2E';
+    setTimeout(function(){ i.style.borderColor = ''; }, 1500);
+  }
+}
+document.getElementById('gate-pwd').addEventListener('keydown', function(e){ if(e.key==='Enter') checkGate(); });
+(function(){
+  try { if(localStorage.getItem('rv-exec-2026')==='1') document.getElementById('gate').classList.add('hidden'); } catch(e){}
+})();
+</script>
+</body>
+</html>
