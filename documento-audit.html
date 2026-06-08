@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Documento di Audit — Ronchiverdi Sport Club</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* === RESET & BASE === */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #F7F6F2;
+  --surface: #FFFFFF;
+  --border: rgba(0,0,0,0.08);
+  --text: #1C1C18;
+  --text-dim: #6B6B62;
+  --gold: #8B6C14;
+  --gold-light: #F5EDD6;
+  --gap-bg: #FFF9EE;
+  --gap-border: #C8921A;
+  --prop-bg: #F2F6F2;
+  --prop-border: #3A6640;
+  --asis-bg: #F2F2EE;
+  --asis-border: #9A9A8E;
+  --danger: #B33A2E;
+  --danger-light: #FDF2F0;
+}
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.7;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* === PASSWORD GATE === */
+#gate {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+}
+#gate.hidden { display: none; }
+.gate-box { width: 100%; max-width: 380px; text-align: center; }
+.gate-logo { height: 40px; width: auto; margin-bottom: 48px; opacity: 0.8; }
+.gate-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 16px;
+}
+.gate-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px; font-weight: 400; color: var(--text);
+  margin-bottom: 8px; line-height: 1.1;
+}
+.gate-title em { font-style: italic; color: var(--gold); }
+.gate-sub { font-size: 13px; color: var(--text-dim); margin-bottom: 36px; line-height: 1.5; }
+.gate-input {
+  width: 100%; background: white;
+  border: 1.5px solid #D9D7CE; border-radius: 10px;
+  padding: 14px 18px; font-family: 'Jost', sans-serif;
+  font-size: 15px; color: var(--text); outline: none;
+  transition: border-color 0.2s; margin-bottom: 10px;
+}
+.gate-input:focus { border-color: var(--gold); }
+.gate-btn {
+  width: 100%; background: var(--text); color: white;
+  border: none; border-radius: 10px; padding: 14px;
+  font-family: 'Jost', sans-serif; font-size: 13px;
+  font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+  cursor: pointer; transition: background 0.2s;
+}
+.gate-btn:hover { background: #2C2C28; }
+.gate-error { font-size: 12px; color: var(--danger); margin-top: 10px; display: none; }
+
+/* === LAYOUT === */
+.layout { display: flex; min-height: 100vh; }
+
+/* === SIDEBAR === */
+.sidebar {
+  width: 256px; min-width: 256px;
+  position: sticky; top: 0; height: 100vh;
+  overflow-y: auto; padding: 28px 20px;
+  border-right: 1px solid var(--border);
+  background: var(--bg);
+  display: flex; flex-direction: column;
+  scrollbar-width: thin;
+}
+.sidebar-logo { height: 26px; opacity: 0.7; margin-bottom: 28px; }
+.sidebar-section-label {
+  font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--text-dim); font-weight: 600; margin-bottom: 8px;
+  padding-left: 8px;
+}
+.sidebar-nav { list-style: none; margin-bottom: 20px; }
+.sidebar-nav li { margin-bottom: 1px; }
+.sidebar-nav a {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 8px; border-radius: 6px;
+  font-size: 12px; color: var(--text-dim); text-decoration: none;
+  transition: all 0.15s; line-height: 1.3;
+}
+.sidebar-nav a:hover { color: var(--text); background: rgba(0,0,0,0.04); }
+.sidebar-nav a.active { color: var(--gold); background: var(--gold-light); font-weight: 500; }
+.sidebar-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; color: var(--text-dim);
+  flex-shrink: 0; width: 18px;
+}
+.sidebar-print {
+  margin-top: auto; padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.btn-print {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; padding: 10px 14px; border-radius: 8px;
+  background: var(--text); color: white; border: none;
+  cursor: pointer; font-family: 'Jost', sans-serif;
+  font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+  text-transform: uppercase; transition: background 0.2s;
+}
+.btn-print:hover { background: #2C2C28; }
+
+/* === MOBILE TOP NAV === */
+.topnav {
+  display: none; position: sticky; top: 0; z-index: 100;
+  background: rgba(247,246,242,0.96); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 20px; height: 58px;
+  align-items: center; justify-content: space-between;
+}
+.topnav-logo { height: 26px; opacity: 0.8; }
+.topnav-print {
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 14px; border-radius: 6px;
+  background: var(--text); color: white; border: none;
+  font-family: 'Jost', sans-serif; font-size: 11px;
+  font-weight: 500; cursor: pointer; letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* === MAIN === */
+.main { flex: 1; min-width: 0; }
+
+/* === HERO === */
+.hero {
+  padding: 80px 72px 64px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 20px;
+}
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 54px; font-weight: 400; line-height: 1.05;
+  margin-bottom: 20px; color: var(--text); max-width: 780px;
+}
+.hero-title em { font-style: italic; color: var(--gold); }
+.hero-sub {
+  font-size: 16px; color: var(--text-dim);
+  max-width: 580px; line-height: 1.6;
+}
+.hero-meta {
+  display: flex; gap: 40px; margin-top: 44px;
+  padding-top: 44px; border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.hero-meta-item {}
+.hero-meta-label {
+  font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--text-dim); font-weight: 600; margin-bottom: 4px;
+}
+.hero-meta-value { font-size: 14px; font-weight: 500; }
+
+/* === GENERIC SECTION === */
+.section {
+  padding: 64px 72px;
+  border-bottom: 1px solid var(--border);
+}
+.section-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 14px;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 38px; font-weight: 400; line-height: 1.1;
+  margin-bottom: 36px;
+}
+.section-title em { font-style: italic; }
+
+/* === TYPOGRAPHY === */
+p { margin-bottom: 16px; font-size: 15px; line-height: 1.78; }
+p:last-child { margin-bottom: 0; }
+p strong { font-weight: 600; }
+.lead { font-size: 17px; line-height: 1.7; color: var(--text); }
+
+/* === QUOTE === */
+.quote-block {
+  border-left: 3px solid var(--gold);
+  padding: 28px 36px; margin-bottom: 44px;
+  background: var(--gold-light); border-radius: 0 10px 10px 0;
+}
+.quote-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-style: italic; line-height: 1.55;
+  color: var(--text); margin-bottom: 16px;
+}
+.quote-author {
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold); font-weight: 600;
+}
+
+/* === AREA OVERVIEW TABLE === */
+.overview-table {
+  width: 100%; border-collapse: collapse;
+  margin: 8px 0 0; font-size: 14px;
+}
+.overview-table thead th {
+  background: var(--text); color: white;
+  padding: 12px 18px; font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  font-weight: 500; text-align: left;
+}
+.overview-table thead th:first-child { border-radius: 6px 0 0 0; width: 52px; }
+.overview-table thead th:last-child { border-radius: 0 6px 0 0; }
+.overview-table tbody td {
+  padding: 13px 18px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+.overview-table tbody tr:last-child td { border-bottom: none; }
+.overview-table tbody tr:hover td { background: rgba(0,0,0,0.015); }
+.area-num-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: 6px;
+  background: var(--text); color: white;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 600;
+}
+.area-row-name { font-weight: 600; color: var(--text); }
+.area-row-desc { color: var(--text-dim); font-size: 13px; margin-top: 2px; }
+
+/* === AREA SECTION === */
+.area-section {
+  padding: 64px 72px;
+  border-bottom: 1px solid var(--border);
+}
+.area-header {
+  display: flex; align-items: flex-start; gap: 20px;
+  margin-bottom: 44px; padding-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+}
+.area-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--gold); font-weight: 600;
+  background: var(--gold-light); padding: 5px 12px;
+  border-radius: 6px; flex-shrink: 0; margin-top: 8px;
+  letter-spacing: 0.1em;
+}
+.area-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px; font-weight: 400; line-height: 1.05;
+  color: var(--text);
+}
+.area-title em { font-style: italic; }
+
+/* === BLOCK PANELS === */
+.block { border-radius: 10px; padding: 28px 32px; margin-bottom: 16px; }
+.block-asis { background: var(--asis-bg); border-left: 3px solid var(--asis-border); }
+.block-gap  { background: var(--gap-bg);  border-left: 3px solid var(--gap-border); }
+.block-prop { background: var(--prop-bg); border-left: 3px solid var(--prop-border); }
+.block-label {
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  font-weight: 600; margin-bottom: 18px;
+}
+.block-asis .block-label { color: #6B6B5E; }
+.block-gap  .block-label { color: #9A6B10; }
+.block-prop .block-label { color: var(--prop-border); }
+.label-dot {
+  width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+}
+.block-asis .label-dot { background: var(--asis-border); }
+.block-gap  .label-dot { background: var(--gap-border); }
+.block-prop .label-dot { background: var(--prop-border); }
+
+/* === STAT CARDS === */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 14px; margin: 24px 0;
+}
+.stat-card {
+  background: white; border-radius: 10px;
+  padding: 20px 18px; border: 1px solid var(--border);
+}
+.stat-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 38px; font-weight: 500; color: var(--gold);
+  line-height: 1; margin-bottom: 6px;
+}
+.stat-label { font-size: 12px; color: var(--text-dim); line-height: 1.4; }
+
+/* === ALERT BADGE === */
+.badge-urgent {
+  display: inline-block; padding: 2px 9px; border-radius: 4px;
+  background: var(--danger-light); color: var(--danger);
+  font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; vertical-align: middle; margin-left: 6px;
+}
+
+/* === ECONOMIC IMPACT CHART === */
+.impact-chart { margin: 32px 0; }
+.impact-row {
+  display: grid;
+  grid-template-columns: 210px 1fr 180px;
+  align-items: center; gap: 16px; margin-bottom: 10px;
+}
+.impact-label { font-size: 13px; font-weight: 500; line-height: 1.3; }
+.impact-bar-track {
+  height: 30px; background: rgba(0,0,0,0.06);
+  border-radius: 6px; overflow: hidden;
+}
+.impact-bar {
+  height: 100%; border-radius: 6px; background: var(--gold);
+  display: flex; align-items: center; padding-left: 10px;
+  font-size: 11px; color: rgba(255,255,255,0.9); font-weight: 500;
+  white-space: nowrap;
+}
+.impact-value { font-size: 13px; font-weight: 600; text-align: right; }
+.impact-ore { font-size: 11px; color: var(--text-dim); margin-top: 1px; }
+.impact-divider {
+  height: 1px; background: var(--text); opacity: 0.15;
+  margin: 14px 0;
+}
+.impact-total-row {
+  display: grid;
+  grid-template-columns: 210px 1fr 180px;
+  align-items: center; gap: 16px;
+}
+.impact-total-label {
+  font-size: 13px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.08em; font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+}
+.impact-total-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px; font-weight: 500; color: var(--gold);
+  text-align: right; grid-column: 3;
+}
+.impact-total-sub {
+  font-size: 11px; color: var(--text-dim);
+  text-align: right; grid-column: 3;
+  margin-top: -4px;
+}
+
+/* === SYNTHESIS === */
+.synthesis-section {
+  padding: 64px 72px;
+}
+.synthesis-pillar {
+  background: white; border-radius: 12px;
+  padding: 32px 36px; border: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+.synthesis-pillar-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); font-weight: 600; margin-bottom: 12px;
+}
+.synthesis-pillar-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px; font-weight: 400; margin-bottom: 20px; line-height: 1.2;
+}
+.closing-line {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; font-style: italic;
+  color: var(--text-dim); text-align: center;
+  margin-top: 56px; padding-top: 56px;
+  border-top: 1px solid var(--border);
+  line-height: 1.5; max-width: 640px; margin-left: auto; margin-right: auto;
+}
+
+/* === PRINT === */
+@media print {
+  #gate, .sidebar, .topnav { display: none !important; }
+  .layout { display: block; }
+  .main { width: 100%; }
+  body { font-size: 10.5pt; background: white; }
+  .hero, .section, .area-section, .synthesis-section { padding: 36px 44px; }
+  .section-title { font-size: 24pt; }
+  .area-title { font-size: 26pt; }
+  .hero-title { font-size: 34pt; }
+  .area-section { page-break-before: always; }
+  .block { page-break-inside: avoid; }
+  .stat-row { page-break-inside: avoid; }
+  .synthesis-pillar { page-break-inside: avoid; }
+  @page { size: A4 portrait; margin: 1.8cm 2cm; }
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 920px) {
+  .sidebar { display: none; }
+  .topnav { display: flex; }
+  .hero { padding: 52px 24px 44px; }
+  .hero-title { font-size: 38px; }
+  .section, .area-section, .synthesis-section { padding: 48px 24px; }
+  .area-title { font-size: 32px; }
+  .impact-row, .impact-total-row { grid-template-columns: 1fr; }
+  .impact-bar-track { display: none; }
+  .impact-value, .impact-total-value, .impact-total-sub { text-align: left; }
+  .impact-total-value { grid-column: 1; }
+  .impact-total-sub { grid-column: 1; }
+}
+</style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div id="gate">
+  <div class="gate-box">
+    <img src="ronchiverdi-logo.jpg" alt="Ronchiverdi" class="gate-logo">
+    <p class="gate-eyebrow">Documento riservato</p>
+    <h1 class="gate-title">Audit <em>Digitale</em></h1>
+    <p class="gate-sub">Inserisci la password per accedere al documento di audit.</p>
+    <input type="password" id="gate-pwd" class="gate-input" placeholder="Password" onkeydown="if(event.key==='Enter')checkGate()">
+    <button class="gate-btn" onclick="checkGate()">Accedi</button>
+    <p class="gate-error" id="gate-err">Password errata. Riprova.</p>
+  </div>
+</div>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <img src="ronchiverdi-logo.jpg" alt="Ronchiverdi" class="sidebar-logo">
+    <p class="sidebar-section-label">Documento</p>
+    <ul class="sidebar-nav">
+      <li><a href="#intro" class="nav-link"><span class="sidebar-num">—</span>Introduzione</a></li>
+      <li><a href="#panoramica" class="nav-link"><span class="sidebar-num">—</span>Panoramica</a></li>
+    </ul>
+    <p class="sidebar-section-label">Aree di analisi</p>
+    <ul class="sidebar-nav">
+      <li><a href="#area1" class="nav-link"><span class="sidebar-num">01</span>Acquisizione contatto</a></li>
+      <li><a href="#area2" class="nav-link"><span class="sidebar-num">02</span>Gestione contatto</a></li>
+      <li><a href="#area3" class="nav-link"><span class="sidebar-num">03</span>Rinnovi e retention</a></li>
+      <li><a href="#area4" class="nav-link"><span class="sidebar-num">04</span>Customer care</a></li>
+      <li><a href="#area5" class="nav-link"><span class="sidebar-num">05</span>Comunicazioni</a></li>
+      <li><a href="#area6" class="nav-link"><span class="sidebar-num">06</span>Contratti e compliance</a></li>
+      <li><a href="#area7" class="nav-link"><span class="sidebar-num">07</span>Crediti e controllo</a></li>
+      <li><a href="#area8" class="nav-link"><span class="sidebar-num">08</span>HR e amministrazione</a></li>
+      <li><a href="#area9" class="nav-link"><span class="sidebar-num">09</span>Certificato medico</a></li>
+      <li><a href="#area10" class="nav-link"><span class="sidebar-num">10</span>Infrastruttura digitale</a></li>
+      <li><a href="#area11" class="nav-link"><span class="sidebar-num">11</span>Manutenzione</a></li>
+    </ul>
+    <p class="sidebar-section-label">Sintesi</p>
+    <ul class="sidebar-nav">
+      <li><a href="#sintesi" class="nav-link"><span class="sidebar-num">—</span>Sintesi finale</a></li>
+    </ul>
+    <div class="sidebar-print">
+      <button class="btn-print" onclick="window.print()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Scarica PDF
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- MOBILE NAV -->
+    <nav class="topnav">
+      <img src="ronchiverdi-logo.jpg" alt="Ronchiverdi" class="topnav-logo">
+      <button class="topnav-print" onclick="window.print()">Scarica PDF</button>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <p class="hero-eyebrow">Ronchiverdi Sport Club · Giugno 2026</p>
+      <h1 class="hero-title">Documento di <em>Audit</em> Digitale</h1>
+      <p class="hero-sub">Analisi end-to-end dei processi operativi, del customer journey e dell'ecosistema digitale a supporto della crescita del club.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <p class="hero-meta-label">Periodo analisi</p>
+          <p class="hero-meta-value">Aprile — Giugno 2026</p>
+        </div>
+        <div class="hero-meta-item">
+          <p class="hero-meta-label">Aree analizzate</p>
+          <p class="hero-meta-value">11 aree tematiche</p>
+        </div>
+        <div class="hero-meta-item">
+          <p class="hero-meta-label">Elaborato da</p>
+          <p class="hero-meta-value">Maurizio Taruggi · Ready 2 Digital</p>
+        </div>
+        <div class="hero-meta-item">
+          <p class="hero-meta-label">Versione</p>
+          <p class="hero-meta-value">1.0 — Giugno 2026</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTRODUZIONE -->
+    <section class="section" id="intro">
+      <p class="section-eyebrow">Introduzione</p>
+      <h2 class="section-title">Il punto di <em>partenza</em></h2>
+
+      <div class="quote-block">
+        <p class="quote-text">"Noi restiamo un club con una grossa valenza sociale per i nostri soci. C'è una parte pronta alla digitalizzazione, ma c'è un'altra parte che viene a Ronchiverdi perché si sente a casa — e a casa si aspetta che qualsiasi cosa la chiedi, la fai. Dobbiamo trovare un equilibrio tra queste due esigenze. La nostra caratteristica di mercato è distinguerci da un posto troppo rigido."</p>
+        <p class="quote-author">Vittorio Zunino — Amministratore Unico — Call del 24 aprile 2026</p>
+      </div>
+
+      <p class="lead">Ronchiverdi non ha bisogno di diventare un club digitale. Ha bisogno di diventare un club più efficiente, in cui le persone che lavorano ogni giorno spendono meno energie a gestire la complessità operativa e ne hanno di più per fare ciò che nessun sistema potrà mai fare al loro posto: <strong>costruire relazioni, risolvere problemi sul momento, far sentire ogni socio a casa propria.</strong></p>
+      <p>L'obiettivo non è introdurre tecnologia per modernizzare l'immagine del club. È togliere attrito dai processi interni — dalla raccolta del dato, dalla comunicazione, dalla gestione amministrativa — per restituire tempo e lucidità alle persone. Un club che funziona bene dentro si vede fuori: nella qualità del servizio, nella continuità della relazione con il socio, nella capacità di rispondere con prontezza senza dipendere dalla memoria di un singolo o dalla buona volontà di qualcuno che quel giorno è di turno.</p>
+
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;margin:36px 0 16px;">Il contesto</h3>
+      <p>Questo documento raccoglie i risultati dell'audit digitale condotto tra aprile e giugno 2026. L'attività ha analizzato l'intero ciclo operativo del club: dall'acquisizione di un nuovo contatto fino alla gestione post-vendita, passando per la relazione continuativa con il socio, i processi amministrativi, la compliance e l'infrastruttura digitale esistente.</p>
+      <p>Il lavoro si è svolto in tre fasi. Una <strong>fase di pre-analisi</strong> dei materiali disponibili: file di tracciamento rinnovi e crediti, campagne pubblicitarie, comunicazioni automatiche, moduli contrattuali, report segnalazioni e dati di customer care. Una <strong>fase di confronto operativo</strong>, attraverso call di approfondimento con il team e interviste dedicate ai responsabili di settore. Una <strong>fase di sopralluogo fisico in sede</strong>, che ha permesso di osservare i processi nel loro contesto reale e raccogliere le prospettive di chi li gestisce ogni giorno.</p>
+      <p>I processi di un club sono interconnessi: le criticità emerse attraversano più funzioni e richiedono una lettura condivisa tra chi gestisce le operazioni, chi guida lo sviluppo commerciale e chi presidia l'area amministrativa e finanziaria. Questo documento è pensato per essere letto insieme, non per funzione separata.</p>
+
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;margin:36px 0 16px;">Come leggere questo documento</h3>
+      <p>Il documento è organizzato in <strong>undici aree tematiche</strong> che coprono l'intero perimetro operativo e digitale del club. Ogni area è descritta su tre livelli:</p>
+      <div class="stat-row" style="margin-top:20px;">
+        <div class="stat-card" style="border-left:3px solid var(--asis-border);">
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--asis-border);font-weight:600;margin-bottom:8px;">AS-IS</p>
+          <p style="font-size:13px;color:var(--text-dim);margin:0;">La situazione attuale — come funzionano i processi oggi.</p>
+        </div>
+        <div class="stat-card" style="border-left:3px solid var(--gap-border);">
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#9A6B10;font-weight:600;margin-bottom:8px;">GAP</p>
+          <p style="font-size:13px;color:var(--text-dim);margin:0;">I punti di rottura, le assenze strutturali e le inefficienze.</p>
+        </div>
+        <div class="stat-card" style="border-left:3px solid var(--prop-border);">
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--prop-border);font-weight:600;margin-bottom:8px;">PROPOSTE</p>
+          <p style="font-size:13px;color:var(--text-dim);margin:0;">Le direzioni di intervento e le priorità raccomandate.</p>
+        </div>
+      </div>
+      <p style="margin-top:20px;">Le proposte contenute in questo documento <strong>non sono un piano operativo</strong>. Indicano la direzione e definiscono le priorità. Il piano operativo dettagliato — con sequenza degli interventi, strumenti, costi e tempi — è oggetto di un documento separato.</p>
+    </section>
+
+    <!-- PANORAMICA -->
+    <section class="section" id="panoramica">
+      <p class="section-eyebrow">Panoramica</p>
+      <h2 class="section-title">Le undici <em>aree</em> di analisi</h2>
+
+      <table class="overview-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Area</th>
+            <th>Focus principale</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="area-num-badge">1</span></td>
+            <td><p class="area-row-name">Acquisizione del contatto</p><p class="area-row-desc">Come entrano i lead nel sistema</p></td>
+            <td><p class="area-row-desc">Canali digitali e fisici, qualità del dato, integrazione tra fonti</p></td>
+          </tr>
+          <tr>
+            <td><span class="area-num-badge">2</span></td>
+            <td><p class="area-row-name">Gestione del contatto</p><p class="area-row-desc">Dal lead alla prova, dalla prova all'iscrizione</p></td>
+            <td><p class="area-row-desc">Follow-up, tracciamento, Young School, feedback strategici</p></td>
+          </tr>
+          <tr>
+            <td><span class="area-num-badge">3</span></td>
+            <td><p class="area-row-name">Rinnovi e retention</p><p class="area-row-desc">La continuità del rapporto con il socio</p></td>
+            <td><p class="area-row-desc">Strumenti di tracciamento, task, dashboard, analisi per risorsa</p></td>
+          </tr>
+          <tr>
+            <td><span class="area-num-badge">4</span></td>
+            <td><p class="area-row-name">Customer care e segnalazioni</p><p class="area-row-desc">Gestione dei reclami e delle richieste</p></td>
+            <td><p class="area-row-desc">Canali di raccolta, smistamento, tassonomia, KPI qualità</p></td>
+          </tr>
+          <tr>
+            <td><span class="area-num-badge">5</span></td>
+            <td><p class="area-row-name">Comunicazioni al socio</p><p class="area-row-desc">Le 7 email automatiche e semi-automatiche</p></td>
+            <td><p class="area-row-desc">Problemi contrattuali, coerenza brand, comunicazione relazionale</p></td>
+          </tr>
+          <tr>
+            <td><span class="area-num-badge">6</span></td>
+            <td><p class="area-row-name">Contratti e compliance</p><p class="area-row-desc">MOD019 adulti e MOD001 Young School</p></td>
+            <td><p class="area-row-desc">8 gap identificati, 2 urgenze legali, T&amp;C pubblici, tesseramento CSI</p></td>
+          </tr>
+          <tr>
+            <td><span class="area-num-badge">7</span></td>
+            <td><p class="area-row-name">Crediti e controllo di gestione</p><p class="area-row-desc">Monitoraggio crediti e marginalità</p></td>
+            <td><p class="area-row-desc">Architettura Excel, pipeline recupero, controllo automatico</p></td>
+          </tr>
+          <tr>
+            <td><span class="area-num-badge">8</span></td>
+            <td><p class="area-row-name">Processi HR e amministrativi</p><p class="area-row-desc">Dipendenti, collaboratori, richieste formali</p></td>
+            <td><p class="area-row-desc">Pizzini e ore manuali, Athletis, form dipendenti</p></td>
+          </tr>
+          <tr>
+            <td><span class="area-num-badge">9</span></td>
+            <td><p class="area-row-name">Certificato medico e Chiron</p><p class="area-row-desc">Gestione obblighi e partnership medica</p></td>
+            <td><p class="area-row-desc">Comunicazione standard, voucher benefit, privacy DPO</p></td>
+          </tr>
+          <tr>
+            <td><span class="area-num-badge">10</span></td>
+            <td><p class="area-row-name">Infrastruttura digitale</p><p class="area-row-desc">Ecosistema tecnologico e sito web</p></td>
+            <td><p class="area-row-desc">Silos, CRM assente, sito inefficace, WhatsApp non strutturato</p></td>
+          </tr>
+          <tr>
+            <td><span class="area-num-badge">11</span></td>
+            <td><p class="area-row-name">Processi di manutenzione</p><p class="area-row-desc">Segnalazione e gestione degli interventi</p></td>
+            <td><p class="area-row-desc">Canali informali, assenza tracciamento, pipeline interventi</p></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- AREA 1 -->
+    <section class="area-section" id="area1">
+      <div class="area-header">
+        <span class="area-tag">AREA 01</span>
+        <h2 class="area-title">Acquisizione del <em>contatto</em></h2>
+      </div>
+
+      <div class="block block-asis">
+        <div class="block-label"><span class="label-dot"></span>AS-IS — Situazione attuale</div>
+        <p>I contatti entrano da <strong>quattro canali distinti</strong>: il sito web, le campagne Meta Ads, i referral da soci esistenti e il guest register fisico alla reception. A questi si aggiunge lo Young School, che opera in modo completamente separato dal commerciale, con proprie modalità di raccolta del contatto e senza integrazione con il flusso principale.</p>
+        <p>Il sito ha form di contatto attivi, ma <strong>non sono collegati a nessun sistema di raccolta centralizzato</strong>. Il form viene compilato, arriva una notifica, e il contatto viene gestito manualmente.</p>
+        <p>Le campagne Meta generano lead tramite lead form nativi di Facebook e Instagram. Questi lead non vengono scaricati automaticamente: <strong>richiedono un'azione manuale periodica</strong>. Tra settembre 2024 e maggio 2026 sono state gestite 16 campagne, per circa 480 contatti totali su sport diversi — padel, nuoto, tennis, fitness. Ogni campagna ha generato un foglio separato, senza struttura comune né vocabolario condiviso.</p>
+        <p>I referral non hanno un percorso definito. Arrivano via WhatsApp, a voce, o attraverso conoscenze dirette dello staff. Non vengono registrati come tali e non è possibile misurare né il volume né la qualità di questo canale.</p>
+        <p>Il guest register alla reception è fisico. L'ospite viene registrato sul momento, ma il dato non entra in nessun sistema digitale.</p>
+
+        <div class="stat-row">
+          <div class="stat-card"><div class="stat-number">16</div><div class="stat-label">campagne gestite<br>Set 2024 – Mag 2026</div></div>
+          <div class="stat-card"><div class="stat-number">~480</div><div class="stat-label">contatti totali<br>su tutti i canali</div></div>
+          <div class="stat-card"><div class="stat-number">4</div><div class="stat-label">canali distinti<br>non integrati</div></div>
+          <div class="stat-card"><div class="stat-number">0</div><div class="stat-label">sistemi di raccolta<br>centralizzata</div></div>
+        </div>
+      </div>
+
+      <div class="block block-gap">
+        <div class="block-label"><span class="label-dot"></span>GAP — Punti critici</div>
+        <p><strong>Ogni fonte genera un silo separato.</strong> Non esiste un momento in cui i contatti provenienti da canali diversi confluiscono in un unico posto. Impossibile avere una fotografia del volume reale di contatti in un dato periodo, misurare quale canale performa meglio, o vedere se lo stesso contatto è entrato da più fonti in momenti diversi.</p>
+        <p>La qualità del dato varia molto per canale. I lead da Meta sono spesso parziali o non aggiornati: numero errato, email generica, nessuna indicazione sull'attività di interesse. I referral hanno dato di qualità alta ma nessuna tracciatura. Il guest register ha dato preciso sul momento ma lo perde immediatamente dopo.</p>
+        <p>Lo Young School è un canale separato che non dialoga con il resto. I contatti generati da quel settore non entrano nel flusso commerciale principale, non vengono incrociati con i dati degli adulti della stessa famiglia, e non sono misurabili con le stesse metriche.</p>
+      </div>
+
+      <div class="block block-prop">
+        <div class="block-label"><span class="label-dot"></span>PROPOSTE — Direzioni di intervento</div>
+        <p><strong>Un punto di ingresso unico per tutti i lead</strong>, indipendentemente dal canale. Ogni contatto — dal sito, da Meta, da un referral, dal guest register — entra in un unico database con gli stessi campi: nome, contatto, sport di interesse, obiettivo, fonte. L'ingestione deve essere automatica dove possibile (Meta via API, sito via webhook) e assistita dove non lo è (guest register via form digitale in reception).</p>
+        <p><strong>Un form di richiesta informazioni strutturato</strong>, che generi flussi differenti in base all'attività di interesse selezionata. Chi richiede informazioni sul padel riceve un percorso diverso da chi è interessato al nuoto o al fitness: contenuti diversi, domande di qualificazione diverse, interlocutori diversi. Il form non è un modulo generico — è il primo passo di un processo commerciale differenziato.</p>
+        <p>Il <strong>guest register fisico</strong> va sostituito con una versione digitale accessibile dalla reception, che sincronizzi il dato in tempo reale.</p>
+      </div>
+    </section>
+
+    <!-- AREA 2 -->
+    <section class="area-section" id="area2">
+      <div class="area-header">
+        <span class="area-tag">AREA 02</span>
+        <h2 class="area-title">Gestione del <em>contatto</em></h2>
+      </div>
+
+      <div class="block block-asis">
+        <div class="block-label"><span class="label-dot"></span>AS-IS — Situazione attuale</div>
+        <p>Una volta che il contatto esiste, la gestione è <strong>interamente manuale e affidata alla discrezionalità della risorsa commerciale</strong>. Non esiste un sistema che assegni un task, registri una chiamata, o ricordi un follow-up.</p>
+        <p>Il team commerciale è composto da una risorsa principale sul new business (Carola), una in affiancamento recente (Jasmine), e sei risorse distribuite tra retention e reception. L'unica persona con un metodo commerciale strutturato e ratio di conversione misurabili è Carola. Il follow-up avviene, ma <strong>non è tracciato</strong>: si sa che i consulenti chiamano, scrivono, fissano appuntamenti. Non si sa quando, quante volte, con quale messaggio e con quale esito.</p>
+        <p>Per lo <strong>Young School</strong>: non esiste un punto di ingresso tracciato. Chi è interessato a iscrivere un figlio arriva tramite passaparola o canali non strutturati, e il primo contatto avviene direttamente <strong>su un numero WhatsApp o sul telefono personale del coordinatore</strong> della singola scuola sportiva. Da quel momento la gestione è interamente interna al settore, senza alcun tracciamento.</p>
+      </div>
+
+      <div class="block block-gap">
+        <div class="block-label"><span class="label-dot"></span>GAP — Punti critici</div>
+        <p>Il tasso di conversione reale — da lead a prova, da prova a iscrizione — <strong>non è oggi calcolabile in modo sistematico</strong>. Il processo dipende interamente dalla memoria della singola risorsa: se assente, i lead in carico rimangono fermi senza che nessuno lo sappia.</p>
+        <p>Non esiste una distinzione operativa tra <strong>lead caldo e lead freddo</strong>. Tutti i contatti hanno lo stesso peso nella lista, le energie vengono distribuite senza priorità.</p>
+        <p><strong>Il limite più rilevante non è operativo: è strategico.</strong> Non avere feedback oggettivi su ciò che funziona e ciò che non funziona rende impossibile valutare se la direzione commerciale sia quella corretta. Le decisioni vengono prese sulla base della percezione interna. Eventuali correzioni di rotta arrivano tardi, spesso solo quando il problema è già evidente nei numeri di fatturato.</p>
+        <p>Per lo Young School il problema è ancora più profondo: <strong>non sappiamo quanti contatti arrivano, quanti vengono ricontattati, in che tempi, con quale esito</strong>. Il settore è una scatola nera dal punto di vista sia quantitativo che qualitativo.</p>
+      </div>
+
+      <div class="block block-prop">
+        <div class="block-label"><span class="label-dot"></span>PROPOSTE — Direzioni di intervento</div>
+        <p>Un <strong>sistema di gestione del follow-up</strong> con task assegnati per contatto: chi chiama, quando, con quale esito registrato. Ogni lead ha uno stato definito (nuovo / contattato / appuntamento fissato / prova effettuata / iscritto / perso) e una persona responsabile.</p>
+        <p>Un <strong>lead scoring semplice</strong> che distingua i contatti per priorità in base al comportamento: ha risposto, ha aperto l'email, ha chiesto informazioni su un'attività specifica.</p>
+        <p>Un <strong>percorso post-prova standardizzato</strong>: template di follow-up, tempo massimo di ricontatto, campo per registrare l'esito.</p>
+        <p>Per lo Young School: <strong>inserire il settore nello stesso tipo di funnel strutturato</strong> del commerciale adulti — punto di ingresso tracciato, flusso definito, stato per ogni lead. Il modello relazionale del coordinatore non va eliminato: va reso misurabile. A questo si affianca una <strong>dashboard dedicata al tecnico responsabile</strong> per vedere in tempo reale volume di contatti, stato delle richieste e andamento conversioni.</p>
+        <p>Una <strong>dashboard strategica di supervisione per i manager</strong>, che aggreghi in tempo reale i principali indicatori del processo commerciale: volume lead per canale, stato follow-up, tasso di conversione per risorsa, andamento prove e iscrizioni.</p>
+      </div>
+    </section>
+
+    <!-- AREA 3 -->
+    <section class="area-section" id="area3">
+      <div class="area-header">
+        <span class="area-tag">AREA 03</span>
+        <h2 class="area-title">Rinnovi e <em>retention</em></h2>
+      </div>
+
+      <div class="block block-asis">
+        <div class="block-label"><span class="label-dot"></span>AS-IS — Situazione attuale</div>
+        <p>Il settore retention è stato costruito progressivamente negli ultimi tre anni: da una sola persona senza tracciabilità, oggi sono <strong>sei le risorse coinvolte</strong> tra retention e reception. È un percorso di crescita reale.</p>
+        <p>Lo strumento principale è un <strong>file Excel creato a dicembre 2024</strong> — il primo tentativo strutturato di portare ordine nel dato di rinnovo. 23 fogli mensili, circa 3.700 record, da novembre 2024 a giugno 2026. Prima di quella data non esisteva nessun tracciamento. I rinnovi vengono gestiti attraverso InfoRYOU e Google Sheet, senza task assegnati.</p>
+        <p>L'accesso al dato aggregato passa interamente da una singola figura: per avere una fotografia del mese in corso è necessario aprire il file e costruire la sintesi manualmente.</p>
+
+        <div class="stat-row">
+          <div class="stat-card"><div class="stat-number">23</div><div class="stat-label">fogli mensili<br>nel file Excel</div></div>
+          <div class="stat-card"><div class="stat-number">~3.700</div><div class="stat-label">record totali<br>Nov 2024 – Giu 2026</div></div>
+          <div class="stat-card"><div class="stat-number">6</div><div class="stat-label">risorse coinvolte<br>retention + reception</div></div>
+        </div>
+      </div>
+
+      <div class="block block-gap">
+        <div class="block-label"><span class="label-dot"></span>GAP — Punti critici</div>
+        <p>Il file Excel è uno strumento di <strong>registrazione, non di gestione</strong>. Registra ciò che è già successo, ma non supporta chi deve agire: non assegna task, non manda reminder, non segnala le scadenze imminenti.</p>
+        <p>Non esiste <strong>analisi qualitativa per risorsa</strong>: sappiamo quanti rinnovi vengono chiusi, ma non con quale approccio, argomentazione e tasso di successo per singola persona.</p>
+        <p>Il limite più rilevante è strategico: <strong>non sappiamo se il tasso di retention sta migliorando o peggiorando nel tempo</strong>, quali segmenti di soci rinnovano meno, quali attività hanno la retention più bassa. Le decisioni vengono prese sull'esperienza delle singole persone, non sul dato.</p>
+      </div>
+
+      <div class="block block-prop">
+        <div class="block-label"><span class="label-dot"></span>PROPOSTE — Direzioni di intervento</div>
+        <p>Uscire da InfoRYOU e Google Sheet per portare il processo di rinnovo in un <strong>CRM con task assegnati</strong>: ogni rinnovo in scadenza genera automaticamente un task con data, stato e campo per l'esito del contatto.</p>
+        <p>Una <strong>dashboard automatica della retention</strong>, aggiornata quotidianamente, accessibile senza costruirla manualmente ogni volta.</p>
+        <p>Un'<strong>analisi quantitativa e qualitativa per risorsa</strong>: quanti rinnovi in carico, quanti chiusi, in che tempi, con quale risultato.</p>
+        <p>Una <strong>dashboard strategica per i manager</strong> con gli indicatori di retention: tasso di rinnovo per periodo, per attività, per fascia di abbonamento, andamento nel tempo.</p>
+      </div>
+    </section>
+
+    <!-- AREA 4 -->
+    <section class="area-section" id="area4">
+      <div class="area-header">
+        <span class="area-tag">AREA 04</span>
+        <h2 class="area-title">Customer care e <em>segnalazioni</em></h2>
+      </div>
+
+      <div class="block block-asis">
+        <div class="block-label"><span class="label-dot"></span>AS-IS — Situazione attuale</div>
+        <p>Ronchiverdi traccia segnalazioni e lamentele attraverso un file Excel con tre fogli e <strong>circa 569 record totali</strong>, dal luglio 2021 al maggio 2026. Due modelli distinti: segnalazioni (372 record dal 2024) e relazioni comportamento (197 record disciplinari dal 2021).</p>
+        <p>Il dato ha una copertura formale alta: <strong>il 96% delle segnalazioni comportamentali riporta una data di risoluzione</strong>. L'85% di queste riguarda un tema specifico: il mancato utilizzo del braccialetto o della tessera. I settori più coinvolti: reception (156), piscina (9), tennis (7).</p>
+        <p>Le richieste ordinarie — informazioni sull'app, prenotazioni, certificati, pagamenti — vengono gestite verbalmente dallo staff. Nessuna standardizzazione delle risposte.</p>
+
+        <div class="stat-row">
+          <div class="stat-card"><div class="stat-number">569</div><div class="stat-label">record totali<br>Lug 2021 – Mag 2026</div></div>
+          <div class="stat-card"><div class="stat-number">96%</div><div class="stat-label">tasso chiusura<br>segnalazioni formale</div></div>
+          <div class="stat-card"><div class="stat-number">85%</div><div class="stat-label">segnalazioni per<br>mancato uso tessera</div></div>
+        </div>
+      </div>
+
+      <div class="block block-gap">
+        <div class="block-label"><span class="label-dot"></span>GAP — Punti critici</div>
+        <p>Il canale di raccolta è <strong>esclusivamente fisico e in presenza</strong>. Chi ha un problema fuori orario o non vuole segnalarlo di persona non ha nessun canale alternativo. Il volume reale di insoddisfazione è probabilmente superiore a quello tracciato.</p>
+        <p>Non esiste <strong>smistamento strutturato ai responsabili di settore</strong>. Il percorso dalla reception al responsabile non è automatico né tracciato: il rischio è che alcune segnalazioni si perdano nel passaggio.</p>
+        <p>Le risposte alle richieste ordinarie sono ripetitive e non standardizzate. Ogni membro dello staff risponde in modo autonomo, con rischio di incoerenza.</p>
+        <p>Il limite più rilevante è strategico: <strong>non avere dati strutturati significa non avere feedback su cosa genera insoddisfazione</strong>, in quale area, con quale frequenza. Un club che non misura la qualità percepita non può migliorarla in modo intenzionale.</p>
+      </div>
+
+      <div class="block block-prop">
+        <div class="block-label"><span class="label-dot"></span>PROPOSTE — Direzioni di intervento</div>
+        <p>Un <strong>form digitale</strong> per la raccolta delle segnalazioni, accessibile tramite QR nei punti strategici del club e tramite link. Il form struttura la segnalazione: area, tipologia, urgenza.</p>
+        <p>Una <strong>pipeline con stati definiti</strong> (aperto / preso in carico / risolto) con smistamento automatico al responsabile di settore competente. Ogni segnalazione ha un proprietario e una data di chiusura attesa.</p>
+        <p>Una <strong>base di risposte standardizzate</strong> per le richieste ordinarie, accessibile a tutto lo staff.</p>
+        <p>Una <strong>classificazione strutturata delle segnalazioni</strong>: non tutte hanno lo stesso peso. Un'analisi approfondita dei 569 record esistenti permette di costruire una tassonomia, distinguere il rumore di fondo dai segnali reali, e concentrare le energie dove l'impatto è effettivamente rilevante.</p>
+        <p>Una <strong>dashboard KPI</strong>: tempi medi di risposta, tasso di risoluzione, categorie prevalenti, trend, soci con segnalazioni ricorrenti.</p>
+      </div>
+    </section>
+
+    <!-- AREA 5 -->
+    <section class="area-section" id="area5">
+      <div class="area-header">
+        <span class="area-tag">AREA 05</span>
+        <h2 class="area-title">Comunicazioni al <em>socio</em></h2>
+      </div>
+
+      <div class="block block-asis">
+        <div class="block-label"><span class="label-dot"></span>AS-IS — Situazione attuale</div>
+        <p>Ronchiverdi gestisce <strong>sette comunicazioni attive</strong> verso i soci: tre automatiche via InfoRYOU, quattro semi-automatiche che richiedono un'azione manuale. Coprono: reminder certificato medico (30 e 15 gg), rinnovi, solleciti pagamento, onboarding Young School.</p>
+        <p>Le comunicazioni automatiche sono <strong>template standard di InfoRYOU</strong>, adattati minimalmente. Non riflettono né il tono né l'identità visiva del club. Sono presenti errori tipografici nel nome stesso del club: <strong>"Ronchvierdi"</strong> e <strong>"Distiniti"</strong> compaiono in comunicazioni ufficiali.</p>
+
+        <div class="stat-row">
+          <div class="stat-card"><div class="stat-number">7</div><div class="stat-label">comunicazioni attive<br>verso i soci</div></div>
+          <div class="stat-card"><div class="stat-number">3</div><div class="stat-label">problemi contrattuali<br>da correggere <span class="badge-urgent">urgente</span></div></div>
+          <div class="stat-card"><div class="stat-number">4</div><div class="stat-label">email da riscrivere<br>in chiave brand</div></div>
+        </div>
+      </div>
+
+      <div class="block block-gap">
+        <div class="block-label"><span class="label-dot"></span>GAP — Punti critici</div>
+        <p><strong>Tre comunicazioni presentano problemi contrattuali che richiedono intervento prima della prossima stagione.</strong> Il caso più rilevante: le email di reminder per il certificato medico aggiungono il requisito dell'ECG "nella norma" che non compare nel modulo firmato dal socio. Un obbligo che non è nel contratto non può essere comunicato come tale.</p>
+        <p>Quattro email sono da riscrivere integralmente: il contenuto informativo è corretto, ma il tono e il formato non sono coerenti con il livello del club. <strong>Testi di gestionale, non comunicazioni di un club premium.</strong></p>
+        <p>L'email Young School — la più strutturata del set — viene inviata manualmente e può arrivare con tempi variabili o non arrivare affatto.</p>
+        <p>Non esiste nessuna comunicazione proattiva. <strong>L'unica voce di Ronchiverdi nella inbox del socio è legata a scadenze, pagamenti o obblighi.</strong> Manca completamente la dimensione relazionale.</p>
+      </div>
+
+      <div class="block block-prop">
+        <div class="block-label"><span class="label-dot"></span>PROPOSTE — Direzioni di intervento</div>
+        <p><strong>Intervento immediato</strong> sulle tre comunicazioni con problemi contrattuali. È una misura di tutela legale, non estetica.</p>
+        <p><strong>Riscrittura delle quattro email</strong> in chiave brand Ronchiverdi: tono coerente, formato visivo riconoscibile, linguaggio che rifletta la relazione con il socio.</p>
+        <p><strong>Automatizzazione dell'email Young School</strong> collegata all'evento di iscrizione.</p>
+        <p>Un <strong>piano di comunicazione relazionale</strong>: benvenuto, anniversario di iscrizione, aggiornamenti, contenuti di valore. Il canale esiste, la lista contatti esiste. Oggi non viene usato per costruire relazione.</p>
+      </div>
+    </section>
+
+    <!-- AREA 6 -->
+    <section class="area-section" id="area6">
+      <div class="area-header">
+        <span class="area-tag">AREA 06</span>
+        <h2 class="area-title">Contratti e <em>compliance</em></h2>
+      </div>
+
+      <div class="block block-asis">
+        <div class="block-label"><span class="label-dot"></span>AS-IS — Situazione attuale</div>
+        <p>Ronchiverdi utilizza due moduli principali: il <strong>MOD019 per gli abbonamenti adulti</strong> (sette pagine: anagrafica, abbonamento, regolamento, condizioni, GDPR) e il <strong>MOD001 per lo Young School</strong>. L'impianto contrattuale è <strong>valido e strutturalmente solido</strong>: le lacune non riguardano la struttura di base, ma clausole specifiche di tutela.</p>
+        <p>La firma avviene in sede tramite <strong>tavoletta Wacom</strong> in due momenti: pagina 1 (accettazione abbonamento) e pagina 7 (consensi GDPR). I contratti firmati vengono archiviati digitalmente.</p>
+        <p>Ronchiverdi opera sotto l'egida del <strong>Centro Sportivo Italiano (CSI)</strong>. Il tesseramento CSI è un obbligo che condiziona direttamente il regime fiscale del club: perché un incasso sia qualificabile come <strong>corrispettivo per attività istituzionale</strong> — e benefici della relativa detassazione — il socio che effettua il pagamento deve essere formalmente tesserato al momento dell'incasso. Il tesseramento viene oggi gestito manualmente.</p>
+      </div>
+
+      <div class="block block-gap">
+        <div class="block-label"><span class="label-dot"></span>GAP — Punti critici</div>
+        <p>L'analisi ha identificato <strong>otto aree di intervento</strong> in materia contrattuale e compliance. Due hanno rilievo legale immediato:</p>
+        <p><strong>1. Conformità al Codice del Consumo <span class="badge-urgent">urgente</span></strong> — tre aspetti specifici: le condizioni di <strong>rinnovo automatico</strong> non sono esplicitamente evidenziate come previsto dalla normativa; le <strong>condizioni di recesso e disdetta</strong> devono essere formulate in modo chiaro e non sproporzionatamente restrittive; alcune <strong>clausole limitative della responsabilità</strong> potrebbero essere classificate come clausole vessatorie ai sensi dell'art. 33 del Codice del Consumo, richiedendo firma separata del consumatore — condizione oggi non garantita sistematicamente.</p>
+        <p><strong>2. GDPR minori (Young School) <span class="badge-urgent">urgente</span></strong> — il MOD001 presenta criticità nella gestione del consenso per i dati dei minori. Approfondimento effettuato con DPO esterno (Nimaja Consulting), call formale del 19 maggio 2026.</p>
+        <p>Tra le aree non urgenti, la più rilevante operativamente è il <strong>mancato allineamento tra contratti e comunicazioni</strong>: le email aggiungono obblighi che non compaiono nel documento firmato.</p>
+        <p>I <strong>termini e condizioni non sono pubblici</strong> sul sito web: il potenziale socio non può leggerli prima di recarsi in sede, in contrasto con i requisiti del Codice del Consumo.</p>
+        <p><strong>Il tesseramento CSI non è presidiato da nessun processo strutturato.</strong> Non esiste un sistema che verifichi, al momento dell'iscrizione o del rinnovo, se il socio risulta tesserato. Non esiste una dashboard che mostri quanti soci sono tesserati e quanti no. Il rischio è concreto: un incasso da un socio non tesserato non può essere classificato come corrispettivo istituzionale — con conseguenze fiscali dirette per il club. Un controllo che dipende dalla memoria dello staff è strutturalmente inaffidabile.</p>
+      </div>
+
+      <div class="block block-prop">
+        <div class="block-label"><span class="label-dot"></span>PROPOSTE — Direzioni di intervento</div>
+        <p><strong>Intervento immediato</strong> sulle due urgenze legali prima della prossima stagione. Il rischio non è teorico.</p>
+        <p><strong>Allineamento sistematico contratti-comunicazioni</strong>: i due documenti vanno rivisti in parallelo, non separatamente.</p>
+        <p><strong>Pubblicazione dei T&amp;C sul sito</strong> in una sezione dedicata, consultabile prima della visita in sede.</p>
+        <p><strong>Processo strutturato per il tesseramento CSI</strong>: ogni nuova iscrizione e ogni rinnovo deve includere, prima della registrazione del pagamento, la verifica e il completamento del tesseramento. Il processo deve essere rapido — completabile in pochi minuti — e sistematico: non un controllo discrezionale, ma un passaggio obbligatorio del flusso di iscrizione. Una <strong>dashboard di controllo</strong> che mostri in tempo reale lo stato di tesseramento dell'intera base soci è lo strumento minimo per garantire che nessun incasso avvenga fuori dai requisiti fiscali.</p>
+      </div>
+    </section>
+
+    <!-- AREA 7 -->
+    <section class="area-section" id="area7">
+      <div class="area-header">
+        <span class="area-tag">AREA 07</span>
+        <h2 class="area-title">Crediti e controllo di <em>gestione</em></h2>
+      </div>
+
+      <div class="block block-asis">
+        <div class="block-label"><span class="label-dot"></span>AS-IS — Situazione attuale</div>
+        <p>Il monitoraggio dei crediti avviene tramite un <strong>file Excel a tre livelli</strong>: dati grezzi mensili (11 fogli di dettaglio), mini-riepilogo per categoria, e dashboard direzionale (2 fogli RECAP con DSO, percentuale sul venduto, rischio per canale di pagamento). Linee di business: abbonamenti e altri settori. Copertura: dicembre 2024 – aprile 2026.</p>
+        <p>Il controllo di gestione — incrocio ricavi InfoRYOU e costi personale per <strong>marginalità per centro di costo</strong> — viene effettuato manualmente su richiesta. Non è un dato disponibile in tempo reale.</p>
+
+        <div class="stat-row">
+          <div class="stat-card"><div class="stat-number">13</div><div class="stat-label">fogli nel file<br>crediti Excel</div></div>
+          <div class="stat-card"><div class="stat-number">3</div><div class="stat-label">livelli di aggregazione<br>dati → dashboard</div></div>
+          <div class="stat-card"><div class="stat-number">DSO</div><div class="stat-label">Days Sales Outstanding<br>monitorato</div></div>
+        </div>
+      </div>
+
+      <div class="block block-gap">
+        <div class="block-label"><span class="label-dot"></span>GAP — Punti critici</div>
+        <p>Il file traccia i crediti ma <strong>non supporta la gestione attiva</strong>: nessuna pipeline operativa, nessun task di sollecito automatico. La costruzione e lettura del dato dipende da una singola risorsa, senza aggiornamento automatico.</p>
+        <p>La marginalità per centro di costo non è un dato corrente ma il risultato di <strong>un'elaborazione manuale su richiesta</strong>, non sostenibile come processo ordinario.</p>
+        <p>Prerequisiti necessari prima di un intervento strutturale: analisi approfondita di InfoRYOU e valutazione dello snellimento delle formule di abbonamento, che oggi generano complessità diretta nel tracciamento.</p>
+      </div>
+
+      <div class="block block-prop">
+        <div class="block-label"><span class="label-dot"></span>PROPOSTE — Direzioni di intervento</div>
+        <p>Una <strong>dashboard settimanale dei crediti</strong> aggiornata automaticamente, accessibile senza intervento manuale.</p>
+        <p>Una <strong>pipeline operativa per la gestione attiva</strong>: ogni posizione aperta ha responsabile, stato e data di prossimo contatto, con priorità per anzianità e importo.</p>
+        <p>Per il controllo di gestione: <strong>incrocio automatico ricavi InfoRYOU + costi personale</strong> per produrre la marginalità per centro di costo in modo continuativo — un dato che oggi viene costruito su richiesta deve diventare una vista ordinaria per la direzione.</p>
+      </div>
+    </section>
+
+    <!-- AREA 8 -->
+    <section class="area-section" id="area8">
+      <div class="area-header">
+        <span class="area-tag">AREA 08</span>
+        <h2 class="area-title">Processi HR e <em>amministrativi</em></h2>
+      </div>
+
+      <div class="block block-asis">
+        <div class="block-label"><span class="label-dot"></span>AS-IS — Situazione attuale</div>
+        <p>La gestione del personale è <strong>interamente manuale</strong>. Nessun software HR dedicato: contratti, rilevazione ore, cedolini, F24 e Certificazioni Uniche gestiti tramite documenti cartacei, file Excel e studio esterno. Ogni operazione ordinaria richiede intervento manuale dell'amministrazione.</p>
+        <p>Le richieste formali dei dipendenti — ferie, permessi, note spese — seguono percorsi informali: WhatsApp, voce, email personali. Non registrate in nessun sistema centralizzato.</p>
+      </div>
+
+      <div class="block block-gap">
+        <div class="block-label"><span class="label-dot"></span>GAP — Punti critici</div>
+        <p>Il gap più critico riguarda i <strong>collaboratori</strong>. Le ore vengono segnate su supporti cartacei informali (<strong>"pizzini"</strong>), raccolte e verificate manualmente dai responsabili di settore, e trasmesse all'amministrazione con ritardo inevitabile. L'amministrazione consolida informazioni frammentate e produce le paghe in ritardo rispetto all'operatività reale.</p>
+        <p>Il risultato è un <strong>lavoro sproporzionato su tutta la catena</strong>: collaboratore → responsabile di settore → amministrazione. La reportistica sulle performance arriva tardi, rendendo impossibile una gestione tempestiva delle situazioni critiche.</p>
+        <p>L'assenza di un canale formale per le richieste dei dipendenti genera ambiguità e potenziale incoerenza nel trattamento.</p>
+      </div>
+
+      <div class="block block-prop">
+        <div class="block-label"><span class="label-dot"></span>PROPOSTE — Direzioni di intervento</div>
+        <p><strong>Adozione urgente di Athletis</strong> per la gestione dei collaboratori. Athletis digitalizza l'intero ciclo: il collaboratore registra le proprie ore direttamente, il responsabile approva, l'amministrazione consolida automaticamente. Il processo a catena fatto di pizzini e trasmissioni ritardate diventa un flusso unico in tempo reale. La reportistica sulle performance diventa un dato corrente.</p>
+        <p>Una <strong>suite di form digitali</strong> per le richieste formali (ferie, permessi, note spese) con database centralizzato e stato visibile per chi fa la richiesta e per chi la gestisce.</p>
+      </div>
+    </section>
+
+    <!-- AREA 9 -->
+    <section class="area-section" id="area9">
+      <div class="area-header">
+        <span class="area-tag">AREA 09</span>
+        <h2 class="area-title">Certificato medico e <em>partnership Chiron</em></h2>
+      </div>
+
+      <div class="block block-asis">
+        <div class="block-label"><span class="label-dot"></span>AS-IS — Situazione attuale</div>
+        <p>Il certificato medico è un obbligo di legge. Ronchiverdi gestisce raccolta e controllo della documentazione, ma <strong>non esiste un processo standardizzato e comunicato in modo uniforme</strong>. Le informazioni arrivano al socio tramite email di reminder (30 e 15 gg prima) e contatto diretto con la segreteria.</p>
+        <p>Durante l'audit è emersa l'opportunità di una <strong>partnership con Chiron</strong>, struttura medica esterna. La proposta è stata rivista alla luce dell'approfondimento con DPO esterno (Nimaja Consulting) e di una call formale tra i DPO delle due parti del <strong>19 maggio 2026</strong>. Il processo non è ancora attivo.</p>
+      </div>
+
+      <div class="block block-gap">
+        <div class="block-label"><span class="label-dot"></span>GAP — Punti critici</div>
+        <p>La <strong>tipologia di certificato richiesta</strong> — agonistico o non agonistico — non è specificata nei moduli di iscrizione. Le email di reminder aggiungono il requisito ECG "nella norma" non presente nel contratto firmato: un obbligo comunicato ma non contrattualizzato.</p>
+        <p>Il certificato medico è un <strong>momento di contatto certo con il socio</strong> — arriva ogni anno, per tutti — e oggi viene gestito esclusivamente come obbligo burocratico, senza valenza di servizio o fidelizzazione.</p>
+        <p>Il nodo principale della partnership Chiron riguarda la <strong>privacy</strong>: qualsiasi trasmissione di dati a una struttura esterna richiede una base giuridica precisa, elemento che ha richiesto un ripensamento del modello operativo originale.</p>
+      </div>
+
+      <div class="block block-prop">
+        <div class="block-label"><span class="label-dot"></span>PROPOSTE — Direzioni di intervento</div>
+        <p>Una <strong>comunicazione standard sul certificato medico</strong> inviata a tutti gli iscritti: tipologia richiesta, modalità di consegna, tempi, riferimenti. Una comunicazione unica e coerente con il contratto firmato.</p>
+        <p>Partnership Chiron su <strong>due livelli</strong>:</p>
+        <p><strong>Livello 1 — tutti gli iscritti:</strong> nella comunicazione standard viene menzionata la partnership come opzione, con i recapiti Chiron. Il socio contatta autonomamente. Nessun dato trasmesso dal club.</p>
+        <p><strong>Livello 2 — abbonamenti &gt; €1.000:</strong> automazione dedicata con voucher per visita medica gratuita come benefit esclusivo. Il sistema voucher è progettato in modo che Ronchiverdi non trasmetta mai dati personali a Chiron: i due soggetti rimangono titolari autonomi del trattamento.</p>
+      </div>
+    </section>
+
+    <!-- AREA 10 -->
+    <section class="area-section" id="area10">
+      <div class="area-header">
+        <span class="area-tag">AREA 10</span>
+        <h2 class="area-title">Infrastruttura <em>digitale</em></h2>
+      </div>
+
+      <div class="block block-asis">
+        <div class="block-label"><span class="label-dot"></span>AS-IS — Situazione attuale</div>
+        <p>Ronchiverdi dispone di un <strong>ecosistema digitale già articolato</strong>. Il problema non è l'assenza di tecnologia: è che questi strumenti non comunicano tra loro.</p>
+        <p><strong>InfoRYOU</strong> — gestionale principale: abbonamenti, fatturazione, pagamenti, comunicazioni automatiche.<br>
+        <strong>MyWellness</strong> — prenotazione corsi e attività fitness.<br>
+        <strong>Meta Ads</strong> — lead generation tramite lead form nativi, esportazione manuale periodica.<br>
+        <strong>Google Sheets / Excel</strong> — gestione di rinnovi (23 fogli), crediti (13 fogli), segnalazioni, lead (16 fogli).<br>
+        <strong>WhatsApp</strong> — canale di comunicazione primario con i soci, usato su numeri personali e aziendali senza struttura definita.</p>
+        <p>Il <strong>sito web</strong> ha form di contatto attivi ma non integrati. La navigazione non guida l'utente verso un'azione chiara, l'impianto grafico non è all'altezza del posizionamento del club. I lead generati sono nell'ordine di <strong>1–5 al mese</strong>: un volume non proporzionato al potenziale. Il modulo principale "Prenota un tour" richiede un impegno formale in una fase di valutazione, senza alternative più leggere. Non esiste nessuna sezione dedicata ai soci esistenti.</p>
+      </div>
+
+      <div class="block block-gap">
+        <div class="block-label"><span class="label-dot"></span>GAP — Punti critici</div>
+        <p><strong>Nessuno dei sistemi parla con gli altri.</strong> Un contatto che arriva da Meta non entra automaticamente in InfoRYOU. Un rinnovo in InfoRYOU non aggiorna il file Excel. Una segnalazione in reception non genera nessun task. Il dato nasce in un posto, viene ricopiato manualmente in un altro: nel passaggio si perdono informazioni, si creano duplicati, si moltiplicano le ore di lavoro.</p>
+        <p><strong>Non esiste una vista unica del socio.</strong> Per avere una fotografia completa — da quando è iscritto, quali attività pratica, pagamenti in sospeso, scadenza certificato — bisogna aprire più sistemi separati.</p>
+        <p>WhatsApp è diventato un <strong>canale operativo critico senza essere mai stato progettato come tale</strong>. Conversazioni importanti esistono solo nelle chat personali dei singoli operatori. Se quella persona non è disponibile o lascia il club, l'informazione non è accessibile.</p>
+        <p>Il sito <strong>non genera lead in modo proporzionato al potenziale</strong>. L'architettura del modulo principale crea attrito. L'assenza di una knowledge base per i soci genera un carico quotidiano sulla segreteria interamente evitabile: in un club con la complessità operativa di Ronchiverdi — tipologie di abbonamento diverse, regole specifiche per attività, scadenze, procedure — questo carico è significativo.</p>
+      </div>
+
+      <div class="block block-prop">
+        <div class="block-label"><span class="label-dot"></span>PROPOSTE — Direzioni di intervento</div>
+        <p>L'obiettivo non è sostituire ciò che funziona. È costruire uno <strong>strato di connessione</strong> tra i sistemi esistenti e introdurre gli strumenti mancanti dove oggi c'è un vuoto. Il vuoto principale è l'assenza di un <strong>CRM</strong> — un sistema centrale dove ogni contatto ha una scheda unica che aggrega le informazioni da tutti i sistemi.</p>
+        <p>Un <strong>intervento strutturale sul sito</strong>: coerenza visiva con il brand, architettura di navigazione orientata alla conversione, form differenziati per attività di interesse. Una <strong>sezione dedicata ai soci</strong> — knowledge base, FAQ operative, guide alle procedure — che riduca il carico sulla segreteria. Le procedure scritte non sono un optional per un club della complessità di Ronchiverdi: sono uno strumento operativo necessario.</p>
+        <p>Per <strong>WhatsApp</strong>: una decisione strutturale — presidiarlo con uno strumento che permetta conversazioni tracciate e condivise tra il team (SuperAgent.fit per gestione conversazionale AI) o Brevo per broadcast. Le due soluzioni rispondono a esigenze diverse e non sono mutuamente esclusive.</p>
+      </div>
+    </section>
+
+    <!-- AREA 11 -->
+    <section class="area-section" id="area11">
+      <div class="area-header">
+        <span class="area-tag">AREA 11</span>
+        <h2 class="area-title">Processi di <em>manutenzione</em></h2>
+      </div>
+
+      <div class="block block-asis">
+        <div class="block-label"><span class="label-dot"></span>AS-IS — Situazione attuale</div>
+        <p>Il team di manutenzione è composto da <strong>sei risorse a tempo pieno</strong>, responsabili della gestione dell'intera struttura. Le segnalazioni di guasti e interventi necessari arrivano attraverso canali informali: comunicazioni verbali dallo staff, messaggi WhatsApp, o rilevazione diretta durante i giri di controllo. <strong>Non esiste un sistema strutturato di raccolta e tracciamento.</strong></p>
+      </div>
+
+      <div class="block block-gap">
+        <div class="block-label"><span class="label-dot"></span>GAP — Punti critici</div>
+        <p>L'assenza di un canale strutturato genera inefficienza su tutta la catena. Il manutentore non ha una lista ordinata di interventi con priorità e stato. Il responsabile non ha una vista aggregata di cosa è aperto, in corso o risolto. Lo staff che segnala un problema <strong>non sa se è stato preso in carico</strong>.</p>
+        <p>Non esiste <strong>tracciamento storico</strong>: impossibile sapere con quale frequenza si guasta un macchinario specifico, quali aree generano più richieste, o qual è il tempo medio di risoluzione per tipologia.</p>
+      </div>
+
+      <div class="block block-prop">
+        <div class="block-label"><span class="label-dot"></span>PROPOSTE — Direzioni di intervento</div>
+        <p>Un <strong>form digitale di segnalazione guasti</strong> accessibile da tutto lo staff via QR o link: area, tipo di problema, urgenza, foto allegata.</p>
+        <p>Un'<strong>interfaccia di controllo dedicata al team</strong>: lista interventi aperti, stato, priorità. Ogni manutentore vede cosa gli è assegnato, aggiorna in tempo reale e chiude il ticket a intervento completato.</p>
+        <p>Una <strong>dashboard storica per il responsabile</strong>: aree con più interventi, attrezzature che richiedono manutenzione frequente, tempi medi di risoluzione. Un dato oggi inesistente che diventa strumento di pianificazione.</p>
+      </div>
+    </section>
+
+    <!-- SINTESI -->
+    <section class="synthesis-section" id="sintesi">
+      <p class="section-eyebrow">Sintesi</p>
+      <h2 class="section-title">Il quadro <em>complessivo</em></h2>
+
+      <div class="synthesis-pillar">
+        <p class="synthesis-pillar-label">Nodo strutturale</p>
+        <h3 class="synthesis-pillar-title">Un'architettura che non supporta il management</h3>
+        <p>Ronchiverdi è un club guidato da un management presente, competente e coinvolto. Le tre figure apicali che presidiano le operazioni, lo sviluppo commerciale e l'area amministrativa dedicano una quota significativa del proprio tempo a un'attività che non dovrebbe essere necessaria: <strong>raccogliere dati, riconciliarli tra sistemi che non comunicano, e costruire manualmente le informazioni necessarie per prendere decisioni.</strong></p>
+        <p>Il problema non è la qualità delle persone. È l'architettura su cui lavorano. <strong>InfoRYOU tiene gli abbonamenti. 23 fogli Excel tengono i rinnovi. 13 fogli Excel tengono i crediti. 16 fogli Google Sheets tengono i lead.</strong> Nessuno parla con l'altro. Ogni riunione richiede una preparazione manuale, ogni decisione richiede una riconciliazione, ogni report richiede che qualcuno lo costruisca prima di poterlo leggere.</p>
+      </div>
+
+      <div class="synthesis-pillar">
+        <p class="synthesis-pillar-label">Rischio organizzativo</p>
+        <h3 class="synthesis-pillar-title">La delega senza visibilità</h3>
+        <p>Il modello di gestione attuale si basa su una delega che funziona finché le persone a cui si delega sono presenti, motivate e affidabili. In assenza di strumenti analitici che permettano di verificare l'operatività dall'alto, il controllo viene esercitato attraverso riunioni e confronti diretti.</p>
+        <p>Questo genera un <strong>profilo di rischio che merita attenzione</strong>. Quando la qualità del servizio dipende dall'iniziativa del singolo più che da un processo organizzativo strutturato, l'organizzazione è esposta a una vulnerabilità sistemica: la variabile umana non è governabile nel lungo periodo con la stessa affidabilità di un processo.</p>
+        <p>L'esempio più evidente riguarda le <strong>Young School</strong>. Settori come il nuoto sono completamente dipendenti da una singola figura che gestisce in autonomia la relazione con l'utente, la qualità del servizio e l'operatività del settore. Non esiste un processo scritto, non esiste tracciamento, non esiste una dashboard. <strong>Se quella risorsa non fosse disponibile, la business unit non avrebbe la struttura per reggere autonomamente.</strong> Non è un giudizio sulla persona: è una valutazione sull'architettura organizzativa.</p>
+      </div>
+
+      <div class="synthesis-pillar">
+        <p class="synthesis-pillar-label">Impatto economico</p>
+        <h3 class="synthesis-pillar-title">Il costo delle inefficienze</h3>
+        <p>Le inefficienze descritte in questo documento hanno un costo economico diretto e misurabile. La stima è conservativa: tiene conto solo delle ore di lavoro a basso valore, non dei costi indiretti legati a errori, ritardi e opportunità mancate.</p>
+
+        <div class="impact-chart">
+          <div class="impact-row">
+            <div>
+              <div class="impact-label">Segreteria e vendita</div>
+              <div class="impact-ore">200–250 ore/mese · 6,4 FTE</div>
+            </div>
+            <div class="impact-bar-track">
+              <div class="impact-bar" style="width:78%;">~200–250 ore/mese</div>
+            </div>
+            <div class="impact-value">€35.000–44.000 / anno</div>
+          </div>
+          <div class="impact-row">
+            <div>
+              <div class="impact-label">Amministrazione</div>
+              <div class="impact-ore">40–60 ore/mese</div>
+            </div>
+            <div class="impact-bar-track">
+              <div class="impact-bar" style="width:45%;">~40–60 ore/mese</div>
+            </div>
+            <div class="impact-value">€16.000–25.000 / anno</div>
+          </div>
+          <div class="impact-row">
+            <div>
+              <div class="impact-label">Manutenzione</div>
+              <div class="impact-ore">20–30 ore/mese · 6 FTE</div>
+            </div>
+            <div class="impact-bar-track">
+              <div class="impact-bar" style="width:18%;">~20–30 ore/mese</div>
+            </div>
+            <div class="impact-value">€5.000–6.000 / anno</div>
+          </div>
+          <div class="impact-divider"></div>
+          <div class="impact-total-row">
+            <div class="impact-total-label">Stima totale conservativa</div>
+            <div style=""></div>
+            <div>
+              <div class="impact-total-value">&gt; €55.000</div>
+              <div class="impact-total-sub">annui in ore lavoro a basso valore</div>
+            </div>
+          </div>
+        </div>
+
+        <p style="margin-top:24px;">Non è il costo di fare le cose. <strong>È il costo di farle nel modo sbagliato.</strong></p>
+      </div>
+
+      <div class="synthesis-pillar">
+        <p class="synthesis-pillar-label">La direzione</p>
+        <h3 class="synthesis-pillar-title">Restituire tempo alle persone</h3>
+        <p>L'obiettivo degli interventi proposti in questo documento <strong>non è ridurre il personale</strong>. È spostare il lavoro delle stesse persone da attività che non producono valore a attività che lo producono.</p>
+        <p>Liberare il management dalla riconciliazione manuale dei dati per restituirgli il tempo per decidere. Liberare la segreteria dalle risposte ripetitive per restituirle il tempo per la relazione. Liberare i responsabili di settore dalla gestione del caos per restituire loro il controllo.</p>
+        <p>E costruire, per la prima volta, <strong>un'organizzazione in cui la qualità del servizio non dipende da chi è in turno — ma da come è strutturato il processo.</strong></p>
+      </div>
+
+      <p class="closing-line">"L'equilibrio non si trova aggiungendo tecnologia.<br>Si trova togliendo attrito per restituire tempo alle persone."</p>
+    </section>
+
+  </main>
+</div>
+
+<script>
+// PASSWORD GATE
+function checkGate() {
+  var v = document.getElementById('gate-pwd').value;
+  if (v === 'ronchi2030') {
+    document.getElementById('gate').classList.add('hidden');
+    try { localStorage.setItem('rv-audit-2026', '1'); } catch(e){}
+  } else {
+    document.getElementById('gate-err').style.display = 'block';
+    document.getElementById('gate-pwd').style.borderColor = '#B33A2E';
+    setTimeout(function(){ document.getElementById('gate-pwd').style.borderColor = ''; }, 1500);
+  }
+}
+
+// Check stored auth
+(function(){
+  try {
+    if (localStorage.getItem('rv-audit-2026') === '1') {
+      document.getElementById('gate').classList.add('hidden');
+    }
+  } catch(e){}
+})();
+
+// Enter key on gate
+document.getElementById('gate-pwd').addEventListener('keydown', function(e){
+  if (e.key === 'Enter') checkGate();
+});
+
+// SCROLL SPY
+var sections = document.querySelectorAll('[id]');
+var links = document.querySelectorAll('.nav-link');
+
+function onScroll() {
+  var scrollY = window.pageYOffset + 120;
+  var current = '';
+  sections.forEach(function(s){
+    if (s.offsetTop <= scrollY) current = s.id;
+  });
+  links.forEach(function(l){
+    l.classList.remove('active');
+    if (l.getAttribute('href') === '#' + current) l.classList.add('active');
+  });
+}
+
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+// SMOOTH SCROLL
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click', function(e){
+    e.preventDefault();
+    var target = document.querySelector(this.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+</body>
+</html>
