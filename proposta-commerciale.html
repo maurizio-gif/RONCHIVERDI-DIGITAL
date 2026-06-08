@@ -441,63 +441,84 @@
   <p class="eyebrow">Investimento</p>
   <h2 class="section-title">Il valore di <em>dodici mesi</em></h2>
 
-  <table class="price-table">
-    <thead>
-      <tr>
-        <th>Voce</th>
-        <th>Dettaglio</th>
-        <th>Totale</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          <strong>Consulenza mensile</strong>
-          <div class="td-sub">Direzione progetto · 2 giorni/mese in sede a Torino · presidio remoto continuativo</div>
-          <div class="td-sub" style="margin-top:6px;color:#7A4E00;">Addebito ricorrente mensile · rivalsa INPS 4% · esente IVA</div>
-        </td>
-        <td style="color:var(--text-dim);font-size:14px;">€ 1.900 × 12 mesi<br><span style="font-size:12px;">+ € 76 rivalsa INPS/mese</span></td>
-        <td>€ 22.800<br><span style="font-size:12px;font-weight:400;color:var(--text-dim);">+ € 912 INPS</span></td>
-      </tr>
-      <tr>
-        <td>
+  <!-- CANONE MENSILE -->
+  <div style="margin-top:28px;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px;">Canone mensile</div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:1fr 200px 200px;border-bottom:1px solid var(--border);">
+        <div style="padding:10px 20px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);">Voce</div>
+        <div style="padding:10px 20px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);border-left:1px solid var(--border);">Cadenza</div>
+        <div style="padding:10px 20px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);text-align:right;border-left:1px solid var(--border);">Importo mensile</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 200px 200px;">
+        <div style="padding:22px 20px;">
+          <strong>Consulenza</strong>
+          <div style="font-size:12px;color:var(--text-dim);margin-top:4px;line-height:1.6;">Direzione progetto · 2 giorni/mese in sede · presidio remoto continuativo<br>Addebito ricorrente mensile · rivalsa INPS 4% · esente IVA</div>
+        </div>
+        <div style="padding:22px 20px;border-left:1px solid var(--border);font-size:14px;color:var(--text-dim);">Ogni mese<br><span style="font-size:12px;">× 12 mesi</span></div>
+        <div style="padding:22px 20px;border-left:1px solid var(--border);text-align:right;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;color:var(--text);">€ 1.900</div>
+          <div style="font-size:12px;color:var(--text-dim);margin-top:2px;">+ € 76 rivalsa INPS</div>
+          <div style="font-size:11px;color:var(--text-dim);margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">Totale 12 mesi: <strong style="color:var(--text);">€ 23.712</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- A PROGETTO -->
+  <div style="margin-top:24px;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px;">A progetto — saldo a SAL</div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:1fr 200px 200px;border-bottom:1px solid var(--border);">
+        <div style="padding:10px 20px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);">Voce</div>
+        <div style="padding:10px 20px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);border-left:1px solid var(--border);">Scadenza</div>
+        <div style="padding:10px 20px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);text-align:right;border-left:1px solid var(--border);">Importo netto</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 200px 200px;border-bottom:1px solid var(--border);">
+        <div style="padding:22px 20px;">
           <strong>Realizzazione</strong>
-          <div class="td-sub">Sviluppo sito, CRM, automazioni, dashboard, integrazioni — distribuito nelle 4 fasi</div>
-          <div class="td-sub" style="margin-top:6px;color:#7A4E00;">Saldo alla consegna per ogni fase (SAL) · IVA 22% esclusa</div>
-        </td>
-        <td>
-          <div class="td-breakdown">
-            Fase 0 — € 10.000<br>
-            Fase 1 — € 10.000<br>
-            Fase 2 — € 10.000<br>
-            Fase 3 — € 5.000
+          <div style="font-size:12px;color:var(--text-dim);margin-top:4px;line-height:1.6;">Sviluppo sito, CRM, automazioni, dashboard, integrazioni<br>IVA 22% esclusa · fattura alla consegna di ogni fase</div>
+        </div>
+        <div style="padding:22px 20px;border-left:1px solid var(--border);font-size:12px;color:var(--text-dim);line-height:2;">
+          Fase 0 — consegna<br>Fase 1 — consegna<br>Fase 2 — consegna<br>Fase 3 — consegna
+        </div>
+        <div style="padding:22px 20px;border-left:1px solid var(--border);text-align:right;">
+          <div style="font-size:12px;color:var(--text-dim);line-height:2;margin-bottom:12px;">
+            € 10.000<br>€ 10.000<br>€ 10.000<br>€ 5.000
           </div>
-        </td>
-        <td>€ 35.000<br><span style="font-size:12px;font-weight:400;color:var(--text-dim);">+ IVA 22%</span></td>
-      </tr>
-      <tr>
-        <td>
+          <div style="padding-top:8px;border-top:1px solid var(--border);">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;color:var(--text);">€ 35.000</div>
+            <div style="font-size:12px;color:var(--text-dim);margin-top:2px;">+ IVA 22% = € 42.700</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 200px 200px;">
+        <div style="padding:22px 20px;">
           <strong>Formazione</strong>
-          <div class="td-sub">Sessioni strutturate con il team nelle fasi 2 e 3 su tutti gli strumenti implementati</div>
-        </td>
-        <td style="color:var(--text-dim);font-size:14px;">Inclusa nelle fasi</td>
-        <td>€ 2.800</td>
-      </tr>
-      <tr class="total-row">
-        <td>Totale listino</td>
-        <td></td>
-        <td>€ 60.600</td>
-      </tr>
-      <tr class="package-row">
-        <td>
-          Offerta pacchetto
-          <div class="package-sub">Pagamento a SAL — saldo al termine di ogni fase · risparmio € 2.600</div>
-        </td>
-        <td></td>
-        <td>€ 58.000</td>
-      </tr>
-    </tbody>
-  </table>
+          <div style="font-size:12px;color:var(--text-dim);margin-top:4px;line-height:1.6;">Sessioni strutturate con il team nelle fasi 2 e 3<br>IVA 22% esclusa</div>
+        </div>
+        <div style="padding:22px 20px;border-left:1px solid var(--border);font-size:14px;color:var(--text-dim);">Fasi 2–3</div>
+        <div style="padding:22px 20px;border-left:1px solid var(--border);text-align:right;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;color:var(--text);">€ 2.800</div>
+          <div style="font-size:12px;color:var(--text-dim);margin-top:2px;">+ IVA 22% = € 3.416</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOTALI -->
+  <div style="margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px 24px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:8px;">Totale netto listino</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:500;color:var(--text);">€ 60.600</div>
+      <div style="font-size:12px;color:var(--text-dim);margin-top:4px;">consulenza + realizzazione + formazione</div>
+    </div>
+    <div style="background:var(--text);border:1px solid rgba(139,108,20,.4);border-radius:10px;padding:20px 24px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(247,246,242,.45);margin-bottom:8px;">Offerta pacchetto · risparmio € 2.600</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:500;color:#F0C040;">€ 58.000</div>
+      <div style="font-size:12px;color:rgba(247,246,242,.4);margin-top:4px;">pagamento a SAL — al termine di ogni fase</div>
+    </div>
+  </div>
 
   <p style="margin-top:18px;font-size:13px;line-height:1.7;color:var(--text-dim);">I costi di infrastruttura (hosting, database, piattaforme SaaS) sono esclusi da questo preventivo e vengono sostenuti direttamente da Ronchiverdi con contratti propri. Il dettaglio è nella sezione successiva.</p>
 </div>
