@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Proposta di Collaborazione — Ronchiverdi 2026–2027</title>
+  <title>Proposta di Progetto — Ronchiverdi 2026–2027</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -20,14 +20,20 @@
       --gold-light: #FEF6E4;
       --green: #2A5C30;
       --green-light: #E8F2EA;
+      --alert: #7B2D1A;
+      --alert-light: #FDF0ED;
     }
 
-    html { font-size: 16px; }
+    html { font-size: 16px; scroll-behavior: smooth; }
     body { background: var(--bg); color: var(--text); font-family: 'Jost', sans-serif; line-height: 1.6; }
     em { font-style: italic; }
     strong { font-weight: 600; }
 
-    /* PASSWORD GATE */
+    /* ---- VISIBILITY HELPERS ---- */
+    .detail { display: block; }
+    .pres-only { display: none; }
+
+    /* ---- PASSWORD GATE ---- */
     #gate {
       position: fixed; inset: 0; background: var(--bg);
       display: flex; align-items: center; justify-content: center;
@@ -35,37 +41,19 @@
     }
     #gate.hidden { display: none; }
     .gate-box { max-width: 400px; width: 100%; text-align: center; }
-    .gate-label {
-      font-family: 'JetBrains Mono', monospace; font-size: 11px;
-      letter-spacing: .14em; text-transform: uppercase; color: var(--text-dim);
-      margin-bottom: 24px;
-    }
-    .gate-title {
-      font-family: 'Cormorant Garamond', serif; font-size: 30px;
-      font-weight: 400; color: var(--text); margin-bottom: 32px; line-height: 1.3;
-    }
-    .gate-input {
-      width: 100%; padding: 14px 18px; background: #fff;
-      border: 1.5px solid var(--border); border-radius: 8px;
-      font-family: 'JetBrains Mono', monospace; font-size: 15px;
-      color: var(--text); outline: none; margin-bottom: 12px;
-      transition: border-color .2s;
-    }
+    .gate-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 24px; }
+    .gate-title { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 400; color: var(--text); margin-bottom: 32px; line-height: 1.3; }
+    .gate-input { width: 100%; padding: 14px 18px; background: #fff; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 15px; color: var(--text); outline: none; margin-bottom: 12px; transition: border-color .2s; }
     .gate-input:focus { border-color: var(--gold); }
-    .gate-btn {
-      width: 100%; padding: 14px; background: var(--text); color: var(--bg);
-      border: none; border-radius: 8px; font-family: 'Jost', sans-serif;
-      font-size: 14px; font-weight: 500; cursor: pointer; letter-spacing: .04em;
-      transition: opacity .2s;
-    }
+    .gate-btn { width: 100%; padding: 14px; background: var(--text); color: var(--bg); border: none; border-radius: 8px; font-family: 'Jost', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; letter-spacing: .04em; transition: opacity .2s; }
     .gate-btn:hover { opacity: .8; }
     .gate-error { font-size: 13px; color: #c0392b; margin-top: 10px; display: none; }
 
-    /* APP */
+    /* ---- APP ---- */
     #app { display: none; }
     #app.visible { display: block; }
 
-    /* TOPBAR */
+    /* ---- TOPBAR ---- */
     .topbar {
       position: sticky; top: 0; z-index: 100;
       background: rgba(247,246,242,.92); backdrop-filter: blur(8px);
@@ -73,195 +61,195 @@
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 32px; height: 52px;
     }
-    .btn-back {
-      font-size: 13px; color: var(--text-dim); text-decoration: none;
-      display: flex; align-items: center; gap: 6px; transition: color .2s;
-    }
+    .btn-back { font-size: 13px; color: var(--text-dim); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color .2s; }
     .btn-back:hover { color: var(--text); }
-    .btn-print {
-      display: flex; align-items: center; gap: 6px;
-      padding: 7px 14px; background: transparent; border: 1px solid var(--border);
-      border-radius: 6px; font-size: 12px; font-family: 'Jost', sans-serif;
-      color: var(--text-dim); cursor: pointer; transition: all .2s;
-    }
+    .btn-print { display: flex; align-items: center; gap: 6px; padding: 7px 14px; background: transparent; border: 1px solid var(--border); border-radius: 6px; font-size: 12px; font-family: 'Jost', sans-serif; color: var(--text-dim); cursor: pointer; transition: all .2s; }
     .btn-print:hover { color: var(--text); border-color: var(--text-dim); }
 
-    /* HERO */
+    /* ---- HERO ---- */
     .hero { padding: 80px 56px 64px; border-bottom: 1px solid var(--border); }
-    .hero-label {
-      font-family: 'JetBrains Mono', monospace; font-size: 11px;
-      letter-spacing: .14em; text-transform: uppercase; color: var(--text-dim);
-      margin-bottom: 24px;
-    }
-    .hero-title {
-      font-family: 'Cormorant Garamond', serif; font-size: clamp(42px, 6vw, 70px);
-      font-weight: 400; line-height: 1.1; color: var(--text); margin-bottom: 28px;
-    }
+    .hero-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 24px; }
+    .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(42px, 6vw, 70px); font-weight: 400; line-height: 1.1; color: var(--text); margin-bottom: 28px; }
     .hero-title em { color: var(--gold); }
-    .hero-sub {
-      font-size: 17px; line-height: 1.75; color: var(--text-dim);
-      max-width: 680px; margin-bottom: 40px;
-    }
-    .hero-meta {
-      display: flex; gap: 40px; flex-wrap: wrap;
-      border-top: 1px solid var(--border); padding-top: 28px;
-    }
-    .meta-label {
-      font-family: 'JetBrains Mono', monospace; font-size: 10px;
-      letter-spacing: .12em; text-transform: uppercase; color: var(--text-dim);
-      margin-bottom: 4px;
-    }
+    .hero-sub { font-size: 17px; line-height: 1.75; color: var(--text-dim); max-width: 680px; margin-bottom: 40px; }
+    .hero-meta { display: flex; gap: 40px; flex-wrap: wrap; border-top: 1px solid var(--border); padding-top: 28px; }
+    .meta-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 4px; }
     .meta-value { font-size: 14px; font-weight: 500; color: var(--text); }
 
-    /* SECTION */
+    /* ---- SECTION ---- */
     .section { padding: 64px 56px; border-bottom: 1px solid var(--border); }
-    .eyebrow {
-      font-family: 'JetBrains Mono', monospace; font-size: 10px;
-      letter-spacing: .14em; text-transform: uppercase; color: var(--text-dim);
-      margin-bottom: 16px;
-    }
-    .section-title {
-      font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 4vw, 42px);
-      font-weight: 400; line-height: 1.2; color: var(--text); margin-bottom: 28px;
-    }
+    .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 16px; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 4vw, 42px); font-weight: 400; line-height: 1.2; color: var(--text); margin-bottom: 28px; }
     .section-title em { color: var(--gold); }
     .lead { font-size: 17px; line-height: 1.75; color: var(--text); margin-bottom: 20px; }
     p { font-size: 15px; line-height: 1.7; color: var(--text); margin-bottom: 14px; }
     p:last-child { margin-bottom: 0; }
 
-    /* APPROCCIO CARDS */
+    /* ---- STEP HEADER ---- */
+    .step-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 12px; }
+    .step-badge { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; padding: 5px 12px; border-radius: 100px; flex-shrink: 0; }
+    .step-badge.urgent { background: var(--alert-light); color: var(--alert); border: 1px solid rgba(123,45,26,.25); }
+    .step-badge.phase-b { background: var(--gold-light); color: var(--gold); border: 1px solid rgba(139,108,20,.25); }
+    .step-badge.phase-c { background: var(--surface); color: var(--text-dim); border: 1px solid var(--border); }
+    .step-timeline { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); }
+
+    /* ---- URGENCY BANNER ---- */
+    .urgency-banner { background: var(--alert-light); border: 1.5px solid rgba(123,45,26,.25); border-radius: 10px; padding: 16px 22px; margin-bottom: 32px; display: flex; align-items: center; gap: 14px; }
+    .urgency-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--alert); flex-shrink: 0; }
+    .urgency-text { font-size: 14px; line-height: 1.6; color: var(--alert); margin: 0; }
+
+    /* ---- STEP A OVERVIEW (3 cards) ---- */
+    .step-overview { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 8px; }
+    .step-ov-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px 28px; }
+    .step-ov-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; display: block; }
+    .step-ov-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: var(--text); margin-bottom: 6px; }
+    .step-ov-desc { font-size: 13px; color: var(--text-dim); line-height: 1.6; margin: 0; }
+
+    /* ---- DELIVERABLE ---- */
+    .deliverable-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 10px; }
+    .deliverable-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; color: var(--text); margin-bottom: 16px; }
+    .deliverable-title em { color: var(--gold); }
+    .deliverable-desc { font-size: 15px; line-height: 1.75; color: var(--text); margin-bottom: 24px; }
+
+    /* ---- ARCH LIST ---- */
+    .arch-box { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 20px; }
+    .arch-box-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 12px; }
+    .arch-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .arch-item { font-size: 14px; line-height: 1.65; color: var(--text); padding-left: 18px; position: relative; }
+    .arch-item::before { content: '→'; position: absolute; left: 0; color: var(--gold); font-size: 12px; }
+
+    /* ---- BU GRID ---- */
+    .bu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+    .bu-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; }
+    .bu-card-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px; }
+    .bu-card p { font-size: 14px; line-height: 1.7; margin: 0; }
+
+    /* ---- INFO BOXES ---- */
+    .note-box { border-radius: 10px; padding: 18px 22px; margin-top: 12px; }
+    .note-box-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 7px; }
+    .note-box p { font-size: 14px; line-height: 1.7; margin: 0; }
+    .note-box.green { background: var(--green-light); border: 1.5px solid rgba(42,92,48,.2); }
+    .note-box.green .note-box-label { color: var(--green); }
+    .note-box.gray { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--text-dim); }
+    .note-box.gray .note-box-label { color: var(--text-dim); }
+    .note-box.neutral { background: var(--surface); border: 1px solid var(--border); }
+    .note-box.neutral .note-box-label { color: var(--text-dim); }
+
+    /* ---- TAG LIST ---- */
+    .tag-list { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 20px; }
+    .tag { font-size: 12px; padding: 4px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 100px; color: var(--text); font-weight: 500; }
+    .tag.green { background: var(--green-light); border-color: rgba(42,92,48,.2); color: var(--green); }
+    .tag.gold { background: var(--gold-light); border-color: rgba(139,108,20,.2); color: var(--gold); }
+
+    /* ---- DATA PIPELINE GRID ---- */
+    .pipeline-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin: 20px 0; }
+    .pipeline-col-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+    .pipeline-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+    .pipeline-list li { font-size: 13px; color: var(--text-dim); padding-left: 14px; position: relative; }
+    .pipeline-list li::before { content: '—'; position: absolute; left: 0; color: var(--text-dim); font-size: 11px; }
+
+    /* ---- TWO COL ---- */
     .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 28px; }
-    .info-card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 10px; padding: 24px 28px;
-    }
-    .info-card-label {
-      font-family: 'JetBrains Mono', monospace; font-size: 10px;
-      letter-spacing: .12em; text-transform: uppercase; color: var(--text-dim);
-      margin-bottom: 12px;
-    }
+    .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 22px 26px; }
+    .info-card-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 10px; }
     .info-card p { font-size: 14px; line-height: 1.7; margin: 0; }
 
-    /* PHASES */
-    .phase-list { display: flex; flex-direction: column; gap: 0; margin-top: 40px; position: relative; }
-    .phase-list::before {
-      content: ''; position: absolute; left: 155px; top: 20px;
-      bottom: 20px; width: 1px; background: var(--border); z-index: 0;
-    }
-    .phase-item { display: grid; grid-template-columns: 155px 1fr; position: relative; }
-    .phase-meta { padding: 20px 32px 32px 0; }
-    .phase-tag {
-      font-family: 'JetBrains Mono', monospace; font-size: 10px;
-      letter-spacing: .12em; text-transform: uppercase; color: var(--text-dim);
-      display: block; margin-bottom: 6px;
-    }
-    .phase-name { font-size: 15px; font-weight: 600; color: var(--text); display: block; margin-bottom: 4px; }
-    .phase-months { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--gold); display: block; }
-    .phase-dot {
-      position: absolute; left: 150px; top: 24px;
-      width: 11px; height: 11px; border-radius: 50%;
-      background: var(--gold); border: 2.5px solid var(--bg);
-      box-shadow: 0 0 0 1px var(--gold); z-index: 1;
-    }
-    .phase-body { padding: 20px 0 32px 32px; border-left: 1px solid var(--border); }
-    .phase-desc { font-size: 14px; line-height: 1.7; color: var(--text-dim); margin-bottom: 16px; }
-    .phase-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; }
-    .phase-tag-item {
-      font-size: 12px; padding: 4px 12px;
-      background: var(--bg); border: 1px solid var(--border);
-      border-radius: 100px; color: var(--text); font-weight: 500;
-    }
-    .phase-price {
-      font-family: 'Cormorant Garamond', serif; font-size: 24px;
-      font-weight: 500; color: var(--gold);
-    }
+    /* ---- DIRECTION SPLIT ---- */
+    .direction-split { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 28px; }
+    .direction-card { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .direction-head { padding: 18px 24px; border-bottom: 1px solid var(--border); background: var(--surface); }
+    .direction-head-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 6px; }
+    .direction-head-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: var(--text); }
+    .direction-body { padding: 20px 24px; }
+    .direction-body ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .direction-body ul li { font-size: 13px; line-height: 1.6; color: var(--text); padding-left: 16px; position: relative; }
+    .direction-body ul li::before { content: '—'; position: absolute; left: 0; color: var(--text-dim); font-size: 11px; }
 
-    /* PRICING TABLE */
-    .price-table { width: 100%; border-collapse: collapse; margin-top: 28px; }
-    .price-table th {
-      font-family: 'JetBrains Mono', monospace; font-size: 10px;
-      letter-spacing: .12em; text-transform: uppercase; color: var(--text-dim);
-      padding: 12px 20px; text-align: left; background: var(--surface);
-      border-bottom: 1px solid var(--border);
-    }
-    .price-table th:last-child { text-align: right; }
-    .price-table td { padding: 20px; border-bottom: 1px solid var(--border); vertical-align: top; }
-    .price-table td:last-child { text-align: right; white-space: nowrap; font-weight: 600; }
-    .price-table .td-sub { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
-    .price-table .td-breakdown { font-size: 12px; color: var(--text-dim); margin-top: 6px; line-height: 2; }
-    .price-table tr.total-row td { background: var(--surface); font-weight: 700; font-size: 15px; border-bottom: none; }
-    .price-table tr.total-row td:last-child {
-      font-family: 'Cormorant Garamond', serif; font-size: 34px;
-      font-weight: 500; color: var(--text);
-    }
-    .price-table tr.package-row td {
-      background: var(--text); color: var(--bg);
-      border-bottom: none; font-weight: 600; font-size: 15px;
-    }
-    .price-table tr.package-row td:last-child {
-      font-family: 'Cormorant Garamond', serif; font-size: 38px;
-      font-weight: 500; color: #F0C040;
-    }
-    .package-sub { font-size: 12px; color: rgba(247,246,242,.5); font-weight: 400; margin-top: 4px; }
+    /* ---- TIMELINE STRIP ---- */
+    .timeline-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-top: 32px; }
+    .timeline-col { padding: 24px 28px; }
+    .timeline-col + .timeline-col { border-left: 1px solid var(--border); }
+    .timeline-col.active { background: var(--text); }
+    .timeline-period { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 10px; }
+    .timeline-col.active .timeline-period { color: rgba(247,246,242,.5); }
+    .timeline-col:not(.active) .timeline-period { color: var(--text-dim); }
+    .timeline-step-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; margin-bottom: 10px; }
+    .timeline-col.active .timeline-step-name { color: #F0C040; }
+    .timeline-col:not(.active) .timeline-step-name { color: var(--text); }
+    .timeline-desc { font-size: 13px; line-height: 1.65; }
+    .timeline-col.active .timeline-desc { color: rgba(247,246,242,.6); }
+    .timeline-col:not(.active) .timeline-desc { color: var(--text-dim); }
 
-    /* INFRA TABLE */
+    /* ---- GOLD NOTE ---- */
+    .gold-note { background: var(--gold-light); border: 1.5px solid rgba(139,108,20,.2); border-radius: 10px; padding: 18px 22px; margin-top: 16px; }
+    .gold-note p { font-size: 14px; line-height: 1.75; color: var(--text); margin: 0; }
+
+    /* ---- INVESTMENT NUMBERS (presentation) ---- */
+    .invest-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 28px; }
+    .invest-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px 28px; }
+    .invest-card-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 10px; }
+    .invest-big { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 500; color: var(--text); line-height: 1.1; margin-bottom: 6px; }
+    .invest-unit { font-size: 18px; color: var(--text-dim); }
+    .invest-sub { font-size: 12px; color: var(--text-dim); line-height: 1.5; margin: 0; }
+
+    /* ---- INVESTMENT TABLES (document mode) ---- */
+    .invest-table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-top: 12px; }
+    .invest-row { display: grid; grid-template-columns: 1fr 180px 180px; }
+    .invest-row + .invest-row { border-top: 1px solid var(--border); }
+    .invest-row.header { border-bottom: 1px solid var(--border); }
+    .invest-cell { padding: 10px 20px; }
+    .invest-row.header .invest-cell { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-dim); }
+    .invest-cell:nth-child(2), .invest-cell:nth-child(3) { border-left: 1px solid var(--border); }
+    .invest-cell:nth-child(3) { text-align: right; }
+    .invest-row:not(.header) .invest-cell { padding: 18px 20px; }
+    .invest-cell-name { font-weight: 600; font-size: 14px; color: var(--text); margin-bottom: 4px; }
+    .invest-cell-note { font-size: 11px; color: var(--text-dim); line-height: 1.6; }
+    .invest-cell-amount { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500; color: var(--text); }
+    .invest-cell-note-sm { font-size: 11px; color: var(--text-dim); margin-top: 3px; }
+    .invest-badge-tbd { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; color: var(--text-dim); }
+    .invest-included { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--green); font-weight: 600; }
+
+    /* ---- KPI STRIP ---- */
+    .kpi-strip { display: grid; grid-template-columns: 240px 1fr; gap: 0; border: 1.5px solid rgba(139,108,20,.3); border-radius: 12px; overflow: hidden; margin-top: 20px; }
+    .kpi-strip-left { background: var(--text); padding: 24px 28px; display: flex; flex-direction: column; justify-content: center; }
+    .kpi-strip-badge { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: #F0C040; display: block; margin-bottom: 12px; }
+    .kpi-strip-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: #F7F6F2; line-height: 1.2; margin: 0; }
+    .kpi-strip-right { background: var(--gold-light); padding: 20px 28px; display: flex; align-items: center; }
+    .kpi-strip-right ul { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 7px 32px; width: 100%; }
+    .kpi-strip-right ul li { font-size: 13px; color: var(--text); padding-left: 16px; position: relative; line-height: 1.55; }
+    .kpi-strip-right ul li::before { content: '→'; position: absolute; left: 0; color: var(--gold); font-size: 11px; }
+
+    /* ---- INFRA TABLE ---- */
     .infra-table { width: 100%; border-collapse: collapse; margin-top: 28px; }
-    .infra-table th {
-      font-family: 'JetBrains Mono', monospace; font-size: 10px;
-      letter-spacing: .12em; text-transform: uppercase; color: var(--text-dim);
-      padding: 10px 16px; text-align: left;
-      background: var(--surface); border-bottom: 1px solid var(--border);
-    }
-    .infra-table td { padding: 16px; border-bottom: 1px solid var(--border); vertical-align: top; font-size: 14px; }
+    .infra-table th { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-dim); padding: 10px 16px; text-align: left; background: var(--surface); border-bottom: 1px solid var(--border); }
+    .infra-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); vertical-align: top; font-size: 14px; }
     .infra-table tr:last-child td { border-bottom: none; }
     .infra-table .td-note { font-size: 12px; color: var(--text-dim); margin-top: 3px; }
     .infra-table .td-cost { font-weight: 600; white-space: nowrap; }
 
-    /* RETAINER BOX */
-    .retainer-box {
-      background: var(--gold-light); border: 1.5px solid rgba(139,108,20,.25);
-      border-radius: 14px; padding: 36px 44px; margin-top: 32px;
-    }
-    .retainer-label {
-      font-family: 'JetBrains Mono', monospace; font-size: 10px;
-      letter-spacing: .12em; text-transform: uppercase; color: var(--gold);
-      margin-bottom: 10px;
-    }
-    .retainer-title {
-      font-family: 'Cormorant Garamond', serif; font-size: 28px;
-      color: var(--text); margin-bottom: 14px;
-    }
+    /* ---- RETAINER BOX ---- */
+    .retainer-box { background: var(--gold-light); border: 1.5px solid rgba(139,108,20,.25); border-radius: 14px; padding: 36px 44px; margin-top: 32px; }
+    .retainer-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .retainer-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; color: var(--text); margin-bottom: 12px; }
     .retainer-desc { font-size: 14px; line-height: 1.7; color: var(--text-dim); margin-bottom: 0; }
-    .retainer-amount {
-      font-family: 'Cormorant Garamond', serif; font-size: 42px;
-      font-weight: 500; color: var(--gold); margin-top: 24px;
-    }
+    .retainer-amount { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 500; color: var(--gold); margin-top: 20px; }
 
-    /* ELEMENTS BOX */
-    .elements-box {
-      background: var(--surface); border: 1px solid var(--border);
-      border-left: 3px solid var(--gold); border-radius: 12px;
-      padding: 36px 40px; margin-top: 32px;
-    }
-    .elements-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; margin-bottom: 28px; }
+    /* ---- ELEMENTS BOX ---- */
+    .elements-box { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--gold); border-radius: 12px; padding: 32px 36px; margin-top: 28px; }
+    .elements-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 16px; margin-bottom: 24px; }
     .elements-item-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
     .elements-item-desc { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
-    .elements-total {
-      display: flex; align-items: baseline; justify-content: space-between;
-      border-top: 1px solid rgba(139,108,20,.2); padding-top: 20px;
-      flex-wrap: wrap; gap: 12px;
-    }
+    .elements-total { display: flex; align-items: baseline; justify-content: space-between; border-top: 1px solid rgba(139,108,20,.2); padding-top: 18px; flex-wrap: wrap; gap: 10px; }
 
-    /* STEPS */
+    /* ---- STEPS LIST ---- */
     .steps-list { list-style: none; margin-top: 28px; display: flex; flex-direction: column; gap: 14px; }
     .step-item { display: flex; gap: 20px; align-items: flex-start; }
-    .step-num {
-      font-family: 'JetBrains Mono', monospace; font-size: 11px;
-      color: var(--gold); font-weight: 500; padding-top: 2px; min-width: 24px;
-    }
+    .step-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--gold); font-weight: 500; padding-top: 2px; min-width: 24px; }
     .step-text { font-size: 15px; line-height: 1.65; color: var(--text); }
 
-    /* PRINT */
+    /* ================================================================
+       PRINT
+    ================================================================ */
     @media print {
       .topbar, #gate { display: none !important; }
       #app { display: block !important; }
@@ -269,18 +257,139 @@
       .section, .hero { page-break-inside: avoid; }
     }
 
-    /* MOBILE */
-    @media (max-width: 720px) {
-      .hero, .section { padding: 40px 24px; }
-      .two-col, .elements-grid { grid-template-columns: 1fr; }
-      .topbar { padding: 0 20px; }
+    /* ================================================================
+       MOBILE  ≤ 719px
+    ================================================================ */
+    @media (max-width: 719px) {
+      .hero { padding: 40px 20px; }
+      .section { padding: 40px 20px; }
       .hero-meta { gap: 20px; }
-      .phase-list::before, .phase-dot { display: none; }
-      .phase-item { grid-template-columns: 1fr; }
-      .phase-meta { padding: 20px 0 8px; }
-      .phase-body { border-left: none; padding: 0 0 28px; border-top: 1px solid var(--border); padding-top: 16px; }
-      .price-table th:nth-child(2), .price-table td:nth-child(2) { display: none; }
-      .infra-table th:nth-child(2), .infra-table td:nth-child(2) { display: none; }
+      .topbar { padding: 0 20px; }
+      .two-col, .bu-grid, .direction-split, .step-overview, .elements-grid { grid-template-columns: 1fr; }
+      .timeline-strip { grid-template-columns: 1fr; }
+      .timeline-col + .timeline-col { border-left: none; border-top: 1px solid var(--border); }
+      .invest-grid { grid-template-columns: 1fr 1fr; }
+      .invest-row { grid-template-columns: 1fr; }
+      .invest-cell:nth-child(2), .invest-cell:nth-child(3) { border-left: none; border-top: 1px solid var(--border); }
+      .invest-cell:nth-child(3) { text-align: left; }
+      .pipeline-grid { grid-template-columns: 1fr; }
+      .kpi-strip { grid-template-columns: 1fr; }
+      .kpi-strip-right ul { grid-template-columns: 1fr; }
+      .section-title { font-size: clamp(28px, 7vw, 40px); }
+      .hero-title { font-size: clamp(38px, 9vw, 54px); }
+      .hero-sub { font-size: 15px; }
+      .lead { font-size: 15px; }
+    }
+
+    /* ================================================================
+       PRESENTATION  ≥ 1200px  (16:9 Full HD)
+    ================================================================ */
+    @media (min-width: 1200px) {
+
+      html {
+        scroll-snap-type: y mandatory;
+        scroll-padding-top: 52px;
+      }
+
+      .hero, .section {
+        min-height: calc(100vh - 52px);
+        scroll-snap-align: start;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 60px 9vw;
+        border-bottom: 1px solid var(--border);
+      }
+
+      /* ---- Typography ---- */
+      .hero-label { font-size: 12px; margin-bottom: 20px; }
+      .hero-title { font-size: clamp(68px, 8vw, 112px); margin-bottom: 24px; }
+      .hero-sub { font-size: clamp(17px, 1.6vw, 24px); max-width: 820px; margin-bottom: 36px; }
+      .meta-value { font-size: 16px; }
+      .hero-meta { gap: 52px; padding-top: 32px; }
+
+      .eyebrow { font-size: 12px; margin-bottom: 14px; }
+      .section-title { font-size: clamp(52px, 6.5vw, 96px); line-height: 1.05; margin-bottom: 24px; }
+      .deliverable-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(44px, 5.5vw, 80px); font-weight: 400; line-height: 1.1; color: var(--text); margin-bottom: 20px; }
+      .deliverable-title em { color: var(--gold); }
+      .deliverable-label { font-size: 12px; }
+      .lead { font-size: clamp(18px, 1.7vw, 26px); line-height: 1.65; max-width: 860px; margin-bottom: 28px; }
+      p { font-size: clamp(13px, 1.1vw, 16px); }
+      .step-timeline { font-size: 13px; }
+
+      /* ---- Hide verbose detail ---- */
+      .detail { display: none; }
+
+      /* ---- Show presentation-only ---- */
+      .pres-only { display: block; }
+
+      /* ---- Tags bigger ---- */
+      .tag { font-size: 14px; padding: 7px 18px; }
+      .tag-list { gap: 10px; margin-top: 24px; }
+
+      /* ---- Cards: bigger text ---- */
+      .bu-card p, .info-card p { font-size: 16px; line-height: 1.65; }
+      .bu-card-label, .info-card-label { font-size: 11px; }
+      .bu-card { padding: 24px 28px; }
+      .info-card { padding: 24px 28px; }
+
+      /* ---- Direction cards ---- */
+      .direction-head-title { font-size: 28px; }
+      .direction-body ul li { font-size: 15px; line-height: 1.65; }
+
+      /* ---- Arch list: 2-col in presentation ---- */
+      .arch-list { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 28px; }
+      .arch-item { font-size: 15px; }
+      .arch-box { padding: 22px 26px; }
+
+      /* ---- Step overview cards ---- */
+      .step-ov-title { font-size: 28px; }
+      .step-ov-desc { font-size: 15px; }
+      .step-ov-card { padding: 28px 32px; }
+
+      /* ---- Timeline ---- */
+      .timeline-step-name { font-size: 30px; }
+      .timeline-desc { font-size: 15px; }
+      .timeline-period { font-size: 12px; }
+      .timeline-col { padding: 28px 32px; }
+
+      /* ---- Urgency banner ---- */
+      .urgency-text { font-size: 16px; }
+      .urgency-banner { padding: 18px 26px; margin-bottom: 28px; }
+
+      /* ---- Pipeline grid ---- */
+      .pipeline-list li { font-size: 15px; gap: 8px; }
+      .pipeline-col-title { font-size: 14px; }
+      .pipeline-grid { padding: 24px 28px; }
+
+      /* ---- Invest grid (pres-only) ---- */
+      .invest-big { font-size: clamp(36px, 3.5vw, 52px); }
+      .invest-unit { font-size: 22px; }
+      .invest-card-label { font-size: 11px; }
+      .invest-sub { font-size: 13px; }
+      .invest-card { padding: 28px 32px; }
+
+      /* ---- Note boxes ---- */
+      .note-box { padding: 20px 26px; }
+      .note-box p { font-size: 15px; }
+
+      /* ---- Gold note ---- */
+      .gold-note p { font-size: 16px; }
+
+      /* ---- Step badge ---- */
+      .step-badge { font-size: 11px; padding: 6px 14px; }
+
+      /* ---- KPI strip ---- */
+      .kpi-strip-title { font-size: 28px; }
+      .kpi-strip-right ul li { font-size: 15px; }
+      .kpi-strip-left { padding: 28px 36px; }
+      .kpi-strip-right { padding: 24px 36px; }
+      .kpi-strip { margin-top: 28px; }
+
+      /* ---- Steps list ---- */
+      .step-text { font-size: 18px; line-height: 1.6; }
+      .step-num { font-size: 14px; }
+      .steps-list { gap: 20px; margin-top: 32px; }
     }
   </style>
 </head>
@@ -290,16 +399,16 @@
 <div id="gate">
   <div class="gate-box">
     <p class="gate-label">Documento riservato · Ronchiverdi Sport Club</p>
-    <h1 class="gate-title">Proposta di<br><em>Collaborazione</em></h1>
+    <h1 class="gate-title">Proposta di<br><em>Progetto</em></h1>
     <input type="password" id="gate-input" class="gate-input" placeholder="Password" autocomplete="off">
     <button class="gate-btn" onclick="checkGate()">Accedi →</button>
     <p class="gate-error" id="gate-error">Password non corretta.</p>
   </div>
 </div>
 
-<!-- APP -->
 <div id="app">
 
+<!-- ============================================================ TOPBAR -->
 <header class="topbar">
   <a href="index.html" class="btn-back">← Menu principale</a>
   <button class="btn-print" onclick="window.print()">
@@ -308,382 +417,492 @@
   </button>
 </header>
 
-<!-- HERO -->
+<!-- ============================================================ SLIDE 1: HERO -->
 <div class="hero">
-  <p class="hero-label">Ronchiverdi Sport Club · Proposta Commerciale 2026–2027</p>
-  <h1 class="hero-title">Dodici mesi per<br>costruire <em>l'infrastruttura</em><br>digitale del club</h1>
-  <p class="hero-sub">Una collaborazione strutturata in cinque fasi progressive: dall'acquisizione di nuovi soci all'automazione dei processi, fino a un management con visibilità reale sull'andamento del club.</p>
+  <p class="hero-label">Ronchiverdi Sport Club · Proposta di Progetto 2026–2027</p>
+  <h1 class="hero-title">Dall'attraction<br>all'<em>operativo</em>:<br>per step</h1>
+  <p class="hero-sub">Si parte da come attraiamo gli utenti e raccogliamo i dati. Si consolida durante l'estate. Si approfondisce in autunno. Nessun big-bang.</p>
   <div class="hero-meta">
     <div><p class="meta-label">Consulente</p><p class="meta-value">Maurizio Taruggi · Ready 2 Digital</p></div>
-    <div><p class="meta-label">Durata</p><p class="meta-value">12 mesi</p></div>
+    <div><p class="meta-label">Step A — scadenza</p><p class="meta-value">Entro settembre 2026</p></div>
     <div><p class="meta-label">Presenza in sede</p><p class="meta-value">2 giorni / mese · Torino</p></div>
     <div><p class="meta-label">Data proposta</p><p class="meta-value">Giugno 2026</p></div>
   </div>
 </div>
 
-<!-- OBIETTIVO -->
+<!-- ============================================================ SLIDE 2: APPROCCIO -->
 <div class="section">
-  <p class="eyebrow">Obiettivo</p>
-  <h2 class="section-title">Uno strumento <em>proprietario</em><br>costruito su misura</h2>
-  <p class="lead">L'obiettivo non è installare un software. È costruire un'infrastruttura digitale che rappresenti fedelmente il modo in cui Ronchiverdi lavora — la sua spina dorsale organizzativa.</p>
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:32px;">
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px 28px;">
-      <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px;">Sartorialità</p>
-      <p style="font-size:14px;line-height:1.7;color:var(--text);margin:0;">Ogni strumento viene progettato sullo schema operativo reale di Ronchiverdi — non adattato a un template generico. Le logiche riflettono le indicazioni di <strong>Marco, Paola e Lorella</strong> e potranno evolvere con quelle che emergeranno dall'uso degli strumenti stessi.</p>
+  <p class="eyebrow">Approccio</p>
+  <h2 class="section-title">Build, <em>validate</em>,<br>evolve</h2>
+  <p class="lead">Tre step progressivi. Ogni step alimenta il successivo con dati reali.</p>
+  <div class="timeline-strip">
+    <div class="timeline-col active">
+      <p class="timeline-period">Step A · Settembre 2026</p>
+      <p class="timeline-step-name">Attraction &amp; Foundation</p>
+      <p class="timeline-desc">Sito web, CRM lead, data pipeline. Live prima dell'apertura della stagione.</p>
     </div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px 28px;">
-      <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px;">Non dipendenza dal fornitore</p>
-      <p style="font-size:14px;line-height:1.7;color:var(--text);margin:0;">Gli strumenti vengono sviluppati con una logica di scalabilità e autonomia: <strong>Simone</strong> e il team interno possono modificare contenuti, aggiungere voci, correggere flussi senza dipendere da interventi tecnici esterni per le operazioni quotidiane.</p>
+    <div class="timeline-col">
+      <p class="timeline-period">Step B · Autunno–Inverno 2026</p>
+      <p class="timeline-step-name">Depth &amp; Automation</p>
+      <p class="timeline-desc">ERP operativo Young School + automazione AI recall commerciale via email e WhatsApp.</p>
     </div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px 28px;">
-      <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px;">Implementazione graduale</p>
-      <p style="font-size:14px;line-height:1.7;color:var(--text);margin:0;">Gli strumenti vengono attivati per fasi, non tutti insieme. L'obiettivo è evitare lo shock operativo: si implementa, si osserva come funziona nella realtà quotidiana, si corregge. Dodici mesi per costruire qualcosa di stabile, non per consegnare qualcosa di definitivo il giorno uno.</p>
+    <div class="timeline-col">
+      <p class="timeline-period">Step C · 2027</p>
+      <p class="timeline-step-name">Organization &amp; Operations</p>
+      <p class="timeline-desc">CRM unico per ruoli, HR, complaints, manutenzione.</p>
     </div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px 28px;">
-      <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px;">Formazione e trasferimento</p>
-      <p style="font-size:14px;line-height:1.7;color:var(--text);margin:0;">Ogni consegna include formazione dedicata. La Fase 3 prevede un percorso specifico con <strong>Simone</strong> per il rilascio definitivo della piattaforma: al termine del progetto, Ronchiverdi è autonoma. Il consulente rimane come presidio tecnico delle sole automazioni.</p>
-    </div>
-  </div>
-
-  <div style="margin-top:16px;background:var(--gold-light);border:1.5px solid rgba(139,108,20,.2);border-radius:10px;padding:22px 28px;">
-    <p style="font-size:14px;line-height:1.75;color:var(--text);margin:0;">L'architettura che viene costruita in questi dodici mesi non è un prodotto di mercato — è il <strong>metodo Ronchiverdi</strong> tradotto in strumenti digitali. Un sistema che raccorda tutte le aree operative, elimina le ridondanze manuali e dà al management una visibilità reale senza dover costruire report a mano prima di ogni riunione.</p>
   </div>
 </div>
 
-<!-- MODELLO DI LAVORO -->
+<!-- ============================================================ SLIDE 3: STEP A OVERVIEW -->
 <div class="section">
-  <p class="eyebrow">Modello di lavoro</p>
-  <h2 class="section-title">Come <em>lavoriamo</em> insieme</h2>
-  <p class="lead">La collaborazione si sviluppa su due dimensioni complementari: una presenza mensile fisica a Torino e un presidio remoto continuativo durante tutto il progetto.</p>
+  <div class="step-header">
+    <span class="step-badge urgent">Step A — Priorità assoluta</span>
+    <span class="step-timeline">Da avviare subito · Live entro settembre 2026</span>
+  </div>
+  <h2 class="section-title">Attraction<br>&amp; <em>Foundation</em></h2>
+  <div class="urgency-banner">
+    <div class="urgency-dot"></div>
+    <p class="urgency-text">Tassativo: operativo entro settembre 2026. I tre deliverable partono in parallelo.</p>
+  </div>
+  <div class="step-overview">
+    <div class="step-ov-card">
+      <span class="step-ov-num">A1</span>
+      <p class="step-ov-title">Sito web</p>
+      <p class="step-ov-desc">8 pagine + SEO dalla release 1. Lead capture con form condizionali per business unit.</p>
+    </div>
+    <div class="step-ov-card">
+      <span class="step-ov-num">A2</span>
+      <p class="step-ov-title">CRM lead</p>
+      <p class="step-ov-desc">Scadenzario, task, assegnazione per responsabile. Core e Young School separati.</p>
+    </div>
+    <div class="step-ov-card">
+      <span class="step-ov-num">A3</span>
+      <p class="step-ov-title">Data pipeline</p>
+      <p class="step-ov-desc">Parser InfoRYOU automatico. Query giornaliere su pagamenti, rinnovi, scadenze.</p>
+    </div>
+  </div>
+</div>
 
+<!-- ============================================================ SLIDE 4: A1 SITO WEB -->
+<div class="section">
+  <p class="deliverable-label">A1 — Primo deliverable</p>
+  <h3 class="deliverable-title">Il nuovo <em>sito web</em></h3>
+  <p class="lead">Non una vetrina — un meccanismo di acquisizione lead. Ogni pagina raccoglie dati di contatto in cambio di informazioni di valore.</p>
+
+  <div class="arch-box">
+    <p class="arch-box-label">Architettura — Release 1</p>
+    <ul class="arch-list">
+      <li class="arch-item"><strong>Home page</strong> — panoramica attività, CTA per ogni area</li>
+      <li class="arch-item"><strong>Triathlon / Tennis / Sport acquatici</strong> — abbonamenti senza prezzi, form contatto</li>
+      <li class="arch-item"><strong>Corsi Fitness</strong> — orari e tipologie, CTA richiesta info / appuntamento</li>
+      <li class="arch-item"><strong>Young School</strong> (una per disciplina) — percorsi, fasce d'età, CTA prova o info</li>
+      <li class="arch-item"><strong>Nuoto / Acqua Fitness</strong> — corsi adulti e bambini, CTA dedicata</li>
+      <li class="arch-item"><strong>Sala Pesi</strong> — orari, abbonamenti senza prezzi, form contatto</li>
+      <li class="arch-item"><strong>Personal Trainer</strong> — presentazione servizio, richiesta appuntamento o info</li>
+    </ul>
+  </div>
+
+  <div class="bu-grid">
+    <div class="bu-card">
+      <p class="bu-card-label">Core Club — Abbonamenti</p>
+      <p>Tipologie senza prezzi. <strong>Richiedi informazioni</strong> (→ CRM) oppure <strong>prenota appuntamento</strong> in sede con calendario. Il prezzo si condivide nella relazione diretta.</p>
+    </div>
+    <div class="bu-card">
+      <p class="bu-card-label">Young School — Percorsi</p>
+      <p>Focus su percorso e proposta educativa. <strong>Richiedi informazioni</strong> oppure <strong>richiedi una prova gratuita</strong>. Il form guida l'assegnazione al responsabile corretto.</p>
+    </div>
+  </div>
+
+  <div class="note-box green detail">
+    <p class="note-box-label">SEO — da subito</p>
+    <p>URL semantici, meta tag, structured data e heading hierarchy corretti già dalla release 1. Non si aggiunge SEO dopo — si costruisce su basi già ottimizzate.</p>
+  </div>
+
+  <div class="note-box green pres-only">
+    <p class="note-box-label">SEO dalla release 1</p>
+    <p>URL semantici · meta tag · structured data · heading hierarchy corretti su ogni pagina</p>
+  </div>
+
+  <div class="note-box gray detail">
+    <p class="note-box-label">Fase successiva — dopo il go-live</p>
+    <p>Pagine per <strong>singolo corso fitness o acqua fitness</strong> (es. Pilates mattino, Zumba, Acquagym…) e pagine per <strong>singola categoria Young School</strong> (es. Nuoto 6–9 anni, Tennis junior…). Ogni pagina = un punto d'ingresso SEO autonomo. Si pianifica dopo la validazione del traffico della release 1.</p>
+  </div>
+
+  <div class="note-box neutral detail" style="margin-top:12px;">
+    <p class="note-box-label">Valutazione da fare insieme</p>
+    <p>Il sito business (Elements) è oggi agganciato al sito principale. Occorre decidere se separarlo prima di avviare lo sviluppo.</p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Astro + Netlify</span>
+    <span class="tag">Form condizionali per BU</span>
+    <span class="tag">Calendario appuntamenti</span>
+    <span class="tag">Abbonamenti senza prezzi</span>
+    <span class="tag green">SEO dalla release 1</span>
+    <span class="tag">Sottopagine corsi — fase 2</span>
+  </div>
+</div>
+
+<!-- ============================================================ SLIDE 5: A2 CRM LEAD -->
+<div class="section">
+  <p class="deliverable-label">A2 — In parallelo con A1</p>
+  <h3 class="deliverable-title">CRM <em>lead</em></h3>
+  <p class="lead">Nessun contatto perso. Recall manuale ma organizzato: scadenzario, task, storico. Il commerciale misura le performance ogni mattina.</p>
+
+  <div class="bu-grid">
+    <div class="bu-card">
+      <p class="bu-card-label">Core Club</p>
+      <p>Responsabile dedicato. Lead con tipo abbonamento, contatto, orario preferito di richiamo. CRM assegna, scadenza, traccia l'esito.</p>
+    </div>
+    <div class="bu-card">
+      <p class="bu-card-label">Young School</p>
+      <p>Responsabile separato. Campi specifici: disciplina, fascia d'età, tipo richiesta. Assegnazione automatica. Performance confrontabili per area.</p>
+    </div>
+  </div>
+
+  <div class="gold-note">
+    <p>Obiettivo misurabile dal primo giorno: <strong>tempo medio di primo contatto, tasso di conversione per BU, lead persi per mancato follow-up.</strong></p>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">CRM Supabase</span>
+    <span class="tag">Scadenzario + task</span>
+    <span class="tag">Assegnazione per responsabile</span>
+    <span class="tag">Tracking conversioni</span>
+    <span class="tag">Interfaccia Softr</span>
+  </div>
+</div>
+
+<!-- ============================================================ SLIDE 6: A3 DATA PIPELINE -->
+<div class="section">
+  <p class="deliverable-label">A3 — In parallelo, priorità urgente</p>
+  <h3 class="deliverable-title">Data <em>pipeline</em></h3>
+  <p class="lead">I file Excel di InfoRYOU scaricati ogni notte diventano un database strutturato. Ogni mattina i dati del giorno precedente sono puliti, consolidati e pronti.</p>
+
+  <div class="pipeline-grid">
+    <div>
+      <p class="pipeline-col-title">Commerciale / Funnel</p>
+      <ul class="pipeline-list">
+        <li>Nuovi abbonamenti del giorno precedente</li>
+        <li>Rinnovi effettuati</li>
+        <li>Abbonamenti in scadenza (30–7 giorni)</li>
+        <li>Conversione lead → abbonato</li>
+      </ul>
+    </div>
+    <div>
+      <p class="pipeline-col-title">Operativo / Finance</p>
+      <ul class="pipeline-list">
+        <li>Pagamenti del giorno precedente</li>
+        <li>Certificati medici in scadenza</li>
+        <li>Crediti vs clienti aggiornati</li>
+        <li>KPI controllo di gestione</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tag-list">
+    <span class="tag">Parser InfoRYOU automatico</span>
+    <span class="tag">Query giornaliere ricorrenti</span>
+    <span class="tag">Logica deduplicazione</span>
+    <span class="tag">Database Supabase consolidato</span>
+    <span class="tag">Funnel primo livello</span>
+    <span class="tag">Finance &amp; CdG ready</span>
+  </div>
+</div>
+
+<!-- ============================================================ SLIDE 7: STEP B -->
+<div class="section">
+  <div class="step-header">
+    <span class="step-badge phase-b">Step B</span>
+    <span class="step-timeline">Da novembre 2026 · dopo validazione sett.–ott.</span>
+  </div>
+  <h2 class="section-title">Depth &amp; <em>Automation</em></h2>
+  <p class="lead">Dopo la calibrazione autunnale, tre filoni in parallelo.</p>
+  <div class="direction-split">
+    <div class="direction-card">
+      <div class="direction-head">
+        <p class="direction-head-label">Direzione 1</p>
+        <p class="direction-head-title">Young School<br>ERP operativo</p>
+      </div>
+      <div class="direction-body">
+        <ul>
+          <li>Assegnazione alunno → turno + istruttore</li>
+          <li>Interfaccia istruttore — presenze e follow-up</li>
+          <li>Visibilità al responsabile in tempo reale</li>
+          <li>Storico e progressione per alunno</li>
+          <li>Qualità condivisa, non dipendente dalla persona</li>
+        </ul>
+        <div class="tag-list">
+          <span class="tag">Softr istruttori</span>
+          <span class="tag">Assegnazione turni</span>
+          <span class="tag">Follow-up presenze</span>
+        </div>
+      </div>
+    </div>
+    <div class="direction-card">
+      <div class="direction-head">
+        <p class="direction-head-label">Direzione 2</p>
+        <p class="direction-head-title">AI recall<br>&amp; automazione</p>
+      </div>
+      <div class="direction-body">
+        <ul>
+          <li>Sequenze email automatiche condizionali</li>
+          <li>WhatsApp automation — qualificazione lead</li>
+          <li>Lead scoring su dati comportamentali</li>
+          <li>Commerciale interviene solo su lead qualificato</li>
+          <li>Logiche separate Core / Young School</li>
+        </ul>
+        <div class="tag-list">
+          <span class="tag">n8n automazioni</span>
+          <span class="tag">WhatsApp API</span>
+          <span class="tag">Lead scoring</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kpi-strip">
+    <div class="kpi-strip-left">
+      <span class="kpi-strip-badge">Continuo · Step B in poi</span>
+      <p class="kpi-strip-title">Consolidamento dati<br>&amp; Dashboard KPI</p>
+    </div>
+    <div class="kpi-strip-right">
+      <ul>
+        <li>Dashboard management con KPI commerciali e operativi in tempo reale</li>
+        <li>Storico dati da Step A — ogni metrica ha continuità temporale</li>
+        <li>Visibilità per area: Core, Young School, Finance</li>
+        <li>Base dati strutturata per decisioni strategiche, non solo operative</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ SLIDE 8: STEP C -->
+<div class="section">
+  <div class="step-header">
+    <span class="step-badge phase-c">Step C</span>
+    <span class="step-timeline">2027 · dopo consolidamento Step B</span>
+  </div>
+  <h2 class="section-title">Organization<br>&amp; <em>Operations</em></h2>
+  <p class="lead">Dal marketing a tutta l'organizzazione. Ogni flusso manuale ripetitivo diventa strutturato e tracciabile.</p>
   <div class="two-col">
     <div class="info-card">
-      <p class="info-card-label">In sede — Torino</p>
-      <p><strong>1 visita al mese, 2 giorni completi.</strong> Sessioni operative con il team, review dei processi, formazione hands-on, allineamento con la direzione. Le giornate in sede sono strutturate per massimizzare il trasferimento di competenze e il raccordo operativo tra le fasi.</p>
+      <p class="info-card-label">CRM unico per ruoli</p>
+      <p>Commerciale, reception, responsabili BU, direzione. Ognuno vede solo il suo perimetro. Rinnovi sincronizzati con InfoRYOU.</p>
     </div>
     <div class="info-card">
-      <p class="info-card-label">Remoto — Continuativo</p>
-      <p><strong>Presidio remoto durante tutto il progetto.</strong> Sviluppo degli strumenti, configurazione delle automazioni, supporto al team su criticità operative, aggiornamenti periodici sullo stato avanzamento lavori.</p>
+      <p class="info-card-label">Complaints &amp; Customer Care</p>
+      <p>Lamentele con assegnazione, follow-up e chiusura tracciata. Storico per analisi qualità, separato per area.</p>
     </div>
-  </div>
-
-  <p style="margin-top:24px;font-size:14px;color:var(--text-dim);line-height:1.7;">L'infrastruttura di automazione (n8n) rimane nell'infrastruttura del consulente — questo comporta costo zero per Ronchiverdi e viene coperto nell'ambito del retainer post-progetto, garantendo continuità operativa senza gestione tecnica diretta da parte del club.</p>
-</div>
-
-<!-- FASI -->
-<div class="section">
-  <p class="eyebrow">Piano di lavoro</p>
-  <h2 class="section-title">Le <em>cinque fasi</em><br>del progetto</h2>
-
-  <div class="phase-list">
-
-    <div class="phase-item">
-      <div class="phase-dot"></div>
-      <div class="phase-meta">
-        <span class="phase-tag">Fase 0</span>
-        <span class="phase-name">Fondamenta</span>
-        <span class="phase-months">Mese 1–3</span>
-      </div>
-      <div class="phase-body">
-        <p class="phase-desc">Prima parte del <a href="nuovo-sito.html" target="_blank" style="color:var(--gold);font-weight:500;">sito sportivo Ronchiverdi ↗</a>: descrizione di tutte le attività, form di prenotazione appuntamento e form contatti con logiche condizionali per qualificare il lead prima del contatto diretto. <a href="crm-logiche.html" target="_blank" style="color:var(--gold);font-weight:500;">CRM Supabase ↗</a> per la gestione del lead in ingresso e parser InfoRYOU per la conversione automatica del lead in abbonato. Automazione completa del processo certificato medico: generazione voucher e sistema di verifica integrato con <a href="chiron-certificato-medico.html" target="_blank" style="color:var(--gold);font-weight:500;">Chiron ↗</a>.</p>
-        <div class="phase-tags">
-          <span class="phase-tag-item">Sito Astro + Netlify</span>
-          <span class="phase-tag-item">Form prenotazione condizionale</span>
-          <span class="phase-tag-item">CRM Supabase — gestione lead</span>
-          <span class="phase-tag-item">Parser InfoRYOU</span>
-          <span class="phase-tag-item">Automazione cert. medico + voucher</span>
-          <span class="phase-tag-item">Integrazione Chiron</span>
-        </div>
-        <div class="phase-price">€ 10.000</div>
-      </div>
+    <div class="info-card">
+      <p class="info-card-label">HR &amp; Operativo staff</p>
+      <p>Ferie, permessi, disponibilità, prenotazione personal trainer. Fine dei flussi su WhatsApp e carta.</p>
     </div>
-
-    <div class="phase-item">
-      <div class="phase-dot"></div>
-      <div class="phase-meta">
-        <span class="phase-tag">Fase 1</span>
-        <span class="phase-name">CRM operativo</span>
-        <span class="phase-months">Mese 3–6</span>
-      </div>
-      <div class="phase-body">
-        <p class="phase-desc">Implementazione del CRM operativo per la gestione del contatto anche dopo l'iscrizione — storico socio, rinnovi, crediti in un unico database. CRM dedicato per le Young School con formazione del personale responsabile. Sistema di invio email singole e newsletter con liste automatiche basate sullo stato dell'abbonamento. Ottimizzazione dei flussi CRM commerciali. Prima parte delle dashboard di controllo per il management. Attivazione tesseramenti automatici. Avvio creazione knowledge base interna.</p>
-        <div class="phase-tags">
-          <span class="phase-tag-item">CRM operativo post-iscrizione</span>
-          <span class="phase-tag-item">Young School CRM + formazione</span>
-          <span class="phase-tag-item">Email singole + newsletter automatiche</span>
-          <span class="phase-tag-item">Ottimizzazione flussi commerciali</span>
-          <span class="phase-tag-item">Dashboard Softr — prima parte</span>
-          <span class="phase-tag-item">Tesseramenti automatici</span>
-          <span class="phase-tag-item">Knowledge base — avvio</span>
-        </div>
-        <div class="phase-price">€ 10.000</div>
-      </div>
+    <div class="info-card">
+      <p class="info-card-label">Manutenzione &amp; Pulizie</p>
+      <p>Segnalazioni strutturate da mobile con assegnazione e chiusura. Il responsabile vede la coda in tempo reale.</p>
     </div>
-
-    <div class="phase-item">
-      <div class="phase-dot"></div>
-      <div class="phase-meta">
-        <span class="phase-tag">Fase 2</span>
-        <span class="phase-name">Operatività avanzata</span>
-        <span class="phase-months">Mese 5–8</span>
-      </div>
-      <div class="phase-body">
-        <p class="phase-desc">Strutturazione delle procedure di customer care per la reception. Sistema automatizzato di gestione rinnovi con comunicazioni proattive multicanale. Dashboard pro per il management con visibilità completa sulle KPI operative. Integrazione WhatsApp con creazione di procedure interne per armonizzare l'utilizzo coordinato di più metodi di comunicazione (email, WhatsApp, telefono) verso il socio. Definizione e sviluppo del sito knowledge base per il team operativo.</p>
-        <div class="phase-tags">
-          <span class="phase-tag-item">Procedure customer care</span>
-          <span class="phase-tag-item">Automazione rinnovi</span>
-          <span class="phase-tag-item">Dashboard Softr Pro</span>
-          <span class="phase-tag-item">WhatsApp API</span>
-          <span class="phase-tag-item">Procedure comunicazione unificata</span>
-          <span class="phase-tag-item">Knowledge base — sito</span>
-        </div>
-        <div class="phase-price">€ 10.000</div>
-      </div>
-    </div>
-
-    <div class="phase-item">
-      <div class="phase-dot"></div>
-      <div class="phase-meta">
-        <span class="phase-tag">Fase 3</span>
-        <span class="phase-name">Rilascio</span>
-        <span class="phase-months">Mese 8–12</span>
-      </div>
-      <div class="phase-body">
-        <p class="phase-desc">Funnel di acquisizione automatico con comunicazioni WhatsApp integrate. Creazione delle dashboard complete per tutti i reparti. Sessione di correzioni e ottimizzazione su tutti i flussi attivi. Formazione definitiva dello staff su tutti gli strumenti implementati. Formazione dedicata con Simone per il rilascio definitivo e la gestione autonoma della piattaforma.</p>
-        <div class="phase-tags">
-          <span class="phase-tag-item">Funnel acquisizione automatico</span>
-          <span class="phase-tag-item">Comunicazioni automatiche WhatsApp</span>
-          <span class="phase-tag-item">Dashboard complete</span>
-          <span class="phase-tag-item">Correzioni e ottimizzazione</span>
-          <span class="phase-tag-item">Formazione staff definitiva</span>
-          <span class="phase-tag-item">Formazione Simone — rilascio piattaforma</span>
-        </div>
-        <div class="phase-price">€ 5.000</div>
-      </div>
-    </div>
-
   </div>
 </div>
 
-<!-- INVESTIMENTO -->
+<!-- ============================================================ SLIDE 9: INVESTIMENTO -->
 <div class="section">
   <p class="eyebrow">Investimento</p>
-  <h2 class="section-title">Il valore di <em>dodici mesi</em></h2>
+  <h2 class="section-title">La struttura<br><em>economica</em></h2>
 
-  <!-- CANONE MENSILE -->
-  <div style="margin-top:28px;">
-    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px;">Canone mensile</div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;">
-      <div style="display:grid;grid-template-columns:1fr 200px 200px;border-bottom:1px solid var(--border);">
-        <div style="padding:10px 20px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);">Voce</div>
-        <div style="padding:10px 20px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);border-left:1px solid var(--border);">Cadenza</div>
-        <div style="padding:10px 20px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);text-align:right;border-left:1px solid var(--border);">Importo mensile</div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 200px 200px;">
-        <div style="padding:22px 20px;">
-          <strong>Consulenza</strong>
-          <div style="font-size:12px;color:var(--text-dim);margin-top:4px;line-height:1.6;">Direzione progetto · 2 giorni/mese in sede · presidio remoto continuativo<br>Addebito ricorrente mensile · rivalsa INPS 4% · esente IVA</div>
-        </div>
-        <div style="padding:22px 20px;border-left:1px solid var(--border);font-size:14px;color:var(--text-dim);">Ogni mese<br><span style="font-size:12px;">× 12 mesi</span></div>
-        <div style="padding:22px 20px;border-left:1px solid var(--border);text-align:right;">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;color:var(--text);">€ 1.900</div>
-          <div style="font-size:12px;color:var(--text-dim);margin-top:2px;">+ € 76 rivalsa INPS</div>
-          <div style="font-size:11px;color:var(--text-dim);margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">Totale 12 mesi: <strong style="color:var(--text);">€ 23.712</strong></div>
-        </div>
-      </div>
+  <!-- Presentation view -->
+  <div class="invest-grid pres-only">
+    <div class="invest-card">
+      <p class="invest-card-label">Consulenza mensile</p>
+      <p class="invest-big">€ 1.900<span class="invest-unit">/mese</span></p>
+      <p class="invest-sub">× 12 mesi = € 23.712 · esente IVA + rivalsa INPS 4%</p>
+    </div>
+    <div class="invest-card">
+      <p class="invest-card-label">Step A — Realizzazione</p>
+      <p class="invest-big">€ 10.000</p>
+      <p class="invest-sub">A1 Sito € 5k · A2+A3 CRM+Pipeline € 5k · + IVA 22%</p>
+    </div>
+    <div class="invest-card">
+      <p class="invest-card-label">Step B — Stima</p>
+      <p class="invest-big">€ 8–12k</p>
+      <p class="invest-sub">Da preventivare dopo validazione Step A</p>
+    </div>
+    <div class="invest-card">
+      <p class="invest-card-label">Infrastruttura SaaS</p>
+      <p class="invest-big">€ 90–450<span class="invest-unit">/mese</span></p>
+      <p class="invest-sub">Paga Ronchiverdi direttamente. Step A: € 90–180. Pieno regime: fino a € 450.</p>
     </div>
   </div>
 
-  <!-- A PROGETTO -->
-  <div style="margin-top:24px;">
-    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px;">A progetto — saldo a SAL</div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;">
-      <div style="display:grid;grid-template-columns:1fr 200px 200px;border-bottom:1px solid var(--border);">
-        <div style="padding:10px 20px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);">Voce</div>
-        <div style="padding:10px 20px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);border-left:1px solid var(--border);">Scadenza</div>
-        <div style="padding:10px 20px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);text-align:right;border-left:1px solid var(--border);">Importo netto</div>
+  <!-- Document view -->
+  <div class="detail">
+    <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);margin:28px 0 10px;">Canone mensile di consulenza</p>
+    <div class="invest-table-wrap">
+      <div class="invest-row header">
+        <div class="invest-cell">Voce</div>
+        <div class="invest-cell">Cadenza</div>
+        <div class="invest-cell">Importo mensile</div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 200px 200px;border-bottom:1px solid var(--border);">
-        <div style="padding:22px 20px;">
-          <strong>Realizzazione</strong>
-          <div style="font-size:12px;color:var(--text-dim);margin-top:4px;line-height:1.6;">Sviluppo sito, CRM, automazioni, dashboard, integrazioni<br>IVA 22% esclusa · fattura alla consegna di ogni fase</div>
+      <div class="invest-row">
+        <div class="invest-cell">
+          <p class="invest-cell-name">Direzione di progetto</p>
+          <p class="invest-cell-note">2 giorni/mese in sede · presidio remoto continuativo · rivalsa INPS 4% · esente IVA</p>
         </div>
-        <div style="padding:22px 20px;border-left:1px solid var(--border);font-size:12px;color:var(--text-dim);line-height:2;">
-          Fase 0 — consegna<br>Fase 1 — consegna<br>Fase 2 — consegna<br>Fase 3 — consegna
-        </div>
-        <div style="padding:22px 20px;border-left:1px solid var(--border);text-align:right;">
-          <div style="font-size:12px;color:var(--text-dim);line-height:2;margin-bottom:12px;">
-            € 10.000<br>€ 10.000<br>€ 10.000<br>€ 5.000
-          </div>
-          <div style="padding-top:8px;border-top:1px solid var(--border);">
-            <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;color:var(--text);">€ 35.000</div>
-            <div style="font-size:12px;color:var(--text-dim);margin-top:2px;">+ IVA 22% = € 42.700</div>
-          </div>
-        </div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 200px 200px;">
-        <div style="padding:22px 20px;">
-          <strong>Formazione</strong>
-          <div style="font-size:12px;color:var(--text-dim);margin-top:4px;line-height:1.6;">Sessioni strutturate con il team nelle fasi 2 e 3 su tutti gli strumenti implementati</div>
-        </div>
-        <div style="padding:22px 20px;border-left:1px solid var(--border);font-size:14px;color:var(--text-dim);">Continua</div>
-        <div style="padding:22px 20px;border-left:1px solid var(--border);text-align:right;">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--green);font-weight:600;">Inclusa</div>
-          <div style="font-size:12px;color:var(--text-dim);margin-top:4px;">gratuita</div>
+        <div class="invest-cell" style="font-size:13px;color:var(--text-dim);">Ogni mese<br>× 12 mesi</div>
+        <div class="invest-cell">
+          <p class="invest-cell-amount">€ 1.900</p>
+          <p class="invest-cell-note-sm">+ € 76 rivalsa INPS · totale 12 mesi: <strong>€ 23.712</strong></p>
         </div>
       </div>
     </div>
+
+    <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);margin:20px 0 10px;">Realizzazione — saldo a SAL</p>
+    <div class="invest-table-wrap">
+      <div class="invest-row header">
+        <div class="invest-cell">Voce</div>
+        <div class="invest-cell">Scadenza</div>
+        <div class="invest-cell">Importo netto</div>
+      </div>
+      <div class="invest-row">
+        <div class="invest-cell">
+          <p class="invest-cell-name">Step A — Sito web</p>
+          <p class="invest-cell-note">Sviluppo sito, form condizionali, calendario · IVA 22% esclusa</p>
+        </div>
+        <div class="invest-cell" style="font-size:13px;color:var(--text-dim);">Consegna A1</div>
+        <div class="invest-cell"><p class="invest-cell-amount">€ 5.000</p></div>
+      </div>
+      <div class="invest-row">
+        <div class="invest-cell">
+          <p class="invest-cell-name">Step A — CRM lead + Data pipeline</p>
+          <p class="invest-cell-note">CRM Supabase, parser InfoRYOU, query ricorrenti, interfaccia Softr · IVA 22% esclusa</p>
+        </div>
+        <div class="invest-cell" style="font-size:13px;color:var(--text-dim);">Consegna A2+A3</div>
+        <div class="invest-cell"><p class="invest-cell-amount">€ 5.000</p></div>
+      </div>
+      <div class="invest-row">
+        <div class="invest-cell">
+          <p class="invest-cell-name">Step B — ERP Young School + Automazioni</p>
+          <p class="invest-cell-note">Da preventivare dopo validazione Step A · IVA 22% esclusa</p>
+        </div>
+        <div class="invest-cell" style="font-size:13px;color:var(--text-dim);">Nov–Feb 2026/27</div>
+        <div class="invest-cell">
+          <p class="invest-badge-tbd">Da definire</p>
+          <p class="invest-cell-note-sm">€ 8.000–12.000 stima</p>
+        </div>
+      </div>
+      <div class="invest-row">
+        <div class="invest-cell">
+          <p class="invest-cell-name">Formazione team</p>
+          <p class="invest-cell-note">Sessioni strutturate a ogni consegna</p>
+        </div>
+        <div class="invest-cell" style="font-size:13px;color:var(--text-dim);">Continua</div>
+        <div class="invest-cell"><p class="invest-included">Inclusa</p></div>
+      </div>
+    </div>
+
+    <p style="margin-top:16px;font-size:13px;line-height:1.7;color:var(--text-dim);">Costi infrastruttura SaaS esclusi — sostenuti direttamente da Ronchiverdi.</p>
   </div>
-
-
-  <p style="margin-top:18px;font-size:13px;line-height:1.7;color:var(--text-dim);">I costi di infrastruttura (hosting, database, piattaforme SaaS) sono esclusi da questo preventivo e vengono sostenuti direttamente da Ronchiverdi con contratti propri. Il dettaglio è nella sezione successiva.</p>
 </div>
 
-<!-- INFRASTRUTTURA -->
+<!-- ============================================================ SLIDE 10: INFRASTRUTTURA -->
 <div class="section">
   <p class="eyebrow">Costi di infrastruttura</p>
   <h2 class="section-title">Cosa paga <em>Ronchiverdi</em><br>direttamente</h2>
-  <p class="lead" style="margin-bottom:0;">Contratti diretti tra Ronchiverdi e i fornitori — il consulente non agisce da intermediario. Stime basate sull'utilizzo previsto a pieno regime.</p>
-
+  <p class="lead">Contratti diretti tra Ronchiverdi e i fornitori. Nessuna intermediazione del consulente.</p>
   <table class="infra-table">
     <thead>
-      <tr>
-        <th>Strumento</th>
-        <th>Note</th>
-        <th>Costo stimato</th>
-      </tr>
+      <tr><th>Strumento</th><th>Note</th><th>Costo stimato</th></tr>
     </thead>
     <tbody>
       <tr>
-        <td>
-          <strong>Softr</strong>
-          <div class="td-note">Dashboard operative per management e staff</div>
-        </td>
+        <td><strong>Softr</strong><div class="td-note">Interfaccia CRM, dashboard management, interfaccia istruttori (Step B)</div></td>
         <td style="font-size:13px;color:var(--text-dim);">Piano Pro</td>
         <td class="td-cost">$ 49–139 / mese</td>
       </tr>
       <tr>
-        <td>
-          <strong>Supabase</strong>
-          <div class="td-note">Database CRM — soci, rinnovi, crediti, lead, Young School</div>
-        </td>
+        <td><strong>Supabase</strong><div class="td-note">Database CRM — lead, soci, rinnovi, data pipeline InfoRYOU</div></td>
         <td style="font-size:13px;color:var(--text-dim);">Piano Pro</td>
         <td class="td-cost">~ $ 25 / mese</td>
       </tr>
       <tr>
-        <td>
-          <strong>Netlify</strong>
-          <div class="td-note">Hosting sito web Ronchiverdi</div>
-        </td>
+        <td><strong>Netlify</strong><div class="td-note">Hosting sito web Ronchiverdi</div></td>
         <td style="font-size:13px;color:var(--text-dim);">Gratuito / Pro</td>
         <td class="td-cost">€ 0–19 / mese</td>
       </tr>
       <tr>
-        <td>
-          <strong>WhatsApp Business API</strong>
-          <div class="td-note">Comunicazioni automatizzate verso i soci — attivo dalla Fase 3</div>
-        </td>
+        <td><strong>WhatsApp Business API</strong><div class="td-note">Comunicazioni automatizzate — attivo dallo Step B</div></td>
         <td style="font-size:13px;color:var(--text-dim);">Volume stimato</td>
         <td class="td-cost">€ 250 / mese<br><span style="font-size:12px;font-weight:400;color:var(--text-dim);">+ € 0,09 / msg oltre 1.000</span></td>
       </tr>
       <tr>
-        <td>
-          <strong>SendGrid API</strong>
-          <div class="td-note">Email transazionali e marketing — comunicazioni soci, newsletter, sequenze automatizzate</div>
-        </td>
+        <td><strong>SendGrid API</strong><div class="td-note">Email transazionali, newsletter, sequenze automatizzate (Step B)</div></td>
         <td style="font-size:13px;color:var(--text-dim);">Canone API</td>
         <td class="td-cost">€ 20 / mese</td>
       </tr>
       <tr>
-        <td>
-          <strong>n8n — Automazioni</strong>
-          <div class="td-note">Flussi operativi automatizzati — infrastruttura del consulente, inclusa nel retainer</div>
-        </td>
+        <td><strong>n8n Automazioni</strong><div class="td-note">Flussi operativi — infrastruttura del consulente, inclusa nel retainer</div></td>
         <td style="font-size:13px;color:var(--text-dim);">Infrastruttura consulente</td>
         <td class="td-cost" style="color:var(--green);">€ 0 per Ronchiverdi</td>
       </tr>
     </tbody>
   </table>
-
-  <p style="margin-top:18px;font-size:13px;line-height:1.7;color:var(--text-dim);">
-    Stima totale a pieno regime (dalla Fase 3):
-    <strong style="color:var(--text);">€ 340–450 / mese.</strong>
-    Nelle fasi iniziali, prima dell'attivazione di WhatsApp API, il costo si attesta intorno a
-    <strong style="color:var(--text);">€ 90–180 / mese.</strong>
-  </p>
+  <p style="margin-top:16px;font-size:13px;line-height:1.7;color:var(--text-dim);">Step A (senza WhatsApp): <strong style="color:var(--text);">€ 90–180 / mese.</strong> Pieno regime Step B: <strong style="color:var(--text);">€ 340–450 / mese.</strong></p>
 </div>
 
-<!-- RETAINER POST-PROGETTO -->
+<!-- ============================================================ SLIDE 11: RETAINER -->
 <div class="section">
-  <p class="eyebrow">Dopo i 12 mesi</p>
-  <h2 class="section-title">Il retainer <em>post-progetto</em></h2>
-  <p>Al termine dei 12 mesi il club dispone di un'infrastruttura digitale funzionante e di un team formato per gestirla in autonomia. Il retainer garantisce la continuità operativa delle automazioni e un presidio tecnico per manutenzione ed evoluzioni.</p>
-
+  <p class="eyebrow">Continuità</p>
+  <h2 class="section-title">Il retainer<br><em>post-progetto</em></h2>
+  <p class="lead">Al termine del ciclo il club è autonomo sugli strumenti. Il retainer mantiene le automazioni operative e garantisce un presidio tecnico continuativo.</p>
   <div class="retainer-box">
-    <p class="retainer-label">Retainer mensile post-progetto</p>
-    <h3 class="retainer-title">Manutenzione automazioni<br>e presidio tecnico continuativo</h3>
-    <p class="retainer-desc">Gestione e aggiornamento delle automazioni n8n, monitoraggio dei flussi attivi, interventi correttivi, supporto tecnico al team su richiesta. Nessuna sorpresa operativa: l'infrastruttura rimane attiva senza che Ronchiverdi debba gestire complessità tecniche.</p>
+    <p class="retainer-label">Retainer mensile</p>
+    <h3 class="retainer-title">Manutenzione automazioni e presidio tecnico</h3>
+    <p class="retainer-desc detail">Gestione e aggiornamento flussi n8n, monitoraggio operativo, interventi correttivi, supporto tecnico su richiesta.</p>
     <div class="retainer-amount">€ 350 – 450 / mese</div>
   </div>
 </div>
 
-<!-- RISTORANTE ELEMENTS -->
+<!-- ============================================================ SLIDE 12: ELEMENTS -->
 <div class="section">
   <p class="eyebrow">Progetto parallelo</p>
-  <h2 class="section-title">Ristorante <em>Elements</em></h2>
-  <p>Perimetro separato dall'audit principale, senza carattere d'urgenza operativa immediata. Il progetto viene quotato autonomamente e può essere attivato in qualsiasi momento — prima, durante o dopo il progetto principale — senza dipendenze di fasi.</p>
-
+  <h2 class="section-title">Ristorante<br><em>Elements</em></h2>
+  <p class="lead">Perimetro separato, attivabile in qualsiasi momento senza dipendenze dal progetto sport.</p>
   <div class="elements-box">
-    <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;">Perimetro di intervento</p>
+    <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;">Perimetro</p>
     <div class="elements-grid">
-      <div>
-        <p class="elements-item-title">Sito dedicato Elements</p>
-        <p class="elements-item-desc">Astro + Netlify, struttura semplificata rispetto al ramo sport. Pagina offerta eventi, galleria, form richiesta con consenso GDPR integrato. Coerenza di brand e stack con l'ecosistema Ronchiverdi.</p>
-      </div>
-      <div>
-        <p class="elements-item-title">CRM eventi — Supabase + Softr</p>
-        <p class="elements-item-desc">Pipeline eventi (preventivo → confermato → completato), database clienti con storico, flag marketing. Il form del sito alimenta Supabase direttamente. Interfaccia Softr gestibile autonomamente dalla responsabile.</p>
-      </div>
-      <div>
-        <p class="elements-item-title">Gestione ordini forniture</p>
-        <p class="elements-item-desc">Form digitale per la registrazione degli ordini, database visibile in tempo reale. Eliminazione della trascrizione Excel manuale del sabato.</p>
-      </div>
-      <div>
-        <p class="elements-item-title">Prenotazioni Cal.com</p>
-        <p class="elements-item-desc">Agenda integrata con il CRM per appuntamenti di preventivo. Il cliente qualificato dal sito prenota direttamente senza scambi di messaggi intermedi.</p>
-      </div>
+      <div><p class="elements-item-title">Sito dedicato Elements</p><p class="elements-item-desc">Astro + Netlify. Offerta eventi, galleria, form con GDPR integrato.</p></div>
+      <div><p class="elements-item-title">CRM eventi — Supabase + Softr</p><p class="elements-item-desc">Pipeline preventivo → confermato → completato. Form alimenta database in automatico.</p></div>
+      <div><p class="elements-item-title">Gestione ordini forniture</p><p class="elements-item-desc">Form digitale per registrazione ordini. Eliminazione Excel manuale del sabato.</p></div>
+      <div><p class="elements-item-title">Prenotazioni Cal.com</p><p class="elements-item-desc">Agenda integrata con CRM. Il cliente prenota senza scambi di messaggi.</p></div>
     </div>
     <div class="elements-total">
       <p style="font-size:14px;color:var(--text-dim);margin:0;">Preventivo progetto Elements</p>
       <p style="font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:500;color:var(--gold);margin:0;">€ 5.000</p>
     </div>
-    <p style="font-size:12px;color:var(--text-dim);margin-top:10px;margin-bottom:0;">Attivabile in qualsiasi momento su richiesta, indipendentemente dall'avanzamento del progetto principale. Retainer incluso nel retainer post-progetto principale.</p>
   </div>
 </div>
 
-<!-- PROSSIMI PASSI -->
+<!-- ============================================================ SLIDE 13: PROSSIMI PASSI -->
 <div class="section" style="border-bottom:none;">
   <p class="eyebrow">Per iniziare</p>
   <h2 class="section-title">Prossimi <em>passi</em></h2>
-  <p>Questa proposta è il punto di partenza di una conversazione, non un documento definitivo. Ogni fase è strutturata per essere validata prima di procedere alla successiva.</p>
-
   <ul class="steps-list">
     <li class="step-item">
       <span class="step-num">01</span>
-      <span class="step-text"><strong>Feedback sulla proposta.</strong> Revisione delle fasi, degli scope e dei costi. Eventuali aggiustamenti di perimetro prima della firma.</span>
+      <span class="step-text"><strong>Feedback sulla proposta.</strong> Allineamento su perimetro Step A, gestione sito Elements, conferma responsabili Core e Young School.</span>
     </li>
     <li class="step-item">
       <span class="step-num">02</span>
-      <span class="step-text"><strong>Firma e kick-off.</strong> Contratto di consulenza, pianificazione della prima visita in sede a Torino.</span>
+      <span class="step-text"><strong>Firma e kick-off.</strong> Contratto, prima visita a Torino, accesso agli export InfoRYOU.</span>
     </li>
     <li class="step-item">
       <span class="step-num">03</span>
-      <span class="step-text"><strong>Brief tecnico sito e GANTT di progetto.</strong> Documento di dettaglio per il sito Ronchiverdi — architettura, contenuti, obiettivi di conversione. In parallelo, redazione del GANTT con il piano temporale delle fasi, i milestone di consegna e le risorse richieste lato Ronchiverdi per ogni fase (referenti, disponibilità, accessi, materiali).</span>
+      <span class="step-text"><strong>Brief tecnico sito + GANTT Step A.</strong> Architettura pagine, CTA definitive per BU, piano temporale con milestone e risorse richieste a Ronchiverdi.</span>
     </li>
     <li class="step-item">
       <span class="step-num">04</span>
-      <span class="step-text"><strong>Avvio Fase 0.</strong> Sviluppo del sito e del parser InfoRYOU in parallelo. Primo checkpoint alla fine del mese 2.</span>
+      <span class="step-text"><strong>Avvio in parallelo.</strong> Sito, CRM e data pipeline partono insieme. Checkpoint fine mese 2. Validazione a settembre prima di pianificare Step B.</span>
     </li>
   </ul>
 </div>
@@ -692,17 +911,13 @@
 
 <script>
   (function() {
-    const KEY = 'rv-prop-2026';
-    const PWD = 'ronchi2031';
-    if (localStorage.getItem(KEY) === '1') unlock();
+    if (localStorage.getItem('rv-prop-2026') === '1') unlock();
     document.getElementById('gate-input').addEventListener('keydown', function(e) {
       if (e.key === 'Enter') checkGate();
     });
   })();
-
   function checkGate() {
-    var val = document.getElementById('gate-input').value;
-    if (val === 'ronchi2031') {
+    if (document.getElementById('gate-input').value === 'ronchi2031') {
       localStorage.setItem('rv-prop-2026', '1');
       unlock();
     } else {
@@ -710,7 +925,6 @@
       document.getElementById('gate-input').style.borderColor = '#c0392b';
     }
   }
-
   function unlock() {
     document.getElementById('gate').classList.add('hidden');
     document.getElementById('app').classList.add('visible');
