@@ -209,6 +209,31 @@
     .invest-badge-tbd { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; color: var(--text-dim); }
     .invest-included { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--green); font-weight: 600; }
 
+    /* ---- STACK GRID ---- */
+    .stack-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; }
+    .stack-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; display: flex; flex-direction: column; gap: 6px; }
+    .stack-card.tbd { border-style: dashed; }
+    .stack-cat { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-dim); }
+    .stack-tool { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; color: var(--text); line-height: 1.1; }
+    .stack-tool em { color: var(--gold); }
+    .stack-sub { font-size: 12px; color: var(--text-dim); line-height: 1.5; margin-top: 4px; }
+    .stack-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+    .stack-tag { font-size: 11px; padding: 3px 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 100px; color: var(--text-dim); }
+
+    /* ---- METHODOLOGY GRID ---- */
+    .method-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 14px; margin-top: 28px; }
+    .method-primary { background: var(--text); border-radius: 12px; padding: 28px 32px; display: flex; flex-direction: column; }
+    .method-primary-num { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: rgba(247,246,242,.35); margin-bottom: 10px; }
+    .method-primary-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; color: #F0C040; margin-bottom: 14px; line-height: 1.2; }
+    .method-primary-desc { font-size: 13px; line-height: 1.7; color: rgba(247,246,242,.7); margin-bottom: 0; flex: 1; }
+    .method-primary .tag-list { margin-top: 18px; }
+    .method-primary .tag { background: rgba(247,246,242,.08); border-color: rgba(247,246,242,.15); color: rgba(247,246,242,.8); font-size: 11px; }
+    .method-secondary-col { display: flex; flex-direction: column; gap: 10px; }
+    .method-secondary { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px 22px; flex: 1; }
+    .method-secondary-num { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 6px; }
+    .method-secondary-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+    .method-secondary p { font-size: 13px; line-height: 1.65; color: var(--text-dim); margin: 0; }
+
     /* ---- KPI STRIP ---- */
     .kpi-strip { display: grid; grid-template-columns: 240px 1fr; gap: 0; border: 1.5px solid rgba(139,108,20,.3); border-radius: 12px; overflow: hidden; margin-top: 20px; }
     .kpi-strip-left { background: var(--text); padding: 24px 28px; display: flex; flex-direction: column; justify-content: center; }
@@ -275,6 +300,8 @@
       .pipeline-grid { grid-template-columns: 1fr; }
       .kpi-strip { grid-template-columns: 1fr; }
       .kpi-strip-right ul { grid-template-columns: 1fr; }
+      .method-grid { grid-template-columns: 1fr; }
+      .stack-grid { grid-template-columns: 1fr 1fr; }
       .section-title { font-size: clamp(28px, 7vw, 40px); }
       .hero-title { font-size: clamp(38px, 9vw, 54px); }
       .hero-sub { font-size: 15px; }
@@ -378,6 +405,20 @@
 
       /* ---- Step badge ---- */
       .step-badge { font-size: 11px; padding: 6px 14px; }
+
+      /* ---- Stack ---- */
+      .stack-tool { font-size: clamp(28px, 2.8vw, 42px); }
+      .stack-sub { font-size: 14px; }
+      .stack-card { padding: 26px 30px; gap: 8px; }
+      .stack-tag { font-size: 12px; padding: 4px 12px; }
+
+      /* ---- Methodology ---- */
+      .method-primary-title { font-size: 30px; }
+      .method-primary-desc { font-size: 15px; }
+      .method-secondary-title { font-size: 15px; }
+      .method-secondary p { font-size: 14px; }
+      .method-primary { padding: 32px 36px; }
+      .method-secondary { padding: 20px 26px; }
 
       /* ---- KPI strip ---- */
       .kpi-strip-title { font-size: 28px; }
@@ -499,18 +540,18 @@
       <li class="arch-item"><strong>Young School</strong> (una per disciplina) — percorsi, fasce d'età, CTA prova o info</li>
       <li class="arch-item"><strong>Nuoto / Acqua Fitness</strong> — corsi adulti e bambini, CTA dedicata</li>
       <li class="arch-item"><strong>Sala Pesi</strong> — orari, abbonamenti senza prezzi, form contatto</li>
-      <li class="arch-item"><strong>Personal Trainer</strong> — presentazione servizio, richiesta appuntamento o info</li>
+      <li class="arch-item"><strong>Personal Trainer</strong> — presentazione servizio, prenotazione prova o appuntamento via Cal.com</li>
     </ul>
   </div>
 
   <div class="bu-grid">
     <div class="bu-card">
       <p class="bu-card-label">Core Club — Abbonamenti</p>
-      <p>Tipologie senza prezzi. <strong>Richiedi informazioni</strong> (→ CRM) oppure <strong>prenota appuntamento</strong> in sede con calendario. Il prezzo si condivide nella relazione diretta.</p>
+      <p>Tipologie senza prezzi. <strong>Richiedi informazioni</strong> (→ CRM) oppure <strong>prenota un tour del club o un appuntamento</strong> in sede via Cal.com. Il prezzo si condivide nella relazione diretta.</p>
     </div>
     <div class="bu-card">
       <p class="bu-card-label">Young School — Percorsi</p>
-      <p>Focus su percorso e proposta educativa. <strong>Richiedi informazioni</strong> oppure <strong>richiedi una prova gratuita</strong>. Il form guida l'assegnazione al responsabile corretto.</p>
+      <p>Focus su percorso e proposta educativa. <strong>Richiedi informazioni</strong> oppure <strong>prenota una prova gratuita</strong> direttamente su Cal.com. Il form guida l'assegnazione al responsabile corretto.</p>
     </div>
   </div>
 
@@ -537,7 +578,7 @@
   <div class="tag-list">
     <span class="tag">Astro + Netlify</span>
     <span class="tag">Form condizionali per BU</span>
-    <span class="tag">Calendario appuntamenti</span>
+    <span class="tag">Cal.com — tour, prove, appuntamenti</span>
     <span class="tag">Abbonamenti senza prezzi</span>
     <span class="tag green">SEO dalla release 1</span>
     <span class="tag">Sottopagine corsi — fase 2</span>
@@ -706,106 +747,122 @@
   </div>
 </div>
 
-<!-- ============================================================ SLIDE 9: INVESTIMENTO -->
+<!-- ============================================================ SLIDE 9: METODOLOGIA -->
 <div class="section">
-  <p class="eyebrow">Investimento</p>
-  <h2 class="section-title">La struttura<br><em>economica</em></h2>
+  <p class="eyebrow">Metodologia</p>
+  <h2 class="section-title">Come <em>lavoriamo</em><br>insieme</h2>
 
-  <!-- Presentation view -->
-  <div class="invest-grid pres-only">
-    <div class="invest-card">
-      <p class="invest-card-label">Consulenza mensile</p>
-      <p class="invest-big">€ 1.900<span class="invest-unit">/mese</span></p>
-      <p class="invest-sub">× 12 mesi = € 23.712 · esente IVA + rivalsa INPS 4%</p>
-    </div>
-    <div class="invest-card">
-      <p class="invest-card-label">Step A — Realizzazione</p>
-      <p class="invest-big">€ 10.000</p>
-      <p class="invest-sub">A1 Sito € 5k · A2+A3 CRM+Pipeline € 5k · + IVA 22%</p>
-    </div>
-    <div class="invest-card">
-      <p class="invest-card-label">Step B — Stima</p>
-      <p class="invest-big">€ 8–12k</p>
-      <p class="invest-sub">Da preventivare dopo validazione Step A</p>
-    </div>
-    <div class="invest-card">
-      <p class="invest-card-label">Infrastruttura SaaS</p>
-      <p class="invest-big">€ 90–450<span class="invest-unit">/mese</span></p>
-      <p class="invest-sub">Paga Ronchiverdi direttamente. Step A: € 90–180. Pieno regime: fino a € 450.</p>
-    </div>
-  </div>
+  <div class="method-grid">
 
-  <!-- Document view -->
-  <div class="detail">
-    <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);margin:28px 0 10px;">Canone mensile di consulenza</p>
-    <div class="invest-table-wrap">
-      <div class="invest-row header">
-        <div class="invest-cell">Voce</div>
-        <div class="invest-cell">Cadenza</div>
-        <div class="invest-cell">Importo mensile</div>
-      </div>
-      <div class="invest-row">
-        <div class="invest-cell">
-          <p class="invest-cell-name">Direzione di progetto</p>
-          <p class="invest-cell-note">2 giorni/mese in sede · presidio remoto continuativo · rivalsa INPS 4% · esente IVA</p>
-        </div>
-        <div class="invest-cell" style="font-size:13px;color:var(--text-dim);">Ogni mese<br>× 12 mesi</div>
-        <div class="invest-cell">
-          <p class="invest-cell-amount">€ 1.900</p>
-          <p class="invest-cell-note-sm">+ € 76 rivalsa INPS · totale 12 mesi: <strong>€ 23.712</strong></p>
-        </div>
+    <div class="method-primary">
+      <span class="method-primary-num">01 — Risorsa interna</span>
+      <p class="method-primary-title">Simone</p>
+      <p class="method-primary-desc">Figura chiave del progetto: raccoglie i materiali, fa da punto di contatto tra l'organizzazione interna e lo sviluppo digitale e ha un ruolo pratico operativo nella costruzione degli strumenti. Condividiamo lo stesso repository GitHub e lavoriamo in parallelo su Claude Code — questo costruisce una knowledge condivisa e un processo formativo in itinere. Sarà coinvolto in ogni singolo step perché sarà lui a gestire la piattaforma in autonomia al termine dell'intervento annuale.</p>
+      <div class="tag-list">
+        <span class="tag">GitHub — repository condiviso</span>
+        <span class="tag">Claude Code in parallelo</span>
+        <span class="tag">Knowledge base condivisa</span>
+        <span class="tag">Formazione in itinere</span>
+        <span class="tag">Autonomia post-progetto</span>
       </div>
     </div>
 
-    <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);margin:20px 0 10px;">Realizzazione — saldo a SAL</p>
-    <div class="invest-table-wrap">
-      <div class="invest-row header">
-        <div class="invest-cell">Voce</div>
-        <div class="invest-cell">Scadenza</div>
-        <div class="invest-cell">Importo netto</div>
+    <div class="method-secondary-col">
+      <div class="method-secondary">
+        <p class="method-secondary-num">02 — Capi reparto</p>
+        <p class="method-secondary-title">Marco · Lorenzo · Paola</p>
+        <p>Rapporto diretto in call e in presenza. Raccordo operativo a ogni step — nessuna implementazione senza validazione da chi lavora sul campo.</p>
       </div>
-      <div class="invest-row">
-        <div class="invest-cell">
-          <p class="invest-cell-name">Step A — Sito web</p>
-          <p class="invest-cell-note">Sviluppo sito, form condizionali, calendario · IVA 22% esclusa</p>
-        </div>
-        <div class="invest-cell" style="font-size:13px;color:var(--text-dim);">Consegna A1</div>
-        <div class="invest-cell"><p class="invest-cell-amount">€ 5.000</p></div>
+      <div class="method-secondary">
+        <p class="method-secondary-num">03 — Risorse operative</p>
+        <p class="method-secondary-title">Coinvolgimento continuo</p>
+        <p>Coinvolte in tutti i processi tramite Simone e tramite interviste dirette. La piattaforma si costruisce su flussi reali, non su assunzioni.</p>
       </div>
-      <div class="invest-row">
-        <div class="invest-cell">
-          <p class="invest-cell-name">Step A — CRM lead + Data pipeline</p>
-          <p class="invest-cell-note">CRM Supabase, parser InfoRYOU, query ricorrenti, interfaccia Softr · IVA 22% esclusa</p>
-        </div>
-        <div class="invest-cell" style="font-size:13px;color:var(--text-dim);">Consegna A2+A3</div>
-        <div class="invest-cell"><p class="invest-cell-amount">€ 5.000</p></div>
-      </div>
-      <div class="invest-row">
-        <div class="invest-cell">
-          <p class="invest-cell-name">Step B — ERP Young School + Automazioni</p>
-          <p class="invest-cell-note">Da preventivare dopo validazione Step A · IVA 22% esclusa</p>
-        </div>
-        <div class="invest-cell" style="font-size:13px;color:var(--text-dim);">Nov–Feb 2026/27</div>
-        <div class="invest-cell">
-          <p class="invest-badge-tbd">Da definire</p>
-          <p class="invest-cell-note-sm">€ 8.000–12.000 stima</p>
-        </div>
-      </div>
-      <div class="invest-row">
-        <div class="invest-cell">
-          <p class="invest-cell-name">Formazione team</p>
-          <p class="invest-cell-note">Sessioni strutturate a ogni consegna</p>
-        </div>
-        <div class="invest-cell" style="font-size:13px;color:var(--text-dim);">Continua</div>
-        <div class="invest-cell"><p class="invest-included">Inclusa</p></div>
+      <div class="method-secondary">
+        <p class="method-secondary-num">04 — Supporto decisionale</p>
+        <p class="method-secondary-title">Ogni decisione, un flusso scalabile</p>
+        <p>Ogni scelta operativa che tocca il processo digitale (es. Chiron, certificato medico) viene incanalata in un flusso scalabile — non un fix isolato che crea debito tecnico.</p>
       </div>
     </div>
 
-    <p style="margin-top:16px;font-size:13px;line-height:1.7;color:var(--text-dim);">Costi infrastruttura SaaS esclusi — sostenuti direttamente da Ronchiverdi.</p>
   </div>
 </div>
 
-<!-- ============================================================ SLIDE 10: INFRASTRUTTURA -->
+<!-- ============================================================ SLIDE 10: STACK -->
+<div class="section">
+  <p class="eyebrow">Stack tecnologico</p>
+  <h2 class="section-title">Gli strumenti<br><em>selezionati</em></h2>
+
+  <div class="stack-grid">
+
+    <div class="stack-card">
+      <p class="stack-cat">Sito web</p>
+      <p class="stack-tool"><em>Astro</em></p>
+      <p class="stack-sub">HTML/CSS statico, performante, ottimizzato SEO. CMS Decap per la gestione contenuti autonoma da parte del team. Hosted su Netlify.</p>
+      <div class="stack-tags">
+        <span class="stack-tag">Astro</span>
+        <span class="stack-tag">Decap CMS</span>
+        <span class="stack-tag">Netlify</span>
+      </div>
+    </div>
+
+    <div class="stack-card">
+      <p class="stack-cat">CRM &amp; Database</p>
+      <p class="stack-tool"><em>Supabase</em> + Softr</p>
+      <p class="stack-sub">Database PostgreSQL su Supabase per lead, soci, rinnovi e pipeline dati. Interfacce operative su Softr per il team — nessuna competenza tecnica richiesta.</p>
+      <div class="stack-tags">
+        <span class="stack-tag">Supabase</span>
+        <span class="stack-tag">Softr</span>
+        <span class="stack-tag">PostgreSQL</span>
+      </div>
+    </div>
+
+    <div class="stack-card">
+      <p class="stack-cat">Prenotazioni</p>
+      <p class="stack-tool"><em>Cal.com</em></p>
+      <p class="stack-sub">Calendario iCal integrato nel sito. Tour del club, prove gratuite, appuntamenti abbonamento, prenotazioni ristorante Elements. Sincronizzazione con i responsabili di area.</p>
+      <div class="stack-tags">
+        <span class="stack-tag">Cal.com</span>
+        <span class="stack-tag">iCal sync</span>
+      </div>
+    </div>
+
+    <div class="stack-card">
+      <p class="stack-cat">Email &amp; Newsletter</p>
+      <p class="stack-tool"><em>SendGrid</em></p>
+      <p class="stack-sub">Invio email transazionali, newsletter e sequenze automatizzate. API integrata con n8n per i flussi di automazione degli Step B e C.</p>
+      <div class="stack-tags">
+        <span class="stack-tag">SendGrid API</span>
+        <span class="stack-tag">Transazionale</span>
+        <span class="stack-tag">Newsletter</span>
+      </div>
+    </div>
+
+    <div class="stack-card tbd">
+      <p class="stack-cat">WhatsApp</p>
+      <p class="stack-tool" style="color:var(--text-dim);">Da definire</p>
+      <p class="stack-sub">Automazione messaggi WhatsApp per qualificazione lead e comunicazioni ai soci. Attivo dallo Step B — ipotesi in valutazione: <strong>Superagent.fit</strong>.</p>
+      <div class="stack-tags">
+        <span class="stack-tag">WhatsApp Business API</span>
+        <span class="stack-tag">Step B</span>
+      </div>
+    </div>
+
+    <div class="stack-card">
+      <p class="stack-cat">Intelligenza Artificiale</p>
+      <p class="stack-tool"><em>Claude</em></p>
+      <p class="stack-sub">AI Anthropic integrata nei flussi n8n per elaborazione dati, draft comunicazioni, supporto decisionale e sviluppo collaborativo con Simone su Claude Code.</p>
+      <div class="stack-tags">
+        <span class="stack-tag">Claude API</span>
+        <span class="stack-tag">Claude Code</span>
+        <span class="stack-tag">n8n integration</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================================================ SLIDE 11: INFRASTRUTTURA -->
 <div class="section">
   <p class="eyebrow">Costi di infrastruttura</p>
   <h2 class="section-title">Cosa paga <em>Ronchiverdi</em><br>direttamente</h2>
@@ -831,7 +888,7 @@
         <td class="td-cost">€ 0–19 / mese</td>
       </tr>
       <tr>
-        <td><strong>WhatsApp Business API</strong><div class="td-note">Comunicazioni automatizzate — attivo dallo Step B</div></td>
+        <td><strong>WhatsApp Business API</strong><div class="td-note">Messaggi automatici · newsletter WhatsApp · automazione AI · risponditore automatico AI — attivo dallo Step B</div></td>
         <td style="font-size:13px;color:var(--text-dim);">Volume stimato</td>
         <td class="td-cost">€ 250 / mese<br><span style="font-size:12px;font-weight:400;color:var(--text-dim);">+ € 0,09 / msg oltre 1.000</span></td>
       </tr>
@@ -841,16 +898,21 @@
         <td class="td-cost">€ 20 / mese</td>
       </tr>
       <tr>
+        <td><strong>Cal.com</strong><div class="td-note">Prenotazione online: tour del club, prove gratuite (Young School / Personal Trainer), appuntamenti abbonamento, prenotazioni ristorante Elements — calendario integrato nel sito, sincronizzato con i responsabili di area</div></td>
+        <td style="font-size:13px;color:var(--text-dim);">Piano Team</td>
+        <td class="td-cost">$ 12–19 / mese</td>
+      </tr>
+      <tr>
         <td><strong>n8n Automazioni</strong><div class="td-note">Flussi operativi — infrastruttura del consulente, inclusa nel retainer</div></td>
         <td style="font-size:13px;color:var(--text-dim);">Infrastruttura consulente</td>
         <td class="td-cost" style="color:var(--green);">€ 0 per Ronchiverdi</td>
       </tr>
     </tbody>
   </table>
-  <p style="margin-top:16px;font-size:13px;line-height:1.7;color:var(--text-dim);">Step A (senza WhatsApp): <strong style="color:var(--text);">€ 90–180 / mese.</strong> Pieno regime Step B: <strong style="color:var(--text);">€ 340–450 / mese.</strong></p>
+  <p style="margin-top:16px;font-size:13px;line-height:1.7;color:var(--text-dim);">Step A (senza WhatsApp): <strong style="color:var(--text);">€ 100–200 / mese.</strong> Pieno regime Step B: <strong style="color:var(--text);">€ 350–470 / mese.</strong></p>
 </div>
 
-<!-- ============================================================ SLIDE 11: RETAINER -->
+<!-- ============================================================ SLIDE 12: RETAINER -->
 <div class="section">
   <p class="eyebrow">Continuità</p>
   <h2 class="section-title">Il retainer<br><em>post-progetto</em></h2>
@@ -863,7 +925,7 @@
   </div>
 </div>
 
-<!-- ============================================================ SLIDE 12: ELEMENTS -->
+<!-- ============================================================ SLIDE 13: ELEMENTS -->
 <div class="section">
   <p class="eyebrow">Progetto parallelo</p>
   <h2 class="section-title">Ristorante<br><em>Elements</em></h2>
@@ -874,7 +936,7 @@
       <div><p class="elements-item-title">Sito dedicato Elements</p><p class="elements-item-desc">Astro + Netlify. Offerta eventi, galleria, form con GDPR integrato.</p></div>
       <div><p class="elements-item-title">CRM eventi — Supabase + Softr</p><p class="elements-item-desc">Pipeline preventivo → confermato → completato. Form alimenta database in automatico.</p></div>
       <div><p class="elements-item-title">Gestione ordini forniture</p><p class="elements-item-desc">Form digitale per registrazione ordini. Eliminazione Excel manuale del sabato.</p></div>
-      <div><p class="elements-item-title">Prenotazioni Cal.com</p><p class="elements-item-desc">Agenda integrata con CRM. Il cliente prenota senza scambi di messaggi.</p></div>
+      <div><p class="elements-item-title">Prenotazioni Cal.com</p><p class="elements-item-desc">Stesso strumento usato per sport e tour del club. Agenda integrata con CRM Elements — il cliente prenota senza scambi di messaggi.</p></div>
     </div>
     <div class="elements-total">
       <p style="font-size:14px;color:var(--text-dim);margin:0;">Preventivo progetto Elements</p>
@@ -883,7 +945,7 @@
   </div>
 </div>
 
-<!-- ============================================================ SLIDE 13: PROSSIMI PASSI -->
+<!-- ============================================================ SLIDE 14: PROSSIMI PASSI -->
 <div class="section" style="border-bottom:none;">
   <p class="eyebrow">Per iniziare</p>
   <h2 class="section-title">Prossimi <em>passi</em></h2>
