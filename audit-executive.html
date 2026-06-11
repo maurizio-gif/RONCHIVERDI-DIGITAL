@@ -27,8 +27,8 @@ body {
   font-family: 'Jost', sans-serif;
   background: var(--bg);
   color: var(--text);
-  font-size: 16px;
-  line-height: 1.7;
+  font-size: 15px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -58,11 +58,10 @@ body {
   background: rgba(247,246,242,0.96); backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0 56px; height: 64px;
+  padding: 0 48px; height: 60px;
 }
-.topbar-logo { height: 28px; opacity: 0.8; }
-.topbar-center { display: flex; align-items: center; gap: 10px; }
-.topbar-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); }
+.topbar-logo { height: 26px; opacity: 0.8; }
+.topbar-center { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); }
 .topbar-right { display: flex; align-items: center; gap: 14px; }
 .btn-back { font-size: 12px; color: var(--text-dim); text-decoration: none; font-weight: 500; letter-spacing: 0.06em; transition: color 0.2s; }
 .btn-back:hover { color: var(--text); }
@@ -70,200 +69,555 @@ body {
 .btn-print:hover { background: #2C2C28; }
 
 /* === HERO === */
-.hero { padding: 80px 56px 72px; max-width: 900px; border-bottom: 1px solid var(--border); }
-.hero-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
-.hero-title { font-family: 'Cormorant Garamond', serif; font-size: 62px; font-weight: 400; line-height: 1.0; color: var(--text); margin-bottom: 28px; }
+.hero {
+  padding: 64px 48px 56px;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: end;
+  max-width: 1100px;
+}
+.hero-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+.hero-title { font-family: 'Cormorant Garamond', serif; font-size: 58px; font-weight: 400; line-height: 1.0; color: var(--text); margin-bottom: 20px; }
 .hero-title em { font-style: italic; color: var(--gold); }
-.hero-sub { font-size: 17px; color: var(--text-dim); line-height: 1.65; max-width: 600px; margin-bottom: 48px; }
-.hero-meta { display: flex; gap: 40px; padding-top: 36px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+.hero-sub { font-size: 15px; color: var(--text-dim); line-height: 1.6; max-width: 520px; }
+.hero-meta { display: flex; flex-direction: column; gap: 16px; flex-shrink: 0; }
 .meta-item {}
-.meta-label { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-dim); font-weight: 600; margin-bottom: 4px; }
-.meta-value { font-size: 14px; font-weight: 500; }
+.meta-label { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-dim); font-weight: 600; margin-bottom: 2px; }
+.meta-value { font-size: 13px; font-weight: 500; }
 
-/* === SECTIONS === */
-.section { padding: 72px 56px; border-bottom: 1px solid var(--border); max-width: 1100px; }
-.section-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; color: var(--text-dim); margin-bottom: 10px; }
-.section-title { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 400; line-height: 1.05; margin-bottom: 36px; }
-.section-title em { font-style: italic; }
-.section-title .accent { color: var(--gold); }
-p { font-size: 15px; line-height: 1.78; margin-bottom: 16px; }
-p:last-child { margin-bottom: 0; }
-p strong { font-weight: 600; }
-.lead { font-size: 17px; line-height: 1.7; }
+/* === SECTION LABEL === */
+.sec-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 20px;
+}
 
-/* === BIG STAT ROW === */
-.big-stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin: 36px 0; }
-.big-stat { background: white; border-radius: 12px; padding: 28px 24px; border: 1px solid var(--border); }
-.big-stat-number { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 500; line-height: 1; margin-bottom: 8px; color: var(--gold); }
-.big-stat-number.danger { color: var(--danger); }
-.big-stat-number.green { color: var(--green); }
-.big-stat-label { font-size: 12px; color: var(--text-dim); line-height: 1.4; }
+/* === DASHBOARD ROW — 4 BIG KPI === */
+.kpi-band {
+  padding: 48px 48px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+}
+.kpi {
+  padding: 32px 28px;
+  background: var(--bg);
+  border-radius: 0;
+  position: relative;
+}
+.kpi:first-child { border-radius: 12px 0 0 12px; }
+.kpi:last-child { border-radius: 0 12px 12px 0; }
+.kpi-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
+  font-weight: 600; margin-bottom: 16px;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border-radius: 4px;
+}
+.kpi-badge.green { color: var(--green); background: var(--green-light); }
+.kpi-badge.red { color: var(--danger); background: var(--danger-light); }
+.kpi-badge.gold { color: var(--gold); background: var(--gold-light); }
+.kpi-badge.neutral { color: var(--text-dim); background: rgba(0,0,0,0.05); }
+.kpi-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 56px; font-weight: 500; line-height: 1;
+  margin-bottom: 10px;
+}
+.kpi-number.green { color: var(--green); }
+.kpi-number.red { color: var(--danger); }
+.kpi-number.gold { color: var(--gold); }
+.kpi-desc { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
 
-/* === TENSION BOX === */
-.tension { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin: 36px 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
-.tension-side { padding: 32px 36px; }
-.tension-side.left { background: #F0EDE4; }
-.tension-side.right { background: #E8F2EA; }
-.tension-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; margin-bottom: 14px; }
-.tension-side.left .tension-label { color: var(--text-dim); }
-.tension-side.right .tension-label { color: var(--green); }
-.tension-value { font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 500; line-height: 1; margin-bottom: 10px; }
-.tension-side.left .tension-value { color: var(--danger); }
-.tension-side.right .tension-value { color: var(--green); }
-.tension-desc { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+/* === PARADOX SPLIT === */
+.paradox {
+  padding: 56px 48px;
+  border-bottom: 1px solid var(--border);
+  max-width: 1100px;
+}
+.paradox-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-top: 28px;
+}
+.paradox-side {
+  padding: 36px 40px;
+  position: relative;
+}
+.paradox-side.problem { background: var(--danger-light); }
+.paradox-side.strength { background: var(--green-light); }
+.paradox-icon { font-size: 28px; margin-bottom: 14px; }
+.paradox-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  font-weight: 600; margin-bottom: 10px;
+}
+.paradox-side.problem .paradox-tag { color: var(--danger); }
+.paradox-side.strength .paradox-tag { color: var(--green); }
+.paradox-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 44px; font-weight: 500; line-height: 1; margin-bottom: 10px;
+}
+.paradox-side.problem .paradox-value { color: var(--danger); }
+.paradox-side.strength .paradox-value { color: var(--green); }
+.paradox-desc { font-size: 13px; color: var(--text-dim); line-height: 1.55; }
 
-/* === IMPACT BAR CHART === */
-.impact-chart { margin: 32px 0; display: flex; flex-direction: column; gap: 12px; }
-.impact-row { display: grid; grid-template-columns: 200px 1fr 160px; align-items: center; gap: 16px; }
-.impact-label { font-size: 13px; font-weight: 500; }
-.impact-sub { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
-.bar-track { height: 32px; background: rgba(0,0,0,0.05); border-radius: 6px; overflow: hidden; }
-.bar-fill { height: 100%; border-radius: 6px; background: var(--gold); display: flex; align-items: center; padding-left: 12px; font-size: 11px; color: rgba(255,255,255,0.85); font-weight: 500; white-space: nowrap; }
-.bar-fill.red { background: var(--danger); }
-.impact-val { font-size: 13px; font-weight: 600; text-align: right; }
-.impact-divider { height: 1px; background: var(--text); opacity: 0.12; margin: 8px 0; }
-.impact-total { display: grid; grid-template-columns: 200px 1fr 160px; align-items: baseline; gap: 16px; margin-top: 4px; }
-.impact-total-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); }
-.impact-total-value { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 500; color: var(--gold); text-align: right; grid-column: 3; }
-.impact-total-note { font-size: 11px; color: var(--text-dim); text-align: right; grid-column: 3; margin-top: -4px; }
+/* === PROBLEMS GRID === */
+.problems-band {
+  padding: 56px 48px;
+  border-bottom: 1px solid var(--border);
+  max-width: 1100px;
+}
+.problems-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 28px;
+}
+.problem-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px 22px;
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--danger);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.problem-card.warning { border-top-color: #C07A00; }
+.problem-icon {
+  width: 36px; height: 36px;
+  background: var(--danger-light);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.problem-icon svg { width: 16px; height: 16px; stroke: var(--danger); }
+.problem-card.warning .problem-icon { background: #FFF3DC; }
+.problem-card.warning .problem-icon svg { stroke: #C07A00; }
+.problem-title { font-size: 13px; font-weight: 600; line-height: 1.3; }
+.problem-desc { font-size: 12px; color: var(--text-dim); line-height: 1.55; }
+.problem-stat {
+  margin-top: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 600;
+  color: var(--danger); background: var(--danger-light);
+  padding: 5px 10px; border-radius: 5px; display: inline-flex;
+  align-self: flex-start;
+}
+.problem-card.warning .problem-stat { color: #7A4E00; background: #FFF3DC; }
 
-/* === COMPLIANCE BLOCKS === */
-.compliance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 32px 0; }
-.c-block { background: white; border-radius: 10px; padding: 24px 28px; border: 1px solid var(--border); border-top: 3px solid; }
-.c-block.urgente { border-top-color: var(--danger); }
-.c-block.attenzione { border-top-color: #C07A00; }
-.c-block-badge { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600; margin-bottom: 10px; }
-.c-block.urgente .c-block-badge { color: var(--danger); }
-.c-block.attenzione .c-block-badge { color: #7A4E00; }
-.c-block-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 8px; line-height: 1.3; }
-.c-block-desc { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
+/* === COST VISUAL === */
+.cost-band {
+  padding: 56px 48px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+.cost-inner { max-width: 860px; }
+.cost-bars { margin-top: 28px; display: flex; flex-direction: column; gap: 12px; }
+.cost-row { display: grid; grid-template-columns: 180px 1fr 140px; align-items: center; gap: 16px; }
+.cost-label { font-size: 13px; font-weight: 500; }
+.cost-sub { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+.bar-track { height: 36px; background: rgba(0,0,0,0.05); border-radius: 7px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 7px; background: var(--gold); display: flex; align-items: center; padding-left: 12px; font-size: 11px; color: rgba(255,255,255,0.9); font-weight: 500; white-space: nowrap; transition: width 1s ease; }
+.cost-val { font-size: 14px; font-weight: 600; text-align: right; }
+.cost-total {
+  margin-top: 20px;
+  display: flex; align-items: baseline; justify-content: flex-end;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.cost-total-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); }
+.cost-total-number { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 500; color: var(--gold); line-height: 1; }
+.cost-total-note { font-size: 12px; color: var(--text-dim); }
 
-/* === FRAMEWORK === */
-.framework { margin: 36px 0; display: flex; flex-direction: column; gap: 3px; }
-.fw-step { display: flex; align-items: center; gap: 20px; padding: 20px 28px; background: white; border-radius: 10px; border: 1px solid var(--border); }
-.fw-step-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; color: var(--gold); background: var(--gold-light); padding: 4px 10px; border-radius: 5px; flex-shrink: 0; }
-.fw-step-body {}
-.fw-step-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
-.fw-step-desc { font-size: 12px; color: var(--text-dim); line-height: 1.4; }
+/* === RECEPTION BLOCK === */
+.reception-band {
+  padding: 56px 48px;
+  border-bottom: 1px solid var(--border);
+  background: #1C1C18;
+}
+.reception-inner { max-width: 900px; display: grid; grid-template-columns: 1fr 280px; gap: 48px; align-items: start; }
+.reception-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(200,153,31,0.8); font-weight: 600; margin-bottom: 20px; }
+.reception-title { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 400; line-height: 1.2; color: #F7F6F2; margin-bottom: 20px; }
+.reception-title em { font-style: italic; color: var(--gold); }
+.reception-points { display: flex; flex-direction: column; gap: 10px; }
+.rec-point { display: flex; gap: 12px; align-items: flex-start; }
+.rec-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(200,153,31,0.6); margin-top: 6px; flex-shrink: 0; }
+.rec-text { font-size: 13px; color: rgba(247,246,242,0.7); line-height: 1.55; }
+.rec-text strong { color: rgba(247,246,242,0.9); font-weight: 600; }
+.funnel { display: flex; flex-direction: column; gap: 0; }
+.funnel-title { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(200,153,31,0.7); margin-bottom: 10px; }
+.funnel-item { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.09); border-radius: 7px; padding: 10px 14px; margin-bottom: 5px; font-size: 12px; color: rgba(247,246,242,0.6); line-height: 1.3; }
+.funnel-arrow { text-align: center; color: rgba(200,153,31,0.5); font-size: 16px; margin: 3px 0; }
+.funnel-result { background: rgba(179,58,46,0.18); border: 1px solid rgba(179,58,46,0.35); border-radius: 7px; padding: 12px; font-size: 12px; color: #F7C0BA; line-height: 1.4; text-align: center; font-weight: 500; }
 
-/* === CLOSING QUOTE === */
-.closing { padding: 72px 56px 80px; border-bottom: 1px solid var(--border); }
+/* === LEGAL BLOCK === */
+.legal-band {
+  padding: 48px 48px;
+  border-bottom: 1px solid var(--border);
+  max-width: 1100px;
+}
+.legal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 28px; }
+.legal-card {
+  background: var(--danger-light);
+  border: 1px solid rgba(179,58,46,0.2);
+  border-left: 4px solid var(--danger);
+  border-radius: 10px;
+  padding: 22px 24px;
+  display: flex; gap: 16px; align-items: flex-start;
+}
+.legal-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px; font-weight: 500; color: var(--danger); line-height: 1; flex-shrink: 0;
+}
+.legal-text { font-size: 13px; line-height: 1.55; color: var(--text-dim); }
+.legal-text strong { color: var(--text); font-weight: 600; }
+
+/* === ROADMAP === */
+.roadmap-band {
+  padding: 56px 48px;
+  border-bottom: 1px solid var(--border);
+  max-width: 1100px;
+}
+.roadmap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin-top: 28px; }
+.road-step {
+  padding: 32px 28px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  position: relative;
+}
+.road-step:first-child { border-radius: 12px 0 0 12px; border-right: 0; }
+.road-step:last-child { border-radius: 0 12px 12px 0; border-left: 0; }
+.road-step:not(:first-child):not(:last-child) { border-left: 0; border-right: 0; }
+.road-phase {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  font-weight: 600; margin-bottom: 6px;
+}
+.road-step:nth-child(1) .road-phase { color: var(--danger); }
+.road-step:nth-child(2) .road-phase { color: var(--gold); }
+.road-step:nth-child(3) .road-phase { color: var(--green); }
+.road-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px; font-weight: 500; line-height: 1;
+  margin-bottom: 16px; opacity: 0.12; color: var(--text);
+}
+.road-title { font-size: 15px; font-weight: 600; margin-bottom: 12px; line-height: 1.3; }
+.road-items { display: flex; flex-direction: column; gap: 7px; }
+.road-item { display: flex; gap: 10px; align-items: flex-start; }
+.road-bullet {
+  width: 5px; height: 5px; border-radius: 50%;
+  margin-top: 7px; flex-shrink: 0;
+}
+.road-step:nth-child(1) .road-bullet { background: var(--danger); }
+.road-step:nth-child(2) .road-bullet { background: var(--gold); }
+.road-step:nth-child(3) .road-bullet { background: var(--green); }
+.road-item-text { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
+
+/* === CLOSING === */
+.closing {
+  padding: 64px 48px 80px;
+  border-bottom: 1px solid var(--border);
+  max-width: 900px;
+}
 .closing-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
-.closing-text { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 400; line-height: 1.4; color: var(--text); max-width: 780px; margin-bottom: 48px; }
+.closing-text { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 400; line-height: 1.4; color: var(--text); max-width: 720px; margin-bottom: 40px; }
 .closing-text em { font-style: italic; color: var(--gold); }
-.cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
-.cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 24px; border-radius: 10px; font-family: 'Jost', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; transition: all 0.2s; }
+.cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 10px; font-family: 'Jost', sans-serif; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; transition: all 0.2s; }
 .cta-btn.primary { background: var(--text); color: white; }
 .cta-btn.primary:hover { background: #2C2C28; }
 .cta-btn.secondary { background: white; color: var(--text); border: 1.5px solid var(--border); }
 .cta-btn.secondary:hover { border-color: var(--gold); color: var(--gold); }
 
-/* === HUMAN BLOCK === */
-.human-block { background: #1C1C18; border-radius: 14px; padding: 40px 44px; margin-top: 36px; }
-.human-block-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(200,153,31,0.8); font-weight: 600; margin-bottom: 28px; }
-.human-block-inner { display: grid; grid-template-columns: 1fr 260px; gap: 44px; margin-bottom: 32px; }
-.human-block-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; line-height: 1.25; color: #F7F6F2; margin-bottom: 20px; }
-.human-block-left p { font-size: 14px; color: rgba(247,246,242,0.72); line-height: 1.75; margin-bottom: 14px; }
-.human-block-left p:last-child { margin-bottom: 0; }
-.human-block-left strong { color: rgba(247,246,242,0.92); font-weight: 600; }
-.human-funnel { display: flex; flex-direction: column; gap: 0; }
-.hf-title { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(200,153,31,0.7); margin-bottom: 12px; }
-.hf-item { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 7px; padding: 10px 14px; margin-bottom: 6px; font-size: 12px; color: rgba(247,246,242,0.65); line-height: 1.35; }
-.hf-item span { display: block; font-size: 11px; color: rgba(200,153,31,0.7); margin-top: 3px; }
-.hf-arrow { text-align: center; color: rgba(200,153,31,0.5); font-size: 18px; margin: 4px 0; }
-.hf-result { background: rgba(179,58,46,0.15); border: 1px solid rgba(179,58,46,0.3); border-radius: 7px; padding: 14px; font-size: 12px; color: #F7C0BA; line-height: 1.5; text-align: center; font-weight: 500; }
-.human-block-footer { padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 14px; color: rgba(247,246,242,0.65); line-height: 1.7; }
-.human-block-footer strong { color: #F7F6F2; font-weight: 600; }
-@media(max-width:800px){ .human-block { padding: 28px 24px; } .human-block-inner { grid-template-columns: 1fr; gap: 28px; } }
+/* === ACTION PLAN === */
+.actions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 24px;
+}
+.action-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 10px;
+  padding: 18px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.action-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.18em; font-weight: 600;
+  color: var(--gold); margin-bottom: 4px;
+}
+.action-title { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.3; }
+.action-benefit { font-size: 12px; color: var(--text-dim); line-height: 1.4; margin-top: 2px; }
+.action-benefit strong { color: var(--green); font-weight: 600; }
 
-/* === BANDS & BLOCKS === */
-.band { padding: 48px 56px; border-bottom: 1px solid var(--border); }
-.band.white { background: var(--surface); }
-.band.max { max-width: 1100px; }
-.band-inner { max-width: 820px; }
-.org-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; max-width: 820px; }
-.points { display: flex; flex-direction: column; gap: 14px; }
-.point { display: flex; gap: 18px; align-items: flex-start; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px 24px; }
-.point-num { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 5px; flex-shrink: 0; }
-.point p { font-size: 15px; line-height: 1.65; margin: 0; }
-.elements-card { background: var(--gold-light); border: 1.5px solid rgba(139,108,20,0.25); border-radius: 14px; padding: 32px 40px; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; }
+/* === OUTCOMES === */
+.outcomes-band {
+  background: var(--surface);
+  padding: 64px 48px;
+  border-bottom: 1px solid var(--border);
+}
+.outcomes-heading { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+.outcomes-title { font-family: 'Cormorant Garamond', serif; font-size: 44px; font-weight: 400; line-height: 1.0; margin-bottom: 44px; }
+.outcomes-title em { font-style: italic; color: var(--gold); }
+.outcomes-grid { display: grid; grid-template-columns: repeat(6, 1fr); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+.outcome-col { padding: 36px 26px 40px; border-right: 1px solid var(--border); }
+.outcome-col:last-child { border-right: none; }
+.outcome-arrow { display: block; flex-shrink: 0; margin-bottom: 28px; }
+.outcome-arrow.up { color: var(--green); }
+.outcome-arrow.down { color: var(--gold); }
+.outcome-cat { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 10px; }
+.outcome-name { font-family: 'Jost', sans-serif; font-size: 20px; font-weight: 700; color: var(--text); line-height: 1.2; text-transform: uppercase; letter-spacing: 0.03em; }
 
 /* === PRINT === */
 @media print {
   #gate, .topbar { display: none !important; }
   body { font-size: 10pt; background: white; }
-  .hero, .section, .closing { padding: 32px 40px; }
-  .band { padding: 24px 40px; }
-  .section-title { font-size: 26pt; }
-  @page { size: A4 portrait; margin: 1.8cm 2cm; }
-  .section { page-break-inside: avoid; max-width: 100%; }
+  .reception-band { background: #1C1C18 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page { size: A4 portrait; margin: 1.5cm 2cm; }
 }
 
-/* === PRESENTAZIONE — SCHERMI 16:9 FULL HD === */
+/* === SLIDE 16:9 — 1920×1080 === */
 @media (min-width: 1500px) {
-  body { font-size: 17px; }
-  p { font-size: 16px; }
-  .lead, .hero-sub { font-size: 19px; }
-  .topbar { height: 72px; padding: 0 72px; }
-  .topbar-logo { height: 32px; }
-  .hero { max-width: none; padding: 104px calc((100% - 1048px) / 2) 88px; }
-  .hero-title { font-size: 80px; }
-  .hero-sub { max-width: 720px; }
-  .section { max-width: none; padding: 88px calc((100% - 1048px) / 2); }
-  .section-title { font-size: 52px; margin-bottom: 44px; }
-  .closing { padding: 88px calc((100% - 1048px) / 2) 100px; }
-  .closing-text { font-size: 36px; max-width: 900px; }
-  .band { padding: 60px calc((100% - 1048px) / 2); }
-  .band.max { max-width: none; }
-  .band-inner { max-width: 880px; }
-  .org-grid { max-width: 1048px; }
-  .point { padding: 20px 28px; }
-  .point p { font-size: 16px; }
-  .big-stat { padding: 32px 28px; }
-  .big-stat-number { font-size: 60px; }
-  .tension-side { padding: 40px 48px; }
-  .tension-value { font-size: 44px; }
-  .tension-desc { font-size: 14px; }
-  .impact-row, .impact-total { grid-template-columns: 240px 1fr 180px; }
-  .impact-label, .impact-val { font-size: 14px; }
-  .fw-step { padding: 24px 32px; }
-  .fw-step-title { font-size: 15px; }
-  .fw-step-desc { font-size: 13px; }
-  .human-block { padding: 48px 52px; }
-  .human-block-title { font-size: 27px; }
-  .human-block-left p { font-size: 15px; }
-  .human-block-footer { font-size: 15px; }
+
+  /* ── SCROLL SNAP: una sezione alla volta ── */
+  html { scroll-snap-type: y mandatory; }
+  .hero {
+    scroll-snap-align: start;
+    height: calc(100vh - 72px);
+    min-height: unset;
+  }
+  .kpi-band, .paradox, .problems-band, .cost-band,
+  .reception-band, .legal-band, .roadmap-band, .outcomes-band, .closing {
+    scroll-snap-align: start;
+    scroll-margin-top: 72px;
+    height: calc(100vh - 72px);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: none;
+  }
+
+  /* ── BASE ── */
+  body { font-size: 20px; }
+
+  /* ── TOPBAR ── */
+  .topbar { height: 72px; padding: 0 96px; }
+  .topbar-logo { height: 34px; }
+  .topbar-center { font-size: 12px; letter-spacing: 0.2em; }
+  .btn-back { font-size: 14px; }
+  .btn-print { font-size: 13px; padding: 11px 20px; }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 0 96px;
+    max-width: none;
+    width: 100%;
+    grid-template-columns: 1fr 400px;
+    gap: 80px;
+    align-items: center;
+  }
+  .hero-label { font-size: 13px; letter-spacing: 0.24em; margin-bottom: 24px; }
+  .hero-title { font-size: 132px; margin-bottom: 28px; line-height: 0.93; }
+  .hero-sub { font-size: 24px; max-width: 720px; line-height: 1.5; }
+  .hero-meta { gap: 32px; }
+  .meta-label { font-size: 11px; letter-spacing: 0.2em; }
+  .meta-value { font-size: 18px; }
+
+  /* ── ETICHETTE SEZIONE ── */
+  .sec-label { font-size: 13px; letter-spacing: 0.24em; margin-bottom: 20px; }
+
+  /* ── KPI BAND ── */
+  .kpi-band { padding: 0 96px; }
+  .kpi-grid { gap: 3px; }
+  .kpi { padding: 48px 44px; }
+  .kpi-badge { font-size: 13px; padding: 7px 16px; gap: 8px; }
+  .kpi-badge svg { width: 13px; height: 13px; }
+  .kpi-number { font-size: 124px; margin-bottom: 20px; line-height: 1; }
+  .kpi-desc { font-size: 24px; line-height: 1.45; }
+
+  /* ── PARADOX ── */
+  .paradox { padding: 0 96px; max-width: none; }
+  .paradox h2 { font-size: 72px !important; margin-bottom: 0; }
+  .paradox-grid { margin-top: 36px; }
+  .paradox-side { padding: 52px 56px; }
+  .paradox-value { font-size: 92px; }
+  .paradox-desc { font-size: 24px !important; line-height: 1.55; }
+  .paradox-tag { font-size: 12px; letter-spacing: 0.22em; margin-bottom: 16px; }
+  .paradox-icon { font-size: 42px; margin-bottom: 18px; }
+
+  /* ── PROBLEMS ── */
+  .problems-band { padding: 0 96px; max-width: none; }
+  .problems-band h2 { font-size: 72px !important; margin-bottom: 0; }
+  .problems-grid { gap: 12px; margin-top: 28px; }
+  .problem-card { padding: 26px 24px; gap: 12px; }
+  .problem-icon { width: 48px; height: 48px; border-radius: 10px; }
+  .problem-icon svg { width: 22px; height: 22px; }
+  .problem-title { font-size: 22px; }
+  .problem-desc { font-size: 19px; line-height: 1.5; }
+  .problem-stat { font-size: 15px; padding: 6px 12px; }
+
+  /* ── COST ── */
+  .cost-band { padding: 0 96px; }
+  .cost-inner { max-width: none; width: 100%; }
+  .cost-inner h2 { font-size: 72px !important; margin-bottom: 0; }
+  .cost-bars { margin-top: 32px; gap: 14px; }
+  .cost-row { grid-template-columns: 300px 1fr 280px; gap: 20px; }
+  .cost-label { font-size: 24px; }
+  .cost-sub { font-size: 19px; margin-top: 4px; }
+  .bar-track { height: 52px; border-radius: 8px; }
+  .bar-fill { font-size: 16px; padding-left: 18px; }
+  .cost-val { font-size: 26px; }
+  .cost-total { margin-top: 24px; padding-top: 22px; gap: 18px; }
+  .cost-total-number { font-size: 104px; line-height: 1; }
+  .cost-total-label { font-size: 13px; letter-spacing: 0.16em; }
+  .cost-total-note { font-size: 20px; }
+  .cost-inner > p { font-size: 20px; margin-top: 18px; }
+
+  /* ── RECEPTION ── */
+  .reception-band { padding: 0 96px; }
+  .reception-inner { max-width: none; grid-template-columns: 1fr 420px; gap: 88px; }
+  .reception-label { font-size: 13px; letter-spacing: 0.24em; margin-bottom: 20px; }
+  .reception-title { font-size: 62px; line-height: 1.08; }
+  .reception-points { gap: 16px; }
+  .rec-point { gap: 16px; }
+  .rec-dot { width: 8px; height: 8px; margin-top: 11px; }
+  .rec-text { font-size: 24px; line-height: 1.5; }
+  .funnel-title { font-size: 12px; letter-spacing: 0.2em; margin-bottom: 14px; }
+  .funnel-item { font-size: 21px; padding: 14px 20px; margin-bottom: 6px; }
+  .funnel-arrow { font-size: 22px; margin: 4px 0; }
+  .funnel-result { font-size: 21px; padding: 18px; line-height: 1.4; }
+
+  /* ── PUNTO CIECO ── */
+  .legal-band { padding: 0 96px; max-width: none; }
+  .legal-band h2 { font-size: 72px !important; margin-bottom: 0; }
+  .legal-band > p { font-size: 22px; max-width: none; line-height: 1.55; margin-top: 14px; }
+  .legal-grid { gap: 12px; margin-top: 28px; }
+  .legal-card { padding: 28px 32px; gap: 22px; align-items: flex-start; }
+  .legal-card > div:first-child { font-size: 44px !important; line-height: 1 !important; flex-shrink: 0; margin-top: 4px; }
+  .legal-text { font-size: 21px; line-height: 1.55; }
+
+  /* ── ACTION PLAN ── */
+  .roadmap-band { padding: 0 96px; max-width: none; }
+  .roadmap-band h2 { font-size: 72px !important; margin-bottom: 0; }
+  .actions-grid { gap: 12px; margin-top: 28px; }
+  .action-card { padding: 26px 28px 30px; border-left-width: 4px; border-radius: 12px; gap: 10px; }
+  .action-num { font-size: 13px; letter-spacing: 0.2em; margin-bottom: 6px; }
+  .action-title { font-size: 22px; line-height: 1.25; }
+  .action-benefit { font-size: 18px; line-height: 1.4; margin-top: 4px; }
+
+  /* ── OUTCOMES ── */
+  .outcomes-band { padding: 0 96px; background: var(--surface); }
+  .outcomes-heading { font-size: 13px; letter-spacing: 0.24em; margin-bottom: 24px; }
+  .outcomes-title { font-size: 72px !important; margin-bottom: 36px; }
+  .outcomes-grid { border-radius: 16px; }
+  .outcome-col { padding: 48px 36px 52px; }
+  .outcome-arrow { width: 40px; height: 80px; margin-bottom: 36px; }
+  .outcome-cat { font-size: 12px; letter-spacing: 0.18em; margin-bottom: 14px; }
+  .outcome-name { font-size: 30px; }
+
+  /* ── CLOSING ── */
+  .closing { padding: 0 96px; max-width: none; }
+  .closing-label { font-size: 13px; letter-spacing: 0.24em; margin-bottom: 28px; }
+  .closing-text { font-size: 56px; max-width: 1100px; margin-bottom: 52px; line-height: 1.25; }
+  .cta-btn { font-size: 17px; padding: 20px 36px; border-radius: 12px; gap: 10px; }
+  .cta-row { gap: 16px; }
 }
 
-/* === RESPONSIVE === */
-@media (max-width: 800px) {
+/* === MOBILE ≤ 768px === */
+@media (max-width: 768px) {
   .topbar { padding: 0 16px; }
   .topbar-center { display: none; }
-  .hide-mobile { display: none; }
-  .btn-print { padding: 9px 12px; }
-  .hero { padding: 52px 24px 48px; }
-  .hero-title { font-size: 42px; }
-  .hero-sub { font-size: 16px; }
-  .hero-meta { gap: 20px 32px; padding-top: 28px; }
-  .section { padding: 52px 24px; }
-  .section-title { font-size: 30px; }
-  .tension { grid-template-columns: 1fr; }
-  .compliance-grid { grid-template-columns: 1fr; }
-  .impact-row, .impact-total { grid-template-columns: 1fr; }
+
+  .hero { grid-template-columns: 1fr; padding: 44px 20px 36px; gap: 28px; }
+  .hero-title { font-size: 38px; }
+  .hero-sub { font-size: 14px; }
+  .hero-meta { flex-direction: row; flex-wrap: wrap; gap: 14px 20px; }
+  .meta-value { font-size: 12px; }
+
+  .kpi-band { padding: 36px 20px; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; gap: 2px; }
+  .kpi { padding: 22px 16px; }
+  .kpi:first-child { border-radius: 12px 0 0 0; }
+  .kpi:nth-child(2) { border-radius: 0 12px 0 0; }
+  .kpi:nth-child(3) { border-radius: 0 0 0 12px; }
+  .kpi:last-child { border-radius: 0 0 12px 0; }
+  .kpi-number { font-size: 42px; }
+  .kpi-badge { font-size: 8px; padding: 3px 8px; }
+  .kpi-desc { font-size: 11px; }
+
+  .paradox { padding: 44px 20px; }
+  .paradox h2 { font-size: 26px !important; }
+  .paradox-grid { grid-template-columns: 1fr; }
+  .paradox-side { padding: 26px 22px; }
+  .paradox-value { font-size: 40px; }
+  .paradox-desc { font-size: 12px; }
+  .paradox-icon { font-size: 24px; }
+
+  .problems-band { padding: 44px 20px; }
+  .problems-band h2 { font-size: 26px !important; }
+  .problems-grid { grid-template-columns: 1fr; gap: 10px; }
+  .problem-card { padding: 18px; }
+  .problem-title { font-size: 13px; }
+  .problem-desc { font-size: 12px; }
+
+  .cost-band { padding: 44px 20px; }
+  .cost-inner h2 { font-size: 26px !important; }
+  .cost-row { grid-template-columns: 1fr auto; gap: 8px; }
+  .cost-sub { display: none; }
   .bar-track { display: none; }
-  .impact-val { text-align: left; }
-  .impact-total-value, .impact-total-note { grid-column: 1; text-align: left; }
-  .closing { padding: 52px 24px 64px; }
-  .closing-text { font-size: 24px; }
-  .band { padding: 40px 20px; }
-  .band-inner { max-width: none; }
-  .org-grid { grid-template-columns: 1fr; gap: 12px; margin-top: 24px; }
-  .point { padding: 16px; gap: 12px; }
-  .elements-card { grid-template-columns: 1fr; padding: 26px 20px; gap: 24px; }
-  .elements-card a { justify-self: start; }
-  .big-stat { padding: 22px 20px; }
-  .big-stat-number { font-size: 40px; }
-  .fw-step { padding: 16px 18px; gap: 14px; align-items: flex-start; }
+  .cost-total { flex-wrap: wrap; gap: 6px; justify-content: flex-start; }
+  .cost-total-number { font-size: 44px; }
+
+  .reception-band { padding: 44px 20px; }
+  .reception-inner { grid-template-columns: 1fr; gap: 32px; }
+  .reception-title { font-size: 26px !important; }
+  .rec-text { font-size: 13px; }
+
+  .legal-band { padding: 44px 20px; }
+  .legal-band h2 { font-size: 26px !important; }
+  .legal-grid { grid-template-columns: 1fr; gap: 10px; }
+  .legal-num { font-size: 32px; }
+  .legal-text { font-size: 12px; }
+
+  .roadmap-band { padding: 44px 20px; }
+  .roadmap-band h2 { font-size: 24px !important; margin-bottom: 0; }
+  .actions-grid { grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 16px; }
+  .action-card { padding: 14px 14px 16px; }
+  .action-num { font-size: 9px; }
+  .action-title { font-size: 12px; }
+  .action-benefit { font-size: 11px; }
+
+  .closing { padding: 48px 20px 64px; }
+  .closing-text { font-size: 22px; }
+  .cta-btn { font-size: 11px; padding: 11px 18px; }
+
+  .outcomes-band { padding: 44px 20px; }
+  .outcomes-title { font-size: 26px !important; margin-bottom: 24px; }
+  .outcomes-grid { grid-template-columns: repeat(2, 1fr); border-radius: 10px; }
+  .outcome-col { padding: 24px 18px 28px; border-right: none; border-bottom: 1px solid var(--border); }
+  .outcome-col:nth-child(odd) { border-right: 1px solid var(--border); }
+  .outcome-col:nth-child(5), .outcome-col:nth-child(6) { border-bottom: none; }
+  .outcome-arrow { width: 22px; height: 44px; margin-bottom: 18px; }
+  .outcome-cat { font-size: 8px; }
+  .outcome-name { font-size: 15px; }
 }
 </style>
 </head>
@@ -285,12 +639,10 @@ p strong { font-weight: 600; }
 <!-- TOPBAR -->
 <header class="topbar">
   <img src="ronchiverdi-logo.jpg" alt="Ronchiverdi" class="topbar-logo">
-  <div class="topbar-center">
-    <span class="topbar-eyebrow">Sintesi per la Direzione · Giugno 2026</span>
-  </div>
+  <div class="topbar-center">Sintesi per la Direzione · Giugno 2026</div>
   <div class="topbar-right">
     <a href="index.html" class="btn-back">← Menu</a>
-    <a href="documento-audit.html" class="btn-back hide-mobile">Documento completo ↗</a>
+    <a href="documento-audit.html" class="btn-back" style="display:none" id="doc-link">Documento completo ↗</a>
     <button class="btn-print" onclick="window.print()">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
       PDF
@@ -300,285 +652,375 @@ p strong { font-weight: 600; }
 
 <!-- HERO -->
 <div class="hero">
-  <p class="hero-label">Ronchiverdi Sport Club · Audit Digitale 2026</p>
-  <h1 class="hero-title">Quello che<br>i numeri <em>dicono</em></h1>
-  <p class="hero-sub lead">L'analisi ha confermato un quadro molto chiaro: Ronchiverdi è un club che i soci amano e in cui scelgono di restare. Ma dietro le quinte troppo lavoro viene ancora fatto a mano, e fuori dal club troppe poche persone scoprono quanto vale. Questo documento spiega in modo semplice cosa abbiamo trovato, quanto costa oggi e cosa proponiamo di fare.</p>
+  <div>
+    <p class="hero-label">Ronchiverdi Sport Club · Audit Digitale 2026</p>
+    <h1 class="hero-title">Quello che<br>i numeri <em>dicono</em></h1>
+    <p class="hero-sub">Un club amato dai soci — ma troppo lavoro fatto a mano e troppo poco visibile fuori. Ecco cosa abbiamo trovato, quanto costa e come si risolve.</p>
+  </div>
   <div class="hero-meta">
-    <div class="meta-item"><p class="meta-label">Preparato per</p><p class="meta-value">Vittorio Zunino · Amministratore Delegato</p></div>
-    <div class="meta-item"><p class="meta-label">Aree analizzate</p><p class="meta-value">11 aree operative</p></div>
-    <div class="meta-item"><p class="meta-label">Periodo</p><p class="meta-value">Aprile — Giugno 2026</p></div>
-    <div class="meta-item"><p class="meta-label">Consulente</p><p class="meta-value">Maurizio Taruggi · Ready 2 Digital</p></div>
-  </div>
-</div>
-
-<!-- IN SINTESI -->
-<div class="band">
-  <div class="band-inner">
-    <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;">L'essenziale in quattro punti</p>
-    <div class="points">
-      <div class="point">
-        <span class="point-num" style="color:var(--green);background:var(--green-light);">1</span>
-        <p><strong>Chi è socio, resta.</strong> Più di 7 soci su 10 rinnovano ogni anno: un risultato sopra la media del settore. Il punto debole non è tenere i soci, è farne arrivare di nuovi: dal sito arrivano solo 1–5 richieste al mese.</p>
-      </div>
-      <div class="point">
-        <span class="point-num" style="color:var(--gold);background:var(--gold-light);">2</span>
-        <p><strong>Troppo lavoro fatto a mano.</strong> Rinnovi, crediti, contatti e segnalazioni vivono in oltre 50 fogli Excel separati. Stimiamo più di <strong>55.000 € l'anno</strong> di ore spese in attività che un sistema ben fatto svolgerebbe da solo.</p>
-      </div>
-      <div class="point">
-        <span class="point-num" style="color:var(--danger);background:var(--danger-light);">3</span>
-        <p><strong>Due questioni legali da sistemare subito,</strong> prima della prossima stagione. Sono descritte nel documento completo e vengono prima di qualunque altro intervento.</p>
-      </div>
-      <div class="point">
-        <span class="point-num" style="color:var(--text);background:rgba(0,0,0,0.06);">4</span>
-        <p><strong>La proposta: tre fasi in ordine preciso.</strong> Prima mettersi in regola e mettere in ordine i dati, poi collegare i sistemi tra loro per liberare ore di lavoro, infine investire per farsi conoscere e far crescere i soci.</p>
-      </div>
+    <div class="meta-item">
+      <p class="meta-label">Preparato per</p>
+      <p class="meta-value">Vittorio Zunino · AD</p>
+    </div>
+    <div class="meta-item">
+      <p class="meta-label">Periodo analisi</p>
+      <p class="meta-value">Apr — Giu 2026</p>
+    </div>
+    <div class="meta-item">
+      <p class="meta-label">Consulente</p>
+      <p class="meta-value">Maurizio Taruggi · R2D</p>
     </div>
   </div>
 </div>
 
-<!-- INTRO: STRUTTURA ORGANIZZATIVA -->
-<div class="band white">
-  <div class="band-inner">
-    <p class="section-eyebrow" style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);font-family:'JetBrains Mono',monospace;margin-bottom:20px;">Contesto organizzativo</p>
-    <p style="font-size:17px;line-height:1.75;color:var(--text);margin-bottom:24px;">Ronchiverdi è oggi guidata da <strong>tre figure chiave</strong> che coprono le aree fondamentali dell'organizzazione: <strong>Marco</strong> segue l'operatività quotidiana e tutto il personale; <strong>Paola</strong> segue amministrazione, contabilità e finanza; <strong>Lorella</strong> segue lo sviluppo commerciale e il rapporto con i clienti.</p>
-    <p style="font-size:16px;line-height:1.75;color:var(--text-dim);margin-bottom:0;">Queste tre persone tengono in piedi l'organizzazione — e lo fanno con competenza — ma con una fatica molto superiore al necessario, perché i dati su cui lavorano sono sparsi e vanno ricostruiti a mano ogni volta. Oggi funziona, ma è <strong style="color:var(--text);">un modo di lavorare difficilmente sostenibile nel tempo</strong>: se il club cresce senza cambiare metodo, i problemi cresceranno con lui.</p>
-  </div>
-  <div class="org-grid">
-    <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:20px 24px;">
-      <p style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);font-family:'JetBrains Mono',monospace;margin-bottom:8px;">Club Manager</p>
-      <p style="font-size:18px;font-weight:600;color:var(--text);margin-bottom:4px;">Marco Rolle</p>
-      <p style="font-size:13px;color:var(--text-dim);line-height:1.5;margin:0;">Controllo operativo e gestione dell'intero personale</p>
+<!-- 4 KPI DASHBOARD -->
+<div class="kpi-band">
+  <p class="sec-label">Il quadro in 4 numeri</p>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="kpi-badge green">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Punto di forza
+      </div>
+      <div class="kpi-number green">&gt;70%</div>
+      <div class="kpi-desc">Tasso di rinnovo annuo — sopra la media di settore. I soci restano.</div>
     </div>
-    <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:20px 24px;">
-      <p style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);font-family:'JetBrains Mono',monospace;margin-bottom:8px;">Amministrazione &amp; Finance</p>
-      <p style="font-size:18px;font-weight:600;color:var(--text);margin-bottom:4px;">Paola Zavattero</p>
-      <p style="font-size:13px;color:var(--text-dim);line-height:1.5;margin:0;">Gestione amministrativa, contabilità e finance</p>
+    <div class="kpi">
+      <div class="kpi-badge red">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        Punto debole
+      </div>
+      <div class="kpi-number red">1–5</div>
+      <div class="kpi-desc">Richieste dal sito al mese. Troppo pochi nuovi soci scoprono il club.</div>
     </div>
-    <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:20px 24px;">
-      <p style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);font-family:'JetBrains Mono',monospace;margin-bottom:8px;">Commerciale &amp; Clienti</p>
-      <p style="font-size:18px;font-weight:600;color:var(--text);margin-bottom:4px;">Lorella Gravame</p>
-      <p style="font-size:13px;color:var(--text-dim);line-height:1.5;margin:0;">Sviluppo commerciale e gestione dei rapporti con il cliente</p>
+    <div class="kpi">
+      <div class="kpi-badge red">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Costo nascosto
+      </div>
+      <div class="kpi-number red">&gt;55k</div>
+      <div class="kpi-desc">Euro/anno spesi in ore su lavoro manuale ripetitivo e file Excel.</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-badge red">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+        Punto cieco
+      </div>
+      <div class="kpi-number red">0</div>
+      <div class="kpi-desc">Dati freschi disponibili per decidere. Si governa sempre su numeri già vecchi.</div>
     </div>
   </div>
 </div>
 
-<!-- TEMA 1: IL PARADOSSO DI RONCHIVERDI -->
-<section class="section">
-  <p class="section-num">01 / 04</p>
-  <h2 class="section-title">Un club che <em>fidelizza bene</em><br>ma acquisisce poco</h2>
-
-  <p class="lead">Il dato più importante emerso dall'analisi non è un problema — è un <strong>punto di forza che oggi non viene sfruttato</strong>. Ronchiverdi mantiene i propri soci con un tasso di rinnovo <strong>superiore al 70%</strong>: più di 7 soci su 10 ogni anno scelgono di restare, un risultato nettamente sopra la media del settore.</p>
-
-  <div class="tension">
-    <div class="tension-side left">
-      <div class="tension-label">Nuovi potenziali soci</div>
-      <div class="tension-value">Pochi</div>
-      <div class="tension-desc">Dal sito web arrivano solo 1–5 richieste di informazioni al mese. Sito e social non sono organizzati per attirare nuovi soci, e la Young School è completamente fuori da questo percorso.</div>
+<!-- PARADOSSO: FIDELIZZA MA NON ACQUISISCE -->
+<div class="paradox">
+  <p class="sec-label">01 — Il paradosso di Ronchiverdi</p>
+  <h2 style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:400;line-height:1.1;">Fidelizza <em>bene</em> — ma acquisisce <em>poco</em></h2>
+  <div class="paradox-grid">
+    <div class="paradox-side problem">
+      <div class="paradox-icon">📭</div>
+      <div class="paradox-tag">Problema</div>
+      <div class="paradox-value">1–5</div>
+      <div class="paradox-desc" style="font-size:13px;line-height:1.6;">
+        Richieste al mese dal sito web.<br><br>
+        Sito = vetrina, non strumento. Ogni percorso porta a "Prenota un tour": troppo impegno per chi sta solo curiosando. Comunicazione su 3 canali separati senza regia unica.
+      </div>
     </div>
-    <div class="tension-side right">
-      <div class="tension-label">Fedeltà dei soci esistenti</div>
-      <div class="tension-value">&gt; 70%</div>
-      <div class="tension-desc">Tasso di rinnovo superiore alla media di settore. La qualità del club si vede in chi sceglie di restare. Il problema è chi non arriva ancora.</div>
+    <div class="paradox-side strength">
+      <div class="paradox-icon">🏆</div>
+      <div class="paradox-tag">Punto di forza da sfruttare</div>
+      <div class="paradox-value">&gt;70%</div>
+      <div class="paradox-desc" style="font-size:13px;line-height:1.6;">
+        Tasso di rinnovo annuo.<br><br>
+        Chi conosce Ronchiverdi lo ama e lo sceglie di nuovo. Il club è eccellente — ma è <strong>invisibile a chi non lo conosce ancora</strong>. La qualità è il miglior argomento di vendita: va raccontata.
+      </div>
     </div>
   </div>
+</div>
 
-  <p>Il divario tra questi due numeri racconta una storia precisa: <strong>Ronchiverdi è percepito come eccellente da chi lo conosce, ma è invisibile a chi non lo conosce ancora.</strong> Un sito che non porta richieste, canali social non pensati per attirare nuovi soci, nessun percorso organizzato che accompagni chi è interessato fino all'iscrizione: oggi i nuovi soci arrivano quasi solo per passaparola o per caso.</p>
-
-  <p>C'è anche un problema di regia: la comunicazione verso l'esterno viaggia su <strong>tre binari separati</strong> — le pagine Facebook e Instagram, la pubblicità a pagamento sui social e il sito web — senza un piano unico che li coordini. Ogni canale fa da sé, con messaggi e tempi propri. E gli inviti all'azione sono poco efficaci: quasi tutto porta a "Prenota un tour", un impegno importante per chi sta solo iniziando a informarsi. Manca un passo intermedio più leggero — chiedere informazioni, lasciare il proprio contatto — per chi non è ancora pronto.</p>
-
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 32px;margin:28px 0;">
-    <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:14px;">Il sito web oggi</p>
-    <p style="font-size:15px;line-height:1.7;margin-bottom:12px;">Il sito è oggi <strong>una vetrina, non uno strumento che porta nuovi soci</strong>. Tre esempi concreti:</p>
-    <ul style="list-style:disc;padding-left:22px;font-size:14px;line-height:1.7;margin:0;">
-      <li>chi entra trova prima una pagina di smistamento con due porte (Sport e Business) e deve fare un click in più prima di vedere qualsiasi contenuto;</li>
-      <li>ogni percorso finisce sullo stesso calendario di prenotazione, scollegato dai sistemi del club: non sappiamo da dove arriva una richiesta né possiamo seguirla in modo ordinato;</li>
-      <li>diversi dettagli trascurati — link di prova mai sostituiti, un refuso nella pagina contatti, i corsi piscina pubblicati come PDF — comunicano online meno cura di quanta il club ne metta dal vivo.</li>
-    </ul>
-    <p style="font-size:13px;color:var(--text-dim);line-height:1.6;margin:14px 0 0;">L'analisi completa del sito, con tutti i rilievi, è nel documento di audit (Area 10).</p>
-  </div>
-
-  <p>Farsi conoscere di più non significa cambiare l'identità del club. Significa rendere visibile all'esterno ciò che già esiste all'interno. <strong>La qualità di Ronchiverdi è il miglior argomento di vendita: oggi semplicemente non viene raccontata in modo sistematico.</strong></p>
-
-  <p>C'è però un prerequisito essenziale: la crescita del numero di soci non deve tradursi in crescita della complessità gestionale. Per questo il tema dell'acquisizione e il tema dei processi operativi sono inseparabili — e vanno affrontati insieme.</p>
-</section>
-
-<!-- TEMA 2: L'EFFICIENZA OPERATIVA -->
-<section class="section">
-  <p class="section-num">02 / 04</p>
-  <h2 class="section-title">Il <em>costo nascosto</em><br>dei processi manuali</h2>
-
-  <p class="lead">Una parte importante del tempo di lavoro viene assorbita da <strong>attività ripetitive fatte a mano</strong>: copiare dati da un foglio all'altro, fare controlli incrociati, ricostruire numeri per i report. Sono attività che un sistema ben impostato svolgerebbe da solo. La stima prudente, basata sui costi del personale, è che <strong>tra il 25% e il 30% delle ore lavorate</strong> in segreteria, commerciale, amministrazione e manutenzione se ne vada così.</p>
-
-  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin:28px 0;">
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 20px;">
-      <p style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);font-family:'JetBrains Mono',monospace;margin-bottom:8px;">Rinnovi abbonamenti</p>
-      <p style="font-size:14px;line-height:1.6;color:var(--text);margin:0;">23 fogli Excel separati, aggiornati manualmente ogni stagione. Nessun sistema invia un promemoria al socio: il rinnovo dipende dall'iniziativa della reception.</p>
-    </div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 20px;">
-      <p style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);font-family:'JetBrains Mono',monospace;margin-bottom:8px;">Gestione crediti</p>
-      <p style="font-size:14px;line-height:1.6;color:var(--text);margin:0;">13 fogli Excel per i crediti residui. Verificare il saldo di un socio richiede di aprire il file corretto, cercare la riga, calcolare manualmente. Ogni volta.</p>
-    </div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 20px;">
-      <p style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);font-family:'JetBrains Mono',monospace;margin-bottom:8px;">Contatti commerciali</p>
-      <p style="font-size:14px;line-height:1.6;color:var(--text);margin:0;">16 fogli di calcolo per i potenziali nuovi soci. Ogni contatto viene registrato a mano. Nessuno ricontatta in automatico chi ha chiesto informazioni, e manca una visione d'insieme.</p>
-    </div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 20px;">
-      <p style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);font-family:'JetBrains Mono',monospace;margin-bottom:8px;">Report e preparazione riunioni</p>
-      <p style="font-size:14px;line-height:1.6;color:var(--text);margin:0;">Non esistono report automatici sempre aggiornati. Prima di ogni riunione, qualcuno costruisce i numeri a mano, raccogliendo dati da sistemi che non comunicano tra loro.</p>
-    </div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 20px;">
-      <p style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);font-family:'JetBrains Mono',monospace;margin-bottom:8px;">Export InfoRYOU</p>
-      <p style="font-size:14px;line-height:1.6;color:var(--text);margin:0;">I report su abbonamenti e incassi vengono costruiti a mano, partendo da dati parziali estratti dal gestionale InfoRYOU. Nessun numero è leggibile così com'è: ogni volta serve un lavoro manuale di sistemazione e controllo.</p>
-    </div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 20px;">
-      <p style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);font-family:'JetBrains Mono',monospace;margin-bottom:8px;">Segnalazioni manutenzione</p>
-      <p style="font-size:14px;line-height:1.6;color:var(--text);margin:0;">Le segnalazioni arrivano a voce o su carta. Non c'è un sistema che le registri e ne segua lo stato: chi segnala non sa se il problema è stato preso in carico, e la priorità dipende da chi insiste di più.</p>
-    </div>
-  </div>
-
-  <div class="impact-chart">
-    <div class="impact-row">
-      <div>
-        <div class="impact-label">Segreteria e vendita</div>
-        <div class="impact-sub">200–250 ore al mese · squadra di 6,4 persone a tempo pieno</div>
+<!-- PUNTI DEBOLI OPERATIVI -->
+<div class="problems-band">
+  <p class="sec-label">02 — Punti deboli operativi</p>
+  <h2 style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:400;line-height:1.1;">50+ file Excel — <em>nessuno parla con l'altro</em></h2>
+  <div class="problems-grid">
+    <div class="problem-card">
+      <div class="problem-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
       </div>
-      <div class="bar-track"><div class="bar-fill" style="width:80%">200–250 ore/mese</div></div>
-      <div class="impact-val">€ 35.000–44.000</div>
+      <div class="problem-title">Rinnovi abbonamenti</div>
+      <div class="problem-desc">23 fogli Excel separati, aggiornati a mano ogni stagione. Nessun promemoria automatico ai soci.</div>
+      <div class="problem-stat">23 file Excel</div>
     </div>
-    <div class="impact-row">
-      <div>
-        <div class="impact-label">Amministrazione</div>
-        <div class="impact-sub">40–60 ore al mese</div>
+    <div class="problem-card">
+      <div class="problem-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
       </div>
-      <div class="bar-track"><div class="bar-fill" style="width:46%">40–60 ore/mese</div></div>
-      <div class="impact-val">€ 16.000–25.000</div>
+      <div class="problem-title">Gestione crediti</div>
+      <div class="problem-desc">13 fogli per i crediti residui. Verificare il saldo di un socio richiede di aprire il file, cercare la riga, calcolare. Ogni volta.</div>
+      <div class="problem-stat">13 file Excel</div>
     </div>
-    <div class="impact-row">
-      <div>
-        <div class="impact-label">Manutenzione</div>
-        <div class="impact-sub">20–30 ore al mese · squadra di 6 persone</div>
+    <div class="problem-card">
+      <div class="problem-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
       </div>
-      <div class="bar-track"><div class="bar-fill" style="width:18%">20–30 ore/mese</div></div>
-      <div class="impact-val">€ 5.000–6.000</div>
+      <div class="problem-title">Contatti commerciali</div>
+      <div class="problem-desc">16 fogli per i potenziali soci. Nessun ricontatto automatico. Nessuna visione d'insieme.</div>
+      <div class="problem-stat">16 file Excel</div>
     </div>
-    <div class="impact-divider"></div>
-    <div class="impact-total">
-      <div class="impact-total-label">Stima totale</div>
-      <div></div>
-      <div class="impact-total-value">&gt; € 55.000</div>
+    <div class="problem-card warning">
+      <div class="problem-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+      </div>
+      <div class="problem-title">Report e riunioni</div>
+      <div class="problem-desc">Nessun report automatico. Prima di ogni riunione, qualcuno costruisce i numeri a mano raccogliendo dati sparsi.</div>
+      <div class="problem-stat warning">Solo manuale</div>
     </div>
-    <div class="impact-total">
-      <div></div>
-      <div></div>
-      <div class="impact-total-note">annui in ore a basso valore</div>
+    <div class="problem-card warning">
+      <div class="problem-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <div class="problem-title">Export InfoRYOU</div>
+      <div class="problem-desc">I dati dal gestionale escono sporchi. Ogni report richiede un lavoro manuale di pulizia e controllo prima di essere leggibile.</div>
+      <div class="problem-stat warning">Ogni volta</div>
+    </div>
+    <div class="problem-card warning">
+      <div class="problem-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      </div>
+      <div class="problem-title">Segnalazioni manutenzione</div>
+      <div class="problem-desc">Segnalazioni a voce o su carta. Nessun sistema di tracking. Chi segnala non sa se il problema è stato preso in carico.</div>
+      <div class="problem-stat warning">Zero tracciabilità</div>
     </div>
   </div>
+</div>
 
-  <p>Non è il costo di fare le cose. <strong>È il costo di farle nel modo sbagliato.</strong></p>
-
-  <p>Il problema non riguarda le persone: riguarda gli strumenti su cui lavorano. Rinnovi, crediti, contatti commerciali, segnalazioni — ognuno vive in un file separato, e nessun file comunica con l'altro. Prima di ogni decisione, qualcuno deve rimettere insieme le informazioni a mano. Chi dirige spende tempo a costruire i numeri invece di leggerli già pronti.</p>
-
-  <p>L'obiettivo degli interventi proposti <strong>non è ridurre il personale</strong>. È spostare lo stesso personale da attività che non producono valore ad attività che lo producono: più relazione con i soci, meno ore su fogli Excel.</p>
-</section>
-
-<!-- TEMA 3: MOTIVAZIONE -->
-<section class="section">
-  <p class="section-num">03 / 04</p>
-  <h2 class="section-title">Il costo <em>umano</em><br>della complessità operativa</h2>
-
-  <p class="lead">L'efficienza si misura in euro. La motivazione no — ma è altrettanto reale. L'analisi ha rilevato un rischio concreto di <strong>demotivazione ed esaurimento</strong> nel personale di reception. Non per mancanza di impegno o di capacità, ma per una ragione strutturale precisa.</p>
-
-  <div class="human-block">
-    <div class="human-block-label">La reception come punto di arrivo di tutto ciò che non è risolto a monte</div>
-    <div class="human-block-inner">
-      <div class="human-block-left">
-        <h3 class="human-block-title">Persone selezionate per la relazione, impiegate per la gestione</h3>
-        <p>Chi lavora in reception gestisce ogni giorno una varietà di richieste che nessun mansionario potrebbe prevedere: apre il tornello, fotocopia il certificato medico, spiega come funziona l'app, risponde alla domanda sul pagamento, gestisce il reclamo, prende nota della segnalazione, trova il documento.</p>
-        <p><strong>Non perché sia sbagliato che lo faccia — ma perché non esistono strumenti o procedure a monte che possano farlo al suo posto.</strong> Il socio che non trova risposta online si reca in sede. Il socio che non capisce come funziona il rinnovo chiama la reception. Il socio che ha perso la tessera, che non ricorda la scadenza del certificato, che vuole sapere gli orari della piscina — tutto converge sullo stesso punto fisico, sulle stesse persone, ogni giorno.</p>
-        <p>Il risultato è una doppia frustrazione: il socio che non riesce a trovare risposte da solo si sente dipendente dalla sede; lo staff che assorbe ogni richiesta, senza poterne dirottare nessuna altrove, si logora giorno dopo giorno. <strong>Il rischio di esaurimento in questo tipo di ruolo non è teorico — è la conseguenza naturale di un'organizzazione che scarica tutto su un unico punto.</strong></p>
-      </div>
-      <div class="human-block-right">
-        <div class="human-funnel">
-          <div class="hf-title">Tutto converge sulla reception</div>
-          <div class="hf-item">Sito senza risposte<br><span>→ il socio viene in sede</span></div>
-          <div class="hf-item">Nessuna raccolta di risposte online<br><span>→ risposta sempre a voce</span></div>
-          <div class="hf-item">Processi non automatizzati<br><span>→ ogni operazione è a mano</span></div>
-          <div class="hf-item">Nessun canale alternativo<br><span>→ unico punto di contatto</span></div>
-          <div class="hf-arrow">↓</div>
-          <div class="hf-result">Sovraccarico di lavoro<br>+ frustrazione reciproca<br>+ rischio esaurimento</div>
+<!-- COSTO NASCOSTO — BAR CHART -->
+<div class="cost-band">
+  <div class="cost-inner">
+    <p class="sec-label">02b — Il costo in euro</p>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:400;line-height:1.1;">Tra il 25–30% delle ore lavorate <em>non produce valore</em></h2>
+    <div class="cost-bars">
+      <div class="cost-row">
+        <div>
+          <div class="cost-label">Segreteria & vendita</div>
+          <div class="cost-sub">200–250 ore/mese</div>
         </div>
+        <div class="bar-track"><div class="bar-fill" style="width:80%">200–250 ore/mese</div></div>
+        <div class="cost-val">€ 35.000–44.000</div>
+      </div>
+      <div class="cost-row">
+        <div>
+          <div class="cost-label">Amministrazione</div>
+          <div class="cost-sub">40–60 ore/mese</div>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width:46%">40–60 ore/mese</div></div>
+        <div class="cost-val">€ 16.000–25.000</div>
+      </div>
+      <div class="cost-row">
+        <div>
+          <div class="cost-label">Manutenzione</div>
+          <div class="cost-sub">20–30 ore/mese</div>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width:18%">20–30 ore/mese</div></div>
+        <div class="cost-val">€ 5.000–6.000</div>
       </div>
     </div>
-    <div class="human-block-footer">
-      <strong>La soluzione non è togliere il contatto umano.</strong> È eliminare i compiti che non lo richiedono — per restituire alle persone il tempo e l'energia per fare ciò che solo loro sanno fare: accogliere, ascoltare, risolvere nel momento. Un'area online dove i soci trovano da soli le risposte più comuni, procedure automatiche e altri canali di contatto non allontanano le persone — proteggono la qualità della relazione.
+    <div class="cost-total">
+      <span class="cost-total-label">Totale stimato annuo</span>
+      <span class="cost-total-number">&gt; € 55.000</span>
+      <span class="cost-total-note">in ore a basso valore</span>
     </div>
+    <p style="font-size:13px;color:var(--text-dim);margin-top:16px;">Non è il costo di fare le cose. <strong style="color:var(--text);">È il costo di farle nel modo sbagliato.</strong> L'obiettivo non è ridurre le persone — è spostare le stesse persone da Excel a relazione con i soci.</p>
   </div>
-</section>
+</div>
 
-<!-- TEMA 4: LA DIREZIONE -->
-<section class="section">
-  <p class="section-num">04 / 04</p>
-  <h2 class="section-title">Un'organizzazione che<br><em>non pesa</em> quando cresce</h2>
-
-  <p class="lead">La domanda che guida questo progetto non è "come cresciamo?" ma <strong>"come costruiamo un'organizzazione in grado di crescere senza appesantirsi?"</strong></p>
-
-  <p>Ronchiverdi ha una caratteristica rara: le persone ci tengono. Lo staff, i soci, il management — c'è un legame autentico con il club che non è replicabile da nessun sistema. <strong>Il rischio non è che la tecnologia distrugga questa relazione. Il rischio è che la complessità operativa la logori lentamente.</strong></p>
-
-  <p>Quando l'assistenza ai soci è reattiva — risponde ai problemi quando arrivano — il socio giudica il servizio in base a quante cose vanno storte. Quando invece è <strong>proattiva</strong> — anticipa le scadenze, ricorda le informazioni giuste al momento giusto, risponde subito — il socio percepisce un club che si prende cura di lui prima ancora che lo chieda.</p>
-
-  <div class="framework">
-    <div class="fw-step">
-      <span class="fw-step-num">Fase 1</span>
-      <div class="fw-step-body">
-        <div class="fw-step-title">Fondamenta — In regola e con dati in ordine</div>
-        <div class="fw-step-desc">Risolvere le due questioni legali urgenti, dare una struttura al tesseramento, allineare contratti e comunicazioni. Mettere in ordine i dati prima di automatizzare qualsiasi cosa.</div>
-      </div>
-    </div>
-    <div class="fw-step">
-      <span class="fw-step-num">Fase 2</span>
-      <div class="fw-step-body">
-        <div class="fw-step-title">Struttura — Sistemi che parlano tra loro</div>
-        <div class="fw-step-desc">Un archivio unico per soci e contatti (il CRM), rinnovi con promemoria automatici, gestione del personale con Athletis, report sempre aggiornati per la direzione. Basta file separati: il tempo torna alle persone.</div>
-      </div>
-    </div>
-    <div class="fw-step">
-      <span class="fw-step-num">Fase 3</span>
-      <div class="fw-step-body">
-        <div class="fw-step-title">Crescita — Nuovi soci e comunicazione</div>
-        <div class="fw-step-desc">Un sito rifatto per portare richieste di nuovi soci, percorsi di iscrizione chiari per le attività e la Young School, comunicazione che anticipa i bisogni dei soci. A quel punto la struttura è pronta per crescere.</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="big-stat-row">
-    <div class="big-stat">
-      <div class="big-stat-number green">&gt;70%</div>
-      <div class="big-stat-label">tasso di rinnovo attuale — da preservare e da raccontare</div>
-    </div>
-    <div class="big-stat">
-      <div class="big-stat-number">&gt;€ 55k</div>
-      <div class="big-stat-label">l'anno di ore spese in lavoro manuale — da convertire in valore reale</div>
-    </div>
-    <div class="big-stat">
-      <div class="big-stat-number danger">2</div>
-      <div class="big-stat-label">questioni legali urgenti — da risolvere prima della prossima stagione</div>
-    </div>
-    <div class="big-stat">
-      <div class="big-stat-number">11</div>
-      <div class="big-stat-label">aree operative analizzate con piano di intervento definito</div>
-    </div>
-  </div>
-</section>
-
-<!-- RISTORANTE ELEMENTS -->
-<div class="band max">
-  <div class="elements-card">
+<!-- RECEPTION — COSTO UMANO -->
+<div class="reception-band">
+  <div class="reception-inner">
     <div>
-      <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:12px;">↗ Progetto parallelo — non urgente</p>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:var(--text);margin-bottom:14px;line-height:1.2;">Ristorante <em>Elements</em></h3>
-      <p style="font-size:14px;color:var(--text-dim);line-height:1.7;margin-bottom:0;max-width:580px;">Il sopralluogo ha individuato un secondo cantiere, indipendente dal resto: la gestione degli eventi del ristorante assorbe <strong style="color:var(--text);">2,5–3 ore al giorno</strong> della responsabile tra preventivi e coordinamento fatti a mano, con i dati dei clienti sparsi tra calendario, WhatsApp e fogli di carta, e un <strong style="color:var(--text);">problema di privacy (GDPR)</strong> sulla raccolta dei consensi. Gli ordini ai fornitori vengono ricopiati a mano su Excel ogni sabato. Niente di urgente, ma un intervento mirato — un sistema unico per gli eventi, un modulo digitale per gli ordini, un archivio clienti con i consensi già raccolti — libera ore preziose ed elimina il rischio sul fronte privacy.</p>
+      <p class="reception-label">03 — Il costo umano</p>
+      <h2 class="reception-title">La reception assorbe <em>tutto quello</em> che non è risolto a monte</h2>
+      <div class="reception-points">
+        <div class="rec-point"><div class="rec-dot"></div><div class="rec-text">Staff selezionato per la <strong>relazione</strong> — impiegato per la <strong>gestione manuale</strong></div></div>
+        <div class="rec-point"><div class="rec-dot"></div><div class="rec-text">Sito senza FAQ → il socio viene in sede per ogni domanda</div></div>
+        <div class="rec-point"><div class="rec-dot"></div><div class="rec-text">Processi non automatizzati → ogni operazione è a mano, ogni volta</div></div>
+        <div class="rec-point"><div class="rec-dot"></div><div class="rec-text">Nessun canale alternativo → <strong>un unico punto di contatto fisico</strong> per tutto</div></div>
+        <div class="rec-point" style="margin-top:4px;"><div class="rec-dot" style="background:rgba(179,58,46,0.7);"></div><div class="rec-text" style="color:rgba(247,246,242,0.9);"><strong>Rischio concreto di esaurimento.</strong> Non per mancanza di impegno — per mancanza di strumenti.</div></div>
+      </div>
     </div>
-    <a href="documento-audit.html#area12" style="display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:8px;background:var(--text);color:white;text-decoration:none;font-family:'Jost',sans-serif;font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;flex-shrink:0;">Analisi completa →</a>
+    <div>
+      <div class="funnel">
+        <div class="funnel-title">Tutto converge qui</div>
+        <div class="funnel-item">Sito senza risposte</div>
+        <div class="funnel-arrow">↓</div>
+        <div class="funnel-item">Nessun canale self-service</div>
+        <div class="funnel-arrow">↓</div>
+        <div class="funnel-item">Processi tutti manuali</div>
+        <div class="funnel-arrow">↓</div>
+        <div class="funnel-item">Unico punto di contatto</div>
+        <div class="funnel-arrow">↓</div>
+        <div class="funnel-result">Sovraccarico · Frustrazione reciproca · Rischio esaurimento</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PUNTO CIECO — DATI -->
+<div class="legal-band">
+  <p class="sec-label">04 — Il punto cieco</p>
+  <h2 style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:400;line-height:1.1;">Si governa guardando<br>nello <em>specchietto retrovisore</em></h2>
+  <p style="font-size:15px;color:var(--text-dim);line-height:1.7;max-width:700px;margin-top:16px;margin-bottom:0;">Tutti i dati disponibili oggi sono dati postumi. Quando arrivano alla direzione, la stagione è già cambiata, le decisioni sono già state prese, i problemi si sono già manifestati. Non esiste nessuna vista in tempo reale su cosa sta succedendo nel club.</p>
+  <div class="legal-grid" style="margin-top:28px;">
+    <div class="legal-card" style="background:var(--danger-light);border-left-color:var(--danger);">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:500;color:var(--danger);line-height:1;flex-shrink:0;">⧖</div>
+      <div class="legal-text">
+        <strong>Dati sempre in ritardo.</strong> I numeri su abbonamenti, incassi e soci arrivano dopo un lavoro manuale di ore — a volte giorni. Quando il report è pronto, fotografa il passato, non il presente.
+      </div>
+    </div>
+    <div class="legal-card" style="background:var(--danger-light);border-left-color:var(--danger);">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:500;color:var(--danger);line-height:1;flex-shrink:0;">≠</div>
+      <div class="legal-text">
+        <strong>Fonti disomogenee.</strong> Ogni area usa il proprio file, il proprio formato, la propria logica. Non esistono due report costruiti allo stesso modo: confrontare i dati di mesi o stagioni diverse è un lavoro a sé.
+      </div>
+    </div>
+    <div class="legal-card" style="background:var(--danger-light);border-left-color:var(--danger);">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:500;color:var(--danger);line-height:1;flex-shrink:0;">∅</div>
+      <div class="legal-text">
+        <strong>Zero visibilità in tempo reale.</strong> Quanti soci attivi ci sono oggi? Quanti rinnovi sono in scadenza questa settimana? Quanto ha incassato il club questo mese? Nessuna di queste domande ha una risposta immediata.
+      </div>
+    </div>
+    <div class="legal-card" style="background:#F0EDE4;border-left-color:var(--gold);border-color:rgba(139,108,20,0.2);">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:500;color:var(--gold);line-height:1;flex-shrink:0;">→</div>
+      <div class="legal-text" style="color:var(--text-dim);">
+        <strong style="color:var(--text);">L'effetto.</strong> Le decisioni si prendono a intuito o a posteriori. Si reagisce ai problemi quando sono già evidenti — mai prima. La direzione non manca di capacità: manca di strumenti.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ACTION PLAN -->
+<div class="roadmap-band">
+  <p class="sec-label">Le prime cose da fare</p>
+  <h2 style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:400;line-height:1.1;">Da dove <em>si comincia</em></h2>
+  <div class="actions-grid">
+
+    <div class="action-card">
+      <div class="action-num">01</div>
+      <div class="action-title">Sito Web</div>
+      <div class="action-benefit"><strong>Lead generation ↑</strong></div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-num">02</div>
+      <div class="action-title">CRM</div>
+      <div class="action-benefit"><strong>Conversione nuovi soci e rinnovi ↑</strong></div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-num">03</div>
+      <div class="action-title">Knowledge Base sul sito</div>
+      <div class="action-benefit"><strong>Ordine operativo ↑ · Stress operativo ↓</strong></div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-num">04</div>
+      <div class="action-title">Sincronizzazione InfoRYOU</div>
+      <div class="action-benefit"><strong>Dashboard performance in tempo reale · Tracciamento lead automatico</strong></div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-num">05</div>
+      <div class="action-title">Automazione Certificati Medici</div>
+      <div class="action-benefit"><strong>Rischio operativo ↓ · Tempi ↓</strong></div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-num">06</div>
+      <div class="action-title">Automazione Tesseramenti</div>
+      <div class="action-benefit"><strong>Rischio operativo ↓ · Tempi ↓</strong></div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-num">07</div>
+      <div class="action-title">Processo Gestione Lamentele</div>
+      <div class="action-benefit"><strong>Customer care ↑ · Qualità servizio ↑</strong></div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-num">08</div>
+      <div class="action-title">Affiancamento ATHLETIS</div>
+      <div class="action-benefit"><strong>Tempi gestione amministrativa collaboratori ↓↓</strong></div>
+    </div>
+
+    <div class="action-card">
+      <div class="action-num">09</div>
+      <div class="action-title">Forms Operativi (Manutenzione, Pulizie, Personal…)</div>
+      <div class="action-benefit"><strong>Efficacia ed efficienza processi operativi ↑</strong></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- OUTCOMES -->
+<div class="outcomes-band">
+  <p class="outcomes-heading">I risultati attesi</p>
+  <h2 class="outcomes-title">Cosa cambia <em>concretamente</em></h2>
+  <div class="outcomes-grid">
+
+    <div class="outcome-col">
+      <svg class="outcome-arrow down" viewBox="0 0 32 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="16" y1="4" x2="16" y2="54" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+        <polyline points="4,40 16,56 28,40" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="outcome-cat">Gestione operativa</div>
+      <div class="outcome-name">Costi Operativi</div>
+    </div>
+
+    <div class="outcome-col">
+      <svg class="outcome-arrow up" viewBox="0 0 32 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="16" y1="60" x2="16" y2="10" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+        <polyline points="4,24 16,8 28,24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="outcome-cat">Fidelizzazione soci</div>
+      <div class="outcome-name">Retention</div>
+    </div>
+
+    <div class="outcome-col">
+      <svg class="outcome-arrow up" viewBox="0 0 32 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="16" y1="60" x2="16" y2="10" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+        <polyline points="4,24 16,8 28,24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="outcome-cat">Acquisizione</div>
+      <div class="outcome-name">Nuovi Iscritti</div>
+    </div>
+
+    <div class="outcome-col">
+      <svg class="outcome-arrow up" viewBox="0 0 32 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="16" y1="60" x2="16" y2="10" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+        <polyline points="4,24 16,8 28,24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="outcome-cat">Normativa</div>
+      <div class="outcome-name">Compliance</div>
+    </div>
+
+    <div class="outcome-col">
+      <svg class="outcome-arrow up" viewBox="0 0 32 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="16" y1="60" x2="16" y2="10" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+        <polyline points="4,24 16,8 28,24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="outcome-cat">Direzione</div>
+      <div class="outcome-name">Controllo di Gestione</div>
+    </div>
+
+    <div class="outcome-col">
+      <svg class="outcome-arrow down" viewBox="0 0 32 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="16" y1="4" x2="16" y2="54" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+        <polyline points="4,40 16,56 28,40" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="outcome-cat">Team</div>
+      <div class="outcome-name">Stress Personale</div>
+    </div>
+
   </div>
 </div>
 
@@ -596,6 +1038,7 @@ p strong { font-weight: 600; }
 function checkGate() {
   if (document.getElementById('gate-pwd').value === 'ronchi2030') {
     document.getElementById('gate').classList.add('hidden');
+    document.getElementById('doc-link').style.display = 'inline';
     try { localStorage.setItem('rv-exec-2026','1'); } catch(e){}
   } else {
     document.getElementById('gate-err').style.display = 'block';
@@ -606,7 +1049,12 @@ function checkGate() {
 }
 document.getElementById('gate-pwd').addEventListener('keydown', function(e){ if(e.key==='Enter') checkGate(); });
 (function(){
-  try { if(localStorage.getItem('rv-exec-2026')==='1') document.getElementById('gate').classList.add('hidden'); } catch(e){}
+  try {
+    if(localStorage.getItem('rv-exec-2026')==='1') {
+      document.getElementById('gate').classList.add('hidden');
+      document.getElementById('doc-link').style.display = 'inline';
+    }
+  } catch(e){}
 })();
 </script>
 </body>

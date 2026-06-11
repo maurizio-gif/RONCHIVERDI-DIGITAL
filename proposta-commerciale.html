@@ -184,31 +184,6 @@
     .gold-note { background: var(--gold-light); border: 1.5px solid rgba(139,108,20,.2); border-radius: 10px; padding: 18px 22px; margin-top: 16px; }
     .gold-note p { font-size: 14px; line-height: 1.75; color: var(--text); margin: 0; }
 
-    /* ---- INVESTMENT NUMBERS (presentation) ---- */
-    .invest-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 28px; }
-    .invest-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px 28px; }
-    .invest-card-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 10px; }
-    .invest-big { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 500; color: var(--text); line-height: 1.1; margin-bottom: 6px; }
-    .invest-unit { font-size: 18px; color: var(--text-dim); }
-    .invest-sub { font-size: 12px; color: var(--text-dim); line-height: 1.5; margin: 0; }
-
-    /* ---- INVESTMENT TABLES (document mode) ---- */
-    .invest-table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-top: 12px; }
-    .invest-row { display: grid; grid-template-columns: 1fr 180px 180px; }
-    .invest-row + .invest-row { border-top: 1px solid var(--border); }
-    .invest-row.header { border-bottom: 1px solid var(--border); }
-    .invest-cell { padding: 10px 20px; }
-    .invest-row.header .invest-cell { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-dim); }
-    .invest-cell:nth-child(2), .invest-cell:nth-child(3) { border-left: 1px solid var(--border); }
-    .invest-cell:nth-child(3) { text-align: right; }
-    .invest-row:not(.header) .invest-cell { padding: 18px 20px; }
-    .invest-cell-name { font-weight: 600; font-size: 14px; color: var(--text); margin-bottom: 4px; }
-    .invest-cell-note { font-size: 11px; color: var(--text-dim); line-height: 1.6; }
-    .invest-cell-amount { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500; color: var(--text); }
-    .invest-cell-note-sm { font-size: 11px; color: var(--text-dim); margin-top: 3px; }
-    .invest-badge-tbd { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; color: var(--text-dim); }
-    .invest-included { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--green); font-weight: 600; }
-
     /* ---- STACK GRID ---- */
     .stack-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; }
     .stack-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px 26px; display: flex; flex-direction: column; gap: 6px; }
@@ -293,10 +268,6 @@
       .two-col, .bu-grid, .direction-split, .step-overview, .elements-grid { grid-template-columns: 1fr; }
       .timeline-strip { grid-template-columns: 1fr; }
       .timeline-col + .timeline-col { border-left: none; border-top: 1px solid var(--border); }
-      .invest-grid { grid-template-columns: 1fr 1fr; }
-      .invest-row { grid-template-columns: 1fr; }
-      .invest-cell:nth-child(2), .invest-cell:nth-child(3) { border-left: none; border-top: 1px solid var(--border); }
-      .invest-cell:nth-child(3) { text-align: left; }
       .pipeline-grid { grid-template-columns: 1fr; }
       .kpi-strip { grid-template-columns: 1fr; }
       .kpi-strip-right ul { grid-template-columns: 1fr; }
@@ -388,13 +359,6 @@
       .pipeline-list li { font-size: 15px; gap: 8px; }
       .pipeline-col-title { font-size: 14px; }
       .pipeline-grid { padding: 24px 28px; }
-
-      /* ---- Invest grid (pres-only) ---- */
-      .invest-big { font-size: clamp(36px, 3.5vw, 52px); }
-      .invest-unit { font-size: 22px; }
-      .invest-card-label { font-size: 11px; }
-      .invest-sub { font-size: 13px; }
-      .invest-card { padding: 28px 32px; }
 
       /* ---- Note boxes ---- */
       .note-box { padding: 20px 26px; }
