@@ -181,6 +181,27 @@ code.mono { font-family: "JetBrains Mono", monospace; font-size: 0.85em; backgro
 .hud-home:hover { color: #8B6C14; }
 .hud-logo { position: fixed; top: 22px; right: 28px; z-index: 50; height: 40px; width: auto; opacity: 0.85; }
 
+/* ══ ROTATE HINT (mobile portrait) ══ */
+.rotate-hint { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(247,246,242,0.97); backdrop-filter: blur(6px); flex-direction: column; align-items: center; justify-content: center; gap: 20px; text-align: center; padding: 40px; }
+.rotate-hint .ri { font-size: 58px; line-height: 1; animation: tilt 1.8s ease-in-out infinite; }
+@keyframes tilt { 0%, 20%, 100% { transform: rotate(0); } 50%, 70% { transform: rotate(90deg); } }
+.rotate-hint h3 { font-family: "Cormorant Garamond", serif; font-size: 28px; font-weight: 400; color: #1C1C18; }
+.rotate-hint p { font-size: 15px; color: rgba(0,0,0,0.55); max-width: 320px; line-height: 1.6; }
+.rotate-hint button { font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #8B6C14; background: none; border: 1px solid rgba(139,108,20,0.4); border-radius: 50px; padding: 11px 26px; cursor: pointer; }
+@media (orientation: portrait) and (max-width: 880px) {
+  body:not(.hint-off) .rotate-hint { display: flex; }
+}
+
+/* ══ MOBILE HUD ══ */
+@media (max-width: 880px) {
+  .hud { bottom: 10px; gap: 12px; }
+  .hud-btn { width: 42px; height: 42px; font-size: 17px; }
+  .hud-dots { display: none; }
+  .hud-counter { min-width: 52px; font-size: 12px; }
+  .hud-home { top: 10px; left: 10px; padding: 7px 15px; font-size: 11px; }
+  .hud-logo { top: 9px; right: 12px; height: 30px; }
+}
+
 @media print {
   html, body { overflow: visible; height: auto; background: #fff; }
   .stage { position: static; display: block; }
@@ -559,10 +580,18 @@ code.mono { font-family: "JetBrains Mono", monospace; font-size: 0.85em; backgro
 </div><!-- /deck -->
 </div><!-- /stage -->
 
+<div class="rotate-hint" id="rotateHint">
+  <div class="ri">&#128241;</div>
+  <h3>Ruota il dispositivo</h3>
+  <p>La presentazione &egrave; in formato 16:9 e si vede a schermo pieno con il telefono in orizzontale.</p>
+  <button id="hintClose">Continua in verticale</button>
+</div>
+
 <div class="hud">
   <button class="hud-btn" id="prevBtn" aria-label="Slide precedente">&#8592;</button>
   <div class="hud-dots" id="dots"></div>
   <button class="hud-btn" id="nextBtn" aria-label="Slide successiva">&#8594;</button>
+  <button class="hud-btn" id="fsBtn" aria-label="Schermo intero" style="font-size:15px;">&#x26F6;</button>
   <div class="hud-counter" id="counter">1 / 9</div>
 </div>
 
@@ -594,11 +623,28 @@ function go(n) {
 }
 
 function fit() {
-  const s = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
-  deck.style.transform = 'scale(' + s + ')';
+  const vw = window.visualViewport ? window.visualViewport.width : window.innerWidth;
+  const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+  deck.style.transform = 'scale(' + Math.min(vw / 1920, vh / 1080) + ')';
 }
 window.addEventListener('resize', fit);
+window.addEventListener('orientationchange', () => setTimeout(fit, 250));
+if (window.visualViewport) window.visualViewport.addEventListener('resize', fit);
 fit();
+
+document.getElementById('hintClose').addEventListener('click', () => {
+  document.body.classList.add('hint-off');
+});
+
+const fsBtn = document.getElementById('fsBtn');
+if (document.documentElement.requestFullscreen) {
+  fsBtn.addEventListener('click', () => {
+    if (document.fullscreenElement) document.exitFullscreen();
+    else document.documentElement.requestFullscreen();
+  });
+} else {
+  fsBtn.style.display = 'none';
+}
 
 document.getElementById('prevBtn').addEventListener('click', () => go(cur - 1));
 document.getElementById('nextBtn').addEventListener('click', () => go(cur + 1));
