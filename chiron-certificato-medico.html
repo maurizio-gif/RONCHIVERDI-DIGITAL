@@ -181,15 +181,88 @@ code.mono { font-family: "JetBrains Mono", monospace; font-size: 0.85em; backgro
 .hud-home:hover { color: #8B6C14; }
 .hud-logo { position: fixed; top: 22px; right: 28px; z-index: 50; height: 40px; width: auto; opacity: 0.85; }
 
-/* ══ ROTATE HINT (mobile portrait) ══ */
-.rotate-hint { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(247,246,242,0.97); backdrop-filter: blur(6px); flex-direction: column; align-items: center; justify-content: center; gap: 20px; text-align: center; padding: 40px; }
-.rotate-hint .ri { font-size: 58px; line-height: 1; animation: tilt 1.8s ease-in-out infinite; }
-@keyframes tilt { 0%, 20%, 100% { transform: rotate(0); } 50%, 70% { transform: rotate(90deg); } }
-.rotate-hint h3 { font-family: "Cormorant Garamond", serif; font-size: 28px; font-weight: 400; color: #1C1C18; }
-.rotate-hint p { font-size: 15px; color: rgba(0,0,0,0.55); max-width: 320px; line-height: 1.6; }
-.rotate-hint button { font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #8B6C14; background: none; border: 1px solid rgba(139,108,20,0.4); border-radius: 50px; padding: 11px 26px; cursor: pointer; }
+/* ══ MOBILE PORTRAIT · layout verticale fluido ══ */
 @media (orientation: portrait) and (max-width: 880px) {
-  body:not(.hint-off) .rotate-hint { display: flex; }
+  .deck { width: 100vw; height: 100dvh; box-shadow: none; transform: none !important; }
+  .slide { padding: 62px 20px 96px; overflow-y: auto; justify-content: flex-start; }
+  .slide-body { justify-content: flex-start; }
+  .slide-head { margin-bottom: 10px; }
+  .slide-eyebrow { font-size: 10px; letter-spacing: 0.16em; }
+  .slide-pageno { font-size: 10px; }
+  .slide h2 { font-size: 30px; margin-bottom: 18px; }
+  .slide-foot { margin-top: 24px; padding-top: 14px; font-size: 11px; gap: 12px; }
+  .slide-foot .fb { font-size: 13px; }
+
+  .cover { justify-content: flex-start; }
+  .cover-pills { gap: 8px; margin-bottom: 20px; }
+  .pill { font-size: 11.5px; padding: 7px 14px; gap: 8px; }
+  .pill .pt { font-size: 9px; }
+  .cover-eyebrow { font-size: 10px; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+  .cover h1 { font-size: 42px; margin-bottom: 14px; }
+  .cover-sub { font-size: 15.5px; margin-bottom: 26px; }
+  .stats-row { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .stat { padding: 16px 10px; border-radius: 13px; }
+  .stat:last-child { grid-column: span 2; }
+  .stat-num { font-size: 27px; }
+  .stat-lbl { font-size: 9px; margin-top: 7px; }
+
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 12px; }
+  .card { padding: 18px 20px; border-radius: 14px; }
+  .card-icon { font-size: 30px; margin-bottom: 10px; }
+  .card-title { font-size: 12px; margin-bottom: 10px; }
+  .card-body { font-size: 14.5px; }
+  .item-list { gap: 9px; }
+  .item { font-size: 14px; gap: 10px; }
+  .dot { width: 5px; height: 5px; margin-top: 8px; }
+  .callout { padding: 16px 18px; border-radius: 12px; }
+  .callout-label { font-size: 10px; }
+  .callout p { font-size: 14px; }
+  .intro-line { font-size: 14.5px; margin-bottom: 18px; }
+
+  .dtree-root { padding: 16px 20px; border-radius: 13px; }
+  .dtree-root-label { font-size: 10px; }
+  .dtree-root-title { font-size: 23px; }
+  .dtree-root-sub { font-size: 12.5px; }
+  .dtree-stem { height: 22px; }
+  .dtree-cross { display: none; }
+  .dtree-branches { grid-template-columns: 1fr; gap: 12px; margin-top: 0; }
+  .dtree-branch { padding: 18px 20px; border-radius: 14px; }
+  .dtree-cond { font-size: 11px; padding: 4px 12px; margin-bottom: 10px; }
+  .dtree-branch h3 { font-size: 21px; margin-bottom: 8px; }
+  .dtree-branch p { font-size: 14px; }
+
+  .wf-legend-row { gap: 14px; padding: 10px 16px; flex-wrap: wrap; }
+  .wf-legend-label { font-size: 9px; }
+  .wf-leg { font-size: 10px; gap: 6px; }
+  .wf-dot { width: 9px; height: 9px; }
+  .wf-zone { padding: 14px 16px; }
+  .wf-zone .wf-steps-row { flex-direction: column; gap: 14px; padding: 12px 0 !important; }
+  .wf-steps-row > div:not([class]) { display: none; }
+  .wf-connector { display: none; }
+  .wf-step-col { flex-direction: row; align-items: center; gap: 14px; padding: 0; width: 100%; }
+  .rv-zone .wf-step-col { flex-direction: row-reverse; justify-content: flex-end; }
+  .wf-step-col .wf-slabel { margin: 0 !important; text-align: left; }
+  .wf-slabel-name { font-size: 16px; margin-bottom: 2px; }
+  .wf-slabel-name br { display: none; }
+  .wf-slabel-sub { font-size: 10px; }
+  .wf-circle { width: 44px; height: 44px; font-size: 13px; }
+  .wf-rail-row { height: 40px; }
+  .wf-handoff-pill { font-size: 10px; padding: 4px 12px; }
+  .wf-zone-name { font-size: 9px; }
+
+  .trace-row { grid-template-columns: 1fr; gap: 18px; }
+  .trace-row::before { display: none; }
+  .trace { display: grid; grid-template-columns: 46px 1fr; column-gap: 14px; text-align: left; align-items: start; }
+  .trace-num { grid-row: 1 / span 3; width: 46px; height: 46px; font-size: 15px; margin: 0; }
+  .trace-who { grid-column: 2; font-size: 10px; margin-bottom: 4px; }
+  .trace-title { grid-column: 2; font-size: 19px; margin-bottom: 6px; }
+  .trace-desc { grid-column: 2; font-size: 13.5px; }
+
+  .step-card { padding: 18px 20px; border-radius: 14px; display: grid; grid-template-columns: 50px 1fr; column-gap: 14px; }
+  .step-num { grid-row: 1 / span 3; font-size: 36px; margin-bottom: 0; }
+  .step-tag { grid-column: 2; justify-self: start; margin-bottom: 6px; font-size: 10px; }
+  .step-title { grid-column: 2; font-size: 19px; margin-bottom: 6px; }
+  .step-desc { grid-column: 2; font-size: 13.5px; }
 }
 
 /* ══ MOBILE HUD ══ */
@@ -580,13 +653,6 @@ code.mono { font-family: "JetBrains Mono", monospace; font-size: 0.85em; backgro
 </div><!-- /deck -->
 </div><!-- /stage -->
 
-<div class="rotate-hint" id="rotateHint">
-  <div class="ri">&#128241;</div>
-  <h3>Ruota il dispositivo</h3>
-  <p>La presentazione &egrave; in formato 16:9 e si vede a schermo pieno con il telefono in orizzontale.</p>
-  <button id="hintClose">Continua in verticale</button>
-</div>
-
 <div class="hud">
   <button class="hud-btn" id="prevBtn" aria-label="Slide precedente">&#8592;</button>
   <div class="hud-dots" id="dots"></div>
@@ -622,7 +688,9 @@ function go(n) {
   if (history.replaceState) history.replaceState(null, '', '#' + (cur + 1));
 }
 
+const portraitMq = window.matchMedia('(orientation: portrait) and (max-width: 880px)');
 function fit() {
+  if (portraitMq.matches) { deck.style.transform = 'none'; return; }
   const vw = window.visualViewport ? window.visualViewport.width : window.innerWidth;
   const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
   deck.style.transform = 'scale(' + Math.min(vw / 1920, vh / 1080) + ')';
@@ -631,10 +699,6 @@ window.addEventListener('resize', fit);
 window.addEventListener('orientationchange', () => setTimeout(fit, 250));
 if (window.visualViewport) window.visualViewport.addEventListener('resize', fit);
 fit();
-
-document.getElementById('hintClose').addEventListener('click', () => {
-  document.body.classList.add('hint-off');
-});
 
 const fsBtn = document.getElementById('fsBtn');
 if (document.documentElement.requestFullscreen) {
@@ -656,13 +720,17 @@ document.addEventListener('keydown', e => {
   else if (e.key === 'End') { e.preventDefault(); go(slides.length - 1); }
 });
 
-let touchX = null;
-document.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+let touchX = null, touchY = null;
+document.addEventListener('touchstart', e => {
+  touchX = e.touches[0].clientX;
+  touchY = e.touches[0].clientY;
+}, { passive: true });
 document.addEventListener('touchend', e => {
   if (touchX === null) return;
   const dx = e.changedTouches[0].clientX - touchX;
-  if (Math.abs(dx) > 50) go(cur + (dx < 0 ? 1 : -1));
-  touchX = null;
+  const dy = e.changedTouches[0].clientY - touchY;
+  if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) go(cur + (dx < 0 ? 1 : -1));
+  touchX = touchY = null;
 }, { passive: true });
 
 const hash = parseInt(location.hash.slice(1), 10);
