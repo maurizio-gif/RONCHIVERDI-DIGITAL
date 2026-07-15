@@ -136,7 +136,6 @@
     .roadmap-table .td-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--gold); }
     .roadmap-table .td-name { font-weight: 500; color: var(--text); }
     .td-sub { display: block; font-size: 12.5px; font-weight: 400; color: var(--text-dim); margin-top: 3px; line-height: 1.5; }
-    .roadmap-table .td-delivery { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-dim); white-space: nowrap; }
     .prio-badge { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; white-space: nowrap; }
     .prio-badge.critica { background: #FDF0ED; color: #7B2D1A; border: 1px solid rgba(123,45,26,.2); }
     .prio-badge.alta { background: var(--gold-light); color: var(--gold); border: 1px solid rgba(139,108,20,.2); }
@@ -305,35 +304,31 @@
 
 <!-- 09 — LA ROADMAP (PARTE 1) -->
 <section class="slide">
-  <p class="eyebrow">Cosa arriva, e quando — parte 1</p>
-  <h2 class="title">Le <em>fondamenta</em><br>entro fine agosto</h2>
+  <p class="eyebrow">Cosa arriva — parte 1</p>
+  <h2 class="title">Le <em>fondamenta</em><br>del progetto</h2>
   <table class="roadmap-table">
     <thead>
-      <tr><th>#</th><th>Cosa arriva</th><th>Consegna prevista</th><th>Priorità</th></tr>
+      <tr><th>#</th><th>Cosa arriva</th><th>Priorità</th></tr>
     </thead>
     <tbody>
       <tr>
         <td class="td-num">01</td>
         <td class="td-name">Sito Web<span class="td-sub">Il nuovo punto di contatto — descrizione fedele, indirizzato ai responsabili</span></td>
-        <td class="td-delivery">31 ago 2026</td>
         <td><span class="prio-badge critica">Critica</span></td>
       </tr>
       <tr>
         <td class="td-num">02</td>
         <td class="td-name">CRM Lead<span class="td-sub">Scadenzario e assegnazione per responsabile — Core e Young School</span></td>
-        <td class="td-delivery">31 ago 2026</td>
         <td><span class="prio-badge critica">Critica</span></td>
       </tr>
       <tr>
         <td class="td-num">03</td>
         <td class="td-name">Voucher &amp; Certificati Medici<span class="td-sub">Gestione digitale, alert automatico sulle scadenze</span></td>
-        <td class="td-delivery">31 ago 2026</td>
         <td><span class="prio-badge critica">Critica</span></td>
       </tr>
       <tr>
         <td class="td-num">04</td>
         <td class="td-name">Formazione ATHLETIS<span class="td-sub">Affiancamento per la gestione dei collaboratori</span></td>
-        <td class="td-delivery">31 ago 2026</td>
         <td><span class="prio-badge alta">Alta</span></td>
       </tr>
     </tbody>
@@ -342,41 +337,36 @@
 
 <!-- 10 — LA ROADMAP (PARTE 2) -->
 <section class="slide">
-  <p class="eyebrow">Cosa arriva, e quando — parte 2</p>
-  <h2 class="title">Il <em>consolidamento</em><br>in autunno</h2>
+  <p class="eyebrow">Cosa arriva — parte 2</p>
+  <h2 class="title">Il <em>consolidamento</em><br>che segue</h2>
   <table class="roadmap-table">
     <thead>
-      <tr><th>#</th><th>Cosa arriva</th><th>Consegna prevista</th><th>Priorità</th></tr>
+      <tr><th>#</th><th>Cosa arriva</th><th>Priorità</th></tr>
     </thead>
     <tbody>
       <tr>
         <td class="td-num">05</td>
         <td class="td-name">Dati sempre aggiornati<span class="td-sub">La base che alimenta CRM, dashboard e tutte le automazioni</span></td>
-        <td class="td-delivery">30 set 2026</td>
         <td><span class="prio-badge alta">Alta</span></td>
       </tr>
       <tr>
         <td class="td-num">06</td>
         <td class="td-name">Knowledge Base soci<span class="td-sub">Uno spazio con FAQ, regolamenti, procedure e orari sempre a disposizione</span></td>
-        <td class="td-delivery">31 ott 2026</td>
         <td><span class="prio-badge alta">Alta</span></td>
       </tr>
       <tr>
         <td class="td-num">07</td>
         <td class="td-name">Tesseramenti<span class="td-sub">Scadenze e rinnovi digitalizzati, meno rischio operativo</span></td>
-        <td class="td-delivery">31 ott 2026</td>
         <td><span class="prio-badge alta">Alta</span></td>
       </tr>
       <tr>
         <td class="td-num">08</td>
         <td class="td-name">Gestione Lamentele<span class="td-sub">Segnalazione, assegnazione e follow-up tracciato per area</span></td>
-        <td class="td-delivery">31 dic 2026</td>
         <td><span class="prio-badge media">Media</span></td>
       </tr>
       <tr>
         <td class="td-num">09</td>
         <td class="td-name">Dashboard di direzione<span class="td-sub">Marketing, commerciale e vendite in tempo reale</span></td>
-        <td class="td-delivery">31 dic 2026</td>
         <td><span class="prio-badge alta">Alta</span></td>
       </tr>
     </tbody>
@@ -459,12 +449,15 @@
 <section class="slide" style="border-bottom:none;">
   <p class="eyebrow">Per iniziare</p>
   <h2 class="title">Prossimi <em>passi</em></h2>
-  <ul class="num-list">
-    <li class="num-item"><span class="num-badge">01</span><span class="num-text">Definire insieme ai responsabili i contenuti reali del sito, area per area.</span></li>
+  <div class="note-box gold">
+    <p class="note-box-label">Step 1 — Definire i contenuti, insieme</p>
+    <p>Per ogni attività — tutte le discipline Young School, tutte le attività adulti — definiamo insieme i dettagli dei contenuti: cosa comunicare, cosa è davvero importante. Le informazioni non le decidiamo noi al posto vostro: devono arrivare da voi, essere condivise e diventare vostre. Da qui in avanti serve la vostra supervisione su tutto il processo — quello che scriveremo sul sito dovrà essere esattamente quello che poi ripeterete di persona, quando interagirete con le persone.</p>
+  </div>
+  <ul class="num-list" style="margin-top:20px;">
     <li class="num-item"><span class="num-badge">02</span><span class="num-text">Formazione all'uso del CRM per ogni responsabile — Core e Young School.</span></li>
     <li class="num-item"><span class="num-badge">03</span><span class="num-text">Avvio del tracciamento: richieste in ingresso e conversione in iscrizioni.</span></li>
   </ul>
-  <p class="lead" style="margin-top:36px;">Grazie a tutti — costruiamo questo percorso insieme.</p>
+  <p class="lead" style="margin-top:24px;">Grazie a tutti — costruiamo questo percorso insieme.</p>
 </section>
 
 <script>
